@@ -28,7 +28,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.0.8
 	github.com/robfig/go-cache v0.0.0-20130306151617-9fc39e0dbf62
 	github.com/rollbar/rollbar-go v1.4.5
-	github.com/rs/zerolog v1.31.0
+	github.com/rs/zerolog v1.32.0
 	github.com/stretchr/testify v1.8.3
 	github.com/ugorji/go/codec v1.2.11
 	go.uber.org/ratelimit v0.3.0
