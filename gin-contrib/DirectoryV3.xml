@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/gin-contrib" title="中间件"/>
+     <tree path="/examples" title="例子"/>
+     <tree path="/auth.go" title="授权认证" extension="" presentableText="" tooltipTitle="" icon="" textColor=""
+           backgroundColor=""/>
+     <tree path="/debug.go" title="调试"/>
+     <tree path="/errors.go" title="错误"/>
+ </trees>
