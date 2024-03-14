@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/examples" title="例子"/>
+     <tree path="/gin-contrib" title="插件"/>
+ </trees>
