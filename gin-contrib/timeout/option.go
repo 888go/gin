@@ -1,10 +1,12 @@
 package timeout
+
 import (
 	"net/http"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 // Option for timeout
 type Option func(*Timeout)
 

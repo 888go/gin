@@ -3,12 +3,14 @@
 // license that can be found in the LICENSE file.
 
 package authz
+
 import (
 	"net/http"
-	
+
 	"github.com/casbin/casbin/v2"
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-gonic/gin"
+)
+
 // NewAuthorizer returns the authorizer, uses a Casbin enforcer as input
 func NewAuthorizer(e *casbin.Enforcer) gin.HandlerFunc {
 	a := &BasicAuthorizer{enforcer: e}

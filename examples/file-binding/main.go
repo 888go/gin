@@ -1,12 +1,14 @@
 package main
+
 import (
 	"fmt"
 	"mime/multipart"
 	"net/http"
 	"path/filepath"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 type BindFile struct {
 	Name  string                `form:"name" binding:"required"`
 	Email string                `form:"email" binding:"required"`
@@ -15,19 +17,19 @@ type BindFile struct {
 
 func main() {
 	router := gin.Default()
-// 为多部分表单设置较低的内存限制(默认为32 MiB)
+	// Set a lower memory limit for multipart forms (default is 32 MiB)
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	router.Static("/", "./public")
 	router.POST("/upload", func(c *gin.Context) {
 		var bindFile BindFile
 
-// 绑定文件
+		// Bind file
 		if err := c.ShouldBind(&bindFile); err != nil {
 			c.String(http.StatusBadRequest, fmt.Sprintf("err: %s", err.Error()))
 			return
 		}
 
-// 保存上传的文件
+		// Save uploaded file
 		file := bindFile.File
 		dst := filepath.Base(file.Filename)
 		if err := c.SaveUploadedFile(file, dst); err != nil {

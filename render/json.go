@@ -3,15 +3,17 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"bytes"
 	"fmt"
 	"html/template"
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin/internal/bytesconv"
-	"e.coding.net/gogit/go/gin/internal/json"
-	)
+
+	"github.com/gin-gonic/gin/internal/bytesconv"
+	"github.com/gin-gonic/gin/internal/json"
+)
+
 // JSON contains the given interface object.
 type JSON struct {
 	Data any

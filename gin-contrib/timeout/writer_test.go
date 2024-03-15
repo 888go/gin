@@ -1,4 +1,5 @@
 package timeout
+
 import (
 	"fmt"
 	"log"
@@ -7,10 +8,11 @@ import (
 	"strconv"
 	"testing"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func TestWriteHeader(t *testing.T) {
 	code1 := 99
 	errmsg1 := fmt.Sprintf("invalid http status code: %d", code1)

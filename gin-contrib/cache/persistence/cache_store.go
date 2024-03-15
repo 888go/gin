@@ -1,8 +1,10 @@
 package persistence
+
 import (
 	"errors"
 	"time"
-	)
+)
+
 const (
 	DEFAULT = time.Duration(0)
 	FOREVER = time.Duration(-1)

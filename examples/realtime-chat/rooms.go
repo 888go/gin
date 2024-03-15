@@ -1,7 +1,9 @@
 package main
+
 import (
 	"github.com/dustin/go-broadcast"
-	)
+)
+
 type Message struct {
 	UserId string
 	RoomId string

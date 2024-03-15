@@ -1,15 +1,17 @@
 package main
+
 import (
 	"embed"
 	"encoding/json"
 	"log"
 	"net/http"
-	
-	ginI18n "e.coding.net/gogit/go/gin/gin-contrib/i18n"
-	"e.coding.net/gogit/go/gin"
+
+	ginI18n "github.com/gin-contrib/i18n"
+	"github.com/gin-gonic/gin"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
-	)
+)
+
 //go:embed i18n/localizeJSON/*
 var fs embed.FS
 

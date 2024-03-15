@@ -1,14 +1,16 @@
 package timeout
+
 import (
 	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func emptySuccessResponse(c *gin.Context) {
 	time.Sleep(200 * time.Microsecond)
 	c.String(http.StatusOK, "")

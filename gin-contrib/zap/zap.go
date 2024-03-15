@@ -1,6 +1,7 @@
 // Package ginzap provides log handling using zap package.
 // Code structure based on ginrus package.
 package ginzap
+
 import (
 	"net"
 	"net/http"
@@ -9,11 +10,12 @@ import (
 	"runtime/debug"
 	"strings"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	)
+)
+
 type Fn func(c *gin.Context) []zapcore.Field
 
 // ZapLogger is the minimal logger interface compatible with zap.Logger

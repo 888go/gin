@@ -1,10 +1,12 @@
 package persistence
+
 import (
 	"reflect"
 	"time"
-	
+
 	"github.com/robfig/go-cache"
-	)
+)
+
 //InMemoryStore represents the cache with memory persistence
 type InMemoryStore struct {
 	cache.Cache

@@ -1,16 +1,17 @@
 package hello
+
 import (
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
-// 这个函数的名字是必须的
-// App Engine使用它来正确地驱动请求
+
+	"github.com/gin-gonic/gin"
+)
+
+// This function's name is a must. App Engine uses it to drive the requests properly.
 func init() {
-// 启动一个没有中间件的新Gin实例
+	// Starts a new Gin instance with no middle-ware
 	r := gin.New()
 
-// 定义处理程序
+	// Define your handlers
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Hello World!")
 	})
@@ -18,6 +19,6 @@ func init() {
 		c.String(http.StatusOK, "pong")
 	})
 
-// 使用net/http处理所有请求
+	// Handle all requests using net/http
 	http.Handle("/", r)
 }

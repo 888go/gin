@@ -1,12 +1,14 @@
 package main
+
 import (
 	"fmt"
 	"io"
 	"math/rand"
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 var roomManager *Manager
 
 func main() {

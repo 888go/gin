@@ -1,11 +1,13 @@
 package location
+
 import (
 	"net/http"
 	"net/url"
 	"strings"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 type (
 	location struct {
 		scheme  string

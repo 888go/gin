@@ -1,12 +1,14 @@
 package multitemplate
+
 import (
 	"fmt"
 	"html/template"
 	"path/filepath"
-	
-	"e.coding.net/gogit/go/gin"
-	"e.coding.net/gogit/go/gin/render"
-	)
+
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/render"
+)
+
 // DynamicRender type
 type DynamicRender map[string]*templateBuilder
 

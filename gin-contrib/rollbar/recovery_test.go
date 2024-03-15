@@ -1,12 +1,14 @@
 package rollbar
+
 import (
 	"errors"
 	"net/http/httptest"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func TestRecovery(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	router := gin.New()

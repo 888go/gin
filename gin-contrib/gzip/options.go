@@ -1,12 +1,14 @@
 package gzip
+
 import (
 	"compress/gzip"
 	"net/http"
 	"regexp"
 	"strings"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 var (
 	DefaultExcludedExtentions = NewExcludedExtensions([]string{
 		".png", ".gif", ".jpeg", ".jpg",

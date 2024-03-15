@@ -1,12 +1,14 @@
 package main
+
 import (
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func CookieTool() gin.HandlerFunc {
 	return func(c *gin.Context) {
-// 把饼干
+		// Get cookie
 		if cookie, err := c.Cookie("label"); err == nil {
 			if cookie == "ok" {
 				c.Next()
@@ -14,7 +16,7 @@ func CookieTool() gin.HandlerFunc {
 			}
 		}
 
-// Cookie验证失败
+		// Cookie verification failed
 		c.JSON(http.StatusForbidden, gin.H{"error": "Forbidden with no cookie"})
 		c.Abort()
 	}
@@ -24,7 +26,7 @@ func main() {
 	route := gin.Default()
 
 	route.GET("/login", func(c *gin.Context) {
-// 设置cookie {"label";}， maxAge 30秒
+		// Set cookie {"label": "ok" }, maxAge 30 seconds.
 		c.SetCookie("label", "ok", 30, "/", "localhost", false, true)
 		c.String(200, "Login success!")
 	})

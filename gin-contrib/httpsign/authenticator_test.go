@@ -1,4 +1,5 @@
 package httpsign
+
 import (
 	"context"
 	"fmt"
@@ -8,16 +9,17 @@ import (
 	"strings"
 	"testing"
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/httpsign/crypto"
-	"e.coding.net/gogit/go/gin/gin-contrib/httpsign/validator"
-	
+
+	"github.com/gin-contrib/httpsign/crypto"
+	"github.com/gin-contrib/httpsign/validator"
+
 	"github.com/stretchr/testify/require"
-	
-	"e.coding.net/gogit/go/gin"
-	"e.coding.net/gogit/go/gin/render"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/render"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 const (
 	readID                 = KeyID("read")
 	writeID                = KeyID("write")

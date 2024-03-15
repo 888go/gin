@@ -2,9 +2,11 @@
 // +build go1.16
 
 package i18n
+
 import (
 	"embed"
-	)
+)
+
 type EmbedLoader struct {
 	FS embed.FS
 }

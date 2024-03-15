@@ -1,13 +1,15 @@
 package requestid
+
 import (
 	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 const testXRequestID = "test-request-id"
 
 func emptySuccessResponse(c *gin.Context) {

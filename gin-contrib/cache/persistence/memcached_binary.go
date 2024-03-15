@@ -1,10 +1,12 @@
 package persistence
+
 import (
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/cache/utils"
+
+	"github.com/gin-contrib/cache/utils"
 	"github.com/memcachier/mc/v3"
-	)
+)
+
 // MemcachedBinaryStore represents the cache with memcached persistence using
 // the binary protocol
 type MemcachedBinaryStore struct {

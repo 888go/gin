@@ -3,11 +3,13 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"net/http"
-	
+
 	"gopkg.in/yaml.v3"
-	)
+)
+
 // YAML contains the given interface object.
 type YAML struct {
 	Data any

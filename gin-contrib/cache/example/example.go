@@ -1,12 +1,14 @@
 package main
+
 import (
 	"fmt"
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/cache"
-	"e.coding.net/gogit/go/gin/gin-contrib/cache/persistence"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/cache"
+	"github.com/gin-contrib/cache/persistence"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	r := gin.Default()
 

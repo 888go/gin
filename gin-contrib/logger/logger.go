@@ -1,15 +1,17 @@
 package logger
+
 import (
 	"io"
 	"net/http"
 	"os"
 	"regexp"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/mattn/go-isatty"
 	"github.com/rs/zerolog"
-	)
+)
+
 type Fn func(*gin.Context, zerolog.Logger) zerolog.Logger
 
 // Config defines the config for logger middleware

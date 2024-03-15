@@ -1,17 +1,19 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
+
 import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
 	"net/http"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func init() {
 	SetMode(TestMode)
 }
@@ -84,11 +86,11 @@ func TestFilterFlags(t *testing.T) {
 }
 
 func TestFunctionName(t *testing.T) {
-	assert.Regexp(t, `^(.*/vendor/)?e.coding.net/gogit/go/gin.somefunction$`, nameOfFunction(somefunction))
+	assert.Regexp(t, `^(.*/vendor/)?github.com/gin-gonic/gin.somefunction$`, nameOfFunction(somefunction))
 }
 
 func somefunction() {
-// 这个空函数由TestFunctionName()使用
+	// this empty function is used by TestFunctionName()
 }
 
 func TestJoinPaths(t *testing.T) {

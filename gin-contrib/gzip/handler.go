@@ -1,4 +1,5 @@
 package gzip
+
 import (
 	"compress/gzip"
 	"fmt"
@@ -7,9 +8,10 @@ import (
 	"path/filepath"
 	"strings"
 	"sync"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 type gzipHandler struct {
 	*Options
 	gzPool sync.Pool

@@ -2,13 +2,15 @@
 //
 // See https://github.com/opentracing/opentracing-go for more information
 package opengintracing
+
 import (
 	"errors"
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/opentracing/opentracing-go"
-	)
+)
+
 const spanContextKey = "span"
 
 // Errors which may occur at operation time.

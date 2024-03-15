@@ -1,8 +1,9 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package binding
+
 import (
 	"bytes"
 	"encoding/json"
@@ -16,11 +17,12 @@ import (
 	"strings"
 	"testing"
 	"time"
-	
-	"e.coding.net/gogit/go/gin/testdata/protoexample"
+
+	"github.com/gin-gonic/gin/testdata/protoexample"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/proto"
-	)
+)
+
 type appkey struct {
 	Appkey string `json:"appkey" form:"appkey"`
 }
@@ -48,7 +50,7 @@ type FooBarFileStruct struct {
 type FooBarFileFailStruct struct {
 	FooBarStruct
 	File *multipart.FileHeader `invalid_name:"file" binding:"required"`
-// 对于取消导出测试
+	// for unexport test
 	data *multipart.FileHeader `form:"data" binding:"required"`
 }
 
@@ -124,7 +126,7 @@ type FooStructForStructPointerType struct {
 }
 
 type FooStructForSliceMapType struct {
-// 未知类型:不支持映射
+	// Unknown type: not support map
 	SliceMapFoo []map[string]any `form:"slice_map_foo"`
 }
 
@@ -361,7 +363,7 @@ func TestBindingFormStringMap(t *testing.T) {
 	testBodyBindingStringMap(t, Form,
 		"/", "",
 		`foo=bar&hello=world`, "")
-// 应该选择最后一个值吗
+	// Should pick the last value
 	testBodyBindingStringMap(t, Form,
 		"/", "",
 		`foo=something&foo=bar&hello=world`, "")
@@ -431,7 +433,7 @@ func TestBindingQueryStringMap(t *testing.T) {
 	assert.Equal(t, "world", obj["hello"])
 
 	obj = make(map[string]string)
-	req = requestWithBody("GET", "/?foo=bar&foo=2&hello=world", "") // 应该最后挑
+	req = requestWithBody("GET", "/?foo=bar&foo=2&hello=world", "") // should pick last
 	err = b.Bind(req, &obj)
 	assert.NoError(t, err)
 	assert.NotNil(t, obj)
@@ -476,7 +478,7 @@ func TestBindingYAML(t *testing.T) {
 }
 
 func TestBindingYAMLStringMap(t *testing.T) {
-// YAML是JSON的超集，所以下面的测试是JSON(为了避免换行)
+	// YAML is a superset of JSON, so the test below is JSON (to avoid newlines)
 	testBodyBindingStringMap(t, YAML,
 		"/", "/",
 		`{"foo": "bar", "hello": "world"}`, `{"nested": {"foo": "bar"}}`)
@@ -650,12 +652,12 @@ func TestBindingFormFilesMultipart(t *testing.T) {
 	err := FormMultipart.Bind(req, &obj)
 	assert.NoError(t, err)
 
-// 来自OS的文件
+	// file from os
 	f, _ := os.Open("form.go")
 	defer f.Close()
 	fileActual, _ := io.ReadAll(f)
 
-// 来自multipart的文件
+	// file from multipart
 	mf, _ := obj.File.Open()
 	defer mf.Close()
 	fileExpect, _ := io.ReadAll(mf)
@@ -1252,7 +1254,7 @@ func testBodyBindingUseNumber(t *testing.T, b Binding, name, path, badPath, body
 	EnableDecoderUseNumber = true
 	err := b.Bind(req, &obj)
 	assert.NoError(t, err)
-// 我们希望是int64(123)
+	// we hope it is int64(123)
 	v, e := obj.Foo.(json.Number).Int64()
 	assert.NoError(t, e)
 	assert.Equal(t, int64(123), v)
@@ -1271,7 +1273,8 @@ func testBodyBindingUseNumber2(t *testing.T, b Binding, name, path, badPath, bod
 	EnableDecoderUseNumber = false
 	err := b.Bind(req, &obj)
 	assert.NoError(t, err)
-// 如果不使用EnableDecoderUseNumber，它将返回float64(123)，这可能不是希望的
+	// it will return float64(123) if not use EnableDecoderUseNumber
+	// maybe it is not hoped
 	assert.Equal(t, float64(123), obj.Foo)
 
 	obj = FooStructUseNumber{}

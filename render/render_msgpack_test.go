@@ -5,14 +5,16 @@
 //go:build !nomsgpack
 
 package render
+
 import (
 	"bytes"
 	"net/http/httptest"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 	"github.com/ugorji/go/codec"
-	)
+)
+
 // TODO unit tests
 // test errors
 

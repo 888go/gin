@@ -1,8 +1,10 @@
 package timeout
+
 import (
 	"bytes"
 	"sync"
-	)
+)
+
 // BufferPool represents a pool of buffers.
 type BufferPool struct {
 	pool sync.Pool

@@ -1,9 +1,11 @@
 package routes
+
 import (
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func addUserRoutes(rg *gin.RouterGroup) {
 	users := rg.Group("/users")
 

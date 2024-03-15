@@ -1,12 +1,14 @@
 package main
+
 import (
 	"fmt"
 	"time"
-	
-	ginzap "e.coding.net/gogit/go/gin/gin-contrib/zap"
-	"e.coding.net/gogit/go/gin"
+
+	ginzap "github.com/gin-contrib/zap"
+	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
-	)
+)
+
 func main() {
 	r := gin.New()
 

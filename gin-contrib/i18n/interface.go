@@ -1,7 +1,9 @@
 package i18n
+
 import (
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-gonic/gin"
+)
+
 // GinI18n ...
 type GinI18n interface {
 	getMessage(context *gin.Context, param interface{}) (string, error)

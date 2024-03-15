@@ -1,18 +1,21 @@
-// 版权所有2021 Gin Core Team版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2021 Gin Core Team. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 //go:build !go1.19
 
 package gin
+
 import (
 	"bytes"
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func TestContextFormFileFailed18(t *testing.T) {
 	buf := new(bytes.Buffer)
 	mw := multipart.NewWriter(buf)

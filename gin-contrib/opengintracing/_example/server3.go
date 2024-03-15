@@ -1,14 +1,16 @@
 package main
+
 import (
 	"fmt"
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/opengintracing"
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-contrib/opengintracing"
+	"github.com/gin-gonic/gin"
 	"github.com/opentracing/opentracing-go"
 	"github.com/uber/jaeger-client-go"
 	"github.com/uber/jaeger-client-go/zipkin"
-	)
+)
+
 func main() {
 	// Configure tracing
 	propagator := zipkin.NewZipkinB3HTTPHeaderPropagator()

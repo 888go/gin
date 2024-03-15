@@ -1,9 +1,11 @@
 package persistence
+
 import (
 	"net"
 	"testing"
 	"time"
-	)
+)
+
 // These tests require redis server running on localhost:6379 (the default)
 const redisTestServer = "localhost:6379"
 

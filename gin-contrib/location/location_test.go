@@ -1,14 +1,16 @@
 package location
+
 import (
 	"crypto/tls"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func init() {
 	gin.SetMode(gin.TestMode)
 }

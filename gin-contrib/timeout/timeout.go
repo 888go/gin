@@ -1,9 +1,11 @@
 package timeout
+
 import (
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 var bufPool *BufferPool
 
 const (

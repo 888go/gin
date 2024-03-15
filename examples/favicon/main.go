@@ -1,14 +1,16 @@
 package main
+
 import (
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	app := gin.Default()
 
-// 从相对于主的位置提供静态图标文件
-// go directory app.StaticFile("/favicon.ico"， "./.assets/favicon.ico")
+	// serve static favicon file from a location relative to main.go directory
+	//app.StaticFile("/favicon.ico", "./.assets/favicon.ico")
 	app.StaticFile("/favicon.ico", "./favicon.ico")
 
 	app.GET("/ping", func(c *gin.Context) {

@@ -3,11 +3,13 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"net/http"
-	
+
 	"google.golang.org/protobuf/proto"
-	)
+)
+
 // ProtoBuf contains the given interface object.
 type ProtoBuf struct {
 	Data any

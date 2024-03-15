@@ -1,9 +1,11 @@
 package location
+
 import (
 	"net/url"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 const key = "location"
 
 // Headers represents the header fields used to map schemes and host.

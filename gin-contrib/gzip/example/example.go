@@ -1,13 +1,15 @@
 package main
+
 import (
 	"fmt"
 	"log"
 	"net/http"
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/gzip"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/gzip"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	r := gin.Default()
 	r.Use(gzip.Gzip(gzip.DefaultCompression))

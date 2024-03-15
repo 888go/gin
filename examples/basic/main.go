@@ -1,22 +1,24 @@
 package main
+
 import (
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 var db = make(map[string]string)
 
 func setupRouter() *gin.Engine {
-// 禁用控制台颜色
-// disableconsolecolor ()
+	// Disable Console Color
+	// gin.DisableConsoleColor()
 	r := gin.Default()
 
-// Ping测试
+	// Ping test
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong")
 	})
 
-// 获取用户价值
+	// Get user value
 	r.GET("/user/:name", func(c *gin.Context) {
 		user := c.Params.ByName("name")
 		value, ok := db[user]
@@ -27,18 +29,23 @@ func setupRouter() *gin.Engine {
 		}
 	})
 
-// 授权组(使用gin. basicauth()中间件)与:Authorized:= r.Group("/") Authorized . use (gin. basicauth())相同
-// 凭证{"foo";bar";manu"; "123"}))
+	// Authorized group (uses gin.BasicAuth() middleware)
+	// Same than:
+	// authorized := r.Group("/")
+	// authorized.Use(gin.BasicAuth(gin.Credentials{
+	//	  "foo":  "bar",
+	//	  "manu": "123",
+	//}))
 	authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
-		"foo":  "bar", // 用户:foo密码:酒吧
-		"manu": "123", // 用户:马努密码:123
+		"foo":  "bar", // user:foo password:bar
+		"manu": "123", // user:manu password:123
 	}))
 
 	/* example curl for /admin with basicauth header
 	   Zm9vOmJhcg== is base64("foo:bar")
 
 		curl -X POST \
-	  	http:// localhost: 8080 / admin \
+	  	http://localhost:8080/admin \
 	  	-H 'authorization: Basic Zm9vOmJhcg==' \
 	  	-H 'content-type: application/json' \
 	  	-d '{"value":"bar"}'
@@ -46,7 +53,7 @@ func setupRouter() *gin.Engine {
 	authorized.POST("admin", func(c *gin.Context) {
 		user := c.MustGet(gin.AuthUserKey).(string)
 
-// 解析JSON
+		// Parse JSON
 		var json struct {
 			Value string `json:"value" binding:"required"`
 		}
@@ -62,6 +69,6 @@ func setupRouter() *gin.Engine {
 
 func main() {
 	r := setupRouter()
-// 监听和服务器在0.0.0.0:8080
+	// Listen and Server in 0.0.0.0:8080
 	r.Run(":8080")
 }

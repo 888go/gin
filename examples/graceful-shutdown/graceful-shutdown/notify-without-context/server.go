@@ -2,6 +2,7 @@
 // +build go1.8
 
 package main
+
 import (
 	"context"
 	"log"
@@ -10,9 +11,10 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	router := gin.Default()
 	router.GET("/", func(c *gin.Context) {
@@ -25,14 +27,16 @@ func main() {
 		Handler: router,
 	}
 
-// 在运行例程中初始化服务器，使其不会阻塞下面的正常关机处理
+	// Initializing the server in a goroutine so that
+	// it won't block the graceful shutdown handling below
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
 
-// 等待中断信号，以5秒的超时时间正常关闭服务器
+	// Wait for interrupt signal to gracefully shutdown the server with
+	// a timeout of 5 seconds.
 	quit := make(chan os.Signal, 1)
 	// kill (no param) default send syscall.SIGTERM
 	// kill -2 is syscall.SIGINT

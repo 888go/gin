@@ -3,11 +3,13 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"io"
 	"net/http"
 	"strconv"
-	)
+)
+
 // Reader contains the IO reader and its length, and custom ContentType and other headers.
 type Reader struct {
 	ContentType   string

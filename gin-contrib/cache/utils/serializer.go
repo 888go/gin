@@ -1,10 +1,12 @@
 package utils
+
 import (
 	"bytes"
 	"encoding/gob"
 	"reflect"
 	"strconv"
-	)
+)
+
 // Serialize returns a []byte representing the passed value
 func Serialize(value interface{}) ([]byte, error) {
 	if bytes, ok := value.([]byte); ok {

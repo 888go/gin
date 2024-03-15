@@ -3,13 +3,15 @@
 // license that can be found in the LICENSE file.
 
 package ginS
+
 import (
 	"html/template"
 	"net/http"
 	"sync"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 var once sync.Once
 var internalEngine *gin.Engine
 

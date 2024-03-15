@@ -1,16 +1,18 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package binding
+
 import (
 	"bytes"
 	"testing"
 	"time"
-	
+
 	"github.com/go-playground/validator/v10"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 type testInterface interface {
 	String() string
 }
@@ -96,7 +98,8 @@ func createNoValidationValues() structNoValidationValues {
 			"foo": substructNoValidation{},
 			"bar": substructNoValidation{},
 		},
-// StructPointerSlice []noValidationSub interfacesslice []testInterface
+		// StructPointerSlice []noValidationSub
+		// InterfaceSlice     []testInterface
 	}
 	s.InlinedStruct.Integer = 1000
 	s.InlinedStruct.String = []string{"first", "second"}
@@ -154,17 +157,16 @@ type structNoValidationPointer struct {
 }
 
 func TestValidateNoValidationPointers(t *testing.T) {
-// origin:= createNoValidation_values() test:= createNoValidation_values()
+	//origin := createNoValidation_values()
+	//test := createNoValidation_values()
 	empty := structNoValidationPointer{}
 
-// ,
-// Nil(t, validate(test))断言
-// 尼罗河(t,执行极为&test))
+	//assert.Nil(t, validate(test))
+	//assert.Nil(t, validate(&test))
 	assert.Nil(t, validate(empty))
 	assert.Nil(t, validate(&empty))
 
-// 断言
-// 等于(t，原点，检验)
+	//assert.Equal(t, origin, test)
 }
 
 type Object map[string]any
@@ -190,8 +192,9 @@ func TestValidatePrimitives(t *testing.T) {
 	assert.Equal(t, "value", str)
 }
 
-// structCustomValidation是一个辅助结构体，我们使用它来检查是否可以在其上注册自定义验证
-// ' notone '绑定指令用于自定义验证并在以后注册
+// structCustomValidation is a helper struct we use to check that
+// custom validation can be registered on it.
+// The `notone` binding directive is for custom validation and registered later.
 type structCustomValidation struct {
 	Integer int `binding:"notone"`
 }
@@ -204,20 +207,22 @@ func notOne(f1 validator.FieldLevel) bool {
 }
 
 func TestValidatorEngine(t *testing.T) {
-// 这将验证函数' notOne '是否与' defaultValidator '和验证器库所期望的函数签名匹配
+	// This validates that the function `notOne` matches
+	// the expected function signature by `defaultValidator`
+	// and by extension the validator library.
 	engine, ok := Validator.Engine().(*validator.Validate)
 	assert.True(t, ok)
 
 	err := engine.RegisterValidation("notone", notOne)
-// 检查我们是否可以注册自定义验证而不会出错
+	// Check that we can register custom validation without error
 	assert.Nil(t, err)
 
-// 创建一个验证失败的实例
+	// Create an instance which will fail validation
 	withOne := structCustomValidation{Integer: 1}
 	errs := validate(withOne)
 
-// 检查我们是否得到非nil错误
+	// Check that we got back non-nil errs
 	assert.NotNil(t, errs)
-// 检查错误是否与预期相符
+	// Check that the error matches expectation
 	assert.Error(t, errs, "", "", "notone")
 }

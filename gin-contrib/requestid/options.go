@@ -1,7 +1,9 @@
 package requestid
+
 import (
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-gonic/gin"
+)
+
 // Option for queue system
 type Option func(*config)
 

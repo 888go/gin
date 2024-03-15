@@ -1,8 +1,9 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
+
 import (
 	"fmt"
 	"math/rand"
@@ -11,9 +12,10 @@ import (
 	"os"
 	"strings"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 type route struct {
 	method string
 	path   string
@@ -21,18 +23,18 @@ type route struct {
 
 // http://developer.github.com/v3/
 var githubAPI = []route{
-// OAuth授权
+	// OAuth Authorizations
 	{http.MethodGet, "/authorizations"},
 	{http.MethodGet, "/authorizations/:id"},
 	{http.MethodPost, "/authorizations"},
-// {http
-// MethodPut， "/authorizations/clients/:client_id"}， {http;“MethodPatch; /授权/:id"},
+	//{http.MethodPut, "/authorizations/clients/:client_id"},
+	//{http.MethodPatch, "/authorizations/:id"},
 	{http.MethodDelete, "/authorizations/:id"},
 	{http.MethodGet, "/applications/:client_id/tokens/:access_token"},
 	{http.MethodDelete, "/applications/:client_id/tokens"},
 	{http.MethodDelete, "/applications/:client_id/tokens/:access_token"},
 
-// 活动
+	// Activity
 	{http.MethodGet, "/events"},
 	{http.MethodGet, "/repos/:owner/:repo/events"},
 	{http.MethodGet, "/networks/:owner/:repo/events"},
@@ -48,8 +50,7 @@ var githubAPI = []route{
 	{http.MethodPut, "/notifications"},
 	{http.MethodPut, "/repos/:owner/:repo/notifications"},
 	{http.MethodGet, "/notifications/threads/:id"},
-// {http
-// “MethodPatch; / /线程/通知:id"},
+	//{http.MethodPatch, "/notifications/threads/:id"},
 	{http.MethodGet, "/notifications/threads/:id/subscription"},
 	{http.MethodPut, "/notifications/threads/:id/subscription"},
 	{http.MethodDelete, "/notifications/threads/:id/subscription"},
@@ -69,62 +70,58 @@ var githubAPI = []route{
 	{http.MethodPut, "/user/subscriptions/:owner/:repo"},
 	{http.MethodDelete, "/user/subscriptions/:owner/:repo"},
 
-// 依据
+	// Gists
 	{http.MethodGet, "/users/:user/gists"},
 	{http.MethodGet, "/gists"},
-// {http
-// MethodGet， "/gist /public"}， {http;MethodGet,“/丰子恺/ starred"},
+	//{http.MethodGet, "/gists/public"},
+	//{http.MethodGet, "/gists/starred"},
 	{http.MethodGet, "/gists/:id"},
 	{http.MethodPost, "/gists"},
-// {http
-// MethodPatch,“丰子恺/:id"},
+	//{http.MethodPatch, "/gists/:id"},
 	{http.MethodPut, "/gists/:id/star"},
 	{http.MethodDelete, "/gists/:id/star"},
 	{http.MethodGet, "/gists/:id/star"},
 	{http.MethodPost, "/gists/:id/forks"},
 	{http.MethodDelete, "/gists/:id"},
 
-// Git数据
+	// Git Data
 	{http.MethodGet, "/repos/:owner/:repo/git/blobs/:sha"},
 	{http.MethodPost, "/repos/:owner/:repo/git/blobs"},
 	{http.MethodGet, "/repos/:owner/:repo/git/commits/:sha"},
 	{http.MethodPost, "/repos/:owner/:repo/git/commits"},
-// {http
-// MethodGet " / /:业主休息,回购:git / refs ref"} / *,
+	//{http.MethodGet, "/repos/:owner/:repo/git/refs/*ref"},
 	{http.MethodGet, "/repos/:owner/:repo/git/refs"},
 	{http.MethodPost, "/repos/:owner/:repo/git/refs"},
-// {http
-// MethodPatch， "/repos/:owner/:repo/git/refs/* refquot;}， {http;MethodDelete,“/回购:所有者/:回购/ git / refs / * ref"},
+	//{http.MethodPatch, "/repos/:owner/:repo/git/refs/*ref"},
+	//{http.MethodDelete, "/repos/:owner/:repo/git/refs/*ref"},
 	{http.MethodGet, "/repos/:owner/:repo/git/tags/:sha"},
 	{http.MethodPost, "/repos/:owner/:repo/git/tags"},
 	{http.MethodGet, "/repos/:owner/:repo/git/trees/:sha"},
 	{http.MethodPost, "/repos/:owner/:repo/git/trees"},
 
-// 问题
+	// Issues
 	{http.MethodGet, "/issues"},
 	{http.MethodGet, "/user/issues"},
 	{http.MethodGet, "/orgs/:org/issues"},
 	{http.MethodGet, "/repos/:owner/:repo/issues"},
 	{http.MethodGet, "/repos/:owner/:repo/issues/:number"},
 	{http.MethodPost, "/repos/:owner/:repo/issues"},
-// {http
-// MethodPatch,“/回购:所有者/:回购/问题/:number"},
+	//{http.MethodPatch, "/repos/:owner/:repo/issues/:number"},
 	{http.MethodGet, "/repos/:owner/:repo/assignees"},
 	{http.MethodGet, "/repos/:owner/:repo/assignees/:assignee"},
 	{http.MethodGet, "/repos/:owner/:repo/issues/:number/comments"},
-// {http
-// MethodGet， "/repos/:owner/:repo/issues/comments"}， {http;MethodGet,“/回购:所有者/:回购/问题/评论/:id"},
+	//{http.MethodGet, "/repos/:owner/:repo/issues/comments"},
+	//{http.MethodGet, "/repos/:owner/:repo/issues/comments/:id"},
 	{http.MethodPost, "/repos/:owner/:repo/issues/:number/comments"},
-// {http
-// MethodPatch， "/repos/:owner/:repo/issues/comments/:id"}， {http;MethodDelete,“/回购:所有者/:回购/问题/评论/:id"},
+	//{http.MethodPatch, "/repos/:owner/:repo/issues/comments/:id"},
+	//{http.MethodDelete, "/repos/:owner/:repo/issues/comments/:id"},
 	{http.MethodGet, "/repos/:owner/:repo/issues/:number/events"},
-// {http
-// MethodGet， "/repos/:owner/:repo/issues/events"}， {http;MethodGet,“/回购:所有者/:回购/问题/事件/:id"},
+	//{http.MethodGet, "/repos/:owner/:repo/issues/events"},
+	//{http.MethodGet, "/repos/:owner/:repo/issues/events/:id"},
 	{http.MethodGet, "/repos/:owner/:repo/labels"},
 	{http.MethodGet, "/repos/:owner/:repo/labels/:name"},
 	{http.MethodPost, "/repos/:owner/:repo/labels"},
-// {http
-// MethodPatch,“/回购:所有者/:回购/标签/:name"},
+	//{http.MethodPatch, "/repos/:owner/:repo/labels/:name"},
 	{http.MethodDelete, "/repos/:owner/:repo/labels/:name"},
 	{http.MethodGet, "/repos/:owner/:repo/issues/:number/labels"},
 	{http.MethodPost, "/repos/:owner/:repo/issues/:number/labels"},
@@ -135,11 +132,10 @@ var githubAPI = []route{
 	{http.MethodGet, "/repos/:owner/:repo/milestones"},
 	{http.MethodGet, "/repos/:owner/:repo/milestones/:number"},
 	{http.MethodPost, "/repos/:owner/:repo/milestones"},
-// {http
-// MethodPatch,“/回购:所有者/:回购/里程碑:number"},
+	//{http.MethodPatch, "/repos/:owner/:repo/milestones/:number"},
 	{http.MethodDelete, "/repos/:owner/:repo/milestones/:number"},
 
-// 杂项
+	// Miscellaneous
 	{http.MethodGet, "/emojis"},
 	{http.MethodGet, "/gitignore/templates"},
 	{http.MethodGet, "/gitignore/templates/:name"},
@@ -148,12 +144,11 @@ var githubAPI = []route{
 	{http.MethodGet, "/meta"},
 	{http.MethodGet, "/rate_limit"},
 
-// 组织
+	// Organizations
 	{http.MethodGet, "/users/:user/orgs"},
 	{http.MethodGet, "/user/orgs"},
 	{http.MethodGet, "/orgs/:org"},
-// {http
-// MethodPatch &quot / orgs: org"},,
+	//{http.MethodPatch, "/orgs/:org"},
 	{http.MethodGet, "/orgs/:org/members"},
 	{http.MethodGet, "/orgs/:org/members/:user"},
 	{http.MethodDelete, "/orgs/:org/members/:user"},
@@ -164,8 +159,7 @@ var githubAPI = []route{
 	{http.MethodGet, "/orgs/:org/teams"},
 	{http.MethodGet, "/teams/:id"},
 	{http.MethodPost, "/orgs/:org/teams"},
-// {http
-// “MethodPatch; /团队/:id"},
+	//{http.MethodPatch, "/teams/:id"},
 	{http.MethodDelete, "/teams/:id"},
 	{http.MethodGet, "/teams/:id/members"},
 	{http.MethodGet, "/teams/:id/members/:user"},
@@ -177,24 +171,23 @@ var githubAPI = []route{
 	{http.MethodDelete, "/teams/:id/repos/:owner/:repo"},
 	{http.MethodGet, "/user/teams"},
 
-// 把请求
+	// Pull Requests
 	{http.MethodGet, "/repos/:owner/:repo/pulls"},
 	{http.MethodGet, "/repos/:owner/:repo/pulls/:number"},
 	{http.MethodPost, "/repos/:owner/:repo/pulls"},
-// {http
-// MethodPatch,“/回购:所有者/:回购/拉/:number"},
+	//{http.MethodPatch, "/repos/:owner/:repo/pulls/:number"},
 	{http.MethodGet, "/repos/:owner/:repo/pulls/:number/commits"},
 	{http.MethodGet, "/repos/:owner/:repo/pulls/:number/files"},
 	{http.MethodGet, "/repos/:owner/:repo/pulls/:number/merge"},
 	{http.MethodPut, "/repos/:owner/:repo/pulls/:number/merge"},
 	{http.MethodGet, "/repos/:owner/:repo/pulls/:number/comments"},
-// {http
-// MethodGet， "/repos/:owner/:repo/拉/评论"}， {http;MethodGet,“/回购:所有者/:回购/拉/评论/:number"},
+	//{http.MethodGet, "/repos/:owner/:repo/pulls/comments"},
+	//{http.MethodGet, "/repos/:owner/:repo/pulls/comments/:number"},
 	{http.MethodPut, "/repos/:owner/:repo/pulls/:number/comments"},
-// {http
-// MethodPatch， "/repos/:owner/:repo/pull /comments/:number"}， {http;MethodDelete,“/回购:所有者/:回购/拉/评论/:number"},
+	//{http.MethodPatch, "/repos/:owner/:repo/pulls/comments/:number"},
+	//{http.MethodDelete, "/repos/:owner/:repo/pulls/comments/:number"},
 
-// 存储库
+	// Repositories
 	{http.MethodGet, "/user/repos"},
 	{http.MethodGet, "/users/:user/repos"},
 	{http.MethodGet, "/orgs/:org/repos"},
@@ -202,8 +195,7 @@ var githubAPI = []route{
 	{http.MethodPost, "/user/repos"},
 	{http.MethodPost, "/orgs/:org/repos"},
 	{http.MethodGet, "/repos/:owner/:repo"},
-// {http
-// MethodPatch,“/回购:所有者/:repo"},
+	//{http.MethodPatch, "/repos/:owner/:repo"},
 	{http.MethodGet, "/repos/:owner/:repo/contributors"},
 	{http.MethodGet, "/repos/:owner/:repo/languages"},
 	{http.MethodGet, "/repos/:owner/:repo/teams"},
@@ -219,19 +211,19 @@ var githubAPI = []route{
 	{http.MethodGet, "/repos/:owner/:repo/commits/:sha/comments"},
 	{http.MethodPost, "/repos/:owner/:repo/commits/:sha/comments"},
 	{http.MethodGet, "/repos/:owner/:repo/comments/:id"},
-// {http
-// MethodPatch,“/回购:所有者/:回购/评论/:id"},
+	//{http.MethodPatch, "/repos/:owner/:repo/comments/:id"},
 	{http.MethodDelete, "/repos/:owner/:repo/comments/:id"},
 	{http.MethodGet, "/repos/:owner/:repo/commits"},
 	{http.MethodGet, "/repos/:owner/:repo/commits/:sha"},
 	{http.MethodGet, "/repos/:owner/:repo/readme"},
-// {http
-// MethodGet， "/repos/:owner/:repo/contents/*path"}， {http;MethodPut， "/repos/:owner/:repo/contents/*path"}， {http;MethodDelete， "/repos/:owner/:repo/contents/*path"}， {http;MethodGet,“/回购:所有者/:回购/:archive_format /: ref"},
+	//{http.MethodGet, "/repos/:owner/:repo/contents/*path"},
+	//{http.MethodPut, "/repos/:owner/:repo/contents/*path"},
+	//{http.MethodDelete, "/repos/:owner/:repo/contents/*path"},
+	//{http.MethodGet, "/repos/:owner/:repo/:archive_format/:ref"},
 	{http.MethodGet, "/repos/:owner/:repo/keys"},
 	{http.MethodGet, "/repos/:owner/:repo/keys/:id"},
 	{http.MethodPost, "/repos/:owner/:repo/keys"},
-// {http
-// MethodPatch,“/回购:所有者/:回购/键/:id"},
+	//{http.MethodPatch, "/repos/:owner/:repo/keys/:id"},
 	{http.MethodDelete, "/repos/:owner/:repo/keys/:id"},
 	{http.MethodGet, "/repos/:owner/:repo/downloads"},
 	{http.MethodGet, "/repos/:owner/:repo/downloads/:id"},
@@ -241,16 +233,14 @@ var githubAPI = []route{
 	{http.MethodGet, "/repos/:owner/:repo/hooks"},
 	{http.MethodGet, "/repos/:owner/:repo/hooks/:id"},
 	{http.MethodPost, "/repos/:owner/:repo/hooks"},
-// {http
-// MethodPatch,“/回购:所有者/:回购/钩子:id"},
+	//{http.MethodPatch, "/repos/:owner/:repo/hooks/:id"},
 	{http.MethodPost, "/repos/:owner/:repo/hooks/:id/tests"},
 	{http.MethodDelete, "/repos/:owner/:repo/hooks/:id"},
 	{http.MethodPost, "/repos/:owner/:repo/merges"},
 	{http.MethodGet, "/repos/:owner/:repo/releases"},
 	{http.MethodGet, "/repos/:owner/:repo/releases/:id"},
 	{http.MethodPost, "/repos/:owner/:repo/releases"},
-// {http
-// MethodPatch,“/回购:所有者/:回购/版本/:id"},
+	//{http.MethodPatch, "/repos/:owner/:repo/releases/:id"},
 	{http.MethodDelete, "/repos/:owner/:repo/releases/:id"},
 	{http.MethodGet, "/repos/:owner/:repo/releases/:id/assets"},
 	{http.MethodGet, "/repos/:owner/:repo/stats/contributors"},
@@ -261,7 +251,7 @@ var githubAPI = []route{
 	{http.MethodGet, "/repos/:owner/:repo/statuses/:ref"},
 	{http.MethodPost, "/repos/:owner/:repo/statuses/:ref"},
 
-// 搜索
+	// Search
 	{http.MethodGet, "/search/repositories"},
 	{http.MethodGet, "/search/code"},
 	{http.MethodGet, "/search/issues"},
@@ -271,11 +261,10 @@ var githubAPI = []route{
 	{http.MethodGet, "/legacy/user/search/:keyword"},
 	{http.MethodGet, "/legacy/user/email/:email"},
 
-// 用户
+	// Users
 	{http.MethodGet, "/users/:user"},
 	{http.MethodGet, "/user"},
-// {http
-// MethodPatch,“/ user"},
+	//{http.MethodPatch, "/user"},
 	{http.MethodGet, "/users"},
 	{http.MethodGet, "/user/emails"},
 	{http.MethodPost, "/user/emails"},
@@ -292,8 +281,7 @@ var githubAPI = []route{
 	{http.MethodGet, "/user/keys"},
 	{http.MethodGet, "/user/keys/:id"},
 	{http.MethodPost, "/user/keys"},
-// {http
-// MethodPatch“/用户/键/:id"},
+	//{http.MethodPatch, "/user/keys/:id"},
 	{http.MethodDelete, "/user/keys/:id"},
 }
 
@@ -365,7 +353,7 @@ func TestRaceContextCopy(t *testing.T) {
 		c.Set("1", 0)
 		c.Set("2", 0)
 
-// 将Context的副本发送给两个独立的例程
+		// Sending a copy of the Context to two separate routines
 		go readWriteKeys(c.Copy())
 		go readWriteKeys(c.Copy())
 		c.String(http.StatusOK, "run OK, no panics")
@@ -403,7 +391,7 @@ func TestGithubAPI(t *testing.T) {
 		path, values := exampleFromPath(route.path)
 		w := PerformRequest(router, route.method, path)
 
-// 测试
+		// TEST
 		assert.Contains(t, w.Body.String(), "\"status\":\"good\"")
 		for _, value := range values {
 			str := fmt.Sprintf("\"%s\":\"%s\"", value.Key, value.Value)
@@ -461,7 +449,7 @@ func BenchmarkParallelGithub(b *testing.B) {
 	req, _ := http.NewRequest(http.MethodPost, "/repos/manucorporat/sse/git/blobs", nil)
 
 	b.RunParallel(func(pb *testing.PB) {
-// 每个程序都有自己的bytes.Buffer
+		// Each goroutine has its own bytes.Buffer.
 		for pb.Next() {
 			w := httptest.NewRecorder()
 			router.ServeHTTP(w, req)
@@ -477,7 +465,7 @@ func BenchmarkParallelGithubDefault(b *testing.B) {
 	req, _ := http.NewRequest(http.MethodPost, "/repos/manucorporat/sse/git/blobs", nil)
 
 	b.RunParallel(func(pb *testing.PB) {
-// 每个程序都有自己的bytes.Buffer
+		// Each goroutine has its own bytes.Buffer.
 		for pb.Next() {
 			w := httptest.NewRecorder()
 			router.ServeHTTP(w, req)

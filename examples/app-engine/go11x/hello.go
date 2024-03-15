@@ -1,11 +1,13 @@
 package main
+
 import (
 	"log"
 	"net/http"
 	"os"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	port := os.Getenv("PORT")
 
@@ -14,10 +16,10 @@ func main() {
 		log.Printf("Defaulting to port %s", port)
 	}
 
-// 启动一个没有中间件的新Gin实例
+	// Starts a new Gin instance with no middle-ware
 	r := gin.New()
 
-// 定义处理程序
+	// Define handlers
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Hello World!")
 	})
@@ -25,7 +27,7 @@ func main() {
 		c.String(http.StatusOK, "pong")
 	})
 
-// 在定义的端口上侦听和服务
+	// Listen and serve on defined port
 	log.Printf("Listening on port %s", port)
 	r.Run(":" + port)
 }

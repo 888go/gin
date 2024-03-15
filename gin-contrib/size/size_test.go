@@ -1,13 +1,15 @@
 package limits
+
 import (
 	"bytes"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func TestRequestSizeLimiterOK(t *testing.T) {
 	router := gin.New()
 	router.Use(RequestSizeLimiter(10))

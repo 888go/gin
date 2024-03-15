@@ -1,9 +1,11 @@
 package httpsign
+
 import (
 	"errors"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func newPublicError(msg string) *gin.Error {
 	return &gin.Error{
 		Err:  errors.New(msg),

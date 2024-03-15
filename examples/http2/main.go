@@ -1,12 +1,14 @@
 package main
+
 import (
 	"html/template"
 	"log"
 	"net/http"
 	"os"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 var html = template.Must(template.New("https").Parse(`
 <html>
 <head>

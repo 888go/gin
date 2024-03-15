@@ -2,15 +2,17 @@
 // +build go1.8
 
 package main
+
 import (
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	router := gin.Default()
 	router.GET("/", func(c *gin.Context) {

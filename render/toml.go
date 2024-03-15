@@ -3,11 +3,13 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"net/http"
-	
+
 	"github.com/pelletier/go-toml/v2"
-	)
+)
+
 // TOML contains the given interface object.
 type TOML struct {
 	Data any

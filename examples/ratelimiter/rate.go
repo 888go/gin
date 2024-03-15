@@ -1,13 +1,15 @@
 package main
+
 import (
 	"flag"
 	"log"
 	"time"
-	
+
 	"github.com/fatih/color"
-	"e.coding.net/gogit/go/gin"
+	"github.com/gin-gonic/gin"
 	"go.uber.org/ratelimit"
-	)
+)
+
 var (
 	limit ratelimit.Limiter
 	rps   = flag.Int("rps", 100, "request per second")

@@ -1,14 +1,16 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package binding
+
 import (
 	"bytes"
 	"encoding/xml"
 	"io"
 	"net/http"
-	)
+)
+
 type xmlBinding struct{}
 
 func (xmlBinding) Name() string {

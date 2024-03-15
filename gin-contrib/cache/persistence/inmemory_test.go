@@ -1,8 +1,10 @@
 package persistence
+
 import (
 	"testing"
 	"time"
-	)
+)
+
 var newInMemoryStore = func(_ *testing.T, defaultExpiration time.Duration) CacheStore {
 	return NewInMemoryStore(defaultExpiration)
 }

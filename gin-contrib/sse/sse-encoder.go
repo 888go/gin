@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 package sse
+
 import (
 	"encoding/json"
 	"fmt"
@@ -11,7 +12,8 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
-	)
+)
+
 // Server-Sent Events
 // W3C Working Draft 29 October 2009
 // http://www.w3.org/TR/2009/WD-eventsource-20091029/

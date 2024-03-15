@@ -1,14 +1,16 @@
 package httpsign
+
 import (
 	"bytes"
 	"encoding/base64"
 	"fmt"
 	"net/http"
 	"strings"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/httpsign/validator"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/httpsign/validator"
+	"github.com/gin-gonic/gin"
+)
+
 const (
 	requestTarget = "(request-target)"
 	date          = "date"

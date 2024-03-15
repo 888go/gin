@@ -1,4 +1,5 @@
 package logger
+
 import (
 	"bytes"
 	"context"
@@ -6,11 +7,12 @@ import (
 	"net/http/httptest"
 	"regexp"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 type header struct {
 	Key   string
 	Value string

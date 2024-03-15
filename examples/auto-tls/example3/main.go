@@ -1,16 +1,18 @@
 package main
+
 import (
 	"context"
 	"log"
 	"net/http"
 	"os/signal"
 	"syscall"
-	
+
 	"github.com/gin-gonic/autotls"
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
-// 创建上下文，监听来自操作系统的中断信号
+	// Create context that listens for the interrupt signal from the OS.
 	ctx, stop := signal.NotifyContext(
 		context.Background(),
 		syscall.SIGINT,
@@ -20,7 +22,7 @@ func main() {
 
 	r := gin.Default()
 
-// 平处理程序
+	// Ping handler
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong")
 	})

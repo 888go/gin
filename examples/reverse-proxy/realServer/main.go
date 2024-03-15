@@ -1,10 +1,12 @@
 package main
+
 import (
 	"fmt"
 	"log"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 const (
 	Addr = "127.0.0.1:2003"
 )

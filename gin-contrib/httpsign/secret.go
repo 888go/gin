@@ -1,7 +1,7 @@
 package httpsign
-import (
-	"e.coding.net/gogit/go/gin/gin-contrib/httpsign/crypto"
-	)
+
+import "github.com/gin-contrib/httpsign/crypto"
+
 // KeyID define type
 type KeyID string
 

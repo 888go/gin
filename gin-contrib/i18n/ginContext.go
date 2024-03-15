@@ -1,7 +1,7 @@
 package i18n
-import (
-	"e.coding.net/gogit/go/gin"
-	)
+
+import "github.com/gin-gonic/gin"
+
 // defaultGetLngHandler ...
 func defaultGetLngHandler(context *gin.Context, defaultLng string) string {
 	if context == nil || context.Request == nil {

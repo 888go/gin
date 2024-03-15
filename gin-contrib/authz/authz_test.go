@@ -3,15 +3,17 @@
 // license that can be found in the LICENSE file.
 
 package authz
+
 import (
 	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
+
 	"github.com/casbin/casbin/v2"
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-gonic/gin"
+)
+
 func testAuthzRequest(t *testing.T, router *gin.Engine, user string, path string, method string, code int) {
 	r, _ := http.NewRequestWithContext(context.Background(), method, path, nil)
 	r.SetBasicAuth(user, "123")

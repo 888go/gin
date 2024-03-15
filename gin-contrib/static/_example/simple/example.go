@@ -1,10 +1,12 @@
 package main
+
 import (
 	"log"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/static"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/static"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	r := gin.Default()
 

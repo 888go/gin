@@ -1,8 +1,10 @@
 package httpsign
+
 import (
 	"net/http"
 	"strings"
-	)
+)
+
 const (
 	authorizationHeader           = "Authorization"
 	authorizationHeaderInitString = "Signature "

@@ -3,10 +3,12 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"html/template"
 	"net/http"
-	)
+)
+
 // Delims represents a set of Left and Right delimiters for HTML template rendering.
 type Delims struct {
 	// Left delimiter, defaults to {{.

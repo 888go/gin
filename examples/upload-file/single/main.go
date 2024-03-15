@@ -1,10 +1,12 @@
 package main
+
 import (
 	"net/http"
 	"path/filepath"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	router := gin.Default()
 	// Set a lower memory limit for multipart forms (default is 32 MiB)

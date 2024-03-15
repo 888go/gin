@@ -1,10 +1,12 @@
 package main
+
 import (
 	"log"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/multitemplate"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/multitemplate"
+	"github.com/gin-gonic/gin"
+)
+
 func createMyRender() multitemplate.Renderer {
 	r := multitemplate.NewRenderer()
 	r.AddFromFiles("index", "templates/base.html", "templates/index.html")

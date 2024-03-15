@@ -1,6 +1,7 @@
-// 构建go1.16
+// build go1.16
 
 package main
+
 import (
 	"context"
 	"log"
@@ -8,11 +9,12 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
-// 创建上下文，监听来自操作系统的中断信号
+	// Create context that listens for the interrupt signal from the OS.
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
@@ -27,21 +29,23 @@ func main() {
 		Handler: router,
 	}
 
-// 在运行例程中初始化服务器，使其不会阻塞下面的正常关机处理
+	// Initializing the server in a goroutine so that
+	// it won't block the graceful shutdown handling below
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
 
-// 监听中断信号
+	// Listen for the interrupt signal.
 	<-ctx.Done()
 
-// 恢复中断信号的默认行为，并通知用户关机
+	// Restore default behavior on the interrupt signal and notify user of shutdown.
 	stop()
 	log.Println("shutting down gracefully, press Ctrl+C again to force")
 
-// 上下文用于通知服务器，它有5秒的时间来完成当前正在处理的请求
+	// The context is used to inform the server it has 5 seconds to finish
+	// the request it is currently handling
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {

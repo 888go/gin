@@ -1,9 +1,11 @@
 package persistence
+
 import (
 	"math"
 	"testing"
 	"time"
-	)
+)
+
 type cacheFactory func(*testing.T, time.Duration) CacheStore
 
 // Test typical cache interactions

@@ -1,10 +1,12 @@
 package main
+
 import (
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/cors"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	router := gin.Default()
 	// CORS for https://foo.com and https://github.com origins, allowing:

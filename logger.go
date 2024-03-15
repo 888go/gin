@@ -1,17 +1,19 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
+
 import (
 	"fmt"
 	"io"
 	"net/http"
 	"os"
 	"time"
-	
+
 	"github.com/mattn/go-isatty"
-	)
+)
+
 type consoleColorModeValue int
 
 const (
@@ -33,52 +35,50 @@ const (
 
 var consoleColorMode = autoColor
 
-// LoggerConfig定义了Logger中间件的配置
+// LoggerConfig defines the config for Logger middleware.
 type LoggerConfig struct {
-// 可选的
-// 默认值为gin.defaultLogFormatter
+	// Optional. Default value is gin.defaultLogFormatter
 	Formatter LogFormatter
 
-// Output是写入日志的写入器
-// 可选的
-// 默认值为gin. defaultwwriter
+	// Output is a writer where logs are written.
+	// Optional. Default value is gin.DefaultWriter.
 	Output io.Writer
 
-// skipppaths是一个url路径数组，不写入日志
-// 可选的
+	// SkipPaths is an url path array which logs are not written.
+	// Optional.
 	SkipPaths []string
 }
 
-// LogFormatter给出传递给LoggerWithFormatter的formatter函数的签名
+// LogFormatter gives the signature of the formatter function passed to LoggerWithFormatter
 type LogFormatter func(params LogFormatterParams) string
 
-// LogFormatterParams是任何格式化程序在需要进行日志记录时要传递的结构
+// LogFormatterParams is the structure any formatter will be handed when time to log comes
 type LogFormatterParams struct {
 	Request *http.Request
 
-// TimeStamp显示服务器返回响应后的时间
+	// TimeStamp shows the time after the server returns a response.
 	TimeStamp time.Time
-// StatusCode是HTTP响应码
+	// StatusCode is HTTP response code.
 	StatusCode int
-// 延迟是服务器处理某个请求所需的时间
+	// Latency is how much time the server cost to process a certain request.
 	Latency time.Duration
-// ClientIP等于Context的ClientIP方法
+	// ClientIP equals Context's ClientIP method.
 	ClientIP string
-// 方法是给定给请求的HTTP方法
+	// Method is the HTTP method given to the request.
 	Method string
-// Path是客户端请求的路径
+	// Path is a path the client requests.
 	Path string
-// 如果在处理请求时发生错误，则设置ErrorMessage
+	// ErrorMessage is set if error has occurred in processing the request.
 	ErrorMessage string
-// isTerm显示gin的输出描述符是否指向终端
+	// isTerm shows whether gin's output descriptor refers to a terminal.
 	isTerm bool
-// BodySize是响应体的大小
+	// BodySize is the size of the Response Body
 	BodySize int
-// 键是在请求的上下文中设置的键
+	// Keys are the keys set on the request's context.
 	Keys map[string]any
 }
 
-// StatusCodeColor是用于将http状态码适当地记录到终端的ANSI颜色
+// StatusCodeColor is the ANSI color for appropriately logging http status code to a terminal.
 func (p *LogFormatterParams) StatusCodeColor() string {
 	code := p.StatusCode
 
@@ -96,7 +96,7 @@ func (p *LogFormatterParams) StatusCodeColor() string {
 	}
 }
 
-// MethodColor是用于将http方法适当地记录到终端的ANSI颜色
+// MethodColor is the ANSI color for appropriately logging http method to a terminal.
 func (p *LogFormatterParams) MethodColor() string {
 	method := p.Method
 
@@ -120,17 +120,17 @@ func (p *LogFormatterParams) MethodColor() string {
 	}
 }
 
-// ResetColor重置所有转义属性
+// ResetColor resets all escape attributes.
 func (p *LogFormatterParams) ResetColor() string {
 	return reset
 }
 
-// IsOutputColor是否可以输出颜色到日志中
+// IsOutputColor indicates whether can colors be outputted to the log.
 func (p *LogFormatterParams) IsOutputColor() bool {
 	return consoleColorMode == forceColor || (consoleColorMode == autoColor && p.isTerm)
 }
 
-// defaultLogFormatter是Logger中间件使用的默认日志格式函数
+// defaultLogFormatter is the default log format function Logger middleware uses.
 var defaultLogFormatter = func(param LogFormatterParams) string {
 	var statusColor, methodColor, resetColor string
 	if param.IsOutputColor() {
@@ -153,22 +153,22 @@ var defaultLogFormatter = func(param LogFormatterParams) string {
 	)
 }
 
-// DisableConsoleColor禁用控制台的颜色输出
+// DisableConsoleColor disables color output in the console.
 func DisableConsoleColor() {
 	consoleColorMode = disableColor
 }
 
-// ForceConsoleColor强制控制台的颜色输出
+// ForceConsoleColor force color output in the console.
 func ForceConsoleColor() {
 	consoleColorMode = forceColor
 }
 
-// ErrorLogger为任何错误类型返回一个HandlerFunc
+// ErrorLogger returns a HandlerFunc for any error type.
 func ErrorLogger() HandlerFunc {
 	return ErrorLoggerT(ErrorTypeAny)
 }
 
-// ErrorLoggerT返回给定错误类型的HandlerFunc
+// ErrorLoggerT returns a HandlerFunc for a given error type.
 func ErrorLoggerT(typ ErrorType) HandlerFunc {
 	return func(c *Context) {
 		c.Next()
@@ -179,23 +179,21 @@ func ErrorLoggerT(typ ErrorType) HandlerFunc {
 	}
 }
 
-// Logger实例化一个Logger中间件，它将把日志写入gin. defaultwwriter
-// 缺省为gin
-// defaultwwriter = os.Stdout
+// Logger instances a Logger middleware that will write the logs to gin.DefaultWriter.
+// By default, gin.DefaultWriter = os.Stdout.
 func Logger() HandlerFunc {
 	return LoggerWithConfig(LoggerConfig{})
 }
 
-// LoggerWithFormatter实例:一个具有指定日志格式功能的Logger中间件
+// LoggerWithFormatter instance a Logger middleware with the specified log format function.
 func LoggerWithFormatter(f LogFormatter) HandlerFunc {
 	return LoggerWithConfig(LoggerConfig{
 		Formatter: f,
 	})
 }
 
-// LoggerWithWriter实例:一个具有指定写入器缓冲区的Logger中间件
-// 例如:操作系统
-// 标准输出，以写模式打开的文件，套接字…
+// LoggerWithWriter instance a Logger middleware with the specified writer buffer.
+// Example: os.Stdout, a file opened in write mode, a socket...
 func LoggerWithWriter(out io.Writer, notlogged ...string) HandlerFunc {
 	return LoggerWithConfig(LoggerConfig{
 		Output:    out,
@@ -203,7 +201,7 @@ func LoggerWithWriter(out io.Writer, notlogged ...string) HandlerFunc {
 	})
 }
 
-// LoggerWithConfig实例是一个带有config的Logger中间件
+// LoggerWithConfig instance a Logger middleware with config.
 func LoggerWithConfig(conf LoggerConfig) HandlerFunc {
 	formatter := conf.Formatter
 	if formatter == nil {
@@ -235,15 +233,15 @@ func LoggerWithConfig(conf LoggerConfig) HandlerFunc {
 	}
 
 	return func(c *Context) {
-// 启动定时器
+		// Start timer
 		start := time.Now()
 		path := c.Request.URL.Path
 		raw := c.Request.URL.RawQuery
 
-// 处理请求
+		// Process request
 		c.Next()
 
-// 仅当路径未被跳过时记录日志
+		// Log only when path is not being skipped
 		if _, ok := skip[path]; !ok {
 			param := LogFormatterParams{
 				Request: c.Request,
@@ -251,7 +249,7 @@ func LoggerWithConfig(conf LoggerConfig) HandlerFunc {
 				Keys:    c.Keys,
 			}
 
-// 停止计时器
+			// Stop timer
 			param.TimeStamp = time.Now()
 			param.Latency = param.TimeStamp.Sub(start)
 

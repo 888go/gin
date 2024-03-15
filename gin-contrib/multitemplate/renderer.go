@@ -1,9 +1,11 @@
 package multitemplate
+
 import (
 	"html/template"
-	
-	"e.coding.net/gogit/go/gin/render"
-	)
+
+	"github.com/gin-gonic/gin/render"
+)
+
 // Renderer type is the Agnostic Renderer for multitemplates.
 // When gin is in debug mode then all multitemplates works with
 // hot reloading allowing you modify file templates and seeing changes instantly.

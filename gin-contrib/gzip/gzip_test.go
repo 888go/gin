@@ -1,4 +1,5 @@
 package gzip
+
 import (
 	"bytes"
 	"compress/gzip"
@@ -11,10 +12,11 @@ import (
 	"net/url"
 	"strconv"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 const (
 	testResponse        = "Gzip Test Response "
 	testReverseResponse = "Gzip Test Reverse Response "

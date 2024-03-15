@@ -1,11 +1,13 @@
 package main
+
 import (
 	"embed"
 	"html/template"
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 //go:embed assets/* templates/*
 var f embed.FS
 
@@ -14,7 +16,7 @@ func main() {
 	templ := template.Must(template.New("").ParseFS(f, "templates/*.tmpl", "templates/foo/*.tmpl"))
 	router.SetHTMLTemplate(templ)
 
-// 例子:公共/资产/图片/ example.png
+	// example: /public/assets/images/example.png
 	router.StaticFS("/public", http.FS(f))
 
 	router.GET("/", func(c *gin.Context) {

@@ -1,11 +1,13 @@
 package pprof
+
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func Test_getPrefix(t *testing.T) {
 	tests := []struct {
 		name string

@@ -1,11 +1,13 @@
 package main
+
 import (
 	"log"
 	"path/filepath"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/multitemplate"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/multitemplate"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	router := gin.Default()
 	router.HTMLRender = loadTemplates("./templates")

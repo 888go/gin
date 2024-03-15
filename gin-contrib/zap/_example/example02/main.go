@@ -1,17 +1,19 @@
 package main
+
 import (
 	"bytes"
 	"fmt"
 	"io"
 	"time"
-	
-	ginzap "e.coding.net/gogit/go/gin/gin-contrib/zap"
-	
-	"e.coding.net/gogit/go/gin"
+
+	ginzap "github.com/gin-contrib/zap"
+
+	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	)
+)
+
 func main() {
 	r := gin.New()
 

@@ -53,6 +53,7 @@ goto :begin
 :安装第三方包
 @Echo on
 go mod download
+go run main.go
 pause
 @Echo Off
 goto :begin

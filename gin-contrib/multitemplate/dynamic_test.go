@@ -1,11 +1,13 @@
 package multitemplate
+
 import (
 	"html/template"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func createFromFileDynamic() Renderer {
 	r := NewRenderer()
 	r.AddFromFiles("index", "tests/base.html", "tests/article.html")

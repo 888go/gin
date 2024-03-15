@@ -1,11 +1,13 @@
 package main
+
 import (
 	"log"
 	"net/http"
-	
-	limits "e.coding.net/gogit/go/gin/gin-contrib/size"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	limits "github.com/gin-contrib/size"
+	"github.com/gin-gonic/gin"
+)
+
 func handler(ctx *gin.Context) {
 	val := ctx.PostForm("b")
 	if len(ctx.Errors) > 0 {

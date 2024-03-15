@@ -1,4 +1,5 @@
 package validator
+
 import (
 	"bytes"
 	"crypto/sha256"
@@ -7,9 +8,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 // TODO: support more digest
 
 // ErrInvalidDigest error when sha256 of body do not match with submitted digest

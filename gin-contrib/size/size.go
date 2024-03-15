@@ -1,11 +1,13 @@
 package limits
+
 import (
 	"fmt"
 	"io"
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 type maxBytesReader struct {
 	ctx        *gin.Context
 	rdr        io.ReadCloser

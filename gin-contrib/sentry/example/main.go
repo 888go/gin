@@ -1,9 +1,11 @@
 package main
+
 import (
 	"github.com/getsentry/raven-go"
-	"e.coding.net/gogit/go/gin/gin-contrib/sentry"
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-contrib/sentry"
+	"github.com/gin-gonic/gin"
+)
+
 func init() {
 	raven.SetDSN("https://<key>:<secret>@app.getsentry.com/<project>")
 }

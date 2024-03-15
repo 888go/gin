@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"encoding/xml"
 	"errors"
@@ -13,12 +14,13 @@ import (
 	"strconv"
 	"strings"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin/internal/json"
-	testdata "e.coding.net/gogit/go/gin/testdata/protoexample"
+
+	"github.com/gin-gonic/gin/internal/json"
+	testdata "github.com/gin-gonic/gin/testdata/protoexample"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/proto"
-	)
+)
+
 // TODO unit tests
 // test errors
 

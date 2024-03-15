@@ -1,4 +1,5 @@
 package cache
+
 import (
 	"bytes"
 	"crypto/sha1"
@@ -9,10 +10,11 @@ import (
 	"net/url"
 	"sync"
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/cache/persistence"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/cache/persistence"
+	"github.com/gin-gonic/gin"
+)
+
 const (
 	CACHE_MIDDLEWARE_KEY = "gincontrib.cache"
 )

@@ -1,12 +1,14 @@
 package static
+
 import (
 	"net/http"
 	"os"
 	"path"
 	"strings"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 const INDEX = "index.html"
 
 type ServeFileSystem interface {

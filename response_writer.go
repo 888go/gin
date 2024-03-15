@@ -1,44 +1,45 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
+
 import (
 	"bufio"
 	"io"
 	"net"
 	"net/http"
-	)
+)
+
 const (
 	noWritten     = -1
 	defaultStatus = http.StatusOK
 )
 
-// ResponseWriter……
+// ResponseWriter ...
 type ResponseWriter interface {
 	http.ResponseWriter
 	http.Hijacker
 	http.Flusher
 	http.CloseNotifier
 
-// Status返回当前请求的HTTP响应状态码
+	// Status returns the HTTP response status code of the current request.
 	Status() int
 
-// Size返回已经写入响应http主体的字节数
-// 看到写()
+	// Size returns the number of bytes already written into the response http body.
+	// See Written()
 	Size() int
 
-// WriteString将字符串写入响应体
+	// WriteString writes the string into the response body.
 	WriteString(string) (int, error)
 
-// 如果响应体已经写好，则write返回true
+	// Written returns true if the response body was already written.
 	Written() bool
 
-// WriteHeaderNow强制写入http报头(状态码+报头)
+	// WriteHeaderNow forces to write the http header (status code + headers).
 	WriteHeaderNow()
 
-// push获取http
-// 用于服务器推送的push
+	// Pusher get the http.Pusher for server push
 	Pusher() http.Pusher
 }
 
@@ -103,8 +104,7 @@ func (w *responseWriter) Written() bool {
 	return w.size != noWritten
 }
 
-// Hijack实现http
-// 劫机者接口
+// Hijack implements the http.Hijacker interface.
 func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	if w.size < 0 {
 		w.size = 0
@@ -112,14 +112,12 @@ func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return w.ResponseWriter.(http.Hijacker).Hijack()
 }
 
-// CloseNotify实现http
-// CloseNotifier接口
+// CloseNotify implements the http.CloseNotifier interface.
 func (w *responseWriter) CloseNotify() <-chan bool {
 	return w.ResponseWriter.(http.CloseNotifier).CloseNotify()
 }
 
-// Flush实现http
-// 冲洗装置接口
+// Flush implements the http.Flusher interface.
 func (w *responseWriter) Flush() {
 	w.WriteHeaderNow()
 	w.ResponseWriter.(http.Flusher).Flush()

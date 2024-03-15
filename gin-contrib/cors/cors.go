@@ -1,11 +1,13 @@
 package cors
+
 import (
 	"errors"
 	"strings"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 // Config represents all available options for the middleware.
 type Config struct {
 	AllowAllOrigins bool

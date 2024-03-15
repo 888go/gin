@@ -1,8 +1,10 @@
 package requestid
+
 import (
-	"e.coding.net/gogit/go/gin"
+	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	)
+)
+
 var headerXRequestID string
 
 // Config defines the config for RequestID middleware

@@ -1,14 +1,16 @@
 package main
+
 import (
 	"fmt"
 	"log"
 	"net/http"
-	
+
 	"github.com/gin-gonic/examples/grpc/example1/gen/helloworld/v1"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
-	)
+)
+
 func main() {
 	// Set up a connection to the server.
 	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())

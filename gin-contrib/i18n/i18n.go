@@ -1,7 +1,9 @@
 package i18n
+
 import (
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-gonic/gin"
+)
+
 // newI18n ...
 func newI18n(opts ...Option) GinI18n {
 	// init ins

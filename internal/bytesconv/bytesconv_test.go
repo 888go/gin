@@ -3,13 +3,15 @@
 // license that can be found in the LICENSE file.
 
 package bytesconv
+
 import (
 	"bytes"
 	"math/rand"
 	"strings"
 	"testing"
 	"time"
-	)
+)
+
 var testString = "Albert Einstein: Logic will get you from A to B. Imagination will take you everywhere."
 var testBytes = []byte(testString)
 

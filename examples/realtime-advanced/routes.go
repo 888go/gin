@@ -1,4 +1,5 @@
 package main
+
 import (
 	"fmt"
 	"html"
@@ -6,9 +7,10 @@ import (
 	"net/http"
 	"strings"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func rateLimit(c *gin.Context) {
 	ip := c.ClientIP()
 	value := int(ips.Add(ip, 1))

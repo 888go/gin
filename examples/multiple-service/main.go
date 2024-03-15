@@ -1,12 +1,14 @@
 package main
+
 import (
 	"log"
 	"net/http"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"golang.org/x/sync/errgroup"
-	)
+)
+
 var g errgroup.Group
 
 func router01() http.Handler {

@@ -1,10 +1,12 @@
 package main
+
 import (
 	"log"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/expvar"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/expvar"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	r := gin.Default()
 

@@ -1,10 +1,12 @@
 package main
+
 import (
 	"fmt"
 	"runtime"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	ConfigRuntime()
 	StartWorkers()

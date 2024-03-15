@@ -1,10 +1,12 @@
 package cors
+
 import (
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
-	)
+)
+
 type converter func(string) string
 
 func generateNormalHeaders(c Config) http.Header {

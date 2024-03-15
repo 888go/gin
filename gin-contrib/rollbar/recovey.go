@@ -1,14 +1,16 @@
 package rollbar
+
 import (
 	"errors"
 	"fmt"
 	"net/http"
 	"runtime"
 	"runtime/debug"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/rollbar/rollbar-go"
-	)
+)
+
 // Recovery middleware for rollbar error monitoring
 func Recovery(onlyCrashes bool) gin.HandlerFunc {
 	return func(c *gin.Context) {

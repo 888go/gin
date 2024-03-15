@@ -1,12 +1,14 @@
 package main
+
 import (
 	"bufio"
 	"log"
 	"net/http"
 	"net/url"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 const (
 	// this is our reverse server ip address
 	ReverseServerAddr = "127.0.0.1:2002"

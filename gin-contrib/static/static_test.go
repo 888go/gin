@@ -1,4 +1,5 @@
 package static
+
 import (
 	"context"
 	"io/ioutil"
@@ -8,10 +9,11 @@ import (
 	"path"
 	"path/filepath"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 // nolint:unparam
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
 	req, _ := http.NewRequestWithContext(context.Background(), method, path, nil)

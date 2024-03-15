@@ -1,12 +1,14 @@
 package validator
+
 import (
 	"errors"
 	"fmt"
 	"net/http"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 const maxTimeGap = 30 * time.Second // 30 secs
 
 func newPublicError(msg string) *gin.Error {

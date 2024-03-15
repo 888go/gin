@@ -1,13 +1,15 @@
 package sentry
+
 import (
 	"errors"
 	"fmt"
 	"net/http"
 	"runtime/debug"
-	
+
 	"github.com/getsentry/raven-go"
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-gonic/gin"
+)
+
 // Recovery middleware for sentry crash reporting
 func Recovery(client *raven.Client, onlyCrashes bool) gin.HandlerFunc {
 

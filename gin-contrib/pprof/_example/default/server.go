@@ -1,8 +1,10 @@
 package main
+
 import (
-	"e.coding.net/gogit/go/gin/gin-contrib/pprof"
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-contrib/pprof"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	router := gin.Default()
 	pprof.Register(router)

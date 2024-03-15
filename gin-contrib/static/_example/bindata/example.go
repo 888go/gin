@@ -1,13 +1,15 @@
 package main
+
 import (
 	"log"
 	"net/http"
 	"strings"
-	
+
 	assetfs "github.com/elazarl/go-bindata-assetfs"
-	"e.coding.net/gogit/go/gin/gin-contrib/static"
-	"e.coding.net/gogit/go/gin"
-	)
+	"github.com/gin-contrib/static"
+	"github.com/gin-gonic/gin"
+)
+
 type binaryFileSystem struct {
 	fs http.FileSystem
 }

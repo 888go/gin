@@ -1,11 +1,13 @@
 package main
+
 import (
 	"log"
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/location"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/location"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	router := gin.Default()
 

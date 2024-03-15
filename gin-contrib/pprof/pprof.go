@@ -1,9 +1,11 @@
 package pprof
+
 import (
 	"net/http/pprof"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 const (
 	// DefaultPrefix url prefix of pprof
 	DefaultPrefix = "/debug/pprof"

@@ -1,9 +1,11 @@
 package persistence
+
 import (
 	"net"
 	"testing"
 	"time"
-	)
+)
+
 // These tests require memcached running on localhost:11211 (the default)
 const testServer = "localhost:11211"
 

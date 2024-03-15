@@ -1,11 +1,13 @@
 package logger
+
 import (
 	"io"
 	"regexp"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
-	)
+)
+
 // Option specifies instrumentation configuration options.
 type Option interface {
 	apply(*config)

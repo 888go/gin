@@ -1,9 +1,11 @@
 package gzip
+
 import (
 	"compress/gzip"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 const (
 	BestCompression    = gzip.BestCompression
 	BestSpeed          = gzip.BestSpeed

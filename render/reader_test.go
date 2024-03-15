@@ -3,13 +3,15 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"net/http/httptest"
 	"strings"
 	"testing"
-	
+
 	"github.com/stretchr/testify/require"
-	)
+)
+
 func TestReaderRenderNoHeaders(t *testing.T) {
 	content := "test"
 	r := Reader{

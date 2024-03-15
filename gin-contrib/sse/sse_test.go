@@ -3,13 +3,15 @@
 // license that can be found in the LICENSE file.
 
 package sse
+
 import (
 	"bytes"
 	"net/http/httptest"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func TestEncodeOnlyData(t *testing.T) {
 	w := new(bytes.Buffer)
 	event := Event{

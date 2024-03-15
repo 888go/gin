@@ -1,12 +1,14 @@
 package secure
+
 import (
 	"fmt"
 	"net"
 	"net/http"
 	"strings"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 type (
 	// Secure is a middleware that helps setup a few basic security features. A single secure.Options struct can be
 	// provided to configure which features should be enabled, and the ability to override a few of the default values.

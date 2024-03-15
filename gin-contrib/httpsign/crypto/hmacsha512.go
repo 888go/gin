@@ -1,8 +1,10 @@
 package crypto
+
 import (
 	"crypto/hmac"
 	"crypto/sha512"
-	)
+)
+
 const algoHmacSha512 = "hmac-sha512"
 
 // HmacSha512 signing algorithm using hmac and sha512

@@ -1,12 +1,14 @@
 package timeout
+
 import (
 	"bytes"
 	"fmt"
 	"net/http"
 	"sync"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 // Writer is a writer with memory buffer
 type Writer struct {
 	gin.ResponseWriter

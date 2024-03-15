@@ -1,13 +1,15 @@
 package main
+
 import (
 	"fmt"
 	"log"
 	"net/http"
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/requestid"
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-contrib/requestid"
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	r := gin.New()
 

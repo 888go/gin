@@ -1,12 +1,14 @@
 package main
+
 import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
 	"strings"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	r := gin.New()
 	t, err := loadTemplate()

@@ -1,12 +1,14 @@
 package main
+
 import (
 	"fmt"
 	"io"
 	"log"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 // It keeps a list of clients those are currently attached
 // and broadcasting events to those clients.
 type Event struct {

@@ -3,10 +3,12 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"encoding/xml"
 	"net/http"
-	)
+)
+
 // XML contains the given interface object.
 type XML struct {
 	Data any

@@ -1,7 +1,7 @@
 package secure
-import (
-	"e.coding.net/gogit/go/gin"
-	)
+
+import "github.com/gin-gonic/gin"
+
 // Config is a struct for specifying configuration options for the secure.
 type Config struct {
 	// AllowedHosts is a list of fully qualified domain names that are allowed.

@@ -3,12 +3,14 @@
 // license that can be found in the LICENSE file.
 
 package sse
+
 import (
 	"bytes"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func TestDecodeSingle1(t *testing.T) {
 	events, err := Decode(bytes.NewBufferString(
 		`data: this is a text

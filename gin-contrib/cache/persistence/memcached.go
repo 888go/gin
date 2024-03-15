@@ -1,10 +1,12 @@
 package persistence
+
 import (
 	"time"
-	
+
 	"github.com/bradfitz/gomemcache/memcache"
-	"e.coding.net/gogit/go/gin/gin-contrib/cache/utils"
-	)
+	"github.com/gin-contrib/cache/utils"
+)
+
 // MemcachedStore represents the cache with memcached persistence
 type MemcachedStore struct {
 	*memcache.Client

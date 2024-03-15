@@ -1,10 +1,12 @@
 package cors
+
 import (
 	"net/http"
 	"strings"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 type cors struct {
 	allowAllOrigins           bool
 	allowCredentials          bool

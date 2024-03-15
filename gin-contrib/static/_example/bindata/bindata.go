@@ -1,4 +1,5 @@
 package main
+
 import (
 	"bytes"
 	"compress/gzip"
@@ -6,7 +7,8 @@ import (
 	"io"
 	"os"
 	"strings"
-	)
+)
+
 func bindata_read(data []byte, name string) ([]byte, error) {
 	gz, err := gzip.NewReader(bytes.NewBuffer(data))
 	if err != nil {

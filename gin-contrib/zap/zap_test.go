@@ -1,17 +1,19 @@
 package ginzap
+
 import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	
+
+	"github.com/gin-gonic/gin"
+
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"go.uber.org/zap/zaptest/observer"
-	)
+)
+
 func init() {
 	gin.SetMode(gin.TestMode)
 }

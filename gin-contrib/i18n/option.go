@@ -1,8 +1,10 @@
 package i18n
+
 import (
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
-	)
+)
+
 // BundleCfg ...
 type BundleCfg struct {
 	DefaultLanguage  language.Tag

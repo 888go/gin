@@ -1,10 +1,12 @@
 package httpsign
+
 import (
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	)
+)
+
 func TestParser(t *testing.T) {
 	tests := []struct {
 		name   string

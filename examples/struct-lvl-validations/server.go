@@ -1,11 +1,13 @@
 package main
+
 import (
 	"net/http"
-	
-	"e.coding.net/gogit/go/gin"
-	"e.coding.net/gogit/go/gin/binding"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	validator "github.com/go-playground/validator/v10"
-	)
+)
+
 // User contains user information.
 type User struct {
 	FirstName string `json:"fname"`

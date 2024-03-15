@@ -3,10 +3,12 @@
 // license that can be found in the LICENSE file.
 
 package render
+
 import (
 	"fmt"
 	"net/http"
-	)
+)
+
 // Redirect contains the http request reference and redirects status code and location.
 type Redirect struct {
 	Code     int

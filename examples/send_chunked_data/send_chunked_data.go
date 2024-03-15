@@ -1,12 +1,14 @@
 package main
+
 import (
 	"fmt"
 	"log"
 	"net/http"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
-	)
+
+	"github.com/gin-gonic/gin"
+)
+
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	r := gin.Default()

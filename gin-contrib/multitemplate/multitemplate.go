@@ -1,11 +1,13 @@
 package multitemplate
+
 import (
 	"fmt"
 	"html/template"
 	"path/filepath"
-	
-	"e.coding.net/gogit/go/gin/render"
-	)
+
+	"github.com/gin-gonic/gin/render"
+)
+
 // Render type
 type Render map[string]*template.Template
 

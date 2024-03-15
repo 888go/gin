@@ -1,4 +1,5 @@
 package cors
+
 import (
 	"context"
 	"net/http"
@@ -6,10 +7,11 @@ import (
 	"strings"
 	"testing"
 	"time"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func newTestRouter(config Config) *gin.Engine {
 	router := gin.New()
 	router.Use(New(config))

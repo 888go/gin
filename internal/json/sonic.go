@@ -6,10 +6,8 @@
 
 package json
 
+import "github.com/bytedance/sonic"
 
-import (
-	"github.com/bytedance/sonic"
-	)
 var (
 	json = sonic.ConfigStd
 	// Marshal is exported by gin/json package.

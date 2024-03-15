@@ -1,17 +1,19 @@
 package main
+
 import (
 	"fmt"
 	"net/http"
 	"regexp"
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/logger"
-	"e.coding.net/gogit/go/gin/gin-contrib/requestid"
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-contrib/logger"
+	"github.com/gin-contrib/requestid"
+	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"go.opentelemetry.io/otel/trace"
-	)
+)
+
 var rxURL = regexp.MustCompile(`^/regexp\d*`)
 
 func main() {

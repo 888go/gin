@@ -1,17 +1,21 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
+
 import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
-	)
-// TODO函数(w *responseWriter)劫持()()康涅狄格州,* bufio
-// ReadWriter，错误){func (w *responseWriter) CloseNotify() <-chan bool {func (w *responseWriter) Flush() {
+)
+
+// TODO
+// func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+// func (w *responseWriter) CloseNotify() <-chan bool {
+// func (w *responseWriter) Flush() {
 
 var (
 	_ ResponseWriter      = &responseWriter{}
@@ -129,7 +133,7 @@ func TestResponseWriterFlush(t *testing.T) {
 	}))
 	defer testServer.Close()
 
-// 应该返回500
+	// should return 500
 	resp, err := http.Get(testServer.URL)
 	assert.NoError(t, err)
 	assert.Equal(t, http.StatusInternalServerError, resp.StatusCode)
@@ -149,12 +153,11 @@ func TestResponseWriterStatusCode(t *testing.T) {
 
 	w.WriteHeader(http.StatusUnauthorized)
 
-// 状态必须是200，尽管我们试图改变它
+	// status must be 200 although we tried to change it
 	assert.Equal(t, http.StatusOK, w.Status())
 }
 
-// mockPusherResponseWriter是一个http
-// 实现http. push的ResponseWriter
+// mockPusherResponseWriter is an http.ResponseWriter that implements http.Pusher.
 type mockPusherResponseWriter struct {
 	http.ResponseWriter
 }
@@ -163,8 +166,7 @@ func (m *mockPusherResponseWriter) Push(target string, opts *http.PushOptions) e
 	return nil
 }
 
-// nonPusherResponseWriter是一个http
-// 没有实现http. push的ResponseWriter
+// nonPusherResponseWriter is an http.ResponseWriter that does not implement http.Pusher.
 type nonPusherResponseWriter struct {
 	http.ResponseWriter
 }

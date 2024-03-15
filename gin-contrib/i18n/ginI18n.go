@@ -1,13 +1,15 @@
 package i18n
+
 import (
 	"errors"
 	"fmt"
 	"path"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
-	)
+)
+
 var _ GinI18n = (*ginI18nImpl)(nil)
 
 type ginI18nImpl struct {

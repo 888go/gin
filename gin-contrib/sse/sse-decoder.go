@@ -3,11 +3,13 @@
 // license that can be found in the LICENSE file.
 
 package sse
+
 import (
 	"bytes"
 	"io"
 	"io/ioutil"
-	)
+)
+
 type decoder struct {
 	events []Event
 }

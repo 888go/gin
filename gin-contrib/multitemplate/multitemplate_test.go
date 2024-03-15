@@ -1,14 +1,16 @@
 package multitemplate
+
 import (
 	"context"
 	"html/template"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
 	req, _ := http.NewRequestWithContext(context.Background(), method, path, nil)
 	w := httptest.NewRecorder()

@@ -5,9 +5,11 @@
 //go:build !go1.20
 
 package bytesconv
+
 import (
 	"unsafe"
-	)
+)
+
 // StringToBytes converts string to byte slice without a memory allocation.
 func StringToBytes(s string) []byte {
 	return *(*[]byte)(unsafe.Pointer(

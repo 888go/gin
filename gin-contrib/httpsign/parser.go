@@ -1,8 +1,10 @@
 package httpsign
+
 import (
 	"bytes"
 	"io"
-	)
+)
+
 type parser struct {
 	input string
 	pos   int

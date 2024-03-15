@@ -1,10 +1,12 @@
 package persistence
+
 import (
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/cache/utils"
+
+	"github.com/gin-contrib/cache/utils"
 	"github.com/gomodule/redigo/redis"
-	)
+)
+
 // RedisStore represents the cache with redis persistence
 type RedisStore struct {
 	pool              *redis.Pool

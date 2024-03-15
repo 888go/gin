@@ -1,4 +1,5 @@
 package cache
+
 import (
 	"bytes"
 	"encoding/gob"
@@ -7,11 +8,12 @@ import (
 	"net/http/httptest"
 	"testing"
 	"time"
-	
-	"e.coding.net/gogit/go/gin/gin-contrib/cache/persistence"
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-contrib/cache/persistence"
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	)
+)
+
 func init() {
 	gin.SetMode(gin.TestMode)
 }

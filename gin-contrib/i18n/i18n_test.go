@@ -1,14 +1,16 @@
 package i18n
+
 import (
 	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
-	"e.coding.net/gogit/go/gin"
+
+	"github.com/gin-gonic/gin"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
-	)
+)
+
 // newServer ...
 func newServer() *gin.Engine {
 	router := gin.New()
