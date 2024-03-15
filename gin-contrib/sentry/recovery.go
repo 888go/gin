@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 	"runtime/debug"
-
+	
 	"github.com/getsentry/raven-go"
-	"github.com/gin-gonic/gin"
+	"github.com/888go/gin"
 )
 
 // Recovery middleware for sentry crash reporting

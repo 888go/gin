@@ -14,9 +14,9 @@ import (
 	"regexp"
 	"strings"
 	"sync"
-
-	"github.com/gin-gonic/gin/internal/bytesconv"
-	"github.com/gin-gonic/gin/render"
+	
+	"github.com/888go/gin/internal/bytesconv"
+	"github.com/888go/gin/render"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 )

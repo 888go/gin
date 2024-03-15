@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
-
-	"github.com/gin-contrib/static"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/static"
+	"github.com/888go/gin"
 )
 
 func main() {

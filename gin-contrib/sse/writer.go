@@ -1,6 +1,8 @@
 package sse
 
-import "io"
+import (
+	"io"
+)
 
 type stringWriter interface {
 	io.Writer

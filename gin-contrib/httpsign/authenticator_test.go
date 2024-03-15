@@ -9,14 +9,14 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	"github.com/gin-contrib/httpsign/crypto"
-	"github.com/gin-contrib/httpsign/validator"
-
+	
+	"github.com/888go/gin/gin-contrib/httpsign/crypto"
+	"github.com/888go/gin/gin-contrib/httpsign/validator"
+	
 	"github.com/stretchr/testify/require"
-
-	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/render"
+	
+	"github.com/888go/gin"
+	"github.com/888go/gin/render"
 	"github.com/stretchr/testify/assert"
 )
 

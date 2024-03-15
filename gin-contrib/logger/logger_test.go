@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"regexp"
 	"testing"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/assert"
 )

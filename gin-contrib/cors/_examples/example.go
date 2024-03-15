@@ -2,9 +2,9 @@ package main
 
 import (
 	"time"
-
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/cors"
+	"github.com/888go/gin"
 )
 
 func main() {

@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 	"sync"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 type gzipHandler struct {

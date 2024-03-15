@@ -4,7 +4,9 @@
 
 package render
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // Data contains ContentType and bytes data.
 type Data struct {

@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 	"time"
-
-	"github.com/gin-contrib/timeout"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/timeout"
+	"github.com/888go/gin"
 )
 
 func testResponse(c *gin.Context) {

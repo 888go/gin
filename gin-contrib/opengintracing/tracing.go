@@ -6,8 +6,8 @@ package opengintracing
 import (
 	"errors"
 	"net/http"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 	"github.com/opentracing/opentracing-go"
 )
 

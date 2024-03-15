@@ -1,6 +1,8 @@
 package secure
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/888go/gin"
+)
 
 // Config is a struct for specifying configuration options for the secure.
 type Config struct {

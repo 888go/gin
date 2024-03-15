@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 const maxTimeGap = 30 * time.Second // 30 secs

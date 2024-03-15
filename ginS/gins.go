@@ -8,8 +8,8 @@ import (
 	"html/template"
 	"net/http"
 	"sync"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 var once sync.Once

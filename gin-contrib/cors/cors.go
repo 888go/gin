@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strings"
 	"time"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 // Config represents all available options for the middleware.

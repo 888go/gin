@@ -1,7 +1,7 @@
 package i18n
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/888go/gin"
 )
 
 // newI18n ...

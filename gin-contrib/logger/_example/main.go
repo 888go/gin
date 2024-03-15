@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"regexp"
 	"time"
-
-	"github.com/gin-contrib/logger"
-	"github.com/gin-contrib/requestid"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/logger"
+	"github.com/888go/gin/gin-contrib/requestid"
+	"github.com/888go/gin"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"go.opentelemetry.io/otel/trace"

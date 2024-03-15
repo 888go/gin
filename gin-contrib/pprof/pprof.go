@@ -2,8 +2,8 @@ package pprof
 
 import (
 	"net/http/pprof"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 const (

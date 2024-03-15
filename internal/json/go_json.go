@@ -6,7 +6,9 @@
 
 package json
 
-import json "github.com/goccy/go-json"
+import (
+	json "github.com/goccy/go-json"
+)
 
 var (
 	// Marshal is exported by gin/json package.

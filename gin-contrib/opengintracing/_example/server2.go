@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
-
-	"github.com/gin-contrib/opengintracing"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/opengintracing"
+	"github.com/888go/gin"
 	"github.com/opentracing/opentracing-go"
 	"github.com/uber/jaeger-client-go"
 	"github.com/uber/jaeger-client-go/zipkin"

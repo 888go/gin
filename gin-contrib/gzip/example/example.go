@@ -5,9 +5,9 @@ import (
 	"log"
 	"net/http"
 	"time"
-
-	"github.com/gin-contrib/gzip"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/gzip"
+	"github.com/888go/gin"
 )
 
 func main() {

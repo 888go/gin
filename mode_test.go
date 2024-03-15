@@ -8,8 +8,8 @@ import (
 	"flag"
 	"os"
 	"testing"
-
-	"github.com/gin-gonic/gin/binding"
+	
+	"github.com/888go/gin/binding"
 	"github.com/stretchr/testify/assert"
 )
 

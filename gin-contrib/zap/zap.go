@@ -10,8 +10,8 @@ import (
 	"runtime/debug"
 	"strings"
 	"time"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-
-	ginI18n "github.com/gin-contrib/i18n"
-	"github.com/gin-gonic/gin"
+	
+	ginI18n "github.com/888go/gin/gin-contrib/i18n"
+	"github.com/888go/gin"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
 )

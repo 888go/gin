@@ -9,9 +9,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
+	
 	"github.com/casbin/casbin/v2"
-	"github.com/gin-gonic/gin"
+	"github.com/888go/gin"
 )
 
 func testAuthzRequest(t *testing.T, router *gin.Engine, user string, path string, method string, code int) {

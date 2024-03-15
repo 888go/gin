@@ -2,8 +2,8 @@ package location
 
 import (
 	"net/url"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 const key = "location"

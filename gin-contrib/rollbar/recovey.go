@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"runtime"
 	"runtime/debug"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 	"github.com/rollbar/rollbar-go"
 )
 

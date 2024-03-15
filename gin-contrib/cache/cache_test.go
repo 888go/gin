@@ -8,9 +8,9 @@ import (
 	"net/http/httptest"
 	"testing"
 	"time"
-
-	"github.com/gin-contrib/cache/persistence"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/cache/persistence"
+	"github.com/888go/gin"
 	"github.com/stretchr/testify/assert"
 )
 

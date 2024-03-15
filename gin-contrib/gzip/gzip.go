@@ -2,8 +2,8 @@ package gzip
 
 import (
 	"compress/gzip"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 const (

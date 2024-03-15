@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
-
-	"github.com/gin-contrib/multitemplate"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/multitemplate"
+	"github.com/888go/gin"
 )
 
 func createMyRender() multitemplate.Renderer {

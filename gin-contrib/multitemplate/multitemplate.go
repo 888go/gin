@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"html/template"
 	"path/filepath"
-
-	"github.com/gin-gonic/gin/render"
+	
+	"github.com/888go/gin/render"
 )
 
 // Render type

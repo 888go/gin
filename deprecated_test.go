@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/gin-gonic/gin/binding"
+	
+	"github.com/888go/gin/binding"
 	"github.com/stretchr/testify/assert"
 )
 

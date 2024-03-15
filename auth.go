@@ -9,8 +9,8 @@ import (
 	"encoding/base64"
 	"net/http"
 	"strconv"
-
-	"github.com/gin-gonic/gin/internal/bytesconv"
+	
+	"github.com/888go/gin/internal/bytesconv"
 )
 
 // AuthUserKey is the cookie name for user credential in basic auth.

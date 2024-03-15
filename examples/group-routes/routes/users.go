@@ -2,8 +2,8 @@ package routes
 
 import (
 	"net/http"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 func addUserRoutes(rg *gin.RouterGroup) {

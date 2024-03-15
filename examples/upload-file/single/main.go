@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 	"path/filepath"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 func main() {

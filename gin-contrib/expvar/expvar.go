@@ -3,8 +3,8 @@ package expvar
 import (
 	"expvar"
 	"fmt"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 // Handler for gin framework

@@ -6,9 +6,9 @@ package authz
 
 import (
 	"net/http"
-
+	
 	"github.com/casbin/casbin/v2"
-	"github.com/gin-gonic/gin"
+	"github.com/888go/gin"
 )
 
 // NewAuthorizer returns the authorizer, uses a Casbin enforcer as input

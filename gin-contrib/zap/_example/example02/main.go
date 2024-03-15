@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"io"
 	"time"
-
-	ginzap "github.com/gin-contrib/zap"
-
-	"github.com/gin-gonic/gin"
+	
+	ginzap "github.com/888go/gin/gin-contrib/zap"
+	
+	"github.com/888go/gin"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

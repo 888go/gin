@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"time"
-
-	ginzap "github.com/gin-contrib/zap"
-	"github.com/gin-gonic/gin"
+	
+	ginzap "github.com/888go/gin/gin-contrib/zap"
+	"github.com/888go/gin"
 	"go.uber.org/zap"
 )
 

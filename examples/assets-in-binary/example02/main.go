@@ -4,8 +4,8 @@ import (
 	"embed"
 	"html/template"
 	"net/http"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 //go:embed assets/* templates/*

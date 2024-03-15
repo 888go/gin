@@ -2,9 +2,9 @@ package persistence
 
 import (
 	"time"
-
+	
 	"github.com/bradfitz/gomemcache/memcache"
-	"github.com/gin-contrib/cache/utils"
+	"github.com/888go/gin/gin-contrib/cache/utils"
 )
 
 // MemcachedStore represents the cache with memcached persistence

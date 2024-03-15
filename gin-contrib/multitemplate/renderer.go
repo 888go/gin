@@ -2,8 +2,8 @@ package multitemplate
 
 import (
 	"html/template"
-
-	"github.com/gin-gonic/gin/render"
+	
+	"github.com/888go/gin/render"
 )
 
 // Renderer type is the Agnostic Renderer for multitemplates.

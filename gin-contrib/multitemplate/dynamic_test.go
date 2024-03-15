@@ -3,8 +3,8 @@ package multitemplate
 import (
 	"html/template"
 	"testing"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 	"github.com/stretchr/testify/assert"
 )
 

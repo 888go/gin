@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
-
-	"github.com/gin-contrib/location"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/location"
+	"github.com/888go/gin"
 )
 
 func main() {

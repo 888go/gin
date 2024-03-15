@@ -5,8 +5,8 @@ import (
 	"os"
 	"path"
 	"strings"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 const INDEX = "index.html"

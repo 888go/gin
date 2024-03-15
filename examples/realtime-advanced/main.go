@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"runtime"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 func main() {

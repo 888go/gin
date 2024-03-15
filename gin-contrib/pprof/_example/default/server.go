@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/gin-contrib/pprof"
-	"github.com/gin-gonic/gin"
+	"github.com/888go/gin/gin-contrib/pprof"
+	"github.com/888go/gin"
 )
 
 func main() {

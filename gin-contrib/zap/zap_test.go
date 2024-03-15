@@ -6,9 +6,9 @@ import (
 	"net/http/httptest"
 	"testing"
 	"time"
-
-	"github.com/gin-gonic/gin"
-
+	
+	"github.com/888go/gin"
+	
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"go.uber.org/zap/zaptest/observer"

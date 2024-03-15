@@ -5,8 +5,8 @@ import (
 	"mime/multipart"
 	"net/http"
 	"path/filepath"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 type BindFile struct {

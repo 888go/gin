@@ -9,8 +9,8 @@ import (
 	"os"
 	"os/signal"
 	"time"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 func main() {

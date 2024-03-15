@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
-
-	"github.com/gin-contrib/httpsign/validator"
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin/gin-contrib/httpsign/validator"
+	"github.com/888go/gin"
 )
 
 const (

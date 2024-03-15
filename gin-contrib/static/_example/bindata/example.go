@@ -4,10 +4,10 @@ import (
 	"log"
 	"net/http"
 	"strings"
-
+	
 	assetfs "github.com/elazarl/go-bindata-assetfs"
-	"github.com/gin-contrib/static"
-	"github.com/gin-gonic/gin"
+	"github.com/888go/gin/gin-contrib/static"
+	"github.com/888go/gin"
 )
 
 type binaryFileSystem struct {

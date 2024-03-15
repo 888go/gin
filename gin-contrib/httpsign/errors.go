@@ -2,8 +2,8 @@ package httpsign
 
 import (
 	"errors"
-
-	"github.com/gin-gonic/gin"
+	
+	"github.com/888go/gin"
 )
 
 func newPublicError(msg string) *gin.Error {

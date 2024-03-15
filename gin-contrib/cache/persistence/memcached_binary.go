@@ -2,8 +2,8 @@ package persistence
 
 import (
 	"time"
-
-	"github.com/gin-contrib/cache/utils"
+	
+	"github.com/888go/gin/gin-contrib/cache/utils"
 	"github.com/memcachier/mc/v3"
 )
 
