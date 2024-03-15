@@ -35,10 +35,9 @@ func BinaryFileSystem(root string) *binaryFileSystem {
 	}
 }
 
-// Usage
-// $ go-bindata data/
-// $ go build && ./bindata
-//
+// 使用方法
+// $ go-bindata data/    // 执行go-bindata命令，将data目录下的文件打包为二进制数据
+// $ go build && ./bindata  // 编译当前程序并执行生成的可执行文件bindata
 func main() {
 	r := gin.Default()
 
@@ -46,7 +45,7 @@ func main() {
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(200, "test")
 	})
-	// Listen and Server in 0.0.0.0:8080
+// 在0.0.0.0:8080监听并服务
 	if err := r.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}

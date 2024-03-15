@@ -8,32 +8,29 @@ import (
 
 const key = "location"
 
-// Headers represents the header fields used to map schemes and host.
+// Headers 表示用于映射方案和主机的头部字段。
 type Headers struct {
 	Scheme string
 	Host   string
 }
 
-// Config represents all available options for the middleware.
+// Config 代表了该中间件可用的所有配置选项。
 type Config struct {
-	// Scheme is the default scheme that should be used when it cannot otherwise
-	// be ascertained from the incoming http.Request.
+// Scheme 是默认的方案，当无法从传入的 http.Request 中确定时应使用此方案。
 	Scheme string
 
-	// Host is the default host that should be used when it cannot otherwise
-	// be ascertained from the incoming http.Request.
+// Host 是默认主机，当无法从传入的 http.Request 中确定时应使用该主机。
 	Host string
 
-	// Base is the base path that should be used in conjunction with proxy
-	// servers that do path re-writing.
+// Base 是基础路径，应与执行路径重写操作的代理服务器结合使用。
 	Base string
 
-	// Header used to map schemes and host.
-	// May be overriden to allow reading values from custom header fields.
+// Header 用于映射方案和主机。
+// 可以重写以允许从自定义头部字段读取值。
 	Headers Headers
 }
 
-// DefaultConfig returns a generic default configuration mapped to localhost.
+// DefaultConfig 返回一个映射到本机的通用默认配置。
 func DefaultConfig() Config {
 	return Config{
 		Host:   "localhost:8080",
@@ -45,13 +42,13 @@ func DefaultConfig() Config {
 	}
 }
 
-// Default returns the location middleware with default configuration.
+// Default 返回默认配置的 location 中间件。
 func Default() gin.HandlerFunc {
 	config := DefaultConfig()
 	return New(config)
 }
 
-// New returns the location middleware with user-defined custom configuration.
+// New 返回一个带有用户自定义配置的 location 中间件。
 func New(config Config) gin.HandlerFunc {
 	location := newLocation(config)
 
@@ -60,8 +57,7 @@ func New(config Config) gin.HandlerFunc {
 	}
 }
 
-// Get returns the Location information for the incoming http.Request from the
-// context. If the location is not set a nil value is returned.
+// Get 从 context 中获取传入 http.Request 的 Location 信息。如果未设置 location，则返回空值（nil）。
 func Get(c *gin.Context) *url.URL {
 	v, ok := c.Get(key)
 

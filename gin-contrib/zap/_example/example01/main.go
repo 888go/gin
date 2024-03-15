@@ -14,26 +14,26 @@ func main() {
 
 	logger, _ := zap.NewProduction()
 
-	// Add a ginzap middleware, which:
-	//   - Logs all requests, like a combined access and error log.
-	//   - Logs to stdout.
-	//   - RFC3339 with UTC time format.
+// 添加一个ginzap中间件，其功能包括：
+//   - 记录所有请求，类似于综合访问和错误日志。
+//   - 将日志输出到标准输出（stdout）。
+//   - 使用UTC时间格式并遵循RFC3339规范。
 	r.Use(ginzap.Ginzap(logger, time.RFC3339, true))
 
-	// Logs all panic to error log
-	//   - stack means whether output the stack info.
+// 将所有 panic 记录到错误日志中
+//   - stack 表示是否输出堆栈信息。
 	r.Use(ginzap.RecoveryWithZap(logger, true))
 
-	// Example ping request.
+// 示例 ping 请求。
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example when panic happen.
+// 示例：当发生 panic 时。
 	r.GET("/panic", func(c *gin.Context) {
 		panic("An unexpected error happen!")
 	})
 
-	// Listen and Server in 0.0.0.0:8080
+// 在0.0.0.0:8080监听并服务
 	r.Run(":8080")
 }

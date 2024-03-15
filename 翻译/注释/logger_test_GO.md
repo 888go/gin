@@ -93,5 +93,6 @@
 
 # <翻译开始>
 // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 # <翻译结束>
 

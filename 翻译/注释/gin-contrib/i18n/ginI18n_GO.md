@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// getMessage get localize message by lng and messageID
+// getMessage 通过 lng（语言代码）和 messageID 获取本地化消息
 # <翻译结束>
 
 
@@ -13,7 +13,7 @@
 <原文结束>
 
 # <翻译开始>
-// mustGetMessage ...
+// mustGetMessage ... 必须获取消息...
 # <翻译结束>
 
 
@@ -22,7 +22,7 @@
 <原文结束>
 
 # <翻译开始>
-// loadMessageFiles load all file localize to bundle
+// loadMessageFiles 加载所有本地化文件到资源包中
 # <翻译结束>
 
 
@@ -31,7 +31,7 @@
 <原文结束>
 
 # <翻译开始>
-// setLocalizerByLng set localizer by language
+// setLocalizerByLng 根据语言设置本地化器
 # <翻译结束>
 
 
@@ -40,7 +40,7 @@
 <原文结束>
 
 # <翻译开始>
-	// set defaultLanguage if it isn't exist
+// 如果默认语言不存在，则设置默认语言
 # <翻译结束>
 
 
@@ -49,7 +49,7 @@
 <原文结束>
 
 # <翻译开始>
-// newLocalizer create a localizer by language
+// newLocalizer 通过语言创建一个本地化器
 # <翻译结束>
 
 
@@ -58,6 +58,6 @@
 <原文结束>
 
 # <翻译开始>
-// getLocalizerByLng get localizer by language
+// getLocalizerByLng 通过语言获取本地化器
 # <翻译结束>
 

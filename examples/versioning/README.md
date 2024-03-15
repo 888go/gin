@@ -1,11 +1,10 @@
-# Versioning
+# # 版本控制
 
-This is Endpoint versioning (i.e `/v1/path`) example using custom middleware group in gin-gonic.
+这是一个在gin-gonic框架中使用自定义中间件组的端点版本控制（例如 `/v1/path`）示例。
+## # 如何运行？
 
-### How to Run? 
+1）执行命令 `go run main.go`
 
-1) Run ` go run main.go `
+2）在`http://localhost:8080`测试API。
 
-2) Test APIs On ` http://localhost:8080 `. 
-
-- For list users in v1, path should be `http://localhost:8080/v1/users`. Likewise, all other routes are working.
+- 若要查看v1中的用户列表，请使用路径`http://localhost:8080/v1/users`。同样地，所有其他路由均有效并可进行访问。

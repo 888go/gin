@@ -10,10 +10,9 @@ import (
 )
 
 type (
-	// Secure is a middleware that helps setup a few basic security features. A single secure.Options struct can be
-	// provided to configure which features should be enabled, and the ability to override a few of the default values.
+// Secure 是一个中间件，用于设置一些基本的安全功能。可以通过提供一个 secure.Options 结构体来配置应启用哪些功能，并且可以覆盖部分默认值。
 	policy struct {
-		// Customize Secure with an Options struct.
+// 通过Options结构体来自定义Secure（安全配置）。
 		config       Config
 		fixedHeaders []header
 	}
@@ -24,7 +23,7 @@ type (
 	}
 )
 
-// Constructs a new Policy instance with supplied options.
+// 使用提供的选项构建一个新的Policy实例。
 func newPolicy(config Config) *policy {
 	policy := &policy{}
 	policy.loadConfig(config)
@@ -35,24 +34,24 @@ func (p *policy) loadConfig(config Config) {
 	p.config = config
 	p.fixedHeaders = make([]header, 0, 5)
 
-	// Frame Options header.
+// Frame Options头部。
 	if len(config.CustomFrameOptionsValue) > 0 {
 		p.addHeader("X-Frame-Options", config.CustomFrameOptionsValue)
 	} else if config.FrameDeny {
 		p.addHeader("X-Frame-Options", "DENY")
 	}
 
-	// Content Type Options header.
+// 内容类型选项头。
 	if config.ContentTypeNosniff {
 		p.addHeader("X-Content-Type-Options", "nosniff")
 	}
 
-	// XSS Protection header.
+// XSS保护头部
 	if config.BrowserXssFilter {
 		p.addHeader("X-Xss-Protection", "1; mode=block")
 	}
 
-	// Content Security Policy header.
+// 内容安全策略（Content Security Policy）头部
 	if len(config.ContentSecurityPolicy) > 0 {
 		p.addHeader("Content-Security-Policy", config.ContentSecurityPolicy)
 	}
@@ -61,26 +60,26 @@ func (p *policy) loadConfig(config Config) {
 		p.addHeader("Referrer-Policy", config.ReferrerPolicy)
 	}
 
-	// Strict Transport Security header.
+// 严格传输安全（Strict Transport Security）头部。
 	if config.STSSeconds != 0 {
 		stsSub := ""
 		if config.STSIncludeSubdomains {
 			stsSub = "; includeSubdomains"
 		}
 
-		// TODO
-		// "max-age=%d%s" refactor
+// TODO
+// "max-age=%d%s" 需重构
 		p.addHeader(
 			"Strict-Transport-Security",
 			fmt.Sprintf("max-age=%d%s", config.STSSeconds, stsSub))
 	}
 
-	// X-Download-Options header.
+// X-Download-Options 头部信息。
 	if config.IENoOpen {
 		p.addHeader("X-Download-Options", "noopen")
 	}
 
-	// FeaturePolicy header.
+// 功能策略头。
 	if len(config.FeaturePolicy) > 0 {
 		p.addHeader("Feature-Policy", config.FeaturePolicy)
 	}
@@ -139,7 +138,7 @@ func (p *policy) checkAllowHosts(c *gin.Context) bool {
 	return false
 }
 
-// checks if a host (possibly with trailing port) is an IPV4 address
+// 检查主机（可能带有尾部端口）是否为IPV4地址
 func isIPV4(host string) bool {
 	if index := strings.IndexByte(host, ':'); index != -1 {
 		host = host[:index]
@@ -182,8 +181,8 @@ func (p *policy) checkSSL(c *gin.Context) bool {
 		return true
 	}
 
-	// TODO
-	// req.Host vs req.URL.Host
+// TODO
+// req.Host 与 req.URL.Host 的区别
 	url := req.URL
 	url.Scheme = "https"
 	url.Host = req.Host

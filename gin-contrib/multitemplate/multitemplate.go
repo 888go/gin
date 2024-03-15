@@ -8,7 +8,7 @@ import (
 	"github.com/888go/gin/render"
 )
 
-// Render type
+// Render 类型
 type Render map[string]*template.Template
 
 var (
@@ -16,12 +16,12 @@ var (
 	_ Renderer          = Render{}
 )
 
-// New instance
+// 新实例
 func New() Render {
 	return make(Render)
 }
 
-// Add new template
+// 添加新模板
 func (r Render) Add(name string, tmpl *template.Template) {
 	if tmpl == nil {
 		panic("template can not be nil")
@@ -35,28 +35,28 @@ func (r Render) Add(name string, tmpl *template.Template) {
 	r[name] = tmpl
 }
 
-// AddFromFiles supply add template from files
+// AddFromFiles 从文件中加载并添加模板
 func (r Render) AddFromFiles(name string, files ...string) *template.Template {
 	tmpl := template.Must(template.ParseFiles(files...))
 	r.Add(name, tmpl)
 	return tmpl
 }
 
-// AddFromGlob supply add template from global path
+// AddFromGlob 从全局路径提供添加模板的功能
 func (r Render) AddFromGlob(name, glob string) *template.Template {
 	tmpl := template.Must(template.ParseGlob(glob))
 	r.Add(name, tmpl)
 	return tmpl
 }
 
-// AddFromString supply add template from strings
+// AddFromString 从字符串中提供并加载添加模板
 func (r Render) AddFromString(name, templateString string) *template.Template {
 	tmpl := template.Must(template.New(name).Parse(templateString))
 	r.Add(name, tmpl)
 	return tmpl
 }
 
-// AddFromStringsFuncs supply add template from strings
+// AddFromStringsFuncs 从字符串提供添加模板功能
 func (r Render) AddFromStringsFuncs(name string, funcMap template.FuncMap, templateStrings ...string) *template.Template {
 	tmpl := template.New(name).Funcs(funcMap)
 
@@ -68,7 +68,7 @@ func (r Render) AddFromStringsFuncs(name string, funcMap template.FuncMap, templ
 	return tmpl
 }
 
-// AddFromFilesFuncs supply add template from file callback func
+// AddFromFilesFuncs 用于提供从文件添加模板的回调函数
 func (r Render) AddFromFilesFuncs(name string, funcMap template.FuncMap, files ...string) *template.Template {
 	tname := filepath.Base(files[0])
 	tmpl := template.Must(template.New(tname).Funcs(funcMap).ParseFiles(files...))
@@ -76,7 +76,7 @@ func (r Render) AddFromFilesFuncs(name string, funcMap template.FuncMap, files .
 	return tmpl
 }
 
-// Instance supply render string
+// Instance 提供渲染字符串功能
 func (r Render) Instance(name string, data interface{}) render.Render {
 	return render.HTML{
 		Template: r[name],

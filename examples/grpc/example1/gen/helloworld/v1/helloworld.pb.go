@@ -152,7 +152,8 @@ func file_pb_helloworld_v1_helloworld_proto_rawDescGZIP() []byte {
 var file_pb_helloworld_v1_helloworld_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_pb_helloworld_v1_helloworld_proto_goTypes = []interface{}{
 	(*HelloRequest)(nil), // 0: helloworld.v1.HelloRequest
-	(*HelloReply)(nil),   // 1: helloworld.v1.HelloReply
+// （翻译）：// 0: 表示HelloRequest结构体在helloworld包的v1版本中
+	(*HelloReply)(nil),   // 1: helloworld.v1.HelloReply （翻译：// 1: helloworld.v1版本的HelloReply）
 }
 var file_pb_helloworld_v1_helloworld_proto_depIdxs = []int32{
 	0, // 0: helloworld.v1.Greeter

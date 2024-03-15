@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// LoadHTMLGlob is a wrapper for Engine.LoadHTMLGlob.
+// LoadHTMLGlob 是 Engine.LoadHTMLGlob 的一个包装器。
 # <翻译结束>
 
 
@@ -26,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// LoadHTMLFiles is a wrapper for Engine.LoadHTMLFiles.
+// LoadHTMLFiles 是 Engine.LoadHTMLFiles 的一个封装函数。
 # <翻译结束>
 
 
@@ -35,7 +35,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetHTMLTemplate is a wrapper for Engine.SetHTMLTemplate.
+// SetHTMLTemplate 是 Engine.SetHTMLTemplate 的一个包装函数。
 # <翻译结束>
 
 
@@ -44,7 +44,7 @@
 <原文结束>
 
 # <翻译开始>
-// NoRoute adds handlers for NoRoute. It returns a 404 code by default.
+// NoRoute 为无路由情况添加处理器。默认返回404状态码。
 # <翻译结束>
 
 
@@ -53,7 +53,7 @@
 <原文结束>
 
 # <翻译开始>
-// NoMethod is a wrapper for Engine.NoMethod.
+// NoMethod 是 Engine.NoMethod 的一个包装器。
 # <翻译结束>
 
 
@@ -63,8 +63,8 @@
 <原文结束>
 
 # <翻译开始>
-// Group creates a new router group. You should add all the routes that have common middlewares or the same path prefix.
-// For example, all the routes that use a common middleware for authorization could be grouped.
+// Group 创建一个新的路由分组。你应该将所有具有共同中间件或相同路径前缀的路由添加到此分组中。
+// 例如，所有使用同一个授权中间件的路由可以被归为一组。
 # <翻译结束>
 
 
@@ -73,7 +73,7 @@
 <原文结束>
 
 # <翻译开始>
-// Handle is a wrapper for Engine.Handle.
+// Handle 是 Engine.Handle 的一个包装器。
 # <翻译结束>
 
 
@@ -82,7 +82,8 @@
 <原文结束>
 
 # <翻译开始>
-// POST is a shortcut for router.Handle("POST", path, handle)
+// POST 是一个快捷方式，用于 router.Handle("POST", path, handle)
+// 即使用特定方法（此处为"POST"）和路径（path）注册一个处理器(handle)到路由(router)
 # <翻译结束>
 
 
@@ -91,7 +92,8 @@
 <原文结束>
 
 # <翻译开始>
-// GET is a shortcut for router.Handle("GET", path, handle)
+// GET 是一个快捷方式，用于 router.Handle("GET", path, handle)
+// 即通过此快捷方式可以快速处理 GET 方法类型的请求，对应路径为 path，并调用 handle 处理函数
 # <翻译结束>
 
 
@@ -100,7 +102,8 @@
 <原文结束>
 
 # <翻译开始>
-// DELETE is a shortcut for router.Handle("DELETE", path, handle)
+// DELETE 是一个快捷方式，用于router.Handle("DELETE", path, handle)
+// 即：通过此快捷方式可以方便地为指定路由路径注册一个处理DELETE请求的方法。
 # <翻译结束>
 
 
@@ -109,7 +112,11 @@
 <原文结束>
 
 # <翻译开始>
-// PATCH is a shortcut for router.Handle("PATCH", path, handle)
+// PATCH 是一个快捷方式，用于 router.Handle("PATCH", path, handle)
+// 即使用 PATCH 方法注册路由处理器，其中：
+// "PATCH" 代表 HTTP 请求方法，
+// path 为待处理的请求路径，
+// handle 为对应的处理函数。
 # <翻译结束>
 
 
@@ -118,7 +125,8 @@
 <原文结束>
 
 # <翻译开始>
-// PUT is a shortcut for router.Handle("PUT", path, handle)
+// PUT 是一个快捷方式，用于 router.Handle("PUT", path, handle)
+// 即：使用 router 处理 "PUT" 方法的请求，路径为 path，并调用 handle 函数进行处理
 # <翻译结束>
 
 
@@ -127,7 +135,8 @@
 <原文结束>
 
 # <翻译开始>
-// OPTIONS is a shortcut for router.Handle("OPTIONS", path, handle)
+// OPTIONS 是一个快捷方式，用于 router.Handle("OPTIONS", path, handle)
+// 即：通过该选项，可以快速处理对指定路径（path）的 "OPTIONS" HTTP 方法请求，并调用相应的处理函数（handle）
 # <翻译结束>
 
 
@@ -136,7 +145,8 @@
 <原文结束>
 
 # <翻译开始>
-// HEAD is a shortcut for router.Handle("HEAD", path, handle)
+// HEAD 是一个快捷方式，用于 router.Handle("HEAD", path, handle)
+// 即为：router 处理 "HEAD" 方法类型的请求，路径为 path，处理函数为 handle
 # <翻译结束>
 
 
@@ -145,7 +155,7 @@
 <原文结束>
 
 # <翻译开始>
-// Any is a wrapper for Engine.Any.
+// Any 是 Engine.Any 的一个包装器。
 # <翻译结束>
 
 
@@ -154,7 +164,7 @@
 <原文结束>
 
 # <翻译开始>
-// StaticFile is a wrapper for Engine.StaticFile.
+// StaticFile 是 Engine.StaticFile 的一个包装器。
 # <翻译结束>
 
 
@@ -169,11 +179,10 @@
 <原文结束>
 
 # <翻译开始>
-// Static serves files from the given file system root.
-// Internally a http.FileServer is used, therefore http.NotFound is used instead
-// of the Router's NotFound handler.
-// To use the operating system's file system implementation,
-// use :
+// Static 从给定的文件系统根目录提供文件服务。
+// 在内部使用了 http.FileServer，因此会使用 http.NotFound 替代 Router 的 NotFound 处理程序。
+// 若要使用操作系统自身的文件系统实现，
+// 可以这样使用：
 //
 //	router.Static("/static", "/var/www")
 # <翻译结束>
@@ -184,7 +193,7 @@
 <原文结束>
 
 # <翻译开始>
-// StaticFS is a wrapper for Engine.StaticFS.
+// StaticFS 是 Engine.StaticFS 的一个包装器。
 # <翻译结束>
 
 
@@ -195,9 +204,9 @@
 <原文结束>
 
 # <翻译开始>
-// Use attaches a global middleware to the router. i.e. the middlewares attached through Use() will be
-// included in the handlers chain for every single request. Even 404, 405, static files...
-// For example, this is the right place for a logger or error management middleware.
+// Use 方法将一个全局中间件附加到路由。也就是说，通过Use()方法附加的中间件将会
+// 包含在每一个请求的处理器链中。即便是404、405等错误状态码响应，或是静态文件请求...
+// 例如，这是放置日志记录器或错误管理中间件的理想位置。
 # <翻译结束>
 
 
@@ -206,7 +215,7 @@
 <原文结束>
 
 # <翻译开始>
-// Routes returns a slice of registered routes.
+// Routes 返回已注册路由的切片。
 # <翻译结束>
 
 
@@ -217,9 +226,9 @@
 <原文结束>
 
 # <翻译开始>
-// Run attaches to a http.Server and starts listening and serving HTTP requests.
-// It is a shortcut for http.ListenAndServe(addr, router)
-// Note: this method will block the calling goroutine indefinitely unless an error happens.
+// Run 函数连接到一个 http.Server，并开始监听和处理 HTTP 请求。
+// 这是调用 http.ListenAndServe(addr, router) 的快捷方式。
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用它的 goroutine。
 # <翻译结束>
 
 
@@ -230,9 +239,9 @@
 <原文结束>
 
 # <翻译开始>
-// RunTLS attaches to a http.Server and starts listening and serving HTTPS requests.
-// It is a shortcut for http.ListenAndServeTLS(addr, certFile, keyFile, router)
-// Note: this method will block the calling goroutine indefinitely unless an error happens.
+// RunTLS 附加到一个 http.Server，并开始监听和处理 HTTPS 请求。
+// 这是 http.ListenAndServeTLS(addr, certFile, keyFile, router) 的快捷方式。
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用的 goroutine。
 # <翻译结束>
 
 
@@ -243,9 +252,8 @@
 <原文结束>
 
 # <翻译开始>
-// RunUnix attaches to a http.Server and starts listening and serving HTTP requests
-// through the specified unix socket (i.e. a file)
-// Note: this method will block the calling goroutine indefinitely unless an error happens.
+// RunUnix连接到一个http.Server，并开始通过指定的Unix套接字（即文件）监听和处理HTTP请求
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用它的goroutine。
 # <翻译结束>
 
 
@@ -256,8 +264,7 @@
 <原文结束>
 
 # <翻译开始>
-// RunFd attaches the router to a http.Server and starts listening and serving HTTP requests
-// through the specified file descriptor.
-// Note: the method will block the calling goroutine indefinitely unless on error happens.
+// RunFd 将路由器附加到 http.Server，并开始监听并透过指定的文件描述符处理 HTTP 请求。
+// 注意：除非发生错误，否则该方法将无限期地阻塞调用它的 goroutine。
 # <翻译结束>
 

@@ -151,7 +151,8 @@ func TestContextReset(t *testing.T) {
 	c.index = 2
 	c.Writer = &responseWriter{ResponseWriter: httptest.NewRecorder()}
 	c.Params = Params{Param{}}
-	c.Error(errors.New("test")) //nolint: errcheck
+	c.Error(errors.New("test")) // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 	c.Set("foo", "bar")
 	c.reset()
 
@@ -1373,12 +1374,14 @@ func TestContextError(t *testing.T) {
 	assert.Empty(t, c.Errors)
 
 	firstErr := errors.New("first error")
-	c.Error(firstErr) //nolint: errcheck
+	c.Error(firstErr) // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 	assert.Len(t, c.Errors, 1)
 	assert.Equal(t, "Error #01: first error\n", c.Errors.String())
 
 	secondErr := errors.New("second error")
-	c.Error(&Error{ //nolint: errcheck
+	c.Error(&Error{ // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 		Err:  secondErr,
 		Meta: "some data 2",
 		Type: ErrorTypePublic,
@@ -1400,13 +1403,16 @@ func TestContextError(t *testing.T) {
 			t.Error("didn't panic")
 		}
 	}()
-	c.Error(nil) //nolint: errcheck
+	c.Error(nil) // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 }
 
 func TestContextTypedError(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
-	c.Error(errors.New("externo 0")).SetType(ErrorTypePublic)  //nolint: errcheck
-	c.Error(errors.New("interno 0")).SetType(ErrorTypePrivate) //nolint: errcheck
+	c.Error(errors.New("externo 0")).SetType(ErrorTypePublic)  // nolint: errcheck
+// 翻译：// 不进行errcheck检查
+	c.Error(errors.New("interno 0")).SetType(ErrorTypePrivate) // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 
 	for _, err := range c.Errors.ByType(ErrorTypePublic) {
 		assert.Equal(t, ErrorTypePublic, err.Type)
@@ -1421,7 +1427,8 @@ func TestContextAbortWithError(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
 
-	c.AbortWithError(http.StatusUnauthorized, errors.New("bad input")).SetMeta("some input") //nolint: errcheck
+	c.AbortWithError(http.StatusUnauthorized, errors.New("bad input")).SetMeta("some input") // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 
 	assert.Equal(t, http.StatusUnauthorized, w.Code)
 	assert.Equal(t, abortIndex, c.index)
@@ -2156,7 +2163,8 @@ func TestHasRequestContext(t *testing.T) {
 	assert.False(t, c.hasRequestContext(), "no request, has fallback")
 	c.Request, _ = http.NewRequest(http.MethodGet, "/", nil)
 	assert.True(t, c.hasRequestContext(), "has request, has fallback")
-	c.Request, _ = http.NewRequestWithContext(nil, "", "", nil) //nolint:staticcheck
+	c.Request, _ = http.NewRequestWithContext(nil, "", "", nil) // nolint: staticcheck
+// （翻译）：忽略静态检查工具对本行代码的检查。
 	assert.False(t, c.hasRequestContext(), "has request with nil ctx, has fallback")
 	c.engine.ContextWithFallback = false
 	assert.False(t, c.hasRequestContext(), "has request, no fallback")

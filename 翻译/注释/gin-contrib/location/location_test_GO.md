@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-	// defaults
+// 默认值
 # <翻译结束>
 
 
@@ -13,7 +13,7 @@
 <原文结束>
 
 # <翻译开始>
-	// url scheme
+// URL方案
 # <翻译结束>
 
 
@@ -22,7 +22,8 @@
 <原文结束>
 
 # <翻译开始>
-	// x-formward headers
+// x-forward headers
+// （注释翻译：）// x-forward headers，这个注释表明该代码段与“x-forwarded-headers”相关，这是一个HTTP头部信息，通常用于标识请求在经过代理服务器或负载均衡器时的原始来源信息。
 # <翻译结束>
 
 
@@ -31,7 +32,7 @@
 <原文结束>
 
 # <翻译开始>
-	// X-Host headers
+// X-Host 头部信息
 # <翻译结束>
 
 
@@ -40,7 +41,7 @@
 <原文结束>
 
 # <翻译开始>
-	// URL Host
+// URL 主机
 # <翻译结束>
 
 
@@ -49,7 +50,7 @@
 <原文结束>
 
 # <翻译开始>
-	// requests
+// 请求
 # <翻译结束>
 
 
@@ -58,7 +59,7 @@
 <原文结束>
 
 # <翻译开始>
-	// tls
+// tls // （Transport Layer Security，传输层安全协议）
 # <翻译结束>
 
 
@@ -67,6 +68,6 @@
 <原文结束>
 
 # <翻译开始>
-	// X-Forwarded-Host host header
+// X-Forwarded-Host：主机头信息
 # <翻译结束>
 

@@ -23,7 +23,7 @@ type LoaderFunc func(path string) ([]byte, error)
 
 func (f LoaderFunc) LoadMessage(path string) ([]byte, error) { return f(path) }
 
-// WithBundle ...
+// WithBundle ... // 使用Bundle
 func WithBundle(config *BundleCfg) Option {
 	return func(g GinI18n) {
 		if config.Loader == nil {
@@ -34,6 +34,9 @@ func WithBundle(config *BundleCfg) Option {
 }
 
 // WithGetLngHandle ...
+// ...
+// （由于上下文信息不足，无法准确翻译该注释含义，请提供更多代码或上下文信息。）
+// 一般情况下，根据函数命名习惯，这个注释可能是在描述一个带有获取经度处理功能的方法或选项，"WithGetLngHandle"可以理解为“带有获取经度处理器”，通常这种形式的函数用于在初始化结构体或者设置配置时，注入获取经度的操作句柄或回调函数。
 func WithGetLngHandle(handler GetLngHandler) Option {
 	return func(g GinI18n) {
 		g.setGetLngHandler(handler)

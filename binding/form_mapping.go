@@ -118,7 +118,7 @@ func mapping(value reflect.Value, field reflect.StructField, setter setter, tag 
 		var isSet bool
 		for i := 0; i < value.NumField(); i++ {
 			sf := tValue.Field(i)
-			if sf.PkgPath != "" && !sf.Anonymous { // unexported
+			if sf.PkgPath != "" && !sf.Anonymous { // 非导出
 				continue
 			}
 			ok, err := mapping(value.Field(i), sf, setter, tag)
@@ -147,7 +147,7 @@ func tryToSetValue(value reflect.Value, field reflect.StructField, setter setter
 	if tagValue == "" { // 缺省值为FieldName
 		tagValue = field.Name
 	}
-	if tagValue == "" { // when field is "emptyField" variable
+	if tagValue == "" { // 当字段为"emptyField"变量时
 		return false, nil
 	}
 

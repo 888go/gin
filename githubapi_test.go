@@ -21,7 +21,7 @@ type route struct {
 	path   string
 }
 
-// http://developer.github.com/v3/
+// 参考链接：GitHub开发者文档v3版本
 var githubAPI = []route{
 // OAuth授权
 	{http.MethodGet, "/authorizations"},

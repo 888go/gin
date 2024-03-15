@@ -4,6 +4,6 @@
 <原文结束>
 
 # <翻译开始>
-// Validator interface for checking if a request is valid or not
+// Validator 接口，用于检查请求是否有效
 # <翻译结束>
 

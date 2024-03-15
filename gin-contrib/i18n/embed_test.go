@@ -62,8 +62,8 @@ var (
 		AcceptLanguage:   []language.Tag{language.English, language.German, language.Chinese},
 		RootPath:         "./testdata/localizeJSON/",
 		UnmarshalFunc:    json.Unmarshal,
-		// After commenting this line, use defaultLoader
-		// it will be loaded from the file
+// 在注释掉这一行后，将使用defaultLoader
+// 它将从文件中加载
 		Loader: &EmbedLoader{fs},
 	})))
 )

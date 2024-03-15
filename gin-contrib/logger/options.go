@@ -8,7 +8,7 @@ import (
 	"github.com/rs/zerolog"
 )
 
-// Option specifies instrumentation configuration options.
+// Option 指定了仪器化配置选项。
 type Option interface {
 	apply(*config)
 }
@@ -21,14 +21,14 @@ func (o optionFunc) apply(c *config) {
 	o(c)
 }
 
-// WithLogger set custom logger func
+// WithLogger 设置自定义日志器函数
 func WithLogger(fn func(*gin.Context, zerolog.Logger) zerolog.Logger) Option {
 	return optionFunc(func(c *config) {
 		c.logger = fn
 	})
 }
 
-// WithSkipPathRegexps multiple skip URL paths by regexp pattern
+// WithSkipPathRegexps 通过正则表达式模式添加多个需要跳过的URL路径
 func WithSkipPathRegexps(regs ...*regexp.Regexp) Option {
 	return optionFunc(func(c *config) {
 		if len(regs) == 0 {
@@ -39,22 +39,22 @@ func WithSkipPathRegexps(regs ...*regexp.Regexp) Option {
 	})
 }
 
-// WithUTC returns t with the location set to UTC.
+// WithUTC 返回一个时间t，其位置设置为UTC。
 func WithUTC(s bool) Option {
 	return optionFunc(func(c *config) {
 		c.utc = s
 	})
 }
 
-// WithSkipPath skip URL path by specific pattern
+// WithSkipPath 根据特定模式跳过URL路径
 func WithSkipPath(s []string) Option {
 	return optionFunc(func(c *config) {
 		c.skipPath = s
 	})
 }
 
-// WithWriter change the default output writer.
-// Default is gin.DefaultWriter
+// WithWriter 更改默认输出 writer。
+// 默认为 gin.DefaultWriter
 func WithWriter(s io.Writer) Option {
 	return optionFunc(func(c *config) {
 		c.output = s

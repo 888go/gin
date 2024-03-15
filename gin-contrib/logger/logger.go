@@ -14,27 +14,27 @@ import (
 
 type Fn func(*gin.Context, zerolog.Logger) zerolog.Logger
 
-// Config defines the config for logger middleware
+// Config 定义了日志中间件的配置
 type config struct {
 	logger Fn
-	// UTC a boolean stating whether to use UTC time zone or local.
+// UTC 是一个布尔值，表示是否使用 UTC 时区还是本地时区。
 	utc             bool
 	skipPath        []string
 	skipPathRegexps []*regexp.Regexp
-	// Output is a writer where logs are written.
-	// Optional. Default value is gin.DefaultWriter.
+// Output 是一个用于写入日志的 writer。
+// 可选配置项，默认值为 gin.DefaultWriter。
 	output io.Writer
-	// the log level used for request with status code < 400
+// 用于状态码小于400的请求的日志级别
 	defaultLevel zerolog.Level
-	// the log level used for request with status code between 400 and 499
+// 用于状态码在400到499之间的请求的日志级别
 	clientErrorLevel zerolog.Level
-	// the log level used for request with status code >= 500
+// 用于状态码大于等于500的请求的日志级别
 	serverErrorLevel zerolog.Level
 }
 
 var isTerm bool = isatty.IsTerminal(os.Stdout.Fd())
 
-// SetLogger initializes the logging middleware.
+// SetLogger 初始化日志中间件。
 func SetLogger(opts ...Option) gin.HandlerFunc {
 	cfg := &config{
 		defaultLevel:     zerolog.InfoLevel,
@@ -43,9 +43,9 @@ func SetLogger(opts ...Option) gin.HandlerFunc {
 		output:           gin.DefaultWriter,
 	}
 
-	// Loop through each option
+// 遍历每个选项
 	for _, o := range opts {
-		// Call the option giving the instantiated
+// 调用选项，传入已实例化的
 		o.apply(cfg)
 	}
 
@@ -136,8 +136,8 @@ func SetLogger(opts ...Option) gin.HandlerFunc {
 	}
 }
 
-// ParseLevel converts a level string into a zerolog Level value.
-// returns an error if the input string does not match known values.
+// ParseLevel将级别字符串转换为zerolog的Level值。
+// 如果输入字符串与已知值不匹配，则返回错误。
 func ParseLevel(levelStr string) (zerolog.Level, error) {
 	return zerolog.ParseLevel(levelStr)
 }

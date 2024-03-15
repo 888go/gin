@@ -1,9 +1,7 @@
-List of all the awesome people working to make Gin the best Web Framework in Go.
+# 以下是致力于使 Gin 成为 Go 语言中最佳 Web 框架的所有出色人员的列表。
+## # gin 1.x 系列作者
 
-## gin 1.x series authors
-
-**Gin Core Team:** Bo-Yi Wu (@appleboy), thinkerou (@thinkerou), Javier Provecho (@javierprovecho)
-
+**Gin 核心团队：**吴博一（@appleboy），thinkerou（@thinkerou），Javier Provecho（@javierprovecho）
 ## gin 0.x series authors
 
 **Maintainers:** Manu Martinez-Almeida (@manucorporat), Javier Provecho (@javierprovecho)
@@ -41,7 +39,7 @@ People and companies, who have contributed, in alphabetical order.
 - Andrey Nering <andrey.nering@gmail.com>
 - Andrey Smirnov <Smirnov.Andrey@gmail.com>
 - Andrii Bubis <firstrow@gmail.com>
-- André Bazaglia <bazaglia@users.noreply.github.com>
+- Andr茅 Bazaglia <bazaglia@users.noreply.github.com>
 - Andy Pan <panjf2000@gmail.com>
 - Antoine GIRARD <sapk@users.noreply.github.com>
 - Anup Kumar Panwar <1anuppanwar@gmail.com>
@@ -141,8 +139,8 @@ People and companies, who have contributed, in alphabetical order.
 - Justin Beckwith <justin.beckwith@gmail.com>
 - Justin Israel <justinisrael@gmail.com>
 - Justin Mayhew <mayhew@live.ca>
-- Jérôme Laforge <jerome-laforge@users.noreply.github.com>
-- Kacper Bąk <56700396+53jk1@users.noreply.github.com>
+- J茅r么me Laforge <jerome-laforge@users.noreply.github.com>
+- Kacper B膮k <56700396+53jk1@users.noreply.github.com>
 - Kamron Batman <kamronbatman@users.noreply.github.com>
 - Kane Rogers <kane@cleanstream.com.au>
 - Kaushik Neelichetty <kaushikneelichetty6132@gmail.com>
@@ -153,13 +151,13 @@ People and companies, who have contributed, in alphabetical order.
 - Kirill Motkov <motkov.kirill@gmail.com>
 - Klemen Sever <ksever@student.42.fr>
 - Kristoffer A. Iversen <kristoffer.a.iversen@gmail.com>
-- Krzysztof Szafrański <k.p.szafranski@gmail.com>
+- Krzysztof Szafra艅ski <k.p.szafranski@gmail.com>
 - Kumar McMillan <kumar.mcmillan@gmail.com>
 - Kyle Mcgill <email@kylescottmcgill.com>
 - Lanco <35420416+lancoLiu@users.noreply.github.com>
 - Levi Olson <olson.levi@gmail.com>
 - Lin Kao-Yuan <mosdeo@gmail.com>
-- Linus Unnebäck <linus@folkdatorn.se>
+- Linus Unneb盲ck <linus@folkdatorn.se>
 - Lucas Clemente <lucas@clemente.io>
 - Ludwig Valda Vasquez <bredov@gmail.com>
 - Luis GG <lggomez@users.noreply.github.com>
@@ -178,7 +176,7 @@ People and companies, who have contributed, in alphabetical order.
 - Matt Williams <gh@mattyw.net>
 - Matthieu MOREL <mmorel-35@users.noreply.github.com>
 - Max Hilbrunner <mhilbrunner@users.noreply.github.com>
-- Maxime Soulé <btik-git@scoubidou.com>
+- Maxime Soul茅 <btik-git@scoubidou.com>
 - MetalBreaker <johnymichelson@gmail.com>
 - Michael Puncel <mpuncel@squareup.com>
 - MichaelDeSteven <51652084+MichaelDeSteven@users.noreply.github.com>
@@ -194,7 +192,7 @@ People and companies, who have contributed, in alphabetical order.
 - Nick Gerakines <nick@gerakines.net>
 - Nikifor Seryakov <nikandfor@gmail.com>
 - Notealot <714804968@qq.com>
-- Olivier Mengué <dolmen@cpan.org>
+- Olivier Mengu茅 <dolmen@cpan.org>
 - Olivier Robardet <orobardet@users.noreply.github.com>
 - Pablo Moncada <pablo.moncada@bq.com>
 - Pablo Moncada <pmoncadaisla@gmail.com>
@@ -212,7 +210,7 @@ People and companies, who have contributed, in alphabetical order.
 - Ray Rodriguez <rayrod2030@gmail.com>
 - Regner Blok-Andersen <shadowdf@gmail.com>
 - Remco <remco@dutchcoders.io>
-- Rex Lee(李俊) <duguying2008@gmail.com>
+- Rex Lee(鏉庝繆) <duguying2008@gmail.com>
 - Richard Lee <dlackty@gmail.com>
 - Riverside <wangyb65@gmail.com>
 - Robert Wilkinson <wilkinson.robert.a@gmail.com>
@@ -396,11 +394,11 @@ People and companies, who have contributed, in alphabetical order.
 - zhing <zqwillseven@gmail.com>
 - ziheng <zihenglv@gmail.com>
 - zzjin <zzjin@users.noreply.github.com>
-- 森 優太 <59682979+uta-mori@users.noreply.github.com>
-- 杰哥 <858806258@qq.com>
-- 涛叔 <hi@taoshu.in>
-- 市民233 <mengrenxiong@gmail.com>
-- 尹宝强 <wmdandme@gmail.com>
-- 梦溪笔谈 <loongmxbt@gmail.com>
-- 飞雪无情 <ls8707@gmail.com>
-- 寻寻觅觅的Gopher <zoujh99@qq.com>
+- 妫?鍎お <59682979+uta-mori@users.noreply.github.com>
+- 鏉板摜 <858806258@qq.com>
+- 娑涘彅 <hi@taoshu.in>
+- 甯傛皯233 <mengrenxiong@gmail.com>
+- 灏瑰疂寮?<wmdandme@gmail.com>
+- 姊︽邯绗旇皥 <loongmxbt@gmail.com>
+- 椋為洩鏃犳儏 <ls8707@gmail.com>
+- 瀵诲瑙呰鐨凣opher <zoujh99@qq.com>

@@ -4,7 +4,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// Option for queue system
+// 队列系统选项
 type Option func(*config)
 
 type (
@@ -14,21 +14,21 @@ type (
 
 type HeaderStrKey string
 
-// WithGenerator set generator function
+// WithGenerator 设置生成器函数
 func WithGenerator(g Generator) Option {
 	return func(cfg *config) {
 		cfg.generator = g
 	}
 }
 
-// WithCustomHeaderStrKey set custom header key for request id
+// WithCustomHeaderStrKey 为请求ID设置自定义头部键
 func WithCustomHeaderStrKey(s HeaderStrKey) Option {
 	return func(cfg *config) {
 		cfg.headerKey = s
 	}
 }
 
-// WithHandler set handler function for request id with context
+// WithHandler 为带有上下文的请求ID设置处理器函数
 func WithHandler(handler Handler) Option {
 	return func(cfg *config) {
 		cfg.handler = handler

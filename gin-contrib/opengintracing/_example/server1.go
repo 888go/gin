@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	// Configure tracing
+// 配置追踪
 	propagator := zipkin.NewZipkinB3HTTPHeaderPropagator()
 	trace, closer := jaeger.NewTracer(
 		"server01",
@@ -29,7 +29,7 @@ func main() {
 		return opentracing.ChildOf(sc)
 	}
 
-	// Set up routes
+// 设置路由
 	r := gin.Default()
 	r.POST("",
 		opengintracing.SpanFromHeadersHTTPFmt(trace, "service1", fn, false),

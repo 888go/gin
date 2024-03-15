@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// HmacSha512 signing algorithm using hmac and sha512
+// 使用hmac和sha512的HmacSha512签名算法
 # <翻译结束>
 
 
@@ -13,7 +13,7 @@
 <原文结束>
 
 # <翻译开始>
-// Sign return signing of input msg with secret string
+// Sign 返回使用秘密字符串对输入msg进行签名的结果
 # <翻译结束>
 
 
@@ -22,6 +22,6 @@
 <原文结束>
 
 # <翻译开始>
-// Name return name of algorithm
+// Name 返回算法名称
 # <翻译结束>
 

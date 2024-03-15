@@ -74,6 +74,7 @@
 
 # <翻译开始>
 // 0: helloworld.v1.HelloRequest
+// （翻译）：// 0: 表示HelloRequest结构体在helloworld包的v1版本中
 # <翻译结束>
 
 
@@ -82,7 +83,7 @@
 <原文结束>
 
 # <翻译开始>
-// 1: helloworld.v1.HelloReply
+// 1: helloworld.v1.HelloReply （翻译：// 1: helloworld.v1版本的HelloReply）
 # <翻译结束>
 
 

@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// http://developer.github.com/v3/
+// 参考链接：GitHub开发者文档v3版本
 # <翻译结束>
 
 
@@ -215,8 +215,11 @@
 <原文结束>
 
 # <翻译开始>
-// {http
-// MethodPatch &quot / orgs: org"},,
+// {http // MethodPatch " / orgs: org"}
+// 这段Go代码中的注释内容似乎是不完整的，无法直接翻译。如果我猜测其完整含义并补充完整，可能类似于：
+// ```go
+// 对于HTTP方法为Patch的请求，路由为"/orgs:org"
+// 在RESTful API设计中，`/orgs:org`通常表示一个与组织（org）相关的路径参数。但因为原始注释有误，所以以上翻译仅供参考，具体含义还需要根据上下文进一步确认。
 # <翻译结束>
 
 

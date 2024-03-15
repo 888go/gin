@@ -4,7 +4,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// defaultGetLngHandler ...
+// defaultGetLngHandler ... 默认获取经度处理器
 func defaultGetLngHandler(context *gin.Context, defaultLng string) string {
 	if context == nil || context.Request == nil {
 		return defaultLng

@@ -21,7 +21,7 @@ import (
 	"golang.org/x/net/http2/h2c"
 )
 
-const defaultMultipartMemory = 32 << 20 // 32 MB
+const defaultMultipartMemory = 32 << 20 // 32 MB （32兆字节）
 
 var (
 	default404Body = []byte("404 page not found")
@@ -31,7 +31,7 @@ var (
 var defaultPlatform string
 
 var defaultTrustedCIDRs = []*net.IPNet{
-	{ // 0.0.0.0/0 (IPv4)
+	{ // 0.0.0.0/0 (IPv4) （IPv4地址）：表示整个IPv4地址空间的通配符，相当于所有IPv4地址的集合。
 		IP:   net.IP{0x0, 0x0, 0x0, 0x0},
 		Mask: net.IPMask{0x0, 0x0, 0x0, 0x0},
 	},

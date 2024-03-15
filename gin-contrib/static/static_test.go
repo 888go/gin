@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// nolint:unparam
+// nolint:unparam 禁止检查未使用的参数
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
 	req, _ := http.NewRequestWithContext(context.Background(), method, path, nil)
 	w := httptest.NewRecorder()
@@ -23,7 +23,7 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 }
 
 func TestEmptyDirectory(t *testing.T) {
-	// SETUP file
+// 设置文件
 	testRoot, _ := os.Getwd()
 	f, err := ioutil.TempFile(testRoot, "")
 	if err != nil {
@@ -89,7 +89,7 @@ func TestEmptyDirectory(t *testing.T) {
 }
 
 func TestIndex(t *testing.T) {
-	// SETUP file
+// 设置文件
 	testRoot, _ := os.Getwd()
 	f, err := os.Create(path.Join(testRoot, "index.html"))
 	if err != nil {
@@ -113,7 +113,7 @@ func TestIndex(t *testing.T) {
 }
 
 func TestListIndex(t *testing.T) {
-	// SETUP file
+// 设置文件
 	testRoot, _ := os.Getwd()
 	f, err := ioutil.TempFile(testRoot, "")
 	if err != nil {

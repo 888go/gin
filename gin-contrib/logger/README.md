@@ -1,13 +1,12 @@
-# logger
+# # 日志记录器
 
-[![Run Tests](https://github.com/gin-contrib/logger/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/gin-contrib/logger/actions/workflows/go.yml)
+[![运行测试](https://github.com/gin-contrib/logger/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/gin-contrib/logger/actions/workflows/go.yml)
 [![codecov](https://codecov.io/gh/gin-contrib/logger/branch/master/graph/badge.svg)](https://codecov.io/gh/gin-contrib/logger)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gin-contrib/logger)](https://goreportcard.com/report/github.com/gin-contrib/logger)
-[![GoDoc](https://godoc.org/github.com/gin-contrib/logger?status.svg)](https://godoc.org/github.com/gin-contrib/logger)
-[![Join the chat at https://gitter.im/gin-gonic/gin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gin-gonic/gin)
+[![Go 代码质量报告](https://goreportcard.com/badge/github.com/gin-contrib/logger)](https://goreportcard.com/report/github.com/gin-contrib/logger)
+[![GoDoc 文档](https://godoc.org/github.com/gin-contrib/logger?status.svg)](https://godoc.org/github.com/gin-contrib/logger)
+[![加入聊天室 https://gitter.im/gin-gonic/gin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gin-gonic/gin)
 
-Gin middleware/handler to logger url path using [rs/zerolog](https://github.com/rs/zerolog).
-
+Gin 中间件/处理器，使用 [rs/zerolog](https://github.com/rs/zerolog) 来记录 URL 路径。
 ## Example
 
 ```go
@@ -109,15 +108,13 @@ func main() {
 }
 ```
 
-## Screenshot
-
-Run app server:
+## # 运行应用服务器：
 
 ```sh
 go run _example/main.go
 ```
 
-Test request:
+测试请求：
 
 ```sh
 curl http://localhost:8080/ping
@@ -125,4 +122,4 @@ curl http://localhost:8080/pong
 curl http://localhost:8080/json
 ```
 
-![screenshot](./images/screenshot.png)
+![](./images/screenshot.png)

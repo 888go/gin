@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// Config defines the config for logger middleware
+// Config 定义了日志中间件的配置
 # <翻译结束>
 
 
@@ -13,7 +13,7 @@
 <原文结束>
 
 # <翻译开始>
-	// UTC a boolean stating whether to use UTC time zone or local.
+// UTC 是一个布尔值，表示是否使用 UTC 时区还是本地时区。
 # <翻译结束>
 
 
@@ -23,8 +23,8 @@
 <原文结束>
 
 # <翻译开始>
-	// Output is a writer where logs are written.
-	// Optional. Default value is gin.DefaultWriter.
+// Output 是一个用于写入日志的 writer。
+// 可选配置项，默认值为 gin.DefaultWriter。
 # <翻译结束>
 
 
@@ -33,7 +33,7 @@
 <原文结束>
 
 # <翻译开始>
-	// the log level used for request with status code < 400
+// 用于状态码小于400的请求的日志级别
 # <翻译结束>
 
 
@@ -42,7 +42,7 @@
 <原文结束>
 
 # <翻译开始>
-	// the log level used for request with status code between 400 and 499
+// 用于状态码在400到499之间的请求的日志级别
 # <翻译结束>
 
 
@@ -51,7 +51,7 @@
 <原文结束>
 
 # <翻译开始>
-	// the log level used for request with status code >= 500
+// 用于状态码大于等于500的请求的日志级别
 # <翻译结束>
 
 
@@ -60,7 +60,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetLogger initializes the logging middleware.
+// SetLogger 初始化日志中间件。
 # <翻译结束>
 
 
@@ -69,7 +69,7 @@
 <原文结束>
 
 # <翻译开始>
-	// Loop through each option
+// 遍历每个选项
 # <翻译结束>
 
 
@@ -78,7 +78,7 @@
 <原文结束>
 
 # <翻译开始>
-		// Call the option giving the instantiated
+// 调用选项，传入已实例化的
 # <翻译结束>
 
 
@@ -88,7 +88,7 @@
 <原文结束>
 
 # <翻译开始>
-// ParseLevel converts a level string into a zerolog Level value.
-// returns an error if the input string does not match known values.
+// ParseLevel将级别字符串转换为zerolog的Level值。
+// 如果输入字符串与已知值不匹配，则返回错误。
 # <翻译结束>
 

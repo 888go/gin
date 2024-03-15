@@ -11,9 +11,9 @@ import (
 func main() {
 	router := gin.Default()
 
-	// configure to automatically detect scheme and host
-	// - use http when default scheme cannot be determined
-	// - use localhost:8080 when default host cannot be determined
+// 配置为自动检测 scheme（协议）和 host（主机）
+// - 当无法确定默认 scheme 时，使用 http
+// - 当无法确定默认 host 时，使用 localhost:8080
 	router.Use(location.Default())
 
 	router.GET("/", func(c *gin.Context) {

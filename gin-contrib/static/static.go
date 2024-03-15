@@ -55,7 +55,7 @@ func ServeRoot(urlPrefix, root string) gin.HandlerFunc {
 	return Serve(urlPrefix, LocalFile(root, false))
 }
 
-// Static returns a middleware handler that serves static files in the given directory.
+// Static 返回一个中间件处理程序，用于在指定目录中提供静态文件服务。
 func Serve(urlPrefix string, fs ServeFileSystem) gin.HandlerFunc {
 	fileserver := http.FileServer(fs)
 	if urlPrefix != "" {

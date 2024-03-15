@@ -19,17 +19,17 @@ var rxURL = regexp.MustCompile(`^/regexp\d*`)
 func main() {
 	r := gin.New()
 
-	// Add a logger middleware, which:
-	//   - Logs all requests, like a combined access and error log.
-	//   - Logs to stdout.
-	// r.Use(logger.SetLogger())
+// 添加一个日志中间件，其功能包括：
+//   - 记录所有请求，就像综合访问和错误日志一样。
+//   - 将日志记录到标准输出（stdout）。
+// r.Use(logger.SetLogger())
 
-	// Example pong request.
+// 示例：请求 pong
 	r.GET("/pong", logger.SetLogger(), func(c *gin.Context) {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example ping request.
+// 示例 ping 请求。
 	r.GET("/ping", logger.SetLogger(
 		logger.WithSkipPath([]string{"/skip"}),
 		logger.WithUTC(true),
@@ -38,28 +38,28 @@ func main() {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example skip path request.
+// 示例：跳过路径请求。
 	r.GET("/skip", logger.SetLogger(
 		logger.WithSkipPath([]string{"/skip"}),
 	), func(c *gin.Context) {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example skip path request.
+// 示例：跳过路径请求。
 	r.GET("/regexp1", logger.SetLogger(
 		logger.WithSkipPathRegexps(rxURL),
 	), func(c *gin.Context) {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example skip path request.
+// 示例：跳过路径请求。
 	r.GET("/regexp2", logger.SetLogger(
 		logger.WithSkipPathRegexps(rxURL),
 	), func(c *gin.Context) {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// add custom fields.
+// 添加自定义字段。
 	r.GET("/id", requestid.New(requestid.WithGenerator(func() string {
 		return "foobar"
 	})), logger.SetLogger(
@@ -81,7 +81,7 @@ func main() {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example of JSON format log
+// 示例：JSON格式的日志
 	r.GET("/json", logger.SetLogger(
 		logger.WithLogger(func(_ *gin.Context, l zerolog.Logger) zerolog.Logger {
 			return l.Output(gin.DefaultWriter).With().Logger()
@@ -90,7 +90,7 @@ func main() {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Listen and Server in 0.0.0.0:8080
+// 在0.0.0.0:8080监听并服务
 	if err := r.Run(":8080"); err != nil {
 		log.Fatal().Msg("can' start server with 8080 port")
 	}

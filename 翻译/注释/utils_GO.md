@@ -73,6 +73,13 @@
 <原文结束>
 
 # <翻译开始>
+// 该注释引用自Stack Overflow上的一个问题：
 // https://stackoverflow.com/questions/53069040/checking-a-string-contains-only-ascii-characters
+// 这段Go代码是用于检查一个字符串是否只包含ASCII字符。
+// 以下是更详细的中文注释（假设后面有具体的代码）：
+// ```go
+// 上述链接指向Stack Overflow上的一个问题，讨论如何检查一个字符串是否仅包含ASCII字符。
+// 下面的Go代码实现了一个函数，用于检测给定的字符串是否全部由ASCII字符组成。
+// ASCII字符集包含128个字符，包括英文字母、数字、标点符号和一些控制字符。
 # <翻译结束>
 

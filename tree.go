@@ -141,7 +141,7 @@ func (n *node) incrementChildPrio(pos int) int {
 	if newPos != pos {
 		n.indices = n.indices[:newPos] + // 未更改前缀，可能为空
 			n.indices[pos:pos+1] + // 我们移动的索引字符
-			n.indices[newPos:pos] + n.indices[pos+1:] // Rest without char at 'pos'
+			n.indices[newPos:pos] + n.indices[pos+1:] // 在'pos'位置移除字符后的剩余部分
 	}
 
 	return newPos
@@ -599,7 +599,7 @@ walk: // 行走树的外循环
 						continue walk
 					}
 				}
-				//	n = latestNode.children[len(latestNode.children)-1]
+// n = 最新节点的子节点列表中的最后一个子节点，即latestNode.children数组的最后一个元素
 			}
 // 我们应该已经到达包含句柄的节点
 // 检查此节点是否已注册句柄

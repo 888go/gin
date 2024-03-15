@@ -4,6 +4,6 @@
 <原文结束>
 
 # <翻译开始>
-		// Intentionally left blank.
+// 故意留空。
 # <翻译结束>
 

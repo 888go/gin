@@ -9,7 +9,7 @@ import (
 	"github.com/888go/gin"
 )
 
-const maxTimeGap = 30 * time.Second // 30 secs
+const maxTimeGap = 30 * time.Second // 30 秒
 
 func newPublicError(msg string) *gin.Error {
 	return &gin.Error{
@@ -18,24 +18,24 @@ func newPublicError(msg string) *gin.Error {
 	}
 }
 
-// ErrDateNotInRange error when date not in acceptable range
+// ErrDateNotInRange 当日期不在可接受范围内时，返回错误
 var ErrDateNotInRange = newPublicError("Date submit is not in acceptable range")
 
-// DateValidator checking validate by time range
+// DateValidator 检查通过时间范围验证
 type DateValidator struct {
-	// TimeGap is max time different between client submit timestamp
-	// and server time that considered valid. The time precision is millisecond.
+// TimeGap 是客户端提交时间戳与服务器时间之间允许的最大时间差，
+// 该参数以毫秒为精度，若两者时间差超过此设定值则视为无效。
 	TimeGap time.Duration
 }
 
-// NewDateValidator return DateValidator with default value (30 second)
+// NewDateValidator 返回一个具有默认值（30秒）的 DateValidator
 func NewDateValidator() *DateValidator {
 	return &DateValidator{
 		TimeGap: maxTimeGap,
 	}
 }
 
-// Validate return error when checking if header date is valid or not
+// Validate在检查头部日期是否有效时返回错误
 func (v *DateValidator) Validate(r *http.Request) error {
 	t, err := http.ParseTime(r.Header.Get("date"))
 	if err != nil {

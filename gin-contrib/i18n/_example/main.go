@@ -16,19 +16,19 @@ import (
 var fs embed.FS
 
 func main() {
-	// new gin engine
+// 创建新的gin引擎
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
 
-	// apply i18n middleware
+// 应用国际化中间件
 	router.Use(ginI18n.Localize(ginI18n.WithBundle(&ginI18n.BundleCfg{
 		DefaultLanguage:  language.English,
 		FormatBundleFile: "json",
 		AcceptLanguage:   []language.Tag{language.English, language.German, language.Chinese},
 		RootPath:         "./i18n/localizeJSON/",
 		UnmarshalFunc:    json.Unmarshal,
-		// After commenting this line, use defaultLoader
-		// it will be loaded from the file
+// 在注释掉这一行后，将使用defaultLoader
+// 它将从文件中加载
 		Loader: &ginI18n.EmbedLoader{
 			FS: fs,
 		},

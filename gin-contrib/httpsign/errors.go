@@ -14,29 +14,29 @@ func newPublicError(msg string) *gin.Error {
 }
 
 var (
-	// ErrInvalidAuthorizationHeader error when get invalid format of Authorization header
+// ErrInvalidAuthorizationHeader 当获取到Authorization头的格式无效时，返回的错误
 	ErrInvalidAuthorizationHeader = newPublicError("Authorization header format is incorrect")
-	// ErrInvalidKeyID error when KeyID in header does not provided
+// ErrInvalidKeyID 当头部中的KeyID未提供时，返回错误
 	ErrInvalidKeyID = newPublicError("Invalid keyId")
-	// ErrDateNotFound error when no date in header
+// ErrDateNotFound 当头部中未找到日期时返回的错误
 	ErrDateNotFound = newPublicError("There is no Date on Headers")
-	// ErrIncorrectAlgorithm error when Algorithm in header does not match with secret key
+// ErrIncorrectAlgorithm 当头部的Algorithm与密钥不匹配时，抛出此错误
 	ErrIncorrectAlgorithm = newPublicError("Algorithm does not match")
-	// ErrHeaderNotEnough error when requirements header do not appear on header field
+// ErrHeaderNotEnough 当必要的头部信息未出现在头部字段时，返回此错误
 	ErrHeaderNotEnough = newPublicError("Header field is not match requirement")
-	// ErrNoSignature error when no Signature not found in header
+// ErrNoSignature 当在头部未找到签名时返回的错误
 	ErrNoSignature = newPublicError("No Signature header found in request")
-	// ErrInvalidSign error when signing string do not match
+// ErrInvalidSign 当签名字符串不匹配时返回错误
 	ErrInvalidSign = newPublicError("Invalid sign")
-	// ErrMissingKeyID error when keyId not in header
+// ErrMissingKeyID 当keyId未在头部中时的错误
 	ErrMissingKeyID = newPublicError("keyId must be on header")
-	// ErrMissingSignature error when signature not in header
+// ErrMissingSignature 当请求头中未包含签名时返回的错误
 	ErrMissingSignature = newPublicError("signature must be on header")
 
-	// ErrUnterminatedParameter err when could not parse value
+// ErrUnterminatedParameter 当无法解析值时产生的错误
 	ErrUnterminatedParameter = newPublicError("Unterminated parameter")
-	// ErrMisingDoubleQuote err when after character = not have double quote
+// ErrMisingDoubleQuote 当字符 = 后面缺少双引号时的错误
 	ErrMisingDoubleQuote = newPublicError(`Missing " after = character`)
-	// ErrMisingEqualCharacter err when there is no character = before " or , character
+// ErrMisingEqualCharacter 当在 " 或 , 字符前缺少等于字符（=）时返回的错误
 	ErrMisingEqualCharacter = newPublicError(`Missing = character =`)
 )

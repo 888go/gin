@@ -25,7 +25,7 @@ var tests = []struct {
 	conf Config
 	req  *http.Request
 }{
-	// defaults
+// 默认值
 	{
 		want: "http://localhost:8080",
 		conf: DefaultConfig(),
@@ -35,7 +35,7 @@ var tests = []struct {
 		},
 	},
 
-	// url scheme
+// URL方案
 	{
 		want: "https://localhost:8080",
 		conf: DefaultConfig(),
@@ -47,7 +47,8 @@ var tests = []struct {
 		},
 	},
 
-	// x-formward headers
+// x-forward headers
+// （注释翻译：）// x-forward headers，这个注释表明该代码段与“x-forwarded-headers”相关，这是一个HTTP头部信息，通常用于标识请求在经过代理服务器或负载均衡器时的原始来源信息。
 	{
 		want: "https://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -60,7 +61,7 @@ var tests = []struct {
 		},
 	},
 
-	// X-Host headers
+// X-Host 头部信息
 	{
 		want: "http://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -72,7 +73,7 @@ var tests = []struct {
 		},
 	},
 
-	// URL Host
+// URL 主机
 	{
 		want: "http://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -84,7 +85,7 @@ var tests = []struct {
 		},
 	},
 
-	// requests
+// 请求
 	{
 		want: "https://baz.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -96,7 +97,7 @@ var tests = []struct {
 		},
 	},
 
-	// tls
+// tls // （Transport Layer Security，传输层安全协议）
 	{
 		want: "https://foo.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -107,7 +108,7 @@ var tests = []struct {
 		},
 	},
 
-	// X-Forwarded-Host host header
+// X-Forwarded-Host：主机头信息
 	{
 		want: "http://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", Headers{

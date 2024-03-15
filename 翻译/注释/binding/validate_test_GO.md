@@ -18,7 +18,13 @@
 <原文结束>
 
 # <翻译开始>
-// StructPointerSlice []noValidationSub interfacesslice []testInterface
+// StructPointerSlice 是一个指向 noValidationSub 结构体的指针切片
+// interfacesslice 是一个 testInterface 接口类型的切片
+// var StructPointerSlice []*noValidationSub
+// var interfacesslice []testInterface
+// 这里的注释翻译为：
+// StructPointerSlice 表示一个包含多个指向 noValidationSub 结构体指针的切片。
+// interfacesslice 表示一个包含多个 testInterface 类型值的切片。
 # <翻译结束>
 
 
@@ -28,7 +34,9 @@
 <原文结束>
 
 # <翻译开始>
-// origin:= createNoValidation_values() test:= createNoValidation_values()
+// origin := createNoValidation_values() // 创建并初始化不进行验证的值，将结果赋给变量origin
+// test := createNoValidation_values() // 创建并初始化另一个不进行验证的值，将结果赋给变量test
+// 上述代码中，`createNoValidation_values()` 是一个假设存在的函数，用于生成不需要进行验证的值。这里对两行代码分别进行了中文注释说明。
 # <翻译结束>
 
 

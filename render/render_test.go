@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package render
 
@@ -21,8 +21,8 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-// TODO unit tests
-// test errors
+// TODO 单元测试
+// 测试错误情况
 
 func TestRenderJSON(t *testing.T) {
 	w := httptest.NewRecorder()
@@ -45,7 +45,8 @@ func TestRenderJSONError(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: unsupported type: chan int
+// json: 不支持的类型：chan int
+// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
 	assert.Error(t, (JSON{data}).Render(w))
 }
 
@@ -67,7 +68,8 @@ func TestRenderIndentedJSONPanics(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: unsupported type: chan int
+// json: 不支持的类型：chan int
+// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
 	err := (IndentedJSON{data}).Render(w)
 	assert.Error(t, err)
 }
@@ -104,7 +106,8 @@ func TestRenderSecureJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: unsupported type: chan int
+// json: 不支持的类型：chan int
+// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
 	err := (SecureJSON{"while(1);", data}).Render(w)
 	assert.Error(t, err)
 }
@@ -165,14 +168,14 @@ func TestRenderJsonpJSONError(t *testing.T) {
 
 	cb := template.JSEscapeString(jsonpJSON.Callback)
 	ew.bufString = cb
-	err := jsonpJSON.Render(ew) // error was returned while writing callback
+	err := jsonpJSON.Render(ew) // 在写入回调时返回了错误
 	assert.Equal(t, `write "`+cb+`" error`, err.Error())
 
 	ew.bufString = `(`
 	err = jsonpJSON.Render(ew)
 	assert.Equal(t, `write "`+`(`+`" error`, err.Error())
 
-	data, _ := json.Marshal(jsonpJSON.Data) // error was returned while writing data
+	data, _ := json.Marshal(jsonpJSON.Data) // 在写入数据时返回了错误
 	ew.bufString = string(data)
 	err = jsonpJSON.Render(ew)
 	assert.Equal(t, `write "`+string(data)+`" error`, err.Error())
@@ -201,7 +204,8 @@ func TestRenderJsonpJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: unsupported type: chan int
+// json: 不支持的类型：chan int
+// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
 	err := (JsonpJSON{"x", data}).Render(w)
 	assert.Error(t, err)
 }
@@ -231,7 +235,8 @@ func TestRenderAsciiJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: unsupported type: chan int
+// json: 不支持的类型：chan int
+// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
 	assert.Error(t, (AsciiJSON{data}).Render(w))
 }
 
@@ -249,7 +254,7 @@ func TestRenderPureJSON(t *testing.T) {
 
 type xmlmap map[string]any
 
-// Allows type H to be used with xml.Marshal
+// 允许类型H在xml.Marshal中使用
 func (h xmlmap) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	start.Name = xml.Name{
 		Space: "",
@@ -290,7 +295,13 @@ b:
 
 type fail struct{}
 
-// Hook MarshalYAML
+// Hook MarshalYAML 钩子
+// （这段代码的完整上下文缺失，但根据已有内容翻译如下：）
+// ```go
+// Hook MarshalYAML 是一个自定义 YAML 序列化的方法钩子，
+// 它会在结构体被转换为 YAML 格式时调用。
+// 通过实现这个方法，可以自定义结构体在序列化为 YAML 时的行为。
+// 在 Golang 的库如 "gopkg.in/yaml.v3" 中，`MarshalYAML` 方法用于定制结构体或其他类型的 YAML 序列化过程。
 func (ft *fail) MarshalYAML() (any, error) {
 	return nil, errors.New("fail")
 }
@@ -322,7 +333,7 @@ func TestRenderTOMLFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
-// test Protobuf rendering
+// 测试Protobuf渲染
 func TestRenderProtoBuf(t *testing.T) {
 	w := httptest.NewRecorder()
 	reps := []int64{int64(1), int64(2)}
@@ -403,7 +414,7 @@ func TestRenderRedirect(t *testing.T) {
 	err = data3.Render(w)
 	assert.NoError(t, err)
 
-	// only improve coverage
+// 仅提高覆盖率
 	data2.WriteContentType(w)
 }
 

@@ -40,7 +40,9 @@ func setupRouter() *gin.Engine {
 	   Zm9vOmJhcg== is base64("foo:bar")
 
 		curl -X POST \
-	  	http://localhost:8080/admin \
+	  	http:// localhost: 8080 / admin 
+// 这是一个注释，表示本地服务器的地址和端口以及访问路径
+// 意思是在本地主机（localhost）上通过8080端口访问admin路径
 	  	-H 'authorization: Basic Zm9vOmJhcg==' \
 	  	-H 'content-type: application/json' \
 	  	-d '{"value":"bar"}'

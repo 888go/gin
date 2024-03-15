@@ -32,6 +32,7 @@
 
 # <翻译开始>
 // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 # <翻译结束>
 
 
@@ -59,7 +60,7 @@
 <原文结束>
 
 # <翻译开始>
-// c.Request == nil
+// c.Request == nil 表示c的Request属性为空(nil)
 # <翻译结束>
 
 
@@ -544,6 +545,7 @@
 
 # <翻译开始>
 // nolint: staticcheck
+// （翻译）：忽略静态检查工具对本行代码的检查。
 # <翻译结束>
 
 

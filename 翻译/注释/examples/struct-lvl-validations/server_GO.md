@@ -33,7 +33,10 @@
 <原文结束>
 
 # <翻译开始>
-// user:= structLevel.CurrentStruct.Interface().(user)
+// 获取当前结构体的接口表示，然后强制类型转换为 user 类型，并赋值给变量 user
+// ```go
+// user := structLevel.CurrentStruct.Interface().(user)
+// 这里的代码是 Go 语言中的类型断言，将 interface 类型转换为已知的具体类型（这里是 user 类型）。`structLevel.CurrentStruct.Interface()` 表示获取一个包含当前结构体实例的 interface 值，后面的 `.(`user`)` 是用于断言这个 interface 实例实际上是 user 类型。
 # <翻译结束>
 
 

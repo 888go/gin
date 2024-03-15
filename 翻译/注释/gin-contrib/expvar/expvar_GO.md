@@ -4,6 +4,6 @@
 <原文结束>
 
 # <翻译开始>
-// Handler for gin framework
+// Gin框架处理器
 # <翻译结束>
 

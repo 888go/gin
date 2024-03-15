@@ -4,6 +4,6 @@
 <原文结束>
 
 # <翻译开始>
-// mock interface always return true
+// 假设接口始终返回 true
 # <翻译结束>
 

@@ -754,6 +754,7 @@
 
 # <翻译开始>
 // nolint: errcheck
+// 翻译：// 不进行errcheck检查
 # <翻译结束>
 
 
@@ -1020,7 +1021,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetSameSite with cookie
+// SetSameSite 用于设置 cookie 的 SameSite 属性
 # <翻译结束>
 
 
