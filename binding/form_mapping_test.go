@@ -1,6 +1,6 @@
-// Copyright 2019 Gin Core Team. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有2019 Gin Core Team
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package binding
 
@@ -38,7 +38,7 @@ func TestMappingBaseTypes(t *testing.T) {
 		{"base type", struct{ F string }{}, "test", string("test")},
 		{"base type", struct{ F *int }{}, "9", intPtr(9)},
 
-		// zero values
+// 零值
 		{"zero value", struct{ F int }{}, "", int(0)},
 		{"zero value", struct{ F uint }{}, "", uint(0)},
 		{"zero value", struct{ F bool }{}, "", false},
@@ -184,14 +184,14 @@ func TestMappingTime(t *testing.T) {
 	assert.Equal(t, "2019-01-19 16:00:00 +0000 UTC", s.CSTTime.UTC().String())
 	assert.Equal(t, "2019-01-20 00:00:00 +0000 UTC", s.UTCTime.String())
 
-	// wrong location
+// 错误的位置
 	var wrongLoc struct {
 		Time time.Time `time_location:"wrong"`
 	}
 	err = mapForm(&wrongLoc, map[string][]string{"Time": {"2019-01-20T16:02:58Z"}})
 	assert.Error(t, err)
 
-	// wrong time value
+// 时间值错误
 	var wrongTime struct {
 		Time time.Time
 	}
@@ -204,7 +204,7 @@ func TestMappingTimeDuration(t *testing.T) {
 		D time.Duration
 	}
 
-	// ok
+// 好吧
 	err := mappingByPtr(&s, formSource{"D": {"5s"}}, "form")
 	assert.NoError(t, err)
 	assert.Equal(t, 5*time.Second, s.D)
@@ -219,12 +219,12 @@ func TestMappingSlice(t *testing.T) {
 		Slice []int `form:"slice,default=9"`
 	}
 
-	// default value
+// 默认值
 	err := mappingByPtr(&s, formSource{}, "form")
 	assert.NoError(t, err)
 	assert.Equal(t, []int{9}, s.Slice)
 
-	// ok
+// 好吧
 	err = mappingByPtr(&s, formSource{"slice": {"3", "4"}}, "form")
 	assert.NoError(t, err)
 	assert.Equal(t, []int{3, 4}, s.Slice)
@@ -239,20 +239,20 @@ func TestMappingArray(t *testing.T) {
 		Array [2]int `form:"array,default=9"`
 	}
 
-	// wrong default
+// 错误的默认
 	err := mappingByPtr(&s, formSource{}, "form")
 	assert.Error(t, err)
 
-	// ok
+// 好吧
 	err = mappingByPtr(&s, formSource{"array": {"3", "4"}}, "form")
 	assert.NoError(t, err)
 	assert.Equal(t, [2]int{3, 4}, s.Array)
 
-	// error - not enough vals
+// 错误-没有足够的值
 	err = mappingByPtr(&s, formSource{"array": {"3"}}, "form")
 	assert.Error(t, err)
 
-	// error - wrong value
+// 错误-错误的值
 	err = mappingByPtr(&s, formSource{"array": {"wrong"}}, "form")
 	assert.Error(t, err)
 }
@@ -280,20 +280,20 @@ func TestMappingPtrField(t *testing.T) {
 
 	var err error
 
-	// With 0 items.
+// 0项
 	var req0 ptrRequest
 	err = mappingByPtr(&req0, formSource{}, "form")
 	assert.NoError(t, err)
 	assert.Empty(t, req0.Items)
 
-	// With 1 item.
+// 只有一件物品
 	var req1 ptrRequest
 	err = mappingByPtr(&req1, formSource{"items": {`{"key": 1}`}}, "form")
 	assert.NoError(t, err)
 	assert.Len(t, req1.Items, 1)
 	assert.EqualValues(t, 1, req1.Items[0].Key)
 
-	// With 2 items.
+// 有2个项目
 	var req2 ptrRequest
 	err = mappingByPtr(&req2, formSource{"items": {`{"key": 1}`, `{"key": 2}`}}, "form")
 	assert.NoError(t, err)

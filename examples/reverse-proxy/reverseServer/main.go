@@ -10,16 +10,16 @@ import (
 )
 
 const (
-	// this is our reverse server ip address
+// 这是我们的反向服务器IP地址
 	ReverseServerAddr = "127.0.0.1:2002"
 )
 
-// maybe we can have many real server addresses and do some load balanced strategy.
+// 也许我们可以有很多真实的服务器地址，并做一些负载均衡策略
 var RealAddr = []string{
 	"http://127.0.0.1:2003",
 }
 
-// a fake function that we can do strategy here.
+// 一个伪函数，我们可以在这里做策略
 func getLoadBalanceAddr() string {
 	return RealAddr[0]
 }
@@ -27,7 +27,7 @@ func getLoadBalanceAddr() string {
 func main() {
 	r := gin.Default()
 	r.GET("/:path", func(c *gin.Context) {
-		// step 1: resolve proxy address, change scheme and host in requets
+// 步骤1:解析代理地址，更改请求中的方案和主机
 		req := c.Request
 		proxy, err := url.Parse(getLoadBalanceAddr())
 		if err != nil {
@@ -38,7 +38,8 @@ func main() {
 		req.URL.Scheme = proxy.Scheme
 		req.URL.Host = proxy.Host
 
-		// step 2: use http.Transport to do request to real server.
+// 步骤2:使用http
+// 将请求传输到实服务器
 		transport := http.DefaultTransport
 		resp, err := transport.RoundTrip(req)
 		if err != nil {
@@ -47,7 +48,7 @@ func main() {
 			return
 		}
 
-		// step 3: return real server response to upstream.
+// 步骤3:向上游返回实服务器响应
 		for k, vv := range resp.Header {
 			for _, v := range vv {
 				c.Header(k, v)

@@ -7,14 +7,13 @@ import (
 	"github.com/memcachier/mc/v3"
 )
 
-// MemcachedBinaryStore represents the cache with memcached persistence using
-// the binary protocol
+// MemcachedBinaryStore表示使用二进制协议的memcached持久性缓存
 type MemcachedBinaryStore struct {
 	*mc.Client
 	defaultExpiration time.Duration
 }
 
-// NewMemcachedBinaryStore returns a MemcachedBinaryStore
+// NewMemcachedBinaryStore返回一个MemcachedBinaryStore
 func NewMemcachedBinaryStore(hostList, username, password string, defaultExpiration time.Duration) *MemcachedBinaryStore {
 	return &MemcachedBinaryStore{mc.NewMC(hostList, username, password), defaultExpiration}
 }

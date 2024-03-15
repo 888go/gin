@@ -1,6 +1,6 @@
-// Copyright 2017 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有2017马努·马丁内斯-阿尔梅达
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-// CreateTestContext returns a fresh engine and context for testing purposes
+// CreateTestContext为测试目的返回一个新的引擎和上下文
 func CreateTestContext(w http.ResponseWriter) (c *Context, r *Engine) {
 	r = New()
 	c = r.allocateContext(0)
@@ -17,7 +17,7 @@ func CreateTestContext(w http.ResponseWriter) (c *Context, r *Engine) {
 	return
 }
 
-// CreateTestContextOnly returns a fresh context base on the engine for testing purposes
+// CreateTestContextOnly返回基于引擎的新上下文，用于测试目的
 func CreateTestContextOnly(w http.ResponseWriter, r *Engine) (c *Context) {
 	c = r.allocateContext(r.maxParams)
 	c.reset()

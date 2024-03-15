@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -15,10 +15,10 @@ import (
 	"unicode"
 )
 
-// BindKey indicates a default bind key.
+// BindKey默认绑定键
 const BindKey = "_gin-gonic/gin/bindkey"
 
-// Bind is a helper function for given interface object and returns a Gin middleware.
+// Bind是给定接口对象的辅助函数，并返回一个Gin中间件
 func Bind(val any) HandlerFunc {
 	value := reflect.ValueOf(val)
 	if value.Kind() == reflect.Ptr {
@@ -36,24 +36,26 @@ func Bind(val any) HandlerFunc {
 	}
 }
 
-// WrapF is a helper function for wrapping http.HandlerFunc and returns a Gin middleware.
+// WrapF是用于包装http的辅助函数
+// HandlerFunc并返回一个Gin中间件
 func WrapF(f http.HandlerFunc) HandlerFunc {
 	return func(c *Context) {
 		f(c.Writer, c.Request)
 	}
 }
 
-// WrapH is a helper function for wrapping http.Handler and returns a Gin middleware.
+// WrapH是包装http的辅助函数
+// 处理程序并返回一个Gin中间件
 func WrapH(h http.Handler) HandlerFunc {
 	return func(c *Context) {
 		h.ServeHTTP(c.Writer, c.Request)
 	}
 }
 
-// H is a shortcut for map[string]any
+// H是map[string]any的快捷方式
 type H map[string]any
 
-// MarshalXML allows type H to be used with xml.Marshal.
+// MarshalXML允许类型H与xml.Marshal一起使用
 func (h H) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	start.Name = xml.Name{
 		Space: "",

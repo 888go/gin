@@ -9,50 +9,48 @@ import (
 	"github.com/888go/gin"
 )
 
-// It keeps a list of clients those are currently attached
-// and broadcasting events to those clients.
+// 它保留当前附加的客户机列表，并向这些客户机广播事件
 type Event struct {
-	// Events are pushed to this channel by the main events-gathering routine
+// 事件由主事件收集例程推送到此通道
 	Message chan string
 
-	// New client connections
+// 新的客户端连接
 	NewClients chan chan string
 
-	// Closed client connections
+// 关闭的客户端连接
 	ClosedClients chan chan string
 
-	// Total client connections
+// 客户端总连接数
 	TotalClients map[chan string]bool
 }
 
-// New event messages are broadcast to all registered client connection channels
+// 将新事件消息广播到所有已注册的客户端连接通道
 type ClientChan chan string
 
 func main() {
 	router := gin.Default()
 
-	// Initialize new streaming server
+// 初始化新的流媒体服务器
 	stream := NewServer()
 
-	// We are streaming current time to clients in the interval 10 seconds
+// 我们以10秒的间隔将当前时间流式传输给客户端
 	go func() {
 		for {
 			time.Sleep(time.Second * 10)
 			now := time.Now().Format("2006-01-02 15:04:05")
 			currentTime := fmt.Sprintf("The Current Time Is %v", now)
 
-			// Send current time to clients message channel
+// 发送当前时间到客户端消息通道
 			stream.Message <- currentTime
 		}
 	}()
 
-	// Basic Authentication
+// 基本身份验证
 	authorized := router.Group("/", gin.BasicAuth(gin.Accounts{
-		"admin": "admin123", // username : admin, password : admin123
+		"admin": "admin123", // 用户名:admin，密码:admin123
 	}))
 
-	// Authorized client can stream the event
-	// Add event-streaming headers
+// 授权客户端可以流式传输事件
 	authorized.GET("/stream", HeadersMiddleware(), stream.serveHTTP(), func(c *gin.Context) {
 		v, ok := c.Get("clientChan")
 		if !ok {
@@ -63,7 +61,7 @@ func main() {
 			return
 		}
 		c.Stream(func(w io.Writer) bool {
-			// Stream message to client from message channel
+// 从消息通道流消息到客户端
 			if msg, ok := <-clientChan; ok {
 				c.SSEvent("message", msg)
 				return true
@@ -72,13 +70,13 @@ func main() {
 		})
 	})
 
-	// Parse Static files
+// 解析静态文件
 	router.StaticFile("/", "./public/index.html")
 
 	router.Run(":8085")
 }
 
-// Initialize event and Start procnteessing requests
+// 初始化事件并开始处理请求
 func NewServer() (event *Event) {
 	event = &Event{
 		Message:       make(chan string),
@@ -92,23 +90,23 @@ func NewServer() (event *Event) {
 	return
 }
 
-// It Listens all incoming requests from clients.
-// Handles addition and removal of clients and broadcast messages to clients.
+// 它监听来自客户端的所有传入请求
+// 处理添加和删除客户端以及向客户端广播消息
 func (stream *Event) listen() {
 	for {
 		select {
-		// Add new available client
+// 添加新的可用客户端
 		case client := <-stream.NewClients:
 			stream.TotalClients[client] = true
 			log.Printf("Client added. %d registered clients", len(stream.TotalClients))
 
-		// Remove closed client
+// 删除关闭的客户端
 		case client := <-stream.ClosedClients:
 			delete(stream.TotalClients, client)
 			close(client)
 			log.Printf("Removed client. %d registered clients", len(stream.TotalClients))
 
-		// Broadcast message to client
+// 向客户端广播消息
 		case eventMsg := <-stream.Message:
 			for clientMessageChan := range stream.TotalClients {
 				clientMessageChan <- eventMsg
@@ -119,14 +117,14 @@ func (stream *Event) listen() {
 
 func (stream *Event) serveHTTP() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Initialize client channel
+// 初始化客户端通道
 		clientChan := make(ClientChan)
 
-		// Send new connection to event server
+// 向事件服务器发送新连接
 		stream.NewClients <- clientChan
 
 		defer func() {
-			// Send closed connection to event server
+// 向事件服务器发送关闭的连接
 			stream.ClosedClients <- clientChan
 		}()
 

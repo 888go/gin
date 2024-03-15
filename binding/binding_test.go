@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package binding
 
@@ -50,7 +50,7 @@ type FooBarFileStruct struct {
 type FooBarFileFailStruct struct {
 	FooBarStruct
 	File *multipart.FileHeader `invalid_name:"file" binding:"required"`
-	// for unexport test
+// 对于取消导出测试
 	data *multipart.FileHeader `form:"data" binding:"required"`
 }
 
@@ -126,7 +126,7 @@ type FooStructForStructPointerType struct {
 }
 
 type FooStructForSliceMapType struct {
-	// Unknown type: not support map
+// 未知类型:不支持映射
 	SliceMapFoo []map[string]any `form:"slice_map_foo"`
 }
 
@@ -363,7 +363,7 @@ func TestBindingFormStringMap(t *testing.T) {
 	testBodyBindingStringMap(t, Form,
 		"/", "",
 		`foo=bar&hello=world`, "")
-	// Should pick the last value
+// 应该选择最后一个值吗
 	testBodyBindingStringMap(t, Form,
 		"/", "",
 		`foo=something&foo=bar&hello=world`, "")
@@ -433,7 +433,7 @@ func TestBindingQueryStringMap(t *testing.T) {
 	assert.Equal(t, "world", obj["hello"])
 
 	obj = make(map[string]string)
-	req = requestWithBody("GET", "/?foo=bar&foo=2&hello=world", "") // should pick last
+	req = requestWithBody("GET", "/?foo=bar&foo=2&hello=world", "") // 应该最后挑
 	err = b.Bind(req, &obj)
 	assert.NoError(t, err)
 	assert.NotNil(t, obj)
@@ -478,7 +478,7 @@ func TestBindingYAML(t *testing.T) {
 }
 
 func TestBindingYAMLStringMap(t *testing.T) {
-	// YAML is a superset of JSON, so the test below is JSON (to avoid newlines)
+// YAML是JSON的超集，所以下面的测试是JSON(为了避免换行)
 	testBodyBindingStringMap(t, YAML,
 		"/", "/",
 		`{"foo": "bar", "hello": "world"}`, `{"nested": {"foo": "bar"}}`)
@@ -652,12 +652,12 @@ func TestBindingFormFilesMultipart(t *testing.T) {
 	err := FormMultipart.Bind(req, &obj)
 	assert.NoError(t, err)
 
-	// file from os
+// 来自OS的文件
 	f, _ := os.Open("form.go")
 	defer f.Close()
 	fileActual, _ := io.ReadAll(f)
 
-	// file from multipart
+// 来自multipart的文件
 	mf, _ := obj.File.Open()
 	defer mf.Close()
 	fileExpect, _ := io.ReadAll(mf)
@@ -1254,7 +1254,7 @@ func testBodyBindingUseNumber(t *testing.T, b Binding, name, path, badPath, body
 	EnableDecoderUseNumber = true
 	err := b.Bind(req, &obj)
 	assert.NoError(t, err)
-	// we hope it is int64(123)
+// 我们希望是int64(123)
 	v, e := obj.Foo.(json.Number).Int64()
 	assert.NoError(t, e)
 	assert.Equal(t, int64(123), v)
@@ -1273,8 +1273,7 @@ func testBodyBindingUseNumber2(t *testing.T, b Binding, name, path, badPath, bod
 	EnableDecoderUseNumber = false
 	err := b.Bind(req, &obj)
 	assert.NoError(t, err)
-	// it will return float64(123) if not use EnableDecoderUseNumber
-	// maybe it is not hoped
+// 如果不使用EnableDecoderUseNumber，它将返回float64(123)，这可能不是希望的
 	assert.Equal(t, float64(123), obj.Foo)
 
 	obj = FooStructUseNumber{}

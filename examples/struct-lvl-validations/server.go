@@ -8,24 +8,19 @@ import (
 	validator "github.com/go-playground/validator/v10"
 )
 
-// User contains user information.
+// User包含用户信息
 type User struct {
 	FirstName string `json:"fname"`
 	LastName  string `json:"lname"`
 	Email     string `binding:"required,email"`
 }
 
-// UserStructLevelValidation contains custom struct level validations that don't always
-// make sense at the field validation level. For example, this function validates that either
-// FirstName or LastName exist; could have done that with a custom field validation but then
-// would have had to add it to both fields duplicating the logic + overhead, this way it's
-// only validated once.
-//
-// NOTE: you may ask why wouldn't not just do this outside of validator. Doing this way
-// hooks right into validator and you can combine with validation tags and still have a
-// common error output format.
+// UserStructLevelValidation包含自定义结构级验证，这些验证在字段验证级别上并不总是有意义的
+// 例如，这个函数验证FirstName或LastName是否存在;本可以使用自定义字段验证来完成此操作，但随后必须将其添加到复制逻辑+开销的两个字段中，这样只验证一次
+// 注意:你可能会问为什么不在验证器之外做这个
+// 这样做可以直接与验证器挂钩，并且可以与验证标记结合使用，并且仍然具有常见的错误输出格式
 func UserStructLevelValidation(sl validator.StructLevel) {
-	// user := structLevel.CurrentStruct.Interface().(User)
+// user:= structLevel.CurrentStruct.Interface().(user)
 	user := sl.Current().Interface().(User)
 
 	if len(user.FirstName) == 0 && len(user.LastName) == 0 {
@@ -33,7 +28,7 @@ func UserStructLevelValidation(sl validator.StructLevel) {
 		sl.ReportError(user.LastName, "LastName", "lname", "fnameorlname", "")
 	}
 
-	// plus can to more, even with different tag than "fnameorlname"
+// Plus可以添加更多，即使标签与“fnameorlname”不同
 }
 
 func main() {

@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida.  All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package authz
 
@@ -11,7 +11,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// NewAuthorizer returns the authorizer, uses a Casbin enforcer as input
+// NewAuthorizer返回授权器，使用Casbin强制器作为输入
 func NewAuthorizer(e *casbin.Enforcer) gin.HandlerFunc {
 	a := &BasicAuthorizer{enforcer: e}
 
@@ -22,20 +22,20 @@ func NewAuthorizer(e *casbin.Enforcer) gin.HandlerFunc {
 	}
 }
 
-// BasicAuthorizer stores the casbin handler
+// BasicAuthorizer存储casbin处理程序
 type BasicAuthorizer struct {
 	enforcer *casbin.Enforcer
 }
 
-// GetUserName gets the user name from the request.
-// Currently, only HTTP basic authentication is supported
+// GetUserName从请求中获取用户名
+// 目前只支持HTTP基本认证
 func (a *BasicAuthorizer) GetUserName(r *http.Request) string {
 	username, _, _ := r.BasicAuth()
 	return username
 }
 
-// CheckPermission checks the user/method/path combination from the request.
-// Returns true (permission granted) or false (permission forbidden)
+// CheckPermission检查请求中的用户/方法/路径组合
+// 返回true(授予权限)或false(禁止权限)
 func (a *BasicAuthorizer) CheckPermission(r *http.Request) bool {
 	user := a.GetUserName(r)
 	method := r.Method
@@ -49,7 +49,7 @@ func (a *BasicAuthorizer) CheckPermission(r *http.Request) bool {
 	return allowed
 }
 
-// RequirePermission returns the 403 Forbidden to the client
+// RequirePermission返回403 Forbidden给客户端
 func (a *BasicAuthorizer) RequirePermission(c *gin.Context) {
 	c.AbortWithStatus(http.StatusForbidden)
 }

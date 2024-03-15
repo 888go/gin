@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -12,15 +12,15 @@ import (
 	"github.com/888go/gin/binding"
 )
 
-// EnvGinMode indicates environment name for gin mode.
+// EnvGinMode为gin模式的环境名
 const EnvGinMode = "GIN_MODE"
 
 const (
-	// DebugMode indicates gin mode is debug.
+// DebugMode表示gin模式为debug
 	DebugMode = "debug"
-	// ReleaseMode indicates gin mode is release.
+// ReleaseMode表示gin模式为release
 	ReleaseMode = "release"
-	// TestMode indicates gin mode is test.
+// TestMode表示gin模式为test
 	TestMode = "test"
 )
 
@@ -30,17 +30,15 @@ const (
 	testCode
 )
 
-// DefaultWriter is the default io.Writer used by Gin for debug output and
-// middleware output like Logger() or Recovery().
-// Note that both Logger and Recovery provides custom ways to configure their
-// output io.Writer.
-// To support coloring in Windows use:
-//
-//	import "github.com/mattn/go-colorable"
-//	gin.DefaultWriter = colorable.NewColorableStdout()
+// defaultwwriter是默认的io
+// Gin用于调试输出和中间件输出的写入器，如Logger()或Recovery()
+// 请注意，Logger和Recovery都提供了自定义的方式来配置它们的输出
+// 要在Windows中支持着色，请使用:import "github.com/mattn/go-colorable"杜松子酒
+// defaultwwriter = colorable.NewColorableStdout()
 var DefaultWriter io.Writer = os.Stdout
 
-// DefaultErrorWriter is the default io.Writer used by Gin to debug errors
+// DefaultErrorWriter是默认io
+// Gin用来调试错误的写入器
 var DefaultErrorWriter io.Writer = os.Stderr
 
 var (
@@ -53,7 +51,7 @@ func init() {
 	SetMode(mode)
 }
 
-// SetMode sets gin mode according to input string.
+// SetMode根据输入的字符串设置gin模式
 func SetMode(value string) {
 	if value == "" {
 		if flag.Lookup("test.v") != nil {
@@ -77,24 +75,24 @@ func SetMode(value string) {
 	modeName = value
 }
 
-// DisableBindValidation closes the default validator.
+// DisableBindValidation关闭默认验证器
 func DisableBindValidation() {
 	binding.Validator = nil
 }
 
-// EnableJsonDecoderUseNumber sets true for binding.EnableDecoderUseNumber to
-// call the UseNumber method on the JSON Decoder instance.
+// EnableJsonDecoderUseNumber为绑定设置为true
+// EnableDecoderUseNumber以调用JSON Decoder实例上的UseNumber方法
 func EnableJsonDecoderUseNumber() {
 	binding.EnableDecoderUseNumber = true
 }
 
-// EnableJsonDecoderDisallowUnknownFields sets true for binding.EnableDecoderDisallowUnknownFields to
-// call the DisallowUnknownFields method on the JSON Decoder instance.
+// EnableJsonDecoderDisallowUnknownFields为绑定设置为true
+// EnableDecoderDisallowUnknownFields调用JSON Decoder实例上的DisallowUnknownFields方法
 func EnableJsonDecoderDisallowUnknownFields() {
 	binding.EnableDecoderDisallowUnknownFields = true
 }
 
-// Mode returns current gin mode.
+// Mode返回当前gin模式
 func Mode() string {
 	return modeName
 }

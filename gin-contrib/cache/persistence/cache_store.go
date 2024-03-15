@@ -17,32 +17,33 @@ var (
 	ErrNotSupport   = errors.New("cache: not support.")
 )
 
-// CacheStore is the interface of a cache backend
+// CacheStore是缓存后端接口
 type CacheStore interface {
-	// Get retrieves an item from the cache. Returns the item or nil, and a bool indicating
-	// whether the key was found.
+// Get从缓存中检索项
+// 返回项或nil，以及指示是否找到键的bool值
 	Get(key string, value interface{}) error
 
-	// Set sets an item to the cache, replacing any existing item.
+// Set将项设置到缓存，替换任何现有项
 	Set(key string, value interface{}, expire time.Duration) error
 
-	// Add adds an item to the cache only if an item doesn't already exist for the given
-	// key, or if the existing item has expired. Returns an error otherwise.
+// Add仅在给定键的项不存在或现有项已过期时向缓存添加项
+// 否则返回错误
 	Add(key string, value interface{}, expire time.Duration) error
 
-	// Replace sets a new value for the cache key only if it already exists. Returns an
-	// error if it does not.
+// Replace仅在缓存键已经存在时才为该键设置新值
+// 如果没有，则返回错误
 	Replace(key string, data interface{}, expire time.Duration) error
 
-	// Delete removes an item from the cache. Does nothing if the key is not in the cache.
+// Delete从缓存中删除项
+// 如果键不在缓存中，则不执行任何操作
 	Delete(key string) error
 
-	// Increment increments a real number, and returns error if the value is not real
+// Increment对实数递增，如果值不是实数则返回error
 	Increment(key string, data uint64) (uint64, error)
 
-	// Decrement decrements a real number, and returns error if the value is not real
+// 递减一个实数，如果值不是实数，则返回错误
 	Decrement(key string, data uint64) (uint64, error)
 
-	// Flush deletes all items from the cache.
+// 刷新从缓存中删除所有项
 	Flush() error
 }

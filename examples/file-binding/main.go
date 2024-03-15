@@ -17,19 +17,19 @@ type BindFile struct {
 
 func main() {
 	router := gin.Default()
-	// Set a lower memory limit for multipart forms (default is 32 MiB)
+// 为多部分表单设置较低的内存限制(默认为32 MiB)
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	router.Static("/", "./public")
 	router.POST("/upload", func(c *gin.Context) {
 		var bindFile BindFile
 
-		// Bind file
+// 绑定文件
 		if err := c.ShouldBind(&bindFile); err != nil {
 			c.String(http.StatusBadRequest, fmt.Sprintf("err: %s", err.Error()))
 			return
 		}
 
-		// Save uploaded file
+// 保存上传的文件
 		file := bindFile.File
 		dst := filepath.Base(file.Filename)
 		if err := c.SaveUploadedFile(file, dst); err != nil {

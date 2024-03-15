@@ -8,7 +8,7 @@ import (
 
 func CookieTool() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Get cookie
+// 把饼干
 		if cookie, err := c.Cookie("label"); err == nil {
 			if cookie == "ok" {
 				c.Next()
@@ -16,7 +16,7 @@ func CookieTool() gin.HandlerFunc {
 			}
 		}
 
-		// Cookie verification failed
+// Cookie验证失败
 		c.JSON(http.StatusForbidden, gin.H{"error": "Forbidden with no cookie"})
 		c.Abort()
 	}
@@ -26,7 +26,7 @@ func main() {
 	route := gin.Default()
 
 	route.GET("/login", func(c *gin.Context) {
-		// Set cookie {"label": "ok" }, maxAge 30 seconds.
+// 设置cookie {"label";}， maxAge 30秒
 		c.SetCookie("label", "ok", 30, "/", "localhost", false, true)
 		c.String(200, "Login success!")
 	})

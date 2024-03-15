@@ -19,7 +19,7 @@ func init() {
 }
 
 func TestCache(t *testing.T) {
-	//TODO:unit test
+// 待办事项:单元测试
 }
 
 func TestWrite(t *testing.T) {
@@ -72,8 +72,7 @@ func TestCachePageExpire(t *testing.T) {
 }
 
 func TestCachePageAtomic(t *testing.T) {
-	// memoryDelayStore is a wrapper of a InMemoryStore
-	// designed to simulate data race (by doing a delayed write)
+// memoryDelayStore是InMemoryStore的包装器，设计用于模拟数据竞争(通过执行延迟写入)
 	store := newDelayStore(60 * time.Second)
 
 	router := gin.New()

@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	// Create context that listens for the interrupt signal from the OS.
+// 创建上下文，监听来自操作系统的中断信号
 	ctx, stop := signal.NotifyContext(
 		context.Background(),
 		syscall.SIGINT,
@@ -22,7 +22,7 @@ func main() {
 
 	r := gin.Default()
 
-	// Ping handler
+// 平处理程序
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong")
 	})

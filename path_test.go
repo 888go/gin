@@ -1,7 +1,7 @@
-// Copyright 2013 Julien Schmidt. All rights reserved.
-// Based on the path package, Copyright 2009 The Go Authors.
-// Use of this source code is governed by a BSD-style license that can be found
-// at https://github.com/julienschmidt/httprouter/blob/master/LICENSE
+// 版权所有2013朱利安施密特
+// 版权所有
+// 基于路径包，版权归the Go Authors所有
+// 此源代码的使用受bsd风格的许可证的约束，该许可证可在https://github.com/julienschmidt/httprouter/blob/master/LICENSE上找到
 
 package gin
 
@@ -17,21 +17,21 @@ type cleanPathTest struct {
 }
 
 var cleanTests = []cleanPathTest{
-	// Already clean
+// 已经清洁
 	{"/", "/"},
 	{"/abc", "/abc"},
 	{"/a/b/c", "/a/b/c"},
 	{"/abc/", "/abc/"},
 	{"/a/b/c/", "/a/b/c/"},
 
-	// missing root
+// 缺失的根源
 	{"", "/"},
 	{"a/", "/a/"},
 	{"abc", "/abc"},
 	{"abc/def", "/abc/def"},
 	{"a/b/c", "/a/b/c"},
 
-	// Remove doubled slash
+// 删除双斜线
 	{"//", "/"},
 	{"/abc//", "/abc/"},
 	{"/abc/def//", "/abc/def/"},
@@ -41,14 +41,15 @@ var cleanTests = []cleanPathTest{
 	{"///abc", "/abc"},
 	{"//abc//", "/abc/"},
 
-	// Remove . elements
+// 删除
+// 元素
 	{".", "/"},
 	{"./", "/"},
 	{"/abc/./def", "/abc/def"},
 	{"/./abc/def", "/abc/def"},
 	{"/abc/.", "/abc/"},
 
-	// Remove .. elements
+// 删除. .元素
 	{"..", "/"},
 	{"../", "/"},
 	{"../../", "/"},
@@ -62,7 +63,7 @@ var cleanTests = []cleanPathTest{
 	{"/abc/def/../../..", "/"},
 	{"/abc/def/../../../ghi/jkl/../../../mno", "/mno"},
 
-	// Combinations
+// 组合
 	{"abc/./../def", "/def"},
 	{"abc//./../def", "/def"},
 	{"abc/../../././../def", "/def"},

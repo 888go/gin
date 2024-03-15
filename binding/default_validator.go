@@ -1,6 +1,6 @@
-// Copyright 2017 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有2017马努·马丁内斯-阿尔梅达
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package binding
 
@@ -20,7 +20,7 @@ type defaultValidator struct {
 
 type SliceValidationError []error
 
-// Error concatenates all error elements in SliceValidationError into a single string separated by \n.
+// Error将SliceValidationError中的所有错误元素连接成一个以\n分隔的字符串
 func (err SliceValidationError) Error() string {
 	n := len(err)
 	switch n {
@@ -45,7 +45,7 @@ func (err SliceValidationError) Error() string {
 
 var _ StructValidator = (*defaultValidator)(nil)
 
-// ValidateStruct receives any kind of type, but only performed struct or pointer to struct type.
+// ValidateStruct接受任何类型，但只能执行结构或指向结构类型的指针
 func (v *defaultValidator) ValidateStruct(obj any) error {
 	if obj == nil {
 		return nil
@@ -74,16 +74,15 @@ func (v *defaultValidator) ValidateStruct(obj any) error {
 	}
 }
 
-// validateStruct receives struct type
+// validateStruct接收结构类型
 func (v *defaultValidator) validateStruct(obj any) error {
 	v.lazyinit()
 	return v.validate.Struct(obj)
 }
 
-// Engine returns the underlying validator engine which powers the default
-// Validator instance. This is useful if you want to register custom validations
-// or struct level validations. See validator GoDoc for more info -
-// https://pkg.go.dev/github.com/go-playground/validator/v10
+// Engine返回为默认validator实例提供动力的底层验证器引擎
+// 如果您想注册自定义验证或结构层验证，这将非常有用
+// 请参阅验证器GoDoc获取更多信息- https://pkg.go.dev/github.com/go-playground/validator/v10
 func (v *defaultValidator) Engine() any {
 	v.lazyinit()
 	return v.validate

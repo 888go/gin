@@ -16,7 +16,7 @@ func main() {
 	templ := template.Must(template.New("").ParseFS(f, "templates/*.tmpl", "templates/foo/*.tmpl"))
 	router.SetHTMLTemplate(templ)
 
-	// example: /public/assets/images/example.png
+// 例子:公共/资产/图片/ example.png
 	router.StaticFS("/public", http.FS(f))
 
 	router.GET("/", func(c *gin.Context) {

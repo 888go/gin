@@ -7,33 +7,33 @@ import (
 	"github.com/888go/gin/gin-contrib/cache/utils"
 )
 
-// MemcachedStore represents the cache with memcached persistence
+// MemcachedStore表示具有memcached持久性的缓存
 type MemcachedStore struct {
 	*memcache.Client
 	defaultExpiration time.Duration
 }
 
-// NewMemcachedStore returns a MemcachedStore
+// NewMemcachedStore返回一个MemcachedStore
 func NewMemcachedStore(hostList []string, defaultExpiration time.Duration) *MemcachedStore {
 	return &MemcachedStore{memcache.New(hostList...), defaultExpiration}
 }
 
-// Set (see CacheStore interface)
+// 设置方法请参见CacheStore界面
 func (c *MemcachedStore) Set(key string, value interface{}, expires time.Duration) error {
 	return c.invoke((*memcache.Client).Set, key, value, expires)
 }
 
-// Add (see CacheStore interface)
+// 添加(见CacheStore接口)
 func (c *MemcachedStore) Add(key string, value interface{}, expires time.Duration) error {
 	return c.invoke((*memcache.Client).Add, key, value, expires)
 }
 
-// Replace (see CacheStore interface)
+// 替换(参见CacheStore接口)
 func (c *MemcachedStore) Replace(key string, value interface{}, expires time.Duration) error {
 	return c.invoke((*memcache.Client).Replace, key, value, expires)
 }
 
-// Get (see CacheStore interface)
+// 获取(参见CacheStore接口)
 func (c *MemcachedStore) Get(key string, value interface{}) error {
 	item, err := c.Client.Get(key)
 	if err != nil {
@@ -42,24 +42,24 @@ func (c *MemcachedStore) Get(key string, value interface{}) error {
 	return utils.Deserialize(item.Value, value)
 }
 
-// Delete (see CacheStore interface)
+// 删除(参见CacheStore界面)
 func (c *MemcachedStore) Delete(key string) error {
 	return convertMemcacheError(c.Client.Delete(key))
 }
 
-// Increment (see CacheStore interface)
+// 增量(见CacheStore接口)
 func (c *MemcachedStore) Increment(key string, delta uint64) (uint64, error) {
 	newValue, err := c.Client.Increment(key, delta)
 	return newValue, convertMemcacheError(err)
 }
 
-// Decrement (see CacheStore interface)
+// 递减(见CacheStore接口)
 func (c *MemcachedStore) Decrement(key string, delta uint64) (uint64, error) {
 	newValue, err := c.Client.Decrement(key, delta)
 	return newValue, convertMemcacheError(err)
 }
 
-// Flush (see CacheStore interface)
+// 刷新(见CacheStore接口)
 func (c *MemcachedStore) Flush() error {
 	return ErrNotSupport
 }
