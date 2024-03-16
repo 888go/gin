@@ -943,7 +943,7 @@ func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error
 // RemoteIPHeaders(缺省为[X-Forwarded-For, X-Real-Ip])
 // 如果报头在语法上无效或远程IP不对应于可信代理，则返回远程IP(来自Request.RemoteAddr)
 
-// ff:
+// ff:取客户端ip
 func (c *Context) ClientIP() string {
 	// 检查我们是否运行在一个可信的平台上，如果错误继续运行
 	if c.engine.TrustedPlatform != "" {
@@ -983,7 +983,7 @@ func (c *Context) ClientIP() string {
 // RemoteIP解析来自Request的IP
 // RemoteAddr，规范化并返回IP(不带端口)
 
-// ff:
+// ff:取协议头ip
 func (c *Context) RemoteIP() string {
 	ip, _, err := net.SplitHostPort(strings.TrimSpace(c.Request.RemoteAddr))
 	if err != nil {
@@ -994,14 +994,14 @@ func (c *Context) RemoteIP() string {
 
 // ContentType返回请求的Content-Type报头
 
-// ff:
+// ff:取协议头ContentType
 func (c *Context) ContentType() string {
 	return filterFlags(c.requestHeader("Content-Type"))
 }
 
 // 如果请求头表明客户端正在发起websocket握手，IsWebsocket返回true
 
-// ff:
+// ff:是否为Websocket请求
 func (c *Context) IsWebsocket() bool {
 	if strings.Contains(strings.ToLower(c.requestHeader("Connection")), "upgrade") &&
 		strings.EqualFold(c.requestHeader("Upgrade"), "websocket") {
@@ -1073,7 +1073,7 @@ func (c *Context) GetRawData() ([]byte, error) {
 
 // SetSameSite 用于设置 cookie 的 SameSite 属性
 
-// ff:
+// ff:设置cookie跨站
 // samesite:
 func (c *Context) SetSameSite(samesite http.SameSite) {
 	c.sameSite = samesite
@@ -1083,14 +1083,14 @@ func (c *Context) SetSameSite(samesite http.SameSite) {
 // 提供的cookie必须有一个有效的Name
 // 无效的cookie可能会被静默删除
 
-// ff:
-// httpOnly:
-// secure:
-// domain:
-// path:
-// maxAge:
-// value:
-// name:
+// ff:设置cookie值
+// httpOnly:禁止js访问
+// secure:仅https生效
+// domain:域名
+// path:路径
+// maxAge:生效时间
+// value:值
+// name:名称
 func (c *Context) SetCookie(name, value string, maxAge int, path, domain string, secure, httpOnly bool) {
 	if path == "" {
 		path = "/"
@@ -1111,8 +1111,8 @@ func (c *Context) SetCookie(name, value string, maxAge int, path, domain string,
 // 并返回未转义的命名cookie
 // 如果多个cookie与给定的名称匹配，则只返回一个cookie
 
-// ff:
-// name:
+// ff:取cookie值
+// name:名称
 func (c *Context) Cookie(name string) (string, error) {
 	cookie, err := c.Request.Cookie(name)
 	if err != nil {
@@ -1148,10 +1148,10 @@ func (c *Context) Render(code int, r render.Render) {
 // 它还更新HTTP代码并将Content-Type设置为"text/html"
 // 参见http://golang.org/doc/articles/wiki/
 
-// ff:
-// obj:
-// name:
-// code:
+// ff:输出html模板
+// obj:结构
+// name:模板文件名
+// code:状态码
 func (c *Context) HTML(code int, name string, obj any) {
 	instance := c.engine.HTMLRender.Instance(name, obj)
 	c.Render(code, instance)
@@ -1162,9 +1162,9 @@ func (c *Context) HTML(code int, name string, obj any) {
 // 警告:我们建议仅用于开发目的，因为打印漂亮的JSON会消耗更多的CPU和带宽
 // 使用Context.JSON()代替
 
-// ff:
-// obj:
-// code:
+// ff:输出JSON并格式化
+// obj:结构
+// code:状态码
 func (c *Context) IndentedJSON(code int, obj any) {
 	c.Render(code, render.IndentedJSON{Data: obj})
 }
@@ -1184,9 +1184,9 @@ func (c *Context) SecureJSON(code int, obj any) {
 // 它向响应体添加填充，以便从位于与客户端不同域的服务器请求数据
 // 它还将Content-Type设置为"application/javascript"
 
-// ff:
+// ff:输出JSONP
 // obj:结构
-// code:
+// code:状态码
 func (c *Context) JSONP(code int, obj any) {
 	callback := c.DefaultQuery("callback", "")
 	if callback == "" {
