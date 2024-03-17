@@ -12,6 +12,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeOnlyData(t *testing.T) {
 	w := new(bytes.Buffer)
 	event := Event{
@@ -32,6 +38,12 @@ data:id:fake
 	assert.Equal(t, decoded[0].Data, []Event{event}[0].Data)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeWithEvent(t *testing.T) {
 	w := new(bytes.Buffer)
 	event := Event{
@@ -54,6 +66,12 @@ data:id:fake
 	assert.Equal(t, decoded[0].Data, []Event{event}[0].Data)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeWithId(t *testing.T) {
 	w := new(bytes.Buffer)
 	err := Encode(w, Event{
@@ -71,6 +89,12 @@ data:id:fa\rke
 `)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeWithRetry(t *testing.T) {
 	w := new(bytes.Buffer)
 	err := Encode(w, Event{
@@ -89,6 +113,12 @@ data:
 `)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeWithEverything(t *testing.T) {
 	w := new(bytes.Buffer)
 	err := Encode(w, Event{
@@ -101,6 +131,12 @@ func TestEncodeWithEverything(t *testing.T) {
 	assert.Equal(t, w.String(), "id:12345\nevent:abc\nretry:10\ndata:some data\n\n")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeMap(t *testing.T) {
 	w := new(bytes.Buffer)
 	err := Encode(w, Event{
@@ -114,6 +150,12 @@ func TestEncodeMap(t *testing.T) {
 	assert.Equal(t, w.String(), "event:a map\ndata:{\"bar\":\"id: 2\",\"foo\":\"b\\n\\rar\"}\n\n")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeSlice(t *testing.T) {
 	w := new(bytes.Buffer)
 	err := Encode(w, Event{
@@ -124,6 +166,12 @@ func TestEncodeSlice(t *testing.T) {
 	assert.Equal(t, w.String(), "event:a slice\ndata:[1,\"text\",{\"foo\":\"bar\"}]\n\n")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeStruct(t *testing.T) {
 	myStruct := struct {
 		A int
@@ -147,6 +195,12 @@ func TestEncodeStruct(t *testing.T) {
 	assert.Equal(t, w.String(), "event:a struct\ndata:{\"A\":1,\"value\":\"number\"}\n\n")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeInteger(t *testing.T) {
 	w := new(bytes.Buffer)
 	err := Encode(w, Event{
@@ -157,6 +211,12 @@ func TestEncodeInteger(t *testing.T) {
 	assert.Equal(t, w.String(), "event:an integer\ndata:1\n\n")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeFloat(t *testing.T) {
 	w := new(bytes.Buffer)
 	err := Encode(w, Event{
@@ -167,6 +227,12 @@ func TestEncodeFloat(t *testing.T) {
 	assert.Equal(t, w.String(), "event:Float\ndata:1.5\n\n")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEncodeStream(t *testing.T) {
 	w := new(bytes.Buffer)
 
@@ -188,6 +254,12 @@ func TestEncodeStream(t *testing.T) {
 	assert.Equal(t, w.String(), "event:float\ndata:1.5\n\nid:123\ndata:{\"bar\":\"foo\",\"foo\":\"bar\"}\n\nid:124\nevent:chat\ndata:hi! dude\n\n")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRenderSSE(t *testing.T) {
 	w := httptest.NewRecorder()
 
@@ -202,6 +274,12 @@ func TestRenderSSE(t *testing.T) {
 	assert.Equal(t, w.Header().Get("Cache-Control"), "no-cache")
 }
 
+
+// ff:
+// b:
+
+// ff:
+// b:
 func BenchmarkResponseWriter(b *testing.B) {
 	w := httptest.NewRecorder()
 	b.ResetTimer()
@@ -214,6 +292,12 @@ func BenchmarkResponseWriter(b *testing.B) {
 	}
 }
 
+
+// ff:
+// b:
+
+// ff:
+// b:
 func BenchmarkFullSSE(b *testing.B) {
 	buf := new(bytes.Buffer)
 	b.ResetTimer()
@@ -229,6 +313,12 @@ func BenchmarkFullSSE(b *testing.B) {
 	}
 }
 
+
+// ff:
+// b:
+
+// ff:
+// b:
 func BenchmarkNoRetrySSE(b *testing.B) {
 	buf := new(bytes.Buffer)
 	b.ResetTimer()
@@ -243,6 +333,12 @@ func BenchmarkNoRetrySSE(b *testing.B) {
 	}
 }
 
+
+// ff:
+// b:
+
+// ff:
+// b:
 func BenchmarkSimpleSSE(b *testing.B) {
 	buf := new(bytes.Buffer)
 	b.ResetTimer()

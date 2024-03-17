@@ -36,6 +36,12 @@ func timestampLocationCheck(t *testing.T, timestampStr string, location *time.Lo
 	return nil
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGinzap(t *testing.T) {
 	r := gin.New()
 
@@ -79,6 +85,12 @@ func TestGinzap(t *testing.T) {
 	}
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGinzapWithConfig(t *testing.T) {
 	r := gin.New()
 

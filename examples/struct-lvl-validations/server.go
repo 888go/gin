@@ -19,6 +19,12 @@ type User struct {
 // 例如，这个函数验证FirstName或LastName是否存在;本可以使用自定义字段验证来完成此操作，但随后必须将其添加到复制逻辑+开销的两个字段中，这样只验证一次
 // 注意:你可能会问为什么不在验证器之外做这个
 // 这样做可以直接与验证器挂钩，并且可以与验证标记结合使用，并且仍然具有常见的错误输出格式
+
+// ff:
+// sl:
+
+// ff:
+// sl:
 func UserStructLevelValidation(sl validator.StructLevel) {
 // user:= structLevel.CurrentStruct.Interface().(user)
 	user := sl.Current().Interface().(User)

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
+	"github.com/888go/gin"
 	"net/http"
 )
 

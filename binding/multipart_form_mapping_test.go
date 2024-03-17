@@ -1,6 +1,6 @@
-// 版权所有2019 Gin Core Team
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2019 Gin Core Team. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package binding
 
@@ -10,10 +10,13 @@ import (
 	"mime/multipart"
 	"net/http"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
+
+// ff:
+// t:
 func TestFormMultipartBindingBindOneFile(t *testing.T) {
 	var s struct {
 		FileValue   multipart.FileHeader     `form:"file"`
@@ -39,6 +42,9 @@ func TestFormMultipartBindingBindOneFile(t *testing.T) {
 	assertMultipartFileHeader(t, s.ArrayPtrs[0], file)
 }
 
+
+// ff:
+// t:
 func TestFormMultipartBindingBindTwoFiles(t *testing.T) {
 	var s struct {
 		SliceValues []multipart.FileHeader   `form:"file"`
@@ -68,6 +74,9 @@ func TestFormMultipartBindingBindTwoFiles(t *testing.T) {
 	}
 }
 
+
+// ff:
+// t:
 func TestFormMultipartBindingBindError(t *testing.T) {
 	files := []testFile{
 		{"file", "file1", []byte("hello")},

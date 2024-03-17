@@ -13,6 +13,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestWriteHeader(t *testing.T) {
 	code1 := 99
 	errmsg1 := fmt.Sprintf("invalid http status code: %d", code1)
@@ -28,6 +34,12 @@ func TestWriteHeader(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestWriteHeader_SkipMinusOne(t *testing.T) {
 	code := -1
 
@@ -38,6 +50,12 @@ func TestWriteHeader_SkipMinusOne(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestWriter_Status(t *testing.T) {
 	r := gin.New()
 
@@ -95,6 +113,12 @@ func timeoutHandler() gin.HandlerFunc {
 }
 
 // TestHTTPStatusCode 测试响应的 HTTP 状态码。
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestHTTPStatusCode(t *testing.T) {
 	gin.SetMode(gin.ReleaseMode)
 

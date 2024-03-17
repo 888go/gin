@@ -33,6 +33,12 @@ func performRequest(router *gin.Engine, path string) *httptest.ResponseRecorder 
 	return w
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestNoConfig(t *testing.T) {
 	router := newServer(Config{
 // 故意留空。
@@ -44,6 +50,12 @@ func TestNoConfig(t *testing.T) {
 	assert.Equal(t, "bar", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestDefaultConfig(t *testing.T) {
 	router := newServer(DefaultConfig())
 
@@ -58,6 +70,12 @@ func TestDefaultConfig(t *testing.T) {
 	assert.Equal(t, "https://www.example.com/foo", w.Header().Get("Location"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestNoAllowHosts(t *testing.T) {
 	router := newServer(Config{
 		AllowedHosts: []string{},
@@ -69,6 +87,12 @@ func TestNoAllowHosts(t *testing.T) {
 	assert.Equal(t, "bar", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGoodSingleAllowHosts(t *testing.T) {
 	router := newServer(Config{
 		AllowedHosts: []string{"www.example.com"},
@@ -80,6 +104,12 @@ func TestGoodSingleAllowHosts(t *testing.T) {
 	assert.Equal(t, "bar", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestBadSingleAllowHosts(t *testing.T) {
 	router := newServer(Config{
 		AllowedHosts: []string{"sub.example.com"},
@@ -90,6 +120,12 @@ func TestBadSingleAllowHosts(t *testing.T) {
 	assert.Equal(t, http.StatusForbidden, w.Code)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGoodMultipleAllowHosts(t *testing.T) {
 	router := newServer(Config{
 		AllowedHosts: []string{"www.example.com", "sub.example.com"},
@@ -101,6 +137,12 @@ func TestGoodMultipleAllowHosts(t *testing.T) {
 	assert.Equal(t, "bar", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestBadMultipleAllowHosts(t *testing.T) {
 	router := newServer(Config{
 		AllowedHosts: []string{"www.example.com", "sub.example.com"},
@@ -110,6 +152,12 @@ func TestBadMultipleAllowHosts(t *testing.T) {
 
 	assert.Equal(t, http.StatusForbidden, w.Code)
 }
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAllowHostsInDevMode(t *testing.T) {
 	router := newServer(Config{
 		AllowedHosts:  []string{"www.example.com", "sub.example.com"},
@@ -121,6 +169,12 @@ func TestAllowHostsInDevMode(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestBadHostHandler(t *testing.T) {
 
 	badHandler := func(c *gin.Context) {
@@ -139,6 +193,12 @@ func TestBadHostHandler(t *testing.T) {
 	assert.Equal(t, "BadHost", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestSSL(t *testing.T) {
 	router := newServer(Config{
 		SSLRedirect: true,
@@ -150,6 +210,12 @@ func TestSSL(t *testing.T) {
 	assert.Equal(t, "bar", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestSSLInDevMode(t *testing.T) {
 	router := newServer(Config{
 		SSLRedirect:   true,
@@ -162,6 +228,12 @@ func TestSSLInDevMode(t *testing.T) {
 	assert.Equal(t, "bar", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestBasicSSL(t *testing.T) {
 	router := newServer(Config{
 		SSLRedirect: true,
@@ -173,6 +245,12 @@ func TestBasicSSL(t *testing.T) {
 	assert.Equal(t, "https://www.example.com/foo", w.Header().Get("Location"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestDontRedirectIPV4Hostnames(t *testing.T) {
 	router := newServer(Config{
 		SSLRedirect: true,
@@ -186,6 +264,12 @@ func TestDontRedirectIPV4Hostnames(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w2.Code)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestBasicSSLWithHost(t *testing.T) {
 	router := newServer(Config{
 		SSLRedirect: true,
@@ -198,6 +282,12 @@ func TestBasicSSLWithHost(t *testing.T) {
 	assert.Equal(t, "https://secure.example.com/foo", w.Header().Get("Location"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestBadProxySSL(t *testing.T) {
 	router := newServer(Config{
 		SSLRedirect: true,
@@ -215,6 +305,12 @@ func TestBadProxySSL(t *testing.T) {
 	assert.Equal(t, "https://www.example.com/foo", w.Header().Get("Location"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestProxySSLWithHeaderOption(t *testing.T) {
 	router := newServer(Config{
 		SSLRedirect:     true,
@@ -232,6 +328,12 @@ func TestProxySSLWithHeaderOption(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestProxySSLWithWrongHeaderValue(t *testing.T) {
 	router := newServer(Config{
 		SSLRedirect:     true,
@@ -250,6 +352,12 @@ func TestProxySSLWithWrongHeaderValue(t *testing.T) {
 	assert.Equal(t, "https://www.example.com/foo", w.Header().Get("Location"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestStsHeader(t *testing.T) {
 	router := newServer(Config{
 		STSSeconds: 315360000,
@@ -261,6 +369,12 @@ func TestStsHeader(t *testing.T) {
 	assert.Equal(t, "max-age=315360000", w.Header().Get("Strict-Transport-Security"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestStsHeaderInDevMode(t *testing.T) {
 	router := newServer(Config{
 		STSSeconds:    315360000,
@@ -273,6 +387,12 @@ func TestStsHeaderInDevMode(t *testing.T) {
 	assert.Equal(t, "", w.Header().Get("Strict-Transport-Security"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestStsHeaderWithSubdomain(t *testing.T) {
 	router := newServer(Config{
 		STSSeconds:           315360000,
@@ -285,6 +405,12 @@ func TestStsHeaderWithSubdomain(t *testing.T) {
 	assert.Equal(t, "max-age=315360000; includeSubdomains", w.Header().Get("Strict-Transport-Security"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestFrameDeny(t *testing.T) {
 	router := newServer(Config{
 		FrameDeny: true,
@@ -296,6 +422,12 @@ func TestFrameDeny(t *testing.T) {
 	assert.Equal(t, "DENY", w.Header().Get("X-Frame-Options"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestCustomFrameValue(t *testing.T) {
 	router := newServer(Config{
 		CustomFrameOptionsValue: "SAMEORIGIN",
@@ -307,6 +439,12 @@ func TestCustomFrameValue(t *testing.T) {
 	assert.Equal(t, "SAMEORIGIN", w.Header().Get("X-Frame-Options"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestCustomFrameValueWithDeny(t *testing.T) {
 	router := newServer(Config{
 		FrameDeny:               true,
@@ -319,6 +457,12 @@ func TestCustomFrameValueWithDeny(t *testing.T) {
 	assert.Equal(t, "SAMEORIGIN", w.Header().Get("X-Frame-Options"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestContentNosniff(t *testing.T) {
 	router := newServer(Config{
 		ContentTypeNosniff: true,
@@ -330,6 +474,12 @@ func TestContentNosniff(t *testing.T) {
 	assert.Equal(t, "nosniff", w.Header().Get("X-Content-Type-Options"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestXSSProtection(t *testing.T) {
 	router := newServer(Config{
 		BrowserXssFilter: true,
@@ -341,6 +491,12 @@ func TestXSSProtection(t *testing.T) {
 	assert.Equal(t, "1; mode=block", w.Header().Get("X-XSS-Protection"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestReferrerPolicy(t *testing.T) {
 	router := newServer(Config{
 		ReferrerPolicy: "strict-origin-when-cross-origin",
@@ -352,6 +508,12 @@ func TestReferrerPolicy(t *testing.T) {
 	assert.Equal(t, "strict-origin-when-cross-origin", w.Header().Get("Referrer-Policy"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestFeaturePolicy(t *testing.T) {
 	router := newServer(Config{
 		FeaturePolicy: "vibrate 'none';",
@@ -363,6 +525,12 @@ func TestFeaturePolicy(t *testing.T) {
 	assert.Equal(t, "vibrate 'none';", w.Header().Get("Feature-Policy"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestCsp(t *testing.T) {
 	router := newServer(Config{
 		ContentSecurityPolicy: "default-src 'self'",
@@ -374,6 +542,12 @@ func TestCsp(t *testing.T) {
 	assert.Equal(t, "default-src 'self'", w.Header().Get("Content-Security-Policy"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestInlineSecure(t *testing.T) {
 	router := newServer(Config{
 		FrameDeny: true,
@@ -385,6 +559,12 @@ func TestInlineSecure(t *testing.T) {
 	assert.Equal(t, "DENY", w.Header().Get("X-Frame-Options"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestIsIpv4Host(t *testing.T) {
 	assert.Equal(t, isIPV4("127.0.0.1"), true)
 	assert.Equal(t, isIPV4("127.0.0.1:8080"), true)

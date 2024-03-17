@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -9,10 +9,13 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
+
+// ff:
+// t:
 func TestBasicAuth(t *testing.T) {
 	pairs := processAccounts(Accounts{
 		"admin": "password",
@@ -35,6 +38,9 @@ func TestBasicAuth(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestBasicAuthFails(t *testing.T) {
 	assert.Panics(t, func() { processAccounts(nil) })
 	assert.Panics(t, func() {
@@ -45,6 +51,9 @@ func TestBasicAuthFails(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestBasicAuthSearchCredential(t *testing.T) {
 	pairs := processAccounts(Accounts{
 		"admin": "password",
@@ -77,10 +86,16 @@ func TestBasicAuthSearchCredential(t *testing.T) {
 	assert.False(t, found)
 }
 
+
+// ff:
+// t:
 func TestBasicAuthAuthorizationHeader(t *testing.T) {
 	assert.Equal(t, "Basic YWRtaW46cGFzc3dvcmQ=", authorizationHeader("admin", "password"))
 }
 
+
+// ff:
+// t:
 func TestBasicAuthSucceed(t *testing.T) {
 	accounts := Accounts{"admin": "password"}
 	router := New()
@@ -98,6 +113,9 @@ func TestBasicAuthSucceed(t *testing.T) {
 	assert.Equal(t, "admin", w.Body.String())
 }
 
+
+// ff:
+// t:
 func TestBasicAuth401(t *testing.T) {
 	called := false
 	accounts := Accounts{"foo": "bar"}
@@ -118,6 +136,9 @@ func TestBasicAuth401(t *testing.T) {
 	assert.Equal(t, "Basic realm=\"Authorization Required\"", w.Header().Get("WWW-Authenticate"))
 }
 
+
+// ff:
+// t:
 func TestBasicAuth401WithCustomRealm(t *testing.T) {
 	called := false
 	accounts := Accounts{"foo": "bar"}

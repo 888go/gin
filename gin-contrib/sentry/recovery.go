@@ -11,6 +11,14 @@ import (
 )
 
 // 这是用于 Sentry 错误报告的恢复中间件
+
+// ff:
+// onlyCrashes:
+// client:
+
+// ff:
+// onlyCrashes:
+// client:
 func Recovery(client *raven.Client, onlyCrashes bool) gin.HandlerFunc {
 
 	return func(c *gin.Context) {

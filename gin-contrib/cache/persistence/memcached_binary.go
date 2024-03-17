@@ -14,17 +14,53 @@ type MemcachedBinaryStore struct {
 }
 
 // NewMemcachedBinaryStore返回一个MemcachedBinaryStore
+
+// ff:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
+
+// ff:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
 func NewMemcachedBinaryStore(hostList, username, password string, defaultExpiration time.Duration) *MemcachedBinaryStore {
 	return &MemcachedBinaryStore{mc.NewMC(hostList, username, password), defaultExpiration}
 }
 
 // NewMemcachedBinaryStoreWithConfig 根据提供的配置返回一个 MemcachedBinaryStore 实例
+
+// ff:
+// config:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
+
+// ff:
+// config:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
 func NewMemcachedBinaryStoreWithConfig(hostList, username, password string, defaultExpiration time.Duration, config *mc.Config) *MemcachedBinaryStore {
 	return &MemcachedBinaryStore{mc.NewMCwithConfig(hostList, username, password, config), defaultExpiration}
 }
 
 // Set (参考CacheStore接口)
 // 此处的Set方法是实现CacheStore接口的一部分，用于设置缓存值。
+
+// ff:
+// expires:
+// value:
+// key:
+
+// ff:
+// expires:
+// value:
+// key:
 func (s *MemcachedBinaryStore) Set(key string, value interface{}, expires time.Duration) error {
 	exp := s.getExpiration(expires)
 	b, err := utils.Serialize(value)
@@ -36,6 +72,16 @@ func (s *MemcachedBinaryStore) Set(key string, value interface{}, expires time.D
 }
 
 // Add (参考 CacheStore 接口)
+
+// ff:
+// expires:
+// value:
+// key:
+
+// ff:
+// expires:
+// value:
+// key:
 func (s *MemcachedBinaryStore) Add(key string, value interface{}, expires time.Duration) error {
 	exp := s.getExpiration(expires)
 	b, err := utils.Serialize(value)
@@ -47,6 +93,16 @@ func (s *MemcachedBinaryStore) Add(key string, value interface{}, expires time.D
 }
 
 // Replace (参考 CacheStore 接口)
+
+// ff:
+// expires:
+// value:
+// key:
+
+// ff:
+// expires:
+// value:
+// key:
 func (s *MemcachedBinaryStore) Replace(key string, value interface{}, expires time.Duration) error {
 	exp := s.getExpiration(expires)
 	b, err := utils.Serialize(value)
@@ -58,6 +114,14 @@ func (s *MemcachedBinaryStore) Replace(key string, value interface{}, expires ti
 }
 
 // Get (参考 CacheStore 接口)
+
+// ff:
+// value:
+// key:
+
+// ff:
+// value:
+// key:
 func (s *MemcachedBinaryStore) Get(key string, value interface{}) error {
 	val, _, _, err := s.Client.Get(key)
 	if err != nil {
@@ -68,23 +132,49 @@ func (s *MemcachedBinaryStore) Get(key string, value interface{}) error {
 
 // Delete (参考 CacheStore 接口)
 // （该注释表明此“Delete”方法实现了 CacheStore 接口中的“Delete”方法，具体功能请参照 CacheStore 接口定义）
+
+// ff:
+// key:
+
+// ff:
+// key:
 func (s *MemcachedBinaryStore) Delete(key string) error {
 	return convertMcError(s.Client.Del(key))
 }
 
 // 自增（参见CacheStore接口）
+
+// ff:
+// delta:
+// key:
+
+// ff:
+// delta:
+// key:
 func (s *MemcachedBinaryStore) Increment(key string, delta uint64) (uint64, error) {
 	n, _, err := s.Client.Incr(key, delta, 0, 0xffffffff, 0)
 	return n, convertMcError(err)
 }
 
 // 减量（参考 CacheStore 接口）
+
+// ff:
+// delta:
+// key:
+
+// ff:
+// delta:
+// key:
 func (s *MemcachedBinaryStore) Decrement(key string, delta uint64) (uint64, error) {
 	n, _, err := s.Client.Decr(key, delta, 0, 0xffffffff, 0)
 	return n, convertMcError(err)
 }
 
 // Flush （参考 CacheStore 接口）
+
+// ff:
+
+// ff:
 func (s *MemcachedBinaryStore) Flush() error {
 	return convertMcError(s.Client.Flush(0))
 }

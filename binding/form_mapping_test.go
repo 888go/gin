@@ -1,6 +1,6 @@
-// 版权所有2019 Gin Core Team
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2019 Gin Core Team. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package binding
 
@@ -8,10 +8,13 @@ import (
 	"reflect"
 	"testing"
 	"time"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
+
+// ff:
+// t:
 func TestMappingBaseTypes(t *testing.T) {
 	intPtr := func(i int) *int {
 		return &i
@@ -38,7 +41,7 @@ func TestMappingBaseTypes(t *testing.T) {
 		{"base type", struct{ F string }{}, "test", string("test")},
 		{"base type", struct{ F *int }{}, "9", intPtr(9)},
 
-// 零值
+		// zero values
 		{"zero value", struct{ F int }{}, "", int(0)},
 		{"zero value", struct{ F uint }{}, "", uint(0)},
 		{"zero value", struct{ F bool }{}, "", false},
@@ -60,6 +63,9 @@ func TestMappingBaseTypes(t *testing.T) {
 	}
 }
 
+
+// ff:
+// t:
 func TestMappingDefault(t *testing.T) {
 	var s struct {
 		Int   int    `form:",default=9"`
@@ -74,6 +80,9 @@ func TestMappingDefault(t *testing.T) {
 	assert.Equal(t, [1]int{9}, s.Array)
 }
 
+
+// ff:
+// t:
 func TestMappingSkipField(t *testing.T) {
 	var s struct {
 		A int
@@ -84,6 +93,9 @@ func TestMappingSkipField(t *testing.T) {
 	assert.Equal(t, 0, s.A)
 }
 
+
+// ff:
+// t:
 func TestMappingIgnoreField(t *testing.T) {
 	var s struct {
 		A int `form:"A"`
@@ -96,6 +108,9 @@ func TestMappingIgnoreField(t *testing.T) {
 	assert.Equal(t, 0, s.B)
 }
 
+
+// ff:
+// t:
 func TestMappingUnexportedField(t *testing.T) {
 	var s struct {
 		A int `form:"a"`
@@ -108,6 +123,9 @@ func TestMappingUnexportedField(t *testing.T) {
 	assert.Equal(t, 0, s.b)
 }
 
+
+// ff:
+// t:
 func TestMappingPrivateField(t *testing.T) {
 	var s struct {
 		f int `form:"field"`
@@ -117,6 +135,9 @@ func TestMappingPrivateField(t *testing.T) {
 	assert.Equal(t, 0, s.f)
 }
 
+
+// ff:
+// t:
 func TestMappingUnknownFieldType(t *testing.T) {
 	var s struct {
 		U uintptr
@@ -127,6 +148,9 @@ func TestMappingUnknownFieldType(t *testing.T) {
 	assert.Equal(t, errUnknownType, err)
 }
 
+
+// ff:
+// t:
 func TestMappingURI(t *testing.T) {
 	var s struct {
 		F int `uri:"field"`
@@ -136,6 +160,9 @@ func TestMappingURI(t *testing.T) {
 	assert.Equal(t, 6, s.F)
 }
 
+
+// ff:
+// t:
 func TestMappingForm(t *testing.T) {
 	var s struct {
 		F int `form:"field"`
@@ -145,6 +172,9 @@ func TestMappingForm(t *testing.T) {
 	assert.Equal(t, 6, s.F)
 }
 
+
+// ff:
+// t:
 func TestMapFormWithTag(t *testing.T) {
 	var s struct {
 		F int `externalTag:"field"`
@@ -154,6 +184,9 @@ func TestMapFormWithTag(t *testing.T) {
 	assert.Equal(t, 6, s.F)
 }
 
+
+// ff:
+// t:
 func TestMappingTime(t *testing.T) {
 	var s struct {
 		Time      time.Time
@@ -184,14 +217,14 @@ func TestMappingTime(t *testing.T) {
 	assert.Equal(t, "2019-01-19 16:00:00 +0000 UTC", s.CSTTime.UTC().String())
 	assert.Equal(t, "2019-01-20 00:00:00 +0000 UTC", s.UTCTime.String())
 
-// 错误的位置
+	// wrong location
 	var wrongLoc struct {
 		Time time.Time `time_location:"wrong"`
 	}
 	err = mapForm(&wrongLoc, map[string][]string{"Time": {"2019-01-20T16:02:58Z"}})
 	assert.Error(t, err)
 
-// 时间值错误
+	// wrong time value
 	var wrongTime struct {
 		Time time.Time
 	}
@@ -199,12 +232,15 @@ func TestMappingTime(t *testing.T) {
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestMappingTimeDuration(t *testing.T) {
 	var s struct {
 		D time.Duration
 	}
 
-// 好吧
+	// ok
 	err := mappingByPtr(&s, formSource{"D": {"5s"}}, "form")
 	assert.NoError(t, err)
 	assert.Equal(t, 5*time.Second, s.D)
@@ -214,17 +250,20 @@ func TestMappingTimeDuration(t *testing.T) {
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestMappingSlice(t *testing.T) {
 	var s struct {
 		Slice []int `form:"slice,default=9"`
 	}
 
-// 默认值
+	// default value
 	err := mappingByPtr(&s, formSource{}, "form")
 	assert.NoError(t, err)
 	assert.Equal(t, []int{9}, s.Slice)
 
-// 好吧
+	// ok
 	err = mappingByPtr(&s, formSource{"slice": {"3", "4"}}, "form")
 	assert.NoError(t, err)
 	assert.Equal(t, []int{3, 4}, s.Slice)
@@ -234,29 +273,35 @@ func TestMappingSlice(t *testing.T) {
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestMappingArray(t *testing.T) {
 	var s struct {
 		Array [2]int `form:"array,default=9"`
 	}
 
-// 错误的默认
+	// wrong default
 	err := mappingByPtr(&s, formSource{}, "form")
 	assert.Error(t, err)
 
-// 好吧
+	// ok
 	err = mappingByPtr(&s, formSource{"array": {"3", "4"}}, "form")
 	assert.NoError(t, err)
 	assert.Equal(t, [2]int{3, 4}, s.Array)
 
-// 错误-没有足够的值
+	// error - not enough vals
 	err = mappingByPtr(&s, formSource{"array": {"3"}}, "form")
 	assert.Error(t, err)
 
-// 错误-错误的值
+	// error - wrong value
 	err = mappingByPtr(&s, formSource{"array": {"wrong"}}, "form")
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestMappingStructField(t *testing.T) {
 	var s struct {
 		J struct {
@@ -269,6 +314,9 @@ func TestMappingStructField(t *testing.T) {
 	assert.Equal(t, 9, s.J.I)
 }
 
+
+// ff:
+// t:
 func TestMappingPtrField(t *testing.T) {
 	type ptrStruct struct {
 		Key int64 `json:"key"`
@@ -280,20 +328,20 @@ func TestMappingPtrField(t *testing.T) {
 
 	var err error
 
-// 0项
+	// With 0 items.
 	var req0 ptrRequest
 	err = mappingByPtr(&req0, formSource{}, "form")
 	assert.NoError(t, err)
 	assert.Empty(t, req0.Items)
 
-// 只有一件物品
+	// With 1 item.
 	var req1 ptrRequest
 	err = mappingByPtr(&req1, formSource{"items": {`{"key": 1}`}}, "form")
 	assert.NoError(t, err)
 	assert.Len(t, req1.Items, 1)
 	assert.EqualValues(t, 1, req1.Items[0].Key)
 
-// 有2个项目
+	// With 2 items.
 	var req2 ptrRequest
 	err = mappingByPtr(&req2, formSource{"items": {`{"key": 1}`, `{"key": 2}`}}, "form")
 	assert.NoError(t, err)
@@ -302,6 +350,9 @@ func TestMappingPtrField(t *testing.T) {
 	assert.EqualValues(t, 2, req2.Items[1].Key)
 }
 
+
+// ff:
+// t:
 func TestMappingMapField(t *testing.T) {
 	var s struct {
 		M map[string]int
@@ -312,6 +363,9 @@ func TestMappingMapField(t *testing.T) {
 	assert.Equal(t, map[string]int{"one": 1}, s.M)
 }
 
+
+// ff:
+// t:
 func TestMappingIgnoredCircularRef(t *testing.T) {
 	type S struct {
 		S *S `form:"-"`

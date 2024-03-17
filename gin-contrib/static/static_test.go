@@ -22,6 +22,12 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 	return w
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestEmptyDirectory(t *testing.T) {
 // 设置文件
 	testRoot, _ := os.Getwd()
@@ -88,6 +94,12 @@ func TestEmptyDirectory(t *testing.T) {
 	assert.Equal(t, w.Body.String(), "Gin Web Framework")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestIndex(t *testing.T) {
 // 设置文件
 	testRoot, _ := os.Getwd()
@@ -112,6 +124,12 @@ func TestIndex(t *testing.T) {
 	assert.Equal(t, w.Body.String(), "index")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestListIndex(t *testing.T) {
 // 设置文件
 	testRoot, _ := os.Getwd()

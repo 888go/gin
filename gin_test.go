@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -17,7 +17,7 @@ import (
 	"sync/atomic"
 	"testing"
 	"time"
-	
+
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/http2"
 )
@@ -60,6 +60,9 @@ func setupHTMLFiles(t *testing.T, mode string, tls bool, loadMethod func(*Engine
 	return ts
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLGlobDebugMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -80,6 +83,9 @@ func TestLoadHTMLGlobDebugMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestH2c(t *testing.T) {
 	ln, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
@@ -118,6 +124,9 @@ func TestH2c(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLGlobTestMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -138,6 +147,9 @@ func TestLoadHTMLGlobTestMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLGlobReleaseMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -158,6 +170,9 @@ func TestLoadHTMLGlobReleaseMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLGlobUsingTLS(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -169,7 +184,7 @@ func TestLoadHTMLGlobUsingTLS(t *testing.T) {
 	)
 	defer ts.Close()
 
-// 使用InsecureSkipVerify来避免“x509: certificate signed by unknown authority”错误
+	// Use InsecureSkipVerify for avoiding `x509: certificate signed by unknown authority` error
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
@@ -185,6 +200,9 @@ func TestLoadHTMLGlobUsingTLS(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLGlobFromFuncMap(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -209,6 +227,9 @@ func init() {
 	SetMode(TestMode)
 }
 
+
+// ff:
+// t:
 func TestCreateEngine(t *testing.T) {
 	router := New()
 	assert.Equal(t, "/", router.basePath)
@@ -216,6 +237,9 @@ func TestCreateEngine(t *testing.T) {
 	assert.Empty(t, router.Handlers)
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLFilesTestMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -236,6 +260,9 @@ func TestLoadHTMLFilesTestMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLFilesDebugMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -256,6 +283,9 @@ func TestLoadHTMLFilesDebugMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLFilesReleaseMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -276,6 +306,9 @@ func TestLoadHTMLFilesReleaseMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLFilesUsingTLS(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -287,7 +320,7 @@ func TestLoadHTMLFilesUsingTLS(t *testing.T) {
 	)
 	defer ts.Close()
 
-// 使用InsecureSkipVerify来避免“x509: certificate signed by unknown authority”错误
+	// Use InsecureSkipVerify for avoiding `x509: certificate signed by unknown authority` error
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
@@ -303,6 +336,9 @@ func TestLoadHTMLFilesUsingTLS(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
+
+// ff:
+// t:
 func TestLoadHTMLFilesFuncMap(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -323,6 +359,9 @@ func TestLoadHTMLFilesFuncMap(t *testing.T) {
 	assert.Equal(t, "Date: 2017/07/01", string(resp))
 }
 
+
+// ff:
+// t:
 func TestAddRoute(t *testing.T) {
 	router := New()
 	router.addRoute("GET", "/", HandlersChain{func(_ *Context) {}})
@@ -341,6 +380,9 @@ func TestAddRoute(t *testing.T) {
 	assert.Len(t, router.trees, 2)
 }
 
+
+// ff:
+// t:
 func TestAddRouteFails(t *testing.T) {
 	router := New()
 	assert.Panics(t, func() { router.addRoute("", "/", HandlersChain{func(_ *Context) {}}) })
@@ -353,11 +395,17 @@ func TestAddRouteFails(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestCreateDefaultRouter(t *testing.T) {
 	router := Default()
 	assert.Len(t, router.Handlers, 2)
 }
 
+
+// ff:
+// t:
 func TestNoRouteWithoutGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
@@ -380,6 +428,9 @@ func TestNoRouteWithoutGlobalHandlers(t *testing.T) {
 	compareFunc(t, router.allNoRoute[1], middleware0)
 }
 
+
+// ff:
+// t:
 func TestNoRouteWithGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
@@ -411,6 +462,9 @@ func TestNoRouteWithGlobalHandlers(t *testing.T) {
 	compareFunc(t, router.allNoRoute[2], middleware0)
 }
 
+
+// ff:
+// t:
 func TestNoMethodWithoutGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
@@ -433,9 +487,15 @@ func TestNoMethodWithoutGlobalHandlers(t *testing.T) {
 	compareFunc(t, router.allNoMethod[1], middleware0)
 }
 
+
+// ff:
+// t:
 func TestRebuild404Handlers(t *testing.T) {
 }
 
+
+// ff:
+// t:
 func TestNoMethodWithGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
@@ -475,6 +535,9 @@ func compareFunc(t *testing.T, a, b any) {
 	}
 }
 
+
+// ff:
+// t:
 func TestListOfRoutes(t *testing.T) {
 	router := New()
 	router.GET("/favicon.ico", handlerTest1)
@@ -493,30 +556,33 @@ func TestListOfRoutes(t *testing.T) {
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "GET",
 		Path:    "/favicon.ico",
-		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
+		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
 	})
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "GET",
 		Path:    "/",
-		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
+		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
 	})
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "GET",
 		Path:    "/users/",
-		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",
+		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest2$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",     
 	})
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "GET",
 		Path:    "/users/:id",
-		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
+		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
 	})
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "POST",
 		Path:    "/users/:id",
-		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",
+		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest2$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",     
 	})
 }
 
+
+// ff:
+// t:
 func TestEngineHandleContext(t *testing.T) {
 	r := New()
 	r.GET("/", func(c *Context) {
@@ -534,6 +600,9 @@ func TestEngineHandleContext(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestEngineHandleContextManyReEntries(t *testing.T) {
 	expectValue := 10000
 
@@ -562,7 +631,7 @@ func TestEngineHandleContextManyReEntries(t *testing.T) {
 	})
 
 	assert.NotPanics(t, func() {
-		w := PerformRequest(r, "GET", "/"+strconv.Itoa(expectValue-1)) // 包含0值
+		w := PerformRequest(r, "GET", "/"+strconv.Itoa(expectValue-1)) // include 0 value
 		assert.Equal(t, 200, w.Code)
 		assert.Equal(t, expectValue, w.Body.Len())
 	})
@@ -571,10 +640,13 @@ func TestEngineHandleContextManyReEntries(t *testing.T) {
 	assert.Equal(t, int64(expectValue), middlewareCounter)
 }
 
+
+// ff:
+// t:
 func TestPrepareTrustedCIRDsWith(t *testing.T) {
 	r := New()
 
-// 有效ipv4 cidr
+	// valid ipv4 cidr
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("0.0.0.0/0")}
 		err := r.SetTrustedProxies([]string{"0.0.0.0/0"})
@@ -583,14 +655,14 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-// 无效ipv4 cidr
+	// invalid ipv4 cidr
 	{
 		err := r.SetTrustedProxies([]string{"192.168.1.33/33"})
 
 		assert.Error(t, err)
 	}
 
-// 有效的ipv4地址
+	// valid ipv4 address
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("192.168.1.33/32")}
 
@@ -600,14 +672,14 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-// 无效的ipv4地址
+	// invalid ipv4 address
 	{
 		err := r.SetTrustedProxies([]string{"192.168.1.256"})
 
 		assert.Error(t, err)
 	}
 
-// 有效的ipv6地址
+	// valid ipv6 address
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("2002:0000:0000:1234:abcd:ffff:c0a8:0101/128")}
 		err := r.SetTrustedProxies([]string{"2002:0000:0000:1234:abcd:ffff:c0a8:0101"})
@@ -616,14 +688,14 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-// 无效的ipv6地址
+	// invalid ipv6 address
 	{
 		err := r.SetTrustedProxies([]string{"gggg:0000:0000:1234:abcd:ffff:c0a8:0101"})
 
 		assert.Error(t, err)
 	}
 
-// 有效ipv6 cidr
+	// valid ipv6 cidr
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("::/0")}
 		err := r.SetTrustedProxies([]string{"::/0"})
@@ -632,14 +704,14 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-// 无效ipv6 cidr
+	// invalid ipv6 cidr
 	{
 		err := r.SetTrustedProxies([]string{"gggg:0000:0000:1234:abcd:ffff:c0a8:0101/129"})
 
 		assert.Error(t, err)
 	}
 
-// 有效的组合
+	// valid combination
 	{
 		expectedTrustedCIDRs := []*net.IPNet{
 			parseCIDR("::/0"),
@@ -656,7 +728,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-// 无效的组合
+	// invalid combination
 	{
 		err := r.SetTrustedProxies([]string{
 			"::/0",
@@ -667,7 +739,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Error(t, err)
 	}
 
-// 零值
+	// nil value
 	{
 		err := r.SetTrustedProxies(nil)
 

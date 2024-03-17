@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 	"time"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -19,6 +19,9 @@ func init() {
 	SetMode(TestMode)
 }
 
+
+// ff:
+// t:
 func TestLogger(t *testing.T) {
 	buffer := new(strings.Builder)
 	router := New()
@@ -37,8 +40,9 @@ func TestLogger(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-// 我先写了这些(扩展了上面的内容)，但后来意识到它们更像是集成测试，因为它们测试的是整个日志记录过程，而不是单个功能
-// 我不确定这些应该放在哪里
+	// I wrote these first (extending the above) but then realized they are more
+	// like integration tests because they test the whole logging process rather
+	// than individual functions.  Im not sure where these should go.
 	buffer.Reset()
 	PerformRequest(router, "POST", "/example")
 	assert.Contains(t, buffer.String(), "200")
@@ -82,6 +86,9 @@ func TestLogger(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/notfound")
 }
 
+
+// ff:
+// t:
 func TestLoggerWithConfig(t *testing.T) {
 	buffer := new(strings.Builder)
 	router := New()
@@ -100,8 +107,9 @@ func TestLoggerWithConfig(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-// 我先写了这些(扩展了上面的内容)，但后来意识到它们更像是集成测试，因为它们测试的是整个日志记录过程，而不是单个功能
-// 我不确定这些应该放在哪里
+	// I wrote these first (extending the above) but then realized they are more
+	// like integration tests because they test the whole logging process rather
+	// than individual functions.  Im not sure where these should go.
 	buffer.Reset()
 	PerformRequest(router, "POST", "/example")
 	assert.Contains(t, buffer.String(), "200")
@@ -145,6 +153,9 @@ func TestLoggerWithConfig(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/notfound")
 }
 
+
+// ff:
+// t:
 func TestLoggerWithFormatter(t *testing.T) {
 	buffer := new(strings.Builder)
 
@@ -169,7 +180,7 @@ func TestLoggerWithFormatter(t *testing.T) {
 	router.GET("/example", func(c *Context) {})
 	PerformRequest(router, "GET", "/example?a=100")
 
-// 输出测试
+	// output test
 	assert.Contains(t, buffer.String(), "[FORMATTER TEST]")
 	assert.Contains(t, buffer.String(), "200")
 	assert.Contains(t, buffer.String(), "GET")
@@ -177,6 +188,9 @@ func TestLoggerWithFormatter(t *testing.T) {
 	assert.Contains(t, buffer.String(), "a=100")
 }
 
+
+// ff:
+// t:
 func TestLoggerWithConfigFormatting(t *testing.T) {
 	var gotParam LogFormatterParams
 	var gotKeys map[string]any
@@ -188,7 +202,7 @@ func TestLoggerWithConfigFormatting(t *testing.T) {
 	router.Use(LoggerWithConfig(LoggerConfig{
 		Output: buffer,
 		Formatter: func(param LogFormatterParams) string {
-// 对于断言测试
+			// for assert test
 			gotParam = param
 
 			return fmt.Sprintf("[FORMATTER TEST] %v | %3d | %13v | %15s | %-7s %s\n%s",
@@ -203,21 +217,21 @@ func TestLoggerWithConfigFormatting(t *testing.T) {
 		},
 	}))
 	router.GET("/example", func(c *Context) {
-// 设置dummy ClientIP
+		// set dummy ClientIP
 		c.Request.Header.Set("X-Forwarded-For", "20.20.20.20")
 		gotKeys = c.Keys
 		time.Sleep(time.Millisecond)
 	})
 	PerformRequest(router, "GET", "/example?a=100")
 
-// 输出测试
+	// output test
 	assert.Contains(t, buffer.String(), "[FORMATTER TEST]")
 	assert.Contains(t, buffer.String(), "200")
 	assert.Contains(t, buffer.String(), "GET")
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-// LogFormatterParams测试
+	// LogFormatterParams test
 	assert.NotNil(t, gotParam.Request)
 	assert.NotEmpty(t, gotParam.TimeStamp)
 	assert.Equal(t, 200, gotParam.StatusCode)
@@ -229,6 +243,9 @@ func TestLoggerWithConfigFormatting(t *testing.T) {
 	assert.Equal(t, gotKeys, gotParam.Keys)
 }
 
+
+// ff:
+// t:
 func TestDefaultLogFormatter(t *testing.T) {
 	timeStamp := time.Unix(1544173902, 0).UTC()
 
@@ -282,6 +299,9 @@ func TestDefaultLogFormatter(t *testing.T) {
 	assert.Equal(t, "[GIN] 2018/12/07 - 09:11:42 |\x1b[97;42m 200 \x1b[0m|    2743h29m3s |     20.20.20.20 |\x1b[97;44m GET     \x1b[0m \"/\"\n", defaultLogFormatter(termTrueLongDurationParam))
 }
 
+
+// ff:
+// t:
 func TestColorForMethod(t *testing.T) {
 	colorForMethod := func(method string) string {
 		p := LogFormatterParams{
@@ -300,6 +320,9 @@ func TestColorForMethod(t *testing.T) {
 	assert.Equal(t, reset, colorForMethod("TRACE"), "trace is not defined and should be the reset color")
 }
 
+
+// ff:
+// t:
 func TestColorForStatus(t *testing.T) {
 	colorForStatus := func(code int) string {
 		p := LogFormatterParams{
@@ -315,13 +338,19 @@ func TestColorForStatus(t *testing.T) {
 	assert.Equal(t, red, colorForStatus(2), "other things should be red")
 }
 
+
+// ff:
+// t:
 func TestResetColor(t *testing.T) {
 	p := LogFormatterParams{}
 	assert.Equal(t, string([]byte{27, 91, 48, 109}), p.ResetColor())
 }
 
+
+// ff:
+// t:
 func TestIsOutputColor(t *testing.T) {
-// 用isTerm标志进行测试
+	// test with isTerm flag true.
 	p := LogFormatterParams{
 		isTerm: true,
 	}
@@ -349,24 +378,24 @@ func TestIsOutputColor(t *testing.T) {
 	DisableConsoleColor()
 	assert.Equal(t, false, p.IsOutputColor())
 
-// 重置控制台颜色模式
+	// reset console color mode.
 	consoleColorMode = autoColor
 }
 
+
+// ff:
+// t:
 func TestErrorLogger(t *testing.T) {
 	router := New()
 	router.Use(ErrorLogger())
 	router.GET("/error", func(c *Context) {
-		c.Error(errors.New("this is an error")) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+		c.Error(errors.New("this is an error")) //nolint: errcheck
 	})
 	router.GET("/abort", func(c *Context) {
-		c.AbortWithError(http.StatusUnauthorized, errors.New("no authorized")) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+		c.AbortWithError(http.StatusUnauthorized, errors.New("no authorized")) //nolint: errcheck
 	})
 	router.GET("/print", func(c *Context) {
-		c.Error(errors.New("this is an error")) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+		c.Error(errors.New("this is an error")) //nolint: errcheck
 		c.String(http.StatusInternalServerError, "hola!")
 	})
 
@@ -383,6 +412,9 @@ func TestErrorLogger(t *testing.T) {
 	assert.Equal(t, "hola!{\"error\":\"this is an error\"}", w.Body.String())
 }
 
+
+// ff:
+// t:
 func TestLoggerWithWriterSkippingPaths(t *testing.T) {
 	buffer := new(strings.Builder)
 	router := New()
@@ -398,6 +430,9 @@ func TestLoggerWithWriterSkippingPaths(t *testing.T) {
 	assert.Contains(t, buffer.String(), "")
 }
 
+
+// ff:
+// t:
 func TestLoggerWithConfigSkippingPaths(t *testing.T) {
 	buffer := new(strings.Builder)
 	router := New()
@@ -416,22 +451,28 @@ func TestLoggerWithConfigSkippingPaths(t *testing.T) {
 	assert.Contains(t, buffer.String(), "")
 }
 
+
+// ff:
+// t:
 func TestDisableConsoleColor(t *testing.T) {
 	New()
 	assert.Equal(t, autoColor, consoleColorMode)
 	DisableConsoleColor()
 	assert.Equal(t, disableColor, consoleColorMode)
 
-// 重置控制台颜色模式
+	// reset console color mode.
 	consoleColorMode = autoColor
 }
 
+
+// ff:
+// t:
 func TestForceConsoleColor(t *testing.T) {
 	New()
 	assert.Equal(t, autoColor, consoleColorMode)
 	ForceConsoleColor()
 	assert.Equal(t, forceColor, consoleColorMode)
 
-// 重置控制台颜色模式
+	// reset console color mode.
 	consoleColorMode = autoColor
 }

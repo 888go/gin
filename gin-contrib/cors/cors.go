@@ -58,16 +58,34 @@ type Config struct {
 }
 
 // AddAllowMethods 允许添加自定义方法
+
+// ff:
+// methods:
+
+// ff:
+// methods:
 func (c *Config) AddAllowMethods(methods ...string) {
 	c.AllowMethods = append(c.AllowMethods, methods...)
 }
 
 // AddAllowHeaders 允许添加自定义头信息
+
+// ff:
+// headers:
+
+// ff:
+// headers:
 func (c *Config) AddAllowHeaders(headers ...string) {
 	c.AllowHeaders = append(c.AllowHeaders, headers...)
 }
 
 // AddExposeHeaders 允许添加自定义暴露头信息
+
+// ff:
+// headers:
+
+// ff:
+// headers:
 func (c *Config) AddExposeHeaders(headers ...string) {
 	c.ExposeHeaders = append(c.ExposeHeaders, headers...)
 }
@@ -97,6 +115,10 @@ func (c Config) validateAllowedSchemas(origin string) bool {
 }
 
 // Validate 是用于检查用户自定义配置的功能。
+
+// ff:
+
+// ff:
 func (c Config) Validate() error {
 	if c.AllowAllOrigins && (c.AllowOriginFunc != nil || len(c.AllowOrigins) > 0) {
 		return errors.New("conflict settings: all origins are allowed. AllowOriginFunc or AllowOrigins is not needed")
@@ -145,6 +167,10 @@ func (c Config) parseWildcardRules() [][]string {
 }
 
 // DefaultConfig 返回一个映射到本机的通用默认配置。
+
+// ff:
+
+// ff:
 func DefaultConfig() Config {
 	return Config{
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},
@@ -155,6 +181,10 @@ func DefaultConfig() Config {
 }
 
 // Default 返回默认配置的 location 中间件。
+
+// ff:
+
+// ff:
 func Default() gin.HandlerFunc {
 	config := DefaultConfig()
 	config.AllowAllOrigins = true
@@ -162,6 +192,12 @@ func Default() gin.HandlerFunc {
 }
 
 // New 返回一个带有用户自定义配置的 location 中间件。
+
+// ff:
+// config:
+
+// ff:
+// config:
 func New(config Config) gin.HandlerFunc {
 	cors := newCors(config)
 	return func(c *gin.Context) {

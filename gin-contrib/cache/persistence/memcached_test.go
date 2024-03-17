@@ -21,26 +21,62 @@ var newMemcachedStore = func(t *testing.T, defaultExpiration time.Duration) Cach
 	panic("")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestMemcachedCache_TypicalGetSet(t *testing.T) {
 	typicalGetSet(t, newMemcachedStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestMemcachedCache_IncrDecr(t *testing.T) {
 	incrDecr(t, newMemcachedStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestMemcachedCache_Expiration(t *testing.T) {
 	expiration(t, newMemcachedStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestMemcachedCache_EmptyCache(t *testing.T) {
 	emptyCache(t, newMemcachedStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestMemcachedCache_Replace(t *testing.T) {
 	testReplace(t, newMemcachedStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestMemcachedCache_Add(t *testing.T) {
 	testAdd(t, newMemcachedStore)
 }

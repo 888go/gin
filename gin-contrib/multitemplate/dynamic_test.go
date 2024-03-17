@@ -50,6 +50,12 @@ func createFromTemplatesDynamic() Renderer {
 	return r
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestMissingTemplateOrNameDynamic(t *testing.T) {
 	r := NewRenderer()
 	tmpl := template.Must(template.New("test").Parse("Welcome to {{ .name }} template"))
@@ -62,6 +68,12 @@ func TestMissingTemplateOrNameDynamic(t *testing.T) {
 	}, "template can not be nil")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAddFromFilesDynamic(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromFileDynamic()
@@ -76,6 +88,12 @@ func TestAddFromFilesDynamic(t *testing.T) {
 	assert.Equal(t, "<p>Test Multiple Template</p>\nHi, this is article template\n", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAddFromGlobDynamic(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromGlobDynamic()
@@ -90,6 +108,12 @@ func TestAddFromGlobDynamic(t *testing.T) {
 	assert.Equal(t, "<p>Test Multiple Template</p>\nHi, this is login template\n", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAddFromStringDynamic(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromStringDynamic()
@@ -104,6 +128,12 @@ func TestAddFromStringDynamic(t *testing.T) {
 	assert.Equal(t, "Welcome to index template", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAddFromStringsFruncsDynamic(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromStringsWithFuncsDynamic()
@@ -118,6 +148,12 @@ func TestAddFromStringsFruncsDynamic(t *testing.T) {
 	assert.Equal(t, "Welcome to index template", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAddFromFilesFruncsDynamic(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromFilesWithFuncsDynamic()
@@ -132,6 +168,12 @@ func TestAddFromFilesFruncsDynamic(t *testing.T) {
 	assert.Equal(t, "Welcome to index template\n", w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestPanicInvalidTypeBuilder(t *testing.T) {
 	assert.Panics(t, func() {
 		b := templateBuilder{}
@@ -140,6 +182,12 @@ func TestPanicInvalidTypeBuilder(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestTemplateNotFound(t *testing.T) {
 	r := make(DynamicRender)
 	r.AddFromString("index", "This is a test template")
@@ -148,12 +196,24 @@ func TestTemplateNotFound(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestNotDynamicMode(t *testing.T) {
 	gin.SetMode("test")
 	TestAddFromFilesDynamic(t)
 	gin.SetMode("debug")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAddTemplate(t *testing.T) {
 	tmpl := template.Must(template.ParseFiles("tests/base.html", "tests/article.html"))
 	b := templateBuilder{}
@@ -165,6 +225,12 @@ func TestAddTemplate(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAddingTemplate(t *testing.T) {
 	assert.NotPanics(t, func() {
 		createFromTemplatesDynamic()

@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -15,12 +15,17 @@ import (
 	"strings"
 	"sync"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
-// 函数debugRoute(httpMethod, absolutePath字符串，HandlersChain){函数debugPrint(格式字符串，值…any) {
+// TODO
+// func debugRoute(httpMethod, absolutePath string, handlers HandlersChain) {
+// func debugPrint(format string, values ...any) {
 
+
+// ff:
+// t:
 func TestIsDebugging(t *testing.T) {
 	SetMode(DebugMode)
 	assert.True(t, IsDebugging())
@@ -30,6 +35,9 @@ func TestIsDebugging(t *testing.T) {
 	assert.False(t, IsDebugging())
 }
 
+
+// ff:
+// t:
 func TestDebugPrint(t *testing.T) {
 	re := captureOutput(t, func() {
 		SetMode(DebugMode)
@@ -44,6 +52,9 @@ func TestDebugPrint(t *testing.T) {
 	assert.Equal(t, "[GIN-debug] these are 2 error messages\n", re)
 }
 
+
+// ff:
+// t:
 func TestDebugPrintError(t *testing.T) {
 	re := captureOutput(t, func() {
 		SetMode(DebugMode)
@@ -54,15 +65,21 @@ func TestDebugPrintError(t *testing.T) {
 	assert.Equal(t, "[GIN-debug] [ERROR] this is an error\n", re)
 }
 
+
+// ff:
+// t:
 func TestDebugPrintRoutes(t *testing.T) {
 	re := captureOutput(t, func() {
 		SetMode(DebugMode)
 		debugPrintRoute("GET", "/path/to/route/:param", HandlersChain{func(c *Context) {}, handlerNameTest})
 		SetMode(TestMode)
 	})
-	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
+	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
 }
 
+
+// ff:
+// t:
 func TestDebugPrintRouteFunc(t *testing.T) {
 	DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		fmt.Fprintf(DefaultWriter, "[GIN-debug] %-6s %-40s --> %s (%d handlers)\n", httpMethod, absolutePath, handlerName, nuHandlers)
@@ -72,9 +89,12 @@ func TestDebugPrintRouteFunc(t *testing.T) {
 		debugPrintRoute("GET", "/path/to/route/:param1/:param2", HandlersChain{func(c *Context) {}, handlerNameTest})
 		SetMode(TestMode)
 	})
-	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
+	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
 }
 
+
+// ff:
+// t:
 func TestDebugPrintLoadTemplate(t *testing.T) {
 	re := captureOutput(t, func() {
 		SetMode(DebugMode)
@@ -85,6 +105,9 @@ func TestDebugPrintLoadTemplate(t *testing.T) {
 	assert.Regexp(t, `^\[GIN-debug\] Loaded HTML Templates \(2\): \n(\t- \n|\t- hello\.tmpl\n){2}\n`, re)
 }
 
+
+// ff:
+// t:
 func TestDebugPrintWARNINGSetHTMLTemplate(t *testing.T) {
 	re := captureOutput(t, func() {
 		SetMode(DebugMode)
@@ -94,6 +117,9 @@ func TestDebugPrintWARNINGSetHTMLTemplate(t *testing.T) {
 	assert.Equal(t, "[GIN-debug] [WARNING] Since SetHTMLTemplate() is NOT thread-safe. It should only be called\nat initialization. ie. before any route is registered or the router is listening in a socket:\n\n\trouter := gin.Default()\n\trouter.SetHTMLTemplate(template) // << good place\n\n", re)
 }
 
+
+// ff:
+// t:
 func TestDebugPrintWARNINGDefault(t *testing.T) {
 	re := captureOutput(t, func() {
 		SetMode(DebugMode)
@@ -108,6 +134,9 @@ func TestDebugPrintWARNINGDefault(t *testing.T) {
 	}
 }
 
+
+// ff:
+// t:
 func TestDebugPrintWARNINGNew(t *testing.T) {
 	re := captureOutput(t, func() {
 		SetMode(DebugMode)
@@ -148,6 +177,9 @@ func captureOutput(t *testing.T, f func()) string {
 	return <-out
 }
 
+
+// ff:
+// t:
 func TestGetMinVer(t *testing.T) {
 	var m uint64
 	var e error

@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -16,31 +16,30 @@ const (
 	defaultStatus = http.StatusOK
 )
 
-// ResponseWriter……
+// ResponseWriter ...
 type ResponseWriter interface {
 	http.ResponseWriter
 	http.Hijacker
 	http.Flusher
 	http.CloseNotifier
 
-// Status返回当前请求的HTTP响应状态码
+	// Status returns the HTTP response status code of the current request.
 	Status() int
 
-// Size返回已经写入响应http主体的字节数
-// 看到写()
+	// Size returns the number of bytes already written into the response http body.
+	// See Written()
 	Size() int
 
-// WriteString将字符串写入响应体
+	// WriteString writes the string into the response body.
 	WriteString(string) (int, error)
 
-// 如果响应体已经写好，则write返回true
+	// Written returns true if the response body was already written.
 	Written() bool
 
-// WriteHeaderNow强制写入http报头(状态码+报头)
+	// WriteHeaderNow forces to write the http header (status code + headers).
 	WriteHeaderNow()
 
-// push获取http
-// 用于服务器推送的push
+	// Pusher get the http.Pusher for server push
 	Pusher() http.Pusher
 }
 
@@ -52,6 +51,8 @@ type responseWriter struct {
 
 var _ ResponseWriter = (*responseWriter)(nil)
 
+
+// ff:
 func (w *responseWriter) Unwrap() http.ResponseWriter {
 	return w.ResponseWriter
 }
@@ -62,6 +63,9 @@ func (w *responseWriter) reset(writer http.ResponseWriter) {
 	w.status = defaultStatus
 }
 
+
+// ff:
+// code:
 func (w *responseWriter) WriteHeader(code int) {
 	if code > 0 && w.status != code {
 		if w.Written() {
@@ -72,6 +76,8 @@ func (w *responseWriter) WriteHeader(code int) {
 	}
 }
 
+
+// ff:
 func (w *responseWriter) WriteHeaderNow() {
 	if !w.Written() {
 		w.size = 0
@@ -79,6 +85,11 @@ func (w *responseWriter) WriteHeaderNow() {
 	}
 }
 
+
+// ff:
+// err:
+// n:
+// data:
 func (w *responseWriter) Write(data []byte) (n int, err error) {
 	w.WriteHeaderNow()
 	n, err = w.ResponseWriter.Write(data)
@@ -86,6 +97,11 @@ func (w *responseWriter) Write(data []byte) (n int, err error) {
 	return
 }
 
+
+// ff:
+// err:
+// n:
+// s:
 func (w *responseWriter) WriteString(s string) (n int, err error) {
 	w.WriteHeaderNow()
 	n, err = io.WriteString(w.ResponseWriter, s)
@@ -93,20 +109,29 @@ func (w *responseWriter) WriteString(s string) (n int, err error) {
 	return
 }
 
+
+// ff:
 func (w *responseWriter) Status() int {
 	return w.status
 }
 
+
+// ff:
 func (w *responseWriter) Size() int {
 	return w.size
 }
 
+
+// ff:
 func (w *responseWriter) Written() bool {
 	return w.size != noWritten
 }
 
-// Hijack实现http
-// 劫机者接口
+// Hijack implements the http.Hijacker interface.
+
+// ff:
+// *bufio.ReadWriter:
+// net.Conn:
 func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	if w.size < 0 {
 		w.size = 0
@@ -114,19 +139,24 @@ func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return w.ResponseWriter.(http.Hijacker).Hijack()
 }
 
-// CloseNotify实现http
-// CloseNotifier接口
+// CloseNotify implements the http.CloseNotifier interface.
+
+// ff:
 func (w *responseWriter) CloseNotify() <-chan bool {
 	return w.ResponseWriter.(http.CloseNotifier).CloseNotify()
 }
 
-// Flush实现http
-// 冲洗装置接口
+// Flush implements the http.Flusher interface.
+
+// ff:
 func (w *responseWriter) Flush() {
 	w.WriteHeaderNow()
 	w.ResponseWriter.(http.Flusher).Flush()
 }
 
+
+// ff:
+// pusher:
 func (w *responseWriter) Pusher() (pusher http.Pusher) {
 	if pusher, ok := w.ResponseWriter.(http.Pusher); ok {
 		return pusher

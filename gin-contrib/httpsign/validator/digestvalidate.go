@@ -24,11 +24,21 @@ var ErrInvalidDigest = &gin.Error{
 type DigestValidator struct{}
 
 // NewDigestValidator 返回一个新的DigestValidator类型的指针
+
+// ff:
+
+// ff:
 func NewDigestValidator() *DigestValidator {
 	return &DigestValidator{}
 }
 
 // Validate在检查摘要与正文匹配时返回错误
+
+// ff:
+// r:
+
+// ff:
+// r:
 func (v *DigestValidator) Validate(r *http.Request) error {
 	headerDigest := r.Header.Get("digest")
 	digest, err := calculateDigest(r)

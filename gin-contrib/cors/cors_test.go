@@ -46,6 +46,12 @@ func performRequestWithHeaders(r http.Handler, method, origin string, header htt
 	return w
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestConfigAddAllow(t *testing.T) {
 	config := Config{}
 	config.AddAllowMethods("POST")
@@ -65,6 +71,12 @@ func TestConfigAddAllow(t *testing.T) {
 	assert.Equal(t, config.ExposeHeaders, []string{"exposed", "header", "hey"})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestBadConfig(t *testing.T) {
 	assert.Panics(t, func() { New(Config{}) })
 	assert.Panics(t, func() {
@@ -86,6 +98,12 @@ func TestBadConfig(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestNormalize(t *testing.T) {
 	values := normalize([]string{
 		"http-Access ", "Post", "POST", " poSt  ",
@@ -100,6 +118,12 @@ func TestNormalize(t *testing.T) {
 	assert.Equal(t, values, []string{})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestConvert(t *testing.T) {
 	methods := []string{"Get", "GET", "get"}
 	headers := []string{"X-CSRF-TOKEN", "X-CSRF-Token", "x-csrf-token"}
@@ -108,6 +132,12 @@ func TestConvert(t *testing.T) {
 	assert.Equal(t, []string{"X-Csrf-Token", "X-Csrf-Token", "X-Csrf-Token"}, convert(headers, http.CanonicalHeaderKey))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGenerateNormalHeaders_AllowAllOrigins(t *testing.T) {
 	header := generateNormalHeaders(Config{
 		AllowAllOrigins: false,
@@ -124,6 +154,12 @@ func TestGenerateNormalHeaders_AllowAllOrigins(t *testing.T) {
 	assert.Len(t, header, 1)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGenerateNormalHeaders_AllowCredentials(t *testing.T) {
 	header := generateNormalHeaders(Config{
 		AllowCredentials: true,
@@ -133,6 +169,12 @@ func TestGenerateNormalHeaders_AllowCredentials(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGenerateNormalHeaders_ExposedHeaders(t *testing.T) {
 	header := generateNormalHeaders(Config{
 		ExposeHeaders: []string{"X-user", "xPassword"},
@@ -142,6 +184,12 @@ func TestGenerateNormalHeaders_ExposedHeaders(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGeneratePreflightHeaders(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowAllOrigins: false,
@@ -158,6 +206,12 @@ func TestGeneratePreflightHeaders(t *testing.T) {
 	assert.Len(t, header, 1)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGeneratePreflightHeaders_AllowCredentials(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowCredentials: true,
@@ -167,6 +221,12 @@ func TestGeneratePreflightHeaders_AllowCredentials(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGeneratePreflightHeaders_AllowPrivateNetwork(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowPrivateNetwork: true,
@@ -176,6 +236,12 @@ func TestGeneratePreflightHeaders_AllowPrivateNetwork(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGeneratePreflightHeaders_AllowMethods(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowMethods: []string{"GET ", "post", "PUT", " put  "},
@@ -185,6 +251,12 @@ func TestGeneratePreflightHeaders_AllowMethods(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGeneratePreflightHeaders_AllowHeaders(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowHeaders: []string{"X-user", "Content-Type"},
@@ -194,6 +266,12 @@ func TestGeneratePreflightHeaders_AllowHeaders(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestGeneratePreflightHeaders_MaxAge(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		MaxAge: 12 * time.Hour,
@@ -204,6 +282,12 @@ func TestGeneratePreflightHeaders_MaxAge(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestValidateOrigin(t *testing.T) {
 	cors := newCors(Config{
 		AllowAllOrigins: true,
@@ -271,6 +355,12 @@ func TestValidateOrigin(t *testing.T) {
 	assert.True(t, cors.validateOrigin("chrome-extension://random-extension-id"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestPassesAllowOrigins(t *testing.T) {
 	router := newTestRouter(Config{
 		AllowOrigins:     []string{"http://google.com"},
@@ -339,6 +429,12 @@ func TestPassesAllowOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Max-Age"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestPassesAllowAllOrigins(t *testing.T) {
 	router := newTestRouter(Config{
 		AllowAllOrigins:  true,
@@ -375,6 +471,12 @@ func TestPassesAllowAllOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestWildcard(t *testing.T) {
 	router := newTestRouter(Config{
 		AllowOrigins:  []string{"https://*.github.com", "https://api.*", "http://*", "https://facebook.com", "*.golang.org"},

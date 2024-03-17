@@ -16,6 +16,12 @@ func emptySuccessResponse(c *gin.Context) {
 	c.String(http.StatusOK, "")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestTimeout(t *testing.T) {
 	r := gin.New()
 	r.GET("/", New(WithTimeout(50*time.Microsecond), WithHandler(emptySuccessResponse)))
@@ -28,6 +34,12 @@ func TestTimeout(t *testing.T) {
 	assert.Equal(t, http.StatusText(http.StatusRequestTimeout), w.Body.String())
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestWithoutTimeout(t *testing.T) {
 	r := gin.New()
 	r.GET("/", New(WithTimeout(-1*time.Microsecond), WithHandler(emptySuccessResponse)))
@@ -44,6 +56,12 @@ func testResponse(c *gin.Context) {
 	c.String(http.StatusRequestTimeout, "test response")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestCustomResponse(t *testing.T) {
 	r := gin.New()
 	r.GET("/", New(
@@ -65,6 +83,12 @@ func emptySuccessResponse2(c *gin.Context) {
 	c.String(http.StatusOK, "")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestSuccess(t *testing.T) {
 	r := gin.New()
 	r.GET("/", New(
@@ -85,6 +109,12 @@ func panicResponse(c *gin.Context) {
 	panic("test")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestPanic(t *testing.T) {
 	r := gin.New()
 	r.Use(gin.Recovery())

@@ -124,6 +124,12 @@ var tests = []struct {
 	},
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestLocation(t *testing.T) {
 	for _, test := range tests {
 		c := new(gin.Context)
@@ -158,6 +164,12 @@ func performRequest(r http.Handler, method string) *httptest.ResponseRecorder {
 	return w
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestDefault(t *testing.T) {
 	router := defaultRouter()
 	w := performRequest(router, "GET")
@@ -177,6 +189,12 @@ func customRouter(config Config) *gin.Engine {
 	return router
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestCustom(t *testing.T) {
 	router := customRouter(Config{
 		Scheme: "https",

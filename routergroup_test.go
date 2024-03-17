@@ -1,13 +1,13 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
 import (
 	"net/http"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -15,6 +15,9 @@ func init() {
 	SetMode(TestMode)
 }
 
+
+// ff:
+// t:
 func TestRouterGroupBasic(t *testing.T) {
 	router := New()
 	group := router.Group("/hola", func(c *Context) {})
@@ -32,6 +35,9 @@ func TestRouterGroupBasic(t *testing.T) {
 	assert.Equal(t, router, group2.engine)
 }
 
+
+// ff:
+// t:
 func TestRouterGroupBasicHandle(t *testing.T) {
 	performRequestInGroup(t, http.MethodGet)
 	performRequestInGroup(t, http.MethodPost)
@@ -89,6 +95,9 @@ func performRequestInGroup(t *testing.T, method string) {
 	assert.Equal(t, "the method was "+method+" and index 1", w.Body.String())
 }
 
+
+// ff:
+// t:
 func TestRouterGroupInvalidStatic(t *testing.T) {
 	router := New()
 	assert.Panics(t, func() {
@@ -100,6 +109,9 @@ func TestRouterGroupInvalidStatic(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestRouterGroupInvalidStaticFile(t *testing.T) {
 	router := New()
 	assert.Panics(t, func() {
@@ -111,6 +123,9 @@ func TestRouterGroupInvalidStaticFile(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestRouterGroupInvalidStaticFileFS(t *testing.T) {
 	router := New()
 	assert.Panics(t, func() {
@@ -122,6 +137,9 @@ func TestRouterGroupInvalidStaticFileFS(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestRouterGroupTooManyHandlers(t *testing.T) {
 	const (
 		panicValue = "too many handlers"
@@ -140,6 +158,9 @@ func TestRouterGroupTooManyHandlers(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestRouterGroupBadMethod(t *testing.T) {
 	router := New()
 	assert.Panics(t, func() {
@@ -165,6 +186,9 @@ func TestRouterGroupBadMethod(t *testing.T) {
 	})
 }
 
+
+// ff:
+// t:
 func TestRouterGroupPipeline(t *testing.T) {
 	router := New()
 	testRoutesInterface(t, router)

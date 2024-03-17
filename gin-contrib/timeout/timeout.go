@@ -13,6 +13,12 @@ const (
 )
 
 // New 包装一个处理器，如果达到超时时间，则中止处理器的执行流程
+
+// ff:
+// opts:
+
+// ff:
+// opts:
 func New(opts ...Option) gin.HandlerFunc {
 	t := &Timeout{
 		timeout:  defaultTimeout,

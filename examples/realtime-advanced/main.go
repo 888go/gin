@@ -14,6 +14,10 @@ func main() {
 }
 
 // ConfigRuntime设置操作系统线程数
+
+// ff:
+
+// ff:
 func ConfigRuntime() {
 	nuCPU := runtime.NumCPU()
 	runtime.GOMAXPROCS(nuCPU)
@@ -21,11 +25,19 @@ func ConfigRuntime() {
 }
 
 // StartWorkers通过例程启动starsWorker
+
+// ff:
+
+// ff:
 func StartWorkers() {
 	go statsWorker()
 }
 
 // 通过设置路由器启动web服务器
+
+// ff:
+
+// ff:
 func StartGin() {
 	gin.SetMode(gin.ReleaseMode)
 

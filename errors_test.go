@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -8,11 +8,14 @@ import (
 	"errors"
 	"fmt"
 	"testing"
-	
-	"github.com/888go/gin/internal/json"
+
+	"github.com/gin-gonic/gin/internal/json"
 	"github.com/stretchr/testify/assert"
 )
 
+
+// ff:
+// t:
 func TestError(t *testing.T) {
 	baseError := errors.New("test error")
 	err := &Error{
@@ -35,8 +38,7 @@ func TestError(t *testing.T) {
 	jsonBytes, _ := json.Marshal(err)
 	assert.Equal(t, "{\"error\":\"test error\",\"meta\":\"some data\"}", string(jsonBytes))
 
-	err.SetMeta(H{ // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	err.SetMeta(H{ //nolint: errcheck
 		"status": "200",
 		"data":   "some data",
 	})
@@ -46,8 +48,7 @@ func TestError(t *testing.T) {
 		"data":   "some data",
 	}, err.JSON())
 
-	err.SetMeta(H{ // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	err.SetMeta(H{ //nolint: errcheck
 		"error":  "custom error",
 		"status": "200",
 		"data":   "some data",
@@ -62,11 +63,13 @@ func TestError(t *testing.T) {
 		status string
 		data   string
 	}
-	err.SetMeta(customError{status: "200", data: "other data"}) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	err.SetMeta(customError{status: "200", data: "other data"}) //nolint: errcheck
 	assert.Equal(t, customError{status: "200", data: "other data"}, err.JSON())
 }
 
+
+// ff:
+// t:
 func TestErrorSlice(t *testing.T) {
 	errs := errorMsgs{
 		{Err: errors.New("first"), Type: ErrorTypePrivate},
@@ -111,22 +114,26 @@ Error #03: third
 
 type TestErr string
 
+
+// ff:
+// e:
 func (e TestErr) Error() string { return string(e) }
 
-// testrorunwrap测试gin的行为
-// Error . is ()"“和“误差()
-// “errors.Is()“;和“误差()“;已经被添加到go 1.13的标准库中
+// TestErrorUnwrap tests the behavior of gin.Error with "errors.Is()" and "errors.As()".
+// "errors.Is()" and "errors.As()" have been added to the standard library in go 1.13.
+
+// ff:
+// t:
 func TestErrorUnwrap(t *testing.T) {
 	innerErr := TestErr("some error")
 
-// 2层包装:使用'fmt. error ("%w")'来包装杜松子酒
-// Error{}，它本身包装了innerErr
+	// 2 layers of wrapping : use 'fmt.Errorf("%w")' to wrap a gin.Error{}, which itself wraps innerErr
 	err := fmt.Errorf("wrapped: %w", &Error{
 		Err:  innerErr,
 		Type: ErrorTypeAny,
 	})
 
-// 检查'errors.Is()'和'errors.As()'的行为是否符合预期:
+	// check that 'errors.Is()' and 'errors.As()' behave as expected :
 	assert.True(t, errors.Is(err, innerErr))
 	var testErr TestErr
 	assert.True(t, errors.As(err, &testErr))

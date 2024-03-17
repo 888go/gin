@@ -68,6 +68,12 @@ func generateSignature(keyID KeyID, algorithm string, headers []string, signatur
 	)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAuthenticatedHeaderNoSignature(t *testing.T) {
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -76,6 +82,12 @@ func TestAuthenticatedHeaderNoSignature(t *testing.T) {
 	assert.Equal(t, ErrNoSignature, c.Errors[0])
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAuthenticatedHeaderInvalidSignature(t *testing.T) {
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -85,6 +97,12 @@ func TestAuthenticatedHeaderInvalidSignature(t *testing.T) {
 	assert.Equal(t, ErrInvalidAuthorizationHeader, c.Errors[0])
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAuthenticatedHeaderWrongKey(t *testing.T) {
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -96,6 +114,12 @@ func TestAuthenticatedHeaderWrongKey(t *testing.T) {
 	assert.Equal(t, ErrInvalidKeyID, c.Errors[0])
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAuthenticateDateNotAccept(t *testing.T) {
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -107,6 +131,12 @@ func TestAuthenticateDateNotAccept(t *testing.T) {
 	assert.Equal(t, validator.ErrDateNotInRange, c.Errors[0])
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAuthenticateInvalidRequiredHeader(t *testing.T) {
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -121,6 +151,12 @@ func TestAuthenticateInvalidRequiredHeader(t *testing.T) {
 	assert.Equal(t, ErrHeaderNotEnough, c.Errors[0])
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestAuthenticateInvalidAlgo(t *testing.T) {
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -133,6 +169,12 @@ func TestAuthenticateInvalidAlgo(t *testing.T) {
 	assert.Equal(t, ErrIncorrectAlgorithm, c.Errors[0])
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestInvalidSign(t *testing.T) {
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -148,6 +190,12 @@ func TestInvalidSign(t *testing.T) {
 // 假设接口始终返回 true
 type dateAlwaysValid struct{}
 
+
+// ff:
+// r:
+
+// ff:
+// r:
 func (v *dateAlwaysValid) Validate(r *http.Request) error { return nil }
 
 var mockValidator = []validator.Validator{
@@ -170,6 +218,12 @@ func httpTestPost(c *gin.Context) {
 	c.Render(http.StatusOK, render.Data{Data: body})
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestHttpInvalidRequest(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
@@ -190,6 +244,12 @@ func TestHttpInvalidRequest(t *testing.T) {
 	assert.NotEqual(t, http.StatusOK, w.Code)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestHttpInvalidDigest(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
@@ -211,6 +271,12 @@ func TestHttpInvalidDigest(t *testing.T) {
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestHttpValidRequest(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
@@ -231,6 +297,12 @@ func TestHttpValidRequest(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestHttpValidRequestBody(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
@@ -255,6 +327,12 @@ func TestHttpValidRequestBody(t *testing.T) {
 	assert.Equal(t, body, []byte(sampleBodyContent))
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestHttpValidRequestHost(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 

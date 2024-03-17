@@ -21,6 +21,16 @@ var (
 // NewSpan 返回一个gin.HandlerFunc（中间件），该中间件会启动一个新的span并将其注入到请求上下文中。
 //
 // 它调用ctx.Next()以测量所有后续处理器的执行时间。
+
+// ff:
+// opts:
+// operationName:
+// tracer:
+
+// ff:
+// opts:
+// operationName:
+// tracer:
 func NewSpan(tracer opentracing.Tracer, operationName string, opts ...opentracing.StartSpanOption) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		span := tracer.StartSpan(operationName, opts...)
@@ -130,6 +140,14 @@ func SpanFromContext(tracer opentracing.Tracer, operationName string, abortOnErr
 //
 // 出错时的行为由abortOnErrors选项决定。
 // 若该选项设置为true，处理请求将会因错误而中止。
+
+// ff:
+// abortOnErrors:
+// tracer:
+
+// ff:
+// abortOnErrors:
+// tracer:
 func InjectToHeaders(tracer opentracing.Tracer, abortOnErrors bool) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var spanContext opentracing.SpanContext
@@ -149,6 +167,16 @@ func InjectToHeaders(tracer opentracing.Tracer, abortOnErrors bool) gin.HandlerF
 
 // GetSpan 从上下文中提取跨度（span）。
 // 在分布式追踪系统中，"span"通常代表一次操作或请求的追踪片段。这个函数是从给定的 context 中获取并返回这个追踪片段。
+
+// ff:
+// exists:
+// span:
+// ctx:
+
+// ff:
+// exists:
+// span:
+// ctx:
 func GetSpan(ctx *gin.Context) (span opentracing.Span, exists bool) {
 	spanI, _ := ctx.Get(spanContextKey)
 	span, ok := spanI.(opentracing.Span)
@@ -157,6 +185,12 @@ func GetSpan(ctx *gin.Context) (span opentracing.Span, exists bool) {
 }
 
 // MustGetSpan 从上下文中提取跨度（span）。如果未设置跨度，则会引发恐慌。
+
+// ff:
+// ctx:
+
+// ff:
+// ctx:
 func MustGetSpan(ctx *gin.Context) opentracing.Span {
 	return ctx.MustGet(spanContextKey).(opentracing.Span)
 }

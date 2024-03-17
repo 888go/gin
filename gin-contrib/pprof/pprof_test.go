@@ -8,6 +8,12 @@ import (
 	"github.com/888go/gin"
 )
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func Test_getPrefix(t *testing.T) {
 	tests := []struct {
 		name string
@@ -25,6 +31,12 @@ func Test_getPrefix(t *testing.T) {
 	}
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRegisterAndRouteRegister(t *testing.T) {
 	bearerToken := "Bearer token"
 	gin.SetMode(gin.ReleaseMode)

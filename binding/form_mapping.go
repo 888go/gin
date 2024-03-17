@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package binding
 
@@ -11,18 +11,18 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	
-	"github.com/888go/gin/internal/bytesconv"
-	"github.com/888go/gin/internal/json"
+
+	"github.com/gin-gonic/gin/internal/bytesconv"
+	"github.com/gin-gonic/gin/internal/json"
 )
 
 var (
 	errUnknownType = errors.New("unknown type")
 
-// ErrConvertMapStringSlice不能转换为map[string][]string
+	// ErrConvertMapStringSlice can not convert to map[string][]string
 	ErrConvertMapStringSlice = errors.New("can not convert to map slices of strings")
 
-// ErrConvertToMapString不能转换为map[string]string
+	// ErrConvertToMapString can not convert to map[string]string
 	ErrConvertToMapString = errors.New("can not convert to map of strings")
 )
 
@@ -34,6 +34,11 @@ func mapForm(ptr any, form map[string][]string) error {
 	return mapFormByTag(ptr, form, "form")
 }
 
+
+// ff:
+// tag:
+// form:
+// ptr:
 func MapFormWithTag(ptr any, form map[string][]string, tag string) error {
 	return mapFormByTag(ptr, form, tag)
 }
@@ -41,7 +46,7 @@ func MapFormWithTag(ptr any, form map[string][]string, tag string) error {
 var emptyField = reflect.StructField{}
 
 func mapFormByTag(ptr any, form map[string][]string, tag string) error {
-// 检查ptr是否为映射
+	// Check if ptr is a map
 	ptrVal := reflect.ValueOf(ptr)
 	var pointed any
 	if ptrVal.Kind() == reflect.Ptr {
@@ -59,7 +64,7 @@ func mapFormByTag(ptr any, form map[string][]string, tag string) error {
 	return mappingByPtr(ptr, formSource(form), tag)
 }
 
-// Setter尝试在结构体的遍历字段上设置值
+// setter tries to set value on a walking by fields of a struct
 type setter interface {
 	TrySet(value reflect.Value, field reflect.StructField, key string, opt setOptions) (isSet bool, err error)
 }
@@ -68,7 +73,15 @@ type formSource map[string][]string
 
 var _ setter = formSource(nil)
 
-// TrySet尝试通过请求的表单源设置值(如map[string][]string)
+// TrySet tries to set a value by request's form source (like map[string][]string)
+
+// ff:
+// err:
+// isSet:
+// opt:
+// tagValue:
+// field:
+// value:
 func (form formSource) TrySet(value reflect.Value, field reflect.StructField, tagValue string, opt setOptions) (isSet bool, err error) {
 	return setByForm(value, field, form, tagValue, opt)
 }
@@ -79,7 +92,7 @@ func mappingByPtr(ptr any, setter setter, tag string) error {
 }
 
 func mapping(value reflect.Value, field reflect.StructField, setter setter, tag string) (bool, error) {
-	if field.Tag.Get(tag) == "-" { // 忽略这个字段
+	if field.Tag.Get(tag) == "-" { // just ignoring this field
 		return false, nil
 	}
 
@@ -118,7 +131,7 @@ func mapping(value reflect.Value, field reflect.StructField, setter setter, tag 
 		var isSet bool
 		for i := 0; i < value.NumField(); i++ {
 			sf := tValue.Field(i)
-			if sf.PkgPath != "" && !sf.Anonymous { // 非导出
+			if sf.PkgPath != "" && !sf.Anonymous { // unexported
 				continue
 			}
 			ok, err := mapping(value.Field(i), sf, setter, tag)
@@ -144,10 +157,10 @@ func tryToSetValue(value reflect.Value, field reflect.StructField, setter setter
 	tagValue = field.Tag.Get(tag)
 	tagValue, opts := head(tagValue, ",")
 
-	if tagValue == "" { // 缺省值为FieldName
+	if tagValue == "" { // default value is FieldName
 		tagValue = field.Name
 	}
-	if tagValue == "" { // 当字段为"emptyField"变量时
+	if tagValue == "" { // when field is "emptyField" variable
 		return false, nil
 	}
 
@@ -401,7 +414,7 @@ func setFormMap(ptr any, form map[string][]string) error {
 		return ErrConvertToMapString
 	}
 	for k, v := range form {
-		ptrMap[k] = v[len(v)-1] // 选择最后一个
+		ptrMap[k] = v[len(v)-1] // pick last
 	}
 
 	return nil

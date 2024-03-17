@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -8,8 +8,8 @@ import (
 	"flag"
 	"os"
 	"testing"
-	
-	"github.com/888go/gin/binding"
+
+	"github.com/gin-gonic/gin/binding"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,6 +17,9 @@ func init() {
 	os.Setenv(EnvGinMode, TestMode)
 }
 
+
+// ff:
+// t:
 func TestSetMode(t *testing.T) {
 	assert.Equal(t, testCode, ginMode)
 	assert.Equal(t, TestMode, Mode())
@@ -48,6 +51,9 @@ func TestSetMode(t *testing.T) {
 	assert.Panics(t, func() { SetMode("unknown") })
 }
 
+
+// ff:
+// t:
 func TestDisableBindValidation(t *testing.T) {
 	v := binding.Validator
 	assert.NotNil(t, binding.Validator)
@@ -56,12 +62,18 @@ func TestDisableBindValidation(t *testing.T) {
 	binding.Validator = v
 }
 
+
+// ff:
+// t:
 func TestEnableJsonDecoderUseNumber(t *testing.T) {
 	assert.False(t, binding.EnableDecoderUseNumber)
 	EnableJsonDecoderUseNumber()
 	assert.True(t, binding.EnableDecoderUseNumber)
 }
 
+
+// ff:
+// t:
 func TestEnableJsonDecoderDisallowUnknownFields(t *testing.T) {
 	assert.False(t, binding.EnableDecoderDisallowUnknownFields)
 	EnableJsonDecoderDisallowUnknownFields()

@@ -68,6 +68,10 @@ type Config struct {
 //		ContentSecurityPolicy: "default-src 'self'", // 内容安全策略，默认只允许加载同一源下的资源
 //		SSLProxyHeaders:       map[string]string{"X-Forwarded-Proto": "https"}, // 用于识别经过代理服务器的 HTTPS 请求头映射（默认将 "X-Forwarded-Proto" 设置为 "https"）
 // ```
+
+// ff:
+
+// ff:
 func DefaultConfig() Config {
 	return Config{
 		SSLRedirect:           true,
@@ -85,6 +89,12 @@ func DefaultConfig() Config {
 
 // New 根据指定的配置创建一个安全中间件实例。
 // 使用方式：router.Use(secure.N)
+
+// ff:
+// config:
+
+// ff:
+// config:
 func New(config Config) gin.HandlerFunc {
 	policy := newPolicy(config)
 	return func(c *gin.Context) {

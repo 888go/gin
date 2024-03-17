@@ -41,11 +41,29 @@ type Config struct {
 // 它接收以下参数：
 //  1. 一个时间格式字符串（例如 time.RFC3339）。
 //  2. 一个布尔值，表示是否使用 UTC 时区或本地时区。
+
+// ff:
+// utc:
+// timeFormat:
+// logger:
+
+// ff:
+// utc:
+// timeFormat:
+// logger:
 func Ginzap(logger ZapLogger, timeFormat string, utc bool) gin.HandlerFunc {
 	return GinzapWithConfig(logger, &Config{TimeFormat: timeFormat, UTC: utc, DefaultLevel: zapcore.InfoLevel})
 }
 
 // GinzapWithConfig 根据配置返回一个 gin.HandlerFunc
+
+// ff:
+// conf:
+// logger:
+
+// ff:
+// conf:
+// logger:
 func GinzapWithConfig(logger ZapLogger, conf *Config) gin.HandlerFunc {
 	skipPaths := make(map[string]bool, len(conf.SkipPaths))
 	for _, path := range conf.SkipPaths {
@@ -109,6 +127,14 @@ func defaultHandleRecovery(c *gin.Context, err interface{}) {
 // 所有错误都会通过zap.Error()方法进行日志记录。
 // stack 参数表示是否输出堆栈信息。
 // 堆栈信息有助于快速定位错误发生的位置，但其体积较大。
+
+// ff:
+// stack:
+// logger:
+
+// ff:
+// stack:
+// logger:
 func RecoveryWithZap(logger ZapLogger, stack bool) gin.HandlerFunc {
 	return CustomRecoveryWithZap(logger, stack, defaultHandleRecovery)
 }
@@ -118,6 +144,16 @@ func RecoveryWithZap(logger ZapLogger, stack bool) gin.HandlerFunc {
 // 所有错误都会通过zap.Error()方法进行日志记录。
 // stack 参数表示是否输出堆栈信息。
 // 堆栈信息有助于快速定位错误发生位置，但其信息量较大。
+
+// ff:
+// recovery:
+// stack:
+// logger:
+
+// ff:
+// recovery:
+// stack:
+// logger:
 func CustomRecoveryWithZap(logger ZapLogger, stack bool, recovery gin.RecoveryFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {

@@ -1,16 +1,19 @@
-// 版权所有2022 Gin Core团队
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2022 Gin Core Team. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package binding
 
 import (
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
+
+// ff:
+// t:
 func TestTOMLBindingBindBody(t *testing.T) {
 	var s struct {
 		Foo string `toml:"foo"`

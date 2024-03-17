@@ -26,10 +26,28 @@ type greeterClient struct {
 	cc grpc.ClientConnInterface
 }
 
+
+// ff:
+// cc:
+
+// ff:
+// cc:
 func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
 	return &greeterClient{cc}
 }
 
+
+// ff:
+// *HelloReply:
+// opts:
+// in:
+// ctx:
+
+// ff:
+// *HelloReply:
+// opts:
+// in:
+// ctx:
 func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
 	out := new(HelloReply)
 	err := c.cc.Invoke(ctx, "/helloworld.v1.Greeter/SayHello", in, out, opts...)
@@ -62,6 +80,14 @@ type UnsafeGreeterServer interface {
 	mustEmbedUnimplementedGreeterServer()
 }
 
+
+// ff:
+// srv:
+// s:
+
+// ff:
+// srv:
+// s:
 func RegisterGreeterServer(s grpc.ServiceRegistrar, srv GreeterServer) {
 	s.RegisterService(&Greeter_ServiceDesc, srv)
 }

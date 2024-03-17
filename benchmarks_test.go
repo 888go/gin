@@ -1,6 +1,6 @@
-// 版权所有2017马努·马丁内斯-阿尔梅达
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2017 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -11,12 +11,18 @@ import (
 	"testing"
 )
 
+
+// ff:
+// B:
 func BenchmarkOneRoute(B *testing.B) {
 	router := New()
 	router.GET("/ping", func(c *Context) {})
 	runRequest(B, router, "GET", "/ping")
 }
 
+
+// ff:
+// B:
 func BenchmarkRecoveryMiddleware(B *testing.B) {
 	router := New()
 	router.Use(Recovery())
@@ -24,6 +30,9 @@ func BenchmarkRecoveryMiddleware(B *testing.B) {
 	runRequest(B, router, "GET", "/")
 }
 
+
+// ff:
+// B:
 func BenchmarkLoggerMiddleware(B *testing.B) {
 	router := New()
 	router.Use(LoggerWithWriter(newMockWriter()))
@@ -31,6 +40,9 @@ func BenchmarkLoggerMiddleware(B *testing.B) {
 	runRequest(B, router, "GET", "/")
 }
 
+
+// ff:
+// B:
 func BenchmarkManyHandlers(B *testing.B) {
 	router := New()
 	router.Use(Recovery(), LoggerWithWriter(newMockWriter()))
@@ -40,6 +52,9 @@ func BenchmarkManyHandlers(B *testing.B) {
 	runRequest(B, router, "GET", "/ping")
 }
 
+
+// ff:
+// B:
 func Benchmark5Params(B *testing.B) {
 	DefaultWriter = os.Stdout
 	router := New()
@@ -48,6 +63,9 @@ func Benchmark5Params(B *testing.B) {
 	runRequest(B, router, "GET", "/param/path/to/parameter/john/12345")
 }
 
+
+// ff:
+// B:
 func BenchmarkOneRouteJSON(B *testing.B) {
 	router := New()
 	data := struct {
@@ -59,6 +77,9 @@ func BenchmarkOneRouteJSON(B *testing.B) {
 	runRequest(B, router, "GET", "/json")
 }
 
+
+// ff:
+// B:
 func BenchmarkOneRouteHTML(B *testing.B) {
 	router := New()
 	t := template.Must(template.New("index").Parse(`
@@ -71,6 +92,9 @@ func BenchmarkOneRouteHTML(B *testing.B) {
 	runRequest(B, router, "GET", "/html")
 }
 
+
+// ff:
+// B:
 func BenchmarkOneRouteSet(B *testing.B) {
 	router := New()
 	router.GET("/ping", func(c *Context) {
@@ -79,6 +103,9 @@ func BenchmarkOneRouteSet(B *testing.B) {
 	runRequest(B, router, "GET", "/ping")
 }
 
+
+// ff:
+// B:
 func BenchmarkOneRouteString(B *testing.B) {
 	router := New()
 	router.GET("/text", func(c *Context) {
@@ -87,18 +114,27 @@ func BenchmarkOneRouteString(B *testing.B) {
 	runRequest(B, router, "GET", "/text")
 }
 
+
+// ff:
+// B:
 func BenchmarkManyRoutesFist(B *testing.B) {
 	router := New()
 	router.Any("/ping", func(c *Context) {})
 	runRequest(B, router, "GET", "/ping")
 }
 
+
+// ff:
+// B:
 func BenchmarkManyRoutesLast(B *testing.B) {
 	router := New()
 	router.Any("/ping", func(c *Context) {})
 	runRequest(B, router, "OPTIONS", "/ping")
 }
 
+
+// ff:
+// B:
 func Benchmark404(B *testing.B) {
 	router := New()
 	router.Any("/something", func(c *Context) {})
@@ -106,6 +142,9 @@ func Benchmark404(B *testing.B) {
 	runRequest(B, router, "GET", "/ping")
 }
 
+
+// ff:
+// B:
 func Benchmark404Many(B *testing.B) {
 	router := New()
 	router.GET("/", func(c *Context) {})
@@ -131,22 +170,37 @@ func newMockWriter() *mockWriter {
 	}
 }
 
+
+// ff:
+// h:
 func (m *mockWriter) Header() (h http.Header) {
 	return m.headers
 }
 
+
+// ff:
+// err:
+// n:
+// p:
 func (m *mockWriter) Write(p []byte) (n int, err error) {
 	return len(p), nil
 }
 
+
+// ff:
+// err:
+// n:
+// s:
 func (m *mockWriter) WriteString(s string) (n int, err error) {
 	return len(s), nil
 }
 
+
+// ff:
 func (m *mockWriter) WriteHeader(int) {}
 
 func runRequest(B *testing.B, r *Engine, method, path string) {
-// 创建假请求
+	// create fake request
 	req, err := http.NewRequest(method, path, nil)
 	if err != nil {
 		panic(err)

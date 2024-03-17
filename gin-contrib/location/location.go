@@ -31,6 +31,10 @@ type Config struct {
 }
 
 // DefaultConfig 返回一个映射到本机的通用默认配置。
+
+// ff:
+
+// ff:
 func DefaultConfig() Config {
 	return Config{
 		Host:   "localhost:8080",
@@ -43,12 +47,22 @@ func DefaultConfig() Config {
 }
 
 // Default 返回默认配置的 location 中间件。
+
+// ff:
+
+// ff:
 func Default() gin.HandlerFunc {
 	config := DefaultConfig()
 	return New(config)
 }
 
 // New 返回一个带有用户自定义配置的 location 中间件。
+
+// ff:
+// config:
+
+// ff:
+// config:
 func New(config Config) gin.HandlerFunc {
 	location := newLocation(config)
 
@@ -58,6 +72,12 @@ func New(config Config) gin.HandlerFunc {
 }
 
 // Get 从 context 中获取传入 http.Request 的 Location 信息。如果未设置 location，则返回空值（nil）。
+
+// ff:
+// c:
+
+// ff:
+// c:
 func Get(c *gin.Context) *url.URL {
 	v, ok := c.Get(key)
 

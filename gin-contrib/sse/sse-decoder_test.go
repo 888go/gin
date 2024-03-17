@@ -11,6 +11,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestDecodeSingle1(t *testing.T) {
 	events, err := Decode(bytes.NewBufferString(
 		`data: this is a text
@@ -27,6 +33,12 @@ data: a very nice one`))
 	assert.Equal(t, events[0].Id, "123456789010")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestDecodeSingle2(t *testing.T) {
 	events, err := Decode(bytes.NewBufferString(
 		`: starting with a comment
@@ -48,6 +60,12 @@ data:a very nice one\n!
 	assert.Equal(t, events[0].Id, "1234567890\\n10")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestDecodeSingle3(t *testing.T) {
 	events, err := Decode(bytes.NewBufferString(
 		`
@@ -66,6 +84,12 @@ data
 	assert.Equal(t, events[0].Id, "123456ABCabc789010")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestDecodeMulti1(t *testing.T) {
 	events, err := Decode(bytes.NewBufferString(
 		`
@@ -102,6 +126,12 @@ id`))
 	assert.Equal(t, events[0].Id, "")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestDecodeW3C(t *testing.T) {
 	events, err := Decode(bytes.NewBufferString(
 		`data

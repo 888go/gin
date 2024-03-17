@@ -1,6 +1,6 @@
-// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package render
 
@@ -14,16 +14,19 @@ import (
 	"strconv"
 	"strings"
 	"testing"
-	
-	"github.com/888go/gin/internal/json"
-	testdata "github.com/888go/gin/testdata/protoexample"
+
+	"github.com/gin-gonic/gin/internal/json"
+	testdata "github.com/gin-gonic/gin/testdata/protoexample"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/proto"
 )
 
-// TODO 单元测试
-// 测试错误情况
+// TODO unit tests
+// test errors
 
+
+// ff:
+// t:
 func TestRenderJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := map[string]any{
@@ -41,15 +44,20 @@ func TestRenderJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderJSONError(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-// json: 不支持的类型：chan int
-// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
+	// json: unsupported type: chan int
 	assert.Error(t, (JSON{data}).Render(w))
 }
 
+
+// ff:
+// t:
 func TestRenderIndentedJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := map[string]any{
@@ -64,16 +72,21 @@ func TestRenderIndentedJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderIndentedJSONPanics(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-// json: 不支持的类型：chan int
-// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
+	// json: unsupported type: chan int
 	err := (IndentedJSON{data}).Render(w)
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestRenderSecureJSON(t *testing.T) {
 	w1 := httptest.NewRecorder()
 	data := map[string]any{
@@ -102,16 +115,21 @@ func TestRenderSecureJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w2.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderSecureJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-// json: 不支持的类型：chan int
-// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
+	// json: unsupported type: chan int
 	err := (SecureJSON{"while(1);", data}).Render(w)
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestRenderJsonpJSON(t *testing.T) {
 	w1 := httptest.NewRecorder()
 	data := map[string]any{
@@ -147,6 +165,9 @@ type errorWriter struct {
 
 var _ http.ResponseWriter = (*errorWriter)(nil)
 
+
+// ff:
+// buf:
 func (w *errorWriter) Write(buf []byte) (int, error) {
 	if string(buf) == w.bufString {
 		return 0, errors.New(`write "` + w.bufString + `" error`)
@@ -154,6 +175,9 @@ func (w *errorWriter) Write(buf []byte) (int, error) {
 	return w.ResponseRecorder.Write(buf)
 }
 
+
+// ff:
+// t:
 func TestRenderJsonpJSONError(t *testing.T) {
 	ew := &errorWriter{
 		ResponseRecorder: httptest.NewRecorder(),
@@ -168,14 +192,14 @@ func TestRenderJsonpJSONError(t *testing.T) {
 
 	cb := template.JSEscapeString(jsonpJSON.Callback)
 	ew.bufString = cb
-	err := jsonpJSON.Render(ew) // 在写入回调时返回了错误
+	err := jsonpJSON.Render(ew) // error was returned while writing callback
 	assert.Equal(t, `write "`+cb+`" error`, err.Error())
 
 	ew.bufString = `(`
 	err = jsonpJSON.Render(ew)
 	assert.Equal(t, `write "`+`(`+`" error`, err.Error())
 
-	data, _ := json.Marshal(jsonpJSON.Data) // 在写入数据时返回了错误
+	data, _ := json.Marshal(jsonpJSON.Data) // error was returned while writing data
 	ew.bufString = string(data)
 	err = jsonpJSON.Render(ew)
 	assert.Equal(t, `write "`+string(data)+`" error`, err.Error())
@@ -185,6 +209,9 @@ func TestRenderJsonpJSONError(t *testing.T) {
 	assert.Equal(t, `write "`+`);`+`" error`, err.Error())
 }
 
+
+// ff:
+// t:
 func TestRenderJsonpJSONError2(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := map[string]any{
@@ -200,16 +227,21 @@ func TestRenderJsonpJSONError2(t *testing.T) {
 	assert.Equal(t, "application/javascript; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderJsonpJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-// json: 不支持的类型：chan int
-// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
+	// json: unsupported type: chan int
 	err := (JsonpJSON{"x", data}).Render(w)
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestRenderAsciiJSON(t *testing.T) {
 	w1 := httptest.NewRecorder()
 	data1 := map[string]any{
@@ -231,15 +263,20 @@ func TestRenderAsciiJSON(t *testing.T) {
 	assert.Equal(t, "3.1415926", w2.Body.String())
 }
 
+
+// ff:
+// t:
 func TestRenderAsciiJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-// json: 不支持的类型：chan int
-// （译文：该注释表明在处理JSON时，Go语言中不支持通道（chan）类型的int。）
+	// json: unsupported type: chan int
 	assert.Error(t, (AsciiJSON{data}).Render(w))
 }
 
+
+// ff:
+// t:
 func TestRenderPureJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := map[string]any{
@@ -254,7 +291,11 @@ func TestRenderPureJSON(t *testing.T) {
 
 type xmlmap map[string]any
 
-// 允许类型H在xml.Marshal中使用
+// Allows type H to be used with xml.Marshal
+
+// ff:
+// start:
+// e:
 func (h xmlmap) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	start.Name = xml.Name{
 		Space: "",
@@ -276,6 +317,9 @@ func (h xmlmap) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	return e.EncodeToken(xml.EndElement{Name: start.Name})
 }
 
+
+// ff:
+// t:
 func TestRenderYAML(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := `
@@ -295,23 +339,26 @@ b:
 
 type fail struct{}
 
-// Hook MarshalYAML 钩子
-// （这段代码的完整上下文缺失，但根据已有内容翻译如下：）
-// ```go
-// Hook MarshalYAML 是一个自定义 YAML 序列化的方法钩子，
-// 它会在结构体被转换为 YAML 格式时调用。
-// 通过实现这个方法，可以自定义结构体在序列化为 YAML 时的行为。
-// 在 Golang 的库如 "gopkg.in/yaml.v3" 中，`MarshalYAML` 方法用于定制结构体或其他类型的 YAML 序列化过程。
+// Hook MarshalYAML
+
+// ff:
+// any:
 func (ft *fail) MarshalYAML() (any, error) {
 	return nil, errors.New("fail")
 }
 
+
+// ff:
+// t:
 func TestRenderYAMLFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	err := (YAML{&fail{}}).Render(w)
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestRenderTOML(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := map[string]any{
@@ -327,13 +374,19 @@ func TestRenderTOML(t *testing.T) {
 	assert.Equal(t, "application/toml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderTOMLFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	err := (TOML{net.IPv4bcast}).Render(w)
 	assert.Error(t, err)
 }
 
-// 测试Protobuf渲染
+// test Protobuf rendering
+
+// ff:
+// t:
 func TestRenderProtoBuf(t *testing.T) {
 	w := httptest.NewRecorder()
 	reps := []int64{int64(1), int64(2)}
@@ -355,6 +408,9 @@ func TestRenderProtoBuf(t *testing.T) {
 	assert.Equal(t, "application/x-protobuf", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderProtoBufFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := &testdata.Test{}
@@ -362,6 +418,9 @@ func TestRenderProtoBufFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
+
+// ff:
+// t:
 func TestRenderXML(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := xmlmap{
@@ -378,6 +437,9 @@ func TestRenderXML(t *testing.T) {
 	assert.Equal(t, "application/xml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderRedirect(t *testing.T) {
 	req, err := http.NewRequest("GET", "/test-redirect", nil)
 	assert.NoError(t, err)
@@ -414,10 +476,13 @@ func TestRenderRedirect(t *testing.T) {
 	err = data3.Render(w)
 	assert.NoError(t, err)
 
-// 仅提高覆盖率
+	// only improve coverage
 	data2.WriteContentType(w)
 }
 
+
+// ff:
+// t:
 func TestRenderData(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := []byte("#!PNG some raw data")
@@ -432,6 +497,9 @@ func TestRenderData(t *testing.T) {
 	assert.Equal(t, "image/png", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderString(t *testing.T) {
 	w := httptest.NewRecorder()
 
@@ -451,6 +519,9 @@ func TestRenderString(t *testing.T) {
 	assert.Equal(t, "text/plain; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderStringLenZero(t *testing.T) {
 	w := httptest.NewRecorder()
 
@@ -464,6 +535,9 @@ func TestRenderStringLenZero(t *testing.T) {
 	assert.Equal(t, "text/plain; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderHTMLTemplate(t *testing.T) {
 	w := httptest.NewRecorder()
 	templ := template.Must(template.New("t").Parse(`Hello {{.name}}`))
@@ -480,6 +554,9 @@ func TestRenderHTMLTemplate(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderHTMLTemplateEmptyName(t *testing.T) {
 	w := httptest.NewRecorder()
 	templ := template.Must(template.New("").Parse(`Hello {{.name}}`))
@@ -496,6 +573,9 @@ func TestRenderHTMLTemplateEmptyName(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderHTMLDebugFiles(t *testing.T) {
 	w := httptest.NewRecorder()
 	htmlRender := HTMLDebug{
@@ -515,6 +595,9 @@ func TestRenderHTMLDebugFiles(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderHTMLDebugGlob(t *testing.T) {
 	w := httptest.NewRecorder()
 	htmlRender := HTMLDebug{
@@ -534,6 +617,9 @@ func TestRenderHTMLDebugGlob(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
+
+// ff:
+// t:
 func TestRenderHTMLDebugPanics(t *testing.T) {
 	htmlRender := HTMLDebug{
 		Files:   nil,
@@ -544,6 +630,9 @@ func TestRenderHTMLDebugPanics(t *testing.T) {
 	assert.Panics(t, func() { htmlRender.Instance("", nil) })
 }
 
+
+// ff:
+// t:
 func TestRenderReader(t *testing.T) {
 	w := httptest.NewRecorder()
 
@@ -567,6 +656,9 @@ func TestRenderReader(t *testing.T) {
 	assert.Equal(t, headers["x-request-id"], w.Header().Get("x-request-id"))
 }
 
+
+// ff:
+// t:
 func TestRenderReaderNoContentLength(t *testing.T) {
 	w := httptest.NewRecorder()
 
@@ -590,6 +682,9 @@ func TestRenderReaderNoContentLength(t *testing.T) {
 	assert.Equal(t, headers["x-request-id"], w.Header().Get("x-request-id"))
 }
 
+
+// ff:
+// t:
 func TestRenderWriteError(t *testing.T) {
 	data := []interface{}{"value1", "value2"}
 	prefix := "my-prefix:"

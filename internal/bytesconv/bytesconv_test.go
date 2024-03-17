@@ -1,6 +1,6 @@
-// 版权所有 ? 2020 Gin Core Team。保留所有权利。
-// 本源代码的使用受 MIT 风格许可证协议约束，
-// 该协议可在 LICENSE 文件中找到。
+// Copyright 2020 Gin Core Team. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package bytesconv
 
@@ -23,8 +23,11 @@ func rawStrToBytes(s string) []byte {
 	return []byte(s)
 }
 
-// 使用以下命令运行测试并显示详细信息：go test -v
+// go test -v
 
+
+// ff:
+// t:
 func TestBytesToString(t *testing.T) {
 	data := make([]byte, 1024)
 	for i := 0; i < 100; i++ {
@@ -37,17 +40,20 @@ func TestBytesToString(t *testing.T) {
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const (
-	letterIdxBits = 6                    // 用6位来表示一个字母索引
-	letterIdxMask = 1<<letterIdxBits - 1 // 生成包含1-bits的切片，数量与letterIdxBits相同
-	letterIdxMax  = 63 / letterIdxBits   // 符合63位大小的字母索引数量
+	letterIdxBits = 6                    // 6 bits to represent a letter index
+	letterIdxMask = 1<<letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
+	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
 )
 
 var src = rand.NewSource(time.Now().UnixNano())
 
+
+// ff:
+// n:
 func RandStringBytesMaskImprSrcSB(n int) string {
 	sb := strings.Builder{}
 	sb.Grow(n)
-// A src.Int63() 生成63个随机位，足以生成letterIdxMax个字符！
+	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
 	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i >= 0; {
 		if remain == 0 {
 			cache, remain = src.Int63(), letterIdxMax
@@ -63,6 +69,9 @@ func RandStringBytesMaskImprSrcSB(n int) string {
 	return sb.String()
 }
 
+
+// ff:
+// t:
 func TestStringToBytes(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		s := RandStringBytesMaskImprSrcSB(64)
@@ -72,26 +81,38 @@ func TestStringToBytes(t *testing.T) {
 	}
 }
 
-// 使用以下命令运行测试并显示详细信息：go test -v -run=none -bench=^BenchmarkBytesConv -benchmem=true
+// go test -v -run=none -bench=^BenchmarkBytesConv -benchmem=true
 
+
+// ff:
+// b:
 func BenchmarkBytesConvBytesToStrRaw(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		rawBytesToStr(testBytes)
 	}
 }
 
+
+// ff:
+// b:
 func BenchmarkBytesConvBytesToStr(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		BytesToString(testBytes)
 	}
 }
 
+
+// ff:
+// b:
 func BenchmarkBytesConvStrToBytesRaw(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		rawStrToBytes(testString)
 	}
 }
 
+
+// ff:
+// b:
 func BenchmarkBytesConvStrToBytes(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		StringToBytes(testString)

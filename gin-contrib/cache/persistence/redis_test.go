@@ -23,26 +23,62 @@ var newRedisStore = func(t *testing.T, defaultExpiration time.Duration) CacheSto
 	panic("")
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRedisCache_TypicalGetSet(t *testing.T) {
 	typicalGetSet(t, newRedisStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRedisCache_IncrDecr(t *testing.T) {
 	incrDecr(t, newRedisStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRedisCache_Expiration(t *testing.T) {
 	expiration(t, newRedisStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRedisCache_EmptyCache(t *testing.T) {
 	emptyCache(t, newRedisStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRedisCache_Replace(t *testing.T) {
 	testReplace(t, newRedisStore)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRedisCache_Add(t *testing.T) {
 	testAdd(t, newRedisStore)
 }

@@ -24,6 +24,14 @@ type SignatureHeader struct {
 }
 
 // NewSignatureHeader 创建一个新的 SignatureHeader 实例
+
+// ff:
+// *SignatureHeader:
+// r:
+
+// ff:
+// *SignatureHeader:
+// r:
 func NewSignatureHeader(r *http.Request) (*SignatureHeader, error) {
 	return parseHTTPRequest(r)
 }

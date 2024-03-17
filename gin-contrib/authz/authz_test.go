@@ -25,6 +25,12 @@ func testAuthzRequest(t *testing.T, router *gin.Engine, user string, path string
 	}
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestBasic(t *testing.T) {
 	router := gin.New()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
@@ -39,6 +45,12 @@ func TestBasic(t *testing.T) {
 	testAuthzRequest(t, router, "alice", "/dataset1/resource2", "POST", 403)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestPathWildcard(t *testing.T) {
 	router := gin.New()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
@@ -62,6 +74,12 @@ func TestPathWildcard(t *testing.T) {
 	testAuthzRequest(t, router, "bob", "/dataset2/folder1/item2", "DELETE", 403)
 }
 
+
+// ff:
+// t:
+
+// ff:
+// t:
 func TestRBAC(t *testing.T) {
 	router := gin.New()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")

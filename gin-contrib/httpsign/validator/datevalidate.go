@@ -29,6 +29,10 @@ type DateValidator struct {
 }
 
 // NewDateValidator 返回一个具有默认值（30秒）的 DateValidator
+
+// ff:
+
+// ff:
 func NewDateValidator() *DateValidator {
 	return &DateValidator{
 		TimeGap: maxTimeGap,
@@ -36,6 +40,12 @@ func NewDateValidator() *DateValidator {
 }
 
 // Validate在检查头部日期是否有效时返回错误
+
+// ff:
+// r:
+
+// ff:
+// r:
 func (v *DateValidator) Validate(r *http.Request) error {
 	t, err := http.ParseTime(r.Header.Get("date"))
 	if err != nil {
