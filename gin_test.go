@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -17,7 +17,7 @@ import (
 	"sync/atomic"
 	"testing"
 	"time"
-
+	
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/http2"
 )
@@ -184,7 +184,7 @@ func TestLoadHTMLGlobUsingTLS(t *testing.T) {
 	)
 	defer ts.Close()
 
-	// Use InsecureSkipVerify for avoiding `x509: certificate signed by unknown authority` error
+// 使用InsecureSkipVerify来避免“x509: certificate signed by unknown authority”错误
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
@@ -320,7 +320,7 @@ func TestLoadHTMLFilesUsingTLS(t *testing.T) {
 	)
 	defer ts.Close()
 
-	// Use InsecureSkipVerify for avoiding `x509: certificate signed by unknown authority` error
+// 使用InsecureSkipVerify来避免“x509: certificate signed by unknown authority”错误
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
@@ -556,27 +556,27 @@ func TestListOfRoutes(t *testing.T) {
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "GET",
 		Path:    "/favicon.ico",
-		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
+		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
 	})
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "GET",
 		Path:    "/",
-		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
+		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
 	})
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "GET",
 		Path:    "/users/",
-		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest2$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",     
+		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",     
 	})
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "GET",
 		Path:    "/users/:id",
-		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
+		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
 	})
 	assertRoutePresent(t, list, RouteInfo{
 		Method:  "POST",
 		Path:    "/users/:id",
-		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest2$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",     
+		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",     
 	})
 }
 
@@ -631,7 +631,7 @@ func TestEngineHandleContextManyReEntries(t *testing.T) {
 	})
 
 	assert.NotPanics(t, func() {
-		w := PerformRequest(r, "GET", "/"+strconv.Itoa(expectValue-1)) // include 0 value
+		w := PerformRequest(r, "GET", "/"+strconv.Itoa(expectValue-1)) // 包含0值
 		assert.Equal(t, 200, w.Code)
 		assert.Equal(t, expectValue, w.Body.Len())
 	})
@@ -646,7 +646,7 @@ func TestEngineHandleContextManyReEntries(t *testing.T) {
 func TestPrepareTrustedCIRDsWith(t *testing.T) {
 	r := New()
 
-	// valid ipv4 cidr
+// 有效ipv4 cidr
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("0.0.0.0/0")}
 		err := r.SetTrustedProxies([]string{"0.0.0.0/0"})
@@ -655,14 +655,14 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-	// invalid ipv4 cidr
+// 无效ipv4 cidr
 	{
 		err := r.SetTrustedProxies([]string{"192.168.1.33/33"})
 
 		assert.Error(t, err)
 	}
 
-	// valid ipv4 address
+// 有效的ipv4地址
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("192.168.1.33/32")}
 
@@ -672,14 +672,14 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-	// invalid ipv4 address
+// 无效的ipv4地址
 	{
 		err := r.SetTrustedProxies([]string{"192.168.1.256"})
 
 		assert.Error(t, err)
 	}
 
-	// valid ipv6 address
+// 有效的ipv6地址
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("2002:0000:0000:1234:abcd:ffff:c0a8:0101/128")}
 		err := r.SetTrustedProxies([]string{"2002:0000:0000:1234:abcd:ffff:c0a8:0101"})
@@ -688,14 +688,14 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-	// invalid ipv6 address
+// 无效的ipv6地址
 	{
 		err := r.SetTrustedProxies([]string{"gggg:0000:0000:1234:abcd:ffff:c0a8:0101"})
 
 		assert.Error(t, err)
 	}
 
-	// valid ipv6 cidr
+// 有效ipv6 cidr
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("::/0")}
 		err := r.SetTrustedProxies([]string{"::/0"})
@@ -704,14 +704,14 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-	// invalid ipv6 cidr
+// 无效ipv6 cidr
 	{
 		err := r.SetTrustedProxies([]string{"gggg:0000:0000:1234:abcd:ffff:c0a8:0101/129"})
 
 		assert.Error(t, err)
 	}
 
-	// valid combination
+// 有效的组合
 	{
 		expectedTrustedCIDRs := []*net.IPNet{
 			parseCIDR("::/0"),
@@ -728,7 +728,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
 	}
 
-	// invalid combination
+// 无效的组合
 	{
 		err := r.SetTrustedProxies([]string{
 			"::/0",
@@ -739,7 +739,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 		assert.Error(t, err)
 	}
 
-	// nil value
+// 零值
 	{
 		err := r.SetTrustedProxies(nil)
 

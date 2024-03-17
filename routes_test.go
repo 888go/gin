@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -11,7 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
-
+	
 	"github.com/stretchr/testify/assert"
 )
 
@@ -20,7 +20,7 @@ type header struct {
 	Value string
 }
 
-// PerformRequest for testing gin router.
+// 对路由器进行测试
 
 // ff:
 // headers:
@@ -56,7 +56,7 @@ func testRouteOK(method string, t *testing.T) {
 	assert.True(t, passedAny)
 }
 
-// TestSingleRouteOK tests that POST route is correctly invoked.
+// TestSingleRouteOK测试POST路由是否被正确调用
 func testRouteNotOK(method string, t *testing.T) {
 	passed := false
 	router := New()
@@ -70,7 +70,7 @@ func testRouteNotOK(method string, t *testing.T) {
 	assert.Equal(t, http.StatusNotFound, w.Code)
 }
 
-// TestSingleRouteOK tests that POST route is correctly invoked.
+// TestSingleRouteOK测试POST路由是否被正确调用
 func testRouteNotOK2(method string, t *testing.T) {
 	passed := false
 	router := New()
@@ -296,7 +296,7 @@ func TestRouteRedirectFixedPath(t *testing.T) {
 	assert.Equal(t, http.StatusTemporaryRedirect, w.Code)
 }
 
-// TestContextParamsGet tests that a parameter can be parsed from the URL.
+// TestContextParamsGet测试是否可以从URL解析参数
 
 // ff:
 // t:
@@ -331,7 +331,7 @@ func TestRouteParamsByName(t *testing.T) {
 	assert.Equal(t, "/is/super/great", wild)
 }
 
-// TestContextParamsGet tests that a parameter can be parsed from the URL even with extra slashes.
+// TestContextParamsGet测试即使使用额外的斜杠也可以从URL解析参数
 
 // ff:
 // t:
@@ -367,9 +367,7 @@ func TestRouteParamsByNameWithExtraSlash(t *testing.T) {
 	assert.Equal(t, "/is/super/great", wild)
 }
 
-// TestRouteParamsNotEmpty tests that context parameters will be set
-// even if a route with params/wildcards is registered after the context
-// initialisation (which happened in a previous requets).
+// TestRouteParamsNotEmpty测试上下文参数是否会被设置，即使在上下文初始化之后注册了带有参数/通配符的路由(这发生在之前的请求中)
 
 // ff:
 // t:
@@ -409,12 +407,12 @@ func TestRouteParamsNotEmpty(t *testing.T) {
 	assert.Equal(t, "/is/super/great", wild)
 }
 
-// TestHandleStaticFile - ensure the static file handles properly
+// TestHandleStaticFile -确保静态文件处理正确
 
 // ff:
 // t:
 func TestRouteStaticFile(t *testing.T) {
-	// SETUP file
+// 安装文件
 	testRoot, _ := os.Getwd()
 	f, err := os.CreateTemp(testRoot, "")
 	if err != nil {
@@ -427,7 +425,7 @@ func TestRouteStaticFile(t *testing.T) {
 
 	dir, filename := filepath.Split(f.Name())
 
-	// SETUP gin
+// 设置杜松子酒
 	router := New()
 	router.Static("/using_static", dir)
 	router.StaticFile("/result", f.Name())
@@ -447,12 +445,12 @@ func TestRouteStaticFile(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w3.Code)
 }
 
-// TestHandleStaticFile - ensure the static file handles properly
+// TestHandleStaticFile -确保静态文件处理正确
 
 // ff:
 // t:
 func TestRouteStaticFileFS(t *testing.T) {
-	// SETUP file
+// 安装文件
 	testRoot, _ := os.Getwd()
 	f, err := os.CreateTemp(testRoot, "")
 	if err != nil {
@@ -464,7 +462,7 @@ func TestRouteStaticFileFS(t *testing.T) {
 	f.Close()
 
 	dir, filename := filepath.Split(f.Name())
-	// SETUP gin
+// 设置杜松子酒
 	router := New()
 	router.Static("/using_static", dir)
 	router.StaticFileFS("/result_fs", filename, Dir(dir, false))
@@ -484,7 +482,7 @@ func TestRouteStaticFileFS(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w3.Code)
 }
 
-// TestHandleStaticDir - ensure the root/sub dir handles properly
+// TestHandleStaticDir -确保根/子目录处理正确
 
 // ff:
 // t:
@@ -499,7 +497,7 @@ func TestRouteStaticListingDir(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// TestHandleHeadToDir - ensure the root/sub dir handles properly
+// TestHandleHeadToDir -确保根/子目录处理得当
 
 // ff:
 // t:
@@ -529,8 +527,7 @@ func TestRouterMiddlewareAndStatic(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Body.String(), "package gin")
-	// Content-Type='text/plain; charset=utf-8' when go version <= 1.16,
-	// else, Content-Type='text/x-go; charset=utf-8'
+// - type = '文本/平原;当go版本<= 1.16时，charset=utf-8'，否则，Content-Type='text/x-go;charset = utf - 8 '
 	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
 	assert.NotEqual(t, w.Header().Get("Last-Modified"), "Mon, 02 Jan 2006 15:04:05 MST")
 	assert.Equal(t, "Mon, 02 Jan 2006 15:04:05 MST", w.Header().Get("Expires"))
@@ -561,7 +558,7 @@ func TestRouteNotAllowedEnabled(t *testing.T) {
 func TestRouteNotAllowedEnabled2(t *testing.T) {
 	router := New()
 	router.HandleMethodNotAllowed = true
-	// add one methodTree to trees
+// 给trees添加一个methodTree
 	router.addRoute(http.MethodPost, "/", HandlersChain{func(_ *Context) {}})
 	router.GET("/path2", func(c *Context) {})
 	w := PerformRequest(router, http.MethodPost, "/path2")
@@ -600,7 +597,7 @@ func TestRouterNotFoundWithRemoveExtraSlash(t *testing.T) {
 		code     int
 		location string
 	}{
-		{"/../path", http.StatusOK, ""},    // CleanPath
+		{"/../path", http.StatusOK, ""},    // CleanPath 清理路径
 		{"/nope", http.StatusNotFound, ""}, // NotFound
 	}
 	for _, tr := range testRoutes {
@@ -627,13 +624,14 @@ func TestRouterNotFound(t *testing.T) {
 		code     int
 		location string
 	}{
-		{"/path/", http.StatusMovedPermanently, "/path"},   // TSR -/
-		{"/dir", http.StatusMovedPermanently, "/dir/"},     // TSR +/
-		{"/PATH", http.StatusMovedPermanently, "/path"},    // Fixed Case
-		{"/DIR/", http.StatusMovedPermanently, "/dir/"},    // Fixed Case
-		{"/PATH/", http.StatusMovedPermanently, "/path"},   // Fixed Case -/
-		{"/DIR", http.StatusMovedPermanently, "/dir/"},     // Fixed Case +/
-		{"/../path", http.StatusMovedPermanently, "/path"}, // Without CleanPath
+		{"/path/", http.StatusMovedPermanently, "/path"},   // TSR - 由于您提供的代码注释不完整，无法准确翻译。请提供完整的注释内容，以便我为您进行准确的翻译。
+		{"/dir", http.StatusMovedPermanently, "/dir/"},     // TSR + /
+// 这段Go语言代码注释内容不完整，无法准确翻译。请提供完整的注释内容以便于翻译。
+		{"/PATH", http.StatusMovedPermanently, "/path"},    // 固定的情况下
+		{"/DIR/", http.StatusMovedPermanently, "/dir/"},    // 固定的情况下
+		{"/PATH/", http.StatusMovedPermanently, "/path"},   // 固定的情况下 -/
+		{"/DIR", http.StatusMovedPermanently, "/dir/"},     // 固定的情况下 +/
+		{"/../path", http.StatusMovedPermanently, "/path"}, // 没有CleanPath
 		{"/nope", http.StatusNotFound, ""},                 // NotFound
 	}
 	for _, tr := range testRoutes {
@@ -644,7 +642,7 @@ func TestRouterNotFound(t *testing.T) {
 		}
 	}
 
-	// Test custom not found handler
+// 测试自定义未找到处理程序
 	var notFound bool
 	router.NoRoute(func(c *Context) {
 		c.AbortWithStatus(http.StatusNotFound)
@@ -654,19 +652,19 @@ func TestRouterNotFound(t *testing.T) {
 	assert.Equal(t, http.StatusNotFound, w.Code)
 	assert.True(t, notFound)
 
-	// Test other method than GET (want 307 instead of 301)
+// 测试GET之外的其他方法(想要307而不是301)
 	router.PATCH("/path", func(c *Context) {})
 	w = PerformRequest(router, http.MethodPatch, "/path/")
 	assert.Equal(t, http.StatusTemporaryRedirect, w.Code)
 	assert.Equal(t, "map[Location:[/path]]", fmt.Sprint(w.Header()))
 
-	// Test special case where no node for the prefix "/" exists
+// 测试特殊情况下没有节点的前缀"/"存在
 	router = New()
 	router.GET("/a", func(c *Context) {})
 	w = PerformRequest(router, http.MethodGet, "/")
 	assert.Equal(t, http.StatusNotFound, w.Code)
 
-	// Reproduction test for the bug of issue #2843
+// 对问题#2843的bug进行复制测试
 	router = New()
 	router.NoRoute(func(c *Context) {
 		if c.Request.RequestURI == "/login" {
@@ -712,14 +710,14 @@ func TestRouterStaticFSFileNotFound(t *testing.T) {
 	})
 }
 
-// Reproduction test for the bug of issue #1805
+// 对问题#1805的bug进行复制测试
 
 // ff:
 // t:
 func TestMiddlewareCalledOnceByRouterStaticFSNotFound(t *testing.T) {
 	router := New()
 
-	// Middleware must be called just only once by per request.
+// 每个请求只能调用中间件一次
 	middlewareCalledNum := 0
 	router.Use(func(c *Context) {
 		middlewareCalledNum++
@@ -727,11 +725,11 @@ func TestMiddlewareCalledOnceByRouterStaticFSNotFound(t *testing.T) {
 
 	router.StaticFS("/", http.FileSystem(http.Dir("/thisreallydoesntexist/")))
 
-	// First access
+// 第一次访问
 	PerformRequest(router, http.MethodGet, "/nonexistent")
 	assert.Equal(t, 1, middlewareCalledNum)
 
-	// Second access
+// 第二次访问
 	PerformRequest(router, http.MethodHead, "/nonexistent")
 	assert.Equal(t, 2, middlewareCalledNum)
 }
@@ -802,7 +800,7 @@ func TestRouteServeErrorWithWriteHeader(t *testing.T) {
 func TestRouteContextHoldsFullPath(t *testing.T) {
 	router := New()
 
-	// Test routes
+// 测试路线
 	routes := []string{
 		"/simple",
 		"/project/:name",
@@ -821,7 +819,7 @@ func TestRouteContextHoldsFullPath(t *testing.T) {
 	for _, route := range routes {
 		actualRoute := route
 		router.GET(route, func(c *Context) {
-			// For each defined route context should contain its full path
+// 对于每个已定义的路由，上下文应该包含它的完整路径
 			assert.Equal(t, actualRoute, c.FullPath())
 			c.AbortWithStatus(http.StatusOK)
 		})
@@ -832,9 +830,9 @@ func TestRouteContextHoldsFullPath(t *testing.T) {
 		assert.Equal(t, http.StatusOK, w.Code)
 	}
 
-	// Test not found
+// 未找到测试
 	router.Use(func(c *Context) {
-		// For not found routes full path is empty
+// 对于未找到的路由，整个路径为空
 		assert.Equal(t, "", c.FullPath())
 	})
 

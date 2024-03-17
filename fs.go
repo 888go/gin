@@ -1,6 +1,6 @@
-// Copyright 2017 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有2017马努·马丁内斯-阿尔梅达
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -17,10 +17,10 @@ type neuteredReaddirFile struct {
 	http.File
 }
 
-// Dir returns a http.FileSystem that can be used by http.FileServer(). It is used internally
-// in router.Static().
-// if listDirectory == true, then it works the same as http.Dir() otherwise it returns
-// a filesystem that prevents http.FileServer() to list the directory files.
+// Dir返回一个http
+// http.FileServer()可以使用的文件系统
+// 它在router.Static()内部使用
+// 如果listDirectory == true，那么它的工作方式与http.Dir()相同，否则它返回一个文件系统，阻止http.FileServer()列出目录文件
 
 // ff:
 // listDirectory:
@@ -33,7 +33,7 @@ func Dir(root string, listDirectory bool) http.FileSystem {
 	return &onlyFilesFS{fs}
 }
 
-// Open conforms to http.Filesystem.
+// Open符合http.Filesystem
 
 // ff:
 // http.File:
@@ -46,12 +46,13 @@ func (fs onlyFilesFS) Open(name string) (http.File, error) {
 	return neuteredReaddirFile{f}, nil
 }
 
-// Readdir overrides the http.File default implementation.
+// Readdir覆盖http
+// 文件默认实现
 
 // ff:
 // []os.FileInfo:
 // _:
 func (f neuteredReaddirFile) Readdir(_ int) ([]os.FileInfo, error) {
-	// this disables directory listing
+// 这将禁用目录列表
 	return nil, nil
 }

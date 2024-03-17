@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -15,13 +15,11 @@ import (
 	"strings"
 	"sync"
 	"testing"
-
+	
 	"github.com/stretchr/testify/assert"
 )
 
-// TODO
-// func debugRoute(httpMethod, absolutePath string, handlers HandlersChain) {
-// func debugPrint(format string, values ...any) {
+// 函数debugRoute(httpMethod, absolutePath字符串，HandlersChain){函数debugPrint(格式字符串，值…any) {
 
 
 // ff:
@@ -74,7 +72,7 @@ func TestDebugPrintRoutes(t *testing.T) {
 		debugPrintRoute("GET", "/path/to/route/:param", HandlersChain{func(c *Context) {}, handlerNameTest})
 		SetMode(TestMode)
 	})
-	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
+	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
 }
 
 
@@ -89,7 +87,7 @@ func TestDebugPrintRouteFunc(t *testing.T) {
 		debugPrintRoute("GET", "/path/to/route/:param1/:param2", HandlersChain{func(c *Context) {}, handlerNameTest})
 		SetMode(TestMode)
 	})
-	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
+	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
 }
 
 

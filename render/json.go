@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package render
 
@@ -9,39 +9,39 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-
-	"github.com/gin-gonic/gin/internal/bytesconv"
-	"github.com/gin-gonic/gin/internal/json"
+	
+	"github.com/888go/gin/internal/bytesconv"
+	"github.com/888go/gin/internal/json"
 )
 
-// JSON contains the given interface object.
+// JSON 包含给定的 interface 对象。
 type JSON struct {
 	Data any
 }
 
-// IndentedJSON contains the given interface object.
+// IndentedJSON 包含给定的 interface 对象。
 type IndentedJSON struct {
 	Data any
 }
 
-// SecureJSON contains the given interface object and its prefix.
+// SecureJSON 包含给定的接口对象及其前缀。
 type SecureJSON struct {
 	Prefix string
 	Data   any
 }
 
-// JsonpJSON contains the given interface object its callback.
+// JsonpJSON 将给定的接口对象及其回调函数包含在内。
 type JsonpJSON struct {
 	Callback string
 	Data     any
 }
 
-// AsciiJSON contains the given interface object.
+// AsciiJSON 包含给定的接口对象。
 type AsciiJSON struct {
 	Data any
 }
 
-// PureJSON contains the given interface object.
+// PureJSON 包含给定的接口对象。
 type PureJSON struct {
 	Data any
 }
@@ -52,7 +52,7 @@ var (
 	jsonASCIIContentType = []string{"application/json"}
 )
 
-// Render (JSON) writes data with custom ContentType.
+// Render (JSON) 以自定义的ContentType写入数据。
 
 // ff:
 // w:
@@ -60,7 +60,7 @@ func (r JSON) Render(w http.ResponseWriter) error {
 	return WriteJSON(w, r.Data)
 }
 
-// WriteContentType (JSON) writes JSON ContentType.
+// WriteContentType (JSON) 写入 JSON ContentType。
 
 // ff:
 // w:
@@ -68,7 +68,7 @@ func (r JSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
-// WriteJSON marshals the given interface object and writes it with custom ContentType.
+// WriteJSON 将给定的接口对象进行序列化，并使用自定义 ContentType 进行写入。
 
 // ff:
 // obj:
@@ -83,7 +83,7 @@ func WriteJSON(w http.ResponseWriter, obj any) error {
 	return err
 }
 
-// Render (IndentedJSON) marshals the given interface object and writes it with custom ContentType.
+// Render (IndentedJSON) 将给定的接口对象进行序列化，并使用自定义 ContentType 进行写入。
 
 // ff:
 // w:
@@ -97,7 +97,7 @@ func (r IndentedJSON) Render(w http.ResponseWriter) error {
 	return err
 }
 
-// WriteContentType (IndentedJSON) writes JSON ContentType.
+// WriteContentType (IndentedJSON) 写入 JSON ContentType。
 
 // ff:
 // w:
@@ -105,7 +105,7 @@ func (r IndentedJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
-// Render (SecureJSON) marshals the given interface object and writes it with custom ContentType.
+// Render (SecureJSON) 将给定的接口对象序列化，并使用自定义 ContentType 进行写入。
 
 // ff:
 // w:
@@ -115,7 +115,7 @@ func (r SecureJSON) Render(w http.ResponseWriter) error {
 	if err != nil {
 		return err
 	}
-	// if the jsonBytes is array values
+// 如果jsonBytes是数组值
 	if bytes.HasPrefix(jsonBytes, bytesconv.StringToBytes("[")) && bytes.HasSuffix(jsonBytes,
 		bytesconv.StringToBytes("]")) {
 		if _, err = w.Write(bytesconv.StringToBytes(r.Prefix)); err != nil {
@@ -126,7 +126,7 @@ func (r SecureJSON) Render(w http.ResponseWriter) error {
 	return err
 }
 
-// WriteContentType (SecureJSON) writes JSON ContentType.
+// WriteContentType (SecureJSON) 写入 JSON ContentType。
 
 // ff:
 // w:
@@ -134,7 +134,7 @@ func (r SecureJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
-// Render (JsonpJSON) marshals the given interface object and writes it and its callback with custom ContentType.
+// Render (JsonpJSON) 将给定的接口对象进行序列化，并使用自定义的ContentType将其和对应的回调函数一起写入。
 
 // ff:
 // err:
@@ -171,7 +171,7 @@ func (r JsonpJSON) Render(w http.ResponseWriter) (err error) {
 	return nil
 }
 
-// WriteContentType (JsonpJSON) writes Javascript ContentType.
+// WriteContentType (JsonpJSON) 写入 Javascript ContentType。
 
 // ff:
 // w:
@@ -179,7 +179,7 @@ func (r JsonpJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonpContentType)
 }
 
-// Render (AsciiJSON) marshals the given interface object and writes it with custom ContentType.
+// Render (AsciiJSON) 将给定的接口对象进行序列化，并以自定义的 ContentType 进行写入。
 
 // ff:
 // err:
@@ -204,7 +204,7 @@ func (r AsciiJSON) Render(w http.ResponseWriter) (err error) {
 	return err
 }
 
-// WriteContentType (AsciiJSON) writes JSON ContentType.
+// WriteContentType (AsciiJSON) 写入 JSON ContentType。
 
 // ff:
 // w:
@@ -212,7 +212,7 @@ func (r AsciiJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonASCIIContentType)
 }
 
-// Render (PureJSON) writes custom ContentType and encodes the given interface object.
+// Render (PureJSON) 设置自定义 ContentType，并对给定的接口对象进行编码。
 
 // ff:
 // w:
@@ -223,7 +223,7 @@ func (r PureJSON) Render(w http.ResponseWriter) error {
 	return encoder.Encode(r.Data)
 }
 
-// WriteContentType (PureJSON) writes custom ContentType.
+// WriteContentType (PureJSON) 写入自定义 ContentType。
 
 // ff:
 // w:

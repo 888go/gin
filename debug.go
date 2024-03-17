@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -14,15 +14,15 @@ import (
 
 const ginSupportMinGoVer = 18
 
-// IsDebugging returns true if the framework is running in debug mode.
-// Use SetMode(gin.ReleaseMode) to disable debug mode.
+// 如果框架在调试模式下运行，IsDebugging返回true
+// 使用SetMode(gin.ReleaseMode)来禁用调试模式
 
 // ff:
 func IsDebugging() bool {
 	return ginMode == debugCode
 }
 
-// DebugPrintRouteFunc indicates debug log output format.
+// DebugPrintRouteFunc调试日志输出格式
 var DebugPrintRouteFunc func(httpMethod, absolutePath, handlerName string, nuHandlers int)
 
 func debugPrintRoute(httpMethod, absolutePath string, handlers HandlersChain) {

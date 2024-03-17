@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"net/http"
 	"testing"
-
+	
 	"github.com/stretchr/testify/assert"
 )
 
@@ -111,11 +111,11 @@ func TestFilterFlags(t *testing.T) {
 // ff:
 // t:
 func TestFunctionName(t *testing.T) {
-	assert.Regexp(t, `^(.*/vendor/)?github.com/gin-gonic/gin.somefunction$`, nameOfFunction(somefunction)) //th:assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction))     
+	assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction)) //th:assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction))     
 }
 
 func somefunction() {
-	// this empty function is used by TestFunctionName()
+// 这个空函数由TestFunctionName()使用
 }
 
 

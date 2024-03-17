@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -8,29 +8,29 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-
-	"github.com/gin-gonic/gin/internal/json"
+	
+	"github.com/888go/gin/internal/json"
 )
 
-// ErrorType is an unsigned 64-bit error code as defined in the gin spec.
+// ErrorType是在gin规范中定义的无符号64位错误代码
 type ErrorType uint64
 
 const (
-	// ErrorTypeBind is used when Context.Bind() fails.
+// 当Context.Bind()失败时使用ErrorTypeBind
 	ErrorTypeBind ErrorType = 1 << 63
-	// ErrorTypeRender is used when Context.Render() fails.
+// 当Context.Render()失败时使用ErrorTypeRender
 	ErrorTypeRender ErrorType = 1 << 62
-	// ErrorTypePrivate indicates a private error.
+// ErrorTypePrivate私有错误
 	ErrorTypePrivate ErrorType = 1 << 0
-	// ErrorTypePublic indicates a public error.
+// ErrorTypePublic表示公共错误
 	ErrorTypePublic ErrorType = 1 << 1
-	// ErrorTypeAny indicates any other error.
+// ErrorTypeAny表示任何其他错误
 	ErrorTypeAny ErrorType = 1<<64 - 1
-	// ErrorTypeNu indicates any other error.
+// ErrorTypeNu表示任何其他错误
 	ErrorTypeNu = 2
 )
 
-// Error represents a error's specification.
+// Error表示错误的说明
 type Error struct {
 	Err  error
 	Type ErrorType
@@ -41,7 +41,7 @@ type errorMsgs []*Error
 
 var _ error = (*Error)(nil)
 
-// SetType sets the error's type.
+// SetType设置错误的类型
 
 // ff:
 // flags:
@@ -50,7 +50,7 @@ func (msg *Error) SetType(flags ErrorType) *Error {
 	return msg
 }
 
-// SetMeta sets the error's meta data.
+// SetMeta设置错误的元数据
 
 // ff:
 // data:
@@ -59,7 +59,7 @@ func (msg *Error) SetMeta(data any) *Error {
 	return msg
 }
 
-// JSON creates a properly formatted JSON
+// JSON创建一个格式正确的JSON
 
 // ff:
 func (msg *Error) JSON() any {
@@ -83,21 +83,22 @@ func (msg *Error) JSON() any {
 	return jsonData
 }
 
-// MarshalJSON implements the json.Marshaller interface.
+// MarshalJSON实现json
+// Marshaller接口
 
 // ff:
 func (msg *Error) MarshalJSON() ([]byte, error) {
 	return json.Marshal(msg.JSON())
 }
 
-// Error implements the error interface.
+// Error实现错误接口
 
 // ff:
 func (msg Error) Error() string {
 	return msg.Err.Error()
 }
 
-// IsType judges one error.
+// IsType判断一个错误
 
 // ff:
 // flags:
@@ -105,15 +106,15 @@ func (msg *Error) IsType(flags ErrorType) bool {
 	return (msg.Type & flags) > 0
 }
 
-// Unwrap returns the wrapped error, to allow interoperability with errors.Is(), errors.As() and errors.Unwrap()
+// Unwrap返回包装后的错误，以允许与errors.Is()、errors.As()和errors.Unwrap()互操作
 
 // ff:
 func (msg *Error) Unwrap() error {
 	return msg.Err
 }
 
-// ByType returns a readonly copy filtered the byte.
-// ie ByType(gin.ErrorTypePublic) returns a slice of errors with type=ErrorTypePublic.
+// ByType返回经过字节过滤的只读副本
+// 即ByType(gin.ErrorTypePublic)返回一个类型=ErrorTypePublic的错误切片
 
 // ff:
 // typ:
@@ -133,8 +134,9 @@ func (a errorMsgs) ByType(typ ErrorType) errorMsgs {
 	return result
 }
 
-// Last returns the last error in the slice. It returns nil if the array is empty.
-// Shortcut for errors[len(errors)-1].
+// Last返回切片中的最后一个错误
+// 如果数组为空，则返回nil
+// 错误的快捷方式[len(errors)-1]
 
 // ff:
 func (a errorMsgs) Last() *Error {
@@ -144,13 +146,8 @@ func (a errorMsgs) Last() *Error {
 	return nil
 }
 
-// Errors returns an array with all the error messages.
-// Example:
-//
-//	c.Error(errors.New("first"))
-//	c.Error(errors.New("second"))
-//	c.Error(errors.New("third"))
-//	c.Errors.Errors() // == []string{"first", "second", "third"}
+// Errors返回一个包含所有错误消息的数组
+// 示例:c.Error(errors.New("first")) c.Error(errors.New("second")) c. errors (errors.New("third")) c. errors () == []string{"first"， "second"， "third"}
 
 // ff:
 func (a errorMsgs) Errors() []string {
@@ -181,7 +178,8 @@ func (a errorMsgs) JSON() any {
 	}
 }
 
-// MarshalJSON implements the json.Marshaller interface.
+// MarshalJSON实现json
+// Marshaller接口
 
 // ff:
 func (a errorMsgs) MarshalJSON() ([]byte, error) {

@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -16,30 +16,31 @@ const (
 	defaultStatus = http.StatusOK
 )
 
-// ResponseWriter ...
+// ResponseWriter……
 type ResponseWriter interface {
 	http.ResponseWriter
 	http.Hijacker
 	http.Flusher
 	http.CloseNotifier
 
-	// Status returns the HTTP response status code of the current request.
+// Status返回当前请求的HTTP响应状态码
 	Status() int
 
-	// Size returns the number of bytes already written into the response http body.
-	// See Written()
+// Size返回已经写入响应http主体的字节数
+// 看到写()
 	Size() int
 
-	// WriteString writes the string into the response body.
+// WriteString将字符串写入响应体
 	WriteString(string) (int, error)
 
-	// Written returns true if the response body was already written.
+// 如果响应体已经写好，则write返回true
 	Written() bool
 
-	// WriteHeaderNow forces to write the http header (status code + headers).
+// WriteHeaderNow强制写入http报头(状态码+报头)
 	WriteHeaderNow()
 
-	// Pusher get the http.Pusher for server push
+// push获取http
+// 用于服务器推送的push
 	Pusher() http.Pusher
 }
 
@@ -127,7 +128,8 @@ func (w *responseWriter) Written() bool {
 	return w.size != noWritten
 }
 
-// Hijack implements the http.Hijacker interface.
+// Hijack实现http
+// 劫机者接口
 
 // ff:
 // *bufio.ReadWriter:
@@ -139,14 +141,16 @@ func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return w.ResponseWriter.(http.Hijacker).Hijack()
 }
 
-// CloseNotify implements the http.CloseNotifier interface.
+// CloseNotify实现http
+// CloseNotifier接口
 
 // ff:
 func (w *responseWriter) CloseNotify() <-chan bool {
 	return w.ResponseWriter.(http.CloseNotifier).CloseNotify()
 }
 
-// Flush implements the http.Flusher interface.
+// Flush实现http
+// 冲洗装置接口
 
 // ff:
 func (w *responseWriter) Flush() {

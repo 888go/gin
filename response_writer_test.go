@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// Manu Martinez-Almeida版权所有
+// 版权所有
+// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
 
 package gin
 
@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
+	
 	"github.com/stretchr/testify/assert"
 )
 
@@ -162,7 +162,7 @@ func TestResponseWriterFlush(t *testing.T) {
 	}))
 	defer testServer.Close()
 
-	// should return 500
+// 应该返回500
 	resp, err := http.Get(testServer.URL)
 	assert.NoError(t, err)
 	assert.Equal(t, http.StatusInternalServerError, resp.StatusCode)
@@ -185,11 +185,12 @@ func TestResponseWriterStatusCode(t *testing.T) {
 
 	w.WriteHeader(http.StatusUnauthorized)
 
-	// status must be 200 although we tried to change it
+// 状态必须是200，尽管我们试图改变它
 	assert.Equal(t, http.StatusOK, w.Status())
 }
 
-// mockPusherResponseWriter is an http.ResponseWriter that implements http.Pusher.
+// mockPusherResponseWriter是一个http
+// 实现http. push的ResponseWriter
 type mockPusherResponseWriter struct {
 	http.ResponseWriter
 }
@@ -202,7 +203,8 @@ func (m *mockPusherResponseWriter) Push(target string, opts *http.PushOptions) e
 	return nil
 }
 
-// nonPusherResponseWriter is an http.ResponseWriter that does not implement http.Pusher.
+// nonPusherResponseWriter是一个http
+// 没有实现http. push的ResponseWriter
 type nonPusherResponseWriter struct {
 	http.ResponseWriter
 }
