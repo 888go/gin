@@ -11,7 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -376,7 +376,7 @@ func TestRouteParamsNotEmpty(t *testing.T) {
 
 // TestHandleStaticFile -确保静态文件处理正确
 func TestRouteStaticFile(t *testing.T) {
-// 安装文件
+	// 安装文件
 	testRoot, _ := os.Getwd()
 	f, err := os.CreateTemp(testRoot, "")
 	if err != nil {
@@ -389,7 +389,7 @@ func TestRouteStaticFile(t *testing.T) {
 
 	dir, filename := filepath.Split(f.Name())
 
-// 设置杜松子酒
+	// 设置杜松子酒
 	router := New()
 	router.Static("/using_static", dir)
 	router.StaticFile("/result", f.Name())
@@ -411,7 +411,7 @@ func TestRouteStaticFile(t *testing.T) {
 
 // TestHandleStaticFile -确保静态文件处理正确
 func TestRouteStaticFileFS(t *testing.T) {
-// 安装文件
+	// 安装文件
 	testRoot, _ := os.Getwd()
 	f, err := os.CreateTemp(testRoot, "")
 	if err != nil {
@@ -423,7 +423,7 @@ func TestRouteStaticFileFS(t *testing.T) {
 	f.Close()
 
 	dir, filename := filepath.Split(f.Name())
-// 设置杜松子酒
+	// 设置杜松子酒
 	router := New()
 	router.Static("/using_static", dir)
 	router.StaticFileFS("/result_fs", filename, Dir(dir, false))
@@ -479,7 +479,7 @@ func TestRouterMiddlewareAndStatic(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Body.String(), "package gin")
-// - type = '文本/平原;当go版本<= 1.16时，charset=utf-8'，否则，Content-Type='text/x-go;charset = utf - 8 '
+	// - type = '文本/平原;当go版本<= 1.16时，charset=utf-8'，否则，Content-Type='text/x-go;charset = utf - 8 '
 	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
 	assert.NotEqual(t, w.Header().Get("Last-Modified"), "Mon, 02 Jan 2006 15:04:05 MST")
 	assert.Equal(t, "Mon, 02 Jan 2006 15:04:05 MST", w.Header().Get("Expires"))
@@ -504,7 +504,7 @@ func TestRouteNotAllowedEnabled(t *testing.T) {
 func TestRouteNotAllowedEnabled2(t *testing.T) {
 	router := New()
 	router.HandleMethodNotAllowed = true
-// 给trees添加一个methodTree
+	// 给trees添加一个methodTree
 	router.addRoute(http.MethodPost, "/", HandlersChain{func(_ *Context) {}})
 	router.GET("/path2", func(c *Context) {})
 	w := PerformRequest(router, http.MethodPost, "/path2")
@@ -561,9 +561,9 @@ func TestRouterNotFound(t *testing.T) {
 		code     int
 		location string
 	}{
-		{"/path/", http.StatusMovedPermanently, "/path"},   // TSR - 由于您提供的代码注释不完整，无法准确翻译。请提供完整的注释内容，以便我为您进行准确的翻译。
-		{"/dir", http.StatusMovedPermanently, "/dir/"},     // TSR + /
-// 这段Go语言代码注释内容不完整，无法准确翻译。请提供完整的注释内容以便于翻译。
+		{"/path/", http.StatusMovedPermanently, "/path"}, // TSR - 由于您提供的代码注释不完整，无法准确翻译。请提供完整的注释内容，以便我为您进行准确的翻译。
+		{"/dir", http.StatusMovedPermanently, "/dir/"},   // TSR + /
+		// 这段Go语言代码注释内容不完整，无法准确翻译。请提供完整的注释内容以便于翻译。
 		{"/PATH", http.StatusMovedPermanently, "/path"},    // 固定的情况下
 		{"/DIR/", http.StatusMovedPermanently, "/dir/"},    // 固定的情况下
 		{"/PATH/", http.StatusMovedPermanently, "/path"},   // 固定的情况下 -/
@@ -579,7 +579,7 @@ func TestRouterNotFound(t *testing.T) {
 		}
 	}
 
-// 测试自定义未找到处理程序
+	// 测试自定义未找到处理程序
 	var notFound bool
 	router.NoRoute(func(c *Context) {
 		c.AbortWithStatus(http.StatusNotFound)
@@ -589,19 +589,19 @@ func TestRouterNotFound(t *testing.T) {
 	assert.Equal(t, http.StatusNotFound, w.Code)
 	assert.True(t, notFound)
 
-// 测试GET之外的其他方法(想要307而不是301)
+	// 测试GET之外的其他方法(想要307而不是301)
 	router.PATCH("/path", func(c *Context) {})
 	w = PerformRequest(router, http.MethodPatch, "/path/")
 	assert.Equal(t, http.StatusTemporaryRedirect, w.Code)
 	assert.Equal(t, "map[Location:[/path]]", fmt.Sprint(w.Header()))
 
-// 测试特殊情况下没有节点的前缀"/"存在
+	// 测试特殊情况下没有节点的前缀"/"存在
 	router = New()
 	router.GET("/a", func(c *Context) {})
 	w = PerformRequest(router, http.MethodGet, "/")
 	assert.Equal(t, http.StatusNotFound, w.Code)
 
-// 对问题#2843的bug进行复制测试
+	// 对问题#2843的bug进行复制测试
 	router = New()
 	router.NoRoute(func(c *Context) {
 		if c.Request.RequestURI == "/login" {
@@ -645,7 +645,7 @@ func TestRouterStaticFSFileNotFound(t *testing.T) {
 func TestMiddlewareCalledOnceByRouterStaticFSNotFound(t *testing.T) {
 	router := New()
 
-// 每个请求只能调用中间件一次
+	// 每个请求只能调用中间件一次
 	middlewareCalledNum := 0
 	router.Use(func(c *Context) {
 		middlewareCalledNum++
@@ -653,11 +653,11 @@ func TestMiddlewareCalledOnceByRouterStaticFSNotFound(t *testing.T) {
 
 	router.StaticFS("/", http.FileSystem(http.Dir("/thisreallydoesntexist/")))
 
-// 第一次访问
+	// 第一次访问
 	PerformRequest(router, http.MethodGet, "/nonexistent")
 	assert.Equal(t, 1, middlewareCalledNum)
 
-// 第二次访问
+	// 第二次访问
 	PerformRequest(router, http.MethodHead, "/nonexistent")
 	assert.Equal(t, 2, middlewareCalledNum)
 }
@@ -716,7 +716,7 @@ func TestRouteServeErrorWithWriteHeader(t *testing.T) {
 func TestRouteContextHoldsFullPath(t *testing.T) {
 	router := New()
 
-// 测试路线
+	// 测试路线
 	routes := []string{
 		"/simple",
 		"/project/:name",
@@ -735,7 +735,9 @@ func TestRouteContextHoldsFullPath(t *testing.T) {
 	for _, route := range routes {
 		actualRoute := route
 		router.GET(route, func(c *Context) {
-// 对于每个已定义的路由，上下文应该包含它的完整路径
+			// 对于每个已定义的路由，上下文应该包含它的完整路径
+			_ = c.FullPath()
+
 			assert.Equal(t, actualRoute, c.FullPath())
 			c.AbortWithStatus(http.StatusOK)
 		})
@@ -746,9 +748,9 @@ func TestRouteContextHoldsFullPath(t *testing.T) {
 		assert.Equal(t, http.StatusOK, w.Code)
 	}
 
-// 未找到测试
+	// 未找到测试
 	router.Use(func(c *Context) {
-// 对于未找到的路由，整个路径为空
+		// 对于未找到的路由，整个路径为空
 		assert.Equal(t, "", c.FullPath())
 	})
 

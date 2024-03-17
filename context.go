@@ -109,7 +109,7 @@ func (c *Context) reset() {
 // Copy返回当前上下文的副本，该副本可在请求作用域之外安全地使用
 // 当必须将上下文传递给程序时，必须使用此方法
 
-// ff:
+// ff:取副本
 func (c *Context) Copy() *Context {
 	cp := Context{
 		writermem: c.writermem,
@@ -133,15 +133,15 @@ func (c *Context) Copy() *Context {
 
 // HandlerName返回主处理程序的名称
 // 例如，如果处理程序为“handleGetUsers()”，则此函数将返回“main.handleGetUsers”
-
-// ff:
+// github.com/888go/gin.handlerNameTest
+// ff:取主处理程序名称
 func (c *Context) HandlerName() string {
 	return nameOfFunction(c.handlers.Last())
 }
 
 // HandlerNames按照HandlerName()的语义，按降序返回此上下文的所有已注册处理程序的列表
 
-// ff:
+// ff:取处理程序数组
 func (c *Context) HandlerNames() []string {
 	hn := make([]string, 0, len(c.handlers))
 	for _, val := range c.handlers {
@@ -152,7 +152,7 @@ func (c *Context) HandlerNames() []string {
 
 // Handler返回主处理程序
 
-// ff:
+// ff:取主处理程序
 func (c *Context) Handler() HandlerFunc {
 	return c.handlers.Last()
 }
@@ -174,7 +174,7 @@ func (c *Context) FullPath() string {
 // 它执行调用处理程序内部链中的挂起处理程序
 // 参见GitHub中的示例
 
-// ff:
+// ff:中间件继续
 func (c *Context) Next() {
 	c.index++
 	for c.index < int8(len(c.handlers)) {
@@ -272,9 +272,9 @@ func (c *Context) Error(err error) *Error {
 // Set用于存储专门用于此上下文的新键/值对
 // 如果以前没有使用c.Keys，它也会延迟初始化它
 
-// ff:
-// value:
-// key:
+// ff:设置值
+// value:值
+// key:名称
 func (c *Context) Set(key string, value any) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -288,10 +288,10 @@ func (c *Context) Set(key string, value any) {
 // Get返回给定键的值，即:(value, true)
 // 如果值不存在，则返回(nil, false)
 
-// ff:
-// exists:
-// value:
-// key:
+// ff:取值
+// exists:是否存在
+// value:返回值
+// key:名称
 func (c *Context) Get(key string) (value any, exists bool) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -301,8 +301,8 @@ func (c *Context) Get(key string) (value any, exists bool) {
 
 // 如果给定的键存在，则必须返回该键的值，否则会产生Panic
 
-// ff:
-// key:
+// ff:取值PANI
+// key:名称
 func (c *Context) MustGet(key string) any {
 	if value, exists := c.Get(key); exists {
 		return value
@@ -312,9 +312,9 @@ func (c *Context) MustGet(key string) any {
 
 // GetString以字符串的形式返回与键相关的值
 
-// ff:
-// s:
-// key:
+// ff:取文本值
+// s:返回值
+// key:名称
 func (c *Context) GetString(key string) (s string) {
 	if val, ok := c.Get(key); ok && val != nil {
 		s, _ = val.(string)
@@ -324,9 +324,9 @@ func (c *Context) GetString(key string) (s string) {
 
 // GetBool返回与键相关联的值作为布尔值
 
-// ff:
-// b:
-// key:
+// ff:取布尔值
+// b:返回值
+// key:名称
 func (c *Context) GetBool(key string) (b bool) {
 	if val, ok := c.Get(key); ok && val != nil {
 		b, _ = val.(bool)
@@ -336,9 +336,9 @@ func (c *Context) GetBool(key string) (b bool) {
 
 // GetInt以整数形式返回与键相关的值
 
-// ff:
-// i:
-// key:
+// ff:取整数值
+// i:返回值
+// key:名称
 func (c *Context) GetInt(key string) (i int) {
 	if val, ok := c.Get(key); ok && val != nil {
 		i, _ = val.(int)
@@ -348,9 +348,9 @@ func (c *Context) GetInt(key string) (i int) {
 
 // GetInt64以整数形式返回与键关联的值
 
-// ff:
-// i64:
-// key:
+// ff:取整数64位值
+// i64:返回值
+// key:名称
 func (c *Context) GetInt64(key string) (i64 int64) {
 	if val, ok := c.Get(key); ok && val != nil {
 		i64, _ = val.(int64)
@@ -360,9 +360,9 @@ func (c *Context) GetInt64(key string) (i64 int64) {
 
 // GetUint以无符号整数的形式返回与键相关的值
 
-// ff:
-// ui:
-// key:
+// ff:取正整数值
+// ui:返回值
+// key:名称
 func (c *Context) GetUint(key string) (ui uint) {
 	if val, ok := c.Get(key); ok && val != nil {
 		ui, _ = val.(uint)
@@ -372,9 +372,9 @@ func (c *Context) GetUint(key string) (ui uint) {
 
 // GetUint64以无符号整数的形式返回与键相关的值
 
-// ff:
-// ui64:
-// key:
+// ff:取正整数64位值
+// ui64:返回值
+// key:名称
 func (c *Context) GetUint64(key string) (ui64 uint64) {
 	if val, ok := c.Get(key); ok && val != nil {
 		ui64, _ = val.(uint64)
@@ -384,9 +384,9 @@ func (c *Context) GetUint64(key string) (ui64 uint64) {
 
 // GetFloat64返回与该键相关的值作为float64
 
-// ff:
-// f64:
-// key:
+// ff:取小数64位值
+// f64:返回值
+// key:名称
 func (c *Context) GetFloat64(key string) (f64 float64) {
 	if val, ok := c.Get(key); ok && val != nil {
 		f64, _ = val.(float64)
@@ -396,9 +396,9 @@ func (c *Context) GetFloat64(key string) (f64 float64) {
 
 // GetTime返回与键相关的值作为time
 
-// ff:
-// t:
-// key:
+// ff:取时间值
+// t:返回值
+// key:名称
 func (c *Context) GetTime(key string) (t time.Time) {
 	if val, ok := c.Get(key); ok && val != nil {
 		t, _ = val.(time.Time)
@@ -408,9 +408,9 @@ func (c *Context) GetTime(key string) (t time.Time) {
 
 // GetDuration以持续时间的形式返回与键相关的值
 
-// ff:
-// d:
-// key:
+// ff:取时长值
+// d:返回时长
+// key:名称
 func (c *Context) GetDuration(key string) (d time.Duration) {
 	if val, ok := c.Get(key); ok && val != nil {
 		d, _ = val.(time.Duration)
@@ -420,9 +420,9 @@ func (c *Context) GetDuration(key string) (d time.Duration) {
 
 // GetStringSlice以字符串切片的形式返回与键相关的值
 
-// ff:
-// ss:
-// key:
+// ff:取数组值
+// ss:返回数组
+// key:名称
 func (c *Context) GetStringSlice(key string) (ss []string) {
 	if val, ok := c.Get(key); ok && val != nil {
 		ss, _ = val.([]string)
@@ -432,9 +432,9 @@ func (c *Context) GetStringSlice(key string) (ss []string) {
 
 // GetStringMap以接口映射的形式返回与键相关的值
 
-// ff:
-// sm:
-// key:
+// ff:取Map值
+// sm:返回Map
+// key:名称
 func (c *Context) GetStringMap(key string) (sm map[string]any) {
 	if val, ok := c.Get(key); ok && val != nil {
 		sm, _ = val.(map[string]any)
@@ -444,9 +444,9 @@ func (c *Context) GetStringMap(key string) (sm map[string]any) {
 
 // GetStringMapString以字符串映射的形式返回与键相关的值
 
-// ff:
-// sms:
-// key:
+// ff:取文本Map值
+// sms:返回Map
+// key:名称
 func (c *Context) GetStringMapString(key string) (sms map[string]string) {
 	if val, ok := c.Get(key); ok && val != nil {
 		sms, _ = val.(map[string]string)
@@ -456,9 +456,9 @@ func (c *Context) GetStringMapString(key string) (sms map[string]string) {
 
 // GetStringMapStringSlice返回与键相关的值，作为到字符串切片的映射
 
-// ff:
-// smss:
-// key:
+// ff:取数组Map值
+// smss:返回数组Map
+// key:名称
 func (c *Context) GetStringMapStringSlice(key string) (smss map[string][]string) {
 	if val, ok := c.Get(key); ok && val != nil {
 		smss, _ = val.(map[string][]string)
@@ -473,8 +473,8 @@ func (c *Context) GetStringMapStringSlice(key string) (smss map[string][]string)
 // 参数返回URL参数的值
 // 它是c. param . byname (key) router.GET("/user/:id"， func(c *gin.Context) {GET请求/user/john id:= c. param ("id") id == "/john"一个GET请求到/user/john/ id:= c.参数("id") id == "/john/"}）
 
-// ff:
-// key:
+// ff:取API参数值
+// key:名称
 func (c *Context) Param(key string) string {
 	return c.Params.ByName(key)
 }
@@ -482,19 +482,20 @@ func (c *Context) Param(key string) string {
 // AddParam将参数添加到上下文中，并用给定的值替换路径参数键，用于端到端测试
 // 示例Route: "/user/:id"AddParam("id"， 1) Result: "/user/1"
 
-// ff:
-// value:
-// key:
+// ff:设置API参数值
+// value:值
+// key:名称
 func (c *Context) AddParam(key, value string) {
 	c.Params = append(c.Params, Param{Key: key, Value: value})
 }
 
 // Query如果存在则返回键控url查询值，否则返回空字符串' ("") '
-// 这是快捷方式的' c.Request.URL.Query().Get(key) ' GET /path?id=1234&name= manual &value= c.Query("id") == "1234"c.Query("name") == " manual "c.Query("value") == "c.查询("wtf") == ";
+// 这是快捷方式的' c.Request.URL.Query().Get(key) '
+////GET /path?id=1234&name= manual &value= c.Query("id") == "1234"c.Query("name") == " manual "c.Query("value") == "c.查询("wtf") == ";
 
-// ff:
-// value:
-// key:
+// ff:取URL参数值
+// value:返回值
+// key:名称
 func (c *Context) Query(key string) (value string) {
 	value, _ = c.GetQuery(key)
 	return
@@ -504,9 +505,9 @@ func (c *Context) Query(key string) (value string) {
 // 更多信息请参见:Query()和GetQuery()
 // GET / ?name=姓名&lastname= c.DefaultQuery("name"， "unknown") ==姓名"c.DefaultQuery("id"， "none") == "none"c.DefaultQuery("lastname"， "none") == "
 
-// ff:
-// defaultValue:
-// key:
+// ff:取URL参数值并带默认
+// defaultValue:默认值
+// key:名称
 func (c *Context) DefaultQuery(key, defaultValue string) string {
 	if value, ok := c.GetQuery(key); ok {
 		return value
@@ -517,8 +518,8 @@ func (c *Context) DefaultQuery(key, defaultValue string) string {
 // GetQuery类似于Query()，如果存在' (value, true) '(即使值是空字符串)，它返回键控url查询值，否则它返回' (""， false) '
 // 它是' c.Request.URL.Query().Get(key) ' GET /?name=Manu&lastname= ("Manu"， true) == c.GetQuery("name") (""， false) == c.GetQuery("id") (""， true) == c.GetQuery("lastname")
 
-// ff:
-// key:
+// ff:取URL参数值2
+// key:名称
 func (c *Context) GetQuery(key string) (string, bool) {
 	if values, ok := c.GetQueryArray(key); ok {
 		return values[0], ok
@@ -529,9 +530,9 @@ func (c *Context) GetQuery(key string) (string, bool) {
 // QueryArray返回给定查询键的字符串切片
 // 切片的长度取决于具有给定键的参数的数量
 
-// ff:
-// values:
-// key:
+// ff:取URL参数数组值
+// values:返回数组
+// key:名称
 func (c *Context) QueryArray(key string) (values []string) {
 	values, _ = c.GetQueryArray(key)
 	return
@@ -549,10 +550,10 @@ func (c *Context) initQueryCache() {
 
 // GetQueryArray返回给定查询键的字符串切片，以及一个布尔值，用于判断给定键是否至少存在一个值
 
-// ff:
-// ok:
-// values:
-// key:
+// ff:取URL参数数组值2
+// ok:是否存在
+// values:返回数组
+// key:名称
 func (c *Context) GetQueryArray(key string) (values []string, ok bool) {
 	c.initQueryCache()
 	values, ok = c.queryCache[key]
@@ -561,9 +562,9 @@ func (c *Context) GetQueryArray(key string) (values []string, ok bool) {
 
 // QueryMap返回给定查询键的映射
 
-// ff:
-// dicts:
-// key:
+// ff:取URL参数Map值
+// dicts:返回Map
+// key:名称
 func (c *Context) QueryMap(key string) (dicts map[string]string) {
 	dicts, _ = c.GetQueryMap(key)
 	return
@@ -571,9 +572,9 @@ func (c *Context) QueryMap(key string) (dicts map[string]string) {
 
 // GetQueryMap返回给定查询键的映射，加上一个布尔值，用于判断给定键是否至少存在一个值
 
-// ff:
+// ff:取URL参数Map值2
 // map[string]string:
-// key:
+// key:名称
 func (c *Context) GetQueryMap(key string) (map[string]string, bool) {
 	c.initQueryCache()
 	return c.get(c.queryCache, key)
@@ -581,9 +582,9 @@ func (c *Context) GetQueryMap(key string) (map[string]string, bool) {
 
 // PostForm从存在的POST url编码表单或多部分表单返回指定的键，否则返回空字符串' ("") '
 
-// ff:
-// value:
-// key:
+// ff:取表单参数值
+// value:返回值
+// key:名称
 func (c *Context) PostForm(key string) (value string) {
 	value, _ = c.GetPostForm(key)
 	return
@@ -592,9 +593,9 @@ func (c *Context) PostForm(key string) (value string) {
 // DefaultPostForm从存在的POST url编码表单或多部分表单返回指定的键，否则返回指定的defaultValue字符串
 // 参见:PostForm()和GetPostForm()了解更多信息
 
-// ff:
-// defaultValue:
-// key:
+// ff:取表单参数值并带默认
+// defaultValue:默认值
+// key:名称
 func (c *Context) DefaultPostForm(key, defaultValue string) string {
 	if value, ok := c.GetPostForm(key); ok {
 		return value
@@ -606,8 +607,8 @@ func (c *Context) DefaultPostForm(key, defaultValue string) string {
 // 如果存在' (value, true) '(即使值是空字符串)，则从POST url编码形式或多部分形式返回指定的键，否则返回(""， false)
 // 例如，在PATCH请求更新用户的电子邮件时:email=mail@example.com——>("mail@example.com"， true):= GetPostForm("email")设置email为"mail@example.com"电子邮件 =                  --& gt;(""， true):= GetPostForm("email")设置email为"——比;(""， false):= GetPostForm(&q
 
-// ff:
-// key:
+// ff:取表单参数值2
+// key:名称
 func (c *Context) GetPostForm(key string) (string, bool) {
 	if values, ok := c.GetPostFormArray(key); ok {
 		return values[0], ok
@@ -618,9 +619,9 @@ func (c *Context) GetPostForm(key string) (string, bool) {
 // PostFormArray返回给定表单键的字符串切片
 // 切片的长度取决于具有给定键的参数的数量
 
-// ff:
-// values:
-// key:
+// ff:取表单参数数组值
+// values:返回数组
+// key:名称
 func (c *Context) PostFormArray(key string) (values []string) {
 	values, _ = c.GetPostFormArray(key)
 	return
@@ -641,10 +642,10 @@ func (c *Context) initFormCache() {
 
 // GetPostFormArray返回给定表单键的字符串切片，以及是否至少存在一个给定键的布尔值
 
-// ff:
-// ok:
-// values:
-// key:
+// ff:取参数数组值
+// ok:是否存在
+// values:返回数组
+// key:名称
 func (c *Context) GetPostFormArray(key string) (values []string, ok bool) {
 	c.initFormCache()
 	values, ok = c.formCache[key]
@@ -653,9 +654,9 @@ func (c *Context) GetPostFormArray(key string) (values []string, ok bool) {
 
 // PostFormMap返回给定表单键的映射
 
-// ff:
-// dicts:
-// key:
+// ff:取表单参数Map值
+// dicts:返回Map
+// key:名称
 func (c *Context) PostFormMap(key string) (dicts map[string]string) {
 	dicts, _ = c.GetPostFormMap(key)
 	return
@@ -663,9 +664,9 @@ func (c *Context) PostFormMap(key string) (dicts map[string]string) {
 
 // GetPostFormMap返回给定表单键的映射，以及一个布尔值，用于判断给定键是否至少存在一个值
 
-// ff:
-// map[string]string:
-// key:
+// ff:取参数Map值
+// map[string]string:返回Map
+// key:名称
 func (c *Context) GetPostFormMap(key string) (map[string]string, bool) {
 	c.initFormCache()
 	return c.get(c.formCache, key)
@@ -688,9 +689,9 @@ func (c *Context) get(m map[string][]string, key string) (map[string]string, boo
 
 // FormFile返回所提供表单键的第一个文件
 
-// ff:
-// *multipart.FileHeader:
-// name:
+// ff:取表单上传文件
+// *multipart.FileHeader:文件对象
+// name:名称
 func (c *Context) FormFile(name string) (*multipart.FileHeader, error) {
 	if c.Request.MultipartForm == nil {
 		if err := c.Request.ParseMultipartForm(c.engine.MaxMultipartMemory); err != nil {
@@ -707,7 +708,7 @@ func (c *Context) FormFile(name string) (*multipart.FileHeader, error) {
 
 // MultipartForm是解析后的多部分表单，包括文件上传
 
-// ff:
+// ff:取表单multipart对象
 // *multipart.Form:
 func (c *Context) MultipartForm() (*multipart.Form, error) {
 	err := c.Request.ParseMultipartForm(c.engine.MaxMultipartMemory)
@@ -716,9 +717,9 @@ func (c *Context) MultipartForm() (*multipart.Form, error) {
 
 // SaveUploadedFile上传表单文件到指定的dst
 
-// ff:
-// dst:
-// file:
+// ff:保存上传文件
+// dst:文件路径
+// file:文件对象
 func (c *Context) SaveUploadedFile(file *multipart.FileHeader, dst string) error {
 	src, err := file.Open()
 	if err != nil {
@@ -1396,7 +1397,7 @@ func (c *Context) Stream(step func(w io.Writer) bool) bool {
 }
 
 /************************************/
-/******** CONTENT NEGOTIATION *******/
+/******** 内容协商  *******/
 /************************************/
 
 // Negotiate包含所有谈判数据

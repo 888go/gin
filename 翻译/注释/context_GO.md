@@ -143,7 +143,10 @@
 
 # <翻译开始>
 // HandlerName返回主处理程序的名称
-// 例如，如果处理程序为“handleGetUsers()”，则此函数将返回“main.handleGetUsers”
+// 例如:
+// 如果处理程序为“handleGetUsers()”，则此函数将返回“main.handleGetUsers”
+// 包名为"github.com/888go/gin",返回如下:
+// github.com/888go/gin.handleGetUsers
 # <翻译结束>
 
 
@@ -154,6 +157,11 @@
 
 # <翻译开始>
 // HandlerNames按照HandlerName()的语义，按降序返回此上下文的所有已注册处理程序的列表
+// 返回数组参考如下:
+// 0 = {string} "github.com/888go/gin.TestContextHandlerNames.func1"
+// 1 = {string} "github.com/888go/gin.handlerNameTest"
+// 2 = {string} "github.com/888go/gin.TestContextHandlerNames.func2"
+// 3 = {string} "github.com/888go/gin.handlerNameTest2"
 # <翻译结束>
 
 
@@ -178,7 +186,9 @@
 # <翻译开始>
 // FullPath返回匹配的路由完整路径
 // 对于未找到的路由返回一个空字符串
-// router.GET("/user/:id"， func(c *gin.Context) {c. fullpath () == "/user/:id"真正})
+//	router.GET("/user/:id", func(c *gin.Context) {
+//	    c.FullPath() == "/user/:id" // true
+//	})
 # <翻译结束>
 
 
@@ -435,9 +445,17 @@
 
 # <翻译开始>
 // 参数返回URL参数的值
-// 它是c. param . byname (key) router.GET("/user/:id"， func(c *gin.Context) {GET请求/user/john id:= c. param ("id") id == "/john"一个GET请求到/user/john/ id:= c.参数("id") id == "/john/"}）
+// Param和DefaultQuery()不同的是: 
+// Param这个方法获取到的是api参数, 如:http://localhost:8080/user/name/value
+// DefaultQuery获取的是url参数,如:http://localhost:8080/user?name=value
+// 它是 c.Params.ByName（key） 的快捷方式
+//	router.GET("/user/:id", func(c *gin.Context) {
+//	    // 一个 GET 请求 /user/john
+//	    id := c.Param("id") // id == "/john"
+//	    // 一个 GET 请求 /user/john/
+//	    id := c.Param("id") // id == "/john/"
+//	}) 
 # <翻译结束>
-
 
 <原文开始>
 // AddParam adds param to context and
@@ -449,7 +467,9 @@
 
 # <翻译开始>
 // AddParam将参数添加到上下文中，并用给定的值替换路径参数键，用于端到端测试
-// 示例Route: "/user/:id"AddParam("id"， 1) Result: "/user/1"
+// Example Route: "/user/:id"
+// AddParam("id", 1)
+// Result: "/user/1"
 # <翻译结束>
 
 
@@ -467,7 +487,13 @@
 
 # <翻译开始>
 // Query如果存在则返回键控url查询值，否则返回空字符串' ("") '
-// 这是快捷方式的' c.Request.URL.Query().Get(key) ' GET /path?id=1234&name= manual &value= c.Query("id") == "1234"c.Query("name") == " manual "c.Query("value") == "c.查询("wtf") == ";
+// 这是快捷方式的' c.Request.URL.Query().Get(key) '
+//
+//	    GET /path?id=1234&name=Manu&value=
+//		   c.Query("id") == "1234"
+//		   c.Query("name") == "Manu"
+//		   c.Query("value") == ""
+//		   c.Query("wtf") == ""
 # <翻译结束>
 
 
@@ -485,7 +511,11 @@
 # <翻译开始>
 // 如果存在，则返回键控url查询值，否则返回指定的defaultValue字符串
 // 更多信息请参见:Query()和GetQuery()
-// GET / ?name=姓名&lastname= c.DefaultQuery("name"， "unknown") ==姓名"c.DefaultQuery("id"， "none") == "none"c.DefaultQuery("lastname"， "none") == "
+//
+//	GET /?name=Manu&lastname=
+//	c.DefaultQuery("name", "unknown") == "Manu"
+//	c.DefaultQuery("id", "none") == "none"
+//	c.DefaultQuery("lastname", "none") == ""
 # <翻译结束>
 
 
@@ -503,7 +533,11 @@
 
 # <翻译开始>
 // GetQuery类似于Query()，如果存在' (value, true) '(即使值是空字符串)，它返回键控url查询值，否则它返回' (""， false) '
-// 它是' c.Request.URL.Query().Get(key) ' GET /?name=Manu&lastname= ("Manu"， true) == c.GetQuery("name") (""， false) == c.GetQuery("id") (""， true) == c.GetQuery("lastname")
+// 它是以下的快捷方式 `c.Request.URL.Query().Get(key)`
+//	GET /?name=Manu&lastname=
+//	("Manu", true) == c.GetQuery("name")
+//	("", false) == c.GetQuery("id")
+//	("", true) == c.GetQuery("lastname")
 # <翻译结束>
 
 
@@ -583,7 +617,10 @@
 # <翻译开始>
 // GetPostForm类似于PostForm(key)
 // 如果存在' (value, true) '(即使值是空字符串)，则从POST url编码形式或多部分形式返回指定的键，否则返回(""， false)
-// 例如，在PATCH请求更新用户的电子邮件时:email=mail@example.com——>("mail@example.com"， true):= GetPostForm("email")设置email为"mail@example.com"电子邮件 =                  --& gt;(""， true):= GetPostForm("email")设置email为"——比;(""， false):= GetPostForm(&q
+// 例如，在PATCH请求更新用户的电子邮件时:
+//	    email=mail@example.com  -->  ("mail@example.com", true) := GetPostForm("email") // set email to "mail@example.com"
+//		   email=                  -->  ("", true) := GetPostForm("email") // set email to ""
+//	                            -->  ("", false) := GetPostForm("email") // do nothing with email
 # <翻译结束>
 
 
@@ -677,7 +714,10 @@
 
 # <翻译开始>
 // Bind检查方法和内容类型以自动选择绑定引擎，具体取决于“内容类型”
-// 头文件使用了不同的绑定，例如:"application/json"——比;JSON绑定"application/xml"——比;如果Content-Type == "application/ JSON "使用JSON或XML作为JSON输入
+// 头文件使用了不同的绑定，例如:
+//	"application/json" --> JSON binding
+//	"application/xml"  --> XML binding
+// 它使用 JSON 或 XML 作为 JSON 输入，将请求的正文解析为 JSON if Content-Type == “application/json”。
 // 它将json有效负载解码为指定为指针的结构
 // 它会写一个400的错误，并设置Content-Type header "text/plain"在响应中，如果输入无效
 # <翻译结束>
@@ -785,7 +825,10 @@
 
 # <翻译开始>
 // shoulbind检查方法和内容类型，根据“内容类型”自动选择绑定引擎
-// 头文件使用了不同的绑定，例如:"application/json"——比;JSON绑定"application/xml"——比;如果Content-Type == "application/ JSON "使用JSON或XML作为JSON输入
+// 头文件使用了不同的绑定，例如:
+//	"application/json" --> JSON binding
+//	"application/xml"  --> XML binding
+// 它使用 JSON 或 XML 作为 JSON 输入，将请求的正文解析为 JSON if Content-Type == “application/json”。
 // 它将json有效负载解码为指定为指针的结构
 // 与c.Bind()类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 # <翻译结束>

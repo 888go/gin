@@ -2,4 +2,6 @@
  <trees>
      <tree path="/examples" title="例子"/>
      <tree path="/gin-contrib" title="插件"/>
+     <tree path="/demo/Param" title="api参数"/>
+     <tree path="/demo/DefaultQuery" title="url参数"/>
  </trees>
