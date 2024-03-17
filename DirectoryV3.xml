@@ -4,4 +4,12 @@
      <tree path="/gin-contrib" title="插件"/>
      <tree path="/demo/Param" title="api参数"/>
      <tree path="/demo/DefaultQuery" title="url参数"/>
- </trees>
+     <tree path="/demo" title="学习例子"/>
+     <tree path="/demo/PostForm" title="表单参数"/>
+     <tree path="/demo/FormFile" title="上传单个文件"/>
+     <tree path="/demo/MultipartForm" title="上传多个文件"/>
+     <tree path="/demo/routes_group" title="分组路由"/>
+     <tree path="/routergroup.go" title="分组路由"/>
+     <tree path="/demo/Json" title="Json 数据解析和绑定"/>
+    <tree path="/demo/AsciiJSON" title="转义的非 ASCII 字符"/>
+</trees>

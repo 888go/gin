@@ -1187,6 +1187,13 @@
 # <翻译开始>
 // AsciiJSON将给定的结构作为JSON序列化到响应体中，并使用unicode到ASCII字符串
 // 它还将Content-Type设置为“application/json”
+//
+// data := map[string]interface{}{
+// "lang": "GO语言",
+// "tag":  "<br>",
+// }
+// 输出 : {"lang":"GO\u8bed\u8a00","tag":"\u003cbr\u003e"}
+// c.AsciiJSON(http.StatusOK, data) 
 # <翻译结束>
 
 

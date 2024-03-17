@@ -755,8 +755,8 @@ func (c *Context) Bind(obj any) error {
 
 // BindJSON是c.MustBindWith(obj, binding.JSON)的快捷方式
 
-// ff:
-// obj:
+// ff:参数指针到JSON
+// obj:结构指针
 func (c *Context) BindJSON(obj any) error {
 	return c.MustBindWith(obj, binding.JSON)
 }
@@ -1163,7 +1163,7 @@ func (c *Context) HTML(code int, name string, obj any) {
 // 警告:我们建议仅用于开发目的，因为打印漂亮的JSON会消耗更多的CPU和带宽
 // 使用Context.JSON()代替
 
-// ff:输出JSON并格式化
+// ff:输出JSON并美化
 // obj:结构
 // code:状态码
 func (c *Context) IndentedJSON(code int, obj any) {
@@ -1220,9 +1220,9 @@ func (c *Context) AsciiJSON(code int, obj any) {
 // PureJSON将给定的结构作为JSON序列化到响应体中
 // 与JSON不同的是，PureJSON不会用它们的unicode实体替换特殊的html字符
 
-// ff:
-// obj:
-// code:
+// ff:输出JSON并按原文
+// obj:结构
+// code:状态码
 func (c *Context) PureJSON(code int, obj any) {
 	c.Render(code, render.PureJSON{Data: obj})
 }
