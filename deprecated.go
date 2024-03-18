@@ -6,14 +6,14 @@ package gin
 
 import (
 	"log"
-	
+
 	"github.com/888go/gin/binding"
 )
 
 // BindWith使用指定的绑定引擎绑定传递的结构指针
 // 参见绑定包
 
-// ff:
+// ff:弃用BindWith
 // b:
 // obj:
 func (c *Context) BindWith(obj any, b binding.Binding) error {

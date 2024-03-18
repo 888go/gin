@@ -54,6 +54,9 @@ func main() {
 
 // ff:
 // c:
+
+// ff:
+// c:
 func AddV1User(c *gin.Context) {
 // 添加用户
 
@@ -78,12 +81,17 @@ func AddV1User(c *gin.Context) {
 
 // ff:
 // c:
+
+// ff:
+// c:
 func AddV2User(c *gin.Context) {
 // 添加用户
 
 	c.JSON(http.StatusOK, "V2 User added")
 }
 
+
+// ff:
 
 // ff:
 

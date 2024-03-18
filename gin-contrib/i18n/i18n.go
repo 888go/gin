@@ -46,6 +46,9 @@ func newI18n(opts ...Option) GinI18n {
 
 // ff:
 // opts:
+
+// ff:
+// opts:
 func Localize(opts ...Option) gin.HandlerFunc {
 	atI18n := newI18n(opts...)
 	return func(context *gin.Context) {
@@ -88,6 +91,10 @@ func Localize(opts ...Option) gin.HandlerFunc {
 // ff:
 // param:
 // context:
+
+// ff:
+// param:
+// context:
 func GetMessage(context *gin.Context, param interface{}) (string, error) {
 	atI18n := context.Value("i18n").(GinI18n)
 	return atI18n.getMessage(context, param)
@@ -104,6 +111,10 @@ func GetMessage(context *gin.Context, param interface{}) (string, error) {
 //     "name": context.Param("name"), // 其中 "name" 键对应context中的参数值
 //   },
 // })
+
+// ff:
+// param:
+// context:
 
 // ff:
 // param:

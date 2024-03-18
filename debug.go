@@ -17,7 +17,7 @@ const ginSupportMinGoVer = 18
 // 如果框架在调试模式下运行，IsDebugging返回true
 // 使用SetMode(gin.ReleaseMode)来禁用调试模式
 
-// ff:
+// ff:是否为调试模式
 func IsDebugging() bool {
 	return ginMode == debugCode
 }

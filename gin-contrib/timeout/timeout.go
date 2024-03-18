@@ -31,6 +31,9 @@ const (
 
 // ff:
 // opts:
+
+// ff:
+// opts:
 func New(opts ...Option) gin.HandlerFunc {
 	t := &Timeout{
 		timeout:  defaultTimeout,

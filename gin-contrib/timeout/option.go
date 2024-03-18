@@ -29,6 +29,9 @@ type Option func(*Timeout)
 
 // ff:
 // timeout:
+
+// ff:
+// timeout:
 func WithTimeout(timeout time.Duration) Option {
 	return func(t *Timeout) {
 		t.timeout = timeout
@@ -54,6 +57,9 @@ func WithTimeout(timeout time.Duration) Option {
 
 // ff:
 // h:
+
+// ff:
+// h:
 func WithHandler(h gin.HandlerFunc) Option {
 	return func(t *Timeout) {
 		t.handler = h
@@ -61,6 +67,9 @@ func WithHandler(h gin.HandlerFunc) Option {
 }
 
 // WithResponse 添加 gin 处理器
+
+// ff:
+// h:
 
 // ff:
 // h:

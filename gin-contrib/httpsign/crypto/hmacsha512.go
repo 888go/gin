@@ -35,6 +35,10 @@ type HmacSha512 struct{}
 // ff:
 // secret:
 // msg:
+
+// ff:
+// secret:
+// msg:
 func (h *HmacSha512) Sign(msg string, secret string) ([]byte, error) {
 	mac := hmac.New(sha512.New, []byte(secret))
 	if _, err := mac.Write([]byte(msg)); err != nil {
@@ -44,6 +48,8 @@ func (h *HmacSha512) Sign(msg string, secret string) ([]byte, error) {
 }
 
 // Name 返回算法名称
+
+// ff:
 
 // ff:
 

@@ -12,5 +12,8 @@
 # zz= 正则表达式,用于结构名称替换或者复杂替换
 #     如待替换: type authPair struct { //zz:^type *authPair处理函数
 
-[AppEngine bool]
-hs=AppEngine弃用
+[func DisableConsoleColor() {]
+ff=关闭控制台颜色
+
+[func ForceConsoleColor() {]
+ff=开启控制台颜色

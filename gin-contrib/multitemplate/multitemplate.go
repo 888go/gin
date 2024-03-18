@@ -29,11 +29,17 @@ var (
 // ff:
 
 // ff:
+
+// ff:
 func New() Render {
 	return make(Render)
 }
 
 // 添加新模板
+
+// ff:
+// tmpl:
+// name:
 
 // ff:
 // tmpl:
@@ -96,6 +102,10 @@ func (r Render) Add(name string, tmpl *template.Template) {
 // ff:
 // files:
 // name:
+
+// ff:
+// files:
+// name:
 func (r Render) AddFromFiles(name string, files ...string) *template.Template {
 	tmpl := template.Must(template.ParseFiles(files...))
 	r.Add(name, tmpl)
@@ -103,6 +113,10 @@ func (r Render) AddFromFiles(name string, files ...string) *template.Template {
 }
 
 // AddFromGlob 从全局路径提供添加模板的功能
+
+// ff:
+// glob:
+// name:
 
 // ff:
 // glob:
@@ -158,6 +172,10 @@ func (r Render) AddFromGlob(name, glob string) *template.Template {
 // ff:
 // templateString:
 // name:
+
+// ff:
+// templateString:
+// name:
 func (r Render) AddFromString(name, templateString string) *template.Template {
 	tmpl := template.Must(template.New(name).Parse(templateString))
 	r.Add(name, tmpl)
@@ -165,6 +183,11 @@ func (r Render) AddFromString(name, templateString string) *template.Template {
 }
 
 // AddFromStringsFuncs 从字符串提供添加模板功能
+
+// ff:
+// templateStrings:
+// funcMap:
+// name:
 
 // ff:
 // templateStrings:
@@ -237,6 +260,11 @@ func (r Render) AddFromStringsFuncs(name string, funcMap template.FuncMap, templ
 // files:
 // funcMap:
 // name:
+
+// ff:
+// files:
+// funcMap:
+// name:
 func (r Render) AddFromFilesFuncs(name string, funcMap template.FuncMap, files ...string) *template.Template {
 	tname := filepath.Base(files[0])
 	tmpl := template.Must(template.New(tname).Funcs(funcMap).ParseFiles(files...))
@@ -245,6 +273,10 @@ func (r Render) AddFromFilesFuncs(name string, funcMap template.FuncMap, files .
 }
 
 // Instance 提供渲染字符串功能
+
+// ff:
+// data:
+// name:
 
 // ff:
 // data:

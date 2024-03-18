@@ -26,6 +26,8 @@ func main() {
 // ff:
 
 // ff:
+
+// ff:
 func ConfigRuntime() {
 	nuCPU := runtime.NumCPU()
 	runtime.GOMAXPROCS(nuCPU)
@@ -45,11 +47,15 @@ func ConfigRuntime() {
 // ff:
 
 // ff:
+
+// ff:
 func StartWorkers() {
 	go statsWorker()
 }
 
 // 通过设置路由器启动web服务器
+
+// ff:
 
 // ff:
 

@@ -30,12 +30,16 @@ var (
 // ff:
 
 // ff:
+
+// ff:
 func NewDynamic() DynamicRender {
 	return make(DynamicRender)
 }
 
 // NewRenderer 允许创建一个与 gin 模式无关的多模板渲染器，
 // 具体实现取决于已启用的 gin 运行模式。
+
+// ff:
 
 // ff:
 
@@ -128,6 +132,10 @@ func (tb templateBuilder) buildTemplate() *template.Template {
 // ff:
 // tmpl:
 // name:
+
+// ff:
+// tmpl:
+// name:
 func (r DynamicRender) Add(name string, tmpl *template.Template) {
 	if tmpl == nil {
 		panic("template cannot be nil")
@@ -141,6 +149,10 @@ func (r DynamicRender) Add(name string, tmpl *template.Template) {
 }
 
 // AddFromFiles 从文件中加载并添加模板
+
+// ff:
+// files:
+// name:
 
 // ff:
 // files:
@@ -197,6 +209,10 @@ func (r DynamicRender) AddFromFiles(name string, files ...string) *template.Temp
 // ff:
 // glob:
 // name:
+
+// ff:
+// glob:
+// name:
 func (r DynamicRender) AddFromGlob(name, glob string) *template.Template {
 	builder := &templateBuilder{templateName: name, glob: glob}
 	builder.buildType = globTemplateType
@@ -229,6 +245,10 @@ func (r DynamicRender) AddFromGlob(name, glob string) *template.Template {
 // ff:
 // templateString:
 // name:
+
+// ff:
+// templateString:
+// name:
 func (r DynamicRender) AddFromString(name, templateString string) *template.Template {
 	builder := &templateBuilder{templateName: name, templateString: templateString}
 	builder.buildType = stringTemplateType
@@ -237,6 +257,11 @@ func (r DynamicRender) AddFromString(name, templateString string) *template.Temp
 }
 
 // AddFromStringsFuncs 从字符串提供添加模板功能
+
+// ff:
+// templateStrings:
+// funcMap:
+// name:
 
 // ff:
 // templateStrings:
@@ -308,6 +333,11 @@ func (r DynamicRender) AddFromStringsFuncs(name string, funcMap template.FuncMap
 // files:
 // funcMap:
 // name:
+
+// ff:
+// files:
+// funcMap:
+// name:
 func (r DynamicRender) AddFromFilesFuncs(name string, funcMap template.FuncMap, files ...string) *template.Template {
 	tname := filepath.Base(files[0])
 	builder := &templateBuilder{templateName: tname, funcMap: funcMap, files: files}
@@ -317,6 +347,10 @@ func (r DynamicRender) AddFromFilesFuncs(name string, funcMap template.FuncMap, 
 }
 
 // Instance 提供渲染字符串功能
+
+// ff:
+// data:
+// name:
 
 // ff:
 // data:

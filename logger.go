@@ -165,14 +165,14 @@ var defaultLogFormatter = func(param LogFormatterParams) string {
 
 // DisableConsoleColor禁用控制台的颜色输出
 
-// ff:
+// ff:关闭控制台颜色
 func DisableConsoleColor() {
 	consoleColorMode = disableColor
 }
 
 // ForceConsoleColor强制控制台的颜色输出
 
-// ff:
+// ff:开启控制台颜色
 func ForceConsoleColor() {
 	consoleColorMode = forceColor
 }

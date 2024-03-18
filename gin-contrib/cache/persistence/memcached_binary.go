@@ -50,11 +50,24 @@ type MemcachedBinaryStore struct {
 // password:
 // username:
 // hostList:
+
+// ff:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
 func NewMemcachedBinaryStore(hostList, username, password string, defaultExpiration time.Duration) *MemcachedBinaryStore {
 	return &MemcachedBinaryStore{mc.NewMC(hostList, username, password), defaultExpiration}
 }
 
 // NewMemcachedBinaryStoreWithConfig 根据提供的配置返回一个 MemcachedBinaryStore 实例
+
+// ff:
+// config:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
 
 // ff:
 // config:
@@ -133,6 +146,11 @@ func NewMemcachedBinaryStoreWithConfig(hostList, username, password string, defa
 // expires:
 // value:
 // key:
+
+// ff:
+// expires:
+// value:
+// key:
 func (s *MemcachedBinaryStore) Set(key string, value interface{}, expires time.Duration) error {
 	exp := s.getExpiration(expires)
 	b, err := utils.Serialize(value)
@@ -144,6 +162,11 @@ func (s *MemcachedBinaryStore) Set(key string, value interface{}, expires time.D
 }
 
 // Add (参考 CacheStore 接口)
+
+// ff:
+// expires:
+// value:
+// key:
 
 // ff:
 // expires:
@@ -215,6 +238,11 @@ func (s *MemcachedBinaryStore) Add(key string, value interface{}, expires time.D
 // expires:
 // value:
 // key:
+
+// ff:
+// expires:
+// value:
+// key:
 func (s *MemcachedBinaryStore) Replace(key string, value interface{}, expires time.Duration) error {
 	exp := s.getExpiration(expires)
 	b, err := utils.Serialize(value)
@@ -226,6 +254,10 @@ func (s *MemcachedBinaryStore) Replace(key string, value interface{}, expires ti
 }
 
 // Get (参考 CacheStore 接口)
+
+// ff:
+// value:
+// key:
 
 // ff:
 // value:
@@ -278,11 +310,18 @@ func (s *MemcachedBinaryStore) Get(key string, value interface{}) error {
 
 // ff:
 // key:
+
+// ff:
+// key:
 func (s *MemcachedBinaryStore) Delete(key string) error {
 	return convertMcError(s.Client.Del(key))
 }
 
 // 自增（参见CacheStore接口）
+
+// ff:
+// delta:
+// key:
 
 // ff:
 // delta:
@@ -337,12 +376,18 @@ func (s *MemcachedBinaryStore) Increment(key string, delta uint64) (uint64, erro
 // ff:
 // delta:
 // key:
+
+// ff:
+// delta:
+// key:
 func (s *MemcachedBinaryStore) Decrement(key string, delta uint64) (uint64, error) {
 	n, _, err := s.Client.Decr(key, delta, 0, 0xffffffff, 0)
 	return n, convertMcError(err)
 }
 
 // Flush （参考 CacheStore 接口）
+
+// ff:
 
 // ff:
 

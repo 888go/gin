@@ -36,11 +36,16 @@ type DigestValidator struct{}
 // ff:
 
 // ff:
+
+// ff:
 func NewDigestValidator() *DigestValidator {
 	return &DigestValidator{}
 }
 
 // Validate在检查摘要与正文匹配时返回错误
+
+// ff:
+// r:
 
 // ff:
 // r:

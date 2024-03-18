@@ -39,6 +39,8 @@ type HelloRequest struct {
 // ff:
 
 // ff:
+
+// ff:
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
 	if protoimpl.UnsafeEnabled {
@@ -60,12 +62,16 @@ func (x *HelloRequest) Reset() {
 // ff:
 
 // ff:
+
+// ff:
 func (x *HelloRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*HelloRequest) ProtoMessage() {}
 
+
+// ff:
 
 // ff:
 
@@ -107,6 +113,8 @@ func (*HelloRequest) Descriptor() ([]byte, []int) {
 // ff:
 
 // ff:
+
+// ff:
 func (x *HelloRequest) GetName() string {
 	if x != nil {
 		return x.Name
@@ -123,6 +131,8 @@ type HelloReply struct {
 	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 }
 
+
+// ff:
 
 // ff:
 
@@ -156,12 +166,16 @@ func (x *HelloReply) Reset() {
 // ff:
 
 // ff:
+
+// ff:
 func (x *HelloReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*HelloReply) ProtoMessage() {}
 
+
+// ff:
 
 // ff:
 
@@ -191,6 +205,8 @@ func (*HelloReply) Descriptor() ([]byte, []int) {
 	return file_pb_helloworld_v1_helloworld_proto_rawDescGZIP(), []int{1}
 }
 
+
+// ff:
 
 // ff:
 

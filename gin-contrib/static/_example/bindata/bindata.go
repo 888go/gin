@@ -67,6 +67,9 @@ func data_index_html() ([]byte, error) {
 
 // ff:
 // name:
+
+// ff:
+// name:
 func Asset(name string) ([]byte, error) {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	if f, ok := _bindata[cannonicalName]; ok {
@@ -76,6 +79,8 @@ func Asset(name string) ([]byte, error) {
 }
 
 // AssetNames 返回资产的名称列表。
+
+// ff:
 
 // ff:
 
@@ -129,6 +134,9 @@ var _bindata = map[string]func() ([]byte, error){
 
 // ff:
 // name:
+
+// ff:
+// name:
 func AssetDir(name string) ([]string, error) {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	pathList := strings.Split(cannonicalName, "/")
@@ -161,6 +169,10 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 }}
 
 // AssetInfo 返回指定路径的文件信息
+
+// ff:
+// os.FileInfo:
+// path:
 
 // ff:
 // os.FileInfo:

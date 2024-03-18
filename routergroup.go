@@ -12,10 +12,10 @@ import (
 )
 
 var (
-// regEnLetter匹配http方法名的英文字母
+	// regEnLetter匹配http方法名的英文字母
 	regEnLetter = regexp.MustCompile("^[A-Z]+$")
 
-// RouterGroup的anyMethods:任何方法
+	// RouterGroup的anyMethods:任何方法
 	anyMethods = []string{
 		http.MethodGet, http.MethodPost, http.MethodPut, http.MethodPatch,
 		http.MethodHead, http.MethodOptions, http.MethodDelete, http.MethodConnect,
@@ -31,17 +31,52 @@ type IRouter interface {
 
 // irroutes定义了所有路由器句柄接口
 type IRoutes interface {
-	Use(...HandlerFunc) IRoutes
+	// ff:中间件
+	// middleware:处理函数
+	Use(...HandlerFunc) IRoutes //hs:中间件
 
-	Handle(string, string, ...HandlerFunc) IRoutes
-	Any(string, ...HandlerFunc) IRoutes
-	GET(string, ...HandlerFunc) IRoutes
-	POST(string, ...HandlerFunc) IRoutes
-	DELETE(string, ...HandlerFunc) IRoutes
-	PATCH(string, ...HandlerFunc) IRoutes
-	PUT(string, ...HandlerFunc) IRoutes
-	OPTIONS(string, ...HandlerFunc) IRoutes
-	HEAD(string, ...HandlerFunc) IRoutes
+	// ff:绑定
+	// handlers:处理函数
+	// relativePath:路由规则
+	// httpMethod:HTTP方法
+	Handle(string, string, ...HandlerFunc) IRoutes //hs:绑定
+
+	// ff:绑定Any
+	// handlers:处理函数
+	// relativePath:路由规则
+	Any(string, ...HandlerFunc) IRoutes //hs:绑定Any
+
+	// ff:绑定GET
+	// handlers:处理函数
+	// relativePath:路由规则
+	GET(string, ...HandlerFunc) IRoutes //hs:绑定GET
+
+	// ff:绑定POST
+	// handlers:处理函数
+	// relativePath:路由规则
+	POST(string, ...HandlerFunc) IRoutes //hs:绑定POST
+	// ff:绑定DELETE
+	// handlers:处理函数
+	// relativePath:路由规则
+	DELETE(string, ...HandlerFunc) IRoutes //hs:绑定DELETE
+
+	// ff:绑定PATCH
+	// handlers:处理函数
+	// relativePath:路由规则
+	PATCH(string, ...HandlerFunc) IRoutes //hs:绑定PATCH
+	// ff:绑定PUT
+	// handlers:处理函数
+	// relativePath:路由规则
+	PUT(string, ...HandlerFunc) IRoutes //hs:绑定PUT
+	// ff:绑定OPTIONS
+	// handlers:处理函数
+	// relativePath:路由规则
+	OPTIONS(string, ...HandlerFunc) IRoutes //hs:绑定OPTIONS
+	// ff:绑定HEAD
+	// handlers:处理函数
+	// relativePath:路由规则
+	HEAD(string, ...HandlerFunc) IRoutes //hs:绑定HEAD
+
 	Match([]string, string, ...HandlerFunc) IRoutes
 
 	StaticFile(string, string) IRoutes
@@ -270,7 +305,7 @@ func (group *RouterGroup) StaticFS(relativePath string, fs http.FileSystem) IRou
 	handler := group.createStaticHandler(relativePath, fs)
 	urlPattern := path.Join(relativePath, "/*filepath")
 
-// 注册GET和HEAD处理程序
+	// 注册GET和HEAD处理程序
 	group.GET(urlPattern, handler)
 	group.HEAD(urlPattern, handler)
 	return group.returnObj()
@@ -286,12 +321,12 @@ func (group *RouterGroup) createStaticHandler(relativePath string, fs http.FileS
 		}
 
 		file := c.Param("filepath")
-// 检查文件是否存在和/或我们是否有访问它的权限
+		// 检查文件是否存在和/或我们是否有访问它的权限
 		f, err := fs.Open(file)
 		if err != nil {
 			c.Writer.WriteHeader(http.StatusNotFound)
 			c.handlers = group.engine.noRoute
-// 重置指数
+			// 重置指数
 			c.index = -1
 			return
 		}
