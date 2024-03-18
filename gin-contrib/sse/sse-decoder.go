@@ -22,6 +22,18 @@ type decoder struct {
 // ff:
 // []Event:
 // r:
+
+// ff:
+// []Event:
+// r:
+
+// ff:
+// []Event:
+// r:
+
+// ff:
+// []Event:
+// r:
 func Decode(r io.Reader) ([]Event, error) {
 	var dec decoder
 	return dec.decode(r)

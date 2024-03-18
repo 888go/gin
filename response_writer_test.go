@@ -12,18 +12,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TODO
-// 
-// ff:
-// *bufio.ReadWriter:
-// net.Conn:
-func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
-// 
-// ff:
-func (w *responseWriter) CloseNotify() <-chan bool {
-// 
-// ff:
-func (w *responseWriter) Flush() {
+// TODO函数(w *responseWriter)劫持()()康涅狄格州,* bufio
+// ReadWriter，错误){func (w *responseWriter) CloseNotify() <-chan bool {func (w *responseWriter) Flush() {
 
 var (
 	_ ResponseWriter      = &responseWriter{}
@@ -38,18 +28,12 @@ func init() {
 	SetMode(TestMode)
 }
 
-
-// ff:
-// t:
 func TestResponseWriterUnwrap(t *testing.T) {
 	testWriter := httptest.NewRecorder()
 	writer := &responseWriter{ResponseWriter: testWriter}
 	assert.Same(t, testWriter, writer.Unwrap())
 }
 
-
-// ff:
-// t:
 func TestResponseWriterReset(t *testing.T) {
 	testWriter := httptest.NewRecorder()
 	writer := &responseWriter{}
@@ -64,9 +48,6 @@ func TestResponseWriterReset(t *testing.T) {
 	assert.False(t, w.Written())
 }
 
-
-// ff:
-// t:
 func TestResponseWriterWriteHeader(t *testing.T) {
 	testWriter := httptest.NewRecorder()
 	writer := &responseWriter{}
@@ -82,9 +63,6 @@ func TestResponseWriterWriteHeader(t *testing.T) {
 	assert.Equal(t, http.StatusMultipleChoices, w.Status())
 }
 
-
-// ff:
-// t:
 func TestResponseWriterWriteHeadersNow(t *testing.T) {
 	testWriter := httptest.NewRecorder()
 	writer := &responseWriter{}
@@ -103,9 +81,6 @@ func TestResponseWriterWriteHeadersNow(t *testing.T) {
 	assert.Equal(t, 10, w.Size())
 }
 
-
-// ff:
-// t:
 func TestResponseWriterWrite(t *testing.T) {
 	testWriter := httptest.NewRecorder()
 	writer := &responseWriter{}
@@ -127,9 +102,6 @@ func TestResponseWriterWrite(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-
-// ff:
-// t:
 func TestResponseWriterHijack(t *testing.T) {
 	testWriter := httptest.NewRecorder()
 	writer := &responseWriter{}
@@ -149,9 +121,6 @@ func TestResponseWriterHijack(t *testing.T) {
 	w.Flush()
 }
 
-
-// ff:
-// t:
 func TestResponseWriterFlush(t *testing.T) {
 	testServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		writer := &responseWriter{}
@@ -168,9 +137,6 @@ func TestResponseWriterFlush(t *testing.T) {
 	assert.Equal(t, http.StatusInternalServerError, resp.StatusCode)
 }
 
-
-// ff:
-// t:
 func TestResponseWriterStatusCode(t *testing.T) {
 	testWriter := httptest.NewRecorder()
 	writer := &responseWriter{}
@@ -195,10 +161,6 @@ type mockPusherResponseWriter struct {
 	http.ResponseWriter
 }
 
-
-// ff:
-// opts:
-// target:
 func (m *mockPusherResponseWriter) Push(target string, opts *http.PushOptions) error {
 	return nil
 }
@@ -209,9 +171,6 @@ type nonPusherResponseWriter struct {
 	http.ResponseWriter
 }
 
-
-// ff:
-// t:
 func TestPusherWithPusher(t *testing.T) {
 	rw := &mockPusherResponseWriter{}
 	w := &responseWriter{ResponseWriter: rw}
@@ -220,9 +179,6 @@ func TestPusherWithPusher(t *testing.T) {
 	assert.NotNil(t, pusher, "Expected pusher to be non-nil")
 }
 
-
-// ff:
-// t:
 func TestPusherWithoutPusher(t *testing.T) {
 	rw := &nonPusherResponseWriter{}
 	w := &responseWriter{ResponseWriter: rw}

@@ -13,9 +13,6 @@ import (
 	"github.com/ugorji/go/codec"
 )
 
-
-// ff:
-// t:
 func TestBindingMsgPack(t *testing.T) {
 	test := FooStruct{
 		Foo: "bar",
@@ -53,9 +50,6 @@ func testMsgPackBodyBinding(t *testing.T, b Binding, name, path, badPath, body, 
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestBindingDefaultMsgPack(t *testing.T) {
 	assert.Equal(t, MsgPack, Default("POST", MIMEMSGPACK))
 	assert.Equal(t, MsgPack, Default("PUT", MIMEMSGPACK2))

@@ -113,9 +113,6 @@ func createNoValidationValues() structNoValidationValues {
 	return s
 }
 
-
-// ff:
-// t:
 func TestValidateNoValidationValues(t *testing.T) {
 	origin := createNoValidationValues()
 	test := createNoValidationValues()
@@ -164,9 +161,6 @@ type structNoValidationPointer struct {
 	StructMap *mapNoValidationSub
 }
 
-
-// ff:
-// t:
 func TestValidateNoValidationPointers(t *testing.T) {
 // origin := createNoValidation_values() // 创建并初始化不进行验证的值，将结果赋给变量origin
 // test := createNoValidation_values() // 创建并初始化另一个不进行验证的值，将结果赋给变量test
@@ -185,9 +179,6 @@ func TestValidateNoValidationPointers(t *testing.T) {
 
 type Object map[string]any
 
-
-// ff:
-// t:
 func TestValidatePrimitives(t *testing.T) {
 	obj := Object{"foo": "bar", "bar": 1}
 	assert.NoError(t, validate(obj))
@@ -222,9 +213,6 @@ func notOne(f1 validator.FieldLevel) bool {
 	return false
 }
 
-
-// ff:
-// t:
 func TestValidatorEngine(t *testing.T) {
 // 这将验证函数' notOne '是否与' defaultValidator '和验证器库所期望的函数签名匹配
 	engine, ok := Validator.Engine().(*validator.Validate)

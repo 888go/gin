@@ -11,9 +11,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-
-// ff:
-// t:
 func TestJSONBindingBindBody(t *testing.T) {
 	var s struct {
 		Foo string `json:"foo"`
@@ -23,9 +20,6 @@ func TestJSONBindingBindBody(t *testing.T) {
 	assert.Equal(t, "FOO", s.Foo)
 }
 
-
-// ff:
-// t:
 func TestJSONBindingBindBodyMap(t *testing.T) {
 	s := make(map[string]string)
 	err := jsonBinding{}.BindBody([]byte(`{"foo": "FOO","hello":"world"}`), &s)

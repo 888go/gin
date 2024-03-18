@@ -31,12 +31,36 @@ func getPrefix(prefixOptions ...string) string {
 // ff:
 // prefixOptions:
 // r:
+
+// ff:
+// prefixOptions:
+// r:
+
+// ff:
+// prefixOptions:
+// r:
+
+// ff:
+// prefixOptions:
+// r:
 func Register(r *gin.Engine, prefixOptions ...string) {
 	RouteRegister(&(r.RouterGroup), prefixOptions...)
 }
 
 // RouteRegister 将来自 net/http/pprof 包的标准 HandlerFuncs 注册到提供的 gin.GrouterGroup。
 // prefixOptions 是可选的。如果不提供 prefixOptions，则使用默认路径前缀，否则将使用第一个 prefixOptions 作为路径前缀。
+
+// ff:
+// prefixOptions:
+// rg:
+
+// ff:
+// prefixOptions:
+// rg:
+
+// ff:
+// prefixOptions:
+// rg:
 
 // ff:
 // prefixOptions:

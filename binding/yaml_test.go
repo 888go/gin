@@ -11,9 +11,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-
-// ff:
-// t:
 func TestYAMLBindingBindBody(t *testing.T) {
 	var s struct {
 		Foo string `yaml:"foo"`

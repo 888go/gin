@@ -55,6 +55,15 @@ func data_index_html() ([]byte, error) {
 
 // ff:
 // name:
+
+// ff:
+// name:
+
+// ff:
+// name:
+
+// ff:
+// name:
 func Asset(name string) ([]byte, error) {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	if f, ok := _bindata[cannonicalName]; ok {
@@ -64,6 +73,12 @@ func Asset(name string) ([]byte, error) {
 }
 
 // AssetNames 返回资产的名称列表。
+
+// ff:
+
+// ff:
+
+// ff:
 
 // ff:
 
@@ -91,6 +106,15 @@ var _bindata = map[string]func() ([]byte, error){
 // 那么 AssetDir("data") 将返回 []string{"foo.txt", "img"}
 // AssetDir("data/img") 将返回 []string{"a.png", "b.png"}
 // 而 AssetDir("foo.txt") 和 AssetDir("notexist") 则会返回错误
+
+// ff:
+// name:
+
+// ff:
+// name:
+
+// ff:
+// name:
 
 // ff:
 // name:
@@ -129,6 +153,18 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 }}
 
 // AssetInfo 返回指定路径的文件信息
+
+// ff:
+// os.FileInfo:
+// path:
+
+// ff:
+// os.FileInfo:
+// path:
+
+// ff:
+// os.FileInfo:
+// path:
 
 // ff:
 // os.FileInfo:

@@ -38,6 +38,15 @@ type Option func(*Authenticator)
 
 // ff:
 // validators:
+
+// ff:
+// validators:
+
+// ff:
+// validators:
+
+// ff:
+// validators:
 func WithValidator(validators ...validator.Validator) Option {
 	return func(a *Authenticator) {
 		a.validators = validators
@@ -53,6 +62,15 @@ func WithValidator(validators ...validator.Validator) Option {
 
 // ff:
 // headers:
+
+// ff:
+// headers:
+
+// ff:
+// headers:
+
+// ff:
+// headers:
 func WithRequiredHeaders(headers []string) Option {
 	return func(a *Authenticator) {
 		a.headers = headers
@@ -61,6 +79,18 @@ func WithRequiredHeaders(headers []string) Option {
 
 // NewAuthenticator 创建一个全新的 Authenticator 实例，其参数包括
 // 允许的权限列表以及请求头中所需的密钥和秘密键。
+
+// ff:
+// options:
+// secretKeys:
+
+// ff:
+// options:
+// secretKeys:
+
+// ff:
+// options:
+// secretKeys:
 
 // ff:
 // options:
@@ -91,6 +121,12 @@ func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 }
 
 // Authenticated 返回一个 gin 中间件，该中间件允许在参数中指定的权限。
+
+// ff:
+
+// ff:
+
+// ff:
 
 // ff:
 

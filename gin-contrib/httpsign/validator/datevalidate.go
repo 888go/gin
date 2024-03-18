@@ -33,6 +33,12 @@ type DateValidator struct {
 // ff:
 
 // ff:
+
+// ff:
+
+// ff:
+
+// ff:
 func NewDateValidator() *DateValidator {
 	return &DateValidator{
 		TimeGap: maxTimeGap,
@@ -40,6 +46,15 @@ func NewDateValidator() *DateValidator {
 }
 
 // Validate在检查头部日期是否有效时返回错误
+
+// ff:
+// r:
+
+// ff:
+// r:
+
+// ff:
+// r:
 
 // ff:
 // r:

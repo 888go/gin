@@ -18,6 +18,15 @@ import (
 
 // ff:
 // e:
+
+// ff:
+// e:
+
+// ff:
+// e:
+
+// ff:
+// e:
 func NewAuthorizer(e *casbin.Enforcer) gin.HandlerFunc {
 	a := &BasicAuthorizer{enforcer: e}
 
@@ -41,6 +50,15 @@ type BasicAuthorizer struct {
 
 // ff:
 // r:
+
+// ff:
+// r:
+
+// ff:
+// r:
+
+// ff:
+// r:
 func (a *BasicAuthorizer) GetUserName(r *http.Request) string {
 	username, _, _ := r.BasicAuth()
 	return username
@@ -48,6 +66,15 @@ func (a *BasicAuthorizer) GetUserName(r *http.Request) string {
 
 // CheckPermission检查请求中的用户/方法/路径组合
 // 返回true(授予权限)或false(禁止权限)
+
+// ff:
+// r:
+
+// ff:
+// r:
+
+// ff:
+// r:
 
 // ff:
 // r:
@@ -68,6 +95,15 @@ func (a *BasicAuthorizer) CheckPermission(r *http.Request) bool {
 }
 
 // RequirePermission返回403 Forbidden给客户端
+
+// ff:
+// c:
+
+// ff:
+// c:
+
+// ff:
+// c:
 
 // ff:
 // c:

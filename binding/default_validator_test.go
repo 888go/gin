@@ -8,9 +8,6 @@ import (
 	"testing"
 )
 
-
-// ff:
-// t:
 func TestSliceValidationError(t *testing.T) {
 	tests := []struct {
 		name string
@@ -48,9 +45,6 @@ func TestSliceValidationError(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestDefaultValidator(t *testing.T) {
 	type exampleStruct struct {
 		A string `binding:"max=8"`

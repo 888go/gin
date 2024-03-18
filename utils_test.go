@@ -18,9 +18,6 @@ func init() {
 	SetMode(TestMode)
 }
 
-
-// ff:
-// b:
 func BenchmarkParseAccept(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		parseAccept("text/html , application/xhtml+xml,application/xml;q=0.9,  */* ;q=0.8")
@@ -31,10 +28,6 @@ type testStruct struct {
 	T *testing.T
 }
 
-
-// ff:
-// req:
-// w:
 func (t *testStruct) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	assert.Equal(t.T, "POST", req.Method)
 	assert.Equal(t.T, "/path", req.URL.Path)
@@ -42,9 +35,6 @@ func (t *testStruct) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(w, "hello")
 }
 
-
-// ff:
-// t:
 func TestWrap(t *testing.T) {
 	router := New()
 	router.POST("/path", WrapH(&testStruct{t}))
@@ -64,18 +54,12 @@ func TestWrap(t *testing.T) {
 	assert.Equal(t, "hola!", w.Body.String())
 }
 
-
-// ff:
-// t:
 func TestLastChar(t *testing.T) {
 	assert.Equal(t, uint8('a'), lastChar("hola"))
 	assert.Equal(t, uint8('s'), lastChar("adios"))
 	assert.Panics(t, func() { lastChar("") })
 }
 
-
-// ff:
-// t:
 func TestParseAccept(t *testing.T) {
 	parts := parseAccept("text/html , application/xhtml+xml,application/xml;q=0.9,  */* ;q=0.8")
 	assert.Len(t, parts, 4)
@@ -85,9 +69,6 @@ func TestParseAccept(t *testing.T) {
 	assert.Equal(t, "*/*", parts[3])
 }
 
-
-// ff:
-// t:
 func TestChooseData(t *testing.T) {
 	A := "a"
 	B := "b"
@@ -96,9 +77,6 @@ func TestChooseData(t *testing.T) {
 	assert.Panics(t, func() { chooseData(nil, nil) })
 }
 
-
-// ff:
-// t:
 func TestFilterFlags(t *testing.T) {
 	result := filterFlags("text/html ")
 	assert.Equal(t, "text/html", result)
@@ -107,9 +85,6 @@ func TestFilterFlags(t *testing.T) {
 	assert.Equal(t, "text/html", result)
 }
 
-
-// ff:
-// t:
 func TestFunctionName(t *testing.T) {
 	assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction)) //th:assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction))     
 }
@@ -118,9 +93,6 @@ func somefunction() {
 // 这个空函数由TestFunctionName()使用
 }
 
-
-// ff:
-// t:
 func TestJoinPaths(t *testing.T) {
 	assert.Equal(t, "", joinPaths("", ""))
 	assert.Equal(t, "/", joinPaths("", "/"))
@@ -139,9 +111,6 @@ type bindTestStruct struct {
 	Bar int    `form:"bar" binding:"min=4"`
 }
 
-
-// ff:
-// t:
 func TestBindMiddleware(t *testing.T) {
 	var value *bindTestStruct
 	var called bool
@@ -164,9 +133,6 @@ func TestBindMiddleware(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
 func TestMarshalXMLforH(t *testing.T) {
 	h := H{
 		"": "test",
@@ -178,9 +144,6 @@ func TestMarshalXMLforH(t *testing.T) {
 	assert.Error(t, e)
 }
 
-
-// ff:
-// t:
 func TestIsASCII(t *testing.T) {
 	assert.Equal(t, isASCII("test"), true)
 	assert.Equal(t, isASCII("🧡💛💚💙💜"), false)

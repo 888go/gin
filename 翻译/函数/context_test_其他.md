@@ -9,8 +9,8 @@ cf= 重复,用于重命名多次,如: 一个文档内有2个"One(result interfac
 
 [assert.Regexp(t, "^(.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest$", c.HandlerName())]
 th=assert.Regexp(t, "^(.*/vendor/)?github.com/888go/gin.handlerNameTest$", c.HandlerName())
-代码块=	assert.Regexp(t, "^(.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest$", c.HandlerName()) //th:assert.Regexp(t, "^(.*/vendor/)?github.com/888go/gin.handlerNameTest$", c.HandlerName())
+代码块=	assert.Regexp(t, "^(.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest$", c.HandlerName()) //th:assert.Regexp(t, "^(.*/vendor/)?github.com/888go/gin.handlerNameTest$", c.HandlerName())          
 
 [assert.Regexp(t, `^(.*/vendor/)?(github\.com/gin-gonic/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)]
 th=assert.Regexp(t, `^(.*/vendor/)?(github\.com/888go/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)
-代码块=		assert.Regexp(t, `^(.*/vendor/)?(github\.com/gin-gonic/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name) //th:assert.Regexp(t, `^(.*/vendor/)?(github\.com/888go/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)
+代码块=		assert.Regexp(t, `^(.*/vendor/)?(github\.com/gin-gonic/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name) //th:assert.Regexp(t, `^(.*/vendor/)?(github\.com/888go/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)          

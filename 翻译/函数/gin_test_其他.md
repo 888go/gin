@@ -9,8 +9,8 @@ cf= 重复,用于重命名多次,如: 一个文档内有2个"One(result interfac
 
 [Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$",]
 th=Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
-代码块=		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
+代码块=		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest1$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",                              
 
 [Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest2$",]
 th=Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",
-代码块=		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest2$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",
+代码块=		Handler: "^(.*/vendor/)?github.com/gin-gonic/gin.handlerTest2$", //th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",                    

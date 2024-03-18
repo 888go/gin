@@ -13,9 +13,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
 func TestError(t *testing.T) {
 	baseError := errors.New("test error")
 	err := &Error{
@@ -70,9 +67,6 @@ func TestError(t *testing.T) {
 	assert.Equal(t, customError{status: "200", data: "other data"}, err.JSON())
 }
 
-
-// ff:
-// t:
 func TestErrorSlice(t *testing.T) {
 	errs := errorMsgs{
 		{Err: errors.New("first"), Type: ErrorTypePrivate},
@@ -117,17 +111,11 @@ Error #03: third
 
 type TestErr string
 
-
-// ff:
-// e:
 func (e TestErr) Error() string { return string(e) }
 
 // testrorunwrap测试gin的行为
 // Error . is ()"“和“误差()
 // “errors.Is()“;和“误差()“;已经被添加到go 1.13的标准库中
-
-// ff:
-// t:
 func TestErrorUnwrap(t *testing.T) {
 	innerErr := TestErr("some error")
 

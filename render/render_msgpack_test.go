@@ -18,9 +18,6 @@ import (
 // TODO 单元测试
 // 测试错误情况
 
-
-// ff:
-// t:
 func TestRenderMsgPack(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := map[string]any{

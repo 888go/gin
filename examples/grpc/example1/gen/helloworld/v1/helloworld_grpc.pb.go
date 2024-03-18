@@ -32,10 +32,37 @@ type greeterClient struct {
 
 // ff:
 // cc:
+
+// ff:
+// cc:
+
+// ff:
+// cc:
+
+// ff:
+// cc:
 func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
 	return &greeterClient{cc}
 }
 
+
+// ff:
+// *HelloReply:
+// opts:
+// in:
+// ctx:
+
+// ff:
+// *HelloReply:
+// opts:
+// in:
+// ctx:
+
+// ff:
+// *HelloReply:
+// opts:
+// in:
+// ctx:
 
 // ff:
 // *HelloReply:
@@ -80,6 +107,18 @@ type UnsafeGreeterServer interface {
 	mustEmbedUnimplementedGreeterServer()
 }
 
+
+// ff:
+// srv:
+// s:
+
+// ff:
+// srv:
+// s:
+
+// ff:
+// srv:
+// s:
 
 // ff:
 // srv:

@@ -16,9 +16,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
 func TestContextFormFileFailed19(t *testing.T) {
 	buf := new(bytes.Buffer)
 	mw := multipart.NewWriter(buf)

@@ -14,9 +14,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
 func TestBindWith(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)

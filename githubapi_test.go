@@ -302,9 +302,6 @@ var githubAPI = []route{
 	{http.MethodDelete, "/user/keys/:id"},
 }
 
-
-// ff:
-// t:
 func TestShouldBindUri(t *testing.T) {
 	DefaultWriter = os.Stdout
 	router := New()
@@ -327,9 +324,6 @@ func TestShouldBindUri(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 }
 
-
-// ff:
-// t:
 func TestBindUri(t *testing.T) {
 	DefaultWriter = os.Stdout
 	router := New()
@@ -352,9 +346,6 @@ func TestBindUri(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 }
 
-
-// ff:
-// t:
 func TestBindUriError(t *testing.T) {
 	DefaultWriter = os.Stdout
 	router := New()
@@ -372,9 +363,6 @@ func TestBindUriError(t *testing.T) {
 	assert.Equal(t, http.StatusBadRequest, w1.Code)
 }
 
-
-// ff:
-// t:
 func TestRaceContextCopy(t *testing.T) {
 	DefaultWriter = os.Stdout
 	router := Default()
@@ -411,9 +399,6 @@ func githubConfigRouter(router *Engine) {
 	}
 }
 
-
-// ff:
-// t:
 func TestGithubAPI(t *testing.T) {
 	DefaultWriter = os.Stdout
 	router := New()
@@ -467,18 +452,12 @@ func exampleFromPath(path string) (string, Params) {
 	return output.String(), params
 }
 
-
-// ff:
-// b:
 func BenchmarkGithub(b *testing.B) {
 	router := New()
 	githubConfigRouter(router)
 	runRequest(b, router, http.MethodGet, "/legacy/issues/search/:owner/:repository/:state/:keyword")
 }
 
-
-// ff:
-// b:
 func BenchmarkParallelGithub(b *testing.B) {
 	DefaultWriter = os.Stdout
 	router := New()
@@ -495,9 +474,6 @@ func BenchmarkParallelGithub(b *testing.B) {
 	})
 }
 
-
-// ff:
-// b:
 func BenchmarkParallelGithubDefault(b *testing.B) {
 	DefaultWriter = os.Stdout
 	router := New()

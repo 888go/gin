@@ -60,9 +60,6 @@ func setupHTMLFiles(t *testing.T, mode string, tls bool, loadMethod func(*Engine
 	return ts
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLGlobDebugMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -83,9 +80,6 @@ func TestLoadHTMLGlobDebugMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestH2c(t *testing.T) {
 	ln, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
@@ -124,9 +118,6 @@ func TestH2c(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLGlobTestMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -147,9 +138,6 @@ func TestLoadHTMLGlobTestMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLGlobReleaseMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -170,9 +158,6 @@ func TestLoadHTMLGlobReleaseMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLGlobUsingTLS(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -200,9 +185,6 @@ func TestLoadHTMLGlobUsingTLS(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLGlobFromFuncMap(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -227,9 +209,6 @@ func init() {
 	SetMode(TestMode)
 }
 
-
-// ff:
-// t:
 func TestCreateEngine(t *testing.T) {
 	router := New()
 	assert.Equal(t, "/", router.basePath)
@@ -237,9 +216,6 @@ func TestCreateEngine(t *testing.T) {
 	assert.Empty(t, router.Handlers)
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLFilesTestMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -260,9 +236,6 @@ func TestLoadHTMLFilesTestMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLFilesDebugMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -283,9 +256,6 @@ func TestLoadHTMLFilesDebugMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLFilesReleaseMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -306,9 +276,6 @@ func TestLoadHTMLFilesReleaseMode(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLFilesUsingTLS(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -336,9 +303,6 @@ func TestLoadHTMLFilesUsingTLS(t *testing.T) {
 	assert.Equal(t, "<h1>Hello world</h1>", string(resp))
 }
 
-
-// ff:
-// t:
 func TestLoadHTMLFilesFuncMap(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
@@ -359,9 +323,6 @@ func TestLoadHTMLFilesFuncMap(t *testing.T) {
 	assert.Equal(t, "Date: 2017/07/01", string(resp))
 }
 
-
-// ff:
-// t:
 func TestAddRoute(t *testing.T) {
 	router := New()
 	router.addRoute("GET", "/", HandlersChain{func(_ *Context) {}})
@@ -380,9 +341,6 @@ func TestAddRoute(t *testing.T) {
 	assert.Len(t, router.trees, 2)
 }
 
-
-// ff:
-// t:
 func TestAddRouteFails(t *testing.T) {
 	router := New()
 	assert.Panics(t, func() { router.addRoute("", "/", HandlersChain{func(_ *Context) {}}) })
@@ -395,17 +353,11 @@ func TestAddRouteFails(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
 func TestCreateDefaultRouter(t *testing.T) {
 	router := Default()
 	assert.Len(t, router.Handlers, 2)
 }
 
-
-// ff:
-// t:
 func TestNoRouteWithoutGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
@@ -428,9 +380,6 @@ func TestNoRouteWithoutGlobalHandlers(t *testing.T) {
 	compareFunc(t, router.allNoRoute[1], middleware0)
 }
 
-
-// ff:
-// t:
 func TestNoRouteWithGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
@@ -462,9 +411,6 @@ func TestNoRouteWithGlobalHandlers(t *testing.T) {
 	compareFunc(t, router.allNoRoute[2], middleware0)
 }
 
-
-// ff:
-// t:
 func TestNoMethodWithoutGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
@@ -487,15 +433,9 @@ func TestNoMethodWithoutGlobalHandlers(t *testing.T) {
 	compareFunc(t, router.allNoMethod[1], middleware0)
 }
 
-
-// ff:
-// t:
 func TestRebuild404Handlers(t *testing.T) {
 }
 
-
-// ff:
-// t:
 func TestNoMethodWithGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
@@ -535,9 +475,6 @@ func compareFunc(t *testing.T, a, b any) {
 	}
 }
 
-
-// ff:
-// t:
 func TestListOfRoutes(t *testing.T) {
 	router := New()
 	router.GET("/favicon.ico", handlerTest1)
@@ -580,9 +517,6 @@ func TestListOfRoutes(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
 func TestEngineHandleContext(t *testing.T) {
 	r := New()
 	r.GET("/", func(c *Context) {
@@ -600,9 +534,6 @@ func TestEngineHandleContext(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
 func TestEngineHandleContextManyReEntries(t *testing.T) {
 	expectValue := 10000
 
@@ -640,9 +571,6 @@ func TestEngineHandleContextManyReEntries(t *testing.T) {
 	assert.Equal(t, int64(expectValue), middlewareCounter)
 }
 
-
-// ff:
-// t:
 func TestPrepareTrustedCIRDsWith(t *testing.T) {
 	r := New()
 

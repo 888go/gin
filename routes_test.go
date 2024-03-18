@@ -21,12 +21,6 @@ type header struct {
 }
 
 // 对路由器进行测试
-
-// ff:
-// headers:
-// path:
-// method:
-// r:
 func PerformRequest(r http.Handler, method, path string, headers ...header) *httptest.ResponseRecorder {
 	req := httptest.NewRequest(method, path, nil)
 	for _, h := range headers {
@@ -91,9 +85,6 @@ func testRouteNotOK2(method string, t *testing.T) {
 	assert.Equal(t, http.StatusMethodNotAllowed, w.Code)
 }
 
-
-// ff:
-// t:
 func TestRouterMethod(t *testing.T) {
 	router := New()
 	router.PUT("/hey2", func(c *Context) {
@@ -114,9 +105,6 @@ func TestRouterMethod(t *testing.T) {
 	assert.Equal(t, "called", w.Body.String())
 }
 
-
-// ff:
-// t:
 func TestRouterGroupRouteOK(t *testing.T) {
 	testRouteOK(http.MethodGet, t)
 	testRouteOK(http.MethodPost, t)
@@ -129,9 +117,6 @@ func TestRouterGroupRouteOK(t *testing.T) {
 	testRouteOK(http.MethodTrace, t)
 }
 
-
-// ff:
-// t:
 func TestRouteNotOK(t *testing.T) {
 	testRouteNotOK(http.MethodGet, t)
 	testRouteNotOK(http.MethodPost, t)
@@ -144,9 +129,6 @@ func TestRouteNotOK(t *testing.T) {
 	testRouteNotOK(http.MethodTrace, t)
 }
 
-
-// ff:
-// t:
 func TestRouteNotOK2(t *testing.T) {
 	testRouteNotOK2(http.MethodGet, t)
 	testRouteNotOK2(http.MethodPost, t)
@@ -159,9 +141,6 @@ func TestRouteNotOK2(t *testing.T) {
 	testRouteNotOK2(http.MethodTrace, t)
 }
 
-
-// ff:
-// t:
 func TestRouteRedirectTrailingSlash(t *testing.T) {
 	router := New()
 	router.RedirectFixedPath = false
@@ -266,9 +245,6 @@ func TestRouteRedirectTrailingSlash(t *testing.T) {
 	assert.Equal(t, http.StatusNotFound, w.Code)
 }
 
-
-// ff:
-// t:
 func TestRouteRedirectFixedPath(t *testing.T) {
 	router := New()
 	router.RedirectFixedPath = true
@@ -297,9 +273,6 @@ func TestRouteRedirectFixedPath(t *testing.T) {
 }
 
 // TestContextParamsGet测试是否可以从URL解析参数
-
-// ff:
-// t:
 func TestRouteParamsByName(t *testing.T) {
 	name := ""
 	lastName := ""
@@ -332,9 +305,6 @@ func TestRouteParamsByName(t *testing.T) {
 }
 
 // TestContextParamsGet测试即使使用额外的斜杠也可以从URL解析参数
-
-// ff:
-// t:
 func TestRouteParamsByNameWithExtraSlash(t *testing.T) {
 	name := ""
 	lastName := ""
@@ -368,9 +338,6 @@ func TestRouteParamsByNameWithExtraSlash(t *testing.T) {
 }
 
 // TestRouteParamsNotEmpty测试上下文参数是否会被设置，即使在上下文初始化之后注册了带有参数/通配符的路由(这发生在之前的请求中)
-
-// ff:
-// t:
 func TestRouteParamsNotEmpty(t *testing.T) {
 	name := ""
 	lastName := ""
@@ -408,9 +375,6 @@ func TestRouteParamsNotEmpty(t *testing.T) {
 }
 
 // TestHandleStaticFile -确保静态文件处理正确
-
-// ff:
-// t:
 func TestRouteStaticFile(t *testing.T) {
 // 安装文件
 	testRoot, _ := os.Getwd()
@@ -446,9 +410,6 @@ func TestRouteStaticFile(t *testing.T) {
 }
 
 // TestHandleStaticFile -确保静态文件处理正确
-
-// ff:
-// t:
 func TestRouteStaticFileFS(t *testing.T) {
 // 安装文件
 	testRoot, _ := os.Getwd()
@@ -483,9 +444,6 @@ func TestRouteStaticFileFS(t *testing.T) {
 }
 
 // TestHandleStaticDir -确保根/子目录处理正确
-
-// ff:
-// t:
 func TestRouteStaticListingDir(t *testing.T) {
 	router := New()
 	router.StaticFS("/", Dir("./", true))
@@ -498,9 +456,6 @@ func TestRouteStaticListingDir(t *testing.T) {
 }
 
 // TestHandleHeadToDir -确保根/子目录处理得当
-
-// ff:
-// t:
 func TestRouteStaticNoListing(t *testing.T) {
 	router := New()
 	router.Static("/", "./")
@@ -511,9 +466,6 @@ func TestRouteStaticNoListing(t *testing.T) {
 	assert.NotContains(t, w.Body.String(), "gin.go")
 }
 
-
-// ff:
-// t:
 func TestRouterMiddlewareAndStatic(t *testing.T) {
 	router := New()
 	static := router.Group("/", func(c *Context) {
@@ -534,9 +486,6 @@ func TestRouterMiddlewareAndStatic(t *testing.T) {
 	assert.Equal(t, "Gin Framework", w.Header().Get("x-GIN"))
 }
 
-
-// ff:
-// t:
 func TestRouteNotAllowedEnabled(t *testing.T) {
 	router := New()
 	router.HandleMethodNotAllowed = true
@@ -552,9 +501,6 @@ func TestRouteNotAllowedEnabled(t *testing.T) {
 	assert.Equal(t, http.StatusTeapot, w.Code)
 }
 
-
-// ff:
-// t:
 func TestRouteNotAllowedEnabled2(t *testing.T) {
 	router := New()
 	router.HandleMethodNotAllowed = true
@@ -565,9 +511,6 @@ func TestRouteNotAllowedEnabled2(t *testing.T) {
 	assert.Equal(t, http.StatusMethodNotAllowed, w.Code)
 }
 
-
-// ff:
-// t:
 func TestRouteNotAllowedDisabled(t *testing.T) {
 	router := New()
 	router.HandleMethodNotAllowed = false
@@ -583,9 +526,6 @@ func TestRouteNotAllowedDisabled(t *testing.T) {
 	assert.Equal(t, http.StatusNotFound, w.Code)
 }
 
-
-// ff:
-// t:
 func TestRouterNotFoundWithRemoveExtraSlash(t *testing.T) {
 	router := New()
 	router.RemoveExtraSlash = true
@@ -609,9 +549,6 @@ func TestRouterNotFoundWithRemoveExtraSlash(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestRouterNotFound(t *testing.T) {
 	router := New()
 	router.RedirectFixedPath = true
@@ -680,9 +617,6 @@ func TestRouterNotFound(t *testing.T) {
 	assert.Equal(t, "logout", w.Body.String())
 }
 
-
-// ff:
-// t:
 func TestRouterStaticFSNotFound(t *testing.T) {
 	router := New()
 	router.StaticFS("/", http.FileSystem(http.Dir("/thisreallydoesntexist/")))
@@ -697,9 +631,6 @@ func TestRouterStaticFSNotFound(t *testing.T) {
 	assert.Equal(t, "non existent", w.Body.String())
 }
 
-
-// ff:
-// t:
 func TestRouterStaticFSFileNotFound(t *testing.T) {
 	router := New()
 
@@ -711,9 +642,6 @@ func TestRouterStaticFSFileNotFound(t *testing.T) {
 }
 
 // 对问题#1805的bug进行复制测试
-
-// ff:
-// t:
 func TestMiddlewareCalledOnceByRouterStaticFSNotFound(t *testing.T) {
 	router := New()
 
@@ -734,9 +662,6 @@ func TestMiddlewareCalledOnceByRouterStaticFSNotFound(t *testing.T) {
 	assert.Equal(t, 2, middlewareCalledNum)
 }
 
-
-// ff:
-// t:
 func TestRouteRawPath(t *testing.T) {
 	route := New()
 	route.UseRawPath = true
@@ -756,9 +681,6 @@ func TestRouteRawPath(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 }
 
-
-// ff:
-// t:
 func TestRouteRawPathNoUnescape(t *testing.T) {
 	route := New()
 	route.UseRawPath = true
@@ -779,9 +701,6 @@ func TestRouteRawPathNoUnescape(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 }
 
-
-// ff:
-// t:
 func TestRouteServeErrorWithWriteHeader(t *testing.T) {
 	route := New()
 	route.Use(func(c *Context) {
@@ -794,9 +713,6 @@ func TestRouteServeErrorWithWriteHeader(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestRouteContextHoldsFullPath(t *testing.T) {
 	router := New()
 
@@ -840,9 +756,6 @@ func TestRouteContextHoldsFullPath(t *testing.T) {
 	assert.Equal(t, http.StatusNotFound, w.Code)
 }
 
-
-// ff:
-// t:
 func TestEngineHandleMethodNotAllowedCornerCase(t *testing.T) {
 	r := New()
 	r.HandleMethodNotAllowed = true

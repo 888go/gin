@@ -29,11 +29,32 @@ type Writer struct {
 // ff:
 // buf:
 // w:
+
+// ff:
+// buf:
+// w:
+
+// ff:
+// buf:
+// w:
+
+// ff:
+// buf:
+// w:
 func NewWriter(w gin.ResponseWriter, buf *bytes.Buffer) *Writer {
 	return &Writer{ResponseWriter: w, body: buf, headers: make(http.Header)}
 }
 
 // Write 将数据写入响应体
+
+// ff:
+// data:
+
+// ff:
+// data:
+
+// ff:
+// data:
 
 // ff:
 // data:
@@ -54,6 +75,15 @@ func (w *Writer) Write(data []byte) (int, error) {
 // WriteHeader 向客户端发送带有指定状态码的HTTP响应头。
 // 若响应写入器已发送过头部信息，或者发生超时，
 // 此方法将不做任何操作。
+
+// ff:
+// code:
+
+// ff:
+// code:
+
+// ff:
+// code:
 
 // ff:
 // code:
@@ -92,11 +122,26 @@ func (w *Writer) writeHeader(code int) {
 // ff:
 
 // ff:
+
+// ff:
+
+// ff:
+
+// ff:
 func (w *Writer) Header() http.Header {
 	return w.headers
 }
 
 // WriteString 将字符串写入响应体
+
+// ff:
+// s:
+
+// ff:
+// s:
+
+// ff:
+// s:
 
 // ff:
 // s:
@@ -112,6 +157,12 @@ func (w *Writer) WriteString(s string) (int, error) {
 // ff:
 
 // ff:
+
+// ff:
+
+// ff:
+
+// ff:
 func (w *Writer) FreeBuffer() {
 // 如果不重置body，旧的字节数据将会被放入bufPool中
 	w.body.Reset()
@@ -120,6 +171,12 @@ func (w *Writer) FreeBuffer() {
 
 // 我们必须在这里覆盖Status函数，
 // 否则在其他自定义gin中间件中，gin.Context.Writer.Status()返回的HTTP状态码将始终为200。
+
+// ff:
+
+// ff:
+
+// ff:
 
 // ff:
 

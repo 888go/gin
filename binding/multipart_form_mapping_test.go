@@ -14,9 +14,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
 func TestFormMultipartBindingBindOneFile(t *testing.T) {
 	var s struct {
 		FileValue   multipart.FileHeader     `form:"file"`
@@ -42,9 +39,6 @@ func TestFormMultipartBindingBindOneFile(t *testing.T) {
 	assertMultipartFileHeader(t, s.ArrayPtrs[0], file)
 }
 
-
-// ff:
-// t:
 func TestFormMultipartBindingBindTwoFiles(t *testing.T) {
 	var s struct {
 		SliceValues []multipart.FileHeader   `form:"file"`
@@ -74,9 +68,6 @@ func TestFormMultipartBindingBindTwoFiles(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestFormMultipartBindingBindError(t *testing.T) {
 	files := []testFile{
 		{"file", "file1", []byte("hello")},

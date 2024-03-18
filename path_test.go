@@ -69,9 +69,6 @@ var cleanTests = []cleanPathTest{
 	{"abc/../../././../def", "/def"},
 }
 
-
-// ff:
-// t:
 func TestPathClean(t *testing.T) {
 	for _, test := range cleanTests {
 		assert.Equal(t, test.result, cleanPath(test.path))
@@ -79,9 +76,6 @@ func TestPathClean(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestPathCleanMallocs(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping malloc count in short mode")
@@ -93,9 +87,6 @@ func TestPathCleanMallocs(t *testing.T) {
 	}
 }
 
-
-// ff:
-// b:
 func BenchmarkPathClean(b *testing.B) {
 	b.ReportAllocs()
 
@@ -128,9 +119,6 @@ func genLongPaths() (testPaths []cleanPathTest) {
 	return
 }
 
-
-// ff:
-// t:
 func TestPathCleanLong(t *testing.T) {
 	cleanTests := genLongPaths()
 
@@ -140,9 +128,6 @@ func TestPathCleanLong(t *testing.T) {
 	}
 }
 
-
-// ff:
-// b:
 func BenchmarkPathCleanLong(b *testing.B) {
 	cleanTests := genLongPaths()
 	b.ResetTimer()

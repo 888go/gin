@@ -12,9 +12,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
 func TestMappingBaseTypes(t *testing.T) {
 	intPtr := func(i int) *int {
 		return &i
@@ -63,9 +60,6 @@ func TestMappingBaseTypes(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestMappingDefault(t *testing.T) {
 	var s struct {
 		Int   int    `form:",default=9"`
@@ -80,9 +74,6 @@ func TestMappingDefault(t *testing.T) {
 	assert.Equal(t, [1]int{9}, s.Array)
 }
 
-
-// ff:
-// t:
 func TestMappingSkipField(t *testing.T) {
 	var s struct {
 		A int
@@ -93,9 +84,6 @@ func TestMappingSkipField(t *testing.T) {
 	assert.Equal(t, 0, s.A)
 }
 
-
-// ff:
-// t:
 func TestMappingIgnoreField(t *testing.T) {
 	var s struct {
 		A int `form:"A"`
@@ -108,9 +96,6 @@ func TestMappingIgnoreField(t *testing.T) {
 	assert.Equal(t, 0, s.B)
 }
 
-
-// ff:
-// t:
 func TestMappingUnexportedField(t *testing.T) {
 	var s struct {
 		A int `form:"a"`
@@ -123,9 +108,6 @@ func TestMappingUnexportedField(t *testing.T) {
 	assert.Equal(t, 0, s.b)
 }
 
-
-// ff:
-// t:
 func TestMappingPrivateField(t *testing.T) {
 	var s struct {
 		f int `form:"field"`
@@ -135,9 +117,6 @@ func TestMappingPrivateField(t *testing.T) {
 	assert.Equal(t, 0, s.f)
 }
 
-
-// ff:
-// t:
 func TestMappingUnknownFieldType(t *testing.T) {
 	var s struct {
 		U uintptr
@@ -148,9 +127,6 @@ func TestMappingUnknownFieldType(t *testing.T) {
 	assert.Equal(t, errUnknownType, err)
 }
 
-
-// ff:
-// t:
 func TestMappingURI(t *testing.T) {
 	var s struct {
 		F int `uri:"field"`
@@ -160,9 +136,6 @@ func TestMappingURI(t *testing.T) {
 	assert.Equal(t, 6, s.F)
 }
 
-
-// ff:
-// t:
 func TestMappingForm(t *testing.T) {
 	var s struct {
 		F int `form:"field"`
@@ -172,9 +145,6 @@ func TestMappingForm(t *testing.T) {
 	assert.Equal(t, 6, s.F)
 }
 
-
-// ff:
-// t:
 func TestMapFormWithTag(t *testing.T) {
 	var s struct {
 		F int `externalTag:"field"`
@@ -184,9 +154,6 @@ func TestMapFormWithTag(t *testing.T) {
 	assert.Equal(t, 6, s.F)
 }
 
-
-// ff:
-// t:
 func TestMappingTime(t *testing.T) {
 	var s struct {
 		Time      time.Time
@@ -232,9 +199,6 @@ func TestMappingTime(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestMappingTimeDuration(t *testing.T) {
 	var s struct {
 		D time.Duration
@@ -250,9 +214,6 @@ func TestMappingTimeDuration(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestMappingSlice(t *testing.T) {
 	var s struct {
 		Slice []int `form:"slice,default=9"`
@@ -273,9 +234,6 @@ func TestMappingSlice(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestMappingArray(t *testing.T) {
 	var s struct {
 		Array [2]int `form:"array,default=9"`
@@ -299,9 +257,6 @@ func TestMappingArray(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestMappingStructField(t *testing.T) {
 	var s struct {
 		J struct {
@@ -314,9 +269,6 @@ func TestMappingStructField(t *testing.T) {
 	assert.Equal(t, 9, s.J.I)
 }
 
-
-// ff:
-// t:
 func TestMappingPtrField(t *testing.T) {
 	type ptrStruct struct {
 		Key int64 `json:"key"`
@@ -350,9 +302,6 @@ func TestMappingPtrField(t *testing.T) {
 	assert.EqualValues(t, 2, req2.Items[1].Key)
 }
 
-
-// ff:
-// t:
 func TestMappingMapField(t *testing.T) {
 	var s struct {
 		M map[string]int
@@ -363,9 +312,6 @@ func TestMappingMapField(t *testing.T) {
 	assert.Equal(t, map[string]int{"one": 1}, s.M)
 }
 
-
-// ff:
-// t:
 func TestMappingIgnoredCircularRef(t *testing.T) {
 	type S struct {
 		S *S `form:"-"`

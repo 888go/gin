@@ -16,9 +16,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
 func TestPanicClean(t *testing.T) {
 	buffer := new(strings.Builder)
 	router := New()
@@ -51,9 +48,6 @@ func TestPanicClean(t *testing.T) {
 }
 
 // TestPanicInHandler断言panic已经恢复
-
-// ff:
-// t:
 func TestPanicInHandler(t *testing.T) {
 	buffer := new(strings.Builder)
 	router := New()
@@ -83,9 +77,6 @@ func TestPanicInHandler(t *testing.T) {
 
 // TestPanicWithAbort断言panic已经恢复，即使上下文
 // 使用了中止
-
-// ff:
-// t:
 func TestPanicWithAbort(t *testing.T) {
 	router := New()
 	router.Use(RecoveryWithWriter(nil))
@@ -99,9 +90,6 @@ func TestPanicWithAbort(t *testing.T) {
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 }
 
-
-// ff:
-// t:
 func TestSource(t *testing.T) {
 	bs := source(nil, 0)
 	assert.Equal(t, dunno, bs)
@@ -117,18 +105,12 @@ func TestSource(t *testing.T) {
 	assert.Equal(t, []byte("Hello world."), bs)
 }
 
-
-// ff:
-// t:
 func TestFunction(t *testing.T) {
 	bs := function(1)
 	assert.Equal(t, dunno, bs)
 }
 
 // TestPanicWithBrokenPipe断言恢复专门处理对损坏管道的写响应
-
-// ff:
-// t:
 func TestPanicWithBrokenPipe(t *testing.T) {
 	const expectCode = 204
 
@@ -162,9 +144,6 @@ func TestPanicWithBrokenPipe(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestCustomRecoveryWithWriter(t *testing.T) {
 	errBuffer := new(strings.Builder)
 	buffer := new(strings.Builder)
@@ -199,9 +178,6 @@ func TestCustomRecoveryWithWriter(t *testing.T) {
 	SetMode(TestMode)
 }
 
-
-// ff:
-// t:
 func TestCustomRecovery(t *testing.T) {
 	errBuffer := new(strings.Builder)
 	buffer := new(strings.Builder)
@@ -237,9 +213,6 @@ func TestCustomRecovery(t *testing.T) {
 	SetMode(TestMode)
 }
 
-
-// ff:
-// t:
 func TestRecoveryWithWriterWithCustomRecovery(t *testing.T) {
 	errBuffer := new(strings.Builder)
 	buffer := new(strings.Builder)

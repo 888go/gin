@@ -25,9 +25,6 @@ func rawStrToBytes(s string) []byte {
 
 // 使用以下命令运行测试并显示详细信息：go test -v
 
-
-// ff:
-// t:
 func TestBytesToString(t *testing.T) {
 	data := make([]byte, 1024)
 	for i := 0; i < 100; i++ {
@@ -47,9 +44,6 @@ const (
 
 var src = rand.NewSource(time.Now().UnixNano())
 
-
-// ff:
-// n:
 func RandStringBytesMaskImprSrcSB(n int) string {
 	sb := strings.Builder{}
 	sb.Grow(n)
@@ -69,9 +63,6 @@ func RandStringBytesMaskImprSrcSB(n int) string {
 	return sb.String()
 }
 
-
-// ff:
-// t:
 func TestStringToBytes(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		s := RandStringBytesMaskImprSrcSB(64)
@@ -83,36 +74,24 @@ func TestStringToBytes(t *testing.T) {
 
 // 使用以下命令运行测试并显示详细信息：go test -v -run=none -bench=^BenchmarkBytesConv -benchmem=true
 
-
-// ff:
-// b:
 func BenchmarkBytesConvBytesToStrRaw(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		rawBytesToStr(testBytes)
 	}
 }
 
-
-// ff:
-// b:
 func BenchmarkBytesConvBytesToStr(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		BytesToString(testBytes)
 	}
 }
 
-
-// ff:
-// b:
 func BenchmarkBytesConvStrToBytesRaw(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		rawStrToBytes(testString)
 	}
 }
 
-
-// ff:
-// b:
 func BenchmarkBytesConvStrToBytes(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		StringToBytes(testString)

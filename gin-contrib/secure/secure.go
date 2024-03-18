@@ -72,6 +72,12 @@ type Config struct {
 // ff:
 
 // ff:
+
+// ff:
+
+// ff:
+
+// ff:
 func DefaultConfig() Config {
 	return Config{
 		SSLRedirect:           true,
@@ -89,6 +95,15 @@ func DefaultConfig() Config {
 
 // New 根据指定的配置创建一个安全中间件实例。
 // 使用方式：router.Use(secure.N)
+
+// ff:
+// config:
+
+// ff:
+// config:
+
+// ff:
+// config:
 
 // ff:
 // config:

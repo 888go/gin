@@ -29,9 +29,6 @@ type structFull struct {
 	Nationality *string `form:"nationality"`
 }
 
-
-// ff:
-// b:
 func BenchmarkMapFormFull(b *testing.B) {
 	var s structFull
 	for i := 0; i < b.N; i++ {
@@ -55,9 +52,6 @@ type structName struct {
 	Name string `form:"name"`
 }
 
-
-// ff:
-// b:
 func BenchmarkMapFormName(b *testing.B) {
 	var s structName
 	for i := 0; i < b.N; i++ {

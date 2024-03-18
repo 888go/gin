@@ -143,9 +143,6 @@ type FooStructForMapPtrType struct {
 	PtrBar *map[string]any `form:"ptr_bar"`
 }
 
-
-// ff:
-// t:
 func TestBindingDefault(t *testing.T) {
 	assert.Equal(t, Form, Default("GET", ""))
 	assert.Equal(t, Form, Default("GET", MIMEJSON))
@@ -172,9 +169,6 @@ func TestBindingDefault(t *testing.T) {
 	assert.Equal(t, TOML, Default("PUT", MIMETOML))
 }
 
-
-// ff:
-// t:
 func TestBindingJSONNilBody(t *testing.T) {
 	var obj FooStruct
 	req, _ := http.NewRequest(http.MethodPost, "/", nil)
@@ -182,9 +176,6 @@ func TestBindingJSONNilBody(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestBindingJSON(t *testing.T) {
 	testBodyBinding(t,
 		JSON, "json",
@@ -192,9 +183,6 @@ func TestBindingJSON(t *testing.T) {
 		`{"foo": "bar"}`, `{"bar": "foo"}`)
 }
 
-
-// ff:
-// t:
 func TestBindingJSONSlice(t *testing.T) {
 	EnableDecoderDisallowUnknownFields = true
 	defer func() {
@@ -209,9 +197,6 @@ func TestBindingJSONSlice(t *testing.T) {
 	testBodyBindingSlice(t, JSON, "json", "/", "/", `[{"foo": "123"}]`, `[{"foo": "123456789012345678901234567890123"}]`)
 }
 
-
-// ff:
-// t:
 func TestBindingJSONUseNumber(t *testing.T) {
 	testBodyBindingUseNumber(t,
 		JSON, "json",
@@ -219,9 +204,6 @@ func TestBindingJSONUseNumber(t *testing.T) {
 		`{"foo": 123}`, `{"bar": "foo"}`)
 }
 
-
-// ff:
-// t:
 func TestBindingJSONUseNumber2(t *testing.T) {
 	testBodyBindingUseNumber2(t,
 		JSON, "json",
@@ -229,81 +211,54 @@ func TestBindingJSONUseNumber2(t *testing.T) {
 		`{"foo": 123}`, `{"bar": "foo"}`)
 }
 
-
-// ff:
-// t:
 func TestBindingJSONDisallowUnknownFields(t *testing.T) {
 	testBodyBindingDisallowUnknownFields(t, JSON,
 		"/", "/",
 		`{"foo": "bar"}`, `{"foo": "bar", "what": "this"}`)
 }
 
-
-// ff:
-// t:
 func TestBindingJSONStringMap(t *testing.T) {
 	testBodyBindingStringMap(t, JSON,
 		"/", "/",
 		`{"foo": "bar", "hello": "world"}`, `{"num": 2}`)
 }
 
-
-// ff:
-// t:
 func TestBindingForm(t *testing.T) {
 	testFormBinding(t, "POST",
 		"/", "/",
 		"foo=bar&bar=foo", "bar2=foo")
 }
 
-
-// ff:
-// t:
 func TestBindingForm2(t *testing.T) {
 	testFormBinding(t, "GET",
 		"/?foo=bar&bar=foo", "/?bar2=foo",
 		"", "")
 }
 
-
-// ff:
-// t:
 func TestBindingFormEmbeddedStruct(t *testing.T) {
 	testFormBindingEmbeddedStruct(t, "POST",
 		"/", "/",
 		"page=1&size=2&appkey=test-appkey", "bar2=foo")
 }
 
-
-// ff:
-// t:
 func TestBindingFormEmbeddedStruct2(t *testing.T) {
 	testFormBindingEmbeddedStruct(t, "GET",
 		"/?page=1&size=2&appkey=test-appkey", "/?bar2=foo",
 		"", "")
 }
 
-
-// ff:
-// t:
 func TestBindingFormDefaultValue(t *testing.T) {
 	testFormBindingDefaultValue(t, "POST",
 		"/", "/",
 		"foo=bar", "bar2=foo")
 }
 
-
-// ff:
-// t:
 func TestBindingFormDefaultValue2(t *testing.T) {
 	testFormBindingDefaultValue(t, "GET",
 		"/?foo=bar", "/?bar2=foo",
 		"", "")
 }
 
-
-// ff:
-// t:
 func TestBindingFormForTime(t *testing.T) {
 	testFormBindingForTime(t, "POST",
 		"/", "/",
@@ -322,9 +277,6 @@ func TestBindingFormForTime(t *testing.T) {
 		"time_foo=2017-11-15", "bar2=foo")
 }
 
-
-// ff:
-// t:
 func TestBindingFormForTime2(t *testing.T) {
 	testFormBindingForTime(t, "GET",
 		"/?time_foo=2017-11-15&time_bar=&createTime=1562400033000000123&unixTime=1562400033", "/?bar2=foo",
@@ -343,36 +295,24 @@ func TestBindingFormForTime2(t *testing.T) {
 		"", "")
 }
 
-
-// ff:
-// t:
 func TestFormBindingIgnoreField(t *testing.T) {
 	testFormBindingIgnoreField(t, "POST",
 		"/", "/",
 		"-=bar", "")
 }
 
-
-// ff:
-// t:
 func TestBindingFormInvalidName(t *testing.T) {
 	testFormBindingInvalidName(t, "POST",
 		"/", "/",
 		"test_name=bar", "bar2=foo")
 }
 
-
-// ff:
-// t:
 func TestBindingFormInvalidName2(t *testing.T) {
 	testFormBindingInvalidName2(t, "POST",
 		"/", "/",
 		"map_foo=bar", "bar2=foo")
 }
 
-
-// ff:
-// t:
 func TestBindingFormForType(t *testing.T) {
 	testFormBindingForType(t, "POST",
 		"/", "/",
@@ -419,9 +359,6 @@ func TestBindingFormForType(t *testing.T) {
 		"", "", "StructPointer")
 }
 
-
-// ff:
-// t:
 func TestBindingFormStringMap(t *testing.T) {
 	testBodyBindingStringMap(t, Form,
 		"/", "",
@@ -432,9 +369,6 @@ func TestBindingFormStringMap(t *testing.T) {
 		`foo=something&foo=bar&hello=world`, "")
 }
 
-
-// ff:
-// t:
 func TestBindingFormStringSliceMap(t *testing.T) {
 	obj := make(map[string][]string)
 	req := requestWithBody("POST", "/", "foo=something&foo=bar&hello=world")
@@ -456,54 +390,36 @@ func TestBindingFormStringSliceMap(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestBindingQuery(t *testing.T) {
 	testQueryBinding(t, "POST",
 		"/?foo=bar&bar=foo", "/",
 		"foo=unused", "bar2=foo")
 }
 
-
-// ff:
-// t:
 func TestBindingQuery2(t *testing.T) {
 	testQueryBinding(t, "GET",
 		"/?foo=bar&bar=foo", "/?bar2=foo",
 		"foo=unused", "")
 }
 
-
-// ff:
-// t:
 func TestBindingQueryFail(t *testing.T) {
 	testQueryBindingFail(t, "POST",
 		"/?map_foo=", "/",
 		"map_foo=unused", "bar2=foo")
 }
 
-
-// ff:
-// t:
 func TestBindingQueryFail2(t *testing.T) {
 	testQueryBindingFail(t, "GET",
 		"/?map_foo=", "/?bar2=foo",
 		"map_foo=unused", "")
 }
 
-
-// ff:
-// t:
 func TestBindingQueryBoolFail(t *testing.T) {
 	testQueryBindingBoolFail(t, "GET",
 		"/?bool_foo=fasl", "/?bar2=foo",
 		"bool_foo=unused", "")
 }
 
-
-// ff:
-// t:
 func TestBindingQueryStringMap(t *testing.T) {
 	b := Query
 
@@ -526,9 +442,6 @@ func TestBindingQueryStringMap(t *testing.T) {
 	assert.Equal(t, "world", obj["hello"])
 }
 
-
-// ff:
-// t:
 func TestBindingXML(t *testing.T) {
 	testBodyBinding(t,
 		XML, "xml",
@@ -536,9 +449,6 @@ func TestBindingXML(t *testing.T) {
 		"<map><foo>bar</foo></map>", "<map><bar>foo</bar></map>")
 }
 
-
-// ff:
-// t:
 func TestBindingXMLFail(t *testing.T) {
 	testBodyBindingFail(t,
 		XML, "xml",
@@ -546,9 +456,6 @@ func TestBindingXMLFail(t *testing.T) {
 		"<map><foo>bar<foo></map>", "<map><bar>foo</bar></map>")
 }
 
-
-// ff:
-// t:
 func TestBindingTOML(t *testing.T) {
 	testBodyBinding(t,
 		TOML, "toml",
@@ -556,9 +463,6 @@ func TestBindingTOML(t *testing.T) {
 		`foo="bar"`, `bar="foo"`)
 }
 
-
-// ff:
-// t:
 func TestBindingTOMLFail(t *testing.T) {
 	testBodyBindingFail(t,
 		TOML, "toml",
@@ -566,9 +470,6 @@ func TestBindingTOMLFail(t *testing.T) {
 		`foo=\n"bar"`, `bar="foo"`)
 }
 
-
-// ff:
-// t:
 func TestBindingYAML(t *testing.T) {
 	testBodyBinding(t,
 		YAML, "yaml",
@@ -576,9 +477,6 @@ func TestBindingYAML(t *testing.T) {
 		`foo: bar`, `bar: foo`)
 }
 
-
-// ff:
-// t:
 func TestBindingYAMLStringMap(t *testing.T) {
 // YAML是JSON的超集，所以下面的测试是JSON(为了避免换行)
 	testBodyBindingStringMap(t, YAML,
@@ -586,9 +484,6 @@ func TestBindingYAMLStringMap(t *testing.T) {
 		`{"foo": "bar", "hello": "world"}`, `{"nested": {"foo": "bar"}}`)
 }
 
-
-// ff:
-// t:
 func TestBindingYAMLFail(t *testing.T) {
 	testBodyBindingFail(t,
 		YAML, "yaml",
@@ -717,9 +612,6 @@ func createFormMultipartRequestForMapFail(t *testing.T) *http.Request {
 	return req
 }
 
-
-// ff:
-// t:
 func TestBindingFormPost(t *testing.T) {
 	req := createFormPostRequest(t)
 	var obj FooBarStruct
@@ -730,9 +622,6 @@ func TestBindingFormPost(t *testing.T) {
 	assert.Equal(t, "foo", obj.Bar)
 }
 
-
-// ff:
-// t:
 func TestBindingDefaultValueFormPost(t *testing.T) {
 	req := createDefaultFormPostRequest(t)
 	var obj FooDefaultBarStruct
@@ -742,9 +631,6 @@ func TestBindingDefaultValueFormPost(t *testing.T) {
 	assert.Equal(t, "hello", obj.Bar)
 }
 
-
-// ff:
-// t:
 func TestBindingFormPostForMap(t *testing.T) {
 	req := createFormPostRequestForMap(t)
 	var obj FooStructForMapType
@@ -753,9 +639,6 @@ func TestBindingFormPostForMap(t *testing.T) {
 	assert.Equal(t, float64(123), obj.MapFoo["bar"].(float64))
 }
 
-
-// ff:
-// t:
 func TestBindingFormPostForMapFail(t *testing.T) {
 	req := createFormPostRequestForMapFail(t)
 	var obj FooStructForMapType
@@ -763,9 +646,6 @@ func TestBindingFormPostForMapFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestBindingFormFilesMultipart(t *testing.T) {
 	req := createFormFilesMultipartRequest(t)
 	var obj FooBarFileStruct
@@ -788,9 +668,6 @@ func TestBindingFormFilesMultipart(t *testing.T) {
 	assert.Equal(t, fileExpect, fileActual)
 }
 
-
-// ff:
-// t:
 func TestBindingFormFilesMultipartFail(t *testing.T) {
 	req := createFormFilesMultipartRequestFail(t)
 	var obj FooBarFileFailStruct
@@ -798,9 +675,6 @@ func TestBindingFormFilesMultipartFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestBindingFormMultipart(t *testing.T) {
 	req := createFormMultipartRequest(t)
 	var obj FooBarStruct
@@ -811,9 +685,6 @@ func TestBindingFormMultipart(t *testing.T) {
 	assert.Equal(t, "foo", obj.Bar)
 }
 
-
-// ff:
-// t:
 func TestBindingFormMultipartForMap(t *testing.T) {
 	req := createFormMultipartRequestForMap(t)
 	var obj FooStructForMapType
@@ -824,9 +695,6 @@ func TestBindingFormMultipartForMap(t *testing.T) {
 	assert.Equal(t, float64(3.14), obj.MapFoo["pai"].(float64))
 }
 
-
-// ff:
-// t:
 func TestBindingFormMultipartForMapFail(t *testing.T) {
 	req := createFormMultipartRequestForMapFail(t)
 	var obj FooStructForMapType
@@ -834,9 +702,6 @@ func TestBindingFormMultipartForMapFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestBindingProtoBuf(t *testing.T) {
 	test := &protoexample.Test{
 		Label: proto.String("yes"),
@@ -849,9 +714,6 @@ func TestBindingProtoBuf(t *testing.T) {
 		string(data), string(data[1:]))
 }
 
-
-// ff:
-// t:
 func TestBindingProtoBufFail(t *testing.T) {
 	test := &protoexample.Test{
 		Label: proto.String("yes"),
@@ -864,9 +726,6 @@ func TestBindingProtoBufFail(t *testing.T) {
 		string(data), string(data[1:]))
 }
 
-
-// ff:
-// t:
 func TestValidationFails(t *testing.T) {
 	var obj FooStruct
 	req := requestWithBody("POST", "/", `{"bar": "foo"}`)
@@ -874,9 +733,6 @@ func TestValidationFails(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestValidationDisabled(t *testing.T) {
 	backup := Validator
 	Validator = nil
@@ -888,9 +744,6 @@ func TestValidationDisabled(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-
-// ff:
-// t:
 func TestRequiredSucceeds(t *testing.T) {
 	type HogeStruct struct {
 		Hoge *int `json:"hoge" binding:"required"`
@@ -902,9 +755,6 @@ func TestRequiredSucceeds(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-
-// ff:
-// t:
 func TestRequiredFails(t *testing.T) {
 	type HogeStruct struct {
 		Hoge *int `json:"foo" binding:"required"`
@@ -916,9 +766,6 @@ func TestRequiredFails(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestHeaderBinding(t *testing.T) {
 	h := Header
 	assert.Equal(t, "header", h.Name())
@@ -944,9 +791,6 @@ func TestHeaderBinding(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestUriBinding(t *testing.T) {
 	b := Uri
 	assert.Equal(t, "uri", b.Name())
@@ -968,9 +812,6 @@ func TestUriBinding(t *testing.T) {
 	assert.Equal(t, map[string]any(nil), not.Name)
 }
 
-
-// ff:
-// t:
 func TestUriInnerBinding(t *testing.T) {
 	type Tag struct {
 		Name string `uri:"name"`
@@ -1049,9 +890,6 @@ func testFormBindingDefaultValue(t *testing.T, method, path, badPath, body, badB
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestFormBindingFail(t *testing.T) {
 	b := Form
 	assert.Equal(t, "form", b.Name())
@@ -1062,9 +900,6 @@ func TestFormBindingFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestFormBindingMultipartFail(t *testing.T) {
 	obj := FooBarStruct{}
 	req, err := http.NewRequest("POST", "/", strings.NewReader("foo=bar"))
@@ -1076,9 +911,6 @@ func TestFormBindingMultipartFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestFormPostBindingFail(t *testing.T) {
 	b := FormPost
 	assert.Equal(t, "form-urlencoded", b.Name())
@@ -1089,9 +921,6 @@ func TestFormPostBindingFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestFormMultipartBindingFail(t *testing.T) {
 	b := FormMultipart
 	assert.Equal(t, "multipart/form-data", b.Name())
@@ -1506,8 +1335,6 @@ func testProtoBodyBinding(t *testing.T, b Binding, name, path, badPath, body, ba
 
 type hook struct{}
 
-
-// ff:
 func (h hook) Read([]byte) (int, error) {
 	return 0, errors.New("error")
 }

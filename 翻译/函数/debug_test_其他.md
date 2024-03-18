@@ -9,8 +9,8 @@ cf= 重复,用于重命名多次,如: 一个文档内有2个"One(result interfac
 
 [assert.Regexp(t, `^\#左中括号#GIN-debug\#右中括号# GET    /path/to/route/:param     --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re)]
 th=assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
-代码块=	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
+代码块=	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)          
 
 [assert.Regexp(t, `^\#左中括号#GIN-debug\#右中括号# GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re)]
 th=assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
-代码块=	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
+代码块=	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re) //th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)          

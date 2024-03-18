@@ -14,9 +14,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
 func TestMiddlewareGeneralCase(t *testing.T) {
 	signature := ""
 	router := New()
@@ -45,9 +42,6 @@ func TestMiddlewareGeneralCase(t *testing.T) {
 	assert.Equal(t, "ACDB", signature)
 }
 
-
-// ff:
-// t:
 func TestMiddlewareNoRoute(t *testing.T) {
 	signature := ""
 	router := New()
@@ -84,9 +78,6 @@ func TestMiddlewareNoRoute(t *testing.T) {
 	assert.Equal(t, "ACEGHFDB", signature)
 }
 
-
-// ff:
-// t:
 func TestMiddlewareNoMethodEnabled(t *testing.T) {
 	signature := ""
 	router := New()
@@ -124,9 +115,6 @@ func TestMiddlewareNoMethodEnabled(t *testing.T) {
 	assert.Equal(t, "ACEGHFDB", signature)
 }
 
-
-// ff:
-// t:
 func TestMiddlewareNoMethodDisabled(t *testing.T) {
 	signature := ""
 	router := New()
@@ -168,9 +156,6 @@ func TestMiddlewareNoMethodDisabled(t *testing.T) {
 	assert.Equal(t, "AC X DB", signature)
 }
 
-
-// ff:
-// t:
 func TestMiddlewareAbort(t *testing.T) {
 	signature := ""
 	router := New()
@@ -197,9 +182,6 @@ func TestMiddlewareAbort(t *testing.T) {
 	assert.Equal(t, "ACD", signature)
 }
 
-
-// ff:
-// t:
 func TestMiddlewareAbortHandlersChainAndNext(t *testing.T) {
 	signature := ""
 	router := New()
@@ -222,9 +204,6 @@ func TestMiddlewareAbortHandlersChainAndNext(t *testing.T) {
 }
 
 // TestFailHandlersChain -确保Fail中断以fifo顺序使用中间件以及Abort
-
-// ff:
-// t:
 func TestMiddlewareFailHandlersChain(t *testing.T) {
 // 设置
 	signature := ""
@@ -247,9 +226,6 @@ func TestMiddlewareFailHandlersChain(t *testing.T) {
 	assert.Equal(t, "A", signature)
 }
 
-
-// ff:
-// t:
 func TestMiddlewareWrite(t *testing.T) {
 	router := New()
 	router.Use(func(c *Context) {

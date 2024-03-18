@@ -19,6 +19,18 @@ import (
 // ff:
 // onlyCrashes:
 // client:
+
+// ff:
+// onlyCrashes:
+// client:
+
+// ff:
+// onlyCrashes:
+// client:
+
+// ff:
+// onlyCrashes:
+// client:
 func Recovery(client *raven.Client, onlyCrashes bool) gin.HandlerFunc {
 
 	return func(c *gin.Context) {

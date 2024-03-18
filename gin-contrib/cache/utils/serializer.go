@@ -14,6 +14,15 @@ import (
 
 // ff:
 // value:
+
+// ff:
+// value:
+
+// ff:
+// value:
+
+// ff:
+// value:
 func Serialize(value interface{}) ([]byte, error) {
 	if bytes, ok := value.([]byte); ok {
 		return bytes, nil
@@ -35,6 +44,21 @@ func Serialize(value interface{}) ([]byte, error) {
 }
 
 // Deserialize 将传入的 []byte 反序列化为传入的 ptr interface{}
+
+// ff:
+// err:
+// ptr:
+// byt:
+
+// ff:
+// err:
+// ptr:
+// byt:
+
+// ff:
+// err:
+// ptr:
+// byt:
 
 // ff:
 // err:

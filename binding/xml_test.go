@@ -11,9 +11,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-
-// ff:
-// t:
 func TestXMLBindingBindBody(t *testing.T) {
 	var s struct {
 		Foo string `xml:"foo"`

@@ -12,9 +12,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-
-// ff:
-// t:
 func TestReaderRenderNoHeaders(t *testing.T) {
 	content := "test"
 	r := Reader{

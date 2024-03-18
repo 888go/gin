@@ -25,6 +25,15 @@ type User struct {
 
 // ff:
 // sl:
+
+// ff:
+// sl:
+
+// ff:
+// sl:
+
+// ff:
+// sl:
 func UserStructLevelValidation(sl validator.StructLevel) {
 // user:= structLevel.CurrentStruct.Interface().(user)
 	user := sl.Current().Interface().(User)

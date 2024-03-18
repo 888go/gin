@@ -28,6 +28,21 @@ type server struct {
 // *v1.HelloReply:
 // in:
 // ctx:
+
+// ff:
+// *v1.HelloReply:
+// in:
+// ctx:
+
+// ff:
+// *v1.HelloReply:
+// in:
+// ctx:
+
+// ff:
+// *v1.HelloReply:
+// in:
+// ctx:
 func (s *server) SayHello(ctx context.Context, in *v1.HelloRequest) (*v1.HelloReply, error) {
 	return &v1.HelloReply{Message: "Hello " + in.Name}, nil
 }

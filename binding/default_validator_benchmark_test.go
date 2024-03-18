@@ -10,9 +10,6 @@ import (
 	"testing"
 )
 
-
-// ff:
-// b:
 func BenchmarkSliceValidationError(b *testing.B) {
 	const size int = 100
 	for i := 0; i < b.N; i++ {

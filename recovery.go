@@ -21,7 +21,7 @@ import (
 
 var (
 	dunno     = []byte("???")
-	centerDot = []byte("路")
+	centerDot = []byte("·")
 	dot       = []byte(".")
 	slash     = []byte("/")
 )
@@ -166,7 +166,7 @@ func function(pc uintptr) []byte {
 	// The name includes the path name to the package, which is unnecessary
 	// since the file name is already included.  Plus, it has center dots.
 	// That is, we see
-	//	runtime/debug.*T路ptrmethod
+	//	runtime/debug.*T·ptrmethod
 	// and want
 	//	*T.ptrmethod
 	// Also the package path might contain dot (e.g. code.google.com/...),

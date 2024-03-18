@@ -32,6 +32,21 @@ func (o optionFunc) apply(c *config) {
 // fn:
 // zerolog.Logger:
 // *gin.Context:
+
+// ff:
+// fn:
+// zerolog.Logger:
+// *gin.Context:
+
+// ff:
+// fn:
+// zerolog.Logger:
+// *gin.Context:
+
+// ff:
+// fn:
+// zerolog.Logger:
+// *gin.Context:
 func WithLogger(fn func(*gin.Context, zerolog.Logger) zerolog.Logger) Option {
 	return optionFunc(func(c *config) {
 		c.logger = fn
@@ -39,6 +54,15 @@ func WithLogger(fn func(*gin.Context, zerolog.Logger) zerolog.Logger) Option {
 }
 
 // WithSkipPathRegexps 通过正则表达式模式添加多个需要跳过的URL路径
+
+// ff:
+// regs:
+
+// ff:
+// regs:
+
+// ff:
+// regs:
 
 // ff:
 // regs:
@@ -62,6 +86,15 @@ func WithSkipPathRegexps(regs ...*regexp.Regexp) Option {
 
 // ff:
 // s:
+
+// ff:
+// s:
+
+// ff:
+// s:
+
+// ff:
+// s:
 func WithUTC(s bool) Option {
 	return optionFunc(func(c *config) {
 		c.utc = s
@@ -69,6 +102,15 @@ func WithUTC(s bool) Option {
 }
 
 // WithSkipPath 根据特定模式跳过URL路径
+
+// ff:
+// s:
+
+// ff:
+// s:
+
+// ff:
+// s:
 
 // ff:
 // s:
@@ -89,12 +131,30 @@ func WithSkipPath(s []string) Option {
 
 // ff:
 // s:
+
+// ff:
+// s:
+
+// ff:
+// s:
+
+// ff:
+// s:
 func WithWriter(s io.Writer) Option {
 	return optionFunc(func(c *config) {
 		c.output = s
 	})
 }
 
+
+// ff:
+// lvl:
+
+// ff:
+// lvl:
+
+// ff:
+// lvl:
 
 // ff:
 // lvl:
@@ -113,12 +173,30 @@ func WithDefaultLevel(lvl zerolog.Level) Option {
 
 // ff:
 // lvl:
+
+// ff:
+// lvl:
+
+// ff:
+// lvl:
+
+// ff:
+// lvl:
 func WithClientErrorLevel(lvl zerolog.Level) Option {
 	return optionFunc(func(c *config) {
 		c.clientErrorLevel = lvl
 	})
 }
 
+
+// ff:
+// lvl:
+
+// ff:
+// lvl:
+
+// ff:
+// lvl:
 
 // ff:
 // lvl:

@@ -89,9 +89,6 @@ func checkPriorities(t *testing.T, n *node) uint32 {
 	return prio
 }
 
-
-// ff:
-// t:
 func TestCountParams(t *testing.T) {
 	if countParams("/path/:param1/static/*catch-all") != 2 {
 		t.Fail()
@@ -101,9 +98,6 @@ func TestCountParams(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestTreeAddAndGet(t *testing.T) {
 	tree := &node{}
 
@@ -117,8 +111,8 @@ func TestTreeAddAndGet(t *testing.T) {
 		"/doc/",
 		"/doc/go_faq.html",
 		"/doc/go1.html",
-		"/伪",
-		"/尾",
+		"/α",
+		"/β",
 	}
 	for _, route := range routes {
 		tree.addRoute(route, fakeHandler(route))
@@ -134,16 +128,13 @@ func TestTreeAddAndGet(t *testing.T) {
 		{"/cona", true, "", nil}, // 关键不匹配
 		{"/no", true, "", nil},   // 没有匹配的子
 		{"/ab", false, "/ab", nil},
-		{"/伪", false, "/伪", nil},
-		{"/尾", false, "/尾", nil},
+		{"/α", false, "/α", nil},
+		{"/β", false, "/β", nil},
 	})
 
 	checkPriorities(t, tree)
 }
 
-
-// ff:
-// t:
 func TestTreeWildcard(t *testing.T) {
 	tree := &node{}
 
@@ -222,8 +213,8 @@ func TestTreeWildcard(t *testing.T) {
 		{"/src/", false, "/src/*filepath", Params{Param{Key: "filepath", Value: "/"}}},
 		{"/src/some/file.png", false, "/src/*filepath", Params{Param{Key: "filepath", Value: "/some/file.png"}}},
 		{"/search/", false, "/search/", nil},
-		{"/search/someth!ng+in+眉n矛cod茅", false, "/search/:query", Params{Param{Key: "query", Value: "someth!ng+in+眉n矛cod茅"}}},
-		{"/search/someth!ng+in+眉n矛cod茅/", true, "", Params{Param{Key: "query", Value: "someth!ng+in+眉n矛cod茅"}}},
+		{"/search/someth!ng+in+ünìcodé", false, "/search/:query", Params{Param{Key: "query", Value: "someth!ng+in+ünìcodé"}}},
+		{"/search/someth!ng+in+ünìcodé/", true, "", Params{Param{Key: "query", Value: "someth!ng+in+ünìcodé"}}},
 		{"/search/gin", false, "/search/:query", Params{Param{"query", "gin"}}},
 		{"/search/gin-gonic", false, "/search/gin-gonic", nil},
 		{"/search/google", false, "/search/google", nil},
@@ -327,9 +318,6 @@ func TestTreeWildcard(t *testing.T) {
 	checkPriorities(t, tree)
 }
 
-
-// ff:
-// t:
 func TestUnescapeParameters(t *testing.T) {
 	tree := &node{}
 
@@ -356,7 +344,7 @@ func TestUnescapeParameters(t *testing.T) {
 		{"/src/some/file+test.png", false, "/src/*filepath", Params{Param{Key: "filepath", Value: "/some/file test.png"}}},
 		{"/src/some/file++++%%%%test.png", false, "/src/*filepath", Params{Param{Key: "filepath", Value: "/some/file++++%%%%test.png"}}},
 		{"/src/some/file%2Ftest.png", false, "/src/*filepath", Params{Param{Key: "filepath", Value: "/some/file/test.png"}}},
-		{"/search/someth!ng+in+眉n矛cod茅", false, "/search/:query", Params{Param{Key: "query", Value: "someth!ng in 眉n矛cod茅"}}},
+		{"/search/someth!ng+in+ünìcodé", false, "/search/:query", Params{Param{Key: "query", Value: "someth!ng in ünìcodé"}}},
 		{"/info/gordon/project/go", false, "/info/:user/project/:project", Params{Param{Key: "user", Value: "gordon"}, Param{Key: "project", Value: "go"}}},
 		{"/info/slash%2Fgordon", false, "/info/:user", Params{Param{Key: "user", Value: "slash/gordon"}}},
 		{"/info/slash%2Fgordon/project/Project%20%231", false, "/info/:user/project/:project", Params{Param{Key: "user", Value: "slash/gordon"}, Param{Key: "project", Value: "Project #1"}}},
@@ -399,9 +387,6 @@ func testRoutes(t *testing.T, routes []testRoute) {
 	}
 }
 
-
-// ff:
-// t:
 func TestTreeWildcardConflict(t *testing.T) {
 	routes := []testRoute{
 		{"/cmd/:tool/:sub", false},
@@ -434,9 +419,6 @@ func TestTreeWildcardConflict(t *testing.T) {
 	testRoutes(t, routes)
 }
 
-
-// ff:
-// t:
 func TestCatchAllAfterSlash(t *testing.T) {
 	routes := []testRoute{
 		{"/non-leading-*catchall", true},
@@ -444,9 +426,6 @@ func TestCatchAllAfterSlash(t *testing.T) {
 	testRoutes(t, routes)
 }
 
-
-// ff:
-// t:
 func TestTreeChildConflict(t *testing.T) {
 	routes := []testRoute{
 		{"/cmd/vet", false},
@@ -466,9 +445,6 @@ func TestTreeChildConflict(t *testing.T) {
 	testRoutes(t, routes)
 }
 
-
-// ff:
-// t:
 func TestTreeDuplicatePath(t *testing.T) {
 	tree := &node{}
 
@@ -502,14 +478,11 @@ func TestTreeDuplicatePath(t *testing.T) {
 		{"/", false, "/", nil},
 		{"/doc/", false, "/doc/", nil},
 		{"/src/some/file.png", false, "/src/*filepath", Params{Param{"filepath", "/some/file.png"}}},
-		{"/search/someth!ng+in+眉n矛cod茅", false, "/search/:query", Params{Param{"query", "someth!ng+in+眉n矛cod茅"}}},
+		{"/search/someth!ng+in+ünìcodé", false, "/search/:query", Params{Param{"query", "someth!ng+in+ünìcodé"}}},
 		{"/user_gopher", false, "/user_:name", Params{Param{"name", "gopher"}}},
 	})
 }
 
-
-// ff:
-// t:
 func TestEmptyWildcardName(t *testing.T) {
 	tree := &node{}
 
@@ -529,9 +502,6 @@ func TestEmptyWildcardName(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestTreeCatchAllConflict(t *testing.T) {
 	routes := []testRoute{
 		{"/src/*filepath/x", true},
@@ -543,9 +513,6 @@ func TestTreeCatchAllConflict(t *testing.T) {
 	testRoutes(t, routes)
 }
 
-
-// ff:
-// t:
 func TestTreeCatchAllConflictRoot(t *testing.T) {
 	routes := []testRoute{
 		{"/", false},
@@ -554,18 +521,12 @@ func TestTreeCatchAllConflictRoot(t *testing.T) {
 	testRoutes(t, routes)
 }
 
-
-// ff:
-// t:
 func TestTreeCatchMaxParams(t *testing.T) {
 	tree := &node{}
 	var route = "/cmd/*filepath"
 	tree.addRoute(route, fakeHandler(route))
 }
 
-
-// ff:
-// t:
 func TestTreeDoubleWildcard(t *testing.T) {
 	const panicMsg = "only one wildcard per path segment is allowed"
 
@@ -587,10 +548,7 @@ func TestTreeDoubleWildcard(t *testing.T) {
 	}
 }
 
-/*
-// ff:
-// t:
-func TestTreeDuplicateWildcard(t *testing.T) {
+/*func TestTreeDuplicateWildcard(t *testing.T) {
 	tree := &node{}
 	routes := [...]string{
 		"/:id/:name/:id",
@@ -600,9 +558,6 @@ func TestTreeDuplicateWildcard(t *testing.T) {
 	}
 }*/
 
-
-// ff:
-// t:
 func TestTreeTrailingSlashRedirect(t *testing.T) {
 	tree := &node{}
 
@@ -709,9 +664,6 @@ func TestTreeTrailingSlashRedirect(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestTreeRootTrailingSlashRedirect(t *testing.T) {
 	tree := &node{}
 
@@ -730,9 +682,6 @@ func TestTreeRootTrailingSlashRedirect(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestRedirectTrailingSlash(t *testing.T) {
 	var data = []struct {
 		path string
@@ -753,9 +702,6 @@ func TestRedirectTrailingSlash(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestTreeFindCaseInsensitivePath(t *testing.T) {
 	tree := &node{}
 
@@ -785,16 +731,16 @@ func TestTreeFindCaseInsensitivePath(t *testing.T) {
 		"/doc/go/away",
 		"/no/a",
 		"/no/b",
-		"/螤",
-		"/u/apf锚l/",
-		"/u/盲pf锚l/",
-		"/u/枚pf锚l",
-		"/v/脛pf锚l/",
-		"/v/脰pf锚l",
-		"/w/鈾?,  // 3字节
-		"/w/鈾?", // 3字节, last byte differs
-		"/w/馉湈",  // 4字节
-		"/w/馉湉/", // 4字节
+		"/Π",
+		"/u/apfêl/",
+		"/u/äpfêl/",
+		"/u/öpfêl",
+		"/v/Äpfêl/",
+		"/v/Öpfêl",
+		"/w/♬",  // 3字节
+		"/w/♭/", // 3字节, last byte differs
+		"/w/𠜎",  // 4字节
+		"/w/𠜏/", // 4字节
 		longPath,
 	}
 
@@ -873,20 +819,20 @@ func TestTreeFindCaseInsensitivePath(t *testing.T) {
 		{"/DOC/", "/doc", true, true},
 		{"/NO", "", false, true},
 		{"/DOC/GO", "", false, true},
-		{"/蟺", "/螤", true, false},
-		{"/蟺/", "/螤", true, true},
-		{"/u/脛PF脢L/", "/u/盲pf锚l/", true, false},
-		{"/u/脛PF脢L", "/u/盲pf锚l/", true, true},
-		{"/u/脰PF脢L/", "/u/枚pf锚l", true, true},
-		{"/u/脰PF脢L", "/u/枚pf锚l", true, false},
-		{"/v/盲pf锚L/", "/v/脛pf锚l/", true, false},
-		{"/v/盲pf锚L", "/v/脛pf锚l/", true, true},
-		{"/v/枚pf锚L/", "/v/脰pf锚l", true, true},
-		{"/v/枚pf锚L", "/v/脰pf锚l", true, false},
-		{"/w/鈾?", "/w/鈾?, true, true},
-		{"/w/鈾?, "/w/鈾?", true, true},
-		{"/w/馉湈/", "/w/馉湈", true, true},
-		{"/w/馉湉", "/w/馉湉/", true, true},
+		{"/π", "/Π", true, false},
+		{"/π/", "/Π", true, true},
+		{"/u/ÄPFÊL/", "/u/äpfêl/", true, false},
+		{"/u/ÄPFÊL", "/u/äpfêl/", true, true},
+		{"/u/ÖPFÊL/", "/u/öpfêl", true, true},
+		{"/u/ÖPFÊL", "/u/öpfêl", true, false},
+		{"/v/äpfêL/", "/v/Äpfêl/", true, false},
+		{"/v/äpfêL", "/v/Äpfêl/", true, true},
+		{"/v/öpfêL/", "/v/Öpfêl", true, true},
+		{"/v/öpfêL", "/v/Öpfêl", true, false},
+		{"/w/♬/", "/w/♬", true, true},
+		{"/w/♭", "/w/♭/", true, true},
+		{"/w/𠜎/", "/w/𠜎", true, true},
+		{"/w/𠜏", "/w/𠜏/", true, true},
 		{lOngPath, longPath, true, true},
 	}
 	// With fixTrailingSlash = true
@@ -916,9 +862,6 @@ func TestTreeFindCaseInsensitivePath(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestTreeInvalidNodeType(t *testing.T) {
 	const panicMsg = "invalid node type"
 
@@ -946,9 +889,6 @@ func TestTreeInvalidNodeType(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestTreeInvalidParamsType(t *testing.T) {
 	tree := &node{}
 // 使用通配符添加子节点
@@ -962,9 +902,6 @@ func TestTreeInvalidParamsType(t *testing.T) {
 	tree.getValue("/test", &params, getSkippedNodes(), false)
 }
 
-
-// ff:
-// t:
 func TestTreeExpandParamsCapacity(t *testing.T) {
 	data := []struct {
 		path string
@@ -993,9 +930,6 @@ func TestTreeExpandParamsCapacity(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestTreeWildcardConflictEx(t *testing.T) {
 	conflicts := [...]struct {
 		route        string

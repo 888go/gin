@@ -15,9 +15,6 @@ import (
 	"github.com/ugorji/go/codec"
 )
 
-
-// ff:
-// t:
 func TestMsgpackBindingBindBody(t *testing.T) {
 	type teststruct struct {
 		Foo string `msgpack:"foo"`
