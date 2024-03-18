@@ -128,3 +128,21 @@
 // 零值
 # <翻译结束>
 
+
+<原文开始>
+//th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
+<原文结束>
+
+# <翻译开始>
+//th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",     
+# <翻译结束>
+
+
+<原文开始>
+//th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",     
+<原文结束>
+
+# <翻译开始>
+//th:Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",     
+# <翻译结束>
+

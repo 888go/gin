@@ -62,3 +62,33 @@
 // 没有实现http. push的ResponseWriter
 # <翻译结束>
 
+
+<原文开始>
+// TODO
+// 
+// ff:
+// *bufio.ReadWriter:
+// net.Conn:
+<原文结束>
+
+# <翻译开始>
+// TODO
+// 
+// ff:
+// *bufio.ReadWriter:
+// net.Conn:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// opts:
+// target:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// opts:
+// target:
+# <翻译结束>
+

@@ -54,3 +54,18 @@
 // 默认为 gin.DefaultWriter
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// fn:
+// zerolog.Logger:
+// *gin.Context:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// fn:
+// zerolog.Logger:
+// *gin.Context:
+# <翻译结束>
+

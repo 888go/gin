@@ -1,22 +1,28 @@
 
 <原文开始>
-// Using map for better lookup performance
+// ff:
+// channel:
+// roomid:
 <原文结束>
 
 # <翻译开始>
-// 使用map以获得更好的查找性能
+// ff:
+// channel:
+// roomid:
 # <翻译结束>
 
 
 <原文开始>
 // ff:
-// decompressFn:
-// c:
+// text:
+// roomid:
+// userid:
 <原文结束>
 
 # <翻译开始>
 // ff:
-// decompressFn:
-// c:
+// text:
+// roomid:
+// userid:
 # <翻译结束>
 

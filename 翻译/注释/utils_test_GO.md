@@ -20,3 +20,12 @@
 // 这个空函数由TestFunctionName()使用
 # <翻译结束>
 
+
+<原文开始>
+//th:assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction))     
+<原文结束>
+
+# <翻译开始>
+//th:assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction))     
+# <翻译结束>
+

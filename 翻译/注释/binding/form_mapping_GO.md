@@ -101,3 +101,39 @@
 // 当字段为"emptyField"变量时
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// tag:
+// form:
+// ptr:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// tag:
+// form:
+// ptr:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// err:
+// isSet:
+// opt:
+// tagValue:
+// field:
+// value:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// err:
+// isSet:
+// opt:
+// tagValue:
+// field:
+// value:
+# <翻译结束>
+

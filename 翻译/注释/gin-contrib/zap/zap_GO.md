@@ -130,3 +130,59 @@
 // 如果连接已断开，我们将无法向其写入状态。
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// utc:
+// timeFormat:
+// logger:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// utc:
+// timeFormat:
+// logger:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// conf:
+// logger:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// conf:
+// logger:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// stack:
+// logger:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// stack:
+// logger:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// recovery:
+// stack:
+// logger:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// recovery:
+// stack:
+// logger:
+# <翻译结束>
+

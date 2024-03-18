@@ -16,3 +16,18 @@
 // Deserialize 将传入的 []byte 反序列化为传入的 ptr interface{}
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// err:
+// ptr:
+// byt:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// err:
+// ptr:
+// byt:
+# <翻译结束>
+

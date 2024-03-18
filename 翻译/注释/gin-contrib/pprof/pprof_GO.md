@@ -33,3 +33,29 @@
 // prefixOptions 是可选的。如果不提供 prefixOptions，则使用默认路径前缀，否则将使用第一个 prefixOptions 作为路径前缀。
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// prefixOptions:
+// r:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// prefixOptions:
+// r:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// prefixOptions:
+// rg:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// prefixOptions:
+// rg:
+# <翻译结束>
+

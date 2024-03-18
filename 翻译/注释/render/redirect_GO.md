@@ -38,3 +38,14 @@
 // WriteContentType (重定向) 不要写入任何 ContentType。
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// http.ResponseWriter:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// http.ResponseWriter:
+# <翻译结束>
+

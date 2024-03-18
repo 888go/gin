@@ -1424,3 +1424,143 @@
 // 连续调用具有相同键的Value返回相同的结果
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// jsonObj:
+// code:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// jsonObj:
+// code:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// err:
+// bb:
+// obj:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// err:
+// bb:
+// obj:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// location:
+// code:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// location:
+// code:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// data:
+// contentType:
+// code:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// data:
+// contentType:
+// code:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// extraHeaders:
+// reader:
+// contentType:
+// contentLength:
+// code:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// extraHeaders:
+// reader:
+// contentType:
+// contentLength:
+// code:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// fs:
+// filepath:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// fs:
+// filepath:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// filename:
+// filepath:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// filename:
+// filepath:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// message:
+// name:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// message:
+// name:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// config:
+// code:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// config:
+// code:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// ok:
+// deadline:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// ok:
+// deadline:
+# <翻译结束>
+

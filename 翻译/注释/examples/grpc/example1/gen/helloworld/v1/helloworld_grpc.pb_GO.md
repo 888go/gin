@@ -93,3 +93,20 @@
 // RegisterService，并且不能被自省或修改(即使作为副本)
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// *HelloReply:
+// opts:
+// in:
+// ctx:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// *HelloReply:
+// opts:
+// in:
+// ctx:
+# <翻译结束>
+

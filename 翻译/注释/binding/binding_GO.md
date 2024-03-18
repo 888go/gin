@@ -136,3 +136,16 @@
 // 案例MIMEPOSTForm:
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// contentType:
+// method:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// contentType:
+// method:
+# <翻译结束>
+

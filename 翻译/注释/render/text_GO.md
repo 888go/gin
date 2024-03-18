@@ -47,3 +47,20 @@
 // WriteString 根据其格式写入数据，并写入自定义 ContentType。
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// err:
+// data:
+// format:
+// w:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// err:
+// data:
+// format:
+// w:
+# <翻译结束>
+

@@ -121,3 +121,54 @@
 // 大于30天
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// config:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// config:
+// defaultExpiration:
+// password:
+// username:
+// hostList:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// expires:
+// value:
+// key:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// expires:
+// value:
+// key:
+# <翻译结束>
+

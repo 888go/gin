@@ -79,3 +79,46 @@
 // Instance 提供渲染字符串功能
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// templateString:
+// name:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// templateString:
+// name:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// templateStrings:
+// funcMap:
+// name:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// templateStrings:
+// funcMap:
+// name:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// files:
+// funcMap:
+// name:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// files:
+// funcMap:
+// name:
+# <翻译结束>
+

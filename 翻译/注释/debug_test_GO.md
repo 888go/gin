@@ -22,3 +22,21 @@
 // 函数debugRoute(httpMethod, absolutePath字符串，HandlersChain){函数debugPrint(格式字符串，值…any) {
 # <翻译结束>
 
+
+<原文开始>
+//th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
+<原文结束>
+
+# <翻译开始>
+//th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
+# <翻译结束>
+
+
+<原文开始>
+//th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
+<原文结束>
+
+# <翻译开始>
+//th:assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)     
+# <翻译结束>
+

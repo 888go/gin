@@ -149,3 +149,46 @@
 // MustGetSpan 从上下文中提取跨度（span）。如果未设置跨度，则会引发恐慌。
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// opts:
+// operationName:
+// tracer:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// opts:
+// operationName:
+// tracer:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// abortOnErrors:
+// tracer:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// abortOnErrors:
+// tracer:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// exists:
+// span:
+// ctx:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// exists:
+// span:
+// ctx:
+# <翻译结束>
+

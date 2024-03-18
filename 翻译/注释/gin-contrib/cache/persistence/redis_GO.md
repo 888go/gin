@@ -175,3 +175,76 @@
 // Flush （参考 CacheStore 接口）
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// defaultExpiration:
+// password:
+// host:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// defaultExpiration:
+// password:
+// host:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// defaultExpiration:
+// pool:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// defaultExpiration:
+// pool:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// expires:
+// value:
+// key:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// expires:
+// value:
+// key:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// ptrValue:
+// key:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// ptrValue:
+// key:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// err:
+// newValue:
+// delta:
+// key:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// err:
+// newValue:
+// delta:
+// key:
+# <翻译结束>
+

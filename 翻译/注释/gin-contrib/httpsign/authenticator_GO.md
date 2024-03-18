@@ -69,3 +69,16 @@
 // isValidHeader 检查是否所有服务器要求的头部都在头部列表中
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// options:
+// secretKeys:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// options:
+// secretKeys:
+# <翻译结束>
+

@@ -17,3 +17,18 @@
 // memoryDelayStore是InMemoryStore的包装器，设计用于模拟数据竞争(通过执行延迟写入)
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// expires:
+// value:
+// key:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// expires:
+// value:
+// key:
+# <翻译结束>
+

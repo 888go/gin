@@ -90,3 +90,46 @@
 // CachePageAtomic装饰
 # <翻译结束>
 
+
+<原文开始>
+// ff:
+// err:
+// n:
+// data:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// err:
+// n:
+// data:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// expire:
+// store:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// expire:
+// store:
+# <翻译结束>
+
+
+<原文开始>
+// ff:
+// handle:
+// expire:
+// store:
+<原文结束>
+
+# <翻译开始>
+// ff:
+// handle:
+// expire:
+// store:
+# <翻译结束>
+
