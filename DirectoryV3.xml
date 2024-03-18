@@ -25,4 +25,25 @@
     <tree path="/deprecated.go" title="弃用"/>
     <tree path="/doc.go" title="内部方法"/>
     <tree path="/version.go" title="内部方法"/>
+    <tree path="/auth_test.go" title="测试文件"/>
+    <tree path="/benchmarks_test.go" title="测试文件"/>
+    <tree path="/context_1.18_test.go" title="测试文件"/>
+    <tree path="/context_1.19_test.go" title="测试文件"/>
+    <tree path="/context_test.go" title="测试文件"/>
+    <tree path="/debug_test.go" title="测试文件"/>
+    <tree path="/deprecated_test.go" title="弃用"/>
+    <tree path="/errors_test.go" title="测试文件"/>
+    <tree path="/gin_integration_test.go" title="测试文件"/>
+    <tree path="/gin_test.go" title="测试文件"/>
+    <tree path="/githubapi_test.go" title="测试文件"/>
+    <tree path="/logger_test.go" title="测试文件"/>
+    <tree path="/middleware_test.go" title="测试文件"/>
+    <tree path="/mode_test.go" title="测试文件"/>
+    <tree path="/path_test.go" title="测试文件"/>
+    <tree path="/recovery_test.go" title="测试文件"/>
+    <tree path="/response_writer_test.go" title="测试文件"/>
+    <tree path="/routergroup_test.go" title="测试文件"/>
+    <tree path="/routes_test.go" title="测试文件"/>
+    <tree path="/tree_test.go" title="测试文件"/>
+    <tree path="/utils_test.go" title="测试文件"/>
 </trees>

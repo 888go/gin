@@ -58,3 +58,7 @@ funcMap=函数Map
 [func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {]
 ff=中间件
 middleware=处理函数
+
+[func (engine *Engine) SecureJsonPrefix(prefix string) *Engine {]
+ff=设置Json防劫持前缀
+prefix=防劫持前缀

@@ -240,8 +240,8 @@ func (engine *Engine) Delims(left, right string) *Engine {
 
 // SecureJsonPrefix设置Context.SecureJSON中使用的SecureJsonPrefix
 
-// ff:
-// prefix:
+// ff:设置Json防劫持前缀
+// prefix:防劫持前缀
 func (engine *Engine) SecureJsonPrefix(prefix string) *Engine {
 	engine.secureJSONPrefix = prefix
 	return engine
