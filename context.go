@@ -18,10 +18,10 @@ import (
 	"strings"
 	"sync"
 	"time"
-	
-	"github.com/gin-contrib/sse"
+
 	"github.com/888go/gin/binding"
 	"github.com/888go/gin/render"
+	"github.com/gin-contrib/sse"
 )
 
 // 内容类型MIME最常用的数据格式
@@ -62,26 +62,26 @@ type Context struct {
 	params       *Params
 	skippedNodes *[]skippedNode
 
-// 这个互斥锁保护键映射
+	// 这个互斥锁保护键映射
 	mu sync.RWMutex
 
-// Keys是每个请求上下文专用的键/值对
+	// Keys是每个请求上下文专用的键/值对
 	Keys map[string]any
 
-// Errors是附加到使用此上下文的所有处理程序/中间件的错误列表
+	// Errors是附加到使用此上下文的所有处理程序/中间件的错误列表
 	Errors errorMsgs
 
-// Accepted定义了一个手动接受的格式列表，用于内容协商
+	// Accepted定义了一个手动接受的格式列表，用于内容协商
 	Accepted []string
 
-// queryCache缓存c.Request.URL.Query()的查询结果
+	// queryCache缓存c.Request.URL.Query()的查询结果
 	queryCache url.Values
 
-// c.Request
-// PostForm，它包含来自POST、PATCH或PUT主体参数的解析表单数据
+	// c.Request
+	// PostForm，它包含来自POST、PATCH或PUT主体参数的解析表单数据
 	formCache url.Values
 
-// SameSite允许服务器定义cookie属性，使浏览器无法将此cookie与跨站点请求一起发送
+	// SameSite允许服务器定义cookie属性，使浏览器无法将此cookie与跨站点请求一起发送
 	sameSite http.SameSite
 }
 
@@ -177,7 +177,7 @@ func (c *Context) FullPath() string {
 }
 
 /************************************/
-/*********** FLOW CONTROL ***********/
+/*********** 流控制 ***********/
 /************************************/
 
 // Next应该只在中间件内部使用
@@ -195,7 +195,7 @@ func (c *Context) Next() {
 
 // 如果当前上下文被中止，IsAborted返回true
 
-// ff:
+// ff:是否已终止
 func (c *Context) IsAborted() bool {
 	return c.index >= abortIndex
 }
@@ -481,7 +481,7 @@ func (c *Context) GetStringMapStringSlice(key string) (smss map[string][]string)
 /************************************/
 
 // 参数返回URL参数的值
-// Param和DefaultQuery()不同的是: 
+// Param和DefaultQuery()不同的是:
 // Param这个方法获取到的是api参数, 如:http://localhost:8080/user/name/value
 // DefaultQuery获取的是url参数,如:http://localhost:8080/user?name=value
 // 它是 c.Params.ByName（key） 的快捷方式
@@ -490,7 +490,7 @@ func (c *Context) GetStringMapStringSlice(key string) (smss map[string][]string)
 //	    id := c.Param("id") // id == "/john"
 //	    // 一个 GET 请求 /user/john/
 //	    id := c.Param("id") // id == "/john/"
-//	}) 
+//	})
 
 // ff:取API参数值
 // key:名称
@@ -786,8 +786,8 @@ func (c *Context) SaveUploadedFile(file *multipart.FileHeader, dst string) error
 // 它将json有效负载解码为指定为指针的结构
 // 它会写一个400的错误，并设置Content-Type header "text/plain"在响应中，如果输入无效
 
-// ff:
-// obj:
+// ff:取参数到指针PANI
+// obj:结构指针
 func (c *Context) Bind(obj any) error {
 	b := binding.Default(c.Request.Method, c.ContentType())
 	return c.MustBindWith(obj, b)
@@ -795,7 +795,7 @@ func (c *Context) Bind(obj any) error {
 
 // BindJSON是c.MustBindWith(obj, binding.JSON)的快捷方式
 
-// ff:参数指针到JSON
+// ff:取JSON参数到指针PANI
 // obj:结构指针
 func (c *Context) BindJSON(obj any) error {
 	return c.MustBindWith(obj, binding.JSON)
@@ -803,40 +803,40 @@ func (c *Context) BindJSON(obj any) error {
 
 // BindXML是c.MustBindWith(obj, binding.BindXML)的快捷方式
 
-// ff:
-// obj:
+// ff:取XML参数到指针PANI
+// obj:结构指针
 func (c *Context) BindXML(obj any) error {
 	return c.MustBindWith(obj, binding.XML)
 }
 
 // BindQuery是c.MustBindWith(obj, binding.Query)的快捷方式
 
-// ff:
-// obj:
+// ff:取表单参数到指针PANI
+// obj:结构指针
 func (c *Context) BindQuery(obj any) error {
 	return c.MustBindWith(obj, binding.Query)
 }
 
 // BindYAML是c.MustBindWith(obj, binding.YAML)的快捷方式
 
-// ff:
-// obj:
+// ff:取YAML参数到指针PANI
+// obj:结构指针
 func (c *Context) BindYAML(obj any) error {
 	return c.MustBindWith(obj, binding.YAML)
 }
 
 // BindTOML是c.MustBindWith(obj, binding.TOML)的快捷方式
 
-// ff:
-// obj:
+// ff:取TOML参数到指针PANI
+// obj:结构指针
 func (c *Context) BindTOML(obj any) error {
 	return c.MustBindWith(obj, binding.TOML)
 }
 
 // BindHeader是c.MustBindWith(obj, binding.Header)的快捷方式
 
-// ff:
-// obj:
+// ff:取Header参数到指针PANI
+// obj:结构指针
 func (c *Context) BindHeader(obj any) error {
 	return c.MustBindWith(obj, binding.Header)
 }
@@ -844,12 +844,12 @@ func (c *Context) BindHeader(obj any) error {
 // BindUri使用binding.Uri绑定传递的结构指针
 // 如果发生任何错误，它将使用HTTP 400中止请求
 
-// ff:
-// obj:
+// ff:取Uri参数到指针PANI
+// obj:结构指针
 func (c *Context) BindUri(obj any) error {
 	if err := c.ShouldBindUri(obj); err != nil {
 		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+		// 翻译：// 不进行errcheck检查
 		return err
 	}
 	return nil
@@ -859,13 +859,13 @@ func (c *Context) BindUri(obj any) error {
 // 如果发生任何错误，它将使用HTTP 400中止请求
 // 参见绑定包
 
-// ff:
-// b:
-// obj:
+// ff:取参数到指针并按类型PANI
+// b:类型
+// obj:结构指针
 func (c *Context) MustBindWith(obj any, b binding.Binding) error {
 	if err := c.ShouldBindWith(obj, b); err != nil {
 		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+		// 翻译：// 不进行errcheck检查
 		return err
 	}
 	return nil
@@ -989,15 +989,15 @@ func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error
 
 // ff:取客户端ip
 func (c *Context) ClientIP() string {
-// 检查我们是否运行在一个可信的平台上，如果错误继续运行
+	// 检查我们是否运行在一个可信的平台上，如果错误继续运行
 	if c.engine.TrustedPlatform != "" {
-// 开发人员可以定义自己的可信平台头或使用预定义的常量
+		// 开发人员可以定义自己的可信平台头或使用预定义的常量
 		if addr := c.requestHeader(c.engine.TrustedPlatform); addr != "" {
 			return addr
 		}
 	}
 
-// 遗留“AppEngine"国旗
+	// 遗留“AppEngine"国旗
 	if c.engine.AppEngine {
 		log.Println(`The AppEngine flag is going to be deprecated. Please check issues #2723 and #2739 and use 'TrustedPlatform: gin.PlatformGoogleAppEngine' instead.`)
 		if addr := c.requestHeader("X-Appengine-Remote-Addr"); addr != "" {
@@ -1005,8 +1005,8 @@ func (c *Context) ClientIP() string {
 		}
 	}
 
-// 它还检查remoteIP是否是受信任的代理
-// 为了执行此验证，它将查看IP是否包含在engine定义的至少一个CIDR块中
+	// 它还检查remoteIP是否是受信任的代理
+	// 为了执行此验证，它将查看IP是否包含在engine定义的至少一个CIDR块中
 	remoteIP := net.ParseIP(c.RemoteIP())
 	if remoteIP == nil {
 		return ""
@@ -1182,7 +1182,7 @@ func (c *Context) Render(code int, r render.Render) {
 	}
 
 	if err := r.Render(c.Writer); err != nil {
-// 将error推入c.Errors
+		// 将error推入c.Errors
 		_ = c.Error(err)
 		c.Abort()
 	}
@@ -1217,9 +1217,9 @@ func (c *Context) IndentedJSON(code int, obj any) {
 // Default前面加上"while(1)，"如果给定的结构体是数组值，则返回响应体
 // 它还将Content-Type设置为“application/json”
 
-// ff:
-// obj:
-// code:
+// ff:输出JSON并防劫持
+// obj:结构
+// code:状态码
 func (c *Context) SecureJSON(code int, obj any) {
 	c.Render(code, render.SecureJSON{Prefix: c.engine.secureJSONPrefix, Data: obj})
 }
@@ -1258,7 +1258,7 @@ func (c *Context) JSON(code int, obj any) {
 // "tag":  "<br>",
 // }
 // 输出 : {"lang":"GO\u8bed\u8a00","tag":"\u003cbr\u003e"}
-// c.AsciiJSON(http.StatusOK, data) 
+// c.AsciiJSON(http.StatusOK, data)
 
 // ff:输出JSON并按ASCII
 // obj:结构
@@ -1491,7 +1491,7 @@ func (c *Context) Negotiate(code int, config Negotiate) {
 
 	default:
 		c.AbortWithError(http.StatusNotAcceptable, errors.New("the accepted formats are not offered by the server")) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+		// 翻译：// 不进行errcheck检查
 	}
 }
 
@@ -1510,7 +1510,7 @@ func (c *Context) NegotiateFormat(offered ...string) string {
 	}
 	for _, accepted := range c.Accepted {
 		for _, offer := range offered {
-// 根据RFC 2616和RFC 2396，头中不允许使用非ascii字符，因此我们可以迭代字符串，而不将其转换为[]rune
+			// 根据RFC 2616和RFC 2396，头中不允许使用非ascii字符，因此我们可以迭代字符串，而不将其转换为[]rune
 			i := 0
 			for ; i < len(accepted) && i < len(offer); i++ {
 				if accepted[i] == '*' || offer[i] == '*' {

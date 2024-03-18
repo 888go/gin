@@ -41,3 +41,15 @@ err=错误
 keyFile=key文件
 certFile=cert文件
 addr=地址与端口
+
+[func (engine *Engine) SetHTMLTemplate(templ *template.Template) {]
+ff=设置Template模板
+templ=Template模板
+
+[func (engine *Engine) SetFuncMap(funcMap template.FuncMap) {]
+ff=设置Template模板方法
+funcMap=方法Map
+
+[func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {]
+ff=中间件
+middleware=中间件方法

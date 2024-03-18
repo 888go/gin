@@ -194,7 +194,7 @@ dst=文件路径
 file=文件对象
 
 [func (c *Context) BindJSON(obj any) error {]
-ff=参数指针到JSON
+ff=取JSON参数到指针PANI
 obj=结构指针
 
 [func (c *Context) ClientIP() string {]
@@ -330,3 +330,44 @@ key=名称
 
 [func (c *Context) GetRawData() (#左中括号##右中括号#byte, error) {]
 ff=取流数据
+
+[func (c *Context) IsAborted() bool {]
+ff=是否已终止
+
+[func (c *Context) Bind(obj any) error {]
+ff=取参数到指针PANI
+obj=结构指针
+
+[func (c *Context) BindXML(obj any) error {]
+ff=取XML参数到指针PANI
+obj=结构指针
+
+[func (c *Context) BindQuery(obj any) error {]
+ff=取表单参数到指针PANI
+obj=结构指针
+
+[func (c *Context) BindYAML(obj any) error {]
+ff=取YAML参数到指针PANI
+obj=结构指针
+
+[func (c *Context) BindTOML(obj any) error {]
+ff=取TOML参数到指针PANI
+obj=结构指针
+
+[func (c *Context) BindHeader(obj any) error {]
+ff=取Header参数到指针PANI
+obj=结构指针
+
+[func (c *Context) BindUri(obj any) error {]
+ff=取Uri参数到指针PANI
+obj=结构指针
+
+[func (c *Context) MustBindWith(obj any, b binding.Binding) error {]
+ff=取参数到指针并按类型PANI
+b=类型
+obj=结构指针
+
+[func (c *Context) SecureJSON(code int, obj any) {]
+ff=输出JSON并防劫持
+obj=结构
+code=状态码

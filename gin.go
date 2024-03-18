@@ -14,7 +14,7 @@ import (
 	"regexp"
 	"strings"
 	"sync"
-	
+
 	"github.com/888go/gin/internal/bytesconv"
 	"github.com/888go/gin/render"
 	"golang.org/x/net/http2"
@@ -36,8 +36,8 @@ var defaultTrustedCIDRs = []*net.IPNet{
 		Mask: net.IPMask{0x0, 0x0, 0x0, 0x0},
 	},
 	{ // /:: 0 (IPv6) // （此注释内容较为简略，直译为“IPv6的/:: 0”）
-// 这个注释可能是在表示一个IPv6地址的特殊表示形式，"/::" 表示IPv6地址中的零压缩写法，其中 "::" 可以替换连续的一串零。当IPv6地址中包含较长的连续零时，可以使用这种简写方式。例如 "/::" 可以代表一串全零的部分，而 "0" 可能是指特定的IPv6地址部分（可能是指IPv6地址的剩余部分为全零）。
-// 但由于上下文不完整，这里的具体含义可能需要根据代码的实际应用场景来判断。
+		// 这个注释可能是在表示一个IPv6地址的特殊表示形式，"/::" 表示IPv6地址中的零压缩写法，其中 "::" 可以替换连续的一串零。当IPv6地址中包含较长的连续零时，可以使用这种简写方式。例如 "/::" 可以代表一串全零的部分，而 "0" 可能是指特定的IPv6地址部分（可能是指IPv6地址的剩余部分为全零）。
+		// 但由于上下文不完整，这里的具体含义可能需要根据代码的实际应用场景来判断。
 		IP:   net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
 		Mask: net.IPMask{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
 	},
@@ -76,11 +76,11 @@ type RoutesInfo []RouteInfo
 
 // 信任的平台
 const (
-// 在Google应用引擎上运行时的平台googleappengine
-// 信任X-Appengine-Remote-Addr来确定客户端的IP
+	// 在Google应用引擎上运行时的平台googleappengine
+	// 信任X-Appengine-Remote-Addr来确定客户端的IP
 	PlatformGoogleAppEngine = "X-Appengine-Remote-Addr"
-// 使用Cloudflare的CDN时的平台Cloudflare
-// Trust CF-Connecting-IP用于确定客户端的IP
+	// 使用Cloudflare的CDN时的平台Cloudflare
+	// Trust CF-Connecting-IP用于确定客户端的IP
 	PlatformCloudflare = "CF-Connecting-IP"
 )
 
@@ -89,62 +89,62 @@ const (
 type Engine struct {
 	RouterGroup
 
-// RedirectTrailingSlash在当前路由不能匹配的情况下启用自动重定向，但是存在一个带有(不带有)尾斜杠的路径处理程序
-// 例如，如果请求/foo/，但只存在/foo的路由，则客户端被重定向到/foo, GET请求的http状态码为301，所有其他请求方法的http状态码为307
+	// RedirectTrailingSlash在当前路由不能匹配的情况下启用自动重定向，但是存在一个带有(不带有)尾斜杠的路径处理程序
+	// 例如，如果请求/foo/，但只存在/foo的路由，则客户端被重定向到/foo, GET请求的http状态码为301，所有其他请求方法的http状态码为307
 	RedirectTrailingSlash bool
 
-// RedirectFixedPath如果启用，如果没有为它注册句柄，路由器会尝试修复当前的请求路径
-// 首先是多余的路径元素，比如…/或被移除
-// 之后，路由器会对清理后的路径进行不区分大小写的查找
-// 如果能找到该路由的句柄，路由器就会重定向到正确的路径，GET请求的状态码为301，其他所有请求方法的状态码为307
-// 例如/FOO和/..Foo可以重定向到/ Foo
-// RedirectTrailingSlash与此选项无关
+	// RedirectFixedPath如果启用，如果没有为它注册句柄，路由器会尝试修复当前的请求路径
+	// 首先是多余的路径元素，比如…/或被移除
+	// 之后，路由器会对清理后的路径进行不区分大小写的查找
+	// 如果能找到该路由的句柄，路由器就会重定向到正确的路径，GET请求的状态码为301，其他所有请求方法的状态码为307
+	// 例如/FOO和/..Foo可以重定向到/ Foo
+	// RedirectTrailingSlash与此选项无关
 	RedirectFixedPath bool
 
-// handlemethodnotalallowed如果使能，如果当前请求不能被路由，则路由器检查当前路由是否允许另一个方法
-// 如果是这种情况，请求将返回“方法不允许”和HTTP状态码405
-// 如果不允许使用其他方法，则将请求委托给NotFound处理程序
+	// handlemethodnotalallowed如果使能，如果当前请求不能被路由，则路由器检查当前路由是否允许另一个方法
+	// 如果是这种情况，请求将返回“方法不允许”和HTTP状态码405
+	// 如果不允许使用其他方法，则将请求委托给NotFound处理程序
 	HandleMethodNotAllowed bool
 
-// 如果启用了ForwardedByClientIP，客户端IP将从与存储在' (*gin.Engine). remoteipheaders '匹配的请求头中解析
-// 如果没有获取到IP，则返回到从' (*gin.Context). request . remoteaddr '获取的IP
+	// 如果启用了ForwardedByClientIP，客户端IP将从与存储在' (*gin.Engine). remoteipheaders '匹配的请求头中解析
+	// 如果没有获取到IP，则返回到从' (*gin.Context). request . remoteaddr '获取的IP
 	ForwardedByClientIP bool
 
-// AppEngine已弃用
-// 已弃用:使用' TrustedPlatform ' WITH VALUE ' gin
-// 如果启用，它将信任一些以“X-AppEngine…”开头的标头
-// 以便与该PaaS更好地集成
-	AppEngine bool //hs:AppEngine弃用     
+	// AppEngine已弃用
+	// 已弃用:使用' TrustedPlatform ' WITH VALUE ' gin
+	// 如果启用，它将信任一些以“X-AppEngine…”开头的标头
+	// 以便与该PaaS更好地集成
+	AppEngine bool //hs:AppEngine弃用
 
-// UseRawPath如果启用，则为url
-// RawPath将用于查找参数
+	// UseRawPath如果启用，则为url
+	// RawPath将用于查找参数
 	UseRawPath bool
 
-// UnescapePathValues如果为true，则不转义路径值
-// 如果UseRawPath为false(默认情况下)，UnescapePathValues有效地为true，如url
-// 路径将被使用，它已经是未转义的
+	// UnescapePathValues如果为true，则不转义路径值
+	// 如果UseRawPath为false(默认情况下)，UnescapePathValues有效地为true，如url
+	// 路径将被使用，它已经是未转义的
 	UnescapePathValues bool
 
-// 即使使用额外的斜杠，也可以从URL解析RemoveExtraSlash参数
-// 见PR #1817和issue #1644
+	// 即使使用额外的斜杠，也可以从URL解析RemoveExtraSlash参数
+	// 见PR #1817和issue #1644
 	RemoveExtraSlash bool
 
-// RemoteIPHeaders获取客户端IP时使用的报头列表(*gin.Engine)
-// ForwardedByClientIP '是' true '和' (*gin.Context). request
-// RemoteAddr '被' (*gin.Engine). settrustedproxies() '定义的列表的至少一个网络源匹配
+	// RemoteIPHeaders获取客户端IP时使用的报头列表(*gin.Engine)
+	// ForwardedByClientIP '是' true '和' (*gin.Context). request
+	// RemoteAddr '被' (*gin.Engine). settrustedproxies() '定义的列表的至少一个网络源匹配
 	RemoteIPHeaders []string
 
-// TrustedPlatform设置为一个值为gin的常量
-// 例如，平台*信任由该平台设置的报头来确定客户端IP
+	// TrustedPlatform设置为一个值为gin的常量
+	// 例如，平台*信任由该平台设置的报头来确定客户端IP
 	TrustedPlatform string
 
-// 给http的“maxMemory”参数的MaxMultipartMemory值请求的parsemmultipartform方法调用
+	// 给http的“maxMemory”参数的MaxMultipartMemory值请求的parsemmultipartform方法调用
 	MaxMultipartMemory int64
 
-// 启用h2c支持
+	// 启用h2c支持
 	UseH2C bool
 
-// 当Context.Request.Context()不是nil时，启用回退Context.Deadline()、Context.Done()、Context.Err()和Context.Value()
+	// 当Context.Request.Context()不是nil时，启用回退Context.Deadline()、Context.Done()、Context.Err()和Context.Value()
 	ContextWithFallback bool
 
 	delims           render.Delims
@@ -210,7 +210,6 @@ func Default() *Engine {
 	engine.Use(Logger(), Recovery())
 	return engine
 }
-
 
 // ff:
 func (engine *Engine) Handler() http.Handler {
@@ -281,8 +280,8 @@ func (engine *Engine) LoadHTMLFiles(files ...string) {
 
 // SetHTMLTemplate将模板与HTML渲染器关联
 
-// ff:
-// templ:
+// ff:设置Template模板
+// templ:Template模板
 func (engine *Engine) SetHTMLTemplate(templ *template.Template) {
 	if len(engine.trees) > 0 {
 		debugPrintWARNINGSetHTMLTemplate()
@@ -293,8 +292,8 @@ func (engine *Engine) SetHTMLTemplate(templ *template.Template) {
 
 // SetFuncMap设置用于template.FuncMap的FuncMap
 
-// ff:
-// funcMap:
+// ff:设置Template模板方法
+// funcMap:方法Map
 func (engine *Engine) SetFuncMap(funcMap template.FuncMap) {
 	engine.FuncMap = funcMap
 }
@@ -323,8 +322,8 @@ func (engine *Engine) NoMethod(handlers ...HandlerFunc) {
 // 也就是说，通过Use()附加的中间件将被包含在每个请求的处理程序链中
 // 甚至404、405、静态文件……例如，这是日志记录器或错误管理中间件的正确位置
 
-// ff:
-// middleware:
+// ff:中间件
+// middleware:中间件方法
 func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {
 	engine.RouterGroup.Use(middleware...)
 	engine.rebuild404Handlers()
@@ -495,7 +494,7 @@ func (engine *Engine) validateHeader(header string) (clientIP string, valid bool
 			break
 		}
 
-// 以相反的顺序检查ip，当发现不受信任的代理时停止
+		// 以相反的顺序检查ip，当发现不受信任的代理时停止
 		if (i == 0) || (!engine.isTrustedProxy(ip)) {
 			return ipStr, true
 		}
@@ -509,11 +508,11 @@ func parseIP(ip string) net.IP {
 	parsedIP := net.ParseIP(ip)
 
 	if ipv4 := parsedIP.To4(); ipv4 != nil {
-// 返回4字节表示的IP
+		// 返回4字节表示的IP
 		return ipv4
 	}
 
-// 返回16字节表示形式的IP或nil
+	// 返回16字节表示形式的IP或nil
 	return parsedIP
 }
 
@@ -657,14 +656,14 @@ func (engine *Engine) handleHTTPRequest(c *Context) {
 		rPath = cleanPath(rPath)
 	}
 
-// 查找给定HTTP方法的树的根
+	// 查找给定HTTP方法的树的根
 	t := engine.trees
 	for i, tl := 0, len(t); i < tl; i++ {
 		if t[i].method != httpMethod {
 			continue
 		}
 		root := t[i].root
-// 在树中查找路由
+		// 在树中查找路由
 		value := root.getValue(rPath, c.params, c.skippedNodes, unescape)
 		if value.params != nil {
 			c.Params = *value.params
