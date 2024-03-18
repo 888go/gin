@@ -277,3 +277,56 @@ ff=输出文本
 values=文本s
 format=格式
 code=状态码
+
+[func (c *Context) ShouldBind(obj any) error {]
+ff=取参数到指针
+obj=变量结构指针
+
+[func (c *Context) ShouldBindJSON(obj any) error {]
+ff=取JSON参数到指针
+obj=JSON结构指针
+
+[func (c *Context) ShouldBindXML(obj any) error {]
+ff=取XML参数到指针
+obj=XML结构指针
+
+[func (c *Context) ShouldBindQuery(obj any) error {]
+ff=取表单参数到指针
+obj=表单结构指针
+
+[func (c *Context) ShouldBindYAML(obj any) error {]
+ff=取YAML参数到指针
+obj=YAML结构指针
+
+[func (c *Context) ShouldBindTOML(obj any) error {]
+ff=取TOML参数到指针
+obj=TOML结构指针
+
+[func (c *Context) ShouldBindHeader(obj any) error {]
+ff=取Header参数到指针
+obj=Header结构指针
+
+[func (c *Context) ShouldBindUri(obj any) error {]
+ff=取Uri参数到指针
+obj=Uri结构指针
+
+[func (c *Context) ShouldBindWith(obj any, b binding.Binding) error {]
+ff=取参数到指针并按类型
+b=类型
+obj=结构指针
+
+[func (c *Context) Status(code int) {]
+ff=设置状态码
+code=状态码
+
+[func (c *Context) Header(key, value string) {]
+ff=设置响应协议头值
+value=值
+key=名称
+
+[func (c *Context) GetHeader(key string) string {]
+ff=取请求协议头值
+key=名称
+
+[func (c *Context) GetRawData() (#左中括号##右中括号#byte, error) {]
+ff=取流数据

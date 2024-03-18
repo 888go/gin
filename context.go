@@ -795,7 +795,7 @@ func (c *Context) Bind(obj any) error {
 
 // BindJSON是c.MustBindWith(obj, binding.JSON)的快捷方式
 
-// ff:参数指针到JSON
+// ff:
 // obj:结构指针
 func (c *Context) BindJSON(obj any) error {
 	return c.MustBindWith(obj, binding.JSON)
@@ -879,8 +879,8 @@ func (c *Context) MustBindWith(obj any, b binding.Binding) error {
 // 它将json有效负载解码为指定为指针的结构
 // 与c.Bind()类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 
-// ff:
-// obj:
+// ff:取参数到指针
+// obj:变量结构指针
 func (c *Context) ShouldBind(obj any) error {
 	b := binding.Default(c.Request.Method, c.ContentType())
 	return c.ShouldBindWith(obj, b)
@@ -888,56 +888,56 @@ func (c *Context) ShouldBind(obj any) error {
 
 // ShouldBindJSON是c.ShouldBindWith(obj, binding.JSON)的快捷方式
 
-// ff:
-// obj:
+// ff:取JSON参数到指针
+// obj:JSON结构指针
 func (c *Context) ShouldBindJSON(obj any) error {
 	return c.ShouldBindWith(obj, binding.JSON)
 }
 
 // ShouldBindXML是c.ShouldBindWith(obj, binding.XML)的快捷方式
 
-// ff:
-// obj:
+// ff:取XML参数到指针
+// obj:XML结构指针
 func (c *Context) ShouldBindXML(obj any) error {
 	return c.ShouldBindWith(obj, binding.XML)
 }
 
 // ShouldBindQuery是c.ShouldBindWith(obj, binding.Query)的快捷方式
 
-// ff:
-// obj:
+// ff:取表单参数到指针
+// obj:表单结构指针
 func (c *Context) ShouldBindQuery(obj any) error {
 	return c.ShouldBindWith(obj, binding.Query)
 }
 
 // ShouldBindYAML是c.ShouldBindWith(obj, binding.YAML)的快捷方式
 
-// ff:
-// obj:
+// ff:取YAML参数到指针
+// obj:YAML结构指针
 func (c *Context) ShouldBindYAML(obj any) error {
 	return c.ShouldBindWith(obj, binding.YAML)
 }
 
 // ShouldBindTOML是c.ShouldBindWith(obj, binding.TOML)的快捷方式
 
-// ff:
-// obj:
+// ff:取TOML参数到指针
+// obj:TOML结构指针
 func (c *Context) ShouldBindTOML(obj any) error {
 	return c.ShouldBindWith(obj, binding.TOML)
 }
 
 // ShouldBindHeader是c.ShouldBindWith(obj, binding.Header)的快捷方式
 
-// ff:
-// obj:
+// ff:取Header参数到指针
+// obj:Header结构指针
 func (c *Context) ShouldBindHeader(obj any) error {
 	return c.ShouldBindWith(obj, binding.Header)
 }
 
 // ShouldBindUri使用指定的绑定引擎绑定传递的结构指针
 
-// ff:
-// obj:
+// ff:取Uri参数到指针
+// obj:Uri结构指针
 func (c *Context) ShouldBindUri(obj any) error {
 	m := make(map[string][]string)
 	for _, v := range c.Params {
@@ -949,9 +949,9 @@ func (c *Context) ShouldBindUri(obj any) error {
 // ShouldBindWith使用指定的绑定引擎绑定传递的结构指针
 // 参见绑定包
 
-// ff:
-// b:
-// obj:
+// ff:取参数到指针并按类型
+// b:类型
+// obj:结构指针
 func (c *Context) ShouldBindWith(obj any, b binding.Binding) error {
 	return b.Bind(c.Request, obj)
 }
@@ -1078,8 +1078,8 @@ func bodyAllowedForStatus(status int) bool {
 
 // 状态设置HTTP响应码
 
-// ff:
-// code:
+// ff:设置状态码
+// code:状态码
 func (c *Context) Status(code int) {
 	c.Writer.WriteHeader(code)
 }
@@ -1089,9 +1089,9 @@ func (c *Context) Status(code int) {
 // 它在响应中写入一个标头
 // 如果value == ""，此方法将删除头' c.Writer.Header().Del(key) '
 
-// ff:
-// value:
-// key:
+// ff:设置响应协议头值
+// value:值
+// key:名称
 func (c *Context) Header(key, value string) {
 	if value == "" {
 		c.Writer.Header().Del(key)
@@ -1102,15 +1102,15 @@ func (c *Context) Header(key, value string) {
 
 // GetHeader从请求头返回值
 
-// ff:
-// key:
+// ff:取请求协议头值
+// key:名称
 func (c *Context) GetHeader(key string) string {
 	return c.requestHeader(key)
 }
 
 // GetRawData返回流数据
 
-// ff:
+// ff:取流数据
 func (c *Context) GetRawData() ([]byte, error) {
 	return io.ReadAll(c.Request.Body)
 }

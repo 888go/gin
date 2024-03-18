@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package gin
 
@@ -22,10 +22,10 @@ import (
 	"sync"
 	"testing"
 	"time"
-	
-	"github.com/gin-contrib/sse"
+
 	"github.com/888go/gin/binding"
 	testdata "github.com/888go/gin/testdata/protoexample"
+	"github.com/gin-contrib/sse"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/proto"
 )
@@ -35,21 +35,9 @@ var _ context.Context = (*Context)(nil)
 var errTestRender = errors.New("TestRender")
 
 // Unit tests TODO
-// 
-// ff:
-// filepath:
-func (c *Context) File(filepath string) {
-// 
-// ff:
-// config:
-// code:
-func (c *Context) Negotiate(code int, config Negotiate) {
-// BAD case: 
-// ff:
-// obj:
-// render:
-// code:
-func (c *Context) Render(code int, render render.Render, obj ...any) {
+// func (c *Context) File(filepath string) {
+// func (c *Context) Negotiate(code int, config Negotiate) {
+// BAD case: func (c *Context) Render(code int, render render.Render, obj ...any) {
 // test that information is not leaked when reusing Contexts (using the Pool)
 
 func createMultipartRequest() *http.Request {
@@ -82,9 +70,6 @@ func must(err error) {
 	}
 }
 
-
-// ff:
-// t:
 func TestContextFormFile(t *testing.T) {
 	buf := new(bytes.Buffer)
 	mw := multipart.NewWriter(buf)
@@ -105,9 +90,6 @@ func TestContextFormFile(t *testing.T) {
 	assert.NoError(t, c.SaveUploadedFile(f, "test"))
 }
 
-
-// ff:
-// t:
 func TestContextMultipartForm(t *testing.T) {
 	buf := new(bytes.Buffer)
 	mw := multipart.NewWriter(buf)
@@ -129,9 +111,6 @@ func TestContextMultipartForm(t *testing.T) {
 	assert.NoError(t, c.SaveUploadedFile(f.File["file"][0], "test"))
 }
 
-
-// ff:
-// t:
 func TestSaveUploadedOpenFailed(t *testing.T) {
 	buf := new(bytes.Buffer)
 	mw := multipart.NewWriter(buf)
@@ -147,9 +126,6 @@ func TestSaveUploadedOpenFailed(t *testing.T) {
 	assert.Error(t, c.SaveUploadedFile(f, "test"))
 }
 
-
-// ff:
-// t:
 func TestSaveUploadedCreateFailed(t *testing.T) {
 	buf := new(bytes.Buffer)
 	mw := multipart.NewWriter(buf)
@@ -170,9 +146,6 @@ func TestSaveUploadedCreateFailed(t *testing.T) {
 	assert.Error(t, c.SaveUploadedFile(f, "/"))
 }
 
-
-// ff:
-// t:
 func TestContextReset(t *testing.T) {
 	router := New()
 	c := router.allocateContext(0)
@@ -181,8 +154,7 @@ func TestContextReset(t *testing.T) {
 	c.index = 2
 	c.Writer = &responseWriter{ResponseWriter: httptest.NewRecorder()}
 	c.Params = Params{Param{}}
-	c.Error(errors.New("test")) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	c.Error(errors.New("test")) //nolint: errcheck
 	c.Set("foo", "bar")
 	c.reset()
 
@@ -197,9 +169,6 @@ func TestContextReset(t *testing.T) {
 	assert.Equal(t, c.Writer.(*responseWriter), &c.writermem)
 }
 
-
-// ff:
-// t:
 func TestContextHandlers(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	assert.Nil(t, c.handlers)
@@ -219,10 +188,8 @@ func TestContextHandlers(t *testing.T) {
 	compareFunc(t, g, c.handlers.Last())
 }
 
-// TestContextSetGet测试在当前上下文中是否正确设置了参数，是否可以使用Get检索参数
-
-// ff:
-// t:
+// TestContextSetGet tests that a parameter is set correctly on the
+// current context and can be retrieved using Get.
 func TestContextSetGet(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("foo", "bar")
@@ -239,9 +206,6 @@ func TestContextSetGet(t *testing.T) {
 	assert.Panics(t, func() { c.MustGet("no_exist") })
 }
 
-
-// ff:
-// t:
 func TestContextSetGetValues(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("string", "this is a string")
@@ -262,72 +226,48 @@ func TestContextSetGetValues(t *testing.T) {
 	assert.Exactly(t, c.MustGet("intInterface").(int), 1)
 }
 
-
-// ff:
-// t:
 func TestContextGetString(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("string", "this is a string")
 	assert.Equal(t, "this is a string", c.GetString("string"))
 }
 
-
-// ff:
-// t:
 func TestContextSetGetBool(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("bool", true)
 	assert.True(t, c.GetBool("bool"))
 }
 
-
-// ff:
-// t:
 func TestContextGetInt(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("int", 1)
 	assert.Equal(t, 1, c.GetInt("int"))
 }
 
-
-// ff:
-// t:
 func TestContextGetInt64(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("int64", int64(42424242424242))
 	assert.Equal(t, int64(42424242424242), c.GetInt64("int64"))
 }
 
-
-// ff:
-// t:
 func TestContextGetUint(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("uint", uint(1))
 	assert.Equal(t, uint(1), c.GetUint("uint"))
 }
 
-
-// ff:
-// t:
 func TestContextGetUint64(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("uint64", uint64(18446744073709551615))
 	assert.Equal(t, uint64(18446744073709551615), c.GetUint64("uint64"))
 }
 
-
-// ff:
-// t:
 func TestContextGetFloat64(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("float64", 4.2)
 	assert.Equal(t, 4.2, c.GetFloat64("float64"))
 }
 
-
-// ff:
-// t:
 func TestContextGetTime(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	t1, _ := time.Parse("1/2/2006 15:04:05", "01/01/2017 12:00:00")
@@ -335,27 +275,18 @@ func TestContextGetTime(t *testing.T) {
 	assert.Equal(t, t1, c.GetTime("time"))
 }
 
-
-// ff:
-// t:
 func TestContextGetDuration(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("duration", time.Second)
 	assert.Equal(t, time.Second, c.GetDuration("duration"))
 }
 
-
-// ff:
-// t:
 func TestContextGetStringSlice(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Set("slice", []string{"foo"})
 	assert.Equal(t, []string{"foo"}, c.GetStringSlice("slice"))
 }
 
-
-// ff:
-// t:
 func TestContextGetStringMap(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	m := make(map[string]any)
@@ -366,9 +297,6 @@ func TestContextGetStringMap(t *testing.T) {
 	assert.Equal(t, 1, c.GetStringMap("map")["foo"])
 }
 
-
-// ff:
-// t:
 func TestContextGetStringMapString(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	m := make(map[string]string)
@@ -379,9 +307,6 @@ func TestContextGetStringMapString(t *testing.T) {
 	assert.Equal(t, "bar", c.GetStringMapString("map")["foo"])
 }
 
-
-// ff:
-// t:
 func TestContextGetStringMapStringSlice(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	m := make(map[string][]string)
@@ -392,9 +317,6 @@ func TestContextGetStringMapStringSlice(t *testing.T) {
 	assert.Equal(t, []string{"foo"}, c.GetStringMapStringSlice("map")["foo"])
 }
 
-
-// ff:
-// t:
 func TestContextCopy(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.index = 2
@@ -416,19 +338,13 @@ func TestContextCopy(t *testing.T) {
 	assert.False(t, cp.Keys["foo"] == c.Keys["foo"])
 }
 
-
-// ff:
-// t:
 func TestContextHandlerName(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.handlers = HandlersChain{func(c *Context) {}, handlerNameTest}
 
-	assert.Regexp(t, "^(.*/vendor/)?github.com/888go/gin.handlerNameTest$", c.HandlerName()) //th:assert.Regexp(t, "^(.*/vendor/)?github.com/888go/gin.handlerNameTest$", c.HandlerName())     
+	assert.Regexp(t, "^(.*/vendor/)?github.com/888go/gin.handlerNameTest$", c.HandlerName())
 }
 
-
-// ff:
-// t:
 func TestContextHandlerNames(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.handlers = HandlersChain{func(c *Context) {}, handlerNameTest, func(c *Context) {}, handlerNameTest2}
@@ -437,7 +353,7 @@ func TestContextHandlerNames(t *testing.T) {
 
 	assert.True(t, len(names) == 4)
 	for _, name := range names {
-		assert.Regexp(t, `^(.*/vendor/)?(github\.com/888go/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name) //th:assert.Regexp(t, `^(.*/vendor/)?(github\.com/888go/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)     
+		assert.Regexp(t, `^(.*/vendor/)?(github\.com/888go/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)
 	}
 }
 
@@ -450,9 +366,6 @@ func handlerNameTest2(c *Context) {
 var handlerTest HandlerFunc = func(c *Context) {
 }
 
-
-// ff:
-// t:
 func TestContextHandler(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.handlers = HandlersChain{func(c *Context) {}, handlerTest}
@@ -460,9 +373,6 @@ func TestContextHandler(t *testing.T) {
 	assert.Equal(t, reflect.ValueOf(handlerTest).Pointer(), reflect.ValueOf(c.Handler()).Pointer())
 }
 
-
-// ff:
-// t:
 func TestContextQuery(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("GET", "http://example.com/?foo=bar&page=10&id=", nil)
@@ -491,18 +401,15 @@ func TestContextQuery(t *testing.T) {
 	assert.Equal(t, "nada", c.DefaultQuery("NoKey", "nada"))
 	assert.Empty(t, c.Query("NoKey"))
 
-// Postform不应该乱
+	// postform should not mess
 	value, ok = c.GetPostForm("page")
 	assert.False(t, ok)
 	assert.Empty(t, value)
 	assert.Empty(t, c.PostForm("foo"))
 }
 
-
-// ff:
-// t:
 func TestContextDefaultQueryOnEmptyRequest(t *testing.T) {
-	c, _ := CreateTestContext(httptest.NewRecorder()) // c.Request == nil 表示c的Request属性为空(nil)
+	c, _ := CreateTestContext(httptest.NewRecorder()) // here c.Request == nil
 	assert.NotPanics(t, func() {
 		value, ok := c.GetQuery("NoKey")
 		assert.False(t, ok)
@@ -516,9 +423,6 @@ func TestContextDefaultQueryOnEmptyRequest(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
 func TestContextQueryAndPostForm(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	body := bytes.NewBufferString("foo=bar&page=11&both=&foo=second")
@@ -617,9 +521,6 @@ func TestContextQueryAndPostForm(t *testing.T) {
 	assert.Equal(t, 0, len(dicts))
 }
 
-
-// ff:
-// t:
 func TestContextPostFormMultipart(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request = createMultipartRequest()
@@ -712,9 +613,6 @@ func TestContextPostFormMultipart(t *testing.T) {
 	assert.Equal(t, 0, len(dicts))
 }
 
-
-// ff:
-// t:
 func TestContextSetCookie(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.SetSameSite(http.SameSiteLaxMode)
@@ -722,9 +620,6 @@ func TestContextSetCookie(t *testing.T) {
 	assert.Equal(t, "user=gin; Path=/; Domain=localhost; Max-Age=1; HttpOnly; Secure; SameSite=Lax", c.Writer.Header().Get("Set-Cookie"))
 }
 
-
-// ff:
-// t:
 func TestContextSetCookiePathEmpty(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.SetSameSite(http.SameSiteLaxMode)
@@ -732,9 +627,6 @@ func TestContextSetCookiePathEmpty(t *testing.T) {
 	assert.Equal(t, "user=gin; Path=/; Domain=localhost; Max-Age=1; HttpOnly; Secure; SameSite=Lax", c.Writer.Header().Get("Set-Cookie"))
 }
 
-
-// ff:
-// t:
 func TestContextGetCookie(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("GET", "/get", nil)
@@ -746,9 +638,6 @@ func TestContextGetCookie(t *testing.T) {
 	assert.Error(t, err)
 }
 
-
-// ff:
-// t:
 func TestContextBodyAllowedForStatus(t *testing.T) {
 	assert.False(t, false, bodyAllowedForStatus(http.StatusProcessing))
 	assert.False(t, false, bodyAllowedForStatus(http.StatusNoContent))
@@ -764,9 +653,6 @@ func (*TestRender) Render(http.ResponseWriter) error {
 
 func (*TestRender) WriteContentType(http.ResponseWriter) {}
 
-
-// ff:
-// t:
 func TestContextRenderIfErr(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -776,10 +662,9 @@ func TestContextRenderIfErr(t *testing.T) {
 	assert.Equal(t, errorMsgs{&Error{Err: errTestRender, Type: 1}}, c.Errors)
 }
 
-// 测试响应是否序列化为JSON, Content-Type是否设置为application/ JSON，是否转义了特殊的HTML字符
-
-// ff:
-// t:
+// Tests that the response is serialized as JSON
+// and Content-Type is set to application/json
+// and special HTML characters are escaped
 func TestContextRenderJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -791,10 +676,8 @@ func TestContextRenderJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试响应是否序列化为JSONP，并且Content-Type设置为application/javascript
-
-// ff:
-// t:
+// Tests that the response is serialized as JSONP
+// and Content-Type is set to application/javascript
 func TestContextRenderJSONP(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -807,10 +690,8 @@ func TestContextRenderJSONP(t *testing.T) {
 	assert.Equal(t, "application/javascript; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试响应是否序列化为JSONP，并且Content-Type设置为application/json
-
-// ff:
-// t:
+// Tests that the response is serialized as JSONP
+// and Content-Type is set to application/json
 func TestContextRenderJSONPWithoutCallback(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -823,10 +704,7 @@ func TestContextRenderJSONPWithoutCallback(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试如果code为204，是否不呈现JSON
-
-// ff:
-// t:
+// Tests that no JSON is rendered if code is 204
 func TestContextRenderNoContentJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -838,10 +716,8 @@ func TestContextRenderNoContentJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试响应是否序列化为JSON(之前更改了内容类型)
-
-// ff:
-// t:
+// Tests that the response is serialized as JSON
+// we change the content-type before
 func TestContextRenderAPIJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -854,10 +730,7 @@ func TestContextRenderAPIJSON(t *testing.T) {
 	assert.Equal(t, "application/vnd.api+json", w.Header().Get("Content-Type"))
 }
 
-// 测试如果code为204，是否不呈现自定义JSON
-
-// ff:
-// t:
+// Tests that no Custom JSON is rendered if code is 204
 func TestContextRenderNoContentAPIJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -872,9 +745,6 @@ func TestContextRenderNoContentAPIJSON(t *testing.T) {
 
 // Tests that the response is serialized as JSON
 // and Content-Type is set to application/json
-
-// ff:
-// t:
 func TestContextRenderIndentedJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -886,10 +756,7 @@ func TestContextRenderIndentedJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试如果code为204，是否不呈现自定义JSON
-
-// ff:
-// t:
+// Tests that no Custom JSON is rendered if code is 204
 func TestContextRenderNoContentIndentedJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -901,10 +768,8 @@ func TestContextRenderNoContentIndentedJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试响应是否序列化为安全JSON，并且Content-Type设置为application/ JSON
-
-// ff:
-// t:
+// Tests that the response is serialized as Secure JSON
+// and Content-Type is set to application/json
 func TestContextRenderSecureJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, router := CreateTestContext(w)
@@ -917,10 +782,7 @@ func TestContextRenderSecureJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试如果code为204，是否不呈现自定义JSON
-
-// ff:
-// t:
+// Tests that no Custom JSON is rendered if code is 204
 func TestContextRenderNoContentSecureJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -932,9 +794,6 @@ func TestContextRenderNoContentSecureJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderNoContentAsciiJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -946,10 +805,9 @@ func TestContextRenderNoContentAsciiJSON(t *testing.T) {
 	assert.Equal(t, "application/json", w.Header().Get("Content-Type"))
 }
 
-// 测试响应是否序列化为JSON, Content-Type是否设置为application/ JSON，是否保留特殊的HTML字符
-
-// ff:
-// t:
+// Tests that the response is serialized as JSON
+// and Content-Type is set to application/json
+// and special HTML characters are preserved
 func TestContextRenderPureJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -959,10 +817,8 @@ func TestContextRenderPureJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试响应是否执行模板，并将Content-Type设置为text/html
-
-// ff:
-// t:
+// Tests that the response executes the templates
+// and responds with Content-Type set to text/html
 func TestContextRenderHTML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, router := CreateTestContext(w)
@@ -977,15 +833,11 @@ func TestContextRenderHTML(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderHTML2(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, router := CreateTestContext(w)
 
-// 输出调试警告日志
-// 树比;0
+	// print debug warning log when Engine.trees > 0
 	router.addRoute("GET", "/", HandlersChain{func(_ *Context) {}})
 	assert.Len(t, router.trees, 1)
 
@@ -1005,10 +857,7 @@ func TestContextRenderHTML2(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试如果code为204，是否不呈现HTML
-
-// ff:
-// t:
+// Tests that no HTML is rendered if code is 204
 func TestContextRenderNoContentHTML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, router := CreateTestContext(w)
@@ -1022,10 +871,8 @@ func TestContextRenderNoContentHTML(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// TestContextXML测试响应是否序列化为XML，并且Content-Type是否设置为application/ XML
-
-// ff:
-// t:
+// TestContextXML tests that the response is serialized as XML
+// and Content-Type is set to application/xml
 func TestContextRenderXML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1037,10 +884,7 @@ func TestContextRenderXML(t *testing.T) {
 	assert.Equal(t, "application/xml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试如果代码为204，是否不呈现XML
-
-// ff:
-// t:
+// Tests that no XML is rendered if code is 204
 func TestContextRenderNoContentXML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1052,10 +896,8 @@ func TestContextRenderNoContentXML(t *testing.T) {
 	assert.Equal(t, "application/xml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// TestContextString测试返回的响应内容类型是否设置为text/plain
-
-// ff:
-// t:
+// TestContextString tests that the response is returned
+// with Content-Type set to text/plain
 func TestContextRenderString(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1067,10 +909,7 @@ func TestContextRenderString(t *testing.T) {
 	assert.Equal(t, "text/plain; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试如果code为204，是否不呈现String
-
-// ff:
-// t:
+// Tests that no String is rendered if code is 204
 func TestContextRenderNoContentString(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1082,10 +921,8 @@ func TestContextRenderNoContentString(t *testing.T) {
 	assert.Equal(t, "text/plain; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// TestContextString测试返回的响应是否将Content-Type设置为text/html
-
-// ff:
-// t:
+// TestContextString tests that the response is returned
+// with Content-Type set to text/html
 func TestContextRenderHTMLString(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1098,10 +935,7 @@ func TestContextRenderHTMLString(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// 测试如果code为204，是否不呈现HTML字符串
-
-// ff:
-// t:
+// Tests that no HTML String is rendered if code is 204
 func TestContextRenderNoContentHTMLString(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1114,10 +948,8 @@ func TestContextRenderNoContentHTMLString(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// TestContextData测试响应是否可以用指定的MIME类型从' bytestring '写入
-
-// ff:
-// t:
+// TestContextData tests that the response can be written from `bytestring`
+// with specified MIME type
 func TestContextRenderData(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1129,10 +961,7 @@ func TestContextRenderData(t *testing.T) {
 	assert.Equal(t, "text/csv", w.Header().Get("Content-Type"))
 }
 
-// 测试如果code为204，是否不呈现自定义数据
-
-// ff:
-// t:
+// Tests that no Custom Data is rendered if code is 204
 func TestContextRenderNoContentData(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1144,9 +973,6 @@ func TestContextRenderNoContentData(t *testing.T) {
 	assert.Equal(t, "text/csv", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderSSE(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1164,9 +990,6 @@ func TestContextRenderSSE(t *testing.T) {
 	assert.Equal(t, strings.Replace(w.Body.String(), " ", "", -1), strings.Replace("event:float\ndata:1.5\n\nid:123\ndata:text\n\nevent:chat\ndata:{\"bar\":\"foo\",\"foo\":\"bar\"}\n\n", " ", "", -1))
 }
 
-
-// ff:
-// t:
 func TestContextRenderFile(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1175,24 +998,12 @@ func TestContextRenderFile(t *testing.T) {
 	c.File("./gin.go")
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	assert.Contains(t, w.Body.String(), "
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-func New() *Engine {")
-// - type = '文本/平原;当go版本<= 1.16时，charset=utf-8'，否则，Content-Type='text/x-go;charset = utf - 8 '
+	assert.Contains(t, w.Body.String(), "func New() *Engine {")
+	// Content-Type='text/plain; charset=utf-8' when go version <= 1.16,
+	// else, Content-Type='text/x-go; charset=utf-8'
 	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderFileFromFS(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1201,25 +1012,13 @@ func TestContextRenderFileFromFS(t *testing.T) {
 	c.FileFromFS("./gin.go", Dir(".", false))
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	assert.Contains(t, w.Body.String(), "
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-func New() *Engine {")
-// - type = '文本/平原;当go版本<= 1.16时，charset=utf-8'，否则，Content-Type='text/x-go;charset = utf - 8 '
+	assert.Contains(t, w.Body.String(), "func New() *Engine {")
+	// Content-Type='text/plain; charset=utf-8' when go version <= 1.16,
+	// else, Content-Type='text/x-go; charset=utf-8'
 	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
 	assert.Equal(t, "/some/path", c.Request.URL.Path)
 }
 
-
-// ff:
-// t:
 func TestContextRenderAttachment(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1229,23 +1028,10 @@ func TestContextRenderAttachment(t *testing.T) {
 	c.FileAttachment("./gin.go", newFilename)
 
 	assert.Equal(t, 200, w.Code)
-	assert.Contains(t, w.Body.String(), "
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-func New() *Engine {")
+	assert.Contains(t, w.Body.String(), "func New() *Engine {")
 	assert.Equal(t, fmt.Sprintf("attachment; filename=\"%s\"", newFilename), w.Header().Get("Content-Disposition"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderAndEscapeAttachment(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1256,23 +1042,10 @@ func TestContextRenderAndEscapeAttachment(t *testing.T) {
 	c.FileAttachment("./gin.go", maliciousFilename)
 
 	assert.Equal(t, 200, w.Code)
-	assert.Contains(t, w.Body.String(), "
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-func New() *Engine {")
+	assert.Contains(t, w.Body.String(), "func New() *Engine {")
 	assert.Equal(t, fmt.Sprintf("attachment; filename=\"%s\"", actualEscapedResponseFilename), w.Header().Get("Content-Disposition"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderUTF8Attachment(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1282,24 +1055,12 @@ func TestContextRenderUTF8Attachment(t *testing.T) {
 	c.FileAttachment("./gin.go", newFilename)
 
 	assert.Equal(t, 200, w.Code)
-	assert.Contains(t, w.Body.String(), "
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-func New() *Engine {")
+	assert.Contains(t, w.Body.String(), "func New() *Engine {")
 	assert.Equal(t, `attachment; filename*=UTF-8''`+url.QueryEscape(newFilename), w.Header().Get("Content-Disposition"))
 }
 
-// TestContextRenderYAML测试响应是否被序列化为YAML，并且Content-Type设置为application/x-yaml
-
-// ff:
-// t:
+// TestContextRenderYAML tests that the response is serialized as YAML
+// and Content-Type is set to application/x-yaml
 func TestContextRenderYAML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1311,10 +1072,8 @@ func TestContextRenderYAML(t *testing.T) {
 	assert.Equal(t, "application/x-yaml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// TestContextRenderTOML测试响应是否序列化为TOML，并且Content-Type设置为application/ TOML
-
-// ff:
-// t:
+// TestContextRenderTOML tests that the response is serialized as TOML
+// and Content-Type is set to application/toml
 func TestContextRenderTOML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1326,10 +1085,9 @@ func TestContextRenderTOML(t *testing.T) {
 	assert.Equal(t, "application/toml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// TestContextRenderProtoBuf测试响应是否被序列化为ProtoBuf，并且Content-Type设置为application/x-protobuf，我们只使用示例ProtoBuf来检查响应是否正确
-
-// ff:
-// t:
+// TestContextRenderProtoBuf tests that the response is serialized as ProtoBuf
+// and Content-Type is set to application/x-protobuf
+// and we just use the example protobuf to check if the response is correct
 func TestContextRenderProtoBuf(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1351,9 +1109,6 @@ func TestContextRenderProtoBuf(t *testing.T) {
 	assert.Equal(t, "application/x-protobuf", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextHeaders(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Header("Content-Type", "text/plain")
@@ -1370,10 +1125,7 @@ func TestContextHeaders(t *testing.T) {
 	assert.False(t, exist)
 }
 
-// 一切
-
-// ff:
-// t:
+// TODO
 func TestContextRenderRedirectWithRelativePath(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1388,9 +1140,6 @@ func TestContextRenderRedirectWithRelativePath(t *testing.T) {
 	assert.Equal(t, "/path", w.Header().Get("Location"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderRedirectWithAbsolutePath(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1403,9 +1152,6 @@ func TestContextRenderRedirectWithAbsolutePath(t *testing.T) {
 	assert.Equal(t, "http://google.com", w.Header().Get("Location"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderRedirectWith201(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1418,9 +1164,6 @@ func TestContextRenderRedirectWith201(t *testing.T) {
 	assert.Equal(t, "/resource", w.Header().Get("Location"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderRedirectAll(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "http://example.com", nil)
@@ -1432,9 +1175,6 @@ func TestContextRenderRedirectAll(t *testing.T) {
 	assert.NotPanics(t, func() { c.Redirect(http.StatusPermanentRedirect, "/resource") })
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationWithJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1450,9 +1190,6 @@ func TestContextNegotiationWithJSON(t *testing.T) {
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationWithXML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1468,9 +1205,6 @@ func TestContextNegotiationWithXML(t *testing.T) {
 	assert.Equal(t, "application/xml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationWithYAML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1486,9 +1220,6 @@ func TestContextNegotiationWithYAML(t *testing.T) {
 	assert.Equal(t, "application/x-yaml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationWithTOML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1504,9 +1235,6 @@ func TestContextNegotiationWithTOML(t *testing.T) {
 	assert.Equal(t, "application/toml; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationWithHTML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, router := CreateTestContext(w)
@@ -1525,9 +1253,6 @@ func TestContextNegotiationWithHTML(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationNotSupport(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1542,9 +1267,6 @@ func TestContextNegotiationNotSupport(t *testing.T) {
 	assert.True(t, c.IsAborted())
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationFormat(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "", nil)
@@ -1554,9 +1276,6 @@ func TestContextNegotiationFormat(t *testing.T) {
 	assert.Equal(t, MIMEHTML, c.NegotiateFormat(MIMEHTML, MIMEJSON))
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationFormatWithAccept(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", nil)
@@ -1567,9 +1286,6 @@ func TestContextNegotiationFormatWithAccept(t *testing.T) {
 	assert.Empty(t, c.NegotiateFormat(MIMEJSON))
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationFormatWithWildcardAccept(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", nil)
@@ -1594,9 +1310,6 @@ func TestContextNegotiationFormatWithWildcardAccept(t *testing.T) {
 	assert.Equal(t, c.NegotiateFormat(MIMEHTML), MIMEHTML)
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationFormatCustom(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", nil)
@@ -1610,9 +1323,6 @@ func TestContextNegotiationFormatCustom(t *testing.T) {
 	assert.Equal(t, MIMEJSON, c.NegotiateFormat(MIMEJSON))
 }
 
-
-// ff:
-// t:
 func TestContextNegotiationFormat2(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", nil)
@@ -1621,9 +1331,6 @@ func TestContextNegotiationFormat2(t *testing.T) {
 	assert.Equal(t, "", c.NegotiateFormat("image/tiff"))
 }
 
-
-// ff:
-// t:
 func TestContextIsAborted(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	assert.False(t, c.IsAborted())
@@ -1638,10 +1345,8 @@ func TestContextIsAborted(t *testing.T) {
 	assert.True(t, c.IsAborted())
 }
 
-// TestContextData测试响应是否可以用指定的MIME类型从' bytestring '写入
-
-// ff:
-// t:
+// TestContextData tests that the response can be written from `bytestring`
+// with specified MIME type
 func TestContextAbortWithStatus(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1660,9 +1365,6 @@ type testJSONAbortMsg struct {
 	Bar string `json:"bar"`
 }
 
-
-// ff:
-// t:
 func TestContextAbortWithStatusJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1689,22 +1391,17 @@ func TestContextAbortWithStatusJSON(t *testing.T) {
 	assert.Equal(t, "{\"foo\":\"fooValue\",\"bar\":\"barValue\"}", jsonStringBody)
 }
 
-
-// ff:
-// t:
 func TestContextError(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	assert.Empty(t, c.Errors)
 
 	firstErr := errors.New("first error")
-	c.Error(firstErr) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	c.Error(firstErr) //nolint: errcheck
 	assert.Len(t, c.Errors, 1)
 	assert.Equal(t, "Error #01: first error\n", c.Errors.String())
 
 	secondErr := errors.New("second error")
-	c.Error(&Error{ // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	c.Error(&Error{ //nolint: errcheck
 		Err:  secondErr,
 		Meta: "some data 2",
 		Type: ErrorTypePublic,
@@ -1726,19 +1423,13 @@ func TestContextError(t *testing.T) {
 			t.Error("didn't panic")
 		}
 	}()
-	c.Error(nil) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	c.Error(nil) //nolint: errcheck
 }
 
-
-// ff:
-// t:
 func TestContextTypedError(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
-	c.Error(errors.New("externo 0")).SetType(ErrorTypePublic)  // nolint: errcheck
-// 翻译：// 不进行errcheck检查
-	c.Error(errors.New("interno 0")).SetType(ErrorTypePrivate) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	c.Error(errors.New("externo 0")).SetType(ErrorTypePublic)  //nolint: errcheck
+	c.Error(errors.New("interno 0")).SetType(ErrorTypePrivate) //nolint: errcheck
 
 	for _, err := range c.Errors.ByType(ErrorTypePublic) {
 		assert.Equal(t, ErrorTypePublic, err.Type)
@@ -1749,31 +1440,25 @@ func TestContextTypedError(t *testing.T) {
 	assert.Equal(t, []string{"externo 0", "interno 0"}, c.Errors.Errors())
 }
 
-
-// ff:
-// t:
 func TestContextAbortWithError(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
 
-	c.AbortWithError(http.StatusUnauthorized, errors.New("bad input")).SetMeta("some input") // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	c.AbortWithError(http.StatusUnauthorized, errors.New("bad input")).SetMeta("some input") //nolint: errcheck
 
 	assert.Equal(t, http.StatusUnauthorized, w.Code)
 	assert.Equal(t, abortIndex, c.index)
 	assert.True(t, c.IsAborted())
 }
 
-
-// ff:
-// t:
 func TestContextClientIP(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", nil)
 	c.engine.trustedCIDRs, _ = c.engine.prepareTrustedCIDRs()
 	resetContextForClientIPTests(c)
 
-// 遗留测试(验证默认值不会破坏(不安全!)旧行为)
+	// Legacy tests (validating that the defaults don't break the
+	// (insecure!) old behaviour)
 	assert.Equal(t, "20.20.20.20", c.ClientIP())
 
 	c.Request.Header.Del("X-Forwarded-For")
@@ -1790,58 +1475,59 @@ func TestContextClientIP(t *testing.T) {
 	c.Request.Header.Del("X-Appengine-Remote-Addr")
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
-// 没有港口
+	// no port
 	c.Request.RemoteAddr = "50.50.50.50"
 	assert.Empty(t, c.ClientIP())
 
-// 测试执行TrustedProxies功能
+	// Tests exercising the TrustedProxies functionality
 	resetContextForClientIPTests(c)
 
-// IPv6支架
+	// IPv6 support
 	c.Request.RemoteAddr = "[::1]:12345"
 	assert.Equal(t, "20.20.20.20", c.ClientIP())
 
 	resetContextForClientIPTests(c)
-// 没有可信代理
+	// No trusted proxies
 	_ = c.engine.SetTrustedProxies([]string{})
 	c.engine.RemoteIPHeaders = []string{"X-Forwarded-For"}
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
-// 禁用TrustedProxies特性
+	// Disabled TrustedProxies feature
 	_ = c.engine.SetTrustedProxies(nil)
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
-// 最后一个代理是可信的，但RemoteAddr不可信
+	// Last proxy is trusted, but the RemoteAddr is not
 	_ = c.engine.SetTrustedProxies([]string{"30.30.30.30"})
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
-// 只信任RemoteAddr
+	// Only trust RemoteAddr
 	_ = c.engine.SetTrustedProxies([]string{"40.40.40.40"})
 	assert.Equal(t, "30.30.30.30", c.ClientIP())
 
-// 所有步骤都是可信的
+	// All steps are trusted
 	_ = c.engine.SetTrustedProxies([]string{"40.40.40.40", "30.30.30.30", "20.20.20.20"})
 	assert.Equal(t, "20.20.20.20", c.ClientIP())
 
-// 使用CIDR
+	// Use CIDR
 	_ = c.engine.SetTrustedProxies([]string{"40.40.25.25/16", "30.30.30.30"})
 	assert.Equal(t, "20.20.20.20", c.ClientIP())
 
-// 使用解析到所有代理的主机名
+	// Use hostname that resolves to all the proxies
 	_ = c.engine.SetTrustedProxies([]string{"foo"})
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
-// 使用返回错误的主机名
+	// Use hostname that returns an error
 	_ = c.engine.SetTrustedProxies([]string{"bar"})
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
-// x - forward - for有一个非ip元素
+	// X-Forwarded-For has a non-IP element
 	_ = c.engine.SetTrustedProxies([]string{"40.40.40.40"})
 	c.Request.Header.Set("X-Forwarded-For", " blah ")
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
-// LookupHost的结果有非ip元素
-// 这种情况不应该发生，但我们应该对其进行测试，以确保我们能够优雅地处理它
+	// Result from LookupHost has non-IP element. This should never
+	// happen, but we should test it to make sure we handle it
+	// gracefully.
 	_ = c.engine.SetTrustedProxies([]string{"baz"})
 	c.Request.Header.Set("X-Forwarded-For", " 30.30.30.30 ")
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
@@ -1855,20 +1541,20 @@ func TestContextClientIP(t *testing.T) {
 	c.engine.TrustedPlatform = PlatformGoogleAppEngine
 	assert.Equal(t, "50.50.50.50", c.ClientIP())
 
-// 使用自定义TrustedPlatform头
+	// Use custom TrustedPlatform header
 	c.engine.TrustedPlatform = "X-CDN-IP"
 	c.Request.Header.Set("X-CDN-IP", "80.80.80.80")
 	assert.Equal(t, "80.80.80.80", c.ClientIP())
-// 错误的标题
+	// wrong header
 	c.engine.TrustedPlatform = "X-Wrong-Header"
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
 	c.Request.Header.Del("X-CDN-IP")
-// TrustedPlatform为空
+	// TrustedPlatform is empty
 	c.engine.TrustedPlatform = ""
 	assert.Equal(t, "40.40.40.40", c.ClientIP())
 
-// 测试遗留标志
+	// Test the legacy flag
 	c.engine.AppEngine = true
 	assert.Equal(t, "50.50.50.50", c.ClientIP())
 	c.engine.AppEngine = false
@@ -1885,7 +1571,7 @@ func TestContextClientIP(t *testing.T) {
 
 	c.engine.TrustedPlatform = ""
 
-// 没有港口
+	// no port
 	c.Request.RemoteAddr = "50.50.50.50"
 	assert.Empty(t, c.ClientIP())
 }
@@ -1901,9 +1587,6 @@ func resetContextForClientIPTests(c *Context) {
 	c.engine.AppEngine = false
 }
 
-
-// ff:
-// t:
 func TestContextContentType(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", nil)
@@ -1912,9 +1595,6 @@ func TestContextContentType(t *testing.T) {
 	assert.Equal(t, "application/json", c.ContentType())
 }
 
-
-// ff:
-// t:
 func TestContextAutoBindJSON(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("{\"foo\":\"bar\", \"bar\":\"foo\"}"))
@@ -1930,15 +1610,12 @@ func TestContextAutoBindJSON(t *testing.T) {
 	assert.Empty(t, c.Errors)
 }
 
-
-// ff:
-// t:
 func TestContextBindWithJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
 
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("{\"foo\":\"bar\", \"bar\":\"foo\"}"))
-	c.Request.Header.Add("Content-Type", MIMEXML) // 设置虚假内容类型
+	c.Request.Header.Add("Content-Type", MIMEXML) // set fake content-type
 
 	var obj struct {
 		Foo string `json:"foo"`
@@ -1950,9 +1627,6 @@ func TestContextBindWithJSON(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextBindWithXML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1962,7 +1636,7 @@ func TestContextBindWithXML(t *testing.T) {
 			<foo>FOO</foo>
 		   	<bar>BAR</bar>
 		</root>`))
-	c.Request.Header.Add("Content-Type", MIMEXML) // 设置虚假内容类型
+	c.Request.Header.Add("Content-Type", MIMEXML) // set fake content-type
 
 	var obj struct {
 		Foo string `xml:"foo"`
@@ -1974,9 +1648,6 @@ func TestContextBindWithXML(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextBindHeader(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -1999,9 +1670,6 @@ func TestContextBindHeader(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextBindWithQuery(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -2018,15 +1686,12 @@ func TestContextBindWithQuery(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextBindWithYAML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
 
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("foo: bar\nbar: foo"))
-	c.Request.Header.Add("Content-Type", MIMEXML) // 设置虚假内容类型
+	c.Request.Header.Add("Content-Type", MIMEXML) // set fake content-type
 
 	var obj struct {
 		Foo string `yaml:"foo"`
@@ -2038,15 +1703,12 @@ func TestContextBindWithYAML(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextBindWithTOML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
 
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("foo = 'bar'\nbar = 'foo'"))
-	c.Request.Header.Add("Content-Type", MIMEXML) // 设置虚假内容类型
+	c.Request.Header.Add("Content-Type", MIMEXML) // set fake content-type
 
 	var obj struct {
 		Foo string `toml:"foo"`
@@ -2058,9 +1720,6 @@ func TestContextBindWithTOML(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextBadAutoBind(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -2082,9 +1741,6 @@ func TestContextBadAutoBind(t *testing.T) {
 	assert.True(t, c.IsAborted())
 }
 
-
-// ff:
-// t:
 func TestContextAutoShouldBindJSON(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("{\"foo\":\"bar\", \"bar\":\"foo\"}"))
@@ -2100,15 +1756,12 @@ func TestContextAutoShouldBindJSON(t *testing.T) {
 	assert.Empty(t, c.Errors)
 }
 
-
-// ff:
-// t:
 func TestContextShouldBindWithJSON(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
 
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("{\"foo\":\"bar\", \"bar\":\"foo\"}"))
-	c.Request.Header.Add("Content-Type", MIMEXML) // 设置虚假内容类型
+	c.Request.Header.Add("Content-Type", MIMEXML) // set fake content-type
 
 	var obj struct {
 		Foo string `json:"foo"`
@@ -2120,9 +1773,6 @@ func TestContextShouldBindWithJSON(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextShouldBindWithXML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -2132,7 +1782,7 @@ func TestContextShouldBindWithXML(t *testing.T) {
 			<foo>FOO</foo>
 			<bar>BAR</bar>
 		</root>`))
-	c.Request.Header.Add("Content-Type", MIMEXML) // 设置虚假内容类型
+	c.Request.Header.Add("Content-Type", MIMEXML) // set fake content-type
 
 	var obj struct {
 		Foo string `xml:"foo"`
@@ -2144,9 +1794,6 @@ func TestContextShouldBindWithXML(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextShouldBindHeader(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -2169,9 +1816,6 @@ func TestContextShouldBindHeader(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextShouldBindWithQuery(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -2192,15 +1836,12 @@ func TestContextShouldBindWithQuery(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextShouldBindWithYAML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
 
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("foo: bar\nbar: foo"))
-	c.Request.Header.Add("Content-Type", MIMEXML) // 设置虚假内容类型
+	c.Request.Header.Add("Content-Type", MIMEXML) // set fake content-type
 
 	var obj struct {
 		Foo string `yaml:"foo"`
@@ -2212,15 +1853,12 @@ func TestContextShouldBindWithYAML(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextShouldBindWithTOML(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
 
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("foo='bar'\nbar= 'foo'"))
-	c.Request.Header.Add("Content-Type", MIMETOML) // 设置虚假内容类型
+	c.Request.Header.Add("Content-Type", MIMETOML) // set fake content-type
 
 	var obj struct {
 		Foo string `toml:"foo"`
@@ -2232,9 +1870,6 @@ func TestContextShouldBindWithTOML(t *testing.T) {
 	assert.Equal(t, 0, w.Body.Len())
 }
 
-
-// ff:
-// t:
 func TestContextBadAutoShouldBind(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -2254,9 +1889,6 @@ func TestContextBadAutoShouldBind(t *testing.T) {
 	assert.False(t, c.IsAborted())
 }
 
-
-// ff:
-// t:
 func TestContextShouldBindBodyWith(t *testing.T) {
 	type typeA struct {
 		Foo string `json:"foo" xml:"foo" binding:"required"`
@@ -2301,14 +1933,15 @@ func TestContextShouldBindBodyWith(t *testing.T) {
 		},
 	} {
 		t.Logf("testing: %s", tt.name)
-// 身体a到类型a和类型b
+		// bodyA to typeA and typeB
 		{
 			w := httptest.NewRecorder()
 			c, _ := CreateTestContext(w)
 			c.Request, _ = http.NewRequest(
 				"POST", "http://example.com", bytes.NewBufferString(tt.bodyA),
 			)
-// 当它绑定到类型a和类型b时，它发现主体不是类型b而是类型a
+			// When it binds to typeA and typeB, it finds the body is
+			// not typeB but typeA.
 			objA := typeA{}
 			assert.NoError(t, c.ShouldBindBodyWith(&objA, tt.bindingA))
 			assert.Equal(t, typeA{"FOO"}, objA)
@@ -2316,9 +1949,10 @@ func TestContextShouldBindBodyWith(t *testing.T) {
 			assert.Error(t, c.ShouldBindBodyWith(&objB, tt.bindingB))
 			assert.NotEqual(t, typeB{"BAR"}, objB)
 		}
-// 身体b到类型a和类型b
+		// bodyB to typeA and typeB
 		{
-// 当它绑定到类型a和类型b时，它发现主体不是类型a而是类型b
+			// When it binds to typeA and typeB, it finds the body is
+			// not typeA but typeB.
 			w := httptest.NewRecorder()
 			c, _ := CreateTestContext(w)
 			c.Request, _ = http.NewRequest(
@@ -2334,9 +1968,6 @@ func TestContextShouldBindBodyWith(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestContextGolangContext(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", bytes.NewBufferString("{\"foo\":\"bar\", \"bar\":\"foo\"}"))
@@ -2354,11 +1985,8 @@ func TestContextGolangContext(t *testing.T) {
 	assert.Nil(t, c.Value(1))
 }
 
-
-// ff:
-// t:
 func TestWebsocketsRequired(t *testing.T) {
-// 来自spec: https://tools.ietf.org/html/rfc6455#section-1.2的示例请求
+	// Example request from spec: https://tools.ietf.org/html/rfc6455#section-1.2
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("GET", "/chat", nil)
 	c.Request.Header.Set("Host", "server.example.com")
@@ -2371,7 +1999,7 @@ func TestWebsocketsRequired(t *testing.T) {
 
 	assert.True(t, c.IsWebsocket())
 
-// 正常请求，不需要websocket
+	// Normal request, no websocket required.
 	c, _ = CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("GET", "/chat", nil)
 	c.Request.Header.Set("Host", "server.example.com")
@@ -2379,9 +2007,6 @@ func TestWebsocketsRequired(t *testing.T) {
 	assert.False(t, c.IsWebsocket())
 }
 
-
-// ff:
-// t:
 func TestGetRequestHeaderValue(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("GET", "/chat", nil)
@@ -2391,9 +2016,6 @@ func TestGetRequestHeaderValue(t *testing.T) {
 	assert.Empty(t, c.GetHeader("Connection"))
 }
 
-
-// ff:
-// t:
 func TestContextGetRawData(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	body := bytes.NewBufferString("Fetch binary post data")
@@ -2405,9 +2027,6 @@ func TestContextGetRawData(t *testing.T) {
 	assert.Equal(t, "Fetch binary post data", string(data))
 }
 
-
-// ff:
-// t:
 func TestContextRenderDataFromReader(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -2427,9 +2046,6 @@ func TestContextRenderDataFromReader(t *testing.T) {
 	assert.Equal(t, extraHeaders["Content-Disposition"], w.Header().Get("Content-Disposition"))
 }
 
-
-// ff:
-// t:
 func TestContextRenderDataFromReaderNoHeaders(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := CreateTestContext(w)
@@ -2452,8 +2068,6 @@ type TestResponseRecorder struct {
 	closeChannel chan bool
 }
 
-
-// ff:
 func (r *TestResponseRecorder) CloseNotify() <-chan bool {
 	return r.closeChannel
 }
@@ -2462,8 +2076,6 @@ func (r *TestResponseRecorder) closeClient() {
 	r.closeChannel <- true
 }
 
-
-// ff:
 func CreateTestResponseRecorder() *TestResponseRecorder {
 	return &TestResponseRecorder{
 		httptest.NewRecorder(),
@@ -2471,9 +2083,6 @@ func CreateTestResponseRecorder() *TestResponseRecorder {
 	}
 }
 
-
-// ff:
-// t:
 func TestContextStream(t *testing.T) {
 	w := CreateTestResponseRecorder()
 	c, _ := CreateTestContext(w)
@@ -2493,9 +2102,6 @@ func TestContextStream(t *testing.T) {
 	assert.Equal(t, "testtest", w.Body.String())
 }
 
-
-// ff:
-// t:
 func TestContextStreamWithClientGone(t *testing.T) {
 	w := CreateTestResponseRecorder()
 	c, _ := CreateTestContext(w)
@@ -2514,9 +2120,6 @@ func TestContextStreamWithClientGone(t *testing.T) {
 	assert.Equal(t, "test", w.Body.String())
 }
 
-
-// ff:
-// t:
 func TestContextResetInHandler(t *testing.T) {
 	w := CreateTestResponseRecorder()
 	c, _ := CreateTestContext(w)
@@ -2529,9 +2132,6 @@ func TestContextResetInHandler(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
 func TestRaceParamsContextCopy(t *testing.T) {
 	DefaultWriter = os.Stdout
 	router := Default()
@@ -2542,7 +2142,7 @@ func TestRaceParamsContextCopy(t *testing.T) {
 		nameGroup.GET("/api", func(c *Context) {
 			go func(c *Context, param string) {
 				defer wg.Done()
-// 第一个断言必须在第二个请求之后执行
+				// First assert must be executed after the second request
 				time.Sleep(50 * time.Millisecond)
 				assert.Equal(t, c.Param("name"), param)
 			}(c.Copy(), c.Param("name"))
@@ -2553,9 +2153,6 @@ func TestRaceParamsContextCopy(t *testing.T) {
 	wg.Wait()
 }
 
-
-// ff:
-// t:
 func TestContextWithKeysMutex(t *testing.T) {
 	c := &Context{}
 	c.Set("foo", "bar")
@@ -2569,9 +2166,6 @@ func TestContextWithKeysMutex(t *testing.T) {
 	assert.False(t, err)
 }
 
-
-// ff:
-// t:
 func TestRemoteIPFail(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.Request, _ = http.NewRequest("POST", "/", nil)
@@ -2582,9 +2176,6 @@ func TestRemoteIPFail(t *testing.T) {
 	assert.False(t, trust)
 }
 
-
-// ff:
-// t:
 func TestHasRequestContext(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	assert.False(t, c.hasRequestContext(), "no request, no fallback")
@@ -2592,8 +2183,7 @@ func TestHasRequestContext(t *testing.T) {
 	assert.False(t, c.hasRequestContext(), "no request, has fallback")
 	c.Request, _ = http.NewRequest(http.MethodGet, "/", nil)
 	assert.True(t, c.hasRequestContext(), "has request, has fallback")
-	c.Request, _ = http.NewRequestWithContext(nil, "", "", nil) // nolint: staticcheck
-// （翻译）：忽略静态检查工具对本行代码的检查。
+	c.Request, _ = http.NewRequestWithContext(nil, "", "", nil) //nolint:staticcheck
 	assert.False(t, c.hasRequestContext(), "has request with nil ctx, has fallback")
 	c.engine.ContextWithFallback = false
 	assert.False(t, c.hasRequestContext(), "has request, no fallback")
@@ -2604,12 +2194,9 @@ func TestHasRequestContext(t *testing.T) {
 	assert.False(t, c.hasRequestContext(), "has request, no engine")
 }
 
-
-// ff:
-// t:
 func TestContextWithFallbackDeadlineFromRequestContext(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
-// 启用ContextWithFallback特性标志
+	// enable ContextWithFallback feature flag
 	c.engine.ContextWithFallback = true
 
 	deadline, ok := c.Deadline()
@@ -2617,7 +2204,7 @@ func TestContextWithFallbackDeadlineFromRequestContext(t *testing.T) {
 	assert.False(t, ok)
 
 	c2, _ := CreateTestContext(httptest.NewRecorder())
-// 启用ContextWithFallback特性标志
+	// enable ContextWithFallback feature flag
 	c2.engine.ContextWithFallback = true
 
 	c2.Request, _ = http.NewRequest(http.MethodGet, "/", nil)
@@ -2630,18 +2217,15 @@ func TestContextWithFallbackDeadlineFromRequestContext(t *testing.T) {
 	assert.True(t, ok)
 }
 
-
-// ff:
-// t:
 func TestContextWithFallbackDoneFromRequestContext(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
-// 启用ContextWithFallback特性标志
+	// enable ContextWithFallback feature flag
 	c.engine.ContextWithFallback = true
 
 	assert.Nil(t, c.Done())
 
 	c2, _ := CreateTestContext(httptest.NewRecorder())
-// 启用ContextWithFallback特性标志
+	// enable ContextWithFallback feature flag
 	c2.engine.ContextWithFallback = true
 
 	c2.Request, _ = http.NewRequest(http.MethodGet, "/", nil)
@@ -2651,18 +2235,15 @@ func TestContextWithFallbackDoneFromRequestContext(t *testing.T) {
 	assert.NotNil(t, <-c2.Done())
 }
 
-
-// ff:
-// t:
 func TestContextWithFallbackErrFromRequestContext(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
-// 启用ContextWithFallback特性标志
+	// enable ContextWithFallback feature flag
 	c.engine.ContextWithFallback = true
 
 	assert.Nil(t, c.Err())
 
 	c2, _ := CreateTestContext(httptest.NewRecorder())
-// 启用ContextWithFallback特性标志
+	// enable ContextWithFallback feature flag
 	c2.engine.ContextWithFallback = true
 
 	c2.Request, _ = http.NewRequest(http.MethodGet, "/", nil)
@@ -2673,9 +2254,6 @@ func TestContextWithFallbackErrFromRequestContext(t *testing.T) {
 	assert.EqualError(t, c2.Err(), context.Canceled.Error())
 }
 
-
-// ff:
-// t:
 func TestContextWithFallbackValueFromRequestContext(t *testing.T) {
 	type contextKey string
 
@@ -2689,7 +2267,7 @@ func TestContextWithFallbackValueFromRequestContext(t *testing.T) {
 			getContextAndKey: func() (*Context, any) {
 				var key struct{}
 				c, _ := CreateTestContext(httptest.NewRecorder())
-			// 启用ContextWithFallback特性标志
+				// enable ContextWithFallback feature flag
 				c.engine.ContextWithFallback = true
 				c.Request, _ = http.NewRequest("POST", "/", nil)
 				c.Request = c.Request.WithContext(context.WithValue(context.TODO(), key, "value"))
@@ -2701,7 +2279,7 @@ func TestContextWithFallbackValueFromRequestContext(t *testing.T) {
 			name: "c with string context key",
 			getContextAndKey: func() (*Context, any) {
 				c, _ := CreateTestContext(httptest.NewRecorder())
-			// 启用ContextWithFallback特性标志
+				// enable ContextWithFallback feature flag
 				c.engine.ContextWithFallback = true
 				c.Request, _ = http.NewRequest("POST", "/", nil)
 				c.Request = c.Request.WithContext(context.WithValue(context.TODO(), contextKey("key"), "value"))
@@ -2713,7 +2291,7 @@ func TestContextWithFallbackValueFromRequestContext(t *testing.T) {
 			name: "c with nil http.Request",
 			getContextAndKey: func() (*Context, any) {
 				c, _ := CreateTestContext(httptest.NewRecorder())
-			// 启用ContextWithFallback特性标志
+				// enable ContextWithFallback feature flag
 				c.engine.ContextWithFallback = true
 				c.Request = nil
 				return c, "key"
@@ -2724,7 +2302,7 @@ func TestContextWithFallbackValueFromRequestContext(t *testing.T) {
 			name: "c with nil http.Request.Context()",
 			getContextAndKey: func() (*Context, any) {
 				c, _ := CreateTestContext(httptest.NewRecorder())
-			// 启用ContextWithFallback特性标志
+				// enable ContextWithFallback feature flag
 				c.engine.ContextWithFallback = true
 				c.Request, _ = http.NewRequest("POST", "/", nil)
 				return c, "key"
@@ -2740,9 +2318,6 @@ func TestContextWithFallbackValueFromRequestContext(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
 func TestContextCopyShouldNotCancel(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
@@ -2759,11 +2334,11 @@ func TestContextCopyShouldNotCancel(t *testing.T) {
 
 		ginctx = ginctx.Copy()
 
-// 启动调用SRV的异步例程
+		// start async goroutine for calling srv
 		go func() {
 			defer wg.Done()
 
-			<-ensureRequestIsOver // 确保完成请求
+			<-ensureRequestIsOver // ensure request is done
 
 			req, err := http.NewRequestWithContext(ginctx, http.MethodGet, srv.URL, nil)
 			must(err)
@@ -2807,9 +2382,6 @@ func TestContextCopyShouldNotCancel(t *testing.T) {
 	wg.Wait()
 }
 
-
-// ff:
-// t:
 func TestContextAddParam(t *testing.T) {
 	c := &Context{}
 	id := "id"
@@ -2821,9 +2393,6 @@ func TestContextAddParam(t *testing.T) {
 	assert.Equal(t, value, v)
 }
 
-
-// ff:
-// t:
 func TestCreateTestContextWithRouteParams(t *testing.T) {
 	w := httptest.NewRecorder()
 	engine := New()
@@ -2843,17 +2412,11 @@ type interceptedWriter struct {
 	b *bytes.Buffer
 }
 
-
-// ff:
-// code:
 func (i interceptedWriter) WriteHeader(code int) {
 	i.Header().Del("X-Test")
 	i.ResponseWriter.WriteHeader(code)
 }
 
-
-// ff:
-// t:
 func TestInterceptedHeader(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, r := CreateTestContext(w)
@@ -2875,9 +2438,10 @@ func TestInterceptedHeader(t *testing.T) {
 	})
 	c.Request = httptest.NewRequest("GET", "/", nil)
 	r.HandleContext(c)
-// 当WriteHeaderNow()被调用时，Result()已经冻结了报头
-// 与此相比，这是响应报头将被刷新的时间
-// 维护这
+	// Result() has headers frozen when WriteHeaderNow() has been called
+	// Compared to this time, this is when the response headers will be flushed
+	// As response is flushed on c.String, the Header cannot be set by the first
+	// middleware. Assert this
 	assert.Equal(t, "", w.Result().Header.Get("X-Test"))
 	assert.Equal(t, "present", w.Result().Header.Get("X-Test-2"))
 }
