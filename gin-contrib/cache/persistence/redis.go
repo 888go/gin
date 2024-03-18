@@ -40,6 +40,11 @@ type RedisStore struct {
 // defaultExpiration:
 // password:
 // host:
+
+// ff:
+// defaultExpiration:
+// password:
+// host:
 func NewRedisCache(host string, password string, defaultExpiration time.Duration) *RedisStore {
 	var pool = &redis.Pool{
 		MaxIdle:     5,
@@ -102,12 +107,21 @@ func NewRedisCache(host string, password string, defaultExpiration time.Duration
 // ff:
 // defaultExpiration:
 // pool:
+
+// ff:
+// defaultExpiration:
+// pool:
 func NewRedisCacheWithPool(pool *redis.Pool, defaultExpiration time.Duration) *RedisStore {
 	return &RedisStore{pool, defaultExpiration}
 }
 
 // Set (参考CacheStore接口)
 // 此处的Set方法是实现CacheStore接口的一部分，用于设置缓存值。
+
+// ff:
+// expires:
+// value:
+// key:
 
 // ff:
 // expires:
@@ -165,6 +179,11 @@ func (c *RedisStore) Set(key string, value interface{}, expires time.Duration) e
 // expires:
 // value:
 // key:
+
+// ff:
+// expires:
+// value:
+// key:
 func (c *RedisStore) Add(key string, value interface{}, expires time.Duration) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -175,6 +194,11 @@ func (c *RedisStore) Add(key string, value interface{}, expires time.Duration) e
 }
 
 // Replace (参考 CacheStore 接口)
+
+// ff:
+// expires:
+// value:
+// key:
 
 // ff:
 // expires:
@@ -236,6 +260,10 @@ func (c *RedisStore) Replace(key string, value interface{}, expires time.Duratio
 // ff:
 // ptrValue:
 // key:
+
+// ff:
+// ptrValue:
+// key:
 func (c *RedisStore) Get(key string, ptrValue interface{}) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -272,6 +300,9 @@ func exists(conn redis.Conn, key string) bool {
 
 // ff:
 // key:
+
+// ff:
+// key:
 func (c *RedisStore) Delete(key string) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -283,6 +314,10 @@ func (c *RedisStore) Delete(key string) error {
 }
 
 // 自增（参见CacheStore接口）
+
+// ff:
+// delta:
+// key:
 
 // ff:
 // delta:
@@ -359,6 +394,12 @@ func (c *RedisStore) Increment(key string, delta uint64) (uint64, error) {
 // newValue:
 // delta:
 // key:
+
+// ff:
+// err:
+// newValue:
+// delta:
+// key:
 func (c *RedisStore) Decrement(key string, delta uint64) (newValue uint64, err error) {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -379,6 +420,8 @@ func (c *RedisStore) Decrement(key string, delta uint64) (newValue uint64, err e
 }
 
 // Flush （参考 CacheStore 接口）
+
+// ff:
 
 // ff:
 

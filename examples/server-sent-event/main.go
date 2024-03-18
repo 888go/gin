@@ -92,6 +92,9 @@ func main() {
 
 // ff:
 // event:
+
+// ff:
+// event:
 func NewServer() (event *Event) {
 	event = &Event{
 		Message:       make(chan string),
@@ -149,6 +152,8 @@ func (stream *Event) serveHTTP() gin.HandlerFunc {
 	}
 }
 
+
+// ff:
 
 // ff:
 

@@ -13,4 +13,9 @@
      <tree path="/demo/Json" title="Json 数据解析和绑定"/>
     <tree path="/demo/AsciiJSON" title="转义的非 ASCII 字符"/>
     <tree path="/demo/LoadHTMLGlob" title="HTML 渲染"/>
+    <tree path="/examples/graceful-shutdown" title="优雅重启或停止"/>
+    <tree path="/demo/BasicAuth" title="BasicAuth 中间件"/>
+    <tree path="/demo/Use" title="使用中间件"/>
+    <tree path="/path.go" title="内部方法"/>
+    <tree path="/utils.go" title="辅助方法"/>
 </trees>

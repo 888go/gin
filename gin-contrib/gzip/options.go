@@ -42,12 +42,18 @@ type Option func(*Options)
 
 // ff:
 // args:
+
+// ff:
+// args:
 func WithExcludedExtensions(args []string) Option {
 	return func(o *Options) {
 		o.ExcludedExtensions = NewExcludedExtensions(args)
 	}
 }
 
+
+// ff:
+// args:
 
 // ff:
 // args:
@@ -84,12 +90,19 @@ func WithExcludedPaths(args []string) Option {
 
 // ff:
 // args:
+
+// ff:
+// args:
 func WithExcludedPathsRegexs(args []string) Option {
 	return func(o *Options) {
 		o.ExcludedPathesRegexs = NewExcludedPathesRegexs(args)
 	}
 }
 
+
+// ff:
+// decompressFn:
+// c:
 
 // ff:
 // decompressFn:
@@ -134,6 +147,9 @@ type ExcludedExtensions map[string]bool
 
 // ff:
 // extensions:
+
+// ff:
+// extensions:
 func NewExcludedExtensions(extensions []string) ExcludedExtensions {
 	res := make(ExcludedExtensions)
 	for _, e := range extensions {
@@ -142,6 +158,9 @@ func NewExcludedExtensions(extensions []string) ExcludedExtensions {
 	return res
 }
 
+
+// ff:
+// target:
 
 // ff:
 // target:
@@ -179,10 +198,16 @@ type ExcludedPaths []string
 
 // ff:
 // paths:
+
+// ff:
+// paths:
 func NewExcludedPaths(paths []string) ExcludedPaths {
 	return ExcludedPaths(paths)
 }
 
+
+// ff:
+// requestURI:
 
 // ff:
 // requestURI:
@@ -224,6 +249,9 @@ type ExcludedPathesRegexs []*regexp.Regexp
 
 // ff:
 // regexs:
+
+// ff:
+// regexs:
 func NewExcludedPathesRegexs(regexs []string) ExcludedPathesRegexs {
 	result := make([]*regexp.Regexp, len(regexs))
 	for i, reg := range regexs {
@@ -232,6 +260,9 @@ func NewExcludedPathesRegexs(regexs []string) ExcludedPathesRegexs {
 	return result
 }
 
+
+// ff:
+// requestURI:
 
 // ff:
 // requestURI:
@@ -256,6 +287,9 @@ func (e ExcludedPathesRegexs) Contains(requestURI string) bool {
 	return false
 }
 
+
+// ff:
+// c:
 
 // ff:
 // c:

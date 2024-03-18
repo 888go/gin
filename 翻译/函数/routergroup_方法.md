@@ -9,11 +9,11 @@ cf= 重复,用于重命名多次,如: 一个文档内有2个"One(result interfac
 
 [func (group *RouterGroup) Use(middleware ...HandlerFunc) IRoutes {]
 ff=中间件
-middleware=处理方法
+middleware=处理函数
 
 [func (group *RouterGroup) Group(relativePath string, handlers ...HandlerFunc) *RouterGroup {]
 ff=创建分组路由
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) BasePath() string {]
@@ -21,46 +21,46 @@ ff=取路由基础路径
 
 [func (group *RouterGroup) Handle(httpMethod, relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 httpMethod=HTTP方法
 
 [func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定POST
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定GET
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) DELETE(relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定DELETE
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) PATCH(relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定PATCH
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) PUT(relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定PUT
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) OPTIONS(relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定OPTIONS
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) HEAD(relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定HEAD
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) Any(relativePath string, handlers ...HandlerFunc) IRoutes {]
 ff=绑定Any
-handlers=处理方法
+handlers=处理函数
 relativePath=路由规则

@@ -46,6 +46,11 @@ var (
 // opts:
 // operationName:
 // tracer:
+
+// ff:
+// opts:
+// operationName:
+// tracer:
 func NewSpan(tracer opentracing.Tracer, operationName string, opts ...opentracing.StartSpanOption) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		span := tracer.StartSpan(operationName, opts...)
@@ -175,6 +180,10 @@ func SpanFromContext(tracer opentracing.Tracer, operationName string, abortOnErr
 // ff:
 // abortOnErrors:
 // tracer:
+
+// ff:
+// abortOnErrors:
+// tracer:
 func InjectToHeaders(tracer opentracing.Tracer, abortOnErrors bool) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var spanContext opentracing.SpanContext
@@ -219,6 +228,11 @@ func InjectToHeaders(tracer opentracing.Tracer, abortOnErrors bool) gin.HandlerF
 // exists:
 // span:
 // ctx:
+
+// ff:
+// exists:
+// span:
+// ctx:
 func GetSpan(ctx *gin.Context) (span opentracing.Span, exists bool) {
 	spanI, _ := ctx.Get(spanContextKey)
 	span, ok := spanI.(opentracing.Span)
@@ -227,6 +241,9 @@ func GetSpan(ctx *gin.Context) (span opentracing.Span, exists bool) {
 }
 
 // MustGetSpan 从上下文中提取跨度（span）。如果未设置跨度，则会引发恐慌。
+
+// ff:
+// ctx:
 
 // ff:
 // ctx:

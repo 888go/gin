@@ -291,7 +291,7 @@ ff=取XML参数到指针
 obj=XML结构指针
 
 [func (c *Context) ShouldBindQuery(obj any) error {]
-ff=取表单参数到指针
+ff=取URL参数到指针
 obj=表单结构指针
 
 [func (c *Context) ShouldBindYAML(obj any) error {]
@@ -343,7 +343,7 @@ ff=取XML参数到指针PANI
 obj=结构指针
 
 [func (c *Context) BindQuery(obj any) error {]
-ff=取表单参数到指针PANI
+ff=取URL参数到指针PANI
 obj=结构指针
 
 [func (c *Context) BindYAML(obj any) error {]
@@ -371,3 +371,12 @@ obj=结构指针
 ff=输出JSON并防劫持
 obj=结构
 code=状态码
+
+[func (c *Context) ProtoBuf(code int, obj any) {]
+ff=输出ProtoBuf
+obj=结构
+code=状态码
+
+[func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error) {]
+err=错误
+obj=结构指针

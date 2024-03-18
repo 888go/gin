@@ -22,6 +22,8 @@ type BufferPool struct {
 // ff:
 
 // ff:
+
+// ff:
 func (p *BufferPool) Get() *bytes.Buffer {
 	buf := p.pool.Get()
 	if buf == nil {
@@ -31,6 +33,9 @@ func (p *BufferPool) Get() *bytes.Buffer {
 }
 
 // Put 将缓冲区放回池中。
+
+// ff:
+// buf:
 
 // ff:
 // buf:

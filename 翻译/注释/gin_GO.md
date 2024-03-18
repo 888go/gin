@@ -319,6 +319,7 @@
 
 # <翻译开始>
 // Default返回一个Engine实例，其中已经附加了Logger和Recovery中间件
+// 如果不使用默认的中间件,可以使用 gin.New()
 # <翻译结束>
 
 

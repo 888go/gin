@@ -729,6 +729,7 @@
 
 # <翻译开始>
 // BindJSON是c.MustBindWith(obj, binding.JSON)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 # <翻译结束>
 
 
@@ -738,6 +739,7 @@
 
 # <翻译开始>
 // BindXML是c.MustBindWith(obj, binding.BindXML)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 # <翻译结束>
 
 
@@ -747,6 +749,9 @@
 
 # <翻译开始>
 // BindQuery是c.MustBindWith(obj, binding.Query)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
+// BindQuery 函数只绑定 url 查询参数而忽略 post 数据。参阅详细信息:
+// https://gin-gonic.com/zh-cn/docs/examples/only-bind-query-string/
 # <翻译结束>
 
 
@@ -756,6 +761,7 @@
 
 # <翻译开始>
 // BindYAML是c.MustBindWith(obj, binding.YAML)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 # <翻译结束>
 
 
@@ -765,6 +771,7 @@
 
 # <翻译开始>
 // BindTOML是c.MustBindWith(obj, binding.TOML)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 # <翻译结束>
 
 
@@ -774,6 +781,7 @@
 
 # <翻译开始>
 // BindHeader是c.MustBindWith(obj, binding.Header)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 # <翻译结束>
 
 
@@ -840,6 +848,7 @@
 
 # <翻译开始>
 // ShouldBindJSON是c.ShouldBindWith(obj, binding.JSON)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 # <翻译结束>
 
 
@@ -849,6 +858,7 @@
 
 # <翻译开始>
 // ShouldBindXML是c.ShouldBindWith(obj, binding.XML)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 # <翻译结束>
 
 
@@ -858,6 +868,9 @@
 
 # <翻译开始>
 // ShouldBindQuery是c.ShouldBindWith(obj, binding.Query)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
+// ShouldBindQuery 函数只绑定 url 查询参数而忽略 post 数据。参阅详细信息:
+// https://gin-gonic.com/zh-cn/docs/examples/only-bind-query-string/
 # <翻译结束>
 
 
@@ -867,6 +880,7 @@
 
 # <翻译开始>
 // ShouldBindYAML是c.ShouldBindWith(obj, binding.YAML)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 # <翻译结束>
 
 
@@ -876,6 +890,7 @@
 
 # <翻译开始>
 // ShouldBindTOML是c.ShouldBindWith(obj, binding.TOML)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 # <翻译结束>
 
 
@@ -885,6 +900,7 @@
 
 # <翻译开始>
 // ShouldBindHeader是c.ShouldBindWith(obj, binding.Header)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 # <翻译结束>
 
 
@@ -894,6 +910,7 @@
 
 # <翻译开始>
 // ShouldBindUri使用指定的绑定引擎绑定传递的结构指针
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 # <翻译结束>
 
 
@@ -904,6 +921,7 @@
 
 # <翻译开始>
 // ShouldBindWith使用指定的绑定引擎绑定传递的结构指针
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 // 参见绑定包
 # <翻译结束>
 
@@ -1243,6 +1261,9 @@
 
 # <翻译开始>
 // ProtoBuf将给定的结构体作为ProtoBuf序列化到响应体中
+// Protobuf是Protocol Buffers的简称，
+// 它是Google公司开发的一种数据描述语言，是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化 。
+// 它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式
 # <翻译结束>
 
 

@@ -40,6 +40,9 @@ type config struct {
 
 // ff:
 // opts:
+
+// ff:
+// opts:
 func New(opts ...Option) gin.HandlerFunc {
 	cfg := &config{
 		generator: func() string {
@@ -71,6 +74,9 @@ func New(opts ...Option) gin.HandlerFunc {
 }
 
 // Get 返回请求标识符
+
+// ff:
+// c:
 
 // ff:
 // c:

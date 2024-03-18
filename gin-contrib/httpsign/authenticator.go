@@ -47,6 +47,9 @@ type Option func(*Authenticator)
 
 // ff:
 // validators:
+
+// ff:
+// validators:
 func WithValidator(validators ...validator.Validator) Option {
 	return func(a *Authenticator) {
 		a.validators = validators
@@ -56,6 +59,9 @@ func WithValidator(validators ...validator.Validator) Option {
 // WithRequiredHeaders 是一个包含所有必需HTTP头的列表，客户端
 // 必须在签名字符串中包含这些头信息，以便请求被认为是有效的。
 // 如果未提供，创建的Authenticator实例将使用默认的defaultRequiredHeaders变量。
+
+// ff:
+// headers:
 
 // ff:
 // headers:
@@ -99,6 +105,10 @@ func WithRequiredHeaders(headers []string) Option {
 // ff:
 // options:
 // secretKeys:
+
+// ff:
+// options:
+// secretKeys:
 func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 	a := &Authenticator{secrets: secretKeys}
 
@@ -121,6 +131,8 @@ func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 }
 
 // Authenticated 返回一个 gin 中间件，该中间件允许在参数中指定的权限。
+
+// ff:
 
 // ff:
 

@@ -44,6 +44,10 @@ type SignatureHeader struct {
 // ff:
 // *SignatureHeader:
 // r:
+
+// ff:
+// *SignatureHeader:
+// r:
 func NewSignatureHeader(r *http.Request) (*SignatureHeader, error) {
 	return parseHTTPRequest(r)
 }

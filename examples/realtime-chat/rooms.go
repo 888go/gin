@@ -33,6 +33,8 @@ type Manager struct {
 // ff:
 
 // ff:
+
+// ff:
 func NewRoomManager() *Manager {
 	manager := &Manager{
 		roomChannels: make(map[string]broadcast.Broadcaster),
@@ -102,6 +104,9 @@ func (m *Manager) room(roomid string) broadcast.Broadcaster {
 
 // ff:
 // roomid:
+
+// ff:
+// roomid:
 func (m *Manager) OpenListener(roomid string) chan interface{} {
 	listener := make(chan interface{})
 	m.open <- &Listener{
@@ -111,6 +116,10 @@ func (m *Manager) OpenListener(roomid string) chan interface{} {
 	return listener
 }
 
+
+// ff:
+// channel:
+// roomid:
 
 // ff:
 // channel:
@@ -153,10 +162,18 @@ func (m *Manager) CloseListener(roomid string, channel chan interface{}) {
 
 // ff:
 // roomid:
+
+// ff:
+// roomid:
 func (m *Manager) DeleteBroadcast(roomid string) {
 	m.delete <- roomid
 }
 
+
+// ff:
+// text:
+// roomid:
+// userid:
 
 // ff:
 // text:

@@ -47,9 +47,9 @@ ff=设置Template模板
 templ=Template模板
 
 [func (engine *Engine) SetFuncMap(funcMap template.FuncMap) {]
-ff=设置Template模板方法
-funcMap=方法Map
+ff=设置Template模板函数
+funcMap=函数Map
 
 [func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {]
 ff=中间件
-middleware=中间件方法
+middleware=中间件函数

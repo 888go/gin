@@ -63,7 +63,7 @@ var _ IRouter = (*RouterGroup)(nil)
 // 使用将中间件添加到组中，参见GitHub中的示例代码
 
 // ff:中间件
-// middleware:处理方法
+// middleware:处理函数
 func (group *RouterGroup) Use(middleware ...HandlerFunc) IRoutes {
 	group.Handlers = append(group.Handlers, middleware...)
 	return group.returnObj()
@@ -74,7 +74,7 @@ func (group *RouterGroup) Use(middleware ...HandlerFunc) IRoutes {
 // 例如，可以对使用公共中间件进行授权的所有路由进行分组
 
 // ff:创建分组路由
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) Group(relativePath string, handlers ...HandlerFunc) *RouterGroup {
 	return &RouterGroup{
@@ -106,7 +106,7 @@ func (group *RouterGroup) handle(httpMethod, relativePath string, handlers Handl
 // 此功能用于批量加载，并允许使用不太常用的非标准化或自定义方法(例如用于与代理的内部通信)
 
 // ff:绑定
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 // httpMethod:HTTP方法
 func (group *RouterGroup) Handle(httpMethod, relativePath string, handlers ...HandlerFunc) IRoutes {
@@ -119,7 +119,7 @@ func (group *RouterGroup) Handle(httpMethod, relativePath string, handlers ...Ha
 // POST是router.Handle("POST" path, handlers)的快捷方式
 
 // ff:绑定POST
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodPost, relativePath, handlers)
@@ -128,7 +128,7 @@ func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRo
 // GET是router.Handle("GET" path, handlers)的快捷方式
 
 // ff:绑定GET
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodGet, relativePath, handlers)
@@ -137,7 +137,7 @@ func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRou
 // DELETE是router.Handle("DELETE"， path, handlers)的快捷方式
 
 // ff:绑定DELETE
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) DELETE(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodDelete, relativePath, handlers)
@@ -146,7 +146,7 @@ func (group *RouterGroup) DELETE(relativePath string, handlers ...HandlerFunc) I
 // PATCH是router.Handle("PATCH" path, handlers)的快捷方式
 
 // ff:绑定PATCH
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) PATCH(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodPatch, relativePath, handlers)
@@ -155,7 +155,7 @@ func (group *RouterGroup) PATCH(relativePath string, handlers ...HandlerFunc) IR
 // PUT是router.Handle("PUT" path, handlers)的快捷方式
 
 // ff:绑定PUT
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) PUT(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodPut, relativePath, handlers)
@@ -164,7 +164,7 @@ func (group *RouterGroup) PUT(relativePath string, handlers ...HandlerFunc) IRou
 // OPTIONS是router.Handle("OPTIONS" path, handlers)的快捷方式
 
 // ff:绑定OPTIONS
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) OPTIONS(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodOptions, relativePath, handlers)
@@ -173,7 +173,7 @@ func (group *RouterGroup) OPTIONS(relativePath string, handlers ...HandlerFunc) 
 // HEAD是router.Handle("HEAD" path, handlers)的快捷方式
 
 // ff:绑定HEAD
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) HEAD(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodHead, relativePath, handlers)
@@ -183,7 +183,7 @@ func (group *RouterGroup) HEAD(relativePath string, handlers ...HandlerFunc) IRo
 // Get, post, put, patch, head, options, delete, connect, trace
 
 // ff:绑定Any
-// handlers:处理方法
+// handlers:处理函数
 // relativePath:路由规则
 func (group *RouterGroup) Any(relativePath string, handlers ...HandlerFunc) IRoutes {
 	for _, method := range anyMethods {

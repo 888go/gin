@@ -34,10 +34,18 @@ type binaryFileSystem struct {
 // ff:
 // http.File:
 // name:
+
+// ff:
+// http.File:
+// name:
 func (b *binaryFileSystem) Open(name string) (http.File, error) {
 	return b.fs.Open(name)
 }
 
+
+// ff:
+// filepath:
+// prefix:
 
 // ff:
 // filepath:
@@ -68,6 +76,9 @@ func (b *binaryFileSystem) Exists(prefix string, filepath string) bool {
 	return false
 }
 
+
+// ff:
+// root:
 
 // ff:
 // root:

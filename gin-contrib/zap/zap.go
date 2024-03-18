@@ -66,11 +66,20 @@ type Config struct {
 // utc:
 // timeFormat:
 // logger:
+
+// ff:
+// utc:
+// timeFormat:
+// logger:
 func Ginzap(logger ZapLogger, timeFormat string, utc bool) gin.HandlerFunc {
 	return GinzapWithConfig(logger, &Config{TimeFormat: timeFormat, UTC: utc, DefaultLevel: zapcore.InfoLevel})
 }
 
 // GinzapWithConfig 根据配置返回一个 gin.HandlerFunc
+
+// ff:
+// conf:
+// logger:
 
 // ff:
 // conf:
@@ -174,6 +183,10 @@ func defaultHandleRecovery(c *gin.Context, err interface{}) {
 // ff:
 // stack:
 // logger:
+
+// ff:
+// stack:
+// logger:
 func RecoveryWithZap(logger ZapLogger, stack bool) gin.HandlerFunc {
 	return CustomRecoveryWithZap(logger, stack, defaultHandleRecovery)
 }
@@ -183,6 +196,11 @@ func RecoveryWithZap(logger ZapLogger, stack bool) gin.HandlerFunc {
 // 所有错误都会通过zap.Error()方法进行日志记录。
 // stack 参数表示是否输出堆栈信息。
 // 堆栈信息有助于快速定位错误发生位置，但其信息量较大。
+
+// ff:
+// recovery:
+// stack:
+// logger:
 
 // ff:
 // recovery:

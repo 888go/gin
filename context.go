@@ -18,10 +18,10 @@ import (
 	"strings"
 	"sync"
 	"time"
-
+	
+	"github.com/gin-contrib/sse"
 	"github.com/888go/gin/binding"
 	"github.com/888go/gin/render"
-	"github.com/gin-contrib/sse"
 )
 
 // 内容类型MIME最常用的数据格式
@@ -62,26 +62,26 @@ type Context struct {
 	params       *Params
 	skippedNodes *[]skippedNode
 
-	// 这个互斥锁保护键映射
+// 这个互斥锁保护键映射
 	mu sync.RWMutex
 
-	// Keys是每个请求上下文专用的键/值对
+// Keys是每个请求上下文专用的键/值对
 	Keys map[string]any
 
-	// Errors是附加到使用此上下文的所有处理程序/中间件的错误列表
+// Errors是附加到使用此上下文的所有处理程序/中间件的错误列表
 	Errors errorMsgs
 
-	// Accepted定义了一个手动接受的格式列表，用于内容协商
+// Accepted定义了一个手动接受的格式列表，用于内容协商
 	Accepted []string
 
-	// queryCache缓存c.Request.URL.Query()的查询结果
+// queryCache缓存c.Request.URL.Query()的查询结果
 	queryCache url.Values
 
-	// c.Request
-	// PostForm，它包含来自POST、PATCH或PUT主体参数的解析表单数据
+// c.Request
+// PostForm，它包含来自POST、PATCH或PUT主体参数的解析表单数据
 	formCache url.Values
 
-	// SameSite允许服务器定义cookie属性，使浏览器无法将此cookie与跨站点请求一起发送
+// SameSite允许服务器定义cookie属性，使浏览器无法将此cookie与跨站点请求一起发送
 	sameSite http.SameSite
 }
 
@@ -177,7 +177,7 @@ func (c *Context) FullPath() string {
 }
 
 /************************************/
-/*********** 流控制 ***********/
+/*********** FLOW CONTROL ***********/
 /************************************/
 
 // Next应该只在中间件内部使用
@@ -481,7 +481,7 @@ func (c *Context) GetStringMapStringSlice(key string) (smss map[string][]string)
 /************************************/
 
 // 参数返回URL参数的值
-// Param和DefaultQuery()不同的是:
+// Param和DefaultQuery()不同的是: 
 // Param这个方法获取到的是api参数, 如:http://localhost:8080/user/name/value
 // DefaultQuery获取的是url参数,如:http://localhost:8080/user?name=value
 // 它是 c.Params.ByName（key） 的快捷方式
@@ -490,7 +490,7 @@ func (c *Context) GetStringMapStringSlice(key string) (smss map[string][]string)
 //	    id := c.Param("id") // id == "/john"
 //	    // 一个 GET 请求 /user/john/
 //	    id := c.Param("id") // id == "/john/"
-//	})
+//	}) 
 
 // ff:取API参数值
 // key:名称
@@ -794,6 +794,7 @@ func (c *Context) Bind(obj any) error {
 }
 
 // BindJSON是c.MustBindWith(obj, binding.JSON)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 
 // ff:取JSON参数到指针PANI
 // obj:结构指针
@@ -802,6 +803,7 @@ func (c *Context) BindJSON(obj any) error {
 }
 
 // BindXML是c.MustBindWith(obj, binding.BindXML)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 
 // ff:取XML参数到指针PANI
 // obj:结构指针
@@ -810,14 +812,18 @@ func (c *Context) BindXML(obj any) error {
 }
 
 // BindQuery是c.MustBindWith(obj, binding.Query)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
+// BindQuery 函数只绑定 url 查询参数而忽略 post 数据。参阅详细信息:
+// https://gin-gonic.com/zh-cn/docs/examples/only-bind-query-string/
 
-// ff:取表单参数到指针PANI
+// ff:取URL参数到指针PANI
 // obj:结构指针
 func (c *Context) BindQuery(obj any) error {
 	return c.MustBindWith(obj, binding.Query)
 }
 
 // BindYAML是c.MustBindWith(obj, binding.YAML)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 
 // ff:取YAML参数到指针PANI
 // obj:结构指针
@@ -826,6 +832,7 @@ func (c *Context) BindYAML(obj any) error {
 }
 
 // BindTOML是c.MustBindWith(obj, binding.TOML)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 
 // ff:取TOML参数到指针PANI
 // obj:结构指针
@@ -834,6 +841,7 @@ func (c *Context) BindTOML(obj any) error {
 }
 
 // BindHeader是c.MustBindWith(obj, binding.Header)的快捷方式
+// 如果解析错误,它将使用HTTP 400中止请求
 
 // ff:取Header参数到指针PANI
 // obj:结构指针
@@ -849,7 +857,7 @@ func (c *Context) BindHeader(obj any) error {
 func (c *Context) BindUri(obj any) error {
 	if err := c.ShouldBindUri(obj); err != nil {
 		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) // nolint: errcheck
-		// 翻译：// 不进行errcheck检查
+// 翻译：// 不进行errcheck检查
 		return err
 	}
 	return nil
@@ -865,7 +873,7 @@ func (c *Context) BindUri(obj any) error {
 func (c *Context) MustBindWith(obj any, b binding.Binding) error {
 	if err := c.ShouldBindWith(obj, b); err != nil {
 		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) // nolint: errcheck
-		// 翻译：// 不进行errcheck检查
+// 翻译：// 不进行errcheck检查
 		return err
 	}
 	return nil
@@ -887,6 +895,7 @@ func (c *Context) ShouldBind(obj any) error {
 }
 
 // ShouldBindJSON是c.ShouldBindWith(obj, binding.JSON)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 
 // ff:取JSON参数到指针
 // obj:JSON结构指针
@@ -895,6 +904,7 @@ func (c *Context) ShouldBindJSON(obj any) error {
 }
 
 // ShouldBindXML是c.ShouldBindWith(obj, binding.XML)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 
 // ff:取XML参数到指针
 // obj:XML结构指针
@@ -903,14 +913,18 @@ func (c *Context) ShouldBindXML(obj any) error {
 }
 
 // ShouldBindQuery是c.ShouldBindWith(obj, binding.Query)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
+// ShouldBindQuery 函数只绑定 url 查询参数而忽略 post 数据。参阅详细信息:
+// https://gin-gonic.com/zh-cn/docs/examples/only-bind-query-string/
 
-// ff:取表单参数到指针
+// ff:取URL参数到指针
 // obj:表单结构指针
 func (c *Context) ShouldBindQuery(obj any) error {
 	return c.ShouldBindWith(obj, binding.Query)
 }
 
 // ShouldBindYAML是c.ShouldBindWith(obj, binding.YAML)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 
 // ff:取YAML参数到指针
 // obj:YAML结构指针
@@ -919,6 +933,7 @@ func (c *Context) ShouldBindYAML(obj any) error {
 }
 
 // ShouldBindTOML是c.ShouldBindWith(obj, binding.TOML)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 
 // ff:取TOML参数到指针
 // obj:TOML结构指针
@@ -927,6 +942,7 @@ func (c *Context) ShouldBindTOML(obj any) error {
 }
 
 // ShouldBindHeader是c.ShouldBindWith(obj, binding.Header)的快捷方式
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 
 // ff:取Header参数到指针
 // obj:Header结构指针
@@ -935,6 +951,7 @@ func (c *Context) ShouldBindHeader(obj any) error {
 }
 
 // ShouldBindUri使用指定的绑定引擎绑定传递的结构指针
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 
 // ff:取Uri参数到指针
 // obj:Uri结构指针
@@ -947,6 +964,7 @@ func (c *Context) ShouldBindUri(obj any) error {
 }
 
 // ShouldBindWith使用指定的绑定引擎绑定传递的结构指针
+// 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
 // 参见绑定包
 
 // ff:取参数到指针并按类型
@@ -961,9 +979,9 @@ func (c *Context) ShouldBindWith(obj any, b binding.Binding) error {
 // 因此，如果只需要调用一次，应该使用ShouldBindWith以获得更好的性能
 
 // ff:
-// err:
+// err:错误
 // bb:
-// obj:
+// obj:结构指针
 func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error) {
 	var body []byte
 	if cb, ok := c.Get(BodyBytesKey); ok {
@@ -989,15 +1007,15 @@ func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error
 
 // ff:取客户端ip
 func (c *Context) ClientIP() string {
-	// 检查我们是否运行在一个可信的平台上，如果错误继续运行
+// 检查我们是否运行在一个可信的平台上，如果错误继续运行
 	if c.engine.TrustedPlatform != "" {
-		// 开发人员可以定义自己的可信平台头或使用预定义的常量
+// 开发人员可以定义自己的可信平台头或使用预定义的常量
 		if addr := c.requestHeader(c.engine.TrustedPlatform); addr != "" {
 			return addr
 		}
 	}
 
-	// 遗留“AppEngine"国旗
+// 遗留“AppEngine"国旗
 	if c.engine.AppEngine {
 		log.Println(`The AppEngine flag is going to be deprecated. Please check issues #2723 and #2739 and use 'TrustedPlatform: gin.PlatformGoogleAppEngine' instead.`)
 		if addr := c.requestHeader("X-Appengine-Remote-Addr"); addr != "" {
@@ -1005,8 +1023,8 @@ func (c *Context) ClientIP() string {
 		}
 	}
 
-	// 它还检查remoteIP是否是受信任的代理
-	// 为了执行此验证，它将查看IP是否包含在engine定义的至少一个CIDR块中
+// 它还检查remoteIP是否是受信任的代理
+// 为了执行此验证，它将查看IP是否包含在engine定义的至少一个CIDR块中
 	remoteIP := net.ParseIP(c.RemoteIP())
 	if remoteIP == nil {
 		return ""
@@ -1182,7 +1200,7 @@ func (c *Context) Render(code int, r render.Render) {
 	}
 
 	if err := r.Render(c.Writer); err != nil {
-		// 将error推入c.Errors
+// 将error推入c.Errors
 		_ = c.Error(err)
 		c.Abort()
 	}
@@ -1258,7 +1276,7 @@ func (c *Context) JSON(code int, obj any) {
 // "tag":  "<br>",
 // }
 // 输出 : {"lang":"GO\u8bed\u8a00","tag":"\u003cbr\u003e"}
-// c.AsciiJSON(http.StatusOK, data)
+// c.AsciiJSON(http.StatusOK, data) 
 
 // ff:输出JSON并按ASCII
 // obj:结构
@@ -1306,10 +1324,13 @@ func (c *Context) TOML(code int, obj any) {
 }
 
 // ProtoBuf将给定的结构体作为ProtoBuf序列化到响应体中
+// Protobuf是Protocol Buffers的简称，
+// 它是Google公司开发的一种数据描述语言，是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化 。
+// 它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式
 
-// ff:
-// obj:
-// code:
+// ff:输出ProtoBuf
+// obj:结构
+// code:状态码
 func (c *Context) ProtoBuf(code int, obj any) {
 	c.Render(code, render.ProtoBuf{Data: obj})
 }
@@ -1491,7 +1512,7 @@ func (c *Context) Negotiate(code int, config Negotiate) {
 
 	default:
 		c.AbortWithError(http.StatusNotAcceptable, errors.New("the accepted formats are not offered by the server")) // nolint: errcheck
-		// 翻译：// 不进行errcheck检查
+// 翻译：// 不进行errcheck检查
 	}
 }
 
@@ -1510,7 +1531,7 @@ func (c *Context) NegotiateFormat(offered ...string) string {
 	}
 	for _, accepted := range c.Accepted {
 		for _, offer := range offered {
-			// 根据RFC 2616和RFC 2396，头中不允许使用非ascii字符，因此我们可以迭代字符串，而不将其转换为[]rune
+// 根据RFC 2616和RFC 2396，头中不允许使用非ascii字符，因此我们可以迭代字符串，而不将其转换为[]rune
 			i := 0
 			for ; i < len(accepted) && i < len(offer); i++ {
 				if accepted[i] == '*' || offer[i] == '*' {
