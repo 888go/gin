@@ -13,7 +13,7 @@ require (
 	github.com/gin-gonic/autotls v1.0.0
 	github.com/gin-gonic/examples v0.0.0-20240225020420-eab1fd895e10
 	github.com/gin-gonic/examples/grpc/example1 v0.0.0-20240225020420-eab1fd895e10
-	github.com/go-playground/validator/v10 v10.18.0
+	github.com/go-playground/validator/v10 v10.19.0
 	github.com/goccy/go-json v0.10.2
 	github.com/gomodule/redigo v1.9.2
 	github.com/google/uuid v1.6.0
