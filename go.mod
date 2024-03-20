@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
-	github.com/bytedance/sonic v1.11.0
+	github.com/bytedance/sonic v1.11.3
 	github.com/casbin/casbin/v2 v2.84.1
 	github.com/dustin/go-broadcast v0.0.0-20211018055107-71439988bd91
 	github.com/fatih/color v1.16.0
