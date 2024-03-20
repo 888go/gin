@@ -46,4 +46,7 @@
     <tree path="/routes_test.go" title="测试文件"/>
     <tree path="/tree_test.go" title="测试文件"/>
     <tree path="/utils_test.go" title="测试文件"/>
+    <tree path="/demo/PostFormMap" title="映射查询字符串或表单参数"/>
+    <tree path="/demo/ListenAndServe" title="自定义 HTTP 配置"/>
+    <tree path="/demo/LoggerWithFormatter" title="自定义日志文件"/>
 </trees>

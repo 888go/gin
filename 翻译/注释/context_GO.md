@@ -839,6 +839,8 @@
 // 它使用 JSON 或 XML 作为 JSON 输入，将请求的正文解析为 JSON if Content-Type == “application/json”。
 // 它将json有效负载解码为指定为指针的结构
 // 与c.Bind()类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
+//
+// c.ShouldBind***方法不能多次被调用, 如果绑定类型为" JSON, XML, MsgPack, ProtoBuf", 第一次绑定之后 c.Request.Body会设置成EOF, 如果需要多次绑定, 可以使用c.ShouldBindBodyWith
 # <翻译结束>
 
 
@@ -849,6 +851,8 @@
 # <翻译开始>
 // ShouldBindJSON是c.ShouldBindWith(obj, binding.JSON)的快捷方式
 // 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
+//
+// c.ShouldBind***方法不能多次被调用, 如果绑定类型为" JSON, XML, MsgPack, ProtoBuf", 第一次绑定之后 c.Request.Body会设置成EOF, 如果需要多次绑定, 可以使用c.ShouldBindBodyWith
 # <翻译结束>
 
 
@@ -859,6 +863,8 @@
 # <翻译开始>
 // ShouldBindXML是c.ShouldBindWith(obj, binding.XML)的快捷方式
 // 与c.Bind***()方法类似，但此方法不会将响应状态码设置为400，也不会在输入无效时中止
+//
+// c.ShouldBind***方法不能多次被调用, 如果绑定类型为" JSON, XML, MsgPack, ProtoBuf", 第一次绑定之后 c.Request.Body会设置成EOF, 如果需要多次绑定, 可以使用c.ShouldBindBodyWith
 # <翻译结束>
 
 

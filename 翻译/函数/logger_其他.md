@@ -10,14 +10,34 @@
 # cf= 重复,用于重命名多次,如: 一个文档内有2个"One(result interface{}) error"需要重命名.
 #     但是要注意,多个新名称要保持一致. 如:"X取一条(result interface{})"
 # zz= 正则表达式,用于结构名称替换或者复杂替换
-#     如待替换: type authPair struct { //zz:^type *authPair处理函数
+#     如待替换: type authPair struct { //zz:^type *authPair
 
-[func DisableConsoleColor() {]
-ff=关闭控制台颜色
+[TimeStamp time.Time]
+hs=响应时间
 
-[func ForceConsoleColor() {]
-ff=开启控制台颜色
+[StatusCode int]
+hs=状态码
 
-[func LoggerWithFormatter(f LogFormatter) HandlerFunc {]
-ff=中间件函数_自定义日志格式
-f=格式化函数
+[Latency time.Duration]
+hs=时长
+
+[ClientIP string]
+hs=客户端IP
+
+[Method string]
+hs=HTTP方法
+
+[Path string]
+hs=请求路径
+
+[ErrorMessage string]
+hs=错误信息
+
+[isTerm bool]
+hs=是否输出到终端
+
+[BodySize int]
+hs=响应体大小
+
+[Keys map#左中括号#string#右中括号#any]
+hs=上下文设置值map

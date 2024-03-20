@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"os"
 	"time"
-	
+
 	"github.com/mattn/go-isatty"
 )
 
@@ -37,17 +37,17 @@ var consoleColorMode = autoColor
 
 // LoggerConfig定义了Logger中间件的配置
 type LoggerConfig struct {
-// 可选的
-// 默认值为gin.defaultLogFormatter
+	// 可选的
+	// 默认值为gin.defaultLogFormatter
 	Formatter LogFormatter
 
-// Output是写入日志的写入器
-// 可选的
-// 默认值为gin. defaultwwriter
+	// Output是写入日志的写入器
+	// 可选的
+	// 默认值为gin. defaultwwriter
 	Output io.Writer
 
-// skipppaths是一个url路径数组，不写入日志
-// 可选的
+	// skipppaths是一个url路径数组，不写入日志
+	// 可选的
 	SkipPaths []string
 }
 
@@ -58,26 +58,26 @@ type LogFormatter func(params LogFormatterParams) string
 type LogFormatterParams struct {
 	Request *http.Request
 
-// TimeStamp显示服务器返回响应后的时间
-	TimeStamp time.Time
-// StatusCode是HTTP响应码
-	StatusCode int
-// 延迟是服务器处理某个请求所需的时间
-	Latency time.Duration
-// ClientIP等于Context的ClientIP方法
-	ClientIP string
-// 方法是给定给请求的HTTP方法
-	Method string
-// Path是客户端请求的路径
-	Path string
-// 如果在处理请求时发生错误，则设置ErrorMessage
-	ErrorMessage string
-// isTerm显示gin的输出描述符是否指向终端
-	isTerm bool
-// BodySize是响应体的大小
-	BodySize int
-// 键是在请求的上下文中设置的键
-	Keys map[string]any
+	// TimeStamp显示服务器返回响应后的时间
+	TimeStamp time.Time //hs:响应时间
+	// StatusCode是HTTP响应码
+	StatusCode int //hs:状态码
+	// 延迟是服务器处理某个请求所需的时间
+	Latency time.Duration //hs:时长
+	// ClientIP等于Context的ClientIP方法
+	ClientIP string //hs:客户端IP
+	// 方法是给定给请求的HTTP方法
+	Method string //hs:HTTP方法
+	// Path是客户端请求的路径
+	Path string //hs:请求路径
+	// 如果在处理请求时发生错误，则设置ErrorMessage
+	ErrorMessage string //hs:错误信息
+	// isTerm显示gin的输出描述符是否指向终端
+	isTerm bool //hs:是否输出到终端
+	// BodySize是响应体的大小
+	BodySize int //hs:响应体大小
+	// 键是在请求的上下文中设置的键
+	Keys map[string]any //hs:上下文设置值map
 }
 
 // StatusCodeColor是用于将http状态码适当地记录到终端的ANSI颜色
@@ -198,7 +198,7 @@ func ErrorLoggerT(typ ErrorType) HandlerFunc {
 	}
 }
 
-// Logger实例化一个Logger中间件，它将把日志写入gin. defaultwwriter
+// Logger实例化一个Logger中间件，它将把日志写入gin.defaultwwriter
 // 缺省为gin
 // defaultwwriter = os.Stdout
 
@@ -209,8 +209,8 @@ func Logger() HandlerFunc {
 
 // LoggerWithFormatter实例:一个具有指定日志格式功能的Logger中间件
 
-// ff:
-// f:
+// ff:中间件函数_自定义日志格式
+// f:格式化函数
 func LoggerWithFormatter(f LogFormatter) HandlerFunc {
 	return LoggerWithConfig(LoggerConfig{
 		Formatter: f,
@@ -266,15 +266,15 @@ func LoggerWithConfig(conf LoggerConfig) HandlerFunc {
 	}
 
 	return func(c *Context) {
-// 启动定时器
+		// 启动定时器
 		start := time.Now()
 		path := c.Request.URL.Path
 		raw := c.Request.URL.RawQuery
 
-// 处理请求
+		// 处理请求
 		c.Next()
 
-// 仅当路径未被跳过时记录日志
+		// 仅当路径未被跳过时记录日志
 		if _, ok := skip[path]; !ok {
 			param := LogFormatterParams{
 				Request: c.Request,
@@ -282,7 +282,7 @@ func LoggerWithConfig(conf LoggerConfig) HandlerFunc {
 				Keys:    c.Keys,
 			}
 
-// 停止计时器
+			// 停止计时器
 			param.TimeStamp = time.Now()
 			param.Latency = param.TimeStamp.Sub(start)
 

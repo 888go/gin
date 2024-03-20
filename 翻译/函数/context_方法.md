@@ -206,7 +206,7 @@ obj=结构指针
 ff=取客户端ip
 
 [func (c *Context) RemoteIP() string {]
-ff=取协议头ip
+ff=取客户端ip并按协议头
 
 [func (c *Context) ContentType() string {]
 ff=取协议头ContentType
@@ -385,3 +385,4 @@ code=状态码
 [func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error) {]
 err=错误
 obj=结构指针
+ff=取参数到指针并按类型且缓存
