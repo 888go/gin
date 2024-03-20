@@ -29,7 +29,7 @@ require (
 	github.com/robfig/go-cache v0.0.0-20130306151617-9fc39e0dbf62
 	github.com/rollbar/rollbar-go v1.4.5
 	github.com/rs/zerolog v1.32.0
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 	github.com/ugorji/go/codec v1.2.12
 	go.uber.org/ratelimit v0.3.1
 	go.uber.org/zap v1.27.0
