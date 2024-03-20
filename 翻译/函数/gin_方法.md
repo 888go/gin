@@ -62,3 +62,6 @@ middleware=处理函数
 [func (engine *Engine) SecureJsonPrefix(prefix string) *Engine {]
 ff=设置Json防劫持前缀
 prefix=防劫持前缀
+
+[func (engine *Engine) Handler() http.Handler {]
+ff=取主处理程序
