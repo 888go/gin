@@ -34,6 +34,11 @@ func mapForm(ptr any, form map[string][]string) error {
 	return mapFormByTag(ptr, form, "form")
 }
 
+
+// ff:
+// tag:
+// form:
+// ptr:
 func MapFormWithTag(ptr any, form map[string][]string, tag string) error {
 	return mapFormByTag(ptr, form, tag)
 }
@@ -69,6 +74,14 @@ type formSource map[string][]string
 var _ setter = formSource(nil)
 
 // TrySet 尝试通过请求的表单源（如 map[string][]string 类型）设置一个值
+
+// ff:
+// err:
+// isSet:
+// opt:
+// tagValue:
+// field:
+// value:
 func (form formSource) TrySet(value reflect.Value, field reflect.StructField, tagValue string, opt setOptions) (isSet bool, err error) {
 	return setByForm(value, field, form, tagValue, opt)
 }

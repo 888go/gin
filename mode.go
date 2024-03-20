@@ -52,6 +52,9 @@ func init() {
 }
 
 // SetMode 根据输入的字符串设置 gin 模式。
+
+// ff:
+// value:
 func SetMode(value string) {
 	if value == "" {
 		if flag.Lookup("test.v") != nil {
@@ -76,23 +79,31 @@ func SetMode(value string) {
 }
 
 // DisableBindValidation 关闭默认的验证器。
+
+// ff:
 func DisableBindValidation() {
 	binding.Validator = nil
 }
 
 // EnableJsonDecoderUseNumber 将参数设置为 true 以启用 binding.EnableDecoderUseNumber，
 // 这样就会在 JSON 解码器实例上调用 UseNumber 方法。
+
+// ff:
 func EnableJsonDecoderUseNumber() {
 	binding.EnableDecoderUseNumber = true
 }
 
 // EnableJsonDecoderDisallowUnknownFields 将 binding.EnableDecoderDisallowUnknownFields 设为 true，
 // 以便在 JSON 解码器实例上调用 DisallowUnknownFields 方法。
+
+// ff:
 func EnableJsonDecoderDisallowUnknownFields() {
 	binding.EnableDecoderDisallowUnknownFields = true
 }
 
 // Mode 返回当前 gin 模式。
+
+// ff:
 func Mode() string {
 	return modeName
 }

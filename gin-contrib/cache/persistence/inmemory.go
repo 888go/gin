@@ -13,11 +13,18 @@ type InMemoryStore struct {
 }
 
 // NewInMemoryStore 返回一个 InMemoryStore
+
+// ff:
+// defaultExpiration:
 func NewInMemoryStore(defaultExpiration time.Duration) *InMemoryStore {
 	return &InMemoryStore{*cache.New(defaultExpiration, time.Minute)}
 }
 
 // Get（参见 CacheStore 接口）
+
+// ff:
+// value:
+// key:
 func (c *InMemoryStore) Get(key string, value interface{}) error {
 	val, found := c.Cache.Get(key)
 	if !found {
@@ -33,6 +40,11 @@ func (c *InMemoryStore) Get(key string, value interface{}) error {
 }
 
 // Set（参见 CacheStore 接口）
+
+// ff:
+// expires:
+// value:
+// key:
 func (c *InMemoryStore) Set(key string, value interface{}, expires time.Duration) error {
 	// 注释：go-cache 能够识别 DEFAULT 和 FOREVER 的值
 	c.Cache.Set(key, value, expires)
@@ -40,6 +52,11 @@ func (c *InMemoryStore) Set(key string, value interface{}, expires time.Duration
 }
 
 // Add （参见 CacheStore 接口）
+
+// ff:
+// expires:
+// value:
+// key:
 func (c *InMemoryStore) Add(key string, value interface{}, expires time.Duration) error {
 	err := c.Cache.Add(key, value, expires)
 	if err == cache.ErrKeyExists {
@@ -49,6 +66,11 @@ func (c *InMemoryStore) Add(key string, value interface{}, expires time.Duration
 }
 
 // Replace（参见 CacheStore 接口）
+
+// ff:
+// expires:
+// value:
+// key:
 func (c *InMemoryStore) Replace(key string, value interface{}, expires time.Duration) error {
 	if err := c.Cache.Replace(key, value, expires); err != nil {
 		return ErrNotStored
@@ -57,6 +79,9 @@ func (c *InMemoryStore) Replace(key string, value interface{}, expires time.Dura
 }
 
 // Delete（参考 CacheStore 接口）
+
+// ff:
+// key:
 func (c *InMemoryStore) Delete(key string) error {
 	if found := c.Cache.Delete(key); !found {
 		return ErrCacheMiss
@@ -65,6 +90,10 @@ func (c *InMemoryStore) Delete(key string) error {
 }
 
 // 自增（参见 CacheStore 接口）
+
+// ff:
+// n:
+// key:
 func (c *InMemoryStore) Increment(key string, n uint64) (uint64, error) {
 	newValue, err := c.Cache.Increment(key, n)
 	if err == cache.ErrCacheMiss {
@@ -74,6 +103,10 @@ func (c *InMemoryStore) Increment(key string, n uint64) (uint64, error) {
 }
 
 // 减量（参考 CacheStore 接口）
+
+// ff:
+// n:
+// key:
 func (c *InMemoryStore) Decrement(key string, n uint64) (uint64, error) {
 	newValue, err := c.Cache.Decrement(key, n)
 	if err == cache.ErrCacheMiss {
@@ -83,6 +116,8 @@ func (c *InMemoryStore) Decrement(key string, n uint64) (uint64, error) {
 }
 
 // Flush（参考 CacheStore 接口）
+
+// ff:
 func (c *InMemoryStore) Flush() error {
 	c.Cache.Flush()
 	return nil

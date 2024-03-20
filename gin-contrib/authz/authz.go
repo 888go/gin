@@ -12,6 +12,9 @@ import (
 )
 
 // NewAuthorizer 返回一个鉴权器，使用 Casbin 执行器作为输入参数
+
+// ff:
+// e:
 func NewAuthorizer(e *casbin.Enforcer) gin.HandlerFunc {
 	a := &BasicAuthorizer{enforcer: e}
 
@@ -29,6 +32,9 @@ type BasicAuthorizer struct {
 
 // GetUserName 从请求中获取用户名。
 // 当前仅支持HTTP基本认证。
+
+// ff:
+// r:
 func (a *BasicAuthorizer) GetUserName(r *http.Request) string {
 	username, _, _ := r.BasicAuth()
 	return username
@@ -36,6 +42,9 @@ func (a *BasicAuthorizer) GetUserName(r *http.Request) string {
 
 // CheckPermission 检查请求中的用户/方法/路径组合。
 // 返回 true（权限授予）或 false（权限禁止）
+
+// ff:
+// r:
 func (a *BasicAuthorizer) CheckPermission(r *http.Request) bool {
 	user := a.GetUserName(r)
 	method := r.Method
@@ -50,6 +59,9 @@ func (a *BasicAuthorizer) CheckPermission(r *http.Request) bool {
 }
 
 // RequirePermission 返回 403 Forbidden 给客户端
+
+// ff:
+// c:
 func (a *BasicAuthorizer) RequirePermission(c *gin.Context) {
 	c.AbortWithStatus(http.StatusForbidden)
 }

@@ -53,16 +53,26 @@ var (
 )
 
 // Render (JSON) 使用自定义的ContentType写入数据。
+
+// ff:
+// w:
 func (r JSON) Render(w http.ResponseWriter) error {
 	return WriteJSON(w, r.Data)
 }
 
 // WriteContentType (JSON) 写入 JSON ContentType。
+
+// ff:
+// w:
 func (r JSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
 // WriteJSON 将给定的接口对象序列化，并使用自定义 ContentType 进行写入。
+
+// ff:
+// obj:
+// w:
 func WriteJSON(w http.ResponseWriter, obj any) error {
 	writeContentType(w, jsonContentType)
 	jsonBytes, err := json.Marshal(obj)
@@ -74,6 +84,9 @@ func WriteJSON(w http.ResponseWriter, obj any) error {
 }
 
 // Render (IndentedJSON) 将给定的接口对象进行序列化，并以自定义 ContentType 进行写入。
+
+// ff:
+// w:
 func (r IndentedJSON) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	jsonBytes, err := json.MarshalIndent(r.Data, "", "    ")
@@ -85,11 +98,17 @@ func (r IndentedJSON) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (IndentedJSON) 写入 JSON ContentType。
+
+// ff:
+// w:
 func (r IndentedJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
 // Render (SecureJSON) 将给定的接口对象进行序列化，并使用自定义的 ContentType 进行写入。
+
+// ff:
+// w:
 func (r SecureJSON) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	jsonBytes, err := json.Marshal(r.Data)
@@ -108,11 +127,18 @@ func (r SecureJSON) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (SecureJSON) 写入 JSON ContentType。
+
+// ff:
+// w:
 func (r SecureJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
 // Render (JsonpJSON) 将给定的接口对象进行序列化，并使用自定义的ContentType将其与回调函数一起写入。
+
+// ff:
+// err:
+// w:
 func (r JsonpJSON) Render(w http.ResponseWriter) (err error) {
 	r.WriteContentType(w)
 	ret, err := json.Marshal(r.Data)
@@ -146,11 +172,18 @@ func (r JsonpJSON) Render(w http.ResponseWriter) (err error) {
 }
 
 // WriteContentType (JsonpJSON) 写入 Javascript 的 ContentType。
+
+// ff:
+// w:
 func (r JsonpJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonpContentType)
 }
 
 // Render (AsciiJSON) 将给定的接口对象进行序列化，并以自定义的 ContentType 进行写入。
+
+// ff:
+// err:
+// w:
 func (r AsciiJSON) Render(w http.ResponseWriter) (err error) {
 	r.WriteContentType(w)
 	ret, err := json.Marshal(r.Data)
@@ -172,11 +205,17 @@ func (r AsciiJSON) Render(w http.ResponseWriter) (err error) {
 }
 
 // WriteContentType (AsciiJSON) 写入 JSON ContentType。
+
+// ff:
+// w:
 func (r AsciiJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonASCIIContentType)
 }
 
 // Render (PureJSON) 设置自定义的ContentType，并对给定的接口对象进行编码。
+
+// ff:
+// w:
 func (r PureJSON) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	encoder := json.NewEncoder(w)
@@ -185,6 +224,9 @@ func (r PureJSON) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (PureJSON) 写入自定义 ContentType。
+
+// ff:
+// w:
 func (r PureJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }

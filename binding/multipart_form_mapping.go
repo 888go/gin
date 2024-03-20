@@ -26,6 +26,12 @@ var (
 )
 
 // TrySet 尝试通过包含表单文件的多部分请求设置值
+
+// ff:
+// opt:
+// key:
+// field:
+// value:
 func (r *multipartRequest) TrySet(value reflect.Value, field reflect.StructField, key string, opt setOptions) (bool, error) {
 	if files := r.MultipartForm.File[key]; len(files) != 0 {
 		return setByMultipartFormFile(value, field, files)

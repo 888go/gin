@@ -62,6 +62,8 @@ type Config struct {
 //   ContentSecurityPolicy: "default-src 'self'" // 设置内容安全策略（CSP），默认源只能为自身站点
 //   SSLProxyHeaders:       map[string]string{"X-Forwarded-Proto": "https"}, // 当通过代理时，将 X-Forwarded-Proto 头设置为 https，确保 SSL 重定向正确执行
 // ```
+
+// ff:
 func DefaultConfig() Config {
 	return Config{
 		SSLRedirect:           true,
@@ -80,6 +82,9 @@ func DefaultConfig() Config {
 // New 函数使用指定的配置创建一个安全中间件实例。
 // 示例用法：router.Use(secure.New(...))
 // 其中，router 代表你的应用路由对象，secure.New(...) 用于生成并初始化安全中间件。
+
+// ff:
+// config:
 func New(config Config) gin.HandlerFunc {
 	policy := newPolicy(config)
 	return func(c *gin.Context) {

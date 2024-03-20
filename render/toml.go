@@ -18,6 +18,9 @@ type TOML struct {
 var TOMLContentType = []string{"application/toml; charset=utf-8"}
 
 // Render (TOML) 将给定的接口对象进行序列化，并使用自定义 ContentType 写入数据。
+
+// ff:
+// w:
 func (r TOML) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 
@@ -31,6 +34,9 @@ func (r TOML) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (TOML) 为响应写入 TOML ContentType。
+
+// ff:
+// w:
 func (r TOML) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, TOMLContentType)
 }

@@ -11,6 +11,10 @@ const algoHmacSha512 = "hmac-sha512"
 type HmacSha512 struct{}
 
 // Sign 返回使用秘密字符串对输入msg进行签名的结果
+
+// ff:
+// secret:
+// msg:
 func (h *HmacSha512) Sign(msg string, secret string) ([]byte, error) {
 	mac := hmac.New(sha512.New, []byte(secret))
 	if _, err := mac.Write([]byte(msg)); err != nil {
@@ -20,6 +24,8 @@ func (h *HmacSha512) Sign(msg string, secret string) ([]byte, error) {
 }
 
 // Name 返回算法的名称
+
+// ff:
 func (h *HmacSha512) Name() string {
 	return algoHmacSha512
 }

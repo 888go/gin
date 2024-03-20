@@ -14,10 +14,18 @@ type binaryFileSystem struct {
 	fs http.FileSystem
 }
 
+
+// ff:
+// http.File:
+// name:
 func (b *binaryFileSystem) Open(name string) (http.File, error) {
 	return b.fs.Open(name)
 }
 
+
+// ff:
+// filepath:
+// prefix:
 func (b *binaryFileSystem) Exists(prefix string, filepath string) bool {
 	if p := strings.TrimPrefix(filepath, prefix); len(p) < len(filepath) {
 		if _, err := b.fs.Open(p); err != nil {
@@ -28,6 +36,9 @@ func (b *binaryFileSystem) Exists(prefix string, filepath string) bool {
 	return false
 }
 
+
+// ff:
+// root:
 func BinaryFileSystem(root string) *binaryFileSystem {
 	fs := &assetfs.AssetFS{Asset, AssetDir, AssetInfo, root}
 	return &binaryFileSystem{

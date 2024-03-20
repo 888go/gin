@@ -11,6 +11,9 @@ import (
 )
 
 // StringToBytes 将字符串转换为字节切片，且无需进行内存分配。
+
+// ff:
+// s:
 func StringToBytes(s string) []byte {
 	return *(*[]byte)(unsafe.Pointer(
 		&struct {
@@ -21,6 +24,9 @@ func StringToBytes(s string) []byte {
 }
 
 // BytesToString 将字节切片转换为字符串，无需进行内存分配。
+
+// ff:
+// b:
 func BytesToString(b []byte) string {
 	return *(*string)(unsafe.Pointer(&b))
 }

@@ -51,6 +51,8 @@ type HandlerFunc func(*Context)
 type HandlersChain []HandlerFunc
 
 // Last 返回链中的最后一个处理器。即，最后一个处理器是主处理器。
+
+// ff:
 func (c HandlersChain) Last() HandlerFunc {
 	if length := len(c); length > 0 {
 		return c[length-1]
@@ -108,7 +110,7 @@ type Engine struct {
 // 废弃: 请改用 `TrustedPlatform`，并设置其值为 `gin.PlatformGoogleAppEngine`
 // #726 #755 如果启用，将会信任以 'X-AppEngine...' 开头的一些头部信息，
 // 以便更好地与该 PaaS（平台即服务）进行集成。
-	AppEngine bool
+	AppEngine bool //hs:AppEngine弃用     
 
 	// 如果启用UseRawPath，将使用url.RawPath来查找参数。
 	UseRawPath bool
@@ -166,6 +168,8 @@ var _ IRouter = (*Engine)(nil)
 // - ForwardedByClientIP:    true （通过客户端 IP 转发请求头）
 // - UseRawPath:             false （不使用原始路径，即不做 URL 解码）
 // - UnescapePathValues:     true （对路径中的参数值进行解码）
+
+// ff:创建
 func New() *Engine {
 	debugPrintWARNINGNew()
 	engine := &Engine{
@@ -199,6 +203,8 @@ func New() *Engine {
 }
 
 // Default 返回一个已附加了 Logger 和 Recovery 中间件的 Engine 实例。
+
+// ff:创建默认对象
 func Default() *Engine {
 	debugPrintWARNINGDefault()
 	engine := New()
@@ -206,6 +212,8 @@ func Default() *Engine {
 	return engine
 }
 
+
+// ff:
 func (engine *Engine) Handler() http.Handler {
 	if !engine.UseH2C {
 		return engine
@@ -222,18 +230,28 @@ func (engine *Engine) allocateContext(maxParams uint16) *Context {
 }
 
 // Delims 设置模板左右分隔符，并返回一个 Engine 实例。
+
+// ff:设置模板分隔符
+// right:右边
+// left:左边
 func (engine *Engine) Delims(left, right string) *Engine {
 	engine.delims = render.Delims{Left: left, Right: right}
 	return engine
 }
 
 // SecureJsonPrefix 设置在 Context.SecureJSON 中使用的 secureJSONPrefix。
+
+// ff:设置Json防劫持前缀
+// prefix:防劫持前缀
 func (engine *Engine) SecureJsonPrefix(prefix string) *Engine {
 	engine.secureJSONPrefix = prefix
 	return engine
 }
 
 // LoadHTMLGlob 通过 glob 模式加载 HTML 文件，并将结果与 HTML 渲染器关联。
+
+// ff:加载HTML模板目录
+// pattern:模板目录
 func (engine *Engine) LoadHTMLGlob(pattern string) {
 	left := engine.delims.Left
 	right := engine.delims.Right
@@ -250,6 +268,9 @@ func (engine *Engine) LoadHTMLGlob(pattern string) {
 
 // LoadHTMLFiles 加载一组 HTML 文件
 // 并将结果与 HTML 渲染器关联。
+
+// ff:加载HTML模板文件
+// files:模板文件s
 func (engine *Engine) LoadHTMLFiles(files ...string) {
 	if IsDebugging() {
 		engine.HTMLRender = render.HTMLDebug{Files: files, FuncMap: engine.FuncMap, Delims: engine.delims}
@@ -261,6 +282,9 @@ func (engine *Engine) LoadHTMLFiles(files ...string) {
 }
 
 // SetHTMLTemplate 将一个模板与HTML渲染器关联。
+
+// ff:设置Template模板
+// templ:Template模板
 func (engine *Engine) SetHTMLTemplate(templ *template.Template) {
 	if len(engine.trees) > 0 {
 		debugPrintWARNINGSetHTMLTemplate()
@@ -270,17 +294,26 @@ func (engine *Engine) SetHTMLTemplate(templ *template.Template) {
 }
 
 // SetFuncMap 用于设置用于 template.FuncMap 的 FuncMap。
+
+// ff:设置Template模板函数
+// funcMap:函数Map
 func (engine *Engine) SetFuncMap(funcMap template.FuncMap) {
 	engine.FuncMap = funcMap
 }
 
 // NoRoute 添加处理函数，用于未找到路由的情况（NoRoute）。默认情况下返回404状态码。
+
+// ff:
+// handlers:
 func (engine *Engine) NoRoute(handlers ...HandlerFunc) {
 	engine.noRoute = handlers
 	engine.rebuild404Handlers()
 }
 
 // NoMethod 设置在 Engine.HandleMethodNotAllowed = true 时调用的处理器。
+
+// ff:
+// handlers:
 func (engine *Engine) NoMethod(handlers ...HandlerFunc) {
 	engine.noMethod = handlers
 	engine.rebuild405Handlers()
@@ -289,6 +322,9 @@ func (engine *Engine) NoMethod(handlers ...HandlerFunc) {
 // Use 方法将一个全局中间件附加到路由。也就是说，通过Use()方法附加的中间件将会
 // 被包含在每一个请求的处理器链中。即便是404、405错误、静态文件等请求...
 // 例如，这里适合放置日志记录器或错误管理中间件。
+
+// ff:中间件
+// middleware:处理函数
 func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {
 	engine.RouterGroup.Use(middleware...)
 	engine.rebuild404Handlers()
@@ -330,6 +366,9 @@ func (engine *Engine) addRoute(method, path string, handlers HandlersChain) {
 
 // Routes 返回已注册路由的切片，其中包括一些有用的信息，比如：
 // HTTP 方法、路径以及处理器名称。
+
+// ff:取路由数组
+// routes:路由s
 func (engine *Engine) Routes() (routes RoutesInfo) {
 	for _, tree := range engine.trees {
 		routes = iterate("", tree.method, routes, tree.root)
@@ -357,6 +396,10 @@ func iterate(path, method string, routes RoutesInfo, root *node) RoutesInfo {
 // Run 将路由器附加到 http.Server，并开始监听和处理 HTTP 请求。
 // 这是 http.ListenAndServe(addr, router) 的一个快捷方式。
 // 注意：除非发生错误，否则此方法将无限期地阻塞调用的 goroutine。
+
+// ff:监听
+// err:错误
+// addr:地址与端口
 func (engine *Engine) Run(addr ...string) (err error) {
 	defer func() { debugPrintError(err) }()
 
@@ -401,6 +444,9 @@ func (engine *Engine) prepareTrustedCIDRs() ([]*net.IPNet, error) {
 }
 
 // SetTrustedProxies 设置一个网络源列表（IPv4地址、IPv4 CIDR、IPv6地址或IPv6 CIDR），从这些源中信任请求头中包含的替代客户端IP。当`(*gin.Engine).ForwardedByClientIP`为`true`时生效。`TrustedProxies`特性默认启用，并且默认情况下信任所有代理。如果你想禁用此功能，使用Engine.SetTrustedProxies(nil)，那么Context.ClientIP()将直接返回远程地址。
+
+// ff:
+// trustedProxies:
 func (engine *Engine) SetTrustedProxies(trustedProxies []string) error {
 	engine.trustedProxies = trustedProxies
 	return engine.parseTrustedProxies()
@@ -469,6 +515,12 @@ func parseIP(ip string) net.IP {
 // RunTLS 将路由器附加到 http.Server，并开始监听和处理 HTTPS（安全）请求。
 // 这是 http.ListenAndServeTLS(addr, certFile, keyFile, router) 的快捷方式。
 // 注意：除非发生错误，否则此方法将无限期地阻塞调用的goroutine。
+
+// ff:监听TLS
+// err:错误
+// keyFile:key文件
+// certFile:cert文件
+// addr:地址与端口
 func (engine *Engine) RunTLS(addr, certFile, keyFile string) (err error) {
 	debugPrint("Listening and serving HTTPS on %s\n", addr)
 	defer func() { debugPrintError(err) }()
@@ -484,6 +536,10 @@ func (engine *Engine) RunTLS(addr, certFile, keyFile string) (err error) {
 
 // RunUnix将路由器连接到http.Server，并开始通过指定的UNIX套接字（即文件）监听和处理HTTP请求。
 // 注意：除非发生错误，否则此方法将无限期地阻塞调用的goroutine。
+
+// ff:
+// err:
+// file:
 func (engine *Engine) RunUnix(file string) (err error) {
 	debugPrint("Listening and serving HTTP on unix:/%s", file)
 	defer func() { debugPrintError(err) }()
@@ -506,6 +562,10 @@ func (engine *Engine) RunUnix(file string) (err error) {
 
 // RunFd 将路由器连接到 http.Server，并开始通过指定的文件描述符监听和处理 HTTP 请求。
 // 注意：除非发生错误，否则此方法将无限期地阻塞调用它的 goroutine。
+
+// ff:
+// err:
+// fd:
 func (engine *Engine) RunFd(fd int) (err error) {
 	debugPrint("Listening and serving HTTP on fd@%d", fd)
 	defer func() { debugPrintError(err) }()
@@ -526,6 +586,10 @@ func (engine *Engine) RunFd(fd int) (err error) {
 }
 
 // RunListener 将路由器附加到 http.Server，并开始通过指定的 net.Listener 监听和处理 HTTP 请求
+
+// ff:
+// err:
+// listener:
 func (engine *Engine) RunListener(listener net.Listener) (err error) {
 	debugPrint("Listening and serving HTTP on listener what's bind with address@%s", listener.Addr())
 	defer func() { debugPrintError(err) }()
@@ -540,6 +604,10 @@ func (engine *Engine) RunListener(listener net.Listener) (err error) {
 }
 
 // ServeHTTP 符合 http.Handler 接口。
+
+// ff:
+// req:
+// w:
 func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	c := engine.pool.Get().(*Context)
 	c.writermem.reset(w)
@@ -553,6 +621,9 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 // HandleContext 重新进入一个已重写的上下文。这可以通过将 c.Request.URL.Path 设置为新的目标来完成。
 // 免责声明：你可以通过循环自身来处理这个问题，但请明智地使用。
+
+// ff:
+// c:
 func (engine *Engine) HandleContext(c *Context) {
 	oldIndexValue := c.index
 	c.reset()

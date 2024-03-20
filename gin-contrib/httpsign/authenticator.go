@@ -32,6 +32,9 @@ type Option func(*Authenticator)
 
 // WithValidator 配置 Authenticator 以使用自定义验证器。
 // 默认的验证器基于时间和摘要。
+
+// ff:
+// validators:
 func WithValidator(validators ...validator.Validator) Option {
 	return func(a *Authenticator) {
 		a.validators = validators
@@ -40,6 +43,9 @@ func WithValidator(validators ...validator.Validator) Option {
 
 // WithRequiredHeaders 是一个包含所有必需HTTP头的列表，客户端必须在签名字符串中包含这些头信息，以便请求被认为是有效的。
 // 如果未提供，则创建的Authenticator实例将使用默认的defaultRequiredHeaders变量。
+
+// ff:
+// headers:
 func WithRequiredHeaders(headers []string) Option {
 	return func(a *Authenticator) {
 		a.headers = headers
@@ -47,6 +53,10 @@ func WithRequiredHeaders(headers []string) Option {
 }
 
 // NewAuthenticator 创建一个具有给定允许权限和所需头部及密钥的新 Authenticator 实例。
+
+// ff:
+// options:
+// secretKeys:
 func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 	a := &Authenticator{secrets: secretKeys}
 
@@ -69,6 +79,8 @@ func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 }
 
 // Authenticated 返回一个 gin 中间件，该中间件允许在参数中给定的权限。
+
+// ff:
 func (a *Authenticator) Authenticated() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		sigHeader, err := NewSignatureHeader(c.Request)

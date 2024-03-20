@@ -47,6 +47,10 @@ type HTML struct {
 var htmlContentType = []string{"text/html; charset=utf-8"}
 
 // Instance (HTMLProduction) 返回一个实现了Render接口的HTML实例。
+
+// ff:
+// data:
+// name:
 func (r HTMLProduction) Instance(name string, data any) Render {
 	return HTML{
 		Template: r.Template,
@@ -56,6 +60,10 @@ func (r HTMLProduction) Instance(name string, data any) Render {
 }
 
 // Instance (HTMLDebug) 返回一个实现了Render接口的HTML实例。
+
+// ff:
+// data:
+// name:
 func (r HTMLDebug) Instance(name string, data any) Render {
 	return HTML{
 		Template: r.loadTemplate(),
@@ -77,6 +85,9 @@ func (r HTMLDebug) loadTemplate() *template.Template {
 }
 
 // Render (HTML) 执行模板并使用自定义的 ContentType 将其结果写入响应中。
+
+// ff:
+// w:
 func (r HTML) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 
@@ -87,6 +98,9 @@ func (r HTML) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (HTML) 写入 HTML ContentType。
+
+// ff:
+// w:
 func (r HTML) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, htmlContentType)
 }

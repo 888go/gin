@@ -19,6 +19,9 @@ import (
 const BindKey = "_gin-gonic/gin/bindkey"
 
 // Bind 是一个辅助函数，用于给定的接口对象并返回 Gin 中间件。
+
+// ff:
+// val:
 func Bind(val any) HandlerFunc {
 	value := reflect.ValueOf(val)
 	if value.Kind() == reflect.Ptr {
@@ -37,6 +40,9 @@ func Bind(val any) HandlerFunc {
 }
 
 // WrapF 是一个用于包装 http.HandlerFunc 的辅助函数，并返回一个 Gin 中间件。
+
+// ff:
+// f:
 func WrapF(f http.HandlerFunc) HandlerFunc {
 	return func(c *Context) {
 		f(c.Writer, c.Request)
@@ -44,6 +50,9 @@ func WrapF(f http.HandlerFunc) HandlerFunc {
 }
 
 // WrapH 是一个辅助函数，用于封装 http.Handler，并返回一个 Gin 中间件。
+
+// ff:
+// h:
 func WrapH(h http.Handler) HandlerFunc {
 	return func(c *Context) {
 		h.ServeHTTP(c.Writer, c.Request)
@@ -54,6 +63,10 @@ func WrapH(h http.Handler) HandlerFunc {
 type H map[string]any
 
 // MarshalXML 允许类型 H 与 xml.Marshal 函数配合使用。
+
+// ff:
+// start:
+// e:
 func (h H) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	start.Name = xml.Name{
 		Space: "",

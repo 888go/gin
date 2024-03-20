@@ -17,6 +17,9 @@ type Redirect struct {
 }
 
 // Render (Redirect) 将HTTP请求重定向到新位置并写入重定向响应。
+
+// ff:
+// w:
 func (r Redirect) Render(w http.ResponseWriter) error {
 	if (r.Code < http.StatusMultipleChoices || r.Code > http.StatusPermanentRedirect) && r.Code != http.StatusCreated {
 		panic(fmt.Sprintf("Cannot redirect with status code %d", r.Code))
@@ -26,4 +29,7 @@ func (r Redirect) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (Redirect) 不要写入任何 ContentType。
+
+// ff:
+// http.ResponseWriter:
 func (r Redirect) WriteContentType(http.ResponseWriter) {}

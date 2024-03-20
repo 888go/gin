@@ -6,6 +6,8 @@ import (
 	"github.com/888go/gin"
 )
 
+
+// ff:
 func CookieTool() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Get cookie

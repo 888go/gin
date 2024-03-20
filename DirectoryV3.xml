@@ -53,4 +53,10 @@
     <tree path="/demo/param-in-path" title="路由参数"/>
     <tree path="/demo/Redirect" title="重定向"/>
     <tree path="/demo/Static" title="静态文件服务"/>
+    <tree path="/context.go" title="请求上下文"/>
+    <tree path="/debug.go" title="调试"/>
+    <tree path="/errors.go" title="错误"/>
+    <tree path="/recovery.go" title="绑定路由方法"/>
+    <tree path="/auth.go" title="中间件函数_简单认证" extension="" presentableText="" tooltipTitle="" icon="" textColor=""
+          backgroundColor=""/>
 </trees>

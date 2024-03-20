@@ -78,6 +78,9 @@ func main() {
 }
 
 // 初始化事件并开始处理请求
+
+// ff:
+// event:
 func NewServer() (event *Event) {
 	event = &Event{
 		Message:       make(chan string),
@@ -135,6 +138,8 @@ func (stream *Event) serveHTTP() gin.HandlerFunc {
 	}
 }
 
+
+// ff:
 func HeadersMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Content-Type", "text/event-stream")

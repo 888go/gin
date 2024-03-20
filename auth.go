@@ -9,7 +9,7 @@ import (
 	"encoding/base64"
 	"net/http"
 	"strconv"
-	
+
 	"github.com/888go/gin/internal/bytesconv"
 )
 
@@ -41,6 +41,10 @@ func (a authPairs) searchCredential(authValue string) (string, bool) {
 // BasicAuthForRealm 返回一个基础HTTP身份验证中间件。它接受两个参数：一个map[string]string，其中键是用户名，值是密码；以及一个realm（领域）名称。
 // 如果realm为空，则默认使用"Authorization Required"。
 // （参见http://tools.ietf.org/html/rfc2617#section-1.2）
+
+// ff:中间件函数_简单认证2
+// realm:
+// accounts:账号密码Map
 func BasicAuthForRealm(accounts Accounts, realm string) HandlerFunc {
 	if realm == "" {
 		realm = "Authorization Required"
@@ -57,14 +61,17 @@ func BasicAuthForRealm(accounts Accounts, realm string) HandlerFunc {
 			return
 		}
 
-// 已找到用户凭据，将用户的ID设置为当前上下文中的AuthUserKey键，稍后可以通过
-// c.MustGet(gin.AuthUserKey)读取用户的ID。
+		// 已找到用户凭据，将用户的ID设置为当前上下文中的AuthUserKey键，稍后可以通过
+		// c.MustGet(gin.AuthUserKey)读取用户的ID。
 		c.Set(AuthUserKey, user)
 	}
 }
 
 // BasicAuth 返回一个基础HTTP授权中间件。它接受一个map[string]string作为参数，
 // 其中键是用户名，值是密码。
+
+// ff:中间件函数_简单认证
+// accounts:账号密码Map
 func BasicAuth(accounts Accounts) HandlerFunc {
 	return BasicAuthForRealm(accounts, "")
 }

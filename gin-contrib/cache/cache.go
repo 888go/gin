@@ -30,6 +30,8 @@ type responseCache struct {
 }
 
 // RegisterResponseCacheGob 注册 responseCache 类型到 encoding/gob 包中
+
+// ff:
 func RegisterResponseCacheGob() {
 	gob.Register(responseCache{})
 }
@@ -46,6 +48,9 @@ type cachedWriter struct {
 var _ gin.ResponseWriter = &cachedWriter{}
 
 // CreateKey 为给定的字符串创建一个特定于包的密钥
+
+// ff:
+// u:
 func CreateKey(u string) string {
 	return urlEscape(PageCachePrefix, u)
 }
@@ -68,20 +73,30 @@ func newCachedWriter(store persistence.CacheStore, expire time.Duration, writer 
 	return &cachedWriter{writer, 0, false, store, expire, key}
 }
 
+
+// ff:
+// code:
 func (w *cachedWriter) WriteHeader(code int) {
 	w.status = code
 	w.written = true
 	w.ResponseWriter.WriteHeader(code)
 }
 
+
+// ff:
 func (w *cachedWriter) Status() int {
 	return w.ResponseWriter.Status()
 }
 
+
+// ff:
 func (w *cachedWriter) Written() bool {
 	return w.ResponseWriter.Written()
 }
 
+
+// ff:
+// data:
 func (w *cachedWriter) Write(data []byte) (int, error) {
 	ret, err := w.ResponseWriter.Write(data)
 	if err == nil {
@@ -107,6 +122,11 @@ func (w *cachedWriter) Write(data []byte) (int, error) {
 	return ret, err
 }
 
+
+// ff:
+// err:
+// n:
+// data:
 func (w *cachedWriter) WriteString(data string) (n int, err error) {
 	ret, err := w.ResponseWriter.WriteString(data)
 	//缓存状态码小于300的响应
@@ -123,6 +143,9 @@ func (w *cachedWriter) WriteString(data string) (n int, err error) {
 }
 
 // Cache Middleware
+
+// ff:
+// store:
 func Cache(store *persistence.CacheStore) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Set(CACHE_MIDDLEWARE_KEY, store)
@@ -130,6 +153,10 @@ func Cache(store *persistence.CacheStore) gin.HandlerFunc {
 	}
 }
 
+
+// ff:
+// expire:
+// store:
 func SiteCache(store persistence.CacheStore, expire time.Duration) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var cache responseCache
@@ -150,6 +177,11 @@ func SiteCache(store persistence.CacheStore, expire time.Duration) gin.HandlerFu
 }
 
 // CachePage Decorator
+
+// ff:
+// handle:
+// expire:
+// store:
 func CachePage(store persistence.CacheStore, expire time.Duration, handle gin.HandlerFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var cache responseCache
@@ -181,6 +213,11 @@ func CachePage(store persistence.CacheStore, expire time.Duration, handle gin.Ha
 }
 
 // CachePageWithoutQuery 添加忽略GET请求参数的能力。
+
+// ff:
+// handle:
+// expire:
+// store:
 func CachePageWithoutQuery(store persistence.CacheStore, expire time.Duration, handle gin.HandlerFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var cache responseCache
@@ -206,6 +243,11 @@ func CachePageWithoutQuery(store persistence.CacheStore, expire time.Duration, h
 }
 
 // CachePageAtomic 装饰器
+
+// ff:
+// handle:
+// expire:
+// store:
 func CachePageAtomic(store persistence.CacheStore, expire time.Duration, handle gin.HandlerFunc) gin.HandlerFunc {
 	var m sync.Mutex
 	p := CachePage(store, expire, handle)
@@ -216,6 +258,11 @@ func CachePageAtomic(store persistence.CacheStore, expire time.Duration, handle 
 	}
 }
 
+
+// ff:
+// handle:
+// expire:
+// store:
 func CachePageWithoutHeader(store persistence.CacheStore, expire time.Duration, handle gin.HandlerFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var cache responseCache

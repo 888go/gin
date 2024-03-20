@@ -43,6 +43,10 @@ type Event struct {
 	Data  interface{}
 }
 
+
+// ff:
+// event:
+// writer:
 func Encode(writer io.Writer, event Event) error {
 	w := checkWriter(writer)
 	writeId(w, event.Id)
@@ -91,11 +95,17 @@ func writeData(w stringWriter, data interface{}) error {
 	return nil
 }
 
+
+// ff:
+// w:
 func (r Event) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	return Encode(w, r)
 }
 
+
+// ff:
+// w:
 func (r Event) WriteContentType(w http.ResponseWriter) {
 	header := w.Header()
 	header["Content-Type"] = contentType

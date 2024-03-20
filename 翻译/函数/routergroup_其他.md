@@ -41,3 +41,15 @@ hs=绑定OPTIONS
 
 [HEAD(string, ...HandlerFunc) IRoutes]
 hs=绑定HEAD
+
+[StaticFile(string, string) IRoutes]
+hs=绑定静态单文件
+
+[StaticFileFS(string, string, http.FileSystem) IRoutes]
+hs=绑定静态单文件FS
+
+[Static(string, string) IRoutes]
+hs=绑定静态文件目录
+
+[StaticFS(string, http.FileSystem) IRoutes]
+hs=绑定静态文件目录FS

@@ -16,6 +16,8 @@ const ginSupportMinGoVer = 18
 
 // IsDebugging 返回一个布尔值，表示框架是否处于调试模式。
 // 若要关闭调试模式，请使用 SetMode(gin.ReleaseMode)。
+
+// ff:是否为调试模式
 func IsDebugging() bool {
 	return ginMode == debugCode
 }

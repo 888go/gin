@@ -250,7 +250,10 @@
 
 # <翻译开始>
 // StaticFS的功能类似于`Static()`，但是可以使用自定义的`http.FileSystem`。
+// 如: router.StaticFS("/more_static", http.Dir("my_file_system")) 
 // Gin默认使用: gin.Dir()
+//
+// 注意: StaticFS 比Static一个多了个功能，当目录下不存 index.html 文件，会直接列出该目录下的所有文件。
 # <翻译结束>
 
 

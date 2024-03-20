@@ -15,6 +15,11 @@ type RedisStore struct {
 
 // NewRedisCache 返回一个 RedisStore
 // 由于 redigo 目前还不支持分片/集群，因此 hostList 中目前只能包含一个主机地址
+
+// ff:
+// defaultExpiration:
+// password:
+// host:
 func NewRedisCache(host string, password string, defaultExpiration time.Duration) *RedisStore {
 	var pool = &redis.Pool{
 		MaxIdle:     5,
@@ -57,11 +62,20 @@ func NewRedisCache(host string, password string, defaultExpiration time.Duration
 
 // NewRedisCacheWithPool 使用提供的连接池返回一个 RedisStore
 // 在 redigo 支持分片/集群之前，hostList 中将只包含一个主机地址
+
+// ff:
+// defaultExpiration:
+// pool:
 func NewRedisCacheWithPool(pool *redis.Pool, defaultExpiration time.Duration) *RedisStore {
 	return &RedisStore{pool, defaultExpiration}
 }
 
 // Set（参见 CacheStore 接口）
+
+// ff:
+// expires:
+// value:
+// key:
 func (c *RedisStore) Set(key string, value interface{}, expires time.Duration) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -69,6 +83,11 @@ func (c *RedisStore) Set(key string, value interface{}, expires time.Duration) e
 }
 
 // Add （参见 CacheStore 接口）
+
+// ff:
+// expires:
+// value:
+// key:
 func (c *RedisStore) Add(key string, value interface{}, expires time.Duration) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -79,6 +98,11 @@ func (c *RedisStore) Add(key string, value interface{}, expires time.Duration) e
 }
 
 // Replace（参见 CacheStore 接口）
+
+// ff:
+// expires:
+// value:
+// key:
 func (c *RedisStore) Replace(key string, value interface{}, expires time.Duration) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -95,6 +119,10 @@ func (c *RedisStore) Replace(key string, value interface{}, expires time.Duratio
 }
 
 // Get（参见 CacheStore 接口）
+
+// ff:
+// ptrValue:
+// key:
 func (c *RedisStore) Get(key string, ptrValue interface{}) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -115,6 +143,9 @@ func exists(conn redis.Conn, key string) bool {
 }
 
 // Delete（参考 CacheStore 接口）
+
+// ff:
+// key:
 func (c *RedisStore) Delete(key string) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -126,6 +157,10 @@ func (c *RedisStore) Delete(key string) error {
 }
 
 // 自增（参见 CacheStore 接口）
+
+// ff:
+// delta:
+// key:
 func (c *RedisStore) Increment(key string, delta uint64) (uint64, error) {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -152,6 +187,12 @@ func (c *RedisStore) Increment(key string, delta uint64) (uint64, error) {
 }
 
 // 减量（参考 CacheStore 接口）
+
+// ff:
+// err:
+// newValue:
+// delta:
+// key:
 func (c *RedisStore) Decrement(key string, delta uint64) (newValue uint64, err error) {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -173,6 +214,8 @@ func (c *RedisStore) Decrement(key string, delta uint64) (newValue uint64, err e
 }
 
 // Flush（参考 CacheStore 接口）
+
+// ff:
 func (c *RedisStore) Flush() error {
 	conn := c.pool.Get()
 	defer conn.Close()

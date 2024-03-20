@@ -21,6 +21,11 @@ var (
 // NewSpan 返回gin.HandlerFunc（中间件），该函数会启动一个新的span并将其注入到请求上下文中。
 //
 // 它调用ctx.Next()来测量所有后续处理器的执行时间。
+
+// ff:
+// opts:
+// operationName:
+// tracer:
 func NewSpan(tracer opentracing.Tracer, operationName string, opts ...opentracing.StartSpanOption) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		span := tracer.StartSpan(operationName, opts...)
@@ -130,6 +135,10 @@ func SpanFromContext(tracer opentracing.Tracer, operationName string, abortOnErr
 // 当您想要跟踪链式请求（client->服务1->服务2）时，这可能很有用。在这种情况下，您需要保存请求头（ctx.Request.Header）并将其传递给下一级请求。
 //
 // 对于错误的行为由 abortOnErrors 选项决定。如果将其设置为 true，则会在出现错误时中止请求处理。
+
+// ff:
+// abortOnErrors:
+// tracer:
 func InjectToHeaders(tracer opentracing.Tracer, abortOnErrors bool) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var spanContext opentracing.SpanContext
@@ -148,6 +157,11 @@ func InjectToHeaders(tracer opentracing.Tracer, abortOnErrors bool) gin.HandlerF
 }
 
 // GetSpan 从上下文中提取跨度（span）。
+
+// ff:
+// exists:
+// span:
+// ctx:
 func GetSpan(ctx *gin.Context) (span opentracing.Span, exists bool) {
 	spanI, _ := ctx.Get(spanContextKey)
 	span, ok := spanI.(opentracing.Span)
@@ -156,6 +170,9 @@ func GetSpan(ctx *gin.Context) (span opentracing.Span, exists bool) {
 }
 
 // MustGetSpan 从上下文中提取 span（跨度）。如果未设置 span，则会触发panic。
+
+// ff:
+// ctx:
 func MustGetSpan(ctx *gin.Context) opentracing.Span {
 	return ctx.MustGet(spanContextKey).(opentracing.Span)
 }

@@ -18,6 +18,10 @@ func (protobufBinding) Name() string {
 	return "protobuf"
 }
 
+
+// ff:
+// obj:
+// req:
 func (b protobufBinding) Bind(req *http.Request, obj any) error {
 	buf, err := io.ReadAll(req.Body)
 	if err != nil {

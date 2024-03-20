@@ -51,6 +51,8 @@ type responseWriter struct {
 
 var _ ResponseWriter = (*responseWriter)(nil)
 
+
+// ff:
 func (w *responseWriter) Unwrap() http.ResponseWriter {
 	return w.ResponseWriter
 }
@@ -61,6 +63,9 @@ func (w *responseWriter) reset(writer http.ResponseWriter) {
 	w.status = defaultStatus
 }
 
+
+// ff:
+// code:
 func (w *responseWriter) WriteHeader(code int) {
 	if code > 0 && w.status != code {
 		if w.Written() {
@@ -71,6 +76,8 @@ func (w *responseWriter) WriteHeader(code int) {
 	}
 }
 
+
+// ff:
 func (w *responseWriter) WriteHeaderNow() {
 	if !w.Written() {
 		w.size = 0
@@ -78,6 +85,11 @@ func (w *responseWriter) WriteHeaderNow() {
 	}
 }
 
+
+// ff:
+// err:
+// n:
+// data:
 func (w *responseWriter) Write(data []byte) (n int, err error) {
 	w.WriteHeaderNow()
 	n, err = w.ResponseWriter.Write(data)
@@ -85,6 +97,11 @@ func (w *responseWriter) Write(data []byte) (n int, err error) {
 	return
 }
 
+
+// ff:
+// err:
+// n:
+// s:
 func (w *responseWriter) WriteString(s string) (n int, err error) {
 	w.WriteHeaderNow()
 	n, err = io.WriteString(w.ResponseWriter, s)
@@ -92,19 +109,29 @@ func (w *responseWriter) WriteString(s string) (n int, err error) {
 	return
 }
 
+
+// ff:
 func (w *responseWriter) Status() int {
 	return w.status
 }
 
+
+// ff:
 func (w *responseWriter) Size() int {
 	return w.size
 }
 
+
+// ff:
 func (w *responseWriter) Written() bool {
 	return w.size != noWritten
 }
 
 // Hijack 实现了 http.Hijacker 接口。
+
+// ff:
+// *bufio.ReadWriter:
+// net.Conn:
 func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	if w.size < 0 {
 		w.size = 0
@@ -113,16 +140,23 @@ func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 }
 
 // CloseNotify 实现了 http.CloseNotifier 接口。
+
+// ff:
 func (w *responseWriter) CloseNotify() <-chan bool {
 	return w.ResponseWriter.(http.CloseNotifier).CloseNotify()
 }
 
 // Flush 实现了 http.Flusher 接口。
+
+// ff:
 func (w *responseWriter) Flush() {
 	w.WriteHeaderNow()
 	w.ResponseWriter.(http.Flusher).Flush()
 }
 
+
+// ff:
+// pusher:
 func (w *responseWriter) Pusher() (pusher http.Pusher) {
 	if pusher, ok := w.ResponseWriter.(http.Pusher); ok {
 		return pusher

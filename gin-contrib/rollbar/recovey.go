@@ -12,6 +12,9 @@ import (
 )
 
 // Recovery中间件用于Rollbar错误监控
+
+// ff:
+// onlyCrashes:
 func Recovery(onlyCrashes bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {

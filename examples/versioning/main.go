@@ -36,18 +36,26 @@ func main() {
 	_ = router.Run(":8081")
 }
 
+
+// ff:
+// c:
 func AddV1User(c *gin.Context) {
 	// AddUser
 
 	c.JSON(http.StatusOK, "V1 User added")
 }
 
+
+// ff:
+// c:
 func AddV2User(c *gin.Context) {
 	// AddUser
 
 	c.JSON(http.StatusOK, "V2 User added")
 }
 
+
+// ff:
 func AuthMiddleWare() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 在这里，您可以添加您的认证方法以授权用户。

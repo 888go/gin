@@ -11,6 +11,10 @@ import (
 )
 
 // Recovery中间件用于Sentry崩溃报告
+
+// ff:
+// onlyCrashes:
+// client:
 func Recovery(client *raven.Client, onlyCrashes bool) gin.HandlerFunc {
 
 	return func(c *gin.Context) {

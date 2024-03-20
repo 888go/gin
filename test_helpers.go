@@ -9,6 +9,11 @@ import (
 )
 
 // CreateTestContext 返回一个用于测试的新鲜（即初始化的）引擎和上下文
+
+// ff:
+// r:
+// c:
+// w:
 func CreateTestContext(w http.ResponseWriter) (c *Context, r *Engine) {
 	r = New()
 	c = r.allocateContext(0)
@@ -18,6 +23,11 @@ func CreateTestContext(w http.ResponseWriter) (c *Context, r *Engine) {
 }
 
 // CreateTestContextOnly 根据引擎为测试目的返回一个新的上下文副本
+
+// ff:
+// c:
+// r:
+// w:
 func CreateTestContextOnly(w http.ResponseWriter, r *Engine) (c *Context) {
 	c = r.allocateContext(r.maxParams)
 	c.reset()

@@ -33,6 +33,12 @@ type headerSource map[string][]string
 
 var _ setter = headerSource(nil)
 
+
+// ff:
+// opt:
+// tagValue:
+// field:
+// value:
 func (hs headerSource) TrySet(value reflect.Value, field reflect.StructField, tagValue string, opt setOptions) (bool, error) {
 	return setByForm(value, field, hs, textproto.CanonicalMIMEHeaderKey(tagValue), opt)
 }

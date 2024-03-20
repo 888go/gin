@@ -22,6 +22,11 @@ func (o optionFunc) apply(c *config) {
 }
 
 // WithLogger 设置自定义日志记录器函数
+
+// ff:
+// fn:
+// zerolog.Logger:
+// *gin.Context:
 func WithLogger(fn func(*gin.Context, zerolog.Logger) zerolog.Logger) Option {
 	return optionFunc(func(c *config) {
 		c.logger = fn
@@ -29,6 +34,9 @@ func WithLogger(fn func(*gin.Context, zerolog.Logger) zerolog.Logger) Option {
 }
 
 // WithSkipPathRegexps 通过正则表达式模式添加多个需要跳过的URL路径
+
+// ff:
+// regs:
 func WithSkipPathRegexps(regs ...*regexp.Regexp) Option {
 	return optionFunc(func(c *config) {
 		if len(regs) == 0 {
@@ -40,6 +48,9 @@ func WithSkipPathRegexps(regs ...*regexp.Regexp) Option {
 }
 
 // WithUTC 返回将时区设置为UTC的t。
+
+// ff:
+// s:
 func WithUTC(s bool) Option {
 	return optionFunc(func(c *config) {
 		c.utc = s
@@ -47,6 +58,9 @@ func WithUTC(s bool) Option {
 }
 
 // WithSkipPath 根据特定模式跳过URL路径
+
+// ff:
+// s:
 func WithSkipPath(s []string) Option {
 	return optionFunc(func(c *config) {
 		c.skipPath = s
@@ -55,24 +69,36 @@ func WithSkipPath(s []string) Option {
 
 // WithWriter 更改默认输出写入器。
 // 默认为 gin.DefaultWriter
+
+// ff:
+// s:
 func WithWriter(s io.Writer) Option {
 	return optionFunc(func(c *config) {
 		c.output = s
 	})
 }
 
+
+// ff:
+// lvl:
 func WithDefaultLevel(lvl zerolog.Level) Option {
 	return optionFunc(func(c *config) {
 		c.defaultLevel = lvl
 	})
 }
 
+
+// ff:
+// lvl:
 func WithClientErrorLevel(lvl zerolog.Level) Option {
 	return optionFunc(func(c *config) {
 		c.clientErrorLevel = lvl
 	})
 }
 
+
+// ff:
+// lvl:
 func WithServerErrorLevel(lvl zerolog.Level) Option {
 	return optionFunc(func(c *config) {
 		c.serverErrorLevel = lvl

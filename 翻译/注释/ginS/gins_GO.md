@@ -170,10 +170,12 @@
 
 # <翻译开始>
 // Static 从给定的文件系统根目录提供文件服务。
+// 如:
+// r.Static("/static", "./文件夹") //当你访问http://localhost:8080/static时，它会服务于./文件夹 目录下的文件
+//
 // 在内部使用了 http.FileServer，因此会使用 http.NotFound 替代 Router 的 NotFound 处理程序。
 // 要使用操作系统自身的文件系统实现，请按如下方式使用：
-//
-//	router.Static("/static", "/var/www")
+// router.Static("/static", "/var/www")
 # <翻译结束>
 
 

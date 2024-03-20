@@ -57,28 +57,30 @@ type LogFormatterParams struct {
 	Request *http.Request
 
 	// TimeStamp 表示服务器返回响应后的时刻。
-	TimeStamp time.Time
+	TimeStamp time.Time //hs:响应时间     
 	// StatusCode 是HTTP响应代码。
-	StatusCode int
+	StatusCode int //hs:状态码     
 	// 延迟是服务器处理特定请求所需的时间。
-	Latency time.Duration
+	Latency time.Duration //hs:时长     
 	// ClientIP 等同于 Context 的 ClientIP 方法。
-	ClientIP string
+	ClientIP string //hs:客户端IP     
 	// Method是请求中给定的HTTP方法。
-	Method string
+	Method string //hs:HTTP方法     
 	// Path 是客户端请求的路径。
-	Path string
+	Path string //hs:请求路径     
 	// ErrorMessage在处理请求时发生错误时设置。
-	ErrorMessage string
+	ErrorMessage string //hs:错误信息     
 	// isTerm 判断 gin 的输出描述符是否指向一个终端。
-	isTerm bool
+	isTerm bool //hs:是否输出到终端     
 	// BodySize 是 Response Body 的大小
-	BodySize int
+	BodySize int //hs:响应体大小     
 	// Keys 是在请求的上下文中设置的键。
-	Keys map[string]any
+	Keys map[string]any //hs:上下文设置值map     
 }
 
 // StatusCodeColor 是用于将 HTTP 状态码适当地以 ANSI 颜色格式输出到终端的。
+
+// ff:
 func (p *LogFormatterParams) StatusCodeColor() string {
 	code := p.StatusCode
 
@@ -97,6 +99,8 @@ func (p *LogFormatterParams) StatusCodeColor() string {
 }
 
 // MethodColor 是用于适当地将HTTP方法以颜色格式输出到终端的ANSI颜色。
+
+// ff:
 func (p *LogFormatterParams) MethodColor() string {
 	method := p.Method
 
@@ -121,11 +125,15 @@ func (p *LogFormatterParams) MethodColor() string {
 }
 
 // ResetColor 重置所有转义属性。
+
+// ff:
 func (p *LogFormatterParams) ResetColor() string {
 	return reset
 }
 
 // IsOutputColor 指示是否可以在日志中输出颜色。
+
+// ff:
 func (p *LogFormatterParams) IsOutputColor() bool {
 	return consoleColorMode == forceColor || (consoleColorMode == autoColor && p.isTerm)
 }
@@ -154,21 +162,30 @@ var defaultLogFormatter = func(param LogFormatterParams) string {
 }
 
 // DisableConsoleColor 禁用控制台中的颜色输出。
+
+// ff:关闭控制台颜色
 func DisableConsoleColor() {
 	consoleColorMode = disableColor
 }
 
 // ForceConsoleColor 强制在控制台输出彩色内容
+
+// ff:开启控制台颜色
 func ForceConsoleColor() {
 	consoleColorMode = forceColor
 }
 
 // ErrorLogger 返回一个适用于任何错误类型的 HandlerFunc。
+
+// ff:
 func ErrorLogger() HandlerFunc {
 	return ErrorLoggerT(ErrorTypeAny)
 }
 
 // ErrorLoggerT为给定的错误类型返回一个HandlerFunc。
+
+// ff:
+// typ:
 func ErrorLoggerT(typ ErrorType) HandlerFunc {
 	return func(c *Context) {
 		c.Next()
@@ -181,11 +198,16 @@ func ErrorLoggerT(typ ErrorType) HandlerFunc {
 
 // Logger 创建一个 Logger 中间件，该中间件会将日志写入 gin.DefaultWriter。
 // 默认情况下，gin.DefaultWriter = os.Stdout。
+
+// ff:
 func Logger() HandlerFunc {
 	return LoggerWithConfig(LoggerConfig{})
 }
 
 // LoggerWithFormatter 根据指定的日志格式化函数实例化一个 Logger 中间件。
+
+// ff:中间件函数_自定义日志格式
+// f:格式化函数
 func LoggerWithFormatter(f LogFormatter) HandlerFunc {
 	return LoggerWithConfig(LoggerConfig{
 		Formatter: f,
@@ -194,6 +216,10 @@ func LoggerWithFormatter(f LogFormatter) HandlerFunc {
 
 // LoggerWithWriter 通过指定的写入器缓冲区实例化一个 Logger 中间件。
 // 示例：os.Stdout（标准输出），以写入模式打开的文件，套接字等...
+
+// ff:
+// notlogged:
+// out:
 func LoggerWithWriter(out io.Writer, notlogged ...string) HandlerFunc {
 	return LoggerWithConfig(LoggerConfig{
 		Output:    out,
@@ -202,6 +228,9 @@ func LoggerWithWriter(out io.Writer, notlogged ...string) HandlerFunc {
 }
 
 // LoggerWithConfig 通过配置实例化一个 Logger 中间件。
+
+// ff:
+// conf:
 func LoggerWithConfig(conf LoggerConfig) HandlerFunc {
 	formatter := conf.Formatter
 	if formatter == nil {

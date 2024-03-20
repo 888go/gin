@@ -19,6 +19,10 @@ type Reader struct {
 }
 
 // Render (Reader) 通过自定义的 ContentType 和头部信息写入数据。
+
+// ff:
+// err:
+// w:
 func (r Reader) Render(w http.ResponseWriter) (err error) {
 	r.WriteContentType(w)
 	if r.ContentLength >= 0 {
@@ -33,6 +37,9 @@ func (r Reader) Render(w http.ResponseWriter) (err error) {
 }
 
 // WriteContentType (针对Reader) 写入自定义的 ContentType。
+
+// ff:
+// w:
 func (r Reader) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, []string{r.ContentType})
 }

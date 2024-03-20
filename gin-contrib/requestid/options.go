@@ -15,6 +15,9 @@ type (
 type HeaderStrKey string
 
 // WithGenerator 设置生成器函数
+
+// ff:
+// g:
 func WithGenerator(g Generator) Option {
 	return func(cfg *config) {
 		cfg.generator = g
@@ -22,6 +25,9 @@ func WithGenerator(g Generator) Option {
 }
 
 // WithCustomHeaderStrKey 为请求ID设置自定义头部键
+
+// ff:
+// s:
 func WithCustomHeaderStrKey(s HeaderStrKey) Option {
 	return func(cfg *config) {
 		cfg.headerKey = s
@@ -29,6 +35,9 @@ func WithCustomHeaderStrKey(s HeaderStrKey) Option {
 }
 
 // WithHandler 为带有上下文的请求ID设置处理函数
+
+// ff:
+// handler:
 func WithHandler(handler Handler) Option {
 	return func(cfg *config) {
 		cfg.handler = handler

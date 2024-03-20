@@ -12,6 +12,10 @@ import (
 
 // BindWith 使用指定的绑定引擎绑定传入的结构体指针。
 // 请参阅binding包以了解更多信息。
+
+// ff:弃用BindWith
+// b:
+// obj:
 func (c *Context) BindWith(obj any, b binding.Binding) error {
 	log.Println(`BindWith(\"any, binding.Binding\") error is going to
 	be deprecated, please check issue #662 and either use MustBindWith() if you

@@ -36,12 +36,16 @@ var (
 	}
 )
 
+
+// ff:
 func (x FOO) Enum() *FOO {
 	p := new(FOO)
 	*p = x
 	return p
 }
 
+
+// ff:
 func (x FOO) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
@@ -54,11 +58,16 @@ func (FOO) Type() protoreflect.EnumType {
 	return &file_test_proto_enumTypes[0]
 }
 
+
+// ff:
 func (x FOO) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
 // 已弃用：请勿使用。
+
+// ff:
+// b:
 func (x *FOO) UnmarshalJSON(b []byte) error {
 	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
 	if err != nil {
@@ -89,6 +98,8 @@ const (
 	Default_Test_Type = int32(77)
 )
 
+
+// ff:
 func (x *Test) Reset() {
 	*x = Test{}
 	if protoimpl.UnsafeEnabled {
@@ -98,12 +109,16 @@ func (x *Test) Reset() {
 	}
 }
 
+
+// ff:
 func (x *Test) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*Test) ProtoMessage() {}
 
+
+// ff:
 func (x *Test) ProtoReflect() protoreflect.Message {
 	mi := &file_test_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
@@ -121,6 +136,8 @@ func (*Test) Descriptor() ([]byte, []int) {
 	return file_test_proto_rawDescGZIP(), []int{0}
 }
 
+
+// ff:
 func (x *Test) GetLabel() string {
 	if x != nil && x.Label != nil {
 		return *x.Label
@@ -128,6 +145,8 @@ func (x *Test) GetLabel() string {
 	return ""
 }
 
+
+// ff:
 func (x *Test) GetType() int32 {
 	if x != nil && x.Type != nil {
 		return *x.Type
@@ -135,6 +154,8 @@ func (x *Test) GetType() int32 {
 	return Default_Test_Type
 }
 
+
+// ff:
 func (x *Test) GetReps() []int64 {
 	if x != nil {
 		return x.Reps
@@ -142,6 +163,8 @@ func (x *Test) GetReps() []int64 {
 	return nil
 }
 
+
+// ff:
 func (x *Test) GetOptionalgroup() *Test_OptionalGroup {
 	if x != nil {
 		return x.Optionalgroup
@@ -157,6 +180,8 @@ type Test_OptionalGroup struct {
 	RequiredField *string `protobuf:"bytes,5,req,name=RequiredField" json:"RequiredField,omitempty"`
 }
 
+
+// ff:
 func (x *Test_OptionalGroup) Reset() {
 	*x = Test_OptionalGroup{}
 	if protoimpl.UnsafeEnabled {
@@ -166,12 +191,16 @@ func (x *Test_OptionalGroup) Reset() {
 	}
 }
 
+
+// ff:
 func (x *Test_OptionalGroup) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*Test_OptionalGroup) ProtoMessage() {}
 
+
+// ff:
 func (x *Test_OptionalGroup) ProtoReflect() protoreflect.Message {
 	mi := &file_test_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
@@ -189,6 +218,8 @@ func (*Test_OptionalGroup) Descriptor() ([]byte, []int) {
 	return file_test_proto_rawDescGZIP(), []int{0, 0}
 }
 
+
+// ff:
 func (x *Test_OptionalGroup) GetRequiredField() string {
 	if x != nil && x.RequiredField != nil {
 		return *x.RequiredField

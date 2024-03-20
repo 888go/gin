@@ -26,6 +26,9 @@ type config struct {
 }
 
 // New 初始化 RequestID 中间件。
+
+// ff:
+// opts:
 func New(opts ...Option) gin.HandlerFunc {
 	cfg := &config{
 		generator: func() string {
@@ -57,6 +60,9 @@ func New(opts ...Option) gin.HandlerFunc {
 }
 
 // Get 返回请求标识符
+
+// ff:
+// c:
 func Get(c *gin.Context) string {
 	return c.GetHeader(headerXRequestID)
 }

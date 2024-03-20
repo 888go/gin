@@ -21,6 +21,8 @@ type defaultValidator struct {
 type SliceValidationError []error
 
 // Error 将 SliceValidationError 中的所有错误元素连接成一个由 \n 分隔的单个字符串。
+
+// ff:
 func (err SliceValidationError) Error() string {
 	n := len(err)
 	switch n {
@@ -46,6 +48,9 @@ func (err SliceValidationError) Error() string {
 var _ StructValidator = (*defaultValidator)(nil)
 
 // ValidateStruct 接收任何类型的参数，但仅对结构体或指向结构体的指针类型执行验证操作。
+
+// ff:
+// obj:
 func (v *defaultValidator) ValidateStruct(obj any) error {
 	if obj == nil {
 		return nil
@@ -82,6 +87,8 @@ func (v *defaultValidator) validateStruct(obj any) error {
 
 // Engine 返回驱动默认验证器的底层验证引擎。如果要注册自定义验证或结构级别验证，这将非常有用。更多详情请参阅 validator 的 GoDoc 文档：
 // https://pkg.go.dev/github.com/go-playground/validator/v10
+
+// ff:
 func (v *defaultValidator) Engine() any {
 	v.lazyinit()
 	return v.validate

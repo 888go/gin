@@ -30,16 +30,25 @@ var (
 type RecoveryFunc func(c *Context, err any)
 
 // Recovery 返回一个中间件，该中间件可从任何 panic 中恢复，并在发生 panic 时写入一个 500 状态码。
+
+// ff:
 func Recovery() HandlerFunc {
 	return RecoveryWithWriter(DefaultErrorWriter)
 }
 
 // CustomRecovery 返回一个中间件，该中间件可从任何 panic 中恢复，并调用提供的处理函数来处理它。
+
+// ff:
+// handle:
 func CustomRecovery(handle RecoveryFunc) HandlerFunc {
 	return RecoveryWithWriter(DefaultErrorWriter, handle)
 }
 
 // RecoveryWithWriter 返回一个中间件，针对给定的writer，在发生任何 panic 时进行恢复，并在发生 panic 时写入 500 状态码。
+
+// ff:
+// recovery:
+// out:
 func RecoveryWithWriter(out io.Writer, recovery ...RecoveryFunc) HandlerFunc {
 	if len(recovery) > 0 {
 		return CustomRecoveryWithWriter(out, recovery[0])
@@ -48,6 +57,10 @@ func RecoveryWithWriter(out io.Writer, recovery ...RecoveryFunc) HandlerFunc {
 }
 
 // CustomRecoveryWithWriter 函数为给定的 writer 返回一个中间件，该中间件可从任何 panic 中恢复，并调用提供的 handle 函数来处理它。
+
+// ff:
+// handle:
+// out:
 func CustomRecoveryWithWriter(out io.Writer, handle RecoveryFunc) HandlerFunc {
 	var logger *log.Logger
 	if out != nil {

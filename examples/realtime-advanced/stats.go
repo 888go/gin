@@ -51,6 +51,8 @@ func connectedUsers() uint64 {
 }
 
 // Stats 返回保存的统计信息数据。
+
+// ff:
 func Stats() map[string]uint64 {
 	mutexStats.RLock()
 	defer mutexStats.RUnlock()

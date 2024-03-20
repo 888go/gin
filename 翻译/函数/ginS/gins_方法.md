@@ -60,3 +60,17 @@ relativePath=路由规则
 
 [func Use(middlewares ...gin.HandlerFunc) gin.IRoutes {]
 ff=中间件
+
+[func StaticFile(relativePath, filepath string) gin.IRoutes {]
+ff=绑定静态单文件
+filepath=文件路径
+relativePath=URL路径
+
+[func Static(relativePath, root string) gin.IRoutes {]
+ff=绑定静态文件目录
+root=绑定目录
+relativePath=URL路径前缀
+
+[func StaticFS(relativePath string, fs http.FileSystem) gin.IRoutes {]
+ff=绑定静态文件目录FS
+relativePath=URL路径前缀

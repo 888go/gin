@@ -28,16 +28,26 @@ type MsgPack struct {
 var msgpackContentType = []string{"application/msgpack; charset=utf-8"}
 
 // WriteContentType (MsgPack) 写入 MsgPack 的 ContentType。
+
+// ff:
+// w:
 func (r MsgPack) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, msgpackContentType)
 }
 
 // Render (MsgPack) 将给定的接口对象进行编码，并使用自定义 ContentType 写入数据。
+
+// ff:
+// w:
 func (r MsgPack) Render(w http.ResponseWriter) error {
 	return WriteMsgPack(w, r.Data)
 }
 
 // WriteMsgPack 将MsgPack ContentType写入，并对给定的接口对象进行编码。
+
+// ff:
+// obj:
+// w:
 func WriteMsgPack(w http.ResponseWriter, obj any) error {
 	writeContentType(w, msgpackContentType)
 	var mh codec.MsgpackHandle

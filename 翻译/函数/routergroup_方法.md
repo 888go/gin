@@ -71,5 +71,20 @@ handlers=处理函数
 relativePath=路由规则
 
 [func (group *RouterGroup) Static(relativePath, root string) IRoutes {]
-root=绑定文件夹
+root=绑定目录
+relativePath=URL路径前缀
+ff=绑定静态文件目录
+
+[func (group *RouterGroup) StaticFile(relativePath, filepath string) IRoutes {]
+ff=绑定静态单文件
+filepath=文件路径
+relativePath=URL路径
+
+[func (group *RouterGroup) StaticFileFS(relativePath, filepath string, fs http.FileSystem) IRoutes {]
+ff=绑定静态单文件FS
+filepath=文件路径
+relativePath=URL路径
+
+[func (group *RouterGroup) StaticFS(relativePath string, fs http.FileSystem) IRoutes {]
+ff=绑定静态文件目录FS
 relativePath=URL路径前缀

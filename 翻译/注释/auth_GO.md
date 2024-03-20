@@ -41,6 +41,8 @@
 // BasicAuthForRealm 返回一个基础HTTP身份验证中间件。它接受两个参数：一个map[string]string，其中键是用户名，值是密码；以及一个realm（领域）名称。
 // 如果realm为空，则默认使用"Authorization Required"。
 // （参见http://tools.ietf.org/html/rfc2617#section-1.2）
+//
+// 学习备注:这种认证方式现代几乎已经没用,访问的时候浏览器会弹出一个简单的认证框,类似访问ftp,会提示输入账号密码.
 # <翻译结束>
 
 
@@ -81,5 +83,7 @@
 # <翻译开始>
 // BasicAuth 返回一个基础HTTP授权中间件。它接受一个map[string]string作为参数，
 // 其中键是用户名，值是密码。
+//
+// 学习备注:这种认证方式现代几乎已经没用,访问的时候浏览器会弹出一个简单的认证框,类似访问ftp,会提示输入账号密码.
 # <翻译结束>
 

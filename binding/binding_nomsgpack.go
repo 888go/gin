@@ -75,6 +75,10 @@ var (
 )
 
 // Default 根据 HTTP 方法和内容类型返回相应的 Binding 实例。
+
+// ff:
+// contentType:
+// method:
 func Default(method, contentType string) Binding {
 	if method == "GET" {
 		return Form

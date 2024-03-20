@@ -20,16 +20,28 @@ type String struct {
 var plainContentType = []string{"text/plain; charset=utf-8"}
 
 // Render (String) 通过自定义 ContentType 写入数据。
+
+// ff:
+// w:
 func (r String) Render(w http.ResponseWriter) error {
 	return WriteString(w, r.Format, r.Data)
 }
 
 // WriteContentType (字符串) 写入纯文本 ContentType。
+
+// ff:
+// w:
 func (r String) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, plainContentType)
 }
 
 // WriteString 根据其格式写入数据，并写入自定义 ContentType。
+
+// ff:
+// err:
+// data:
+// format:
+// w:
 func WriteString(w http.ResponseWriter, format string, data []any) (err error) {
 	writeContentType(w, plainContentType)
 	if len(data) > 0 {

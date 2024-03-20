@@ -8,6 +8,9 @@ import (
 )
 
 // Serialize 将传入的值转换为 []byte 类型并返回
+
+// ff:
+// value:
 func Serialize(value interface{}) ([]byte, error) {
 	if bytes, ok := value.([]byte); ok {
 		return bytes, nil
@@ -29,6 +32,11 @@ func Serialize(value interface{}) ([]byte, error) {
 }
 
 // Deserialize 将传入的 []byte 反序列化为给定的 ptr interface{}
+
+// ff:
+// err:
+// ptr:
+// byt:
 func Deserialize(byt []byte, ptr interface{}) (err error) {
 	if bytes, ok := ptr.(*[]byte); ok {
 		*bytes = byt

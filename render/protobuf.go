@@ -18,6 +18,9 @@ type ProtoBuf struct {
 var protobufContentType = []string{"application/x-protobuf"}
 
 // Render (ProtoBuf) 将给定的接口对象进行序列化，并使用自定义 ContentType 写入数据。
+
+// ff:
+// w:
 func (r ProtoBuf) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 
@@ -31,6 +34,9 @@ func (r ProtoBuf) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (ProtoBuf) 写入 ProtoBuf 的 ContentType。
+
+// ff:
+// w:
 func (r ProtoBuf) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, protobufContentType)
 }

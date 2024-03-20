@@ -33,6 +33,9 @@ type Params []Param
 
 // Get 方法返回第一个参数键与给定名称相匹配的值，并返回布尔值 true。
 // 如果未找到匹配的参数，则返回一个空字符串和布尔值 false。
+
+// ff:
+// name:
 func (ps Params) Get(name string) (string, bool) {
 	for _, entry := range ps {
 		if entry.Key == name {
@@ -44,6 +47,10 @@ func (ps Params) Get(name string) (string, bool) {
 
 // ByName 返回第一个其键与给定名称相匹配的Param的值。
 // 如果未找到匹配的Param，则返回一个空字符串。
+
+// ff:
+// va:
+// name:
 func (ps Params) ByName(name string) (va string) {
 	va, _ = ps.Get(name)
 	return

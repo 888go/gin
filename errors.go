@@ -42,18 +42,26 @@ type errorMsgs []*Error
 var _ error = (*Error)(nil)
 
 // SetType 设置错误的类型。
+
+// ff:
+// flags:
 func (msg *Error) SetType(flags ErrorType) *Error {
 	msg.Type = flags
 	return msg
 }
 
 // SetMeta 设置错误的元数据。
+
+// ff:
+// data:
 func (msg *Error) SetMeta(data any) *Error {
 	msg.Meta = data
 	return msg
 }
 
 // JSON 创建一个格式正确的 JSON
+
+// ff:
 func (msg *Error) JSON() any {
 	jsonData := H{}
 	if msg.Meta != nil {
@@ -76,26 +84,38 @@ func (msg *Error) JSON() any {
 }
 
 // MarshalJSON 实现了 json.Marshaller 接口。
+
+// ff:
 func (msg *Error) MarshalJSON() ([]byte, error) {
 	return json.Marshal(msg.JSON())
 }
 
 // Error 实现了 error 接口。
+
+// ff:
 func (msg Error) Error() string {
 	return msg.Err.Error()
 }
 
 // IsType 判断一个错误。
+
+// ff:
+// flags:
 func (msg *Error) IsType(flags ErrorType) bool {
 	return (msg.Type & flags) > 0
 }
 
 // Unwrap 返回封装的错误，以便与 errors.Is()、errors.As() 和 errors.Unwrap() 之间进行互操作性
+
+// ff:
 func (msg *Error) Unwrap() error {
 	return msg.Err
 }
 
 // ByType 返回一个只读副本，其中包含了经过过滤的错误信息。具体来说，ByType(gin.ErrorTypePublic) 将返回一个类型为 ErrorTypePublic 的错误信息切片。
+
+// ff:
+// typ:
 func (a errorMsgs) ByType(typ ErrorType) errorMsgs {
 	if len(a) == 0 {
 		return nil
@@ -114,6 +134,8 @@ func (a errorMsgs) ByType(typ ErrorType) errorMsgs {
 
 // Last 函数返回切片中的最后一个错误。如果该数组为空，则返回 nil。
 // 这是 errors[len(errors)-1] 的快捷方式。
+
+// ff:
 func (a errorMsgs) Last() *Error {
 	if length := len(a); length > 0 {
 		return a[length-1]
@@ -128,6 +150,8 @@ func (a errorMsgs) Last() *Error {
 //	c.Error(errors.New("第二个错误"))
 //	c.Error(errors.New("第三个错误"))
 //	c.Errors.Errors() // == []string{"第一个", "第二个", "第三个"}
+
+// ff:
 func (a errorMsgs) Errors() []string {
 	if len(a) == 0 {
 		return nil
@@ -139,6 +163,8 @@ func (a errorMsgs) Errors() []string {
 	return errorStrings
 }
 
+
+// ff:
 func (a errorMsgs) JSON() any {
 	switch length := len(a); length {
 	case 0:
@@ -155,10 +181,14 @@ func (a errorMsgs) JSON() any {
 }
 
 // MarshalJSON 实现了 json.Marshaller 接口。
+
+// ff:
 func (a errorMsgs) MarshalJSON() ([]byte, error) {
 	return json.Marshal(a.JSON())
 }
 
+
+// ff:
 func (a errorMsgs) String() string {
 	if len(a) == 0 {
 		return ""

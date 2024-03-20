@@ -18,6 +18,9 @@ type User struct {
 // UserStructLevelValidation 包含一些自定义的结构级别验证，这些验证在字段级别上并不总是适用。例如，此函数验证 FirstName 或 LastName 至少有一个存在；虽然也可以通过自定义字段验证来实现，但那样就需要在两个字段上都添加该验证逻辑，导致代码重复和额外开销，而这种方式只需验证一次。
 // 
 // 注意：你可能会问为什么不直接在 validator 之外进行这种验证。采用这种方式将验证过程直接融入到 validator 中，可以与验证标签结合使用，并且仍然保持统一的错误输出格式。
+
+// ff:
+// sl:
 func UserStructLevelValidation(sl validator.StructLevel) {
 	// 获取当前结构体的接口表示，并将其转换为 User 类型，赋值给 user 变量
 	user := sl.Current().Interface().(User)

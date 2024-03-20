@@ -30,6 +30,11 @@ func (mbr *maxBytesReader) tooLarge() (n int, err error) {
 	return
 }
 
+
+// ff:
+// err:
+// n:
+// p:
 func (mbr *maxBytesReader) Read(p []byte) (n int, err error) {
 	toRead := mbr.remaining
 	if mbr.remaining == 0 {
@@ -61,6 +66,8 @@ func (mbr *maxBytesReader) Read(p []byte) (n int, err error) {
 	return n, err
 }
 
+
+// ff:
 func (mbr *maxBytesReader) Close() error {
 	return mbr.rdr.Close()
 }
@@ -71,6 +78,9 @@ func (mbr *maxBytesReader) Close() error {
 // * 设置 "Connection: close" 头部
 // * 向客户端发送 413 错误（http.StatusRequestEntityTooLarge，请求实体过大）
 // * 中断当前上下文
+
+// ff:
+// limit:
 func RequestSizeLimiter(limit int64) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		ctx.Request.Body = &maxBytesReader{

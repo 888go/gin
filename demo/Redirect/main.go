@@ -10,6 +10,8 @@ import (
 // Gin框架官方文档示例：自定义中间件（中文版）
 
 // 定义Logger中间件
+
+// ff:
 func Logger() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		t := time.Now()

@@ -35,6 +35,9 @@ type config struct {
 var isTerm bool = isatty.IsTerminal(os.Stdout.Fd())
 
 // SetLogger 初始化日志中间件。
+
+// ff:
+// opts:
 func SetLogger(opts ...Option) gin.HandlerFunc {
 	cfg := &config{
 		defaultLevel:     zerolog.InfoLevel,
@@ -138,6 +141,10 @@ func SetLogger(opts ...Option) gin.HandlerFunc {
 
 // ParseLevel将级别字符串转换为zerolog的Level值。
 // 如果输入字符串与已知值不匹配，则返回错误。
+
+// ff:
+// zerolog.Level:
+// levelStr:
 func ParseLevel(levelStr string) (zerolog.Level, error) {
 	return zerolog.ParseLevel(levelStr)
 }

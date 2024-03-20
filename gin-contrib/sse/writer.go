@@ -13,6 +13,9 @@ type stringWrapper struct {
 	io.Writer
 }
 
+
+// ff:
+// str:
 func (w stringWrapper) WriteString(str string) (int, error) {
 	return w.Writer.Write([]byte(str))
 }
