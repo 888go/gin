@@ -49,4 +49,8 @@
     <tree path="/demo/PostFormMap" title="映射查询字符串或表单参数"/>
     <tree path="/demo/ListenAndServe" title="自定义 HTTP 配置"/>
     <tree path="/demo/LoggerWithFormatter" title="自定义日志文件"/>
+    <tree path="/demo/Cookie" title="设置和获取 Cookie"/>
+    <tree path="/demo/param-in-path" title="路由参数"/>
+    <tree path="/demo/Redirect" title="重定向"/>
+    <tree path="/demo/Static" title="静态文件服务"/>
 </trees>

@@ -285,8 +285,8 @@ func (group *RouterGroup) staticFileHandler(relativePath string, handler Handler
 // 要使用操作系统的文件系统实现，使用:router.Static("/static"， "/var/www")
 
 // ff:
-// root:
-// relativePath:
+// root:绑定文件夹
+// relativePath:URL路径前缀
 func (group *RouterGroup) Static(relativePath, root string) IRoutes {
 	return group.StaticFS(relativePath, Dir(root, false))
 }

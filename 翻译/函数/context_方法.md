@@ -386,3 +386,8 @@ code=状态码
 err=错误
 obj=结构指针
 ff=取参数到指针并按类型且缓存
+
+[func (c *Context) Redirect(code int, location string) {]
+ff=重定向
+location=重定向地址
+code=状态码

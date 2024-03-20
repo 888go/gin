@@ -69,3 +69,7 @@ relativePath=路由规则
 ff=绑定Any
 handlers=处理函数
 relativePath=路由规则
+
+[func (group *RouterGroup) Static(relativePath, root string) IRoutes {]
+root=绑定文件夹
+relativePath=URL路径前缀

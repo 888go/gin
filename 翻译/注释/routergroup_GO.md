@@ -231,11 +231,13 @@
 <原文结束>
 
 # <翻译开始>
-// 静态从给定的文件系统根目录提供文件
-// 内部http
-// 使用的是FileServer，因此是http
-// 使用NotFound来代替路由器的NotFound处理程序
-// 要使用操作系统的文件系统实现，使用:router.Static("/static"， "/var/www")
+// Static 提供来自给定文件系统根目录的文件。
+// 在内部使用http.FileServer，因此使用http.NotFound而不是路由器的 NotFound 处理程序。
+// 如:
+// r.Static("/static", "./文件夹") //当你访问http://localhost:8080/static时，它会服务于./文件夹 目录下的文件
+//
+// use :
+// router.Static("/static", "/var/www")
 # <翻译结束>
 
 

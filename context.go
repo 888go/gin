@@ -1348,9 +1348,9 @@ func (c *Context) String(code int, format string, values ...any) {
 
 // Redirect返回到特定位置的HTTP重定向
 
-// ff:
-// location:
-// code:
+// ff:重定向
+// location:重定向地址
+// code:状态码
 func (c *Context) Redirect(code int, location string) {
 	c.Render(-1, render.Redirect{
 		Code:     code,
