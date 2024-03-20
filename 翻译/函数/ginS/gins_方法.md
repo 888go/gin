@@ -74,3 +74,35 @@ relativePath=URL路径前缀
 [func StaticFS(relativePath string, fs http.FileSystem) gin.IRoutes {]
 ff=绑定静态文件目录FS
 relativePath=URL路径前缀
+
+[func LoadHTMLGlob(pattern string) {]
+ff=加载HTML模板目录
+pattern=模板目录
+
+[func LoadHTMLFiles(files ...string) {]
+ff=加载HTML模板文件
+files=模板文件s
+
+[func SetHTMLTemplate(templ *template.Template) {]
+ff=设置Template模板
+templ=Template模板
+
+[func Group(relativePath string, handlers ...gin.HandlerFunc) *gin.RouterGroup {]
+ff=创建分组路由
+handlers=处理函数
+relativePath=路由规则
+
+[func Routes() gin.RoutesInfo {]
+ff=取路由数组
+
+[func Run(addr ...string) (err error) {]
+ff=监听
+err=错误
+addr=地址与端口
+
+[func RunTLS(addr, certFile, keyFile string) (err error) {]
+ff=监听TLS
+err=错误
+keyFile=key文件
+certFile=cert文件
+addr=地址与端口
