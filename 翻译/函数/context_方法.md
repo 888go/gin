@@ -206,7 +206,7 @@ obj=结构指针
 ff=取客户端ip
 
 [func (c *Context) RemoteIP() string {]
-ff=取客户端ip并按协议头
+ff=取协议头ip
 
 [func (c *Context) ContentType() string {]
 ff=取协议头ContentType
@@ -337,7 +337,7 @@ key=名称
 ff=取流数据
 
 [func (c *Context) IsAborted() bool {]
-ff=是否已终止
+ff=是否已停止
 
 [func (c *Context) Bind(obj any) error {]
 ff=取参数到指针PANI
@@ -391,3 +391,81 @@ ff=取参数到指针并按类型且缓存
 ff=重定向
 location=重定向地址
 code=状态码
+
+[func (c *Context) FullPath() string {]
+ff=取路由路径
+
+[func (c *Context) Abort() {]
+ff=停止
+
+[func (c *Context) AbortWithStatus(code int) {]
+ff=停止并带状态码
+code=状态码
+
+[func (c *Context) AbortWithStatusJSON(code int, jsonObj any) {]
+ff=停止并带状态码且返回JSON
+jsonObj=JSON结构
+code=状态码
+
+[func (c *Context) AbortWithError(code int, err error) *Error {]
+ff=停止并带状态码与错误
+err=错误
+code=状态码
+
+[func (c *Context) Error(err error) *Error {]
+ff=错误
+err=错误
+
+[func (c *Context) Render(code int, r render.Render) {]
+ff=Render底层方法
+code=状态码
+
+[func (c *Context) Data(code int, contentType string, data #左中括号##右中括号#byte) {]
+ff=输出字节集
+data=字节集
+contentType=HTTP响应类型
+code=状态码
+
+[func (c *Context) DataFromReader(code int, contentLength int64, contentType string, reader io.Reader, extraHeaders map#左中括号#string#右中括号#string) {]
+ff=输出字节集并按IO
+extraHeaders=协议头Map
+reader=写出IO数据
+contentType=HTTP响应类型
+contentLength=数据长度
+code=状态码
+
+[func (c *Context) File(filepath string) {]
+ff=下载文件
+filepath=文件路径
+
+[func (c *Context) FileFromFS(filepath string, fs http.FileSystem) {]
+ff=下载文件FS
+filepath=文件路径
+
+[func (c *Context) FileAttachment(filepath, filename string) {]
+ff=下载文件并带文件名
+filename=文件名
+filepath=文件路径
+
+[func (c *Context) Negotiate(code int, config Negotiate) {]
+ff=Negotiate底层方法
+
+[func (c *Context) NegotiateFormat(offered ...string) string {]
+ff=NegotiateFormat底层方法
+
+[func (c *Context) SetAccepted(formats ...string) {]
+ff=SetAccepted底层方法
+formats=类型名称s
+
+[func (c *Context) Deadline() (deadline time.Time, ok bool) {]
+ff=Deadline底层方法
+
+[func (c *Context) Done() <-chan struct{} {]
+ff=Done底层方法
+
+[func (c *Context) Err() error {]
+ff=取上下文错误
+
+[func (c *Context) Value(key any) any {]
+ff=取上下文值
+key=名称

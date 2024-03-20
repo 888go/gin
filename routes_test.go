@@ -11,7 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -479,8 +479,8 @@ func TestRouterMiddlewareAndStatic(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Body.String(), "package gin")
-// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
-// 否则，Content-Type='text/x-go; charset=utf-8'
+	// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
+	// 否则，Content-Type='text/x-go; charset=utf-8'
 	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
 	assert.NotEqual(t, w.Header().Get("Last-Modified"), "Mon, 02 Jan 2006 15:04:05 MST")
 	assert.Equal(t, "Mon, 02 Jan 2006 15:04:05 MST", w.Header().Get("Expires"))
@@ -736,6 +736,7 @@ func TestRouteContextHoldsFullPath(t *testing.T) {
 		actualRoute := route
 		router.GET(route, func(c *Context) {
 			// 对于每个已定义的路由，其上下文应包含完整的路径
+			fmt.Println("输出" + c.FullPath())
 			assert.Equal(t, actualRoute, c.FullPath())
 			c.AbortWithStatus(http.StatusOK)
 		})

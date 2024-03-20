@@ -162,7 +162,7 @@ func (c *Context) Handler() HandlerFunc {
 //       c.FullPath() == "/user/:id" // 将会返回 true
 //   })
 
-// ff:
+// ff:取路由路径
 func (c *Context) FullPath() string {
 	return c.fullPath
 }
@@ -186,7 +186,7 @@ func (c *Context) Next() {
 
 // IsAborted 返回当前上下文是否已中止。
 
-// ff:是否已终止
+// ff:是否已停止
 func (c *Context) IsAborted() bool {
 	return c.index >= abortIndex
 }
@@ -195,7 +195,7 @@ func (c *Context) IsAborted() bool {
 // 假设你有一个授权中间件用于验证当前请求是否已授权。
 // 如果授权失败（例如，密码不匹配），则调用 Abort 来确保该请求的剩余处理器不会被调用。
 
-// ff:
+// ff:停止
 func (c *Context) Abort() {
 	c.index = abortIndex
 }
@@ -208,8 +208,8 @@ func (c *Context) Abort() {
 // AbortWithStatus 函数会调用 `Abort()` 函数，并携带特定状态码设置响应头。
 // 举例来说，如果尝试验证请求失败，可以采用如下的方式：context.AbortWithStatus(401)。
 
-// ff:
-// code:
+// ff:停止并带状态码
+// code:状态码
 func (c *Context) AbortWithStatus(code int) {
 	c.Status(code)
 	c.Writer.WriteHeaderNow()
@@ -220,9 +220,9 @@ func (c *Context) AbortWithStatus(code int) {
 // 该方法中断执行链，写入状态码并返回一个JSON格式的响应体。
 // 同时将Content-Type设置为"application/json"。
 
-// ff:
-// jsonObj:
-// code:
+// ff:停止并带状态码且返回JSON
+// jsonObj:JSON结构
+// code:状态码
 func (c *Context) AbortWithStatusJSON(code int, jsonObj any) {
 	c.Abort()
 	c.JSON(code, jsonObj)
@@ -232,9 +232,9 @@ func (c *Context) AbortWithStatusJSON(code int, jsonObj any) {
 // 该方法停止执行链，写入状态码并将指定错误推送到 `c.Errors`。
 // 有关更多详细信息，请参阅 Context.Error()。
 
-// ff:
-// err:
-// code:
+// ff:停止并带状态码与错误
+// err:错误
+// code:状态码
 func (c *Context) AbortWithError(code int, err error) *Error {
 	c.AbortWithStatus(code)
 	return c.Error(err)
@@ -249,8 +249,8 @@ func (c *Context) AbortWithError(code int, err error) *Error {
 // 可以使用中间件来收集所有错误，并将它们一起推送到数据库、打印日志或将其添加到HTTP响应中。
 // 如果err为nil，Error将会触发panic。
 
-// ff:
-// err:
+// ff:错误
+// err:错误
 func (c *Context) Error(err error) *Error {
 	if err == nil {
 		panic("err is nil")
@@ -1041,7 +1041,7 @@ func (c *Context) ClientIP() string {
 
 // RemoteIP 从 Request.RemoteAddr 解析 IP，进行规范化处理并返回不含端口号的 IP 地址。
 
-// ff:取客户端ip并按协议头
+// ff:取协议头ip
 func (c *Context) RemoteIP() string {
 	ip, _, err := net.SplitHostPort(strings.TrimSpace(c.Request.RemoteAddr))
 	if err != nil {
@@ -1177,9 +1177,9 @@ func (c *Context) Cookie(name string) (string, error) {
 
 // Render方法会写入响应头并调用render.Render来渲染数据。
 
-// ff:
+// ff:Render底层方法
 // r:
-// code:
+// code:状态码
 func (c *Context) Render(code int, r render.Render) {
 	c.Status(code)
 
@@ -1339,10 +1339,10 @@ func (c *Context) Redirect(code int, location string) {
 
 // Data 将一些数据写入主体流并更新HTTP状态码。
 
-// ff:
-// data:
-// contentType:
-// code:
+// ff:输出字节集
+// data:字节集
+// contentType:HTTP响应类型
+// code:状态码
 func (c *Context) Data(code int, contentType string, data []byte) {
 	c.Render(code, render.Data{
 		ContentType: contentType,
@@ -1352,12 +1352,12 @@ func (c *Context) Data(code int, contentType string, data []byte) {
 
 // DataFromReader 将指定读取器的内容写入主体流，并更新HTTP状态码。
 
-// ff:
-// extraHeaders:
-// reader:
-// contentType:
-// contentLength:
-// code:
+// ff:输出字节集并按IO
+// extraHeaders:协议头Map
+// reader:写出IO数据
+// contentType:HTTP响应类型
+// contentLength:数据长度
+// code:状态码
 func (c *Context) DataFromReader(code int, contentLength int64, contentType string, reader io.Reader, extraHeaders map[string]string) {
 	c.Render(code, render.Reader{
 		Headers:       extraHeaders,
@@ -1369,17 +1369,17 @@ func (c *Context) DataFromReader(code int, contentLength int64, contentType stri
 
 // File 以高效的方式将指定的文件写入正文流中。
 
-// ff:
-// filepath:
+// ff:下载文件
+// filepath:文件路径
 func (c *Context) File(filepath string) {
 	http.ServeFile(c.Writer, c.Request, filepath)
 }
 
 // FileFromFS 以高效的方式将指定的文件从 http.FileSystem 写入到 body 流中。
 
-// ff:
+// ff:下载文件FS
 // fs:
-// filepath:
+// filepath:文件路径
 func (c *Context) FileFromFS(filepath string, fs http.FileSystem) {
 	defer func(old string) {
 		c.Request.URL.Path = old
@@ -1399,9 +1399,9 @@ func escapeQuotes(s string) string {
 // FileAttachment 以高效的方式将指定文件写入主体流
 // 在客户端，该文件通常会以给定的文件名下载
 
-// ff:
-// filename:
-// filepath:
+// ff:下载文件并带文件名
+// filename:文件名
+// filepath:文件路径
 func (c *Context) FileAttachment(filepath, filename string) {
 	if isASCII(filename) {
 		c.Writer.Header().Set("Content-Disposition", `attachment; filename="`+escapeQuotes(filename)+`"`)
@@ -1464,7 +1464,7 @@ type Negotiate struct {
 
 // Negotiate 根据可接受的 Accept 格式调用不同的 Render 方法。
 
-// ff:
+// ff:Negotiate底层方法
 // config:
 // code:
 func (c *Context) Negotiate(code int, config Negotiate) {
@@ -1496,7 +1496,7 @@ func (c *Context) Negotiate(code int, config Negotiate) {
 
 // NegotiateFormat 返回一个可接受的 Accept 格式。
 
-// ff:
+// ff:NegotiateFormat底层方法
 // offered:
 func (c *Context) NegotiateFormat(offered ...string) string {
 	assert1(len(offered) > 0, "you must provide at least one offer")
@@ -1530,8 +1530,8 @@ func (c *Context) NegotiateFormat(offered ...string) string {
 
 // SetAccepted 设置 Accept 头部数据。
 
-// ff:
-// formats:
+// ff:SetAccepted底层方法
+// formats:类型名称s
 func (c *Context) SetAccepted(formats ...string) {
 	c.Accepted = formats
 }
@@ -1549,7 +1549,7 @@ func (c *Context) hasRequestContext() bool {
 
 // Deadline 返回当 c.Request 没有 Context 时，表示没有截止时间（ok==false）。
 
-// ff:
+// ff:Deadline底层方法
 // ok:
 // deadline:
 func (c *Context) Deadline() (deadline time.Time, ok bool) {
@@ -1561,7 +1561,7 @@ func (c *Context) Deadline() (deadline time.Time, ok bool) {
 
 // 当c.Request没有Context时，Done返回nil（表示一个将永远等待的通道）。
 
-// ff:
+// ff:Done底层方法
 func (c *Context) Done() <-chan struct{} {
 	if !c.hasRequestContext() {
 		return nil
@@ -1571,7 +1571,7 @@ func (c *Context) Done() <-chan struct{} {
 
 // Err在c.Request没有Context时返回nil。
 
-// ff:
+// ff:取上下文错误
 func (c *Context) Err() error {
 	if !c.hasRequestContext() {
 		return nil
@@ -1581,8 +1581,8 @@ func (c *Context) Err() error {
 
 // Value 方法返回与该上下文关联的键key所对应的值，如果该键没有关联任何值，则返回nil。对同一键连续调用Value方法将返回相同的结果。
 
-// ff:
-// key:
+// ff:取上下文值
+// key:名称
 func (c *Context) Value(key any) any {
 	if key == 0 {
 		return c.Request

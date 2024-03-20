@@ -8,7 +8,7 @@ import (
 	"flag"
 	"io"
 	"os"
-	
+
 	"github.com/888go/gin/binding"
 )
 
@@ -17,11 +17,11 @@ const EnvGinMode = "GIN_MODE"
 
 const (
 	// DebugMode 指示 gin 模式为调试模式。
-	DebugMode = "debug"
+	DebugMode = "debug" //hs:常量_运行模式_调试
 	// ReleaseMode 表示 gin 模式为发布模式。
-	ReleaseMode = "release"
+	ReleaseMode = "release" //hs:常量_运行模式_发布
 	// TestMode 表示 gin 模式为测试模式。
-	TestMode = "test"
+	TestMode = "test" //hs:常量_运行模式_测试
 )
 
 const (
@@ -53,8 +53,8 @@ func init() {
 
 // SetMode 根据输入的字符串设置 gin 模式。
 
-// ff:
-// value:
+// ff:设置运行模式
+// value:常量_运行模式
 func SetMode(value string) {
 	if value == "" {
 		if flag.Lookup("test.v") != nil {
@@ -80,7 +80,7 @@ func SetMode(value string) {
 
 // DisableBindValidation 关闭默认的验证器。
 
-// ff:
+// ff:关闭Validator验证器
 func DisableBindValidation() {
 	binding.Validator = nil
 }
@@ -88,7 +88,7 @@ func DisableBindValidation() {
 // EnableJsonDecoderUseNumber 将参数设置为 true 以启用 binding.EnableDecoderUseNumber，
 // 这样就会在 JSON 解码器实例上调用 UseNumber 方法。
 
-// ff:
+// ff:启用Json解码器使用Number
 func EnableJsonDecoderUseNumber() {
 	binding.EnableDecoderUseNumber = true
 }
@@ -96,14 +96,14 @@ func EnableJsonDecoderUseNumber() {
 // EnableJsonDecoderDisallowUnknownFields 将 binding.EnableDecoderDisallowUnknownFields 设为 true，
 // 以便在 JSON 解码器实例上调用 DisallowUnknownFields 方法。
 
-// ff:
+// ff:启用json解码器禁止未知字段
 func EnableJsonDecoderDisallowUnknownFields() {
 	binding.EnableDecoderDisallowUnknownFields = true
 }
 
 // Mode 返回当前 gin 模式。
 
-// ff:
+// ff:取运行模式
 func Mode() string {
 	return modeName
 }

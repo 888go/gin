@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/888go/gin"
 	"net/http"
 )
@@ -15,6 +16,7 @@ func main() {
 	// 2.绑定路由规则，执行的函数
 	// gin.Context，封装了request和response
 	r.GET("/", func(c *gin.Context) {
+		fmt.Println(c.FullPath())
 		c.String(http.StatusOK, "hello World!")
 	})
 	// 3.监听端口，默认在8080

@@ -103,7 +103,7 @@
 
 # <翻译开始>
 // EnableJsonDecoderUseNumber 将参数设置为 true 以启用 binding.EnableDecoderUseNumber，
-// 这样就会在 JSON 解码器实例上调用 UseNumber 方法。
+// EnableDecoderUseNumber 用于调用 JSON 解码器实例上的 UseNumber 方法。启用 UseNumber 后，解码器将在反序列化数字时将其解析为 Number 类型而不是 float64 类型并存储到 any 类型变量中。
 # <翻译结束>
 
 
@@ -114,7 +114,7 @@
 
 # <翻译开始>
 // EnableJsonDecoderDisallowUnknownFields 将 binding.EnableDecoderDisallowUnknownFields 设为 true，
-// 以便在 JSON 解码器实例上调用 DisallowUnknownFields 方法。
+// EnableDecoderDisallowUnknownFields 用于调用 JSON 解码器实例上的 DisallowUnknownFields 方法。该方法启用后，当目标是一个结构体且输入包含与目标中非忽略的导出字段不匹配的对象键时，解码器会返回一个错误。
 # <翻译结束>
 
 

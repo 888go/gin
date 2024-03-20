@@ -59,4 +59,6 @@
     <tree path="/recovery.go" title="绑定路由方法"/>
     <tree path="/auth.go" title="中间件函数_简单认证" extension="" presentableText="" tooltipTitle="" icon="" textColor=""
           backgroundColor=""/>
+    <tree path="/mode.go" title="运行模式"/>
+    <tree path="/binding/default_validator.go" title="默认效验器"/>
 </trees>
