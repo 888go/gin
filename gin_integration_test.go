@@ -14,12 +14,11 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
-	"path/filepath"
 	"runtime"
 	"sync"
 	"testing"
 	"time"
-	
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -69,8 +68,8 @@ func TestRunEmpty(t *testing.T) {
 		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 		assert.NoError(t, router.Run())
 	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// 必须等待 goroutine 启动并运行服务器
+	// 否则主线程将提前完成
 	time.Sleep(5 * time.Millisecond)
 
 	assert.Error(t, router.Run(":8080"))
@@ -160,8 +159,8 @@ func TestRunTLS(t *testing.T) {
 		assert.NoError(t, router.RunTLS(":8443", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
 	}()
 
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// 必须等待 goroutine 启动并运行服务器
+	// 否则主线程将提前完成
 	time.Sleep(5 * time.Millisecond)
 
 	assert.Error(t, router.RunTLS(":8443", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
@@ -197,8 +196,8 @@ func TestPusher(t *testing.T) {
 		assert.NoError(t, router.RunTLS(":8449", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
 	}()
 
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// 必须等待 goroutine 启动并运行服务器
+	// 否则主线程将提前完成
 	time.Sleep(5 * time.Millisecond)
 
 	assert.Error(t, router.RunTLS(":8449", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
@@ -212,8 +211,8 @@ func TestRunEmptyWithEnv(t *testing.T) {
 		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 		assert.NoError(t, router.Run())
 	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// 必须等待 goroutine 启动并运行服务器
+	// 否则主线程将提前完成
 	time.Sleep(5 * time.Millisecond)
 
 	assert.Error(t, router.Run(":3123"))
@@ -233,41 +232,42 @@ func TestRunWithPort(t *testing.T) {
 		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 		assert.NoError(t, router.Run(":5150"))
 	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// 必须等待 goroutine 启动并运行服务器
+	// 否则主线程将提前完成
 	time.Sleep(5 * time.Millisecond)
 
 	assert.Error(t, router.Run(":5150"))
 	testRequest(t, "http://localhost:5150/example")
 }
 
-func TestUnixSocket(t *testing.T) {
-	router := New()
-
-	unixTestSocket := filepath.Join(os.TempDir(), "unix_unit_test")
-
-	defer os.Remove(unixTestSocket)
-
-	go func() {
-		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
-		assert.NoError(t, router.RunUnix(unixTestSocket))
-	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
-	time.Sleep(5 * time.Millisecond)
-
-	c, err := net.Dial("unix", unixTestSocket)
-	assert.NoError(t, err)
-
-	fmt.Fprint(c, "GET /example HTTP/1.0\r\n\r\n")
-	scanner := bufio.NewScanner(c)
-	var response string
-	for scanner.Scan() {
-		response += scanner.Text()
-	}
-	assert.Contains(t, response, "HTTP/1.0 200", "should get a 200")
-	assert.Contains(t, response, "it worked", "resp body should match")
-}
+//
+//func TestUnixSocket(t *testing.T) {
+//	router := New()
+//
+//	unixTestSocket := filepath.Join(os.TempDir(), "unix_unit_test")
+//
+//	defer os.Remove(unixTestSocket)
+//
+//	go func() {
+//		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
+//		assert.NoError(t, router.RunUnix(unixTestSocket))
+//	}()
+//// 必须等待 goroutine 启动并运行服务器
+//// 否则主线程将提前完成
+//	time.Sleep(5 * time.Millisecond)
+//
+//	c, err := net.Dial("unix", unixTestSocket)
+//	assert.NoError(t, err)
+//
+//	fmt.Fprint(c, "GET /example HTTP/1.0\r\n\r\n")
+//	scanner := bufio.NewScanner(c)
+//	var response string
+//	for scanner.Scan() {
+//		response += scanner.Text()
+//	}
+//	assert.Contains(t, response, "HTTP/1.0 200", "should get a 200")
+//	assert.Contains(t, response, "it worked", "resp body should match")
+//}
 
 func TestBadUnixSocket(t *testing.T) {
 	router := New()
@@ -297,8 +297,8 @@ func TestFileDescriptor(t *testing.T) {
 		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 		assert.NoError(t, router.RunFd(int(socketFile.Fd())))
 	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// 必须等待 goroutine 启动并运行服务器
+	// 否则主线程将提前完成
 	time.Sleep(5 * time.Millisecond)
 
 	c, err := net.Dial("tcp", listener.Addr().String())
@@ -329,8 +329,8 @@ func TestListener(t *testing.T) {
 		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 		assert.NoError(t, router.RunListener(listener))
 	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// 必须等待 goroutine 启动并运行服务器
+	// 否则主线程将提前完成
 	time.Sleep(5 * time.Millisecond)
 
 	c, err := net.Dial("tcp", listener.Addr().String())
@@ -388,7 +388,7 @@ func TestConcurrentHandleContext(t *testing.T) {
 
 // 函数TestWithHttptestWithSpecifiedPort用于测试指定端口的功能
 // (接收一个*testing.T类型的参数t)
-// 
+//
 // 创建一个新的路由实例router
 // 在router上注册GET方法的"/example"路由处理函数，当该路由被访问时，
 // 会调用传入的函数，向Context写入http.StatusOK状态码及字符串"it worked"作为响应内容

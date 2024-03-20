@@ -9,16 +9,6 @@ require (
 	github.com/dustin/go-broadcast v0.0.0-20211018055107-71439988bd91
 	github.com/fatih/color v1.16.0
 	github.com/getsentry/raven-go v0.2.0
-	github.com/gin-contrib/cache v1.2.0
-	github.com/gin-contrib/expvar v1.0.0
-	github.com/gin-contrib/gzip v0.0.6
-	github.com/gin-contrib/httpsign v1.0.0
-	github.com/gin-contrib/location v0.0.2
-	github.com/gin-contrib/multitemplate v0.0.0-20231230012943-32b233489a81
-	github.com/gin-contrib/rollbar v0.0.1
-	github.com/gin-contrib/secure v0.0.1
-	github.com/gin-contrib/sentry v0.0.0-20191119142041-ff0e9556d1b7
-	github.com/gin-contrib/size v0.0.0-20231230013409-e0f46cc9c1db
 	github.com/gin-contrib/sse v0.1.0
 	github.com/gin-gonic/autotls v1.0.0
 	github.com/gin-gonic/examples v0.0.0-20240225020420-eab1fd895e10
@@ -60,6 +50,7 @@ require (
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
+	github.com/gin-gonic/gin v1.9.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
@@ -70,7 +61,6 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/stvp/roll v0.0.0-20170522205222-3627a5cbeaea // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/arch v0.7.0 // indirect
