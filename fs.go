@@ -34,9 +34,9 @@ func Dir(root string, listDirectory bool) http.FileSystem {
 
 // Open 符合 http.Filesystem 接口。
 
-// ff:
+// ff:打开
 // http.File:
-// name:
+// name:名称
 func (fs onlyFilesFS) Open(name string) (http.File, error) {
 	f, err := fs.fs.Open(name)
 	if err != nil {

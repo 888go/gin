@@ -8,7 +8,7 @@ import (
 	"html/template"
 	"net/http"
 	"sync"
-	
+
 	"github.com/888go/gin"
 )
 
@@ -48,16 +48,16 @@ func SetHTMLTemplate(templ *template.Template) {
 
 // NoRoute 添加处理函数，用于未找到路由的情况（NoRoute）。默认情况下返回404状态码。
 
-// ff:
-// handlers:
+// ff:绑定404
+// handlers:处理函数s
 func NoRoute(handlers ...gin.HandlerFunc) {
 	engine().NoRoute(handlers...)
 }
 
 // NoMethod 是 Engine.NoMethod 的一个包装器。
 
-// ff:
-// handlers:
+// ff:绑定405
+// handlers:处理函数s
 func NoMethod(handlers ...gin.HandlerFunc) {
 	engine().NoMethod(handlers...)
 }
@@ -66,7 +66,7 @@ func NoMethod(handlers ...gin.HandlerFunc) {
 // 例如，所有使用共同授权中间件的路由可以被归为一组。
 
 // ff:创建分组路由
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func Group(relativePath string, handlers ...gin.HandlerFunc) *gin.RouterGroup {
 	return engine().Group(relativePath, handlers...)
@@ -75,7 +75,7 @@ func Group(relativePath string, handlers ...gin.HandlerFunc) *gin.RouterGroup {
 // Handle 是 Engine.Handle 的一个包装器。
 
 // ff:绑定
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 // httpMethod:HTTP方法
 func Handle(httpMethod, relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
@@ -85,7 +85,7 @@ func Handle(httpMethod, relativePath string, handlers ...gin.HandlerFunc) gin.IR
 // POST 是一个快捷方式，用于 router.Handle("POST", path, handle)
 
 // ff:绑定POST
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func POST(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 	return engine().POST(relativePath, handlers...)
@@ -94,7 +94,7 @@ func POST(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 // GET 是一个快捷方式，等同于 router.Handle("GET", path, handle)
 
 // ff:绑定GET
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func GET(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 	return engine().GET(relativePath, handlers...)
@@ -103,7 +103,7 @@ func GET(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 // DELETE 是一个快捷方式，等同于 router.Handle("DELETE", path, handle)
 
 // ff:绑定DELETE
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func DELETE(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 	return engine().DELETE(relativePath, handlers...)
@@ -112,7 +112,7 @@ func DELETE(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 // PATCH 是一个快捷方式，用于 router.Handle("PATCH", path, handle)
 
 // ff:绑定PATCH
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func PATCH(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 	return engine().PATCH(relativePath, handlers...)
@@ -121,7 +121,7 @@ func PATCH(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 // PUT 是一个快捷方式，等同于 router.Handle("PUT", path, handle)
 
 // ff:绑定PUT
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func PUT(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 	return engine().PUT(relativePath, handlers...)
@@ -130,7 +130,7 @@ func PUT(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 // OPTIONS 是一个快捷方式，用于 router.Handle("OPTIONS", path, handle)
 
 // ff:绑定OPTIONS
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func OPTIONS(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 	return engine().OPTIONS(relativePath, handlers...)
@@ -139,7 +139,7 @@ func OPTIONS(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 // HEAD 是一个快捷方式，用于 router.Handle("HEAD", path, handle)
 
 // ff:绑定HEAD
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func HEAD(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 	return engine().HEAD(relativePath, handlers...)
@@ -148,7 +148,7 @@ func HEAD(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 // Any 是 Engine.Any 的一个包装器。
 
 // ff:绑定Any
-// handlers:处理函数
+// handlers:处理函数s
 // relativePath:路由规则
 func Any(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {
 	return engine().Any(relativePath, handlers...)
@@ -230,9 +230,9 @@ func RunTLS(addr, certFile, keyFile string) (err error) {
 // RunUnix连接到一个http.Server，并开始通过指定的unix套接字（即文件）监听和处理HTTP请求。
 // 注意：除非发生错误，否则此方法将无限期地阻塞调用的goroutine。
 
-// ff:
-// err:
-// file:
+// ff:监听Unix
+// err:错误
+// file:文件路径
 func RunUnix(file string) (err error) {
 	return engine().RunUnix(file)
 }
@@ -240,8 +240,8 @@ func RunUnix(file string) (err error) {
 // RunFd 将路由器附加到 http.Server，并开始通过指定的文件描述符监听和处理 HTTP 请求。
 // 注意：除非发生错误，否则该方法将无限期地阻塞调用它的 goroutine。
 
-// ff:
-// err:
+// ff:监听Fd
+// err:错误
 // fd:
 func RunFd(fd int) (err error) {
 	return engine().RunFd(fd)

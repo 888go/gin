@@ -10,34 +10,8 @@
 # cf= 重复,用于重命名多次,如: 一个文档内有2个"One(result interface{}) error"需要重命名.
 #     但是要注意,多个新名称要保持一致. 如:"X取一条(result interface{})"
 # zz= 正则表达式,用于结构名称替换或者复杂替换
-#     如待替换: type authPair struct { //zz:^type *authPair处理函数
+#     如待替换: type authPair struct { //zz:^type *authPair
 
-[AppEngine bool]
-hs=AppEngine弃用
-
-[Method      string]
-hs=方法
-
-[Path        string]
-hs=路径
-
-[HandlerFunc HandlerFunc]
-hs=处理函数
-
-[RedirectTrailingSlash bool]
-hs=重定向尾部斜杠
-
-[RedirectFixedPath bool]
-hs=重定向固定路径
-
-[UseRawPath bool]
-hs=使用原始路径
-
-[RemoveExtraSlash bool]
-hs=删除多余斜杠
-
-[MaxMultipartMemory int64]
-hs=最大Multipart内存
-
-[UseH2C bool]
-hs=启用h2c支持
+[func (fs onlyFilesFS) Open(name string) (http.File, error) {]
+ff=打开
+name=名称

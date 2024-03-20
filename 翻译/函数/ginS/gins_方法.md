@@ -13,49 +13,49 @@
 #     如待替换: type authPair struct { //zz:^type *authPair
 
 [func Handle(httpMethod, relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 httpMethod=HTTP方法
 ff=绑定
 
 [func POST(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
 ff=绑定POST
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func GET(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
 ff=绑定GET
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func DELETE(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
 ff=绑定DELETE
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func PATCH(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
 ff=绑定PATCH
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func PUT(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
 ff=绑定PUT
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func OPTIONS(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
 ff=绑定OPTIONS
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func HEAD(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
 ff=绑定HEAD
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func Any(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes {]
 ff=绑定Any
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func Use(middlewares ...gin.HandlerFunc) gin.IRoutes {]
@@ -89,7 +89,7 @@ templ=Template模板
 
 [func Group(relativePath string, handlers ...gin.HandlerFunc) *gin.RouterGroup {]
 ff=创建分组路由
-handlers=处理函数
+handlers=处理函数s
 relativePath=路由规则
 
 [func Routes() gin.RoutesInfo {]
@@ -106,3 +106,11 @@ err=错误
 keyFile=key文件
 certFile=cert文件
 addr=地址与端口
+
+[func NoRoute(handlers ...gin.HandlerFunc) {]
+ff=绑定404
+handlers=处理函数s
+
+[func NoMethod(handlers ...gin.HandlerFunc) {]
+ff=绑定405
+handlers=处理函数s

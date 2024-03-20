@@ -65,3 +65,37 @@ prefix=防劫持前缀
 
 [func (engine *Engine) Handler() http.Handler {]
 ff=取主处理程序
+
+[func (c HandlersChain) Last() HandlerFunc {]
+ff=取最后一个处理函数
+
+[func (engine *Engine) NoRoute(handlers ...HandlerFunc) {]
+ff=绑定404
+handlers=处理函数s
+
+[func (engine *Engine) NoMethod(handlers ...HandlerFunc) {]
+ff=绑定405
+handlers=处理函数s
+
+[func (engine *Engine) SetTrustedProxies(trustedProxies #左中括号##右中括号#string) error {]
+ff=设置受信任代理
+trustedProxies=受信任代理
+
+[func (engine *Engine) RunUnix(file string) (err error) {]
+ff=监听Unix
+err=错误
+file=文件路径
+
+[func (engine *Engine) RunFd(fd int) (err error) {]
+ff=监听Fd
+err=错误
+
+[func (engine *Engine) RunListener(listener net.Listener) (err error) {]
+ff=监听Listener
+err=错误
+
+[func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {]
+ff=ServeHTTP底层方法
+
+[func (engine *Engine) HandleContext(c *Context) {]
+ff=HandleContext底层方法
