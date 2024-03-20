@@ -24,24 +24,24 @@ func engine() *gin.Engine {
 
 // LoadHTMLGlob 是 Engine.LoadHTMLGlob 的一个包装函数。
 
-// ff:
-// pattern:
+// ff:加载HTML模板目录
+// pattern:模板目录
 func LoadHTMLGlob(pattern string) {
 	engine().LoadHTMLGlob(pattern)
 }
 
 // LoadHTMLFiles 是对 Engine.LoadHTMLFiles 的一个封装。
 
-// ff:
-// files:
+// ff:加载HTML模板文件
+// files:模板文件s
 func LoadHTMLFiles(files ...string) {
 	engine().LoadHTMLFiles(files...)
 }
 
 // SetHTMLTemplate 是 Engine.SetHTMLTemplate 的一个包装函数。
 
-// ff:
-// templ:
+// ff:设置Template模板
+// templ:Template模板
 func SetHTMLTemplate(templ *template.Template) {
 	engine().SetHTMLTemplate(templ)
 }
@@ -65,9 +65,9 @@ func NoMethod(handlers ...gin.HandlerFunc) {
 // Group 创建一个新的路由分组。你应该在此添加所有具有共同中间件或相同路径前缀的路由。
 // 例如，所有使用共同授权中间件的路由可以被归为一组。
 
-// ff:
-// handlers:
-// relativePath:
+// ff:创建分组路由
+// handlers:处理函数
+// relativePath:路由规则
 func Group(relativePath string, handlers ...gin.HandlerFunc) *gin.RouterGroup {
 	return engine().Group(relativePath, handlers...)
 }
@@ -197,7 +197,8 @@ func Use(middlewares ...gin.HandlerFunc) gin.IRoutes {
 
 // Routes 返回已注册路由的切片。
 
-// ff:
+// ff:取路由数组
+// routes:路由s
 func Routes() gin.RoutesInfo {
 	return engine().Routes()
 }
@@ -206,9 +207,9 @@ func Routes() gin.RoutesInfo {
 // 这是 http.ListenAndServe(addr, router) 的快捷方式。
 // 注意：除非发生错误，否则此方法将无限期地阻塞调用它的 goroutine。
 
-// ff:
-// err:
-// addr:
+// ff:监听
+// err:错误
+// addr:地址与端口
 func Run(addr ...string) (err error) {
 	return engine().Run(addr...)
 }
@@ -217,11 +218,11 @@ func Run(addr ...string) (err error) {
 // 这是 http.ListenAndServeTLS(addr, certFile, keyFile, router) 的快捷方式。
 // 注意：除非发生错误，否则此方法将无限期地阻塞调用它的 goroutine。
 
-// ff:
-// err:
-// keyFile:
-// certFile:
-// addr:
+// ff:监听TLS
+// err:错误
+// keyFile:key文件
+// certFile:cert文件
+// addr:地址与端口
 func RunTLS(addr, certFile, keyFile string) (err error) {
 	return engine().RunTLS(addr, certFile, keyFile)
 }
