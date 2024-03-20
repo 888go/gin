@@ -10,20 +10,14 @@ import (
 	"unsafe"
 )
 
-// StringToBytes 将字符串转换为字节切片，无需进行内存分配。
+// StringToBytes 将字符串转换为字节切片，且无需进行内存分配。
 // 有关更多详细信息，请参见 https://github.com/golang/go/issues/53003#issuecomment-1140276077。
-
-// ff:
-// s:
 func StringToBytes(s string) []byte {
 	return unsafe.Slice(unsafe.StringData(s), len(s))
 }
 
 // BytesToString 将字节切片转换为字符串，无需进行内存分配。
-// 有关更多详细信息，请参阅 https://github.com/golang/go/issues/53003#issuecomment-1140276077。
-
-// ff:
-// b:
+// 有关更多详细信息，请参见 https://github.com/golang/go/issues/53003#issuecomment-1140276077。
 func BytesToString(b []byte) string {
 	return unsafe.String(unsafe.SliceData(b), len(b))
 }

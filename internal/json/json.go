@@ -1,4 +1,4 @@
-// 版权所有 2017 Bo-Yi Wu。保留所有权利。
+// 版权所有 ? 2017 Bo-Yi Wu。保留所有权利。
 // 本源代码的使用受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 
@@ -11,15 +11,14 @@ import (
 )
 
 var (
-// Marshal 是由 gin/json 包导出的。
+	// Marshal 是由 gin/json 包导出的。
 	Marshal = json.Marshal
-// Unmarshal 是由 gin/json 包导出的。
+	// Unmarshal 是由 gin/json 包导出的。
 	Unmarshal = json.Unmarshal
-// MarshalIndent 是 gin/json 包导出的方法。
-// （该方法用于）将数据按照指定的缩进格式转换为 JSON 格式的字符串。
+	// MarshalIndent 是 gin/json 包导出的方法。
 	MarshalIndent = json.MarshalIndent
-// NewDecoder 是 gin/json 包导出的方法。
+	// NewDecoder 由 gin/json 包导出。
 	NewDecoder = json.NewDecoder
-// NewEncoder 由 gin/json 包导出。
+	// NewEncoder 是由 gin/json 包导出的。
 	NewEncoder = json.NewEncoder
 )

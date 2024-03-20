@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -86,11 +86,11 @@ func TestFilterFlags(t *testing.T) {
 }
 
 func TestFunctionName(t *testing.T) {
-	assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction)) //th:assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction))     
+	assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction))
 }
 
 func somefunction() {
-// 这个空函数由TestFunctionName()使用
+	// 这个空函数被TestFunctionName()测试函数使用
 }
 
 func TestJoinPaths(t *testing.T) {

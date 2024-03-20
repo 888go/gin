@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// 参考 Gin 框架官方文档（中文版）：
 // https://gin-gonic.com/zh-cn/docs/examples/param-in-path/
 func main() {
 	router := gin.Default()

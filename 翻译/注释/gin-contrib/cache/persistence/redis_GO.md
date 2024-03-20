@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// RedisStore 表示使用 Redis 进行持久化的缓存
+// RedisStore代表了使用Redis进行持久化的缓存
 # <翻译结束>
 
 
@@ -15,12 +15,12 @@
 
 # <翻译开始>
 // NewRedisCache 返回一个 RedisStore
-// 由于 redigo 库目前还不支持分片/集群，所以 hostList 中当前仅包含一个主机地址
+// 由于 redigo 目前还不支持分片/集群，因此 hostList 中目前只能包含一个主机地址
 # <翻译结束>
 
 
 <原文开始>
-			// the redis protocol should probably be made sett-able
+// the redis protocol should probably be made sett-able
 <原文结束>
 
 # <翻译开始>
@@ -29,16 +29,7 @@
 
 
 <原文开始>
-				// check with PING
-<原文结束>
-
-# <翻译开始>
-// 使用PING进行检查
-# <翻译结束>
-
-
-<原文开始>
-		// custom connection test method
+// custom connection test method
 <原文结束>
 
 # <翻译开始>
@@ -47,7 +38,7 @@
 
 
 <原文开始>
-			// don't need check connection every time.
+// don't need check connection every time.
 <原文结束>
 
 # <翻译开始>
@@ -62,7 +53,7 @@
 
 # <翻译开始>
 // NewRedisCacheWithPool 使用提供的连接池返回一个 RedisStore
-// 直到 redigo 支持分片/集群，hostList 中将仅包含一个主机
+// 在 redigo 支持分片/集群之前，hostList 中将只包含一个主机地址
 # <翻译结束>
 
 
@@ -71,8 +62,7 @@
 <原文结束>
 
 # <翻译开始>
-// Set (参考CacheStore接口)
-// 此处的Set方法是实现CacheStore接口的一部分，用于设置缓存值。
+// Set（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -81,7 +71,7 @@
 <原文结束>
 
 # <翻译开始>
-// Add (参考 CacheStore 接口)
+// Add （参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -90,7 +80,7 @@
 <原文结束>
 
 # <翻译开始>
-// Replace (参考 CacheStore 接口)
+// Replace（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -99,7 +89,7 @@
 <原文结束>
 
 # <翻译开始>
-// Get (参考 CacheStore 接口)
+// Get（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -108,8 +98,7 @@
 <原文结束>
 
 # <翻译开始>
-// Delete (参考 CacheStore 接口)
-// （该注释表明此“Delete”方法实现了 CacheStore 接口中的“Delete”方法，具体功能请参照 CacheStore 接口定义）
+// Delete（参考 CacheStore 接口）
 # <翻译结束>
 
 
@@ -118,7 +107,7 @@
 <原文结束>
 
 # <翻译开始>
-// 自增（参见CacheStore接口）
+// 自增（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -130,8 +119,8 @@
 <原文结束>
 
 # <翻译开始>
-// 根据缓存契约，在自增操作**之前**检查键是否存在。
-// Redis 会自动创建键，但我们并不希望这样。因为我们需要自己进行自增操作（由于 Redis 不支持数值溢出，不能直接使用 INCRBY 命令），所以我们先获取值，通过这种方式来检查键是否存在，以尽量减少对 Redis 的调用次数。
+// 根据缓存契约，在自增之前检查是否存在。
+// Redis 会自动创建键，但我们不希望这样。因为我们需要自己而不是通过原生的 INCRBY（Redis 不支持自增后循环）来执行自增操作，所以我们获取值并以这种方式进行存在性检查，以尽量减少对 Redis 的调用。
 # <翻译结束>
 
 
@@ -150,8 +139,8 @@
 <原文结束>
 
 # <翻译开始>
-// 根据缓存契约，在自增之前检查键是否存在。
-// Redis 会自动创建键，但我们不希望这样，因此需要调用 exists 方法。
+// 按照缓存契约，在递增前检查是否存在。
+// Redis 会自动创建键，但我们不希望这样，因此需要调用 exists 函数。
 # <翻译结束>
 
 
@@ -162,8 +151,9 @@
 <原文结束>
 
 # <翻译开始>
-// 减少合约规定只能减到0
-// 因此我们获取当前值，如果减少量大于该值，则将值置零
+// Decrement contract 表示你只能减到0
+// 因此，我们获取当前值，如果减少的量大于该值，
+// 则将值置为0
 # <翻译结束>
 
 
@@ -172,79 +162,6 @@
 <原文结束>
 
 # <翻译开始>
-// Flush （参考 CacheStore 接口）
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// defaultExpiration:
-// password:
-// host:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// defaultExpiration:
-// password:
-// host:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// defaultExpiration:
-// pool:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// defaultExpiration:
-// pool:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// expires:
-// value:
-// key:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// expires:
-// value:
-// key:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// ptrValue:
-// key:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// ptrValue:
-// key:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// err:
-// newValue:
-// delta:
-// key:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// err:
-// newValue:
-// delta:
-// key:
+// Flush（参考 CacheStore 接口）
 # <翻译结束>
 

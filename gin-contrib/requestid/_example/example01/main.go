@@ -15,17 +15,17 @@ func main() {
 
 	r.Use(requestid.New())
 
-// 示例 ping 请求。
+	// Example ping request.
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-// 示例 / 请求
+	// Example / request.
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "id:"+requestid.Get(c))
 	})
 
-// 在0.0.0.0:8080监听并服务
+	// 在0.0.0.0:8080监听并服务
 	if err := r.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}

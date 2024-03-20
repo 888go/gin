@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-// https://topgoer.com/gin%E6%A1%86%E6%9E%B6/gin%E8%B7%AF%E7%94%B1/%E8%A1%A8%E5%8D%95%E5%8F%82%E6%95%B0.html
+// 参考链接：https://topgoer.com/gin框架/gin路由/表单参数.html
 func main() {
 	r := gin.Default()
 	r.POST("/form", func(c *gin.Context) {
@@ -14,6 +14,7 @@ func main() {
 		username := c.PostForm("username")
 		password := c.PostForm("userpassword")
 		// c.String(http.StatusOK, fmt.Sprintf("username:%s,password:%s,type:%s", username, password, types))
+// 使用c.String方法向客户端返回HTTP状态码为200的响应，并在响应体中输出格式化的字符串，内容为：username（用户名称）、password（密码）和type（类型），其中username、password、types分别替换为对应的变量值。
 		c.String(http.StatusOK, fmt.Sprintf("username:%s,password:%s,type:%s", username, password, types))
 	})
 	r.Run()

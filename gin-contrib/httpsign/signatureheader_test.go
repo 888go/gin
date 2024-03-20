@@ -25,12 +25,6 @@ func newSignatureHeader(s string) http.Header {
 	}
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestFromSignatureString(t *testing.T) {
 	tests := []struct {
 		name      string

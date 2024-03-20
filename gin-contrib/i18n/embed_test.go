@@ -62,18 +62,12 @@ var (
 		AcceptLanguage:   []language.Tag{language.English, language.German, language.Chinese},
 		RootPath:         "./testdata/localizeJSON/",
 		UnmarshalFunc:    json.Unmarshal,
-// 在注释掉这一行后，将使用defaultLoader
+// 在注释掉这一行后，使用defaultLoader
 // 它将从文件中加载
 		Loader: &EmbedLoader{fs},
 	})))
 )
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestEmbedLoader(t *testing.T) {
 	type args struct {
 		lng  language.Tag

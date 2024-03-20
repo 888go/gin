@@ -10,11 +10,11 @@ you can also make your owns via gin's functional `Use()` to integrate extra midd
 <原文结束>
 
 # <翻译开始>
-# 在 Gin 中实现速率限制
+# 在 Gin 中实现限流
 
-该项目是一个使用漏桶算法实现速率限制的示例。尽管 Golang 官方包提供了一个基于令牌桶算法的实现 [time/rate](https://pkg.go.dev/golang.org/x/time/rate?tab=doc)，
+该项目是一个使用漏桶算法进行限流的示例。尽管 Go 语言官方包提供了一个基于令牌桶算法的实现（参考 [time/rate](https://pkg.go.dev/golang.org/x/time/rate?tab=doc)），
 
-但你也可以通过 Gin 的函数式 `Use()` 方法来集成自定义中间件，以实现额外的速率限制功能。
+但你也可以通过 Gin 的函数式 `Use()` 方法来集成自定义中间件，实现额外的限流功能。
 
 # <翻译结束>
 

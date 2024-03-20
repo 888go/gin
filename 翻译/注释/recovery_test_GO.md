@@ -6,36 +6,18 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
 <原文开始>
-	// RUN
+// Check the buffer does not have the secret key
 <原文结束>
 
 # <翻译开始>
-// 运行
-# <翻译结束>
-
-
-<原文开始>
-	// TEST
-<原文结束>
-
-# <翻译开始>
-// 测试
-# <翻译结束>
-
-
-<原文开始>
-	// Check the buffer does not have the secret key
-<原文结束>
-
-# <翻译开始>
-// 检查缓冲区是否有密钥
+// 检查缓冲区中不包含密钥
 # <翻译结束>
 
 
@@ -44,16 +26,16 @@
 <原文结束>
 
 # <翻译开始>
-// TestPanicInHandler断言panic已经恢复
+// TestPanicInHandler 断言在处理器中捕获到了 panic。
 # <翻译结束>
 
 
 <原文开始>
-	// Debug mode prints the request
+// Debug mode prints the request
 <原文结束>
 
 # <翻译开始>
-// 调试模式打印请求
+// Debug模式会打印请求
 # <翻译结束>
 
 
@@ -62,8 +44,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestPanicWithAbort断言panic已经恢复，即使上下文
-// 使用了中止
+// TestPanicWithAbort 断言即使使用了 context.Abort，也能捕获到 panic 异常。
 # <翻译结束>
 
 
@@ -73,43 +54,16 @@
 <原文结束>
 
 # <翻译开始>
-// TestPanicWithBrokenPipe断言恢复专门处理对损坏管道的写响应
+// TestPanicWithBrokenPipe 断言 recovery 特别处理了
+// 向已断开连接的管道写入响应的情况
 # <翻译结束>
 
 
 <原文开始>
-				// Start writing response
+// Oops. Client connection closed
 <原文结束>
 
 # <翻译开始>
-// 开始写回应
-# <翻译结束>
-
-
-<原文开始>
-				// Oops. Client connection closed
-<原文结束>
-
-# <翻译开始>
-// 哦
-// 客户端连接已关闭
-# <翻译结束>
-
-
-<原文开始>
-			// RUN
-<原文结束>
-
-# <翻译开始>
-// 运行
-# <翻译结束>
-
-
-<原文开始>
-			// TEST
-<原文结束>
-
-# <翻译开始>
-// 测试
+// 哎呀，客户端连接已关闭
 # <翻译结束>
 

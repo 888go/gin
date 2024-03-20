@@ -16,12 +16,6 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 	return w
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestHandler(t *testing.T) {
 	router := gin.New()
 	router.GET("/debug/vars", Handler())

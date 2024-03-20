@@ -5,7 +5,10 @@ import (
 	"net/http"
 )
 
-// https://topgoer.com/gin%E6%A1%86%E6%9E%B6/%E7%AE%80%E4%BB%8B.html
+// 参考链接：https://topgoer.com/gin框架/简介.html
+// 此段代码为Go语言中的单行注释，其内容是对一个URL的描述，翻译成中文即为：
+// ```go
+// 参考链接：https://topgoer.com/gin框架简介.html
 func main() {
 	// 1.创建路由
 	r := gin.Default()

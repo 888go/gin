@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// 版权所有2013朱利安施密特
-// 版权所有
-// 此源代码的使用受bsd风格的许可证的约束，该许可证可在https://github.com/julienschmidt/httprouter/blob/master/LICENSE上找到
+// 版权所有 ? 2013 Julien Schmidt。保留所有权利。
+// 本源代码的使用受 BSD 风格许可协议约束，该协议可在
+// https://github.com/julienschmidt/httprouter/blob/master/LICENSE 查阅
 # <翻译结束>
 
 
@@ -17,25 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// 作为一种变通方法，因为我们不能比较函数或它们的地址
-# <翻译结束>
-
-
-<原文开始>
-// key mismatch
-<原文结束>
-
-# <翻译开始>
-// 关键不匹配
-# <翻译结束>
-
-
-<原文开始>
-// no matching child
-<原文结束>
-
-# <翻译开始>
-// 没有匹配的子
+// 由于我们无法比较函数或其地址，因此作为临时解决方案使用
 # <翻译结束>
 
 
@@ -46,34 +28,9 @@
 <原文结束>
 
 # <翻译开始>
-// *错误的参数被截获新的PR句柄(/all /all/cc /a/cc)修复PR: https://github.com/gin-gonic/gin/pull/2796
-# <翻译结束>
-
-
-<原文开始>
-		// Add again
-<原文结束>
-
-# <翻译开始>
-// 再次添加
-# <翻译结束>
-
-
-<原文开始>
-	//printChildren(tree, "")
-<原文结束>
-
-# <翻译开始>
-// printChildren(树,““)
-# <翻译结束>
-
-
-<原文开始>
-// 3 byte
-<原文结束>
-
-# <翻译开始>
-// 3字节
+// * 遇到被拦截的参数错误
+// 新增 PR 处理方式（/all、/all/cc、/a/cc）
+// 修复 PR：https://github.com/gin-gonic/gin/pull/2796
 # <翻译结束>
 
 
@@ -82,16 +39,7 @@
 <原文结束>
 
 # <翻译开始>
-// 3个字节，最后一个字节不同
-# <翻译结束>
-
-
-<原文开始>
-// 4 byte
-<原文结束>
-
-# <翻译开始>
-// 4字节
+// 3字节，最后一字节不同
 # <翻译结束>
 
 
@@ -101,16 +49,17 @@
 <原文结束>
 
 # <翻译开始>
-// Check out == in查看所有fixTrailingSlash = true的注册路由
+// 查看所有已注册路由中的 `== in`
+// 当 fixTrailingSlash 设置为 true 时
 # <翻译结束>
 
 
 <原文开始>
-	// With fixTrailingSlash = false
+// With fixTrailingSlash = false
 <原文结束>
 
 # <翻译开始>
-// 使用fixTrailingSlash = false
+// 当 fixTrailingSlash 设置为 false 时
 # <翻译结束>
 
 
@@ -119,62 +68,43 @@
 <原文结束>
 
 # <翻译开始>
-// test需要一个trailingSlash修复
-// 一定不能找到它!
+// 测试需要进行尾部斜杠修正。确保它不会被找到！
 # <翻译结束>
 
 
 <原文开始>
-	// set invalid node type
+// case-insensitive lookup
 <原文结束>
 
 # <翻译开始>
-// 设置无效节点类型
+// 不区分大小写的查找
 # <翻译结束>
 
 
 <原文开始>
-	// normal lookup
+// add a child with wildcard
 <原文结束>
 
 # <翻译开始>
-// 普通查找
+// 添加一个带有通配符的子节点
 # <翻译结束>
 
 
 <原文开始>
-	// case-insensitive lookup
+// set invalid Params type
 <原文结束>
 
 # <翻译开始>
-// 不区分大小写的查询
+// 设置无效的Params类型
 # <翻译结束>
 
 
 <原文开始>
-	// add a child with wildcard
+// try to trigger slice bounds out of range with capacity 0
 <原文结束>
 
 # <翻译开始>
-// 使用通配符添加子节点
-# <翻译结束>
-
-
-<原文开始>
-	// set invalid Params type
-<原文结束>
-
-# <翻译开始>
-// 设置无效的参数类型
-# <翻译结束>
-
-
-<原文开始>
-	// try to trigger slice bounds out of range with capacity 0
-<原文结束>
-
-# <翻译开始>
-// 尝试触发超出容量0范围的切片边界
+// 尝试通过容量为0触发切片越界
 # <翻译结束>
 
 
@@ -185,6 +115,6 @@
 <原文结束>
 
 # <翻译开始>
-// 我必须重新创建一个“树”，因为当循环从“addRoute”函数引发的Panic中恢复时，“树”将处于不一致的状态
+// 我必须重新创建一个“树”，因为当循环从由`addRoute`函数抛出的panic中恢复时，“树”将处于不一致的状态。
 # <翻译结束>
 

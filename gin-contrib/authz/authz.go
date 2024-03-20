@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 ? 2014 Manu Martinez-Almeida。保留所有权利。
+// 本源代码的使用受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package authz
 
@@ -11,28 +11,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// NewAuthorizer返回授权器，使用Casbin强制器作为输入
-
-// ff:
-// e:
-
-// ff:
-// e:
-
-// ff:
-// e:
-
-// ff:
-// e:
-
-// ff:
-// e:
-
-// ff:
-// e:
-
-// ff:
-// e:
+// NewAuthorizer 返回一个鉴权器，使用 Casbin 执行器作为输入参数
 func NewAuthorizer(e *casbin.Enforcer) gin.HandlerFunc {
 	a := &BasicAuthorizer{enforcer: e}
 
@@ -43,62 +22,20 @@ func NewAuthorizer(e *casbin.Enforcer) gin.HandlerFunc {
 	}
 }
 
-// BasicAuthorizer存储casbin处理程序
+// BasicAuthorizer 基础授权器存储了 casbin 处理器
 type BasicAuthorizer struct {
 	enforcer *casbin.Enforcer
 }
 
-// GetUserName从请求中获取用户名
-// 目前只支持HTTP基本认证
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
+// GetUserName 从请求中获取用户名。
+// 当前仅支持HTTP基本认证。
 func (a *BasicAuthorizer) GetUserName(r *http.Request) string {
 	username, _, _ := r.BasicAuth()
 	return username
 }
 
-// CheckPermission检查请求中的用户/方法/路径组合
-// 返回true(授予权限)或false(禁止权限)
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
-
-// ff:
-// r:
+// CheckPermission 检查请求中的用户/方法/路径组合。
+// 返回 true（权限授予）或 false（权限禁止）
 func (a *BasicAuthorizer) CheckPermission(r *http.Request) bool {
 	user := a.GetUserName(r)
 	method := r.Method
@@ -112,28 +49,7 @@ func (a *BasicAuthorizer) CheckPermission(r *http.Request) bool {
 	return allowed
 }
 
-// RequirePermission返回403 Forbidden给客户端
-
-// ff:
-// c:
-
-// ff:
-// c:
-
-// ff:
-// c:
-
-// ff:
-// c:
-
-// ff:
-// c:
-
-// ff:
-// c:
-
-// ff:
-// c:
+// RequirePermission 返回 403 Forbidden 给客户端
 func (a *BasicAuthorizer) RequirePermission(c *gin.Context) {
 	c.AbortWithStatus(http.StatusForbidden)
 }

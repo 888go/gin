@@ -1,5 +1,5 @@
-// 版权声明 2022 Gin 核心团队。所有权利保留。
-// 本源代码的使用受 MIT 风格许可证约束，
+// 版权所有 ? 2022 Gin 核心团队。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 
 package render
@@ -18,9 +18,6 @@ type TOML struct {
 var TOMLContentType = []string{"application/toml; charset=utf-8"}
 
 // Render (TOML) 将给定的接口对象进行序列化，并使用自定义 ContentType 写入数据。
-
-// ff:
-// w:
 func (r TOML) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 
@@ -34,9 +31,6 @@ func (r TOML) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (TOML) 为响应写入 TOML ContentType。
-
-// ff:
-// w:
 func (r TOML) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, TOMLContentType)
 }

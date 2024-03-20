@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -17,17 +17,16 @@
 <原文结束>
 
 # <翻译开始>
-// LoggerConfig定义了Logger中间件的配置
+// LoggerConfig 定义了 Logger 中间件的配置。
 # <翻译结束>
 
 
 <原文开始>
-	// Optional. Default value is gin.defaultLogFormatter
+// Optional. Default value is gin.defaultLogFormatter
 <原文结束>
 
 # <翻译开始>
-// 可选的
-// 默认值为gin.defaultLogFormatter
+// 可选的。默认值为gin.defaultLogFormatter
 # <翻译结束>
 
 
@@ -37,9 +36,8 @@
 <原文结束>
 
 # <翻译开始>
-// Output是写入日志的写入器
-// 可选的
-// 默认值为gin. defaultwwriter
+// Output 是一个用于写入日志的writer。
+// 可选配置，默认值为gin.DefaultWriter。
 # <翻译结束>
 
 
@@ -49,8 +47,8 @@
 <原文结束>
 
 # <翻译开始>
-// skipppaths是一个url路径数组，不写入日志
-// 可选的
+// SkipPaths 是一个 URL 路径数组，其中的请求日志不会被记录。
+// 可选配置。
 # <翻译结束>
 
 
@@ -59,7 +57,7 @@
 <原文结束>
 
 # <翻译开始>
-// LogFormatter给出传递给LoggerWithFormatter的formatter函数的签名
+// LogFormatter 提供了传递给 LoggerWithFormatter 的格式化函数的签名
 # <翻译结束>
 
 
@@ -68,97 +66,97 @@
 <原文结束>
 
 # <翻译开始>
-// LogFormatterParams是任何格式化程序在需要进行日志记录时要传递的结构
+// LogFormatterParams 是一个结构体，当需要进行日志记录时，任何格式化器都将接收到这个结构体作为参数
 # <翻译结束>
 
 
 <原文开始>
-	// TimeStamp shows the time after the server returns a response.
+// TimeStamp shows the time after the server returns a response.
 <原文结束>
 
 # <翻译开始>
-// TimeStamp显示服务器返回响应后的时间
+// TimeStamp 表示服务器返回响应后的时刻。
 # <翻译结束>
 
 
 <原文开始>
-	// StatusCode is HTTP response code.
+// StatusCode is HTTP response code.
 <原文结束>
 
 # <翻译开始>
-// StatusCode是HTTP响应码
+// StatusCode 是HTTP响应代码。
 # <翻译结束>
 
 
 <原文开始>
-	// Latency is how much time the server cost to process a certain request.
+// Latency is how much time the server cost to process a certain request.
 <原文结束>
 
 # <翻译开始>
-// 延迟是服务器处理某个请求所需的时间
+// 延迟是服务器处理特定请求所需的时间。
 # <翻译结束>
 
 
 <原文开始>
-	// ClientIP equals Context's ClientIP method.
+// ClientIP equals Context's ClientIP method.
 <原文结束>
 
 # <翻译开始>
-// ClientIP等于Context的ClientIP方法
+// ClientIP 等同于 Context 的 ClientIP 方法。
 # <翻译结束>
 
 
 <原文开始>
-	// Method is the HTTP method given to the request.
+// Method is the HTTP method given to the request.
 <原文结束>
 
 # <翻译开始>
-// 方法是给定给请求的HTTP方法
+// Method是请求中给定的HTTP方法。
 # <翻译结束>
 
 
 <原文开始>
-	// Path is a path the client requests.
+// Path is a path the client requests.
 <原文结束>
 
 # <翻译开始>
-// Path是客户端请求的路径
+// Path 是客户端请求的路径。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrorMessage is set if error has occurred in processing the request.
+// ErrorMessage is set if error has occurred in processing the request.
 <原文结束>
 
 # <翻译开始>
-// 如果在处理请求时发生错误，则设置ErrorMessage
+// ErrorMessage在处理请求时发生错误时设置。
 # <翻译结束>
 
 
 <原文开始>
-	// isTerm shows whether gin's output descriptor refers to a terminal.
+// isTerm shows whether gin's output descriptor refers to a terminal.
 <原文结束>
 
 # <翻译开始>
-// isTerm显示gin的输出描述符是否指向终端
+// isTerm 判断 gin 的输出描述符是否指向一个终端。
 # <翻译结束>
 
 
 <原文开始>
-	// BodySize is the size of the Response Body
+// BodySize is the size of the Response Body
 <原文结束>
 
 # <翻译开始>
-// BodySize是响应体的大小
+// BodySize 是 Response Body 的大小
 # <翻译结束>
 
 
 <原文开始>
-	// Keys are the keys set on the request's context.
+// Keys are the keys set on the request's context.
 <原文结束>
 
 # <翻译开始>
-// 键是在请求的上下文中设置的键
+// Keys 是在请求的上下文中设置的键。
 # <翻译结束>
 
 
@@ -167,7 +165,7 @@
 <原文结束>
 
 # <翻译开始>
-// StatusCodeColor是用于将http状态码适当地记录到终端的ANSI颜色
+// StatusCodeColor 是用于将 HTTP 状态码适当地以 ANSI 颜色格式输出到终端的。
 # <翻译结束>
 
 
@@ -176,7 +174,7 @@
 <原文结束>
 
 # <翻译开始>
-// MethodColor是用于将http方法适当地记录到终端的ANSI颜色
+// MethodColor 是用于适当地将HTTP方法以颜色格式输出到终端的ANSI颜色。
 # <翻译结束>
 
 
@@ -185,7 +183,7 @@
 <原文结束>
 
 # <翻译开始>
-// ResetColor重置所有转义属性
+// ResetColor 重置所有转义属性。
 # <翻译结束>
 
 
@@ -194,7 +192,7 @@
 <原文结束>
 
 # <翻译开始>
-// IsOutputColor是否可以输出颜色到日志中
+// IsOutputColor 指示是否可以在日志中输出颜色。
 # <翻译结束>
 
 
@@ -203,7 +201,7 @@
 <原文结束>
 
 # <翻译开始>
-// defaultLogFormatter是Logger中间件使用的默认日志格式函数
+// defaultLogFormatter 是 Logger 中间件默认使用的日志格式化函数。
 # <翻译结束>
 
 
@@ -212,7 +210,7 @@
 <原文结束>
 
 # <翻译开始>
-// DisableConsoleColor禁用控制台的颜色输出
+// DisableConsoleColor 禁用控制台中的颜色输出。
 # <翻译结束>
 
 
@@ -221,7 +219,7 @@
 <原文结束>
 
 # <翻译开始>
-// ForceConsoleColor强制控制台的颜色输出
+// ForceConsoleColor 强制在控制台输出彩色内容
 # <翻译结束>
 
 
@@ -230,7 +228,7 @@
 <原文结束>
 
 # <翻译开始>
-// ErrorLogger为任何错误类型返回一个HandlerFunc
+// ErrorLogger 返回一个适用于任何错误类型的 HandlerFunc。
 # <翻译结束>
 
 
@@ -239,7 +237,7 @@
 <原文结束>
 
 # <翻译开始>
-// ErrorLoggerT返回给定错误类型的HandlerFunc
+// ErrorLoggerT为给定的错误类型返回一个HandlerFunc。
 # <翻译结束>
 
 
@@ -249,9 +247,8 @@
 <原文结束>
 
 # <翻译开始>
-// Logger实例化一个Logger中间件，它将把日志写入gin. defaultwwriter
-// 缺省为gin
-// defaultwwriter = os.Stdout
+// Logger 创建一个 Logger 中间件，该中间件会将日志写入 gin.DefaultWriter。
+// 默认情况下，gin.DefaultWriter = os.Stdout。
 # <翻译结束>
 
 
@@ -260,7 +257,7 @@
 <原文结束>
 
 # <翻译开始>
-// LoggerWithFormatter实例:一个具有指定日志格式功能的Logger中间件
+// LoggerWithFormatter 根据指定的日志格式化函数实例化一个 Logger 中间件。
 # <翻译结束>
 
 
@@ -270,9 +267,8 @@
 <原文结束>
 
 # <翻译开始>
-// LoggerWithWriter实例:一个具有指定写入器缓冲区的Logger中间件
-// 例如:操作系统
-// 标准输出，以写模式打开的文件，套接字…
+// LoggerWithWriter 通过指定的写入器缓冲区实例化一个 Logger 中间件。
+// 示例：os.Stdout（标准输出），以写入模式打开的文件，套接字等...
 # <翻译结束>
 
 
@@ -281,55 +277,15 @@
 <原文结束>
 
 # <翻译开始>
-// LoggerWithConfig实例是一个带有config的Logger中间件
+// LoggerWithConfig 通过配置实例化一个 Logger 中间件。
 # <翻译结束>
 
 
 <原文开始>
-		// Start timer
+// Log only when path is not being skipped
 <原文结束>
 
 # <翻译开始>
-// 启动定时器
-# <翻译结束>
-
-
-<原文开始>
-		// Process request
-<原文结束>
-
-# <翻译开始>
-// 处理请求
-# <翻译结束>
-
-
-<原文开始>
-		// Log only when path is not being skipped
-<原文结束>
-
-# <翻译开始>
-// 仅当路径未被跳过时记录日志
-# <翻译结束>
-
-
-<原文开始>
-			// Stop timer
-<原文结束>
-
-# <翻译开始>
-// 停止计时器
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// notlogged:
-// out:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// notlogged:
-// out:
+// 当路径未被跳过时才记录日志
 # <翻译结束>
 

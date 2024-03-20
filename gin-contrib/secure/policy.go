@@ -10,9 +10,9 @@ import (
 )
 
 type (
-// Secure 是一个中间件，用于设置一些基本的安全功能。可以通过提供一个 secure.Options 结构体来配置应启用哪些功能，并且可以覆盖部分默认值。
+// Secure 是一个中间件，用于帮助设置一些基本的安全功能。可以通过提供一个 secure.Options 结构体来配置要启用哪些功能，并且可以覆盖一些默认值。
 	policy struct {
-// 通过Options结构体来自定义Secure（安全配置）。
+		// 使用Options结构体来自定义Secure。
 		config       Config
 		fixedHeaders []header
 	}
@@ -34,24 +34,24 @@ func (p *policy) loadConfig(config Config) {
 	p.config = config
 	p.fixedHeaders = make([]header, 0, 5)
 
-// Frame Options头部。
+	// Frame Options header.
 	if len(config.CustomFrameOptionsValue) > 0 {
 		p.addHeader("X-Frame-Options", config.CustomFrameOptionsValue)
 	} else if config.FrameDeny {
 		p.addHeader("X-Frame-Options", "DENY")
 	}
 
-// 内容类型选项头。
+	// 内容类型选项头。
 	if config.ContentTypeNosniff {
 		p.addHeader("X-Content-Type-Options", "nosniff")
 	}
 
-// XSS保护头部
+	// XSS Protection header.
 	if config.BrowserXssFilter {
 		p.addHeader("X-Xss-Protection", "1; mode=block")
 	}
 
-// 内容安全策略（Content Security Policy）头部
+	// 内容安全策略头。
 	if len(config.ContentSecurityPolicy) > 0 {
 		p.addHeader("Content-Security-Policy", config.ContentSecurityPolicy)
 	}
@@ -60,26 +60,26 @@ func (p *policy) loadConfig(config Config) {
 		p.addHeader("Referrer-Policy", config.ReferrerPolicy)
 	}
 
-// 严格传输安全（Strict Transport Security）头部。
+	// 严格传输安全（Strict Transport Security）头部。
 	if config.STSSeconds != 0 {
 		stsSub := ""
 		if config.STSIncludeSubdomains {
 			stsSub = "; includeSubdomains"
 		}
 
-// TODO
+// TODO：待办事项
 // "max-age=%d%s" 需重构
 		p.addHeader(
 			"Strict-Transport-Security",
 			fmt.Sprintf("max-age=%d%s", config.STSSeconds, stsSub))
 	}
 
-// X-Download-Options 头部信息。
+	// X-Download-Options 头部信息。
 	if config.IENoOpen {
 		p.addHeader("X-Download-Options", "noopen")
 	}
 
-// 功能策略头。
+	// FeaturePolicy header.
 	if len(config.FeaturePolicy) > 0 {
 		p.addHeader("Feature-Policy", config.FeaturePolicy)
 	}
@@ -138,7 +138,7 @@ func (p *policy) checkAllowHosts(c *gin.Context) bool {
 	return false
 }
 
-// 检查主机（可能带有尾部端口）是否为IPV4地址
+// 检查一个主机（可能带有端口号）是否为IPV4地址
 func isIPV4(host string) bool {
 	if index := strings.IndexByte(host, ':'); index != -1 {
 		host = host[:index]
@@ -181,8 +181,8 @@ func (p *policy) checkSSL(c *gin.Context) bool {
 		return true
 	}
 
-// TODO
-// req.Host 与 req.URL.Host 的区别
+// TODO：（待办事项）
+// req.Host 与 req.URL.Host 的对比
 	url := req.URL
 	url.Scheme = "https"
 	url.Host = req.Host

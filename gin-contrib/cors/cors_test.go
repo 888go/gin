@@ -46,12 +46,6 @@ func performRequestWithHeaders(r http.Handler, method, origin string, header htt
 	return w
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestConfigAddAllow(t *testing.T) {
 	config := Config{}
 	config.AddAllowMethods("POST")
@@ -71,12 +65,6 @@ func TestConfigAddAllow(t *testing.T) {
 	assert.Equal(t, config.ExposeHeaders, []string{"exposed", "header", "hey"})
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestBadConfig(t *testing.T) {
 	assert.Panics(t, func() { New(Config{}) })
 	assert.Panics(t, func() {
@@ -98,12 +86,6 @@ func TestBadConfig(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestNormalize(t *testing.T) {
 	values := normalize([]string{
 		"http-Access ", "Post", "POST", " poSt  ",
@@ -118,12 +100,6 @@ func TestNormalize(t *testing.T) {
 	assert.Equal(t, values, []string{})
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestConvert(t *testing.T) {
 	methods := []string{"Get", "GET", "get"}
 	headers := []string{"X-CSRF-TOKEN", "X-CSRF-Token", "x-csrf-token"}
@@ -132,12 +108,6 @@ func TestConvert(t *testing.T) {
 	assert.Equal(t, []string{"X-Csrf-Token", "X-Csrf-Token", "X-Csrf-Token"}, convert(headers, http.CanonicalHeaderKey))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGenerateNormalHeaders_AllowAllOrigins(t *testing.T) {
 	header := generateNormalHeaders(Config{
 		AllowAllOrigins: false,
@@ -154,12 +124,6 @@ func TestGenerateNormalHeaders_AllowAllOrigins(t *testing.T) {
 	assert.Len(t, header, 1)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGenerateNormalHeaders_AllowCredentials(t *testing.T) {
 	header := generateNormalHeaders(Config{
 		AllowCredentials: true,
@@ -169,12 +133,6 @@ func TestGenerateNormalHeaders_AllowCredentials(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGenerateNormalHeaders_ExposedHeaders(t *testing.T) {
 	header := generateNormalHeaders(Config{
 		ExposeHeaders: []string{"X-user", "xPassword"},
@@ -184,12 +142,6 @@ func TestGenerateNormalHeaders_ExposedHeaders(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGeneratePreflightHeaders(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowAllOrigins: false,
@@ -206,12 +158,6 @@ func TestGeneratePreflightHeaders(t *testing.T) {
 	assert.Len(t, header, 1)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGeneratePreflightHeaders_AllowCredentials(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowCredentials: true,
@@ -221,12 +167,6 @@ func TestGeneratePreflightHeaders_AllowCredentials(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGeneratePreflightHeaders_AllowPrivateNetwork(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowPrivateNetwork: true,
@@ -236,12 +176,6 @@ func TestGeneratePreflightHeaders_AllowPrivateNetwork(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGeneratePreflightHeaders_AllowMethods(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowMethods: []string{"GET ", "post", "PUT", " put  "},
@@ -251,12 +185,6 @@ func TestGeneratePreflightHeaders_AllowMethods(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGeneratePreflightHeaders_AllowHeaders(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		AllowHeaders: []string{"X-user", "Content-Type"},
@@ -266,28 +194,15 @@ func TestGeneratePreflightHeaders_AllowHeaders(t *testing.T) {
 	assert.Len(t, header, 2)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGeneratePreflightHeaders_MaxAge(t *testing.T) {
 	header := generatePreflightHeaders(Config{
 		MaxAge: 12 * time.Hour,
 	})
-	assert.Equal(t, header.Get("Access-Control-Max-Age"), "43200") // 12 * 60 * 60
-// 这段代码是 Go 语言中的一个数值表达式，计算的是 12 小时乘以每小时的分钟数（60）再乘以每分钟的秒数（60），所以这个表达式的结果代表了 12 小时的总秒数。
+	assert.Equal(t, header.Get("Access-Control-Max-Age"), "43200") // 12*60*60
 	assert.Equal(t, header.Get("Vary"), "Origin")
 	assert.Len(t, header, 2)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestValidateOrigin(t *testing.T) {
 	cors := newCors(Config{
 		AllowAllOrigins: true,
@@ -355,12 +270,6 @@ func TestValidateOrigin(t *testing.T) {
 	assert.True(t, cors.validateOrigin("chrome-extension://random-extension-id"))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestPassesAllowOrigins(t *testing.T) {
 	router := newTestRouter(Config{
 		AllowOrigins:     []string{"http://google.com"},
@@ -374,14 +283,14 @@ func TestPassesAllowOrigins(t *testing.T) {
 		},
 	})
 
-// 没有CORS请求，origin为空字符串
+	// 没有CORS请求，origin（来源）为空字符串
 	w := performRequest(router, "GET", "")
 	assert.Equal(t, "get", w.Body.String())
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Origin"))
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Empty(t, w.Header().Get("Access-Control-Expose-Headers"))
 
-// 没有CORS请求，origin（来源）等于host（主机）
+	// 无CORS请求，origin（来源）== host（主机）
 	h := http.Header{}
 	h.Set("Host", "facebook.com")
 	w = performRequestWithHeaders(router, "GET", "http://facebook.com", h)
@@ -390,7 +299,7 @@ func TestPassesAllowOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Empty(t, w.Header().Get("Access-Control-Expose-Headers"))
 
-// 允许跨源资源共享（CORS）请求
+	// allowed CORS request
 	w = performRequest(router, "GET", "http://google.com")
 	assert.Equal(t, "get", w.Body.String())
 	assert.Equal(t, "http://google.com", w.Header().Get("Access-Control-Allow-Origin"))
@@ -403,14 +312,14 @@ func TestPassesAllowOrigins(t *testing.T) {
 	assert.Equal(t, "", w.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Equal(t, "Data,X-User", w.Header().Get("Access-Control-Expose-Headers"))
 
-// 拒绝CORS请求
+	// deny CORS request
 	w = performRequest(router, "GET", "https://google.com")
 	assert.Equal(t, http.StatusForbidden, w.Code)
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Origin"))
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Empty(t, w.Header().Get("Access-Control-Expose-Headers"))
 
-// 允许CORS预检请求
+	// 允许CORS预检请求
 	w = performRequest(router, "OPTIONS", "http://github.com")
 	assert.Equal(t, http.StatusNoContent, w.Code)
 	assert.Equal(t, "http://github.com", w.Header().Get("Access-Control-Allow-Origin"))
@@ -419,7 +328,7 @@ func TestPassesAllowOrigins(t *testing.T) {
 	assert.Equal(t, "Content-Type,Timestamp", w.Header().Get("Access-Control-Allow-Headers"))
 	assert.Equal(t, "43200", w.Header().Get("Access-Control-Max-Age"))
 
-// 拒绝CORS预检请求
+	// 拒绝CORS预检请求
 	w = performRequest(router, "OPTIONS", "http://example.com")
 	assert.Equal(t, http.StatusForbidden, w.Code)
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Origin"))
@@ -429,12 +338,6 @@ func TestPassesAllowOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Max-Age"))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestPassesAllowAllOrigins(t *testing.T) {
 	router := newTestRouter(Config{
 		AllowAllOrigins:  true,
@@ -445,7 +348,7 @@ func TestPassesAllowAllOrigins(t *testing.T) {
 		MaxAge:           10 * time.Hour,
 	})
 
-// 没有CORS请求，origin为空字符串
+	// 没有CORS请求，origin（来源）为空字符串
 	w := performRequest(router, "GET", "")
 	assert.Equal(t, "get", w.Body.String())
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Origin"))
@@ -453,7 +356,7 @@ func TestPassesAllowAllOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Expose-Headers"))
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 
-// 允许跨源资源共享（CORS）请求
+	// allowed CORS request
 	w = performRequest(router, "POST", "example.com")
 	assert.Equal(t, "post", w.Body.String())
 	assert.Equal(t, "*", w.Header().Get("Access-Control-Allow-Origin"))
@@ -461,7 +364,7 @@ func TestPassesAllowAllOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Equal(t, "*", w.Header().Get("Access-Control-Allow-Origin"))
 
-// 允许CORS预检请求
+	// 允许CORS预检请求
 	w = performRequest(router, "OPTIONS", "https://facebook.com")
 	assert.Equal(t, http.StatusNoContent, w.Code)
 	assert.Equal(t, "*", w.Header().Get("Access-Control-Allow-Origin"))
@@ -471,12 +374,6 @@ func TestPassesAllowAllOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestWildcard(t *testing.T) {
 	router := newTestRouter(Config{
 		AllowOrigins:  []string{"https://*.github.com", "https://api.*", "http://*", "https://facebook.com", "*.golang.org"},

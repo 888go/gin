@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// https://gin-gonic.com/zh-cn/docs/examples/custom-http-config/
+// 参考链接：https://gin-gonic.com/zh-cn/docs/examples/custom-http-config/
 func main() {
 	router := gin.Default()
 

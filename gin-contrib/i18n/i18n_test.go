@@ -12,7 +12,6 @@ import (
 )
 
 // newServer ...
-// 创建一个新的服务器
 func newServer() *gin.Engine {
 	router := gin.New()
 	router.Use(Localize())
@@ -41,7 +40,7 @@ func newServer() *gin.Engine {
 	return router
 }
 
-// makeRequest ... 发起请求
+// makeRequest ...
 func makeRequest(
 	lng language.Tag,
 	path string,
@@ -49,7 +48,7 @@ func makeRequest(
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", path, nil)
 	req.Header.Add("Accept-Language", lng.String())
 
-// 执行请求
+	// Perform the request
 	w := httptest.NewRecorder()
 	r := newServer()
 	r.ServeHTTP(w, req)
@@ -57,12 +56,6 @@ func makeRequest(
 	return w.Body.String()
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestI18nEN(t *testing.T) {
 	type args struct {
 		lng  language.Tag
@@ -97,8 +90,7 @@ func TestI18nEN(t *testing.T) {
 			},
 			want: "I am 18 years old",
 		},
-// 德语
-// 你提供的Go语言代码注释内容为"German"，这是一个表示语言的英文单词，翻译成中文即为“德语”。若该注释是针对某段代码的，则可能表示这段代码与德语相关，例如处理德语文本或实现德语环境下的功能等。但单纯这一句并没有指出具体的代码含义，故无法给出更精确的翻译。如果能提供更多的上下文信息，我可以帮助你做出更准确的翻译。
+		// German
 		{
 			name: "hallo",
 			args: args{
@@ -123,7 +115,7 @@ func TestI18nEN(t *testing.T) {
 			},
 			want: "ich bin 18 Jahre alt",
 		},
-// 法语
+		// French
 		{
 			name: "bonjour",
 			args: args{

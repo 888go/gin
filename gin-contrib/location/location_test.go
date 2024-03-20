@@ -25,7 +25,7 @@ var tests = []struct {
 	conf Config
 	req  *http.Request
 }{
-// 默认值
+	// defaults
 	{
 		want: "http://localhost:8080",
 		conf: DefaultConfig(),
@@ -35,7 +35,7 @@ var tests = []struct {
 		},
 	},
 
-// URL方案
+	// url scheme
 	{
 		want: "https://localhost:8080",
 		conf: DefaultConfig(),
@@ -47,8 +47,7 @@ var tests = []struct {
 		},
 	},
 
-// x-forward headers
-// （注释翻译：）// x-forward headers，这个注释表明该代码段与“x-forwarded-headers”相关，这是一个HTTP头部信息，通常用于标识请求在经过代理服务器或负载均衡器时的原始来源信息。
+	// x-formward headers
 	{
 		want: "https://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -61,7 +60,7 @@ var tests = []struct {
 		},
 	},
 
-// X-Host 头部信息
+	// X-Host headers
 	{
 		want: "http://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -73,7 +72,7 @@ var tests = []struct {
 		},
 	},
 
-// URL 主机
+	// URL Host
 	{
 		want: "http://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -85,7 +84,7 @@ var tests = []struct {
 		},
 	},
 
-// 请求
+	// requests
 	{
 		want: "https://baz.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -97,7 +96,7 @@ var tests = []struct {
 		},
 	},
 
-// tls // （Transport Layer Security，传输层安全协议）
+	// tls
 	{
 		want: "https://foo.com/bar",
 		conf: Config{"http", "foo.com", "/bar", defaultHeaders},
@@ -108,7 +107,7 @@ var tests = []struct {
 		},
 	},
 
-// X-Forwarded-Host：主机头信息
+	// X-Forwarded-Host：主机头
 	{
 		want: "http://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", Headers{
@@ -124,12 +123,6 @@ var tests = []struct {
 	},
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestLocation(t *testing.T) {
 	for _, test := range tests {
 		c := new(gin.Context)
@@ -164,12 +157,6 @@ func performRequest(r http.Handler, method string) *httptest.ResponseRecorder {
 	return w
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestDefault(t *testing.T) {
 	router := defaultRouter()
 	w := performRequest(router, "GET")
@@ -189,12 +176,6 @@ func customRouter(config Config) *gin.Engine {
 	return router
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCustom(t *testing.T) {
 	router := customRouter(Config{
 		Scheme: "https",

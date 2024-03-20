@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// 版权声明：2017 Manu Martinez-Almeida。保留所有权利。
-// 本源代码的使用受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// 版权所有 ? 2017 Manu Martinez-Almeida。保留所有权利。
+// 本源代码的使用受 MIT 风格许可证协议约束，
+// 该协议可在 LICENSE 文件中查阅。
 # <翻译结束>
 
 
@@ -20,9 +20,8 @@
 # <翻译开始>
 // 在此处检查接口实现以支持go构建标签nomsgpack。
 // 参考：https://github.com/gin-gonic/gin/pull/1852/
-// 这段Go语言代码注释翻译成中文的大致意思是：
-// 为了支持go构建标签nomsgpack，我们在此处实现了相应的接口。
-// 详情请参阅：https://github.com/gin-gonic/gin/pull/1852/
+// 
+// 这段注释的大致意思是，为了支持名为"nomsgpack"的Go构建标签，这里实现了某个接口。更多详情可以参考提供的GitHub链接（ gin-gonic/gin 项目的一个拉取请求）。
 # <翻译结束>
 
 
@@ -31,7 +30,7 @@
 <原文结束>
 
 # <翻译开始>
-// MsgPack 包含给定的 interface 对象。
+// MsgPack 包含给定的接口对象。
 # <翻译结束>
 
 
@@ -58,6 +57,6 @@
 <原文结束>
 
 # <翻译开始>
-// WriteMsgPack 将MsgPack ContentType写入，并编码给定的接口对象。
+// WriteMsgPack 将MsgPack ContentType写入，并对给定的接口对象进行编码。
 # <翻译结束>
 

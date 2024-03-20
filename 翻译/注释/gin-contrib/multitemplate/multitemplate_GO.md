@@ -1,32 +1,5 @@
 
 <原文开始>
-// Render type
-<原文结束>
-
-# <翻译开始>
-// Render 类型
-# <翻译结束>
-
-
-<原文开始>
-// New instance
-<原文结束>
-
-# <翻译开始>
-// 新实例
-# <翻译结束>
-
-
-<原文开始>
-// Add new template
-<原文结束>
-
-# <翻译开始>
-// 添加新模板
-# <翻译结束>
-
-
-<原文开始>
 // AddFromFiles supply add template from files
 <原文结束>
 
@@ -49,7 +22,7 @@
 <原文结束>
 
 # <翻译开始>
-// AddFromString 从字符串中提供并加载添加模板
+// AddFromString 从字符串中提供添加模板
 # <翻译结束>
 
 
@@ -76,49 +49,6 @@
 <原文结束>
 
 # <翻译开始>
-// Instance 提供渲染字符串功能
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// templateString:
-// name:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// templateString:
-// name:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// templateStrings:
-// funcMap:
-// name:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// templateStrings:
-// funcMap:
-// name:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// files:
-// funcMap:
-// name:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// files:
-// funcMap:
-// name:
+// 实例提供渲染字符串
 # <翻译结束>
 

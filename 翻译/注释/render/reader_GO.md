@@ -6,7 +6,7 @@
 <原文结束>
 
 # <翻译开始>
-// 版权所有 2018 Gin 核心团队。保留所有权利。
+// 版权所有 ? 2018 Gin 核心团队。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// Reader 结构体包含了一个IO读取器及其长度，以及自定义的ContentType和其他头部信息。
+// Reader 包含了 IO 读取器及其长度，以及自定义的 ContentType 和其他头部信息。
 # <翻译结束>
 
 
@@ -26,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// Render (Reader) 使用自定义的ContentType和头信息写入数据。
+// Render (Reader) 通过自定义的 ContentType 和头部信息写入数据。
 # <翻译结束>
 
 
@@ -35,7 +35,7 @@
 <原文结束>
 
 # <翻译开始>
-// WriteContentType (读取器) 写入自定义 ContentType。
+// WriteContentType (针对Reader) 写入自定义的 ContentType。
 # <翻译结束>
 
 
@@ -44,6 +44,6 @@
 <原文结束>
 
 # <翻译开始>
-// writeHeaders 写入自定义头部信息。
+// writeHeaders 写入自定义 Header。
 # <翻译结束>
 

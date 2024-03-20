@@ -1,6 +1,6 @@
 
 <原文开始>
-		// request is not a CORS request
+// request is not a CORS request
 <原文结束>
 
 # <翻译开始>
@@ -14,7 +14,7 @@
 <原文结束>
 
 # <翻译开始>
-// 请求并非CORS请求，但包含了origin头部。
-// 例如，使用fetch API时会出现这种情况。
+// 请求不是CORS请求，但包含origin头。
+// 例如，使用fetch API时。
 # <翻译结束>
 

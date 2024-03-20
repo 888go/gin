@@ -37,7 +37,7 @@ func (i *ginI18nImpl) getMessage(ctx *gin.Context, param interface{}) (string, e
 	return message, nil
 }
 
-// mustGetMessage ... 必须获取消息...
+// mustGetMessage ...
 func (i *ginI18nImpl) mustGetMessage(ctx *gin.Context, param interface{}) string {
 	message, _ := i.getMessage(ctx, param)
 	return message
@@ -58,7 +58,7 @@ func (i *ginI18nImpl) setGetLngHandler(handler GetLngHandler) {
 	i.getLngHandler = handler
 }
 
-// loadMessageFiles 加载所有本地化文件到资源包中
+// loadMessageFiles 加载所有本地化文件到资源包
 func (i *ginI18nImpl) loadMessageFiles(config *BundleCfg) {
 	for _, lng := range config.AcceptLanguage {
 		src := path.Join(config.RootPath, lng.String()) + "." + config.FormatBundleFile
@@ -80,7 +80,7 @@ func (i *ginI18nImpl) loadMessageFile(config *BundleCfg, src string) error {
 	return nil
 }
 
-// setLocalizerByLng 根据语言设置本地化器
+// setLocalizerByLng 通过语言设置本地化器
 func (i *ginI18nImpl) setLocalizerByLng(acceptLanguage []language.Tag) {
 	i.localizerByLng = map[string]*i18n.Localizer{}
 	for _, lng := range acceptLanguage {
@@ -88,7 +88,7 @@ func (i *ginI18nImpl) setLocalizerByLng(acceptLanguage []language.Tag) {
 		i.localizerByLng[lngStr] = i.newLocalizer(lngStr)
 	}
 
-// 如果默认语言不存在，则设置默认语言
+	// 如果defaultLanguage未设置，则设置它
 	defaultLng := i.defaultLanguage.String()
 	if _, hasDefaultLng := i.localizerByLng[defaultLng]; !hasDefaultLng {
 		i.localizerByLng[defaultLng] = i.newLocalizer(defaultLng)

@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// Config 代表了该中间件可用的所有配置选项。
+// Config 表示该中间件的所有可用选项。
 # <翻译结束>
 
 
@@ -15,8 +15,8 @@
 <原文结束>
 
 # <翻译开始>
-// AllowOrigins 是一个允许跨域请求发起的源列表。
-// 如果该列表中存在特殊的 "*" 值，则所有来源都将被允许。
+// AllowOrigins 是一个跨域请求允许执行的源列表。
+// 如果列表中存在特殊的 "*" 值，则允许所有来源。
 // 默认值为 []
 # <翻译结束>
 
@@ -28,7 +28,7 @@
 <原文结束>
 
 # <翻译开始>
-// AllowOriginFunc 是一个自定义函数，用于验证请求来源。它接收一个起源（origin）作为参数，并在允许访问时返回 true，否则返回 false。如果设置了这个选项，则会忽略 AllowOrigins 的内容。
+// AllowOriginFunc 是一个自定义函数，用于验证源。它接受一个 origin 参数，并在允许访问时返回 true，否则返回 false。如果设置了此选项，则忽略 AllowOrigins 的内容。
 # <翻译结束>
 
 
@@ -38,16 +38,16 @@
 <原文结束>
 
 # <翻译开始>
-// AllowMethods 是一个方法列表，用于指定客户端在跨域请求中允许使用的方法。默认值包括常见的简单方法（GET, POST, PUT, PATCH, DELETE, HEAD 和 OPTIONS）
+// AllowMethods 是一个方法列表，列出了客户端在跨域请求中允许使用的HTTP方法。默认值包括简单的方法（GET, POST, PUT, PATCH, DELETE, HEAD 和 OPTIONS）。
 # <翻译结束>
 
 
 <原文开始>
-	// AllowPrivateNetwork indicates whether the response should include allow private network header
+// AllowPrivateNetwork indicates whether the response should include allow private network header
 <原文结束>
 
 # <翻译开始>
-// AllowPrivateNetwork 表示响应中是否应包含允许私有网络头信息
+// AllowPrivateNetwork 指示响应中是否应包含允许私有网络头
 # <翻译结束>
 
 
@@ -57,7 +57,7 @@
 <原文结束>
 
 # <翻译开始>
-// AllowHeaders 是一个包含客户端在跨域请求中允许使用的非简单头部列表。
+// AllowHeaders 是一个包含客户端在跨域请求中允许使用的非简单头信息的列表。
 # <翻译结束>
 
 
@@ -77,7 +77,7 @@
 <原文结束>
 
 # <翻译开始>
-// ExposeHeaders 表示哪些头部信息是安全的，可以暴露给 CORS（跨源资源共享）API 规范的 API。
+// ExposeHeaders 表示哪些头部信息在 CORS（跨源资源共享）API 规范中是安全的，并可以暴露给 API。
 # <翻译结束>
 
 
@@ -87,33 +87,30 @@
 <原文结束>
 
 # <翻译开始>
-// MaxAge 指示预检请求结果可以被缓存的时间长度（以秒为单位）
+// MaxAge 指示预检请求结果可以被缓存的时间长度（精确到秒）
 # <翻译结束>
 
 
 <原文开始>
-	// Allows to add origins like http://some-domain/*, https://api.* or http://some.*.subdomain.com
+// Allows to add origins like http://some-domain/*, https://api.* or http://some.*.subdomain.com
 <原文结束>
 
 # <翻译开始>
-// 允许添加如下形式的源地址：
-// http://some-domain/* 表示以 http://some-domain/ 开头的所有URL
-// https://api.* 表示以 https://api. 开头，且域名后跟任意字符的所有URL
-// http://some.*.subdomain.com 表示以 http://some. 以及任意子域名.subdomain.com 结尾的所有URL
+// 允许添加诸如 http://some-domain/*、https://api.* 或 http://some.*.subdomain.com 等来源
 # <翻译结束>
 
 
 <原文开始>
-	// Allows usage of popular browser extensions schemas
+// Allows usage of popular browser extensions schemas
 <原文结束>
 
 # <翻译开始>
-// 允许使用流行的浏览器扩展方案
+// 允许使用流行的浏览器扩展程序架构
 # <翻译结束>
 
 
 <原文开始>
-	// Allows usage of WebSocket protocol
+// Allows usage of WebSocket protocol
 <原文结束>
 
 # <翻译开始>
@@ -122,16 +119,16 @@
 
 
 <原文开始>
-	// Allows usage of file:// schema (dangerous!) use it only when you 100% sure it's needed
+// Allows usage of file:// schema (dangerous!) use it only when you 100% sure it's needed
 <原文结束>
 
 # <翻译开始>
-// 允许使用 file:// 协议模式（危险！）仅在您100%确定需要时才使用它
+// 允许使用 file:// 方案（危险！）仅在您 100% 确定需要时才使用它
 # <翻译结束>
 
 
 <原文开始>
-	// Allows to pass custom OPTIONS response status code for old browsers / clients
+// Allows to pass custom OPTIONS response status code for old browsers / clients
 <原文结束>
 
 # <翻译开始>
@@ -153,7 +150,7 @@
 <原文结束>
 
 # <翻译开始>
-// AddAllowHeaders 允许添加自定义头信息
+// AddAllowHeaders 允许添加自定义头
 # <翻译结束>
 
 
@@ -162,7 +159,7 @@
 <原文结束>
 
 # <翻译开始>
-// AddExposeHeaders 允许添加自定义暴露头信息
+// AddExposeHeaders 允许添加自定义暴露头
 # <翻译结束>
 
 
@@ -171,7 +168,7 @@
 <原文结束>
 
 # <翻译开始>
-// Validate 是用于检查用户自定义配置的功能。
+// Validate 是检查用户自定义配置的功能。
 # <翻译结束>
 
 
@@ -189,7 +186,7 @@
 <原文结束>
 
 # <翻译开始>
-// Default 返回默认配置的 location 中间件。
+// 默认返回使用默认配置的位置中间件。
 # <翻译结束>
 
 
@@ -198,6 +195,6 @@
 <原文结束>
 
 # <翻译开始>
-// New 返回一个带有用户自定义配置的 location 中间件。
+// New 函数返回一个使用用户自定义配置的 location 中间件。
 # <翻译结束>
 

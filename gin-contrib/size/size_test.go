@@ -10,12 +10,6 @@ import (
 	"github.com/888go/gin"
 )
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRequestSizeLimiterOK(t *testing.T) {
 	router := gin.New()
 	router.Use(RequestSizeLimiter(10))
@@ -34,12 +28,6 @@ func TestRequestSizeLimiterOK(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRequestSizeLimiterOver(t *testing.T) {
 	router := gin.New()
 	router.Use(RequestSizeLimiter(10))

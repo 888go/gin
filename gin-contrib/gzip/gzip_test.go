@@ -24,14 +24,6 @@ const (
 
 type rServer struct{}
 
-
-// ff:
-// req:
-// rw:
-
-// ff:
-// req:
-// rw:
 func (s *rServer) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(rw, testReverseResponse)
 }
@@ -48,16 +40,12 @@ func newCloseNotifyingRecorder() *closeNotifyingRecorder {
 	}
 }
 
-
-// ff:
-
-// ff:
 func (c *closeNotifyingRecorder) CloseNotify() <-chan bool {
 	return c.closed
 }
 
 func newServer() *gin.Engine {
-// 初始化反向代理服务器
+	// 初始化反向代理服务器
 	rServer := httptest.NewServer(new(rServer))
 	target, _ := url.Parse(rServer.URL)
 	rp := httputil.NewSingleHostReverseProxy(target)
@@ -74,12 +62,6 @@ func newServer() *gin.Engine {
 	return router
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGzip(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	req.Header.Add("Accept-Encoding", "gzip")
@@ -103,12 +85,6 @@ func TestGzip(t *testing.T) {
 	assert.Equal(t, string(body), testResponse)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGzipPNG(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/image.png", nil)
 	req.Header.Add("Accept-Encoding", "gzip")
@@ -128,12 +104,6 @@ func TestGzipPNG(t *testing.T) {
 	assert.Equal(t, w.Body.String(), "this is a PNG!")
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestExcludedExtensions(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/index.html", nil)
 	req.Header.Add("Accept-Encoding", "gzip")
@@ -154,12 +124,6 @@ func TestExcludedExtensions(t *testing.T) {
 	assert.Equal(t, "", w.Header().Get("Content-Length"))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestExcludedPaths(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/api/books", nil)
 	req.Header.Add("Accept-Encoding", "gzip")
@@ -180,12 +144,6 @@ func TestExcludedPaths(t *testing.T) {
 	assert.Equal(t, "", w.Header().Get("Content-Length"))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestNoGzip(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 
@@ -199,12 +157,6 @@ func TestNoGzip(t *testing.T) {
 	assert.Equal(t, w.Body.String(), testResponse)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestGzipWithReverseProxy(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/reverse", nil)
 	req.Header.Add("Accept-Encoding", "gzip")
@@ -228,12 +180,6 @@ func TestGzipWithReverseProxy(t *testing.T) {
 	assert.Equal(t, string(body), testReverseResponse)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestDecompressGzip(t *testing.T) {
 	buf := &bytes.Buffer{}
 	gz, _ := gzip.NewWriterLevel(buf, gzip.DefaultCompression)
@@ -272,12 +218,6 @@ func TestDecompressGzip(t *testing.T) {
 	assert.Equal(t, "", w.Header().Get("Content-Length"))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestDecompressGzipWithEmptyBody(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "POST", "/", nil)
 	req.Header.Add("Content-Encoding", "gzip")
@@ -298,12 +238,6 @@ func TestDecompressGzipWithEmptyBody(t *testing.T) {
 	assert.Equal(t, "", w.Header().Get("Content-Length"))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestDecompressGzipWithIncorrectData(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "POST", "/", bytes.NewReader([]byte(testResponse)))
 	req.Header.Add("Content-Encoding", "gzip")

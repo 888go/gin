@@ -6,7 +6,7 @@
 <原文结束>
 
 # <翻译开始>
-// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
@@ -17,12 +17,12 @@
 <原文结束>
 
 # <翻译开始>
-// Delims 表示用于 HTML 模板渲染的一组左（Left）和右（Right）定界符。
+// Delims 表示一组用于 HTML 模板渲染的左、右定界符。
 # <翻译结束>
 
 
 <原文开始>
-	// Left delimiter, defaults to {{.
+// Left delimiter, defaults to {{.
 <原文结束>
 
 # <翻译开始>
@@ -31,7 +31,7 @@
 
 
 <原文开始>
-	// Right delimiter, defaults to }}.
+// Right delimiter, defaults to }}.
 <原文结束>
 
 # <翻译开始>
@@ -49,11 +49,11 @@
 
 
 <原文开始>
-	// Instance returns an HTML instance.
+// Instance returns an HTML instance.
 <原文结束>
 
 # <翻译开始>
-// Instance 返回一个HTML实例。
+// Instance 返回一个 HTML 实例。
 # <翻译结束>
 
 
@@ -71,7 +71,7 @@
 <原文结束>
 
 # <翻译开始>
-// HTMLDebug 包含模板分隔符、模式以及带有文件列表的函数，主要用于调试HTML。
+// HTMLDebug 包含模板分隔符、模式以及带文件列表的函数，主要用于调试HTML。
 # <翻译结束>
 
 
@@ -107,7 +107,7 @@
 <原文结束>
 
 # <翻译开始>
-// Render (HTML) 执行模板并使用自定义 ContentType 将其结果写入响应。
+// Render (HTML) 执行模板并使用自定义的 ContentType 将其结果写入响应中。
 # <翻译结束>
 
 

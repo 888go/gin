@@ -27,24 +27,24 @@ func main() {
 		Handler: router,
 	}
 
-// 在运行例程中初始化服务器，使其不会阻塞下面的正常关机处理
+// 在一个goroutine中初始化服务器，以便于
+// 不会阻塞下面的优雅关闭处理流程
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
 
-// 等待中断信号，以5秒的超时时间正常关闭服务器
+// 等待中断信号以优雅地关闭服务器，超时时间为5秒。
 	quit := make(chan os.Signal, 1)
-// Kill(无参数)默认发送系统调用
-// SIGTERM kill -2是系统调用
-// SIGINT kill -9是系统调用
-// 但是不能被捕获，所以不需要添加它
+// (无参数) kill 默认发送 syscall.SIGTERM
+// kill -2 等同于 syscall.SIGINT
+// kill -9 等同于 syscall.SIGKILL，但无法被捕获，因此不需要添加它
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 	log.Println("Shutting down server...")
 
-// 上下文用于通知服务器，它有5秒的时间来完成当前正在处理的请求
+// 上下文用于通知服务器，它有5秒钟的时间来完成当前正在处理的请求
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {

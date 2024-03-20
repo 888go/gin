@@ -13,61 +13,19 @@ func main() {
 	StartGin()
 }
 
-// ConfigRuntime设置操作系统线程数
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
+// ConfigRuntime 设置操作系统的线程数量。
 func ConfigRuntime() {
 	nuCPU := runtime.NumCPU()
 	runtime.GOMAXPROCS(nuCPU)
 	fmt.Printf("Running with %d CPUs\n", nuCPU)
 }
 
-// StartWorkers通过例程启动starsWorker
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
+// StartWorkers 通过 goroutine 启动 starsWorker。
 func StartWorkers() {
 	go statsWorker()
 }
 
-// 通过设置路由器启动web服务器
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
+// StartGin 通过设置路由启动 Gin Web 服务器。
 func StartGin() {
 	gin.SetMode(gin.ReleaseMode)
 

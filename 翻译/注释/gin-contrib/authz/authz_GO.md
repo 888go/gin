@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 ? 2014 Manu Martinez-Almeida。保留所有权利。
+// 本源代码的使用受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// NewAuthorizer返回授权器，使用Casbin强制器作为输入
+// NewAuthorizer 返回一个鉴权器，使用 Casbin 执行器作为输入参数
 # <翻译结束>
 
 
@@ -26,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// BasicAuthorizer存储casbin处理程序
+// BasicAuthorizer 基础授权器存储了 casbin 处理器
 # <翻译结束>
 
 
@@ -36,8 +36,8 @@
 <原文结束>
 
 # <翻译开始>
-// GetUserName从请求中获取用户名
-// 目前只支持HTTP基本认证
+// GetUserName 从请求中获取用户名。
+// 当前仅支持HTTP基本认证。
 # <翻译结束>
 
 
@@ -47,8 +47,8 @@
 <原文结束>
 
 # <翻译开始>
-// CheckPermission检查请求中的用户/方法/路径组合
-// 返回true(授予权限)或false(禁止权限)
+// CheckPermission 检查请求中的用户/方法/路径组合。
+// 返回 true（权限授予）或 false（权限禁止）
 # <翻译结束>
 
 
@@ -57,6 +57,6 @@
 <原文结束>
 
 # <翻译开始>
-// RequirePermission返回403 Forbidden给客户端
+// RequirePermission 返回 403 Forbidden 给客户端
 # <翻译结束>
 

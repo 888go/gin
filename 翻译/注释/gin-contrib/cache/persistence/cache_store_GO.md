@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// CacheStore是缓存后端接口
+// CacheStore 是缓存后端的接口
 # <翻译结束>
 
 
@@ -14,17 +14,16 @@
 <原文结束>
 
 # <翻译开始>
-// Get从缓存中检索项
-// 返回项或nil，以及指示是否找到键的bool值
+// Get 从缓存中检索一个项目。返回该项目或nil，以及一个布尔值，表示是否找到了该键。
 # <翻译结束>
 
 
 <原文开始>
-	// Set sets an item to the cache, replacing any existing item.
+// Set sets an item to the cache, replacing any existing item.
 <原文结束>
 
 # <翻译开始>
-// Set将项设置到缓存，替换任何现有项
+// Set 将一个项设置到缓存中，替换任何已存在的项。
 # <翻译结束>
 
 
@@ -34,8 +33,7 @@
 <原文结束>
 
 # <翻译开始>
-// Add仅在给定键的项不存在或现有项已过期时向缓存添加项
-// 否则返回错误
+// Add 将一个项添加到缓存中，但只有在给定键下尚未存在项，或者已存在的项已过期时才会添加。否则返回错误。
 # <翻译结束>
 
 
@@ -45,44 +43,42 @@
 <原文结束>
 
 # <翻译开始>
-// Replace仅在缓存键已经存在时才为该键设置新值
-// 如果没有，则返回错误
+// Replace仅当缓存键已存在时设置新的值。如果不存在，则返回错误。
 # <翻译结束>
 
 
 <原文开始>
-	// Delete removes an item from the cache. Does nothing if the key is not in the cache.
+// Delete removes an item from the cache. Does nothing if the key is not in the cache.
 <原文结束>
 
 # <翻译开始>
-// Delete从缓存中删除项
-// 如果键不在缓存中，则不执行任何操作
+// Delete 从缓存中移除一个项目。如果键不在缓存中，则不执行任何操作。
 # <翻译结束>
 
 
 <原文开始>
-	// Increment increments a real number, and returns error if the value is not real
+// Increment increments a real number, and returns error if the value is not real
 <原文结束>
 
 # <翻译开始>
-// Increment对实数递增，如果值不是实数则返回error
+// Increment 函数对一个实数进行增加操作，并在值不是实数时返回错误
 # <翻译结束>
 
 
 <原文开始>
-	// Decrement decrements a real number, and returns error if the value is not real
+// Decrement decrements a real number, and returns error if the value is not real
 <原文结束>
 
 # <翻译开始>
-// 递减一个实数，如果值不是实数，则返回错误
+// Decrement 函数对一个实数进行减一操作，如果该值不是实数，则返回错误
 # <翻译结束>
 
 
 <原文开始>
-	// Flush deletes all items from the cache.
+// Flush deletes all items from the cache.
 <原文结束>
 
 # <翻译开始>
-// 刷新从缓存中删除所有项
+// Flush 清空缓存中的所有项。
 # <翻译结束>
 

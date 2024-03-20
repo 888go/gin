@@ -17,33 +17,29 @@ var (
 	ErrNotSupport   = errors.New("cache: not support.")
 )
 
-// CacheStore是缓存后端接口
+// CacheStore 是缓存后端的接口
 type CacheStore interface {
-// Get从缓存中检索项
-// 返回项或nil，以及指示是否找到键的bool值
+// Get 从缓存中检索一个项目。返回该项目或nil，以及一个布尔值，表示是否找到了该键。
 	Get(key string, value interface{}) error
 
-// Set将项设置到缓存，替换任何现有项
+	// Set 将一个项设置到缓存中，替换任何已存在的项。
 	Set(key string, value interface{}, expire time.Duration) error
 
-// Add仅在给定键的项不存在或现有项已过期时向缓存添加项
-// 否则返回错误
+// Add 将一个项添加到缓存中，但只有在给定键下尚未存在项，或者已存在的项已过期时才会添加。否则返回错误。
 	Add(key string, value interface{}, expire time.Duration) error
 
-// Replace仅在缓存键已经存在时才为该键设置新值
-// 如果没有，则返回错误
+// Replace仅当缓存键已存在时设置新的值。如果不存在，则返回错误。
 	Replace(key string, data interface{}, expire time.Duration) error
 
-// Delete从缓存中删除项
-// 如果键不在缓存中，则不执行任何操作
+	// Delete 从缓存中移除一个项目。如果键不在缓存中，则不执行任何操作。
 	Delete(key string) error
 
-// Increment对实数递增，如果值不是实数则返回error
+	// Increment 函数对一个实数进行增加操作，并在值不是实数时返回错误
 	Increment(key string, data uint64) (uint64, error)
 
-// 递减一个实数，如果值不是实数，则返回错误
+	// Decrement 函数对一个实数进行减一操作，如果该值不是实数，则返回错误
 	Decrement(key string, data uint64) (uint64, error)
 
-// 刷新从缓存中删除所有项
+	// Flush 清空缓存中的所有项。
 	Flush() error
 }

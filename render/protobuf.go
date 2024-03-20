@@ -1,4 +1,4 @@
-// 版权所有 2018 Gin 核心团队。保留所有权利。
+// 版权所有 ? 2018 Gin 核心团队。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 
@@ -17,10 +17,7 @@ type ProtoBuf struct {
 
 var protobufContentType = []string{"application/x-protobuf"}
 
-// Render (ProtoBuf) 将给定的接口对象序列化，并以自定义的 ContentType 写入数据。
-
-// ff:
-// w:
+// Render (ProtoBuf) 将给定的接口对象进行序列化，并使用自定义 ContentType 写入数据。
 func (r ProtoBuf) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 
@@ -34,9 +31,6 @@ func (r ProtoBuf) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (ProtoBuf) 写入 ProtoBuf 的 ContentType。
-
-// ff:
-// w:
 func (r ProtoBuf) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, protobufContentType)
 }

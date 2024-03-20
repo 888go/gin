@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// InMemoryStore表示具有内存持久性的缓存
+// InMemoryStore 表示使用内存持久化的缓存
 # <翻译结束>
 
 
@@ -13,7 +13,7 @@
 <原文结束>
 
 # <翻译开始>
-// NewInMemoryStore返回一个InMemoryStore
+// NewInMemoryStore 返回一个 InMemoryStore
 # <翻译结束>
 
 
@@ -22,7 +22,7 @@
 <原文结束>
 
 # <翻译开始>
-// 获取(参见CacheStore接口)
+// Get（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -31,16 +31,16 @@
 <原文结束>
 
 # <翻译开始>
-// 设置方法请参见CacheStore界面
+// Set（参见 CacheStore 接口）
 # <翻译结束>
 
 
 <原文开始>
-	// NOTE: go-cache understands the values of DEFAULT and FOREVER
+// NOTE: go-cache understands the values of DEFAULT and FOREVER
 <原文结束>
 
 # <翻译开始>
-// 注意:go-cache理解DEFAULT和FOREVER的值
+// 注释：go-cache 能够识别 DEFAULT 和 FOREVER 的值
 # <翻译结束>
 
 
@@ -49,7 +49,7 @@
 <原文结束>
 
 # <翻译开始>
-// 添加(见CacheStore接口)
+// Add （参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -58,7 +58,7 @@
 <原文结束>
 
 # <翻译开始>
-// 替换(参见CacheStore接口)
+// Replace（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -67,7 +67,7 @@
 <原文结束>
 
 # <翻译开始>
-// 删除(参见CacheStore界面)
+// Delete（参考 CacheStore 接口）
 # <翻译结束>
 
 
@@ -76,7 +76,7 @@
 <原文结束>
 
 # <翻译开始>
-// 增量(见CacheStore接口)
+// 自增（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -85,7 +85,7 @@
 <原文结束>
 
 # <翻译开始>
-// 递减(见CacheStore接口)
+// 减量（参考 CacheStore 接口）
 # <翻译结束>
 
 
@@ -94,32 +94,6 @@
 <原文结束>
 
 # <翻译开始>
-// 刷新(见CacheStore接口)
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// defaultExpiration:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// defaultExpiration:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// expires:
-// value:
-// key:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// expires:
-// value:
-// key:
+// Flush（参考 CacheStore 接口）
 # <翻译结束>
 

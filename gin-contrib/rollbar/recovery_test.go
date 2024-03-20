@@ -9,12 +9,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRecovery(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	router := gin.New()

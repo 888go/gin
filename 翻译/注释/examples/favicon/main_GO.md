@@ -5,7 +5,7 @@
 <原文结束>
 
 # <翻译开始>
-// 从相对于主的位置提供静态图标文件
-// go directory app.StaticFile("/favicon.ico"， "./.assets/favicon.ico")
+// 从main.go目录的相对位置提供静态favicon文件
+// app.StaticFile("/favicon.ico", "./.assets/favicon.ico")
 # <翻译结束>
 

@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// RegisterResponseCacheGob用encoding/gob包注册responseCache类型
+// RegisterResponseCacheGob 注册 responseCache 类型到 encoding/gob 包中
 # <翻译结束>
 
 
@@ -13,16 +13,16 @@
 <原文结束>
 
 # <翻译开始>
-// CreateKey为给定字符串创建包特定的键
+// CreateKey 为给定的字符串创建一个特定于包的密钥
 # <翻译结束>
 
 
 <原文开始>
-		//cache responses with a status code < 300
+//cache responses with a status code < 300
 <原文结束>
 
 # <翻译开始>
-// 缓存状态码&lt的响应;300
+//缓存状态码小于300的响应
 # <翻译结束>
 
 
@@ -33,43 +33,18 @@
 <原文结束>
 
 # <翻译开始>
-// 如果err != nil{需要logger}
+// 如果err不为nil {
+//   // 需要使用日志记录器
+// }
 # <翻译结束>
 
 
 <原文开始>
-// Cache Middleware
+// Drop caches of aborted contexts
 <原文结束>
 
 # <翻译开始>
-// 缓存的中间件
-# <翻译结束>
-
-
-<原文开始>
-// CachePage Decorator
-<原文结束>
-
-# <翻译开始>
-// CachePage装饰
-# <翻译结束>
-
-
-<原文开始>
-			// replace writer
-<原文结束>
-
-# <翻译开始>
-// 取代的作家
-# <翻译结束>
-
-
-<原文开始>
-			// Drop caches of aborted contexts
-<原文结束>
-
-# <翻译开始>
-// 删除已终止上下文的缓存
+// 清除已中止上下文的缓存
 # <翻译结束>
 
 
@@ -78,7 +53,7 @@
 <原文结束>
 
 # <翻译开始>
-// CachePageWithoutQuery增加忽略GET查询参数的功能
+// CachePageWithoutQuery 添加忽略GET请求参数的能力。
 # <翻译结束>
 
 
@@ -87,49 +62,6 @@
 <原文结束>
 
 # <翻译开始>
-// CachePageAtomic装饰
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// err:
-// n:
-// data:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// err:
-// n:
-// data:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// expire:
-// store:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// expire:
-// store:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// handle:
-// expire:
-// store:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// handle:
-// expire:
-// store:
+// CachePageAtomic 装饰器
 # <翻译结束>
 

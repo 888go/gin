@@ -4,7 +4,7 @@ import (
 	"github.com/888go/gin/gin-contrib/httpsign/crypto"
 )
 
-// KeyID 定义类型
+// KeyID define type
 type KeyID string
 
 // Secret 定义密钥及其使用的算法
@@ -13,5 +13,5 @@ type Secret struct {
 	Algorithm crypto.Crypto
 }
 
-// Secrets：使用keyID作为键、秘密信息作为值的映射（字典）
+// 密钥映射表，其中keyID为键，secret为值
 type Secrets map[KeyID]*Secret

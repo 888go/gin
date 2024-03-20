@@ -6,8 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Gin Core团队版权所有版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 ? 2020 Gin 核心团队。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -16,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// 内容类型MIME最常用的数据格式
+// Content-Type MIME 是最常见的数据格式的 MIME 类型。
 # <翻译结束>
 
 
@@ -27,7 +28,7 @@
 <原文结束>
 
 # <翻译开始>
-// 绑定描述了需要实现的接口，用于绑定请求中的数据，如JSON请求体、查询参数或表单POST
+// Binding描述了需要实现的接口，目的是为了将请求中携带的数据（如JSON请求体、查询参数或表单POST数据）进行绑定。
 # <翻译结束>
 
 
@@ -37,8 +38,8 @@
 <原文结束>
 
 # <翻译开始>
-// BindingBody在Binding中添加BindBody方法
-// BindBody与Bind类似，但它从提供的字节中读取主体，而不是从req.Body中读取主体
+// BindingBody 为 Binding 添加了 BindBody 方法。BindBody 与 Bind 类似，
+// 但是它从提供的字节中读取请求体，而不是从 req.Body 中读取。
 # <翻译结束>
 
 
@@ -48,8 +49,8 @@
 <原文结束>
 
 # <翻译开始>
-// BindingUri将BindUri方法添加到Binding中
-// BindUri与Bind类似，但它读取Params
+// BindingUri 向 Binding 结构体添加 BindUri 方法。BindUri 与 Bind 类似，
+// 但它读取的是 Params 参数。
 # <翻译结束>
 
 
@@ -61,8 +62,8 @@
 <原文结束>
 
 # <翻译开始>
-// StructValidator是需要实现的最小接口，以便将其用作确保请求正确性的验证器引擎
-// Gin为此提供了一个默认实现，使用https://github.com/go-playground/validator/tree/v10.6.1
+// StructValidator 是一个最小接口，为了能够用作验证请求正确性的验证引擎，需要实现这个接口。
+// Gin 提供了一个默认实现，使用了 https://github.com/go-playground/validator/tree/v10.6.1。
 # <翻译结束>
 
 
@@ -75,11 +76,9 @@
 <原文结束>
 
 # <翻译开始>
-// ValidateStruct可以接收任何类型，即使配置不正确，它也不会panic
-// 如果接收到的类型不是结构体，则应该跳过任何验证，并且必须返回nil
-// 如果接收到的类型是结构体或指向结构体的指针，则应该执行验证
-// 如果结构无效或验证本身失败，则应返回描述性错误
-// 否则必须返回nil
+// ValidateStruct 可以接收任何类型的值，并且即使配置不正确，也绝不应该引发 panic。如果接收到的类型不是结构体，则应跳过所有验证并返回 nil。
+// 如果接收到的类型是结构体或指向结构体的指针，则应执行验证操作。
+// 若结构体无效或验证过程本身失败，则应返回一个描述性错误信息。否则必须返回 nil。
 # <翻译结束>
 
 
@@ -89,7 +88,7 @@
 <原文结束>
 
 # <翻译开始>
-// Engine返回为StructValidator实现提供动力的底层验证器引擎
+// Engine 方法返回底层驱动验证器引擎，该引擎为 StructValidator 实现提供支持。
 # <翻译结束>
 
 
@@ -100,8 +99,7 @@
 <原文结束>
 
 # <翻译开始>
-// Validator是默认的验证器，它实现了StructValidator接口
-// 它在引擎盖下使用https://github.com/go-playground/validator/tree/v10.6.1
+// Validator 是默认的验证器，实现了 StructValidator 接口。在底层，它使用了 https://github.com/go-playground/validator/tree/v10.6.1 。
 # <翻译结束>
 
 
@@ -111,7 +109,7 @@
 <原文结束>
 
 # <翻译开始>
-// 它们实现了Binding接口，可用于将请求中的数据绑定到struct实例
+// 这些实现了Binding接口，可用于将请求中呈现的数据绑定到结构体实例。
 # <翻译结束>
 
 
@@ -121,28 +119,6 @@
 <原文结束>
 
 # <翻译开始>
-// Default根据HTTP方法和内容类型返回适当的Binding实例
-# <翻译结束>
-
-
-<原文开始>
-// case MIMEPOSTForm:
-<原文结束>
-
-# <翻译开始>
-// 案例MIMEPOSTForm:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// contentType:
-// method:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// contentType:
-// method:
+// Default 根据 HTTP 方法和内容类型返回相应的 Binding 实例。
 # <翻译结束>
 

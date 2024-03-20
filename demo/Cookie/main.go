@@ -5,7 +5,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// https://gin-gonic.com/zh-cn/docs/examples/cookie/
+// 参考 Gin 框架官方文档（中文版）：https://gin-gonic.com/zh-cn/docs/examples/cookie/
 func main() {
 
 	router := gin.Default()

@@ -6,27 +6,27 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
 <原文开始>
-	// regEnLetter matches english letters for http method name
+// regEnLetter matches english letters for http method name
 <原文结束>
 
 # <翻译开始>
-// regEnLetter匹配http方法名的英文字母
+// regEnLetter 匹配用于HTTP方法名称的英文字母
 # <翻译结束>
 
 
 <原文开始>
-	// anyMethods for RouterGroup Any method
+// anyMethods for RouterGroup Any method
 <原文结束>
 
 # <翻译开始>
-// RouterGroup的anyMethods:任何方法
+// anyMethods 用于 RouterGroup 的任意方法
 # <翻译结束>
 
 
@@ -35,7 +35,7 @@
 <原文结束>
 
 # <翻译开始>
-// IRouter定义了所有路由器句柄接口，包括单个和组路由器
+// IRouter 定义了包括单个和组合路由在内的所有路由处理器接口。
 # <翻译结束>
 
 
@@ -44,7 +44,7 @@
 <原文结束>
 
 # <翻译开始>
-// irroutes定义了所有路由器句柄接口
+// IRoutes 定义了所有路由处理器的接口。
 # <翻译结束>
 
 
@@ -54,7 +54,7 @@
 <原文结束>
 
 # <翻译开始>
-// RouterGroup在内部用于配置路由器，它与一个前缀和一组处理程序(中间件)相关联
+// RouterGroup 用于内部配置路由器，一个 RouterGroup 与一个前缀和一组处理器（中间件）关联。
 # <翻译结束>
 
 
@@ -63,7 +63,7 @@
 <原文结束>
 
 # <翻译开始>
-// 使用将中间件添加到组中，参见GitHub中的示例代码
+// Use 向组中添加中间件，参见 GitHub 中的示例代码。
 # <翻译结束>
 
 
@@ -73,9 +73,8 @@
 <原文结束>
 
 # <翻译开始>
-// Group命令用于创建新的路由器组
-// 您应该添加所有具有相同中间件或相同路径前缀的路由
-// 例如，可以对使用公共中间件进行授权的所有路由进行分组
+// Group 创建一个新的路由分组。你应该在此添加所有具有共同中间件或相同路径前缀的路由。
+// 例如，所有使用共同授权中间件的路由可以被归为一组。
 # <翻译结束>
 
 
@@ -85,8 +84,8 @@
 <原文结束>
 
 # <翻译开始>
-// BasePath返回路由器组的基路径
-// 例如:v:= router.Group("/rest/n/v1/api")，则v. basepath()为"/rest/n/v1/api"
+// BasePath 返回路由组的基础路径。
+// 例如，如果 v := router.Group("/rest/n/v1/api")，那么 v.BasePath() 的值就是 "/rest/n/v1/api"。
 # <翻译结束>
 
 
@@ -104,11 +103,13 @@
 <原文结束>
 
 # <翻译开始>
-// Handle用给定的路径和方法注册一个新的请求句柄和中间件
-// 最后一个处理程序应该是真正的处理程序，其他的应该是中间件，可以并且应该在不同的路由之间共享
-// 参见GitHub中的示例代码
-// 对于GET、POST、PUT、PATCH和DELETE请求，可以使用各自的快捷函数
-// 此功能用于批量加载，并允许使用不太常用的非标准化或自定义方法(例如用于与代理的内部通信)
+// Handle 注册一个新的请求处理程序和中间件，关联给定的路径和方法。
+// 最后一个处理器应该是真正的处理器，其他的应该是可以在不同路由间共享的中间件。
+// 请参阅 GitHub 上的示例代码。
+//
+// 对于 GET、POST、PUT、PATCH 和 DELETE 请求，可以分别使用相应的快捷函数。
+//
+// 该函数主要用于批量加载，并允许使用不太常用、非标准化或自定义的方法（例如，用于与代理的内部通信）。
 # <翻译结束>
 
 
@@ -117,7 +118,7 @@
 <原文结束>
 
 # <翻译开始>
-// POST是router.Handle("POST" path, handlers)的快捷方式
+// POST 是一个快捷方式，用于 router.Handle("POST", path, handlers)。
 # <翻译结束>
 
 
@@ -126,7 +127,7 @@
 <原文结束>
 
 # <翻译开始>
-// GET是router.Handle("GET" path, handlers)的快捷方式
+// GET 是一个快捷方式，用于 router.Handle("GET", path, handlers)。
 # <翻译结束>
 
 
@@ -135,7 +136,7 @@
 <原文结束>
 
 # <翻译开始>
-// DELETE是router.Handle("DELETE"， path, handlers)的快捷方式
+// DELETE 是一个快捷方式，用于 router.Handle("DELETE", path, handlers)。
 # <翻译结束>
 
 
@@ -144,7 +145,7 @@
 <原文结束>
 
 # <翻译开始>
-// PATCH是router.Handle("PATCH" path, handlers)的快捷方式
+// PATCH 是一个快捷方式，用于 router.Handle("PATCH", path, handlers)。
 # <翻译结束>
 
 
@@ -153,7 +154,7 @@
 <原文结束>
 
 # <翻译开始>
-// PUT是router.Handle("PUT" path, handlers)的快捷方式
+// PUT 是一个快捷方式，用于 router.Handle("PUT", path, handlers)。
 # <翻译结束>
 
 
@@ -162,7 +163,7 @@
 <原文结束>
 
 # <翻译开始>
-// OPTIONS是router.Handle("OPTIONS" path, handlers)的快捷方式
+// OPTIONS 是一个快捷方式，用于 router.Handle("OPTIONS", path, handlers)。
 # <翻译结束>
 
 
@@ -171,7 +172,7 @@
 <原文结束>
 
 # <翻译开始>
-// HEAD是router.Handle("HEAD" path, handlers)的快捷方式
+// HEAD 是一个快捷方式，用于router.Handle("HEAD", path, handlers)。
 # <翻译结束>
 
 
@@ -181,8 +182,8 @@
 <原文结束>
 
 # <翻译开始>
-// Any注册了一个匹配所有HTTP方法的路由
-// Get, post, put, patch, head, options, delete, connect, trace
+// Any 注册一个路由，该路由会匹配所有 HTTP 方法。
+// 包括 GET, POST, PUT, PATCH, HEAD, OPTIONS, DELETE, CONNECT 和 TRACE。
 # <翻译结束>
 
 
@@ -191,7 +192,7 @@
 <原文结束>
 
 # <翻译开始>
-// Match注册一个与你声明的指定方法匹配的路由
+// Match 注册一条路由，该路由会匹配你声明的指定方法。
 # <翻译结束>
 
 
@@ -201,9 +202,8 @@
 <原文结束>
 
 # <翻译开始>
-// 为了服务本地文件系统的单个文件，StaticFile注册单个路由
-// router.StaticFile(“favicon.ico&quot“
-// /资源/ favicon.ico")
+// StaticFile 注册一个单独的路由，以便从本地文件系统服务单个文件。
+// 示例：router.StaticFile("favicon.ico", "./resources/favicon.ico")
 # <翻译结束>
 
 
@@ -214,9 +214,13 @@
 <原文结束>
 
 # <翻译开始>
-// StaticFileFS的工作原理就像' StaticFile '，但一个自定义的' http
-// 可以用FileSystem代替
-// router. staticfiles ("favicon.ico"， " /resources/favicon.ico"， Dir{"."， false}) Gin默认使用:Gin .Dir()
+// StaticFileFS 的工作方式与 `StaticFile` 类似，但是可以使用自定义的 `http.FileSystem`。
+// 示例：router.StaticFileFS("favicon.ico", "./resources/favicon.ico", Dir{".", false})
+// Gin 框架默认使用：gin.Dir()
+// 翻译：
+// StaticFileFS 与 `StaticFile` 功能类似，但允许使用自定义的 `http.FileSystem` 实例替代。
+// 例如：通过 router.StaticFileFS 将 favicon.ico 静态文件映射到 "./resources/favicon.ico"，并指定 Dir{".", false} 参数。
+// Gin 框架默认情况下使用的静态文件系统为 gin.Dir()。
 # <翻译结束>
 
 
@@ -231,13 +235,11 @@
 <原文结束>
 
 # <翻译开始>
-// Static 提供来自给定文件系统根目录的文件。
-// 在内部使用http.FileServer，因此使用http.NotFound而不是路由器的 NotFound 处理程序。
-// 如:
-// r.Static("/static", "./文件夹") //当你访问http://localhost:8080/static时，它会服务于./文件夹 目录下的文件
+// Static 从给定的文件系统根目录提供文件服务。
+// 在内部使用了 http.FileServer，因此会使用 http.NotFound 替代 Router 的 NotFound 处理程序。
+// 要使用操作系统自身的文件系统实现，请按如下方式使用：
 //
-// use :
-// router.Static("/static", "/var/www")
+//	router.Static("/static", "/var/www")
 # <翻译结束>
 
 
@@ -247,104 +249,25 @@
 <原文结束>
 
 # <翻译开始>
-// StaticFS的工作原理就像' Static() '，但一个自定义的' http
-// 可以使用FileSystem’代替
-// Gin默认使用:Gin . dir ()
+// StaticFS的功能类似于`Static()`，但是可以使用自定义的`http.FileSystem`。
+// Gin默认使用: gin.Dir()
 # <翻译结束>
 
 
 <原文开始>
-	// Register GET and HEAD handlers
+// Register GET and HEAD handlers
 <原文结束>
 
 # <翻译开始>
-// 注册GET和HEAD处理程序
+// 注册 GET 和 HEAD 请求处理器
 # <翻译结束>
 
 
 <原文开始>
-		// Check if file exists and/or if we have permission to access it
+// Check if file exists and/or if we have permission to access it
 <原文结束>
 
 # <翻译开始>
-// 检查文件是否存在和/或我们是否有访问它的权限
-# <翻译结束>
-
-
-<原文开始>
-			// Reset index
-<原文结束>
-
-# <翻译开始>
-// 重置指数
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// handlers:
-// relativePath:
-// methods:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// handlers:
-// relativePath:
-// methods:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// filepath:
-// relativePath:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// filepath:
-// relativePath:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// fs:
-// filepath:
-// relativePath:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// fs:
-// filepath:
-// relativePath:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// root:
-// relativePath:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// root:
-// relativePath:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// fs:
-// relativePath:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// fs:
-// relativePath:
+// 检查文件是否存在，以及/或我们是否有权限访问它
 # <翻译结束>
 

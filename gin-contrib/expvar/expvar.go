@@ -8,20 +8,6 @@ import (
 )
 
 // Gin框架处理器
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func Handler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		w := c.Writer

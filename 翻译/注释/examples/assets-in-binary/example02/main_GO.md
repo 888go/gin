@@ -1,9 +1,9 @@
 
 <原文开始>
-	// example: /public/assets/images/example.png
+// example: /public/assets/images/example.png
 <原文结束>
 
 # <翻译开始>
-// 例子:公共/资产/图片/ example.png
+// 示例：/public/assets/images/example.png
 # <翻译结束>
 

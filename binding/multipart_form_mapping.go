@@ -1,6 +1,6 @@
-// 版权所有2019 Gin Core Team
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2019 Gin 核心团队。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package binding
 
@@ -16,22 +16,16 @@ type multipartRequest http.Request
 var _ setter = (*multipartRequest)(nil)
 
 var (
-// ErrMultiFileHeader多部分
-// FileHeader无效
+	// ErrMultiFileHeader：multipart.FileHeader无效
 	ErrMultiFileHeader = errors.New("unsupported field type for multipart.FileHeader")
 
-// errmultifileheaderlen无效数组[]*multipart
-// 文件头len无效
+	// ErrMultiFileHeaderLenInvalid 表示 []*multipart.FileHeader 的长度无效
+// 
+// 这段 Go 语言注释翻译成中文为：当用于表示多个文件头的 []*multipart.FileHeader 切片（数组）的长度不正确或无效时，会返回这个错误。
 	ErrMultiFileHeaderLenInvalid = errors.New("unsupported len of array for []*multipart.FileHeader")
 )
 
-// TrySet尝试通过绑定表单文件的多部分请求设置一个值
-
-// ff:
-// opt:
-// key:
-// field:
-// value:
+// TrySet 尝试通过包含表单文件的多部分请求设置值
 func (r *multipartRequest) TrySet(value reflect.Value, field reflect.StructField, key string, opt setOptions) (bool, error) {
 	if files := r.MultipartForm.File[key]; len(files) != 0 {
 		return setByMultipartFormFile(value, field, files)

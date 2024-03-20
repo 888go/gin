@@ -5,12 +5,13 @@ import (
 	"github.com/888go/gin"
 )
 
-//https://gin-gonic.com/zh-cn/docs/examples/map-as-querystring-or-postform/
+// 官方示例：将map作为查询字符串或POST表单参数
+// 参考网址：https://gin-gonic.com/zh-cn/docs/examples/map-as-querystring-or-postform/
 
-// POST /post?ids[a]=1234&ids[b]=hello HTTP/1.1
-// Content-Type: application/x-www-form-urlencoded
+// POST 请求，URL 为 /post，并在查询参数中携带键值对 ids[a]=1234 和 ids[b]=hello，使用 HTTP/1.1 协议版本
+// 设置请求头 Content-Type 为 application/x-www-form-urlencoded，表示请求体内容采用 URL 编码格式
 //
-// names[first]=thinkerou&names[second]=tianou
+// 请求体数据为 names[first]=thinkerou&names[second]=tianou，其中包含两个键值对：names[first] 和 names[second]
 
 // 返回 ids: map[b:hello a:1234], names: map[second:tianou first:thinkerou]
 func main() {

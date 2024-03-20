@@ -11,7 +11,7 @@ import (
 func main() {
 	r := gin.Default()
 
-// 平处理程序
+	// Ping handler
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(200, "pong")
 	})

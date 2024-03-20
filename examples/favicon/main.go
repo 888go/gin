@@ -9,8 +9,8 @@ import (
 func main() {
 	app := gin.Default()
 
-// 从相对于主的位置提供静态图标文件
-// go directory app.StaticFile("/favicon.ico"， "./.assets/favicon.ico")
+// 从main.go目录的相对位置提供静态favicon文件
+// app.StaticFile("/favicon.ico", "./.assets/favicon.ico")
 	app.StaticFile("/favicon.ico", "./favicon.ico")
 
 	app.GET("/ping", func(c *gin.Context) {

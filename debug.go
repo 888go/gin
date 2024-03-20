@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -14,15 +14,13 @@ import (
 
 const ginSupportMinGoVer = 18
 
-// 如果框架在调试模式下运行，IsDebugging返回true
-// 使用SetMode(gin.ReleaseMode)来禁用调试模式
-
-// ff:是否为调试模式
+// IsDebugging 返回一个布尔值，表示框架是否处于调试模式。
+// 若要关闭调试模式，请使用 SetMode(gin.ReleaseMode)。
 func IsDebugging() bool {
 	return ginMode == debugCode
 }
 
-// DebugPrintRouteFunc调试日志输出格式
+// DebugPrintRouteFunc 表示调试日志输出格式。
 var DebugPrintRouteFunc func(httpMethod, absolutePath, handlerName string, nuHandlers int)
 
 func debugPrintRoute(httpMethod, absolutePath string, handlers HandlersChain) {

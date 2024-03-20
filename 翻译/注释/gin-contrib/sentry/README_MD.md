@@ -22,13 +22,13 @@ sentry
 
 [![构建状态](https://travis-ci.org/gin-contrib/sentry.svg?branch=master)](https://travis-ci.org/gin-contrib/sentry)
 [![Go 代码质量报告](https://goreportcard.com/badge/github.com/gin-contrib/sentry)](https://goreportcard.com/report/github.com/gin-contrib/sentry)
-[![GoDoc](https://godoc.org/github.com/gin-contrib/sentry?status.svg)](https://godoc.org/github.com/gin-contrib/sentry)
+[![GoDoc 文档](https://godoc.org/github.com/gin-contrib/sentry?status.svg)](https://godoc.org/github.com/gin-contrib/sentry)
 [![加入聊天室](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gin-gonic/gin)
 
 ---
 
-> `sentry` 中间件已停止维护，并已被 `sentry-go` SDK 替代。
-> 在 [GitHub](https://github.com/getsentry/sentry-go) 上了解更多该项目信息，并查看新的 [gin 中间件](https://github.com/getsentry/sentry-go/tree/master/gin)。
+> 中间件`sentry`已停止维护，并被`sentry-go` SDK取代。
+> 您可以在[GitHub](https://github.com/getsentry/sentry-go)上了解更多关于该项目的信息，并查看新的[gin中间件](https://github.com/getsentry/sentry-go/tree/master/gin)。
 
 # <翻译结束>
 
@@ -44,7 +44,7 @@ See the [example](example/main.go)
 # <翻译开始>
 # 示例
 
-参见 [example](example/main.go)
+请参阅 [example](example/main.go)
 
 [embedmd]:
 
@@ -78,30 +78,35 @@ func main() {
 <原文结束>
 
 # <翻译开始>
-# 以下是翻译后的内容：
+# ```go
+// (example/main.go Go 代码文件)
 
-```go
 package main
 
 import (
-	"github.com/getsentry/raven-go"
-	"github.com/gin-contrib/sentry"
-	"github.com/gin-gonic/gin"
+    "github.com/getsentry/raven-go" // 引入raven错误报告库
+    "github.com/gin-contrib/sentry"  // 引入gin框架的sentry中间件
+    "github.com/gin-gonic/gin"       // 引入gin框架
 )
 
 func init() {
-	raven.SetDSN("https://<key>:<secret>@app.getsentry.com/<project>")
+    raven.SetDSN("https://<key>:<secret>@app.getsentry.com/<project>") // 设置Sentry DSN（数据源名称）
 }
 
 func main() {
-	r := gin.Default()
-	r.Use(sentry.Recovery(raven.DefaultClient, false)) // 仅发送崩溃报告
-	// r.Use(sentry.Recovery(raven.DefaultClient, true)) // 发送崩溃报告并启用panic捕获
-	r.Run(":8080")
+    r := gin.Default() // 初始化gin引擎
+
+// 使用sentry中间件进行恢复处理，不发送非崩溃报告
+    r.Use(sentry.Recovery(raven.DefaultClient, false))
+
+// 若要同时发送崩溃报告和非崩溃报告，可以使用如下代码：
+// r.Use(sentry.Recovery(raven.DefaultClient, true))
+
+    r.Run(":8080") // 启动gin服务在8080端口
 }
 ```
 
-注意：在实际使用时，请将`<key>:<secret>`和`<project>`替换为您的Sentry项目对应的密钥、密钥 secret 和项目ID。
+这段Go代码示例展示了如何在gin框架中集成sentry错误报告服务。首先通过`raven-go`库设置Sentry的数据源名称（DSN），然后在gin引擎中使用`sentry`中间件进行异常恢复处理，并配置是否发送非崩溃报告。最后启动服务器在8080端口监听请求。其中`<key>:<secret>`和`<project>`需要替换为实际的Sentry密钥、密钥秘密和项目ID。
 
 # <翻译结束>
 

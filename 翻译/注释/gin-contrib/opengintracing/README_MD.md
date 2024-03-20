@@ -19,10 +19,10 @@ See [opentracing/opentracing-go](https://github.com/opentracing/opentracing-go) 
 <原文结束>
 
 # <翻译开始>
-# 跟踪
+# 追踪
 
 [![运行测试](https://github.com/gin-contrib/opengintracing/actions/workflows/go.yml/badge.svg)](https://github.com/gin-contrib/opengintracing/actions/workflows/go.yml)
-[![Go 代码质量报告](https://goreportcard.com/badge/github.com/gin-contrib/opengintracing)](https://goreportcard.com/report/github.com/gin-contrib/opengintracing)
+[![Go 项目报告卡](https://goreportcard.com/badge/github.com/gin-contrib/opengintracing)](https://goreportcard.com/report/github.com/gin-contrib/opengintracing)
 [![GoDoc](https://godoc.org/github.com/gin-contrib/opengintracing?status.png)](https://pkg.go.dev/github.com/gin-contrib/opengintracing)
 [![许可协议: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -32,7 +32,7 @@ See [opentracing/opentracing-go](https://github.com/opentracing/opentracing-go) 
 go get -u github.com/gin-contrib/opengintracing
 ```
 
-更多相关信息请参阅 [opentracing/opentracing-go](https://github.com/opentracing/opentracing-go)。
+欲了解更多信息，请查看 [opentracing/opentracing-go](https://github.com/opentracing/opentracing-go)。
 
 # <翻译结束>
 
@@ -136,99 +136,106 @@ func main() {
 <原文结束>
 
 # <翻译开始>
-# 用法
+# 用法示例
 
-例如，您有这样的架构：
+假设您有这样的架构设计：
 
-![](example_architecture.png)
+![示例架构](example_architecture.png)
 
-要开始请求追踪，请按照以下步骤操作：
+要开始追踪请求，您需要执行以下操作：
 
-* 在“API Gateway”上：启动跨度（span），注入头部信息并将它们传递给服务
+1. 在“API Gateway”上：
 
-```go
-package main
-import (
-    ...
-    "github.com/gin-gonic/gin"
-    "github.com/gin-contrib/opengintracing"
-    "github.com/opentracing/opentracing-go"
-    ...
-)
+   ```go
+   package main
+   import (
+       ...
+       "github.com/gin-gonic/gin"
+       "github.com/gin-contrib/opengintracing"
+       "github.com/opentracing/opentracing-go"
+       ...
+   )
 
-var trace = /* 设置追踪器 */
+   var trace = /* 设置追踪器 */
 
-func main() {
-    ...
-    app := gin.Default()
+   func main() {
+       ...
+       app := gin.Default()
 
-    app.POST("/service1",
-        opengintracing.NewSpan(trace, "转发到服务 1"),
-        opengintracing.InjectToHeaders(trace, true),
-        service1handler)
-    app.POST("/service2",
-        opengintracing.NewSpan(trace, "转发到服务 2"),
-        opengintracing.InjectToHeaders(trace, true),
-        service2handler)
-    ...
-}
-```
+// 为转发到服务1的请求启动span，并注入headers
+       app.POST("/service1",
+           opengintracing.NewSpan(trace, "转发至服务1"),
+           opengintracing.InjectToHeaders(trace, true),
+           service1handler)
 
-* 在“服务 1”和“服务 2”上，从“API Gateway”的跨度继承并启动新的跨度
+// 为转发到服务2的请求启动span，并注入headers
+       app.POST("/service2",
+           opengintracing.NewSpan(trace, "转发至服务2"),
+           opengintracing.InjectToHeaders(trace, true),
+           service2handler)
+       ...
+   }
+   ```
 
-```go
-package main
-import (
-    ...
-    "github.com/gin-gonic/gin"
-    "github.com/gin-contrib/opengintracing"
-    "github.com/opentracing/opentracing-go"
-    ...
-)
+2. 在“服务1”和“服务2”中：
 
-var trace = /* 设置追踪器 */
+   ```go
+   package main
+   import (
+       ...
+       "github.com/gin-gonic/gin"
+       "github.com/gin-contrib/opengintracing"
+       "github.com/opentracing/opentracing-go"
+       ...
+   )
 
-func main() {
-    ...
-    refFunc := opentracing.FollowsFrom
-    app := gin.Default()
+   var trace = /* 设置追踪器 */
 
-    app.POST("",
-        opengintracing.SpanFromHeaders(trace, "操作", refFunc, true),
-        // 如果要在其他服务中继续追踪，请不要忘记注入
-        opengintracing.InjectToHeaders(trace, true),
-        handler)
-    ...
-}
-```
+   func main() {
+       ...
+       refFunc := opentracing.FollowsFrom
+       app := gin.Default()
 
-同时，别忘了将“服务 1”中的头部信息转发给“服务 3”
+// 从请求头中获取并继承自“API Gateway”的span
+       app.POST("",
+           opengintracing.SpanFromHeaders(trace, "操作", refFunc, true),
+// 如果要在其他服务中继续追踪，请勿忘记注入headers
+           opengintracing.InjectToHeaders(trace, true),
+           handler)
+       ...
+   }
+   ```
 
-* 在“服务 3”上，不需要注入到头部信息
+3. 同时，请确保将“服务1”中的headers传递给“服务3”。
 
-```go
-package main
-import (
-    ...
-    "github.com/gin-gonic/gin"
-    "github.com/gin-contrib/opengintracing"
-    "github.com/opentracing/opentracing-go"
-    ...
-)
+4. 在“服务3”上，注入到headers不是必需的：
 
-var trace = /* 设置追踪器 */
+   ```go
+   package main
+   import (
+       ...
+       "github.com/gin-gonic/gin"
+       "github.com/gin-contrib/opengintracing"
+       "github.com/opentracing/opentracing-go"
+       ...
+   )
 
-func main() {
-    ...
-    refFunc := opentracing.ChildOf
-    app := gin.Default()
+   var trace = /* 设置追踪器 */
 
-    app.POST("",
-        opengintracing.SpanFromHeaders(trace, "操作", refFunc, true),
-        handler)
-    ...
-}
-```
+   func main() {
+       ...
+       refFunc := opentracing.ChildOf
+       app := gin.Default()
+
+// 从请求头中获取并作为子span创建
+       app.POST("",
+           opengintracing.SpanFromHeaders(trace, "操作", refFunc, true),
+           handler)
+       ...
+   }
+   ```
+
+以上代码示例展示了如何在各个服务中通过OpenTracing实现请求追踪。在API Gateway处创建并注入追踪信息到请求头，然后在后续的服务中继承或关联这些追踪信息以完成整个请求链路的追踪。
 
 # <翻译结束>
 
@@ -246,7 +253,7 @@ TODO
 # 待办事项：
 
 * [x] 添加代码示例
-* [ ] 考虑添加使用 SpanFromContext 的示例
+* [ ] 考虑添加包含SpanFromContext的示例
 * [ ] 添加可构建示例（需要一个简单的日志跟踪器）
 
 # <翻译结束>

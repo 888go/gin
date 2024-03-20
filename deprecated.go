@@ -1,21 +1,17 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
 import (
 	"log"
-
+	
 	"github.com/888go/gin/binding"
 )
 
-// BindWith使用指定的绑定引擎绑定传递的结构指针
-// 参见绑定包
-
-// ff:弃用BindWith
-// b:
-// obj:
+// BindWith 使用指定的绑定引擎绑定传入的结构体指针。
+// 请参阅binding包以了解更多信息。
 func (c *Context) BindWith(obj any, b binding.Binding) error {
 	log.Println(`BindWith(\"any, binding.Binding\") error is going to
 	be deprecated, please check issue #662 and either use MustBindWith() if you

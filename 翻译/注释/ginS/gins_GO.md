@@ -6,7 +6,7 @@
 <原文结束>
 
 # <翻译开始>
-// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// LoadHTMLGlob 是 Engine.LoadHTMLGlob 的一个包装器。
+// LoadHTMLGlob 是 Engine.LoadHTMLGlob 的一个包装函数。
 # <翻译结束>
 
 
@@ -26,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// LoadHTMLFiles 是 Engine.LoadHTMLFiles 的一个封装函数。
+// LoadHTMLFiles 是对 Engine.LoadHTMLFiles 的一个封装。
 # <翻译结束>
 
 
@@ -44,7 +44,7 @@
 <原文结束>
 
 # <翻译开始>
-// NoRoute 为无路由情况添加处理器。默认返回404状态码。
+// NoRoute 添加处理函数，用于未找到路由的情况（NoRoute）。默认情况下返回404状态码。
 # <翻译结束>
 
 
@@ -63,8 +63,8 @@
 <原文结束>
 
 # <翻译开始>
-// Group 创建一个新的路由分组。你应该将所有具有共同中间件或相同路径前缀的路由添加到此分组中。
-// 例如，所有使用同一个授权中间件的路由可以被归为一组。
+// Group 创建一个新的路由分组。你应该在此添加所有具有共同中间件或相同路径前缀的路由。
+// 例如，所有使用共同授权中间件的路由可以被归为一组。
 # <翻译结束>
 
 
@@ -83,7 +83,6 @@
 
 # <翻译开始>
 // POST 是一个快捷方式，用于 router.Handle("POST", path, handle)
-// 即使用特定方法（此处为"POST"）和路径（path）注册一个处理器(handle)到路由(router)
 # <翻译结束>
 
 
@@ -92,8 +91,7 @@
 <原文结束>
 
 # <翻译开始>
-// GET 是一个快捷方式，用于 router.Handle("GET", path, handle)
-// 即通过此快捷方式可以快速处理 GET 方法类型的请求，对应路径为 path，并调用 handle 处理函数
+// GET 是一个快捷方式，等同于 router.Handle("GET", path, handle)
 # <翻译结束>
 
 
@@ -102,8 +100,7 @@
 <原文结束>
 
 # <翻译开始>
-// DELETE 是一个快捷方式，用于router.Handle("DELETE", path, handle)
-// 即：通过此快捷方式可以方便地为指定路由路径注册一个处理DELETE请求的方法。
+// DELETE 是一个快捷方式，等同于 router.Handle("DELETE", path, handle)
 # <翻译结束>
 
 
@@ -113,10 +110,6 @@
 
 # <翻译开始>
 // PATCH 是一个快捷方式，用于 router.Handle("PATCH", path, handle)
-// 即使用 PATCH 方法注册路由处理器，其中：
-// "PATCH" 代表 HTTP 请求方法，
-// path 为待处理的请求路径，
-// handle 为对应的处理函数。
 # <翻译结束>
 
 
@@ -125,8 +118,7 @@
 <原文结束>
 
 # <翻译开始>
-// PUT 是一个快捷方式，用于 router.Handle("PUT", path, handle)
-// 即：使用 router 处理 "PUT" 方法的请求，路径为 path，并调用 handle 函数进行处理
+// PUT 是一个快捷方式，等同于 router.Handle("PUT", path, handle)
 # <翻译结束>
 
 
@@ -136,7 +128,6 @@
 
 # <翻译开始>
 // OPTIONS 是一个快捷方式，用于 router.Handle("OPTIONS", path, handle)
-// 即：通过该选项，可以快速处理对指定路径（path）的 "OPTIONS" HTTP 方法请求，并调用相应的处理函数（handle）
 # <翻译结束>
 
 
@@ -146,7 +137,6 @@
 
 # <翻译开始>
 // HEAD 是一个快捷方式，用于 router.Handle("HEAD", path, handle)
-// 即为：router 处理 "HEAD" 方法类型的请求，路径为 path，处理函数为 handle
 # <翻译结束>
 
 
@@ -181,8 +171,7 @@
 # <翻译开始>
 // Static 从给定的文件系统根目录提供文件服务。
 // 在内部使用了 http.FileServer，因此会使用 http.NotFound 替代 Router 的 NotFound 处理程序。
-// 若要使用操作系统自身的文件系统实现，
-// 可以这样使用：
+// 要使用操作系统自身的文件系统实现，请按如下方式使用：
 //
 //	router.Static("/static", "/var/www")
 # <翻译结束>
@@ -204,9 +193,9 @@
 <原文结束>
 
 # <翻译开始>
-// Use 方法将一个全局中间件附加到路由。也就是说，通过Use()方法附加的中间件将会
-// 包含在每一个请求的处理器链中。即便是404、405等错误状态码响应，或是静态文件请求...
-// 例如，这是放置日志记录器或错误管理中间件的理想位置。
+// Use 方法将全局中间件附加到路由器。即通过 Use() 附加的中间件将会
+// 包含在每一个请求的处理器链中。即使是 404、405 状态码的响应，或者是静态文件的处理...
+// 例如，这里适合放置日志记录器或错误管理中间件。
 # <翻译结束>
 
 
@@ -227,7 +216,7 @@
 
 # <翻译开始>
 // Run 函数连接到一个 http.Server，并开始监听和处理 HTTP 请求。
-// 这是调用 http.ListenAndServe(addr, router) 的快捷方式。
+// 这是 http.ListenAndServe(addr, router) 的快捷方式。
 // 注意：除非发生错误，否则此方法将无限期地阻塞调用它的 goroutine。
 # <翻译结束>
 
@@ -239,9 +228,9 @@
 <原文结束>
 
 # <翻译开始>
-// RunTLS 附加到一个 http.Server，并开始监听和处理 HTTPS 请求。
+// RunTLS 绑定到一个 http.Server，并开始监听和处理 HTTPS 请求。
 // 这是 http.ListenAndServeTLS(addr, certFile, keyFile, router) 的快捷方式。
-// 注意：除非发生错误，否则此方法将无限期地阻塞调用的 goroutine。
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用它的 goroutine。
 # <翻译结束>
 
 
@@ -252,8 +241,8 @@
 <原文结束>
 
 # <翻译开始>
-// RunUnix连接到一个http.Server，并开始通过指定的Unix套接字（即文件）监听和处理HTTP请求
-// 注意：除非发生错误，否则此方法将无限期地阻塞调用它的goroutine。
+// RunUnix连接到一个http.Server，并开始通过指定的unix套接字（即文件）监听和处理HTTP请求。
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用的goroutine。
 # <翻译结束>
 
 
@@ -264,91 +253,7 @@
 <原文结束>
 
 # <翻译开始>
-// RunFd 将路由器附加到 http.Server，并开始监听并透过指定的文件描述符处理 HTTP 请求。
+// RunFd 将路由器附加到 http.Server，并开始通过指定的文件描述符监听和处理 HTTP 请求。
 // 注意：除非发生错误，否则该方法将无限期地阻塞调用它的 goroutine。
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// handlers:
-// relativePath:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// handlers:
-// relativePath:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// handlers:
-// relativePath:
-// httpMethod:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// handlers:
-// relativePath:
-// httpMethod:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// filepath:
-// relativePath:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// filepath:
-// relativePath:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// root:
-// relativePath:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// root:
-// relativePath:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// fs:
-// relativePath:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// fs:
-// relativePath:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// err:
-// keyFile:
-// certFile:
-// addr:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// err:
-// keyFile:
-// certFile:
-// addr:
 # <翻译结束>
 

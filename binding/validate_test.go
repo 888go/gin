@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package binding
 
@@ -98,13 +98,8 @@ func createNoValidationValues() structNoValidationValues {
 			"foo": substructNoValidation{},
 			"bar": substructNoValidation{},
 		},
-// StructPointerSlice 是一个指向 noValidationSub 结构体的指针切片
-// interfacesslice 是一个 testInterface 接口类型的切片
-// var StructPointerSlice []*noValidationSub
-// var interfacesslice []testInterface
-// 这里的注释翻译为：
-// StructPointerSlice 表示一个包含多个指向 noValidationSub 结构体指针的切片。
-// interfacesslice 表示一个包含多个 testInterface 类型值的切片。
+// StructPointerSlice []noValidationSub // 结构体指针切片
+// InterfaceSlice     []testInterface   // 接口类型切片
 	}
 	s.InlinedStruct.Integer = 1000
 	s.InlinedStruct.String = []string{"first", "second"}
@@ -162,19 +157,18 @@ type structNoValidationPointer struct {
 }
 
 func TestValidateNoValidationPointers(t *testing.T) {
-// origin := createNoValidation_values() // 创建并初始化不进行验证的值，将结果赋给变量origin
-// test := createNoValidation_values() // 创建并初始化另一个不进行验证的值，将结果赋给变量test
-// 上述代码中，`createNoValidation_values()` 是一个假设存在的函数，用于生成不需要进行验证的值。这里对两行代码分别进行了中文注释说明。
+// origin := 创建无验证值()
+// test := 创建无验证值()
 	empty := structNoValidationPointer{}
 
-// ,
-// Nil(t, validate(test))断言
-// 尼罗河(t,执行极为&test))
+// 断言validate(test)的结果为nil
+// 断言validate(&test)的结果为nil
+// 
+// 这里是对Go语言中测试断言库（如 testify/assert）的注释翻译，这两行代码在进行单元测试时使用。它们的作用是分别检查函数`validate(test)`和`validate(&test)`的返回值是否为`nil`，如果实际结果确实是`nil`，则测试通过；否则，测试失败。
 	assert.Nil(t, validate(empty))
 	assert.Nil(t, validate(&empty))
 
-// 断言
-// 等于(t，原点，检验)
+	// 断言：在测试用例t中，origin（原始值）应等于test（测试值）
 }
 
 type Object map[string]any
@@ -200,8 +194,8 @@ func TestValidatePrimitives(t *testing.T) {
 	assert.Equal(t, "value", str)
 }
 
-// structCustomValidation是一个辅助结构体，我们使用它来检查是否可以在其上注册自定义验证
-// ' notone '绑定指令用于自定义验证并在以后注册
+// structCustomValidation 是一个辅助结构体，我们使用它来检查是否能够在其上注册自定义验证。
+// `notone` 绑定指令用于自定义验证，并将在后续进行注册。
 type structCustomValidation struct {
 	Integer int `binding:"notone"`
 }
@@ -214,20 +208,21 @@ func notOne(f1 validator.FieldLevel) bool {
 }
 
 func TestValidatorEngine(t *testing.T) {
-// 这将验证函数' notOne '是否与' defaultValidator '和验证器库所期望的函数签名匹配
+// 这验证了函数 `notOne` 与 `defaultValidator` 预期的函数签名相匹配，
+// 从而也就验证了该函数与 validator 库的兼容性。
 	engine, ok := Validator.Engine().(*validator.Validate)
 	assert.True(t, ok)
 
 	err := engine.RegisterValidation("notone", notOne)
-// 检查我们是否可以注册自定义验证而不会出错
+	// 检查我们可以无错误地注册自定义验证
 	assert.Nil(t, err)
 
-// 创建一个验证失败的实例
+	// 创建一个在验证时会失败的实例
 	withOne := structCustomValidation{Integer: 1}
 	errs := validate(withOne)
 
-// 检查我们是否得到非nil错误
+	// 检查返回的 errs 是否非空
 	assert.NotNil(t, errs)
-// 检查错误是否与预期相符
+	// 检查错误是否符合预期
 	assert.Error(t, errs, "", "", "notone")
 }

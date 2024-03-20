@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// 对路由器进行测试
+// PerformRequest 用于测试 gin 路由器。
 # <翻译结束>
 
 
@@ -26,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestSingleRouteOK测试POST路由是否被正确调用
+// TestSingleRouteOK 测试 POST 路由是否被正确调用。
 # <翻译结束>
 
 
@@ -35,7 +35,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextParamsGet测试是否可以从URL解析参数
+// TestContextParamsGet 测试从URL中解析参数的功能。
 # <翻译结束>
 
 
@@ -44,7 +44,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextParamsGet测试即使使用额外的斜杠也可以从URL解析参数
+// TestContextParamsGet 测试即使存在额外的斜杠，也能从 URL 中解析出参数。
 # <翻译结束>
 
 
@@ -55,7 +55,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestRouteParamsNotEmpty测试上下文参数是否会被设置，即使在上下文初始化之后注册了带有参数/通配符的路由(这发生在之前的请求中)
+// TestRouteParamsNotEmpty 测试即使在初始化上下文（已在先前请求中发生）后注册了带有参数/通配符的路由，上下文参数也会被设置。
 # <翻译结束>
 
 
@@ -64,25 +64,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestHandleStaticFile -确保静态文件处理正确
-# <翻译结束>
-
-
-<原文开始>
-	// SETUP file
-<原文结束>
-
-# <翻译开始>
-// 安装文件
-# <翻译结束>
-
-
-<原文开始>
-	// SETUP gin
-<原文结束>
-
-# <翻译开始>
-// 设置杜松子酒
+// TestHandleStaticFile - 确保静态文件处理正常
 # <翻译结束>
 
 
@@ -91,7 +73,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestHandleStaticDir -确保根/子目录处理正确
+// TestHandleStaticDir - 确保根目录/子目录正确处理
 # <翻译结束>
 
 
@@ -100,7 +82,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestHandleHeadToDir -确保根/子目录处理得当
+// TestHandleHeadToDir - 确保根目录/子目录处理正确
 # <翻译结束>
 
 
@@ -110,125 +92,53 @@
 <原文结束>
 
 # <翻译开始>
-// - type = '文本/平原;当go版本<= 1.16时，charset=utf-8'，否则，Content-Type='text/x-go;charset = utf - 8 '
+// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
+// 否则，Content-Type='text/x-go; charset=utf-8'
 # <翻译结束>
 
 
 <原文开始>
-	// add one methodTree to trees
+// add one methodTree to trees
 <原文结束>
 
 # <翻译开始>
-// 给trees添加一个methodTree
+// 向trees添加一个methodTree
 # <翻译结束>
 
 
 <原文开始>
-// CleanPath
+// Test custom not found handler
 <原文结束>
 
 # <翻译开始>
-// CleanPath 清理路径
+// 测试自定义未找到处理器
 # <翻译结束>
 
 
 <原文开始>
-// NotFound
+// Test other method than GET (want 307 instead of 301)
 <原文结束>
 
 # <翻译开始>
-// NotFound
+// 测试非GET方法（期望返回307而非301）
 # <翻译结束>
 
 
 <原文开始>
-// TSR -/
+// Test special case where no node for the prefix "/" exists
 <原文结束>
 
 # <翻译开始>
-// TSR - 由于您提供的代码注释不完整，无法准确翻译。请提供完整的注释内容，以便我为您进行准确的翻译。
+// 测试特殊情况，其中前缀 "/" 对应的节点不存在
 # <翻译结束>
 
 
 <原文开始>
-// TSR +/
+// Reproduction test for the bug of issue #2843
 <原文结束>
 
 # <翻译开始>
-// TSR + /
-// 这段Go语言代码注释内容不完整，无法准确翻译。请提供完整的注释内容以便于翻译。
-# <翻译结束>
-
-
-<原文开始>
-// Fixed Case
-<原文结束>
-
-# <翻译开始>
-// 固定的情况下
-# <翻译结束>
-
-
-<原文开始>
-// Fixed Case -/
-<原文结束>
-
-# <翻译开始>
-// 固定情况-/
-# <翻译结束>
-
-
-<原文开始>
-// Fixed Case +/
-<原文结束>
-
-# <翻译开始>
-// 固定大小写+/
-# <翻译结束>
-
-
-<原文开始>
-// Without CleanPath
-<原文结束>
-
-# <翻译开始>
-// 没有CleanPath
-# <翻译结束>
-
-
-<原文开始>
-	// Test custom not found handler
-<原文结束>
-
-# <翻译开始>
-// 测试自定义未找到处理程序
-# <翻译结束>
-
-
-<原文开始>
-	// Test other method than GET (want 307 instead of 301)
-<原文结束>
-
-# <翻译开始>
-// 测试GET之外的其他方法(想要307而不是301)
-# <翻译结束>
-
-
-<原文开始>
-	// Test special case where no node for the prefix "/" exists
-<原文结束>
-
-# <翻译开始>
-// 测试特殊情况下没有节点的前缀"/"存在
-# <翻译结束>
-
-
-<原文开始>
-	// Reproduction test for the bug of issue #2843
-<原文结束>
-
-# <翻译开始>
-// 对问题#2843的bug进行复制测试
+// 用于重现问题#2843的bug测试
 # <翻译结束>
 
 
@@ -237,86 +147,33 @@
 <原文结束>
 
 # <翻译开始>
-// 对问题#1805的bug进行复制测试
+// 用于重现问题 #1805 的 bug 测试
 # <翻译结束>
 
 
 <原文开始>
-	// Middleware must be called just only once by per request.
+// Middleware must be called just only once by per request.
 <原文结束>
 
 # <翻译开始>
-// 每个请求只能调用中间件一次
+// 中间件必须在每个请求中仅调用一次。
 # <翻译结束>
 
 
 <原文开始>
-	// First access
+// For each defined route context should contain its full path
 <原文结束>
 
 # <翻译开始>
-// 第一次访问
+// 对于每个已定义的路由，其上下文应包含完整的路径
 # <翻译结束>
 
 
 <原文开始>
-	// Second access
+// For not found routes full path is empty
 <原文结束>
 
 # <翻译开始>
-// 第二次访问
-# <翻译结束>
-
-
-<原文开始>
-	// Test routes
-<原文结束>
-
-# <翻译开始>
-// 测试路线
-# <翻译结束>
-
-
-<原文开始>
-			// For each defined route context should contain its full path
-<原文结束>
-
-# <翻译开始>
-// 对于每个已定义的路由，上下文应该包含它的完整路径
-# <翻译结束>
-
-
-<原文开始>
-	// Test not found
-<原文结束>
-
-# <翻译开始>
-// 未找到测试
-# <翻译结束>
-
-
-<原文开始>
-		// For not found routes full path is empty
-<原文结束>
-
-# <翻译开始>
-// 对于未找到的路由，整个路径为空
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// headers:
-// path:
-// method:
-// r:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// headers:
-// path:
-// method:
-// r:
+// 对于未找到的路由，其完整路径为空
 # <翻译结束>
 

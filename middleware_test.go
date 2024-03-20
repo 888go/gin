@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -34,10 +34,10 @@ func TestMiddlewareGeneralCase(t *testing.T) {
 	router.NoMethod(func(c *Context) {
 		signature += " XX "
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/")
 
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Equal(t, "ACDB", signature)
 }
@@ -70,10 +70,10 @@ func TestMiddlewareNoRoute(t *testing.T) {
 	router.NoMethod(func(c *Context) {
 		signature += " X "
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/")
 
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusNotFound, w.Code)
 	assert.Equal(t, "ACEGHFDB", signature)
 }
@@ -107,10 +107,10 @@ func TestMiddlewareNoMethodEnabled(t *testing.T) {
 	router.POST("/", func(c *Context) {
 		signature += " XX "
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/")
 
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusMethodNotAllowed, w.Code)
 	assert.Equal(t, "ACEGHFDB", signature)
 }
@@ -119,7 +119,7 @@ func TestMiddlewareNoMethodDisabled(t *testing.T) {
 	signature := ""
 	router := New()
 
-// NoMethod禁用
+	// NoMethod disabled
 	router.HandleMethodNotAllowed = false
 
 	router.Use(func(c *Context) {
@@ -148,10 +148,10 @@ func TestMiddlewareNoMethodDisabled(t *testing.T) {
 		signature += " XX "
 	})
 
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/")
 
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusNotFound, w.Code)
 	assert.Equal(t, "AC X DB", signature)
 }
@@ -174,10 +174,10 @@ func TestMiddlewareAbort(t *testing.T) {
 		signature += " XX "
 	})
 
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/")
 
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusUnauthorized, w.Code)
 	assert.Equal(t, "ACD", signature)
 }
@@ -195,33 +195,33 @@ func TestMiddlewareAbortHandlersChainAndNext(t *testing.T) {
 		signature += "C"
 		c.Next()
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/")
 
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusGone, w.Code)
 	assert.Equal(t, "ACB", signature)
 }
 
-// TestFailHandlersChain -确保Fail中断以fifo顺序使用中间件以及Abort
+// TestFailHandlersChain - 确保 Fail 中断会按照先进先出（FIFO）顺序使用中间件，
+// 同时也会中断执行链
 func TestMiddlewareFailHandlersChain(t *testing.T) {
-// 设置
+	// SETUP
 	signature := ""
 	router := New()
 	router.Use(func(context *Context) {
 		signature += "A"
-		context.AbortWithError(http.StatusInternalServerError, errors.New("foo")) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+		context.AbortWithError(http.StatusInternalServerError, errors.New("foo")) //nolint: errcheck
 	})
 	router.Use(func(context *Context) {
 		signature += "B"
 		context.Next()
 		signature += "C"
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/")
 
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusInternalServerError, w.Code)
 	assert.Equal(t, "A", signature)
 }

@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// BindKey默认绑定键
+// BindKey 指示一个默认的绑定键。
 # <翻译结束>
 
 
@@ -26,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// Bind是给定接口对象的辅助函数，并返回一个Gin中间件
+// Bind 是一个辅助函数，用于给定的接口对象并返回 Gin 中间件。
 # <翻译结束>
 
 
@@ -35,8 +35,7 @@
 <原文结束>
 
 # <翻译开始>
-// WrapF是用于包装http的辅助函数
-// HandlerFunc并返回一个Gin中间件
+// WrapF 是一个用于包装 http.HandlerFunc 的辅助函数，并返回一个 Gin 中间件。
 # <翻译结束>
 
 
@@ -45,8 +44,7 @@
 <原文结束>
 
 # <翻译开始>
-// WrapH是包装http的辅助函数
-// 处理程序并返回一个Gin中间件
+// WrapH 是一个辅助函数，用于封装 http.Handler，并返回一个 Gin 中间件。
 # <翻译结束>
 
 
@@ -55,7 +53,7 @@
 <原文结束>
 
 # <翻译开始>
-// H是map[string]any的快捷方式
+// H 是 map[string]any 的一个快捷方式
 # <翻译结束>
 
 
@@ -64,7 +62,7 @@
 <原文结束>
 
 # <翻译开始>
-// MarshalXML允许类型H与xml.Marshal一起使用
+// MarshalXML 允许类型 H 与 xml.Marshal 函数配合使用。
 # <翻译结束>
 
 
@@ -73,13 +71,6 @@
 <原文结束>
 
 # <翻译开始>
-// 该注释引用自Stack Overflow上的一个问题：
-// https://stackoverflow.com/questions/53069040/checking-a-string-contains-only-ascii-characters
-// 这段Go代码是用于检查一个字符串是否只包含ASCII字符。
-// 以下是更详细的中文注释（假设后面有具体的代码）：
-// ```go
-// 上述链接指向Stack Overflow上的一个问题，讨论如何检查一个字符串是否仅包含ASCII字符。
-// 下面的Go代码实现了一个函数，用于检测给定的字符串是否全部由ASCII字符组成。
-// ASCII字符集包含128个字符，包括英文字母、数字、标点符号和一些控制字符。
+// 来源：https://stackoverflow.com/questions/53069040/检查一个字符串是否只包含ASCII字符
 # <翻译结束>
 

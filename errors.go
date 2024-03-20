@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -12,25 +12,25 @@ import (
 	"github.com/888go/gin/internal/json"
 )
 
-// ErrorType是在gin规范中定义的无符号64位错误代码
+// ErrorType 是一个无符号的64位错误代码，遵循gin规范定义。
 type ErrorType uint64
 
 const (
-// 当Context.Bind()失败时使用ErrorTypeBind
+	// ErrorTypeBind 用于当 Context.Bind() 失败时。
 	ErrorTypeBind ErrorType = 1 << 63
-// 当Context.Render()失败时使用ErrorTypeRender
+	// ErrorTypeRender 用于当 Context.Render() 失败时。
 	ErrorTypeRender ErrorType = 1 << 62
-// ErrorTypePrivate私有错误
+	// ErrorTypePrivate 表示一个私有错误。
 	ErrorTypePrivate ErrorType = 1 << 0
-// ErrorTypePublic表示公共错误
+	// ErrorTypePublic 表示一个公开的错误。
 	ErrorTypePublic ErrorType = 1 << 1
-// ErrorTypeAny表示任何其他错误
+	// ErrorTypeAny 表示任何其他错误。
 	ErrorTypeAny ErrorType = 1<<64 - 1
-// ErrorTypeNu表示任何其他错误
+	// ErrorTypeNu 表示任何其他错误。
 	ErrorTypeNu = 2
 )
 
-// Error表示错误的说明
+// Error代表了一个错误的规格说明。
 type Error struct {
 	Err  error
 	Type ErrorType
@@ -41,27 +41,19 @@ type errorMsgs []*Error
 
 var _ error = (*Error)(nil)
 
-// SetType设置错误的类型
-
-// ff:
-// flags:
+// SetType 设置错误的类型。
 func (msg *Error) SetType(flags ErrorType) *Error {
 	msg.Type = flags
 	return msg
 }
 
-// SetMeta设置错误的元数据
-
-// ff:
-// data:
+// SetMeta 设置错误的元数据。
 func (msg *Error) SetMeta(data any) *Error {
 	msg.Meta = data
 	return msg
 }
 
-// JSON创建一个格式正确的JSON
-
-// ff:
+// JSON 创建一个格式正确的 JSON
 func (msg *Error) JSON() any {
 	jsonData := H{}
 	if msg.Meta != nil {
@@ -83,41 +75,27 @@ func (msg *Error) JSON() any {
 	return jsonData
 }
 
-// MarshalJSON实现json
-// Marshaller接口
-
-// ff:
+// MarshalJSON 实现了 json.Marshaller 接口。
 func (msg *Error) MarshalJSON() ([]byte, error) {
 	return json.Marshal(msg.JSON())
 }
 
-// Error实现错误接口
-
-// ff:
+// Error 实现了 error 接口。
 func (msg Error) Error() string {
 	return msg.Err.Error()
 }
 
-// IsType判断一个错误
-
-// ff:
-// flags:
+// IsType 判断一个错误。
 func (msg *Error) IsType(flags ErrorType) bool {
 	return (msg.Type & flags) > 0
 }
 
-// Unwrap返回包装后的错误，以允许与errors.Is()、errors.As()和errors.Unwrap()互操作
-
-// ff:
+// Unwrap 返回封装的错误，以便与 errors.Is()、errors.As() 和 errors.Unwrap() 之间进行互操作性
 func (msg *Error) Unwrap() error {
 	return msg.Err
 }
 
-// ByType返回经过字节过滤的只读副本
-// 即ByType(gin.ErrorTypePublic)返回一个类型=ErrorTypePublic的错误切片
-
-// ff:
-// typ:
+// ByType 返回一个只读副本，其中包含了经过过滤的错误信息。具体来说，ByType(gin.ErrorTypePublic) 将返回一个类型为 ErrorTypePublic 的错误信息切片。
 func (a errorMsgs) ByType(typ ErrorType) errorMsgs {
 	if len(a) == 0 {
 		return nil
@@ -134,11 +112,8 @@ func (a errorMsgs) ByType(typ ErrorType) errorMsgs {
 	return result
 }
 
-// Last返回切片中的最后一个错误
-// 如果数组为空，则返回nil
-// 错误的快捷方式[len(errors)-1]
-
-// ff:
+// Last 函数返回切片中的最后一个错误。如果该数组为空，则返回 nil。
+// 这是 errors[len(errors)-1] 的快捷方式。
 func (a errorMsgs) Last() *Error {
 	if length := len(a); length > 0 {
 		return a[length-1]
@@ -146,10 +121,13 @@ func (a errorMsgs) Last() *Error {
 	return nil
 }
 
-// Errors返回一个包含所有错误消息的数组
-// 示例:c.Error(errors.New("first")) c.Error(errors.New("second")) c. errors (errors.New("third")) c. errors () == []string{"first"， "second"， "third"}
-
-// ff:
+// Errors 返回包含所有错误消息的数组。
+// 示例：
+//
+//	c.Error(errors.New("第一个错误"))
+//	c.Error(errors.New("第二个错误"))
+//	c.Error(errors.New("第三个错误"))
+//	c.Errors.Errors() // == []string{"第一个", "第二个", "第三个"}
 func (a errorMsgs) Errors() []string {
 	if len(a) == 0 {
 		return nil
@@ -161,8 +139,6 @@ func (a errorMsgs) Errors() []string {
 	return errorStrings
 }
 
-
-// ff:
 func (a errorMsgs) JSON() any {
 	switch length := len(a); length {
 	case 0:
@@ -178,16 +154,11 @@ func (a errorMsgs) JSON() any {
 	}
 }
 
-// MarshalJSON实现json
-// Marshaller接口
-
-// ff:
+// MarshalJSON 实现了 json.Marshaller 接口。
 func (a errorMsgs) MarshalJSON() ([]byte, error) {
 	return json.Marshal(a.JSON())
 }
 
-
-// ff:
 func (a errorMsgs) String() string {
 	if len(a) == 0 {
 		return ""

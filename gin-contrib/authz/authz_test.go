@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 ? 2014 Manu Martinez-Almeida。保留所有权利。
+// 本源代码的使用受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package authz
 
@@ -25,12 +25,6 @@ func testAuthzRequest(t *testing.T, router *gin.Engine, user string, path string
 	}
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestBasic(t *testing.T) {
 	router := gin.New()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
@@ -45,12 +39,6 @@ func TestBasic(t *testing.T) {
 	testAuthzRequest(t, router, "alice", "/dataset1/resource2", "POST", 403)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestPathWildcard(t *testing.T) {
 	router := gin.New()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
@@ -74,12 +62,6 @@ func TestPathWildcard(t *testing.T) {
 	testAuthzRequest(t, router, "bob", "/dataset2/folder1/item2", "DELETE", 403)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRBAC(t *testing.T) {
 	router := gin.New()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
@@ -88,7 +70,7 @@ func TestRBAC(t *testing.T) {
 		c.Status(200)
 	})
 
-// Cathy可以通过所有方法访问所有/dataset1/*资源，因为它具有dataset1_admin角色
+	// Cathy 可以通过所有方法访问 /dataset1/* 下的所有资源，因为它具有 dataset1_admin 角色。
 	testAuthzRequest(t, router, "cathy", "/dataset1/item", "GET", 200)
 	testAuthzRequest(t, router, "cathy", "/dataset1/item", "POST", 200)
 	testAuthzRequest(t, router, "cathy", "/dataset1/item", "DELETE", 200)
@@ -96,7 +78,7 @@ func TestRBAC(t *testing.T) {
 	testAuthzRequest(t, router, "cathy", "/dataset2/item", "POST", 403)
 	testAuthzRequest(t, router, "cathy", "/dataset2/item", "DELETE", 403)
 
-// 删除用户cathy上的所有角色，因此cathy现在不能访问任何资源
+	// 删除用户cathy的所有角色，因此cathy现在无法访问任何资源。
 	_, err := e.DeleteRolesForUser("cathy")
 	if err != nil {
 		t.Errorf("got error %v", err)

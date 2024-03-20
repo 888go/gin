@@ -49,27 +49,6 @@ func data_index_html() ([]byte, error) {
 
 // Asset 函数加载并返回指定名称的资源。
 // 如果无法找到该资源或无法加载，则返回错误。
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
 func Asset(name string) ([]byte, error) {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	if f, ok := _bindata[cannonicalName]; ok {
@@ -79,20 +58,6 @@ func Asset(name string) ([]byte, error) {
 }
 
 // AssetNames 返回资产的名称列表。
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func AssetNames() []string {
 	names := make([]string, 0, len(_bindata))
 	for name := range _bindata {
@@ -101,42 +66,21 @@ func AssetNames() []string {
 	return names
 }
 
-// _bindata 是一个表，用于存储每个资产生成器，并将其映射到对应的名称。
+// _bindata 是一个表格，用于存储每个资产生成器，并将其映射到对应的名称。
 var _bindata = map[string]func() ([]byte, error){
 	"data/index.html": data_index_html,
 }
 
-// AssetDir 返回在由 go-bindata 嵌入到文件中的特定目录下的文件名。
-// 例如，如果你运行 go-bindata 对 data/... 进行处理，且 data 包含以下层次结构：
+// AssetDir 返回指定目录及其子目录下，由 go-bindata 嵌入到文件中的文件名列表。
+// 例如，如果你在 data/... 目录下运行 go-bindata，并且 data 目录包含以下层次结构：
 //     data/
 //       foo.txt
 //       img/
 //         a.png
 //         b.png
 // 那么 AssetDir("data") 将返回 []string{"foo.txt", "img"}
-// AssetDir("data/img") 将返回 []string{"a.png", "b.png"}
-// 而 AssetDir("foo.txt") 和 AssetDir("notexist") 则会返回错误
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
-
-// ff:
-// name:
+// 而 AssetDir("data/img") 则会返回 []string{"a.png", "b.png"}
+// 对于 AssetDir("foo.txt") 和 AssetDir("notexist")，它们将返回错误
 func AssetDir(name string) ([]string, error) {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	pathList := strings.Split(cannonicalName, "/")
@@ -169,34 +113,6 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 }}
 
 // AssetInfo 返回指定路径的文件信息
-
-// ff:
-// os.FileInfo:
-// path:
-
-// ff:
-// os.FileInfo:
-// path:
-
-// ff:
-// os.FileInfo:
-// path:
-
-// ff:
-// os.FileInfo:
-// path:
-
-// ff:
-// os.FileInfo:
-// path:
-
-// ff:
-// os.FileInfo:
-// path:
-
-// ff:
-// os.FileInfo:
-// path:
 func AssetInfo(path string) (os.FileInfo, error) {
 	return os.Stat(path)
 }

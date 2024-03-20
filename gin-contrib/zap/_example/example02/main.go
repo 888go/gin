@@ -24,18 +24,18 @@ func main() {
 		TimeFormat: time.RFC3339,
 		Context: ginzap.Fn(func(c *gin.Context) []zapcore.Field {
 			fields := []zapcore.Field{}
-// 记录请求ID
+			// log request ID
 			if requestID := c.Writer.Header().Get("X-Request-Id"); requestID != "" {
 				fields = append(fields, zap.String("request_id", requestID))
 			}
 
-// 日志跟踪和跨度ID
+			// log trace and span ID
 			if trace.SpanFromContext(c.Request.Context()).SpanContext().IsValid() {
 				fields = append(fields, zap.String("trace_id", trace.SpanFromContext(c.Request.Context()).SpanContext().TraceID().String()))
 				fields = append(fields, zap.String("span_id", trace.SpanFromContext(c.Request.Context()).SpanContext().SpanID().String()))
 			}
 
-// 记录请求体
+			// log request body
 			var body []byte
 			var buf bytes.Buffer
 			tee := io.TeeReader(c.Request.Body, &buf)
@@ -47,7 +47,7 @@ func main() {
 		}),
 	}))
 
-// 示例 ping 请求。
+	// Example ping request.
 	r.GET("/ping", func(c *gin.Context) {
 		c.Writer.Header().Add("X-Request-Id", "1234-5678-9012")
 		c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
@@ -58,6 +58,6 @@ func main() {
 		c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-// 在0.0.0.0:8080监听并服务
+	// 在0.0.0.0:8080监听并服务
 	r.Run(":8080")
 }

@@ -10,22 +10,8 @@ type BufferPool struct {
 	pool sync.Pool
 }
 
-// Get 从缓冲池中获取一个缓冲区。
-// 如果缓冲池为空，则创建一个新的缓冲区并返回。
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
+// Get 从缓冲池返回一个缓冲区。
+// 如果缓冲池为空，则创建并返回一个新的缓冲区。
 func (p *BufferPool) Get() *bytes.Buffer {
 	buf := p.pool.Get()
 	if buf == nil {
@@ -35,27 +21,6 @@ func (p *BufferPool) Get() *bytes.Buffer {
 }
 
 // Put 将缓冲区放回池中。
-
-// ff:
-// buf:
-
-// ff:
-// buf:
-
-// ff:
-// buf:
-
-// ff:
-// buf:
-
-// ff:
-// buf:
-
-// ff:
-// buf:
-
-// ff:
-// buf:
 func (p *BufferPool) Put(buf *bytes.Buffer) {
 	p.pool.Put(buf)
 }

@@ -5,16 +5,16 @@
 <原文结束>
 
 # <翻译开始>
-// Secure 是一个中间件，用于设置一些基本的安全功能。可以通过提供一个 secure.Options 结构体来配置应启用哪些功能，并且可以覆盖部分默认值。
+// Secure 是一个中间件，用于帮助设置一些基本的安全功能。可以通过提供一个 secure.Options 结构体来配置要启用哪些功能，并且可以覆盖一些默认值。
 # <翻译结束>
 
 
 <原文开始>
-		// Customize Secure with an Options struct.
+// Customize Secure with an Options struct.
 <原文结束>
 
 # <翻译开始>
-// 通过Options结构体来自定义Secure（安全配置）。
+// 使用Options结构体来自定义Secure。
 # <翻译结束>
 
 
@@ -28,16 +28,7 @@
 
 
 <原文开始>
-	// Frame Options header.
-<原文结束>
-
-# <翻译开始>
-// Frame Options头部。
-# <翻译结束>
-
-
-<原文开始>
-	// Content Type Options header.
+// Content Type Options header.
 <原文结束>
 
 # <翻译开始>
@@ -46,25 +37,16 @@
 
 
 <原文开始>
-	// XSS Protection header.
+// Content Security Policy header.
 <原文结束>
 
 # <翻译开始>
-// XSS保护头部
+// 内容安全策略头。
 # <翻译结束>
 
 
 <原文开始>
-	// Content Security Policy header.
-<原文结束>
-
-# <翻译开始>
-// 内容安全策略（Content Security Policy）头部
-# <翻译结束>
-
-
-<原文开始>
-	// Strict Transport Security header.
+// Strict Transport Security header.
 <原文结束>
 
 # <翻译开始>
@@ -78,13 +60,13 @@
 <原文结束>
 
 # <翻译开始>
-// TODO
+// TODO：待办事项
 // "max-age=%d%s" 需重构
 # <翻译结束>
 
 
 <原文开始>
-	// X-Download-Options header.
+// X-Download-Options header.
 <原文结束>
 
 # <翻译开始>
@@ -93,20 +75,11 @@
 
 
 <原文开始>
-	// FeaturePolicy header.
-<原文结束>
-
-# <翻译开始>
-// 功能策略头。
-# <翻译结束>
-
-
-<原文开始>
 // checks if a host (possibly with trailing port) is an IPV4 address
 <原文结束>
 
 # <翻译开始>
-// 检查主机（可能带有尾部端口）是否为IPV4地址
+// 检查一个主机（可能带有端口号）是否为IPV4地址
 # <翻译结束>
 
 
@@ -116,7 +89,7 @@
 <原文结束>
 
 # <翻译开始>
-// TODO
-// req.Host 与 req.URL.Host 的区别
+// TODO：（待办事项）
+// req.Host 与 req.URL.Host 的对比
 # <翻译结束>
 

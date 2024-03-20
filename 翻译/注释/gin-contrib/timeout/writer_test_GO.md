@@ -5,7 +5,7 @@
 <原文结束>
 
 # <翻译开始>
-// testNew 是 New() 函数的一个副本，对其内部的 timeoutHandler() 函数做了一个小改动。
+// testNew是对New()的一个副本，对其timeoutHandler()函数做了微小改动。
 // 参考：https://github.com/gin-contrib/timeout/issues/31
 # <翻译结束>
 
@@ -15,7 +15,7 @@
 <原文结束>
 
 # <翻译开始>
-// timeoutHandler 返回一个处理器，该处理器会返回一个504 Gateway Timeout错误。
+// timeoutHandler 返回一个处理器，该处理器返回一个 504 网关超时错误。
 # <翻译结束>
 
 

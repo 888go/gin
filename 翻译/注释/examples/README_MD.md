@@ -7,9 +7,9 @@ Gin Examples
 <原文结束>
 
 # <翻译开始>
-# Gin 示例
+# Gin示例
 
-**注意：**所有 gin 示例已移至独立仓库 [此处](https://github.com/gin-gonic/examples)。
+**注意：**所有gin示例已移至独立仓库 [此处](https://github.com/gin-gonic/examples)。
 
 # <翻译结束>
 

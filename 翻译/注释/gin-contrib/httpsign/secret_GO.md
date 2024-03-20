@@ -1,14 +1,5 @@
 
 <原文开始>
-// KeyID define type
-<原文结束>
-
-# <翻译开始>
-// KeyID 定义类型
-# <翻译结束>
-
-
-<原文开始>
 // Secret define secret key and algorithm that key use
 <原文结束>
 
@@ -22,6 +13,6 @@
 <原文结束>
 
 # <翻译开始>
-// Secrets：使用keyID作为键、秘密信息作为值的映射（字典）
+// 密钥映射表，其中keyID为键，secret为值
 # <翻译结束>
 

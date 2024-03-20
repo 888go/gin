@@ -1,6 +1,6 @@
 
 <原文开始>
-		// Intentionally left blank.
+// Intentionally left blank.
 <原文结束>
 
 # <翻译开始>

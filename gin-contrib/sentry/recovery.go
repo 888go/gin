@@ -10,35 +10,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// 这是用于 Sentry 错误报告的恢复中间件
-
-// ff:
-// onlyCrashes:
-// client:
-
-// ff:
-// onlyCrashes:
-// client:
-
-// ff:
-// onlyCrashes:
-// client:
-
-// ff:
-// onlyCrashes:
-// client:
-
-// ff:
-// onlyCrashes:
-// client:
-
-// ff:
-// onlyCrashes:
-// client:
-
-// ff:
-// onlyCrashes:
-// client:
+// Recovery中间件用于Sentry崩溃报告
 func Recovery(client *raven.Client, onlyCrashes bool) gin.HandlerFunc {
 
 	return func(c *gin.Context) {

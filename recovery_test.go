@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -25,7 +25,7 @@ func TestPanicClean(t *testing.T) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		panic("Oupps, Houston, we have a problem")
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/recovery",
 		header{
 			Key:   "Host",
@@ -40,14 +40,14 @@ func TestPanicClean(t *testing.T) {
 			Value: "application/json",
 		},
 	)
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 
-// 检查缓冲区是否有密钥
+	// 检查缓冲区中不包含密钥
 	assert.NotContains(t, buffer.String(), password)
 }
 
-// TestPanicInHandler断言panic已经恢复
+// TestPanicInHandler 断言在处理器中捕获到了 panic。
 func TestPanicInHandler(t *testing.T) {
 	buffer := new(strings.Builder)
 	router := New()
@@ -55,28 +55,27 @@ func TestPanicInHandler(t *testing.T) {
 	router.GET("/recovery", func(_ *Context) {
 		panic("Oupps, Houston, we have a problem")
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusInternalServerError, w.Code)
 	assert.Contains(t, buffer.String(), "panic recovered")
 	assert.Contains(t, buffer.String(), "Oupps, Houston, we have a problem")
 	assert.Contains(t, buffer.String(), t.Name())
 	assert.NotContains(t, buffer.String(), "GET /recovery")
 
-// 调试模式打印请求
+	// Debug模式会打印请求
 	SetMode(DebugMode)
-// 运行
+	// RUN
 	w = PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusInternalServerError, w.Code)
 	assert.Contains(t, buffer.String(), "GET /recovery")
 
 	SetMode(TestMode)
 }
 
-// TestPanicWithAbort断言panic已经恢复，即使上下文
-// 使用了中止
+// TestPanicWithAbort 断言即使使用了 context.Abort，也能捕获到 panic 异常。
 func TestPanicWithAbort(t *testing.T) {
 	router := New()
 	router.Use(RecoveryWithWriter(nil))
@@ -84,9 +83,9 @@ func TestPanicWithAbort(t *testing.T) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		panic("Oupps, Houston, we have a problem")
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 }
 
@@ -110,7 +109,8 @@ func TestFunction(t *testing.T) {
 	assert.Equal(t, dunno, bs)
 }
 
-// TestPanicWithBrokenPipe断言恢复专门处理对损坏管道的写响应
+// TestPanicWithBrokenPipe 断言 recovery 特别处理了
+// 向已断开连接的管道写入响应的情况
 func TestPanicWithBrokenPipe(t *testing.T) {
 	const expectCode = 204
 
@@ -126,18 +126,17 @@ func TestPanicWithBrokenPipe(t *testing.T) {
 			router := New()
 			router.Use(RecoveryWithWriter(&buf))
 			router.GET("/recovery", func(c *Context) {
-// 开始写回应
+				// Start writing response
 				c.Header("X-Test", "Value")
 				c.Status(expectCode)
 
-// 哦
-// 客户端连接已关闭
+				// 哎呀，客户端连接已关闭
 				e := &net.OpError{Err: &os.SyscallError{Err: errno}}
 				panic(e)
 			})
-		// 运行
+			// RUN
 			w := PerformRequest(router, "GET", "/recovery")
-		// 测试
+			// TEST
 			assert.Equal(t, expectCode, w.Code)
 			assert.Contains(t, strings.ToLower(buf.String()), expectMsg)
 		})
@@ -156,20 +155,20 @@ func TestCustomRecoveryWithWriter(t *testing.T) {
 	router.GET("/recovery", func(_ *Context) {
 		panic("Oupps, Houston, we have a problem")
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Contains(t, buffer.String(), "panic recovered")
 	assert.Contains(t, buffer.String(), "Oupps, Houston, we have a problem")
 	assert.Contains(t, buffer.String(), t.Name())
 	assert.NotContains(t, buffer.String(), "GET /recovery")
 
-// 调试模式打印请求
+	// Debug模式会打印请求
 	SetMode(DebugMode)
-// 运行
+	// RUN
 	w = PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Contains(t, buffer.String(), "GET /recovery")
 
@@ -191,20 +190,20 @@ func TestCustomRecovery(t *testing.T) {
 	router.GET("/recovery", func(_ *Context) {
 		panic("Oupps, Houston, we have a problem")
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Contains(t, buffer.String(), "panic recovered")
 	assert.Contains(t, buffer.String(), "Oupps, Houston, we have a problem")
 	assert.Contains(t, buffer.String(), t.Name())
 	assert.NotContains(t, buffer.String(), "GET /recovery")
 
-// 调试模式打印请求
+	// Debug模式会打印请求
 	SetMode(DebugMode)
-// 运行
+	// RUN
 	w = PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Contains(t, buffer.String(), "GET /recovery")
 
@@ -226,20 +225,20 @@ func TestRecoveryWithWriterWithCustomRecovery(t *testing.T) {
 	router.GET("/recovery", func(_ *Context) {
 		panic("Oupps, Houston, we have a problem")
 	})
-// 运行
+	// RUN
 	w := PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Contains(t, buffer.String(), "panic recovered")
 	assert.Contains(t, buffer.String(), "Oupps, Houston, we have a problem")
 	assert.Contains(t, buffer.String(), t.Name())
 	assert.NotContains(t, buffer.String(), "GET /recovery")
 
-// 调试模式打印请求
+	// Debug模式会打印请求
 	SetMode(DebugMode)
-// 运行
+	// RUN
 	w = PerformRequest(router, "GET", "/recovery")
-// 测试
+	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	assert.Contains(t, buffer.String(), "GET /recovery")
 

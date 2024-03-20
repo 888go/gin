@@ -28,12 +28,6 @@ func performRequest(r http.Handler, method, path string, headers ...header) *htt
 	return w
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestLogger(t *testing.T) {
 	buffer := new(bytes.Buffer)
 	gin.SetMode(gin.ReleaseMode)
@@ -75,12 +69,6 @@ func TestLogger(t *testing.T) {
 	assert.Contains(t, buffer.String(), "path=/example?a=100")
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestLoggerWithLogger(t *testing.T) {
 	buffer := new(bytes.Buffer)
 	gin.SetMode(gin.ReleaseMode)
@@ -133,12 +121,6 @@ func TestLoggerWithLogger(t *testing.T) {
 	assert.NotContains(t, buffer.String(), "/regexp02")
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestLoggerWithLevels(t *testing.T) {
 	buffer := new(bytes.Buffer)
 	gin.SetMode(gin.ReleaseMode)
@@ -169,12 +151,6 @@ func TestLoggerWithLevels(t *testing.T) {
 	assert.Contains(t, buffer.String(), "FTL")
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestLoggerParseLevel(t *testing.T) {
 	type args struct {
 		levelStr string
@@ -212,12 +188,6 @@ func TestLoggerParseLevel(t *testing.T) {
 	}
 }
 
-
-// ff:
-// b:
-
-// ff:
-// b:
 func BenchmarkLogger(b *testing.B) {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()

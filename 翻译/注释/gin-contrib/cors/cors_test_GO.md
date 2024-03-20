@@ -12,53 +12,25 @@
 
 
 <原文开始>
-// 12*60*60
+// no CORS request, origin == ""
 <原文结束>
 
 # <翻译开始>
-// 12 * 60 * 60
-// 这段代码是 Go 语言中的一个数值表达式，计算的是 12 小时乘以每小时的分钟数（60）再乘以每分钟的秒数（60），所以这个表达式的结果代表了 12 小时的总秒数。
+// 没有CORS请求，origin（来源）为空字符串
 # <翻译结束>
 
 
 <原文开始>
-	// no CORS request, origin == ""
+// no CORS request, origin == host
 <原文结束>
 
 # <翻译开始>
-// 没有CORS请求，origin为空字符串
+// 无CORS请求，origin（来源）== host（主机）
 # <翻译结束>
 
 
 <原文开始>
-	// no CORS request, origin == host
-<原文结束>
-
-# <翻译开始>
-// 没有CORS请求，origin（来源）等于host（主机）
-# <翻译结束>
-
-
-<原文开始>
-	// allowed CORS request
-<原文结束>
-
-# <翻译开始>
-// 允许跨源资源共享（CORS）请求
-# <翻译结束>
-
-
-<原文开始>
-	// deny CORS request
-<原文结束>
-
-# <翻译开始>
-// 拒绝CORS请求
-# <翻译结束>
-
-
-<原文开始>
-	// allowed CORS prefligh request
+// allowed CORS prefligh request
 <原文结束>
 
 # <翻译开始>
@@ -67,7 +39,7 @@
 
 
 <原文开始>
-	// deny CORS prefligh request
+// deny CORS prefligh request
 <原文结束>
 
 # <翻译开始>

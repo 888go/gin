@@ -6,7 +6,9 @@ import (
 	"os"
 )
 
+// 参考 Gin 框架官方文档（中文版）：
 // https://gin-gonic.com/zh-cn/docs/examples/write-log/
+// 由于您给出的代码片段仅为一个链接引用，并无实际的 Go 语言代码，故以上为对此链接内容的中文描述。如果需要对具体代码进行翻译，请提供相应的 Go 语言代码段。
 func main() {
 	// 禁用控制台颜色，将日志写入文件时不需要控制台颜色。
 	gin.DisableConsoleColor()

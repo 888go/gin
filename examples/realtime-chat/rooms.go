@@ -23,20 +23,6 @@ type Manager struct {
 	messages     chan *Message
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func NewRoomManager() *Manager {
 	manager := &Manager{
 		roomChannels: make(map[string]broadcast.Broadcaster),
@@ -91,27 +77,6 @@ func (m *Manager) room(roomid string) broadcast.Broadcaster {
 	return b
 }
 
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
 func (m *Manager) OpenListener(roomid string) chan interface{} {
 	listener := make(chan interface{})
 	m.open <- &Listener{
@@ -121,34 +86,6 @@ func (m *Manager) OpenListener(roomid string) chan interface{} {
 	return listener
 }
 
-
-// ff:
-// channel:
-// roomid:
-
-// ff:
-// channel:
-// roomid:
-
-// ff:
-// channel:
-// roomid:
-
-// ff:
-// channel:
-// roomid:
-
-// ff:
-// channel:
-// roomid:
-
-// ff:
-// channel:
-// roomid:
-
-// ff:
-// channel:
-// roomid:
 func (m *Manager) CloseListener(roomid string, channel chan interface{}) {
 	m.close <- &Listener{
 		RoomId: roomid,
@@ -156,66 +93,10 @@ func (m *Manager) CloseListener(roomid string, channel chan interface{}) {
 	}
 }
 
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
-
-// ff:
-// roomid:
 func (m *Manager) DeleteBroadcast(roomid string) {
 	m.delete <- roomid
 }
 
-
-// ff:
-// text:
-// roomid:
-// userid:
-
-// ff:
-// text:
-// roomid:
-// userid:
-
-// ff:
-// text:
-// roomid:
-// userid:
-
-// ff:
-// text:
-// roomid:
-// userid:
-
-// ff:
-// text:
-// roomid:
-// userid:
-
-// ff:
-// text:
-// roomid:
-// userid:
-
-// ff:
-// text:
-// roomid:
-// userid:
 func (m *Manager) Submit(userid, roomid, text string) {
 	msg := &Message{
 		UserId: userid,

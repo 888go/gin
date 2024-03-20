@@ -6,36 +6,27 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrConvertMapStringSlice can not convert to map[string][]string
+// ErrConvertMapStringSlice can not convert to map[string][]string
 <原文结束>
 
 # <翻译开始>
-// ErrConvertMapStringSlice不能转换为map[string][]string
+// ErrConvertMapStringSlice 无法转换为 map[string][]string
 # <翻译结束>
 
 
 <原文开始>
-	// ErrConvertToMapString can not convert to map[string]string
+// ErrConvertToMapString can not convert to map[string]string
 <原文结束>
 
 # <翻译开始>
-// ErrConvertToMapString不能转换为map[string]string
-# <翻译结束>
-
-
-<原文开始>
-	// Check if ptr is a map
-<原文结束>
-
-# <翻译开始>
-// 检查ptr是否为映射
+// ErrConvertToMapString 无法转换为 map[string]string
 # <翻译结束>
 
 
@@ -44,7 +35,7 @@
 <原文结束>
 
 # <翻译开始>
-// Setter尝试在结构体的遍历字段上设置值
+// setter尝试通过遍历结构体字段来设置值
 # <翻译结束>
 
 
@@ -53,7 +44,7 @@
 <原文结束>
 
 # <翻译开始>
-// TrySet尝试通过请求的表单源设置值(如map[string][]string)
+// TrySet 尝试通过请求的表单源（如 map[string][]string 类型）设置一个值
 # <翻译结束>
 
 
@@ -67,29 +58,11 @@
 
 
 <原文开始>
-// unexported
-<原文结束>
-
-# <翻译开始>
-// 非导出
-# <翻译结束>
-
-
-<原文开始>
 // default value is FieldName
 <原文结束>
 
 # <翻译开始>
-// 缺省值为FieldName
-# <翻译结束>
-
-
-<原文开始>
-// pick last
-<原文结束>
-
-# <翻译开始>
-// 选择最后一个
+// 默认值为FieldName
 # <翻译结束>
 
 
@@ -98,42 +71,6 @@
 <原文结束>
 
 # <翻译开始>
-// 当字段为"emptyField"变量时
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// tag:
-// form:
-// ptr:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// tag:
-// form:
-// ptr:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// err:
-// isSet:
-// opt:
-// tagValue:
-// field:
-// value:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// err:
-// isSet:
-// opt:
-// tagValue:
-// field:
-// value:
+// 当字段为 "emptyField" 变量时
 # <翻译结束>
 

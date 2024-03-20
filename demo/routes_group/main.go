@@ -5,7 +5,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// https://topgoer.com/gin%E6%A1%86%E6%9E%B6/gin%E8%B7%AF%E7%94%B1/routesgroup.html
+// 参考链接：https://topgoer.com/gin框架/gin路由/routesgroup.html
 
 func main() {
 	// 1.创建路由

@@ -8,7 +8,7 @@
 
 # <翻译开始>
 // 添加一个ginzap中间件，其功能包括：
-//   - 记录所有请求，类似于综合访问和错误日志。
+//   - 记录所有请求，类似于综合访问日志和错误日志。
 //   - 将日志输出到标准输出（stdout）。
 //   - 使用UTC时间格式并遵循RFC3339规范。
 # <翻译结束>
@@ -26,25 +26,16 @@
 
 
 <原文开始>
-	// Example ping request.
+// Example when panic happen.
 <原文结束>
 
 # <翻译开始>
-// 示例 ping 请求。
+// 示例：发生panic的情况。
 # <翻译结束>
 
 
 <原文开始>
-	// Example when panic happen.
-<原文结束>
-
-# <翻译开始>
-// 示例：当发生 panic 时。
-# <翻译结束>
-
-
-<原文开始>
-	// Listen and Server in 0.0.0.0:8080
+// Listen and Server in 0.0.0.0:8080
 <原文结束>
 
 # <翻译开始>

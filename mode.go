@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -12,15 +12,15 @@ import (
 	"github.com/888go/gin/binding"
 )
 
-// EnvGinMode为gin模式的环境名
+// EnvGinMode 指示 Gin 模式的环境名称。
 const EnvGinMode = "GIN_MODE"
 
 const (
-// DebugMode表示gin模式为debug
+	// DebugMode 指示 gin 模式为调试模式。
 	DebugMode = "debug"
-// ReleaseMode表示gin模式为release
+	// ReleaseMode 表示 gin 模式为发布模式。
 	ReleaseMode = "release"
-// TestMode表示gin模式为test
+	// TestMode 表示 gin 模式为测试模式。
 	TestMode = "test"
 )
 
@@ -30,15 +30,15 @@ const (
 	testCode
 )
 
-// defaultwwriter是默认的io
-// Gin用于调试输出和中间件输出的写入器，如Logger()或Recovery()
-// 请注意，Logger和Recovery都提供了自定义的方式来配置它们的输出
-// 要在Windows中支持着色，请使用:import "github.com/mattn/go-colorable"杜松子酒
-// defaultwwriter = colorable.NewColorableStdout()
+// DefaultWriter 是 Gin 默认使用的 io.Writer，用于调试输出以及中间件输出，如 Logger() 和 Recovery()。
+// 注意，Logger 和 Recovery 都提供了自定义配置其输出 io.Writer 的方法。
+// 若要在 Windows 系统中支持彩色输出，请使用：
+//
+//	导入 "github.com/mattn/go-colorable"
+//	gin.DefaultWriter = colorable.NewColorableStdout()
 var DefaultWriter io.Writer = os.Stdout
 
-// DefaultErrorWriter是默认io
-// Gin用来调试错误的写入器
+// DefaultErrorWriter 是 Gin 默认使用的 io.Writer，用于调试错误
 var DefaultErrorWriter io.Writer = os.Stderr
 
 var (
@@ -51,10 +51,7 @@ func init() {
 	SetMode(mode)
 }
 
-// SetMode根据输入的字符串设置gin模式
-
-// ff:
-// value:
+// SetMode 根据输入的字符串设置 gin 模式。
 func SetMode(value string) {
 	if value == "" {
 		if flag.Lookup("test.v") != nil {
@@ -78,32 +75,24 @@ func SetMode(value string) {
 	modeName = value
 }
 
-// DisableBindValidation关闭默认验证器
-
-// ff:
+// DisableBindValidation 关闭默认的验证器。
 func DisableBindValidation() {
 	binding.Validator = nil
 }
 
-// EnableJsonDecoderUseNumber为绑定设置为true
-// EnableDecoderUseNumber以调用JSON Decoder实例上的UseNumber方法
-
-// ff:
+// EnableJsonDecoderUseNumber 将参数设置为 true 以启用 binding.EnableDecoderUseNumber，
+// 这样就会在 JSON 解码器实例上调用 UseNumber 方法。
 func EnableJsonDecoderUseNumber() {
 	binding.EnableDecoderUseNumber = true
 }
 
-// EnableJsonDecoderDisallowUnknownFields为绑定设置为true
-// EnableDecoderDisallowUnknownFields调用JSON Decoder实例上的DisallowUnknownFields方法
-
-// ff:
+// EnableJsonDecoderDisallowUnknownFields 将 binding.EnableDecoderDisallowUnknownFields 设为 true，
+// 以便在 JSON 解码器实例上调用 DisallowUnknownFields 方法。
 func EnableJsonDecoderDisallowUnknownFields() {
 	binding.EnableDecoderDisallowUnknownFields = true
 }
 
-// Mode返回当前gin模式
-
-// ff:
+// Mode 返回当前 gin 模式。
 func Mode() string {
 	return modeName
 }

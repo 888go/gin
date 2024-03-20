@@ -13,11 +13,11 @@
 
 
 <原文开始>
-		//If the data buffer's last character is a U+000A LINE FEED (LF) character, then remove the last character from the data buffer.
+//If the data buffer's last character is a U+000A LINE FEED (LF) character, then remove the last character from the data buffer.
 <原文结束>
 
 # <翻译开始>
-// 如果数据缓冲区的最后一个字符是 U+000A 换行符（LF），则从数据缓冲区中移除最后一个字符。
+// 如果数据缓冲区的最后一个字符是U+000A换行符（LF），则从数据缓冲区中移除最后一个字符。
 # <翻译结束>
 
 
@@ -29,25 +29,27 @@
 <原文结束>
 
 # <翻译开始>
-// TODO (以及单元测试)
-// 行必须由以下字符分隔：
-// - U+000D 回车（CARRIAGE RETURN，CR）和 U+000A 换行（LINE FEED，LF）字符对
-// - 单个 U+000A 换行（LINE FEED，LF）字符
-// - 或者单个 U+000D 回车（CARRIAGE RETURN，CR）字符。
+// TODO (并编写单元测试)
+// 行与行之间必须由以下任意一种字符对或单个字符分隔：
+// U+000D 回车（CARRIAGE RETURN）和 U+000A 换行（LINE FEED，即 CRLF 组合）
+// 或者
+// 单个 U+000A 换行（LINE FEED，LF）字符
+// 或者
+// 单个 U+000D 回车（CARRIAGE RETURN，CR）字符。
 # <翻译结束>
 
 
 <原文开始>
-			// If the line is empty (a blank line). Dispatch the event.
+// If the line is empty (a blank line). Dispatch the event.
 <原文结束>
 
 # <翻译开始>
-// 如果该行为空（即空白行），则分发事件。
+// 如果该行为空（即空白行），则分派该事件。
 # <翻译结束>
 
 
 <原文开始>
-			// reset current event and data buffer
+// reset current event and data buffer
 <原文结束>
 
 # <翻译开始>
@@ -56,11 +58,11 @@
 
 
 <原文开始>
-			// If the line starts with a U+003A COLON character (:), ignore the line.
+// If the line starts with a U+003A COLON character (:), ignore the line.
 <原文结束>
 
 # <翻译开始>
-// 如果行以 U+003A（冒号）字符开始，则忽略该行。
+// 如果行以 U+003A 字符（冒号）开始，则忽略该行。
 # <翻译结束>
 
 
@@ -71,9 +73,9 @@
 <原文结束>
 
 # <翻译开始>
-// 如果该行包含 U+003A 字符（冒号）：
+// 如果该行包含一个 U+003A 字符（冒号）：
 // 收集该行第一个 U+003A 字符（冒号）之前的所有字符，
-// 并将这个字符串赋值给 field 变量。
+// 并将这些字符组成的字符串赋值给 field。
 # <翻译结束>
 
 
@@ -83,16 +85,16 @@
 <原文结束>
 
 # <翻译开始>
-// 获取第一个 U+003A（冒号）字符之后的行上字符，并将这些字符组成的字符串赋值给 value。
+// 收集行中第一个 U+003A COLON 字符 (:) 之后的字符，并将该字符串赋值给 value。
 # <翻译结束>
 
 
 <原文开始>
-			// If value starts with a single U+0020 SPACE character, remove it from value.
+// If value starts with a single U+0020 SPACE character, remove it from value.
 <原文结束>
 
 # <翻译开始>
-// 如果value以一个U+0020（空格）字符开头，则从value中移除它。
+// 如果value以单个U+0020（空格）字符开头，则从value中移除它。
 # <翻译结束>
 
 
@@ -102,8 +104,8 @@
 <原文结束>
 
 # <翻译开始>
-// 否则，字符串非空但不包含 U+003A（冒号）字符
-// 将整行作为字段名，并使用空字符串作为字段值。
+// 否则，字符串不为空，但不包含 U+003A 字符（冒号）：
+// 将整行用作字段名，并使用空字符串作为字段值。
 # <翻译结束>
 
 
@@ -114,14 +116,12 @@
 <原文结束>
 
 # <翻译开始>
-// 根据给定的字段名和字段值处理该字段的步骤取决于字段名，
-// 以下列表给出了具体规则。字段名必须进行逐字比较，
-// 不进行大小写折叠处理。
+// 根据给定的字段名和字段值来处理该字段的步骤取决于字段名，具体如下所示。字段名必须进行逐字比较，且不应进行大小写折叠处理。
 # <翻译结束>
 
 
 <原文开始>
-			// Set the event name buffer to field value.
+// Set the event name buffer to field value.
 <原文结束>
 
 # <翻译开始>
@@ -130,11 +130,11 @@
 
 
 <原文开始>
-			// Set the event stream's last event ID to the field value.
+// Set the event stream's last event ID to the field value.
 <原文结束>
 
 # <翻译开始>
-// 将事件流的最后事件ID设置为字段值。
+// 将事件流的最后一个事件ID设置为字段值。
 # <翻译结束>
 
 
@@ -145,23 +145,24 @@
 <原文结束>
 
 # <翻译开始>
-// 如果字段值仅包含范围从 U+0030（数字零 0）到 U+0039（数字九 9）之间的字符，
-// 则将字段值解释为十进制整数，并将事件流的重连时间设置为该整数。
-// 否则，忽略该字段。
+// 如果字段值仅包含从 U+0030（数字零，0）到 U+0039（数字九，9）范围内的字符，则将该字段值解释为十进制整数，并将事件流的重连时间设置为该整数。否则，忽略该字段。
 # <翻译结束>
 
 
 <原文开始>
-			// Append the field value to the data buffer,
+// Append the field value to the data buffer,
 <原文结束>
 
 # <翻译开始>
 // 将字段值追加到数据缓冲区，
+// 
+// ensuring there's a space separator if the buffer already has content.
+// 确保如果缓冲区已有内容，则在追加前添加一个空格分隔符。
 # <翻译结束>
 
 
 <原文开始>
-			// then append a single U+000A LINE FEED (LF) character to the data buffer.
+// then append a single U+000A LINE FEED (LF) character to the data buffer.
 <原文结束>
 
 # <翻译开始>
@@ -170,16 +171,16 @@
 
 
 <原文开始>
-			//Otherwise. The field is ignored.
+//Otherwise. The field is ignored.
 <原文结束>
 
 # <翻译开始>
-// 否则，该字段将被忽略。
+// 否则。该字段将被忽略。
 # <翻译结束>
 
 
 <原文开始>
-	// Once the end of the file is reached, the user agent must dispatch the event one final time.
+// Once the end of the file is reached, the user agent must dispatch the event one final time.
 <原文结束>
 
 # <翻译开始>

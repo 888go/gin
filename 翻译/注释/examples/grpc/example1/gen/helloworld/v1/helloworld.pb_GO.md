@@ -8,27 +8,29 @@
 <原文结束>
 
 # <翻译开始>
-// 由protoc-gen-go生成的代码
-// 不要编辑
-// 版本号:protoc-gen-go v1.28.1 protoc v3.21.5来源:pb/helloworld/v1/helloworld.proto
+// 该代码由 protoc-gen-go 自动生成。请勿直接编辑。
+// 版本信息：
+// 	protoc-gen-go v1.28.1
+// 	protoc        v3.21.5
+// 源文件：pb/helloworld/v1/helloworld.proto
 # <翻译结束>
 
 
 <原文开始>
-	// Verify that this generated code is sufficiently up-to-date.
+// Verify that this generated code is sufficiently up-to-date.
 <原文结束>
 
 # <翻译开始>
-// 验证生成的代码是否足够最新
+// 验证此生成的代码是否足够新。
 # <翻译结束>
 
 
 <原文开始>
-	// Verify that runtime/protoimpl is sufficiently up-to-date.
+// Verify that runtime/protoimpl is sufficiently up-to-date.
 <原文结束>
 
 # <翻译开始>
-// 验证runtime/protoimpl是否足够最新
+// 验证runtime/protoimpl是否足够新。
 # <翻译结束>
 
 
@@ -37,7 +39,7 @@
 <原文结束>
 
 # <翻译开始>
-// 包含用户名的请求消息
+// 请求消息，其中包含用户的名字。
 # <翻译结束>
 
 
@@ -46,7 +48,7 @@
 <原文结束>
 
 # <翻译开始>
-// 已弃用:使用HelloRequest.ProtoReflect.Descriptor代替
+// 已弃用：请改用 HelloRequest.ProtoReflect.Descriptor。
 # <翻译结束>
 
 
@@ -55,7 +57,7 @@
 <原文结束>
 
 # <翻译开始>
-// 包含问候语的响应消息
+// 响应消息，其中包含问候语
 # <翻译结束>
 
 
@@ -64,7 +66,7 @@
 <原文结束>
 
 # <翻译开始>
-// 已弃用:使用HelloReply.ProtoReflect.Descriptor代替
+// 已弃用：请改用 HelloReply.ProtoReflect.Descriptor。
 # <翻译结束>
 
 
@@ -73,8 +75,9 @@
 <原文结束>
 
 # <翻译开始>
-// 0: helloworld.v1.HelloRequest
-// （翻译）：// 0: 表示HelloRequest结构体在helloworld包的v1版本中
+// 0: helloworld.v1.HelloRequest 的中文翻译是：
+// 
+// 0: helloworld.v1.HelloRequest（HelloRequest 是 helloworld.v1 包中的结构体或接口类型）
 # <翻译结束>
 
 
@@ -83,7 +86,9 @@
 <原文结束>
 
 # <翻译开始>
-// 1: helloworld.v1.HelloReply （翻译：// 1: helloworld.v1版本的HelloReply）
+// 1: helloworld.v1.HelloReply （这是一条关于Go语言程序的注释，翻译为：）
+// 
+// 1: helloworld.v1.HelloReply 表示这是一个版本为v1的helloworld包中的HelloReply结构体或接口。
 # <翻译结束>
 
 
@@ -92,8 +97,7 @@
 <原文结束>
 
 # <翻译开始>
-// 0: helloworld.v1.Greeter
-// SayHello:要→helloworld.v1.HelloRequest
+// 0: helloworld.v1.Greeter.SayHello 方法的输入类型 -> helloworld.v1.HelloRequest
 # <翻译结束>
 
 
@@ -102,8 +106,7 @@
 <原文结束>
 
 # <翻译开始>
-// 1: helloworld.v1.Greeter
-// SayHello: output_type→helloworld.v1.HelloReply
+// 1: helloworld.v1.Greeter.SayHello 方法的输出类型为 helloworld.v1.HelloReply
 # <翻译结束>
 
 
@@ -112,7 +115,7 @@
 <原文结束>
 
 # <翻译开始>
-// [1:2]是output_type方法的子列表
+// [1:2] 是方法输出类型对应的子列表
 # <翻译结束>
 
 
@@ -121,7 +124,7 @@
 <原文结束>
 
 # <翻译开始>
-// [01:1]是input_type方法的子列表
+// [0:1] 是用于方法输入类型的子列表
 # <翻译结束>
 
 
@@ -130,7 +133,7 @@
 <原文结束>
 
 # <翻译开始>
-// [0:0]是扩展type_name的子列表
+// [0:0] 是用于扩展类型名的子列表
 # <翻译结束>
 
 
@@ -139,7 +142,7 @@
 <原文结束>
 
 # <翻译开始>
-// [0:0]是扩展extendee的子列表
+// [0:0] 是扩展实体的子列表
 # <翻译结束>
 
 
@@ -148,6 +151,6 @@
 <原文结束>
 
 # <翻译开始>
-// [0:0]是字段type_name的子列表
+// [0:0] 是字段 type_name 的子列表
 # <翻译结束>
 

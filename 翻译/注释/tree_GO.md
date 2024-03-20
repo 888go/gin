@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// 版权所有2013朱利安施密特
-// 版权所有
-// 此源代码的使用受bsd风格的许可证的约束，该许可证可在https://github.com/julienschmidt/httprouter/blob/master/LICENSE上找到
+// 版权所有 ? 2013 Julien Schmidt。保留所有权利。
+// 本源代码的使用受 BSD 风格许可协议约束，该协议可在
+// https://github.com/julienschmidt/httprouter/blob/master/LICENSE 查阅
 # <翻译结束>
 
 
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// Param是一个URL参数，由一个键和一个值组成
+// Param 是单个URL参数，包含一个键和一个值。
 # <翻译结束>
 
 
@@ -28,9 +28,9 @@
 <原文结束>
 
 # <翻译开始>
-// Params是一个Param-slice，由路由器返回
-// 片是有序的，第一个URL参数也是第一个片值
-// 因此，通过索引读取值是安全的
+// Params 是一个 Param 切片，由路由器返回。
+// 这个切片是有序的，第一个 URL 参数也是切片中的第一个值。
+// 因此，通过索引读取值是安全的。
 # <翻译结束>
 
 
@@ -40,8 +40,8 @@
 <原文结束>
 
 # <翻译开始>
-// Get返回与给定名称匹配的第一个Param的值和一个布尔值true
-// 如果没有找到匹配的参数，则返回一个空字符串和一个布尔值false
+// Get 方法返回第一个参数键与给定名称相匹配的值，并返回布尔值 true。
+// 如果未找到匹配的参数，则返回一个空字符串和布尔值 false。
 # <翻译结束>
 
 
@@ -51,8 +51,8 @@
 <原文结束>
 
 # <翻译开始>
-// ByName返回与给定名称匹配的第一个参数的值
-// 如果没有找到匹配的Param，则返回一个空字符串
+// ByName 返回第一个其键与给定名称相匹配的Param的值。
+// 如果未找到匹配的Param，则返回一个空字符串。
 # <翻译结束>
 
 
@@ -61,7 +61,7 @@
 <原文结束>
 
 # <翻译开始>
-// addChild将添加一个子节点，将wildcardChild保留在最后
+// addChild 将添加一个子节点，并保持 wildcardChild 位于末尾
 # <翻译结束>
 
 
@@ -70,7 +70,7 @@
 <原文结束>
 
 # <翻译开始>
-// 子节点，最多1个:数组末尾的参数样式节点
+// 子节点，数组末尾最多包含 1 个 :param 样式的节点
 # <翻译结束>
 
 
@@ -79,34 +79,25 @@
 <原文结束>
 
 # <翻译开始>
-// 增加给定子元素的优先级，并在必要时重新排序
+// 如果有必要，递增给定子项的优先级并重新排序
 # <翻译结束>
 
 
 <原文开始>
-	// Adjust position (move to front)
+// Adjust position (move to front)
 <原文结束>
 
 # <翻译开始>
-// 调整位置(移动到前面)
+// 调整位置（移动到前面）
 # <翻译结束>
 
 
 <原文开始>
-		// Swap node positions
+// Build new index char string
 <原文结束>
 
 # <翻译开始>
-// 交换节点位置
-# <翻译结束>
-
-
-<原文开始>
-	// Build new index char string
-<原文结束>
-
-# <翻译开始>
-// 构建新的索引字符串
+// 构建新的索引字符字符串
 # <翻译结束>
 
 
@@ -115,16 +106,16 @@
 <原文结束>
 
 # <翻译开始>
-// 未更改前缀，可能为空
+// 未更改的前缀，可能为空
 # <翻译结束>
 
 
 <原文开始>
-// The index char we move
+// Rest without char at 'pos'
 <原文结束>
 
 # <翻译开始>
-// 我们移动的索引字符
+// 在'pos'位置没有字符的Rest
 # <翻译结束>
 
 
@@ -134,17 +125,8 @@
 <原文结束>
 
 # <翻译开始>
-// addRoute将具有给定句柄的节点添加到路径中
-// 不是concurrency-safe !
-# <翻译结束>
-
-
-<原文开始>
-	// Empty tree
-<原文结束>
-
-# <翻译开始>
-// 空树
+// addRoute 向路径中添加具有给定 handle 的节点。
+// 非并发安全！
 # <翻译结束>
 
 
@@ -155,85 +137,50 @@
 <原文结束>
 
 # <翻译开始>
-// 找出最长的公共前缀
-// 这还意味着公共前缀不包含':'或'*'，因为现有键不能包含这些字符
+// 查找最长公共前缀。
+// 这也意味着，公共前缀中不包含 ':' 或 '*'，
+// 因为已存在的键不能包含这些字符。
 # <翻译结束>
 
 
 <原文开始>
-		// Split edge
+// []byte for proper unicode char conversion, see #65
 <原文结束>
 
 # <翻译开始>
-// 分裂的边缘
+// 使用 []byte 以正确处理 Unicode 字符转换，参考 #65 号问题
 # <翻译结束>
 
 
 <原文开始>
-			// []byte for proper unicode char conversion, see #65
+// Make new node a child of this node
 <原文结束>
 
 # <翻译开始>
-// []byte用于正确的unicode字符转换，参见#65
+// 将新节点作为此节点的子节点
 # <翻译结束>
 
 
 <原文开始>
-		// Make new node a child of this node
+// Check if a child with the next path byte exists
 <原文结束>
 
 # <翻译开始>
-// 使新节点成为此节点的子节点
+// 检查是否存在下一个路径字节的子节点
 # <翻译结束>
 
 
 <原文开始>
-			// '/' after param
+// inserting a wildcard node, need to check if it conflicts with the existing wildcard
 <原文结束>
 
 # <翻译开始>
-// 参数后的'/'
+// 插入通配符节点，需要检查是否与现有通配符冲突
 # <翻译结束>
 
 
 <原文开始>
-			// Check if a child with the next path byte exists
-<原文结束>
-
-# <翻译开始>
-// 检查下一个路径字节的子节点是否存在
-# <翻译结束>
-
-
-<原文开始>
-			// Otherwise insert it
-<原文结束>
-
-# <翻译开始>
-// 否则插入
-# <翻译结束>
-
-
-<原文开始>
-				// []byte for proper unicode char conversion, see #65
-<原文结束>
-
-# <翻译开始>
-// []byte用于正确的unicode字符转换，参见#65
-# <翻译结束>
-
-
-<原文开始>
-				// inserting a wildcard node, need to check if it conflicts with the existing wildcard
-<原文结束>
-
-# <翻译开始>
-// 插入一个通配符节点，需要检查它是否与现有的通配符冲突
-# <翻译结束>
-
-
-<原文开始>
-				// Check if the wildcard matches
+// Check if the wildcard matches
 <原文结束>
 
 # <翻译开始>
@@ -242,16 +189,16 @@
 
 
 <原文开始>
-					// Adding a child to a catchAll is not possible
+// Adding a child to a catchAll is not possible
 <原文结束>
 
 # <翻译开始>
-// 不能将子对象添加到catchAll中
+// 向 catchAll 添加子节点是不可能的
 # <翻译结束>
 
 
 <原文开始>
-					// Check for longer wildcard, e.g. :name and :names
+// Check for longer wildcard, e.g. :name and :names
 <原文结束>
 
 # <翻译开始>
@@ -260,20 +207,11 @@
 
 
 <原文开始>
-				// Wildcard conflict
+// Otherwise add handle to current node
 <原文结束>
 
 # <翻译开始>
-// 通配符的冲突
-# <翻译结束>
-
-
-<原文开始>
-		// Otherwise add handle to current node
-<原文结束>
-
-# <翻译开始>
-// 否则向当前节点添加句柄
+// 否则将处理程序添加到当前节点
 # <翻译结束>
 
 
@@ -283,67 +221,49 @@
 <原文结束>
 
 # <翻译开始>
-// 搜索通配符段并检查名称是否有无效字符
-// 如果没有找到通配符，则返回-1作为索引
+// 搜索通配符段，并检查名称中是否存在无效字符。
+// 如果未找到通配符，则返回索引 -1。
 # <翻译结束>
 
 
 <原文开始>
-	// Find start
+// A wildcard starts with ':' (param) or '*' (catch-all)
 <原文结束>
 
 # <翻译开始>
-// 找到开始
+// 通配符以 ':'（参数）或 '*'（捕获全部）开始
 # <翻译结束>
 
 
 <原文开始>
-		// A wildcard starts with ':' (param) or '*' (catch-all)
+// Find end and check for invalid characters
 <原文结束>
 
 # <翻译开始>
-// 通配符以':'(参数)或'*'(通配符)开头
+// 查找结尾并检查无效字符
 # <翻译结束>
 
 
 <原文开始>
-		// Find end and check for invalid characters
+// Find prefix until first wildcard
 <原文结束>
 
 # <翻译开始>
-// 查找结束符并检查无效字符
+// 查找直到第一个通配符为止的前缀
 # <翻译结束>
 
 
 <原文开始>
-		// Find prefix until first wildcard
+// The wildcard name must only contain one ':' or '*' character
 <原文结束>
 
 # <翻译开始>
-// 查找前缀直到第一个通配符
+// 通配符名称中只能包含一个':'或'*'字符
 # <翻译结束>
 
 
 <原文开始>
-// No wildcard found
-<原文结束>
-
-# <翻译开始>
-// 没有找到通配符
-# <翻译结束>
-
-
-<原文开始>
-		// The wildcard name must only contain one ':' or '*' character
-<原文结束>
-
-# <翻译开始>
-// 通配符名称只能包含一个':'或'*'字符
-# <翻译结束>
-
-
-<原文开始>
-		// check if the wildcard has a name
+// check if the wildcard has a name
 <原文结束>
 
 # <翻译开始>
@@ -352,20 +272,11 @@
 
 
 <原文开始>
-// param
+// Insert prefix before the current wildcard
 <原文结束>
 
 # <翻译开始>
-// 参数
-# <翻译结束>
-
-
-<原文开始>
-				// Insert prefix before the current wildcard
-<原文结束>
-
-# <翻译开始>
-// 在当前通配符之前插入前缀
+// 在当前通配符前插入前缀
 # <翻译结束>
 
 
@@ -375,62 +286,52 @@
 <原文结束>
 
 # <翻译开始>
-// 如果路径没有以通配符结尾，那么将会有另一个子路径以'/'开头
+// 如果路径没有以通配符结尾，则会有一个以'/'开头的另一个子路径
 # <翻译结束>
 
 
 <原文开始>
-			// Otherwise we're done. Insert the handle in the new leaf
+// Otherwise we're done. Insert the handle in the new leaf
 <原文结束>
 
 # <翻译开始>
-// 否则我们就做完了
-// 将手柄插入新叶中
+// 否则我们已经完成。将句柄插入新的叶子节点
 # <翻译结束>
 
 
 <原文开始>
-		// catchAll
+// currently fixed width 1 for '/'
 <原文结束>
 
 # <翻译开始>
-// 包罗万象的
+// 当前固定宽度为1用于 '/'
 # <翻译结束>
 
 
 <原文开始>
-		// currently fixed width 1 for '/'
+// First node: catchAll node with empty path
 <原文结束>
 
 # <翻译开始>
-// 目前固定宽度为1的“/”
+// 第一个节点：匹配所有路径的“catchAll”节点，其路径为空
 # <翻译结束>
 
 
 <原文开始>
-		// First node: catchAll node with empty path
+// second node: node holding the variable
 <原文结束>
 
 # <翻译开始>
-// 第一个节点:空路径的catchAll节点
+// 第二个节点：存储变量的节点
 # <翻译结束>
 
 
 <原文开始>
-		// second node: node holding the variable
+// If no wildcard was found, simply insert the path and handle
 <原文结束>
 
 # <翻译开始>
-// 第二个节点:保存变量的节点
-# <翻译结束>
-
-
-<原文开始>
-	// If no wildcard was found, simply insert the path and handle
-<原文结束>
-
-# <翻译开始>
-// 如果没有找到通配符，只需插入路径和句柄
+// 如果没有找到通配符，直接插入路径并处理
 # <翻译结束>
 
 
@@ -439,8 +340,7 @@
 <原文结束>
 
 # <翻译开始>
-// nodeValue保存(*Node)的返回值
-// getValue方法
+// nodeValue 用于存储 (*Node).getValue 方法的返回值
 # <翻译结束>
 
 
@@ -453,9 +353,8 @@
 <原文结束>
 
 # <翻译开始>
-// 返回用给定路径(键)注册的句柄
-// 通配符的值保存到映射中
-// 如果找不到句柄，如果存在一个带有额外(不带)尾斜杠的句柄，则会提出TSR(尾斜杠重定向)建议
+// 根据给定路径（键）返回已注册的处理程序。通配符的值将保存到一个映射中。
+// 如果找不到处理程序，且对于给定路径存在一个带有额外（无）尾部斜杠的处理程序，则会提出 TSR（尾部斜杠重定向）建议。
 # <翻译结束>
 
 
@@ -464,26 +363,25 @@
 <原文结束>
 
 # <翻译开始>
-// 行走树的外循环
+// 外层循环，用于遍历树
 # <翻译结束>
 
 
 <原文开始>
-				// Try all the non-wildcard children first by matching the indices
+// Try all the non-wildcard children first by matching the indices
 <原文结束>
 
 # <翻译开始>
-// 首先通过匹配索引来尝试所有非通配符子节点
+// 首先尝试通过匹配索引来查找所有非通配符子节点
 # <翻译结束>
 
 
 <原文开始>
-						//  strings.HasPrefix(n.children[len(n.children)-1].path, ":") == n.wildChild
+//  strings.HasPrefix(n.children[len(n.children)-1].path, ":") == n.wildChild
 <原文结束>
 
 # <翻译开始>
-// strings.HasPrefix (n.children len (n.children)[1]
-// path， ":") == n.wildChild
+// 判断n的子节点列表中最后一个子节点的路径是否以":"开头，结果与n.wildChild属性相等
 # <翻译结束>
 
 
@@ -493,7 +391,8 @@
 <原文结束>
 
 # <翻译开始>
-// 如果循环结束时的路径不等于'/'，并且当前节点没有子节点，则当前节点需要回滚到最后一个有效的skippedNode
+// 如果循环结束时路径不等于'/'且当前节点没有子节点，
+// 那么当前节点需要回滚到上一个有效的已跳过节点
 # <翻译结束>
 
 
@@ -504,17 +403,17 @@
 <原文结束>
 
 # <翻译开始>
-// 没有什么发现
-// 我们可以建议重定向到相同的URL，如果该路径存在叶子，则不带尾斜杠
+// 未找到任何内容。
+// 如果该路径存在叶节点，我们可以建议重定向到不带尾部斜杠的相同 URL。
 # <翻译结束>
 
 
 <原文开始>
-				// Handle wildcard child, which is always at the end of the array
+// Handle wildcard child, which is always at the end of the array
 <原文结束>
 
 # <翻译开始>
-// 处理通配符子，它总是在数组的末尾
+// 处理通配符子节点，它总是在数组的末尾
 # <翻译结束>
 
 
@@ -524,62 +423,35 @@
 <原文结束>
 
 # <翻译开始>
-// 修复截断参数tree_test的问题
-// Go line: 204
+// 修复：截断参数
+// 文件：tree_test.go，行号：204
 # <翻译结束>
 
 
 <原文开始>
-					// Find param end (either '/' or path end)
+// Find param end (either '/' or path end)
 <原文结束>
 
 # <翻译开始>
-// 查找参数结束('/'或路径结束)
+// 查找参数结束位置（可能是'/'或路径结束）
 # <翻译结束>
 
 
 <原文开始>
-					// Save param value
+// Preallocate capacity if necessary
 <原文结束>
 
 # <翻译开始>
-// 保存参数值
+// 如果有必要，预先分配容量
 # <翻译结束>
 
 
 <原文开始>
-						// Preallocate capacity if necessary
+// Expand slice within preallocated capacity
 <原文结束>
 
 # <翻译开始>
-// 必要时预分配容量
-# <翻译结束>
-
-
-<原文开始>
-						// Expand slice within preallocated capacity
-<原文结束>
-
-# <翻译开始>
-// 在预分配的容量内扩展切片
-# <翻译结束>
-
-
-<原文开始>
-					// we need to go deeper!
-<原文结束>
-
-# <翻译开始>
-// 我们得再深入一点!
-# <翻译结束>
-
-
-<原文开始>
-						// ... but we can't
-<原文结束>
-
-# <翻译开始>
-// …但我们不能
+// 在预先分配的容量内扩展切片
 # <翻译结束>
 
 
@@ -589,8 +461,7 @@
 <原文结束>
 
 # <翻译开始>
-// 没有找到手柄
-// 检查是否存在此路径的句柄+尾斜杠以供TSR推荐
+// 未找到处理程序。检查是否存在该路径加上末尾斜杠的处理程序，以便进行 TSR（可能指“透明目录重写”）推荐
 # <翻译结束>
 
 
@@ -600,16 +471,17 @@
 <原文结束>
 
 # <翻译开始>
-// 如果当前路径不等于'/'，并且节点没有注册句柄，并且最近匹配的节点有子节点，则当前节点需要回滚到最后一个有效的skippedNode
+// 如果当前路径不等于'/'，并且节点未注册处理程序，并且最近匹配的节点有一个子节点
+// 那么当前节点需要回滚到上一个有效跳过的节点
 # <翻译结束>
 
 
 <原文开始>
-				//	n = latestNode.children[len(latestNode.children)-1]
+//	n = latestNode.children[len(latestNode.children)-1]
 <原文结束>
 
 # <翻译开始>
-// n = 最新节点的子节点列表中的最后一个子节点，即latestNode.children数组的最后一个元素
+// n = latestNode.children数组的最后一个元素
 # <翻译结束>
 
 
@@ -619,8 +491,8 @@
 <原文结束>
 
 # <翻译开始>
-// 我们应该已经到达包含句柄的节点
-// 检查此节点是否已注册句柄
+// 我们应该已经到达包含处理程序的节点。
+// 检查该节点是否注册了处理程序。
 # <翻译结束>
 
 
@@ -631,7 +503,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果这个路由没有句柄，但是这个路由有一个通配符子节点，那么这个路径必须有一个附加斜杠的句柄
+// 如果该路由没有处理程序，但该路由有一个通配符子路由，则必须为此路径（带有一个额外的尾部斜杠）提供一个处理程序
 # <翻译结束>
 
 
@@ -641,8 +513,7 @@
 <原文结束>
 
 # <翻译开始>
-// 没有找到手柄
-// 检查该路径的句柄+尾斜杠是否存在以推荐尾斜杠
+// 未找到处理程序。检查是否存在针对此路径加上末尾斜杠的处理程序，以便提供末尾斜杠建议
 # <翻译结束>
 
 
@@ -652,17 +523,16 @@
 <原文结束>
 
 # <翻译开始>
-// 没有什么发现
-// 我们可以建议重定向到相同的URL，如果该路径存在叶子，则使用额外的斜杠
+// 未找到任何内容。如果该路径存在叶子节点，我们可以建议重定向到同一 URL 并附加一个额外的尾部斜杠
 # <翻译结束>
 
 
 <原文开始>
-		// roll back to last valid skippedNode
+// roll back to last valid skippedNode
 <原文结束>
 
 # <翻译开始>
-// 回滚到最后一个有效的skippedNode
+// 回滚到最后一个有效的跳过节点
 # <翻译结束>
 
 
@@ -674,9 +544,9 @@
 <原文结束>
 
 # <翻译开始>
-// 对给定路径进行不区分大小写的查找，并尝试查找处理程序
-// 它还可以选择修复尾随斜杠
-// 它返回经过大小写校正的路径和一个bool值，该值指示查找是否成功
+// 根据给定的路径进行不区分大小写的查找，并尝试找到一个处理器。
+// 可选地，它也可以修正尾部的斜杠。
+// 它返回大小写纠正后的路径以及一个布尔值，表示查找是否成功。
 # <翻译结束>
 
 
@@ -686,8 +556,7 @@
 <原文结束>
 
 # <翻译开始>
-// 一般情况下，在堆栈上使用静态大小的缓冲区
-// 如果路径太长，则在堆上分配一个缓冲区
+// 在常见情况下，使用栈上静态大小的缓冲区。如果路径过长，则改为在堆上分配缓冲区。
 # <翻译结束>
 
 
@@ -696,16 +565,7 @@
 <原文结束>
 
 # <翻译开始>
-// 为新路径预先分配足够的内存
-# <翻译结束>
-
-
-<原文开始>
-// Empty rune buffer
-<原文结束>
-
-# <翻译开始>
-// 空符文缓冲区
+// 预先分配足够的内存用于新路径
 # <翻译结束>
 
 
@@ -723,16 +583,16 @@
 <原文结束>
 
 # <翻译开始>
-// n.findCaseInsensitivePath使用的递归不区分大小写的查找函数
+// 递归的大小写不敏感查找函数，由n.findCaseInsensitivePath调用
 # <翻译结束>
 
 
 <原文开始>
-		// Add common prefix to result
+// Add common prefix to result
 <原文结束>
 
 # <翻译开始>
-// 在结果中添加公共前缀
+// 向结果添加公共前缀
 # <翻译结束>
 
 
@@ -742,8 +602,8 @@
 <原文结束>
 
 # <翻译开始>
-// 没有找到手柄
-// 尝试通过添加尾斜杠来修复路径
+// 未找到处理程序。
+// 尝试通过添加尾部斜杠来修复路径
 # <翻译结束>
 
 
@@ -754,43 +614,26 @@
 <原文结束>
 
 # <翻译开始>
-// 如果该节点没有通配符(param或catchAll)子节点，我们可以只查找下一个子节点并继续沿着树向下走
+// 如果该节点没有通配符（param 或 catchAll）子节点，
+// 我们可以直接查找下一个子节点并继续向下遍历树
 # <翻译结束>
 
 
 <原文开始>
-			// Skip rune bytes already processed
+// Skip rune bytes already processed
 <原文结束>
 
 # <翻译开始>
-// 跳过已处理的符文字节
+// 跳过已处理的 rune 字节
 # <翻译结束>
 
 
 <原文开始>
-				// Old rune not finished
+// continue with child node
 <原文结束>
 
 # <翻译开始>
-// 旧符文还没写完
-# <翻译结束>
-
-
-<原文开始>
-						// continue with child node
-<原文结束>
-
-# <翻译开始>
-// 继续子节点
-# <翻译结束>
-
-
-<原文开始>
-				// Process a new rune
-<原文结束>
-
-# <翻译开始>
-// 处理一个新的符文
+// 继续处理子节点
 # <翻译结束>
 
 
@@ -801,44 +644,36 @@
 <原文结束>
 
 # <翻译开始>
-// 找到符文开始
-// 符文最多有4字节长，-4肯定是另一个符文
+// 查找rune的起始位置。
+// rune字符可能包含最多4个字节，
+// 因此，-4肯定属于另一个rune字符。
 # <翻译结束>
 
 
 <原文开始>
-						// read rune from cached path
+// read rune from cached path
 <原文结束>
 
 # <翻译开始>
-// 从缓存路径读取符文
+// 从缓存路径读取单个字符
 # <翻译结束>
 
 
 <原文开始>
-				// Calculate lowercase bytes of current rune
+// Calculate lowercase bytes of current rune
 <原文结束>
 
 # <翻译开始>
-// 计算当前符文的小写字节
+// 计算当前字符的 lowercase 字节
 # <翻译结束>
 
 
 <原文开始>
-				// Skip already processed bytes
+// Skip already processed bytes
 <原文结束>
 
 # <翻译开始>
-// 跳过已经处理的字节
-# <翻译结束>
-
-
-<原文开始>
-					// Lowercase matches
-<原文结束>
-
-# <翻译开始>
-// 小写字母相匹配
+// 跳过已处理的字节
 # <翻译结束>
 
 
@@ -849,7 +684,7 @@
 <原文结束>
 
 # <翻译开始>
-// 必须使用递归方法，因为大写字节和小写字节都可能作为索引存在
+// 必须采用递归方法，因为大小写两种字节都可能存在作为索引
 # <翻译结束>
 
 
@@ -859,25 +694,17 @@
 <原文结束>
 
 # <翻译开始>
-// 如果找不到匹配，大写符文也一样，如果不同
+// 如果我们没有找到匹配项，对于大写字符执行相同的操作，
+// 如果它与小写字符不同的话
 # <翻译结束>
 
 
 <原文开始>
-						// Uppercase matches
+// Continue with child node
 <原文结束>
 
 # <翻译开始>
-// 大写字母相匹配
-# <翻译结束>
-
-
-<原文开始>
-							// Continue with child node
-<原文结束>
-
-# <翻译开始>
-// 继续子节点
+// 继续处理子节点
 # <翻译结束>
 
 
@@ -887,37 +714,16 @@
 <原文结束>
 
 # <翻译开始>
-// 没有什么发现
-// 我们可以建议重定向到相同的URL，如果该路径存在叶子，则不带尾斜杠
+// 未找到任何内容。如果该路径存在叶子节点，我们可以建议重定向到去掉尾部斜杠的相同URL
 # <翻译结束>
 
 
 <原文开始>
-			// Add param value to case insensitive path
+// Add param value to case insensitive path
 <原文结束>
 
 # <翻译开始>
-// 为不区分大小写的路径添加参数值
-# <翻译结束>
-
-
-<原文开始>
-			// We need to go deeper!
-<原文结束>
-
-# <翻译开始>
-// 我们得再深入一点!
-# <翻译结束>
-
-
-<原文开始>
-				// No handle found. Check if a handle for this path + a
-				// trailing slash exists
-<原文结束>
-
-# <翻译开始>
-// 没有找到手柄
-// 检查是否存在此路径的句柄+尾斜杠
+// 添加参数值到不区分大小写的路径
 # <翻译结束>
 
 
@@ -927,16 +733,7 @@
 <原文结束>
 
 # <翻译开始>
-// 没有什么发现
-// 尝试通过添加/删除尾斜杠来修复路径
-# <翻译结束>
-
-
-<原文开始>
-// Rest without char at 'pos'
-<原文结束>
-
-# <翻译开始>
-// 在'pos'位置移除字符后的剩余部分
+// 未找到任何内容。
+// 尝试通过添加或删除尾部斜杠来修复路径
 # <翻译结束>
 

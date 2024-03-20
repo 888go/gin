@@ -8,7 +8,7 @@
 <原文结束>
 
 # <翻译开始>
-// 该代码由protoc-gen-go工具自动生成。请勿直接编辑。
+// 该代码由protoc-gen-go工具生成。请勿直接编辑。
 // 版本信息：
 // 	protoc-gen-go版本：v1.27.0
 // 	protoc版本：v3.15.8
@@ -17,16 +17,16 @@
 
 
 <原文开始>
-	// Verify that this generated code is sufficiently up-to-date.
+// Verify that this generated code is sufficiently up-to-date.
 <原文结束>
 
 # <翻译开始>
-// 验证此生成的代码足够新。
+// 验证此生成的代码是否足够新。
 # <翻译结束>
 
 
 <原文开始>
-	// Verify that runtime/protoimpl is sufficiently up-to-date.
+// Verify that runtime/protoimpl is sufficiently up-to-date.
 <原文结束>
 
 # <翻译开始>
@@ -89,31 +89,17 @@
 
 
 <原文开始>
-// 0: protoexample.FOO
-<原文结束>
-
-# <翻译开始>
-// 0: protoexample.FOO // 这个注释表明在该代码中，常量或变量被赋予了值protoexample.FOO，其中"protoexample"通常是一个包名，"FOO"是该包中的一个枚举、常量或其他标识符。但具体含义需要参照protoexample包的定义。
-# <翻译结束>
-
-
-<原文开始>
-// 1: protoexample.Test
-<原文结束>
-
-# <翻译开始>
-// 1: protoexample.Test （此句注释翻译为：）
-// 示例：protoexample包中的Test
-# <翻译结束>
-
-
-<原文开始>
 // 2: protoexample.Test.OptionalGroup
 <原文结束>
 
 # <翻译开始>
 // 2: protoexample.Test.OptionalGroup
-// （翻译）：// 2: protoexample.Test中的可选分组
+// 
+// （注释翻译）：// 在该注释中，描述的是protoexample包下的Test结构体中的OptionalGroup字段或成员。
+// 
+// protoexample：表示Go语言中的一个包名。
+// Test：表示该包下定义的一个结构体或消息类型名称。
+// OptionalGroup：表示Test结构体中的一个可选分组字段或成员。在Protocol Buffers等序列化协议中，OptionalGroup通常用于表示可以嵌套的、可选的消息字段集合。
 # <翻译结束>
 
 
@@ -122,7 +108,7 @@
 <原文结束>
 
 # <翻译开始>
-// 0: 在protoexample.Test结构体中，可选组（optionalgroup）字段的类型名称指向protoexample.Test.OptionalGroup
+// 0: 在protoexample.Test结构体中，optionalgroup字段的类型名称映射为protoexample.Test.OptionalGroup
 # <翻译结束>
 
 
@@ -131,7 +117,7 @@
 <原文结束>
 
 # <翻译开始>
-// [1:1] 是用于方法输出类型的子列表
+// [1:1] 是方法输出类型的子列表
 # <翻译结束>
 
 

@@ -6,7 +6,7 @@
 <原文结束>
 
 # <翻译开始>
-// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// JSON 包含给定的 interface 对象。
+// JSON 包含给定的接口对象。
 # <翻译结束>
 
 
@@ -26,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// IndentedJSON 包含给定的 interface 对象。
+// IndentedJSON 包含给定的接口对象。
 # <翻译结束>
 
 
@@ -71,7 +71,7 @@
 <原文结束>
 
 # <翻译开始>
-// Render (JSON) 以自定义的ContentType写入数据。
+// Render (JSON) 使用自定义的ContentType写入数据。
 # <翻译结束>
 
 
@@ -89,7 +89,7 @@
 <原文结束>
 
 # <翻译开始>
-// WriteJSON 将给定的接口对象进行序列化，并使用自定义 ContentType 进行写入。
+// WriteJSON 将给定的接口对象序列化，并使用自定义 ContentType 进行写入。
 # <翻译结束>
 
 
@@ -98,7 +98,7 @@
 <原文结束>
 
 # <翻译开始>
-// Render (IndentedJSON) 将给定的接口对象进行序列化，并使用自定义 ContentType 进行写入。
+// Render (IndentedJSON) 将给定的接口对象进行序列化，并以自定义 ContentType 进行写入。
 # <翻译结束>
 
 
@@ -116,12 +116,12 @@
 <原文结束>
 
 # <翻译开始>
-// Render (SecureJSON) 将给定的接口对象序列化，并使用自定义 ContentType 进行写入。
+// Render (SecureJSON) 将给定的接口对象进行序列化，并使用自定义的 ContentType 进行写入。
 # <翻译结束>
 
 
 <原文开始>
-	// if the jsonBytes is array values
+// if the jsonBytes is array values
 <原文结束>
 
 # <翻译开始>
@@ -143,7 +143,7 @@
 <原文结束>
 
 # <翻译开始>
-// Render (JsonpJSON) 将给定的接口对象进行序列化，并使用自定义的ContentType将其和对应的回调函数一起写入。
+// Render (JsonpJSON) 将给定的接口对象进行序列化，并使用自定义的ContentType将其与回调函数一起写入。
 # <翻译结束>
 
 
@@ -152,7 +152,7 @@
 <原文结束>
 
 # <翻译开始>
-// WriteContentType (JsonpJSON) 写入 Javascript ContentType。
+// WriteContentType (JsonpJSON) 写入 Javascript 的 ContentType。
 # <翻译结束>
 
 
@@ -179,7 +179,7 @@
 <原文结束>
 
 # <翻译开始>
-// Render (PureJSON) 设置自定义 ContentType，并对给定的接口对象进行编码。
+// Render (PureJSON) 设置自定义的ContentType，并对给定的接口对象进行编码。
 # <翻译结束>
 
 

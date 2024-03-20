@@ -1,24 +1,6 @@
 
 <原文开始>
-	// Example ping request.
-<原文结束>
-
-# <翻译开始>
-// 示例 ping 请求。
-# <翻译结束>
-
-
-<原文开始>
-	// Example / request.
-<原文结束>
-
-# <翻译开始>
-// 示例 / 请求
-# <翻译结束>
-
-
-<原文开始>
-	// Listen and Server in 0.0.0.0:8080
+// Listen and Server in 0.0.0.0:8080
 <原文结束>
 
 # <翻译开始>

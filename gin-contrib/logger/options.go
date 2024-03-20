@@ -21,42 +21,7 @@ func (o optionFunc) apply(c *config) {
 	o(c)
 }
 
-// WithLogger 设置自定义日志器函数
-
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
-
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
-
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
-
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
-
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
-
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
-
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
+// WithLogger 设置自定义日志记录器函数
 func WithLogger(fn func(*gin.Context, zerolog.Logger) zerolog.Logger) Option {
 	return optionFunc(func(c *config) {
 		c.logger = fn
@@ -64,27 +29,6 @@ func WithLogger(fn func(*gin.Context, zerolog.Logger) zerolog.Logger) Option {
 }
 
 // WithSkipPathRegexps 通过正则表达式模式添加多个需要跳过的URL路径
-
-// ff:
-// regs:
-
-// ff:
-// regs:
-
-// ff:
-// regs:
-
-// ff:
-// regs:
-
-// ff:
-// regs:
-
-// ff:
-// regs:
-
-// ff:
-// regs:
 func WithSkipPathRegexps(regs ...*regexp.Regexp) Option {
 	return optionFunc(func(c *config) {
 		if len(regs) == 0 {
@@ -95,28 +39,7 @@ func WithSkipPathRegexps(regs ...*regexp.Regexp) Option {
 	})
 }
 
-// WithUTC 返回一个时间t，其位置设置为UTC。
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
+// WithUTC 返回将时区设置为UTC的t。
 func WithUTC(s bool) Option {
 	return optionFunc(func(c *config) {
 		c.utc = s
@@ -124,137 +47,32 @@ func WithUTC(s bool) Option {
 }
 
 // WithSkipPath 根据特定模式跳过URL路径
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
 func WithSkipPath(s []string) Option {
 	return optionFunc(func(c *config) {
 		c.skipPath = s
 	})
 }
 
-// WithWriter 更改默认输出 writer。
+// WithWriter 更改默认输出写入器。
 // 默认为 gin.DefaultWriter
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
-
-// ff:
-// s:
 func WithWriter(s io.Writer) Option {
 	return optionFunc(func(c *config) {
 		c.output = s
 	})
 }
 
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
 func WithDefaultLevel(lvl zerolog.Level) Option {
 	return optionFunc(func(c *config) {
 		c.defaultLevel = lvl
 	})
 }
 
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
 func WithClientErrorLevel(lvl zerolog.Level) Option {
 	return optionFunc(func(c *config) {
 		c.clientErrorLevel = lvl
 	})
 }
 
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
-
-// ff:
-// lvl:
 func WithServerErrorLevel(lvl zerolog.Level) Option {
 	return optionFunc(func(c *config) {
 		c.serverErrorLevel = lvl

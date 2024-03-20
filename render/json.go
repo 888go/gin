@@ -1,4 +1,4 @@
-// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 
@@ -14,12 +14,12 @@ import (
 	"github.com/888go/gin/internal/json"
 )
 
-// JSON 包含给定的 interface 对象。
+// JSON 包含给定的接口对象。
 type JSON struct {
 	Data any
 }
 
-// IndentedJSON 包含给定的 interface 对象。
+// IndentedJSON 包含给定的接口对象。
 type IndentedJSON struct {
 	Data any
 }
@@ -52,27 +52,17 @@ var (
 	jsonASCIIContentType = []string{"application/json"}
 )
 
-// Render (JSON) 以自定义的ContentType写入数据。
-
-// ff:
-// w:
+// Render (JSON) 使用自定义的ContentType写入数据。
 func (r JSON) Render(w http.ResponseWriter) error {
 	return WriteJSON(w, r.Data)
 }
 
 // WriteContentType (JSON) 写入 JSON ContentType。
-
-// ff:
-// w:
 func (r JSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
-// WriteJSON 将给定的接口对象进行序列化，并使用自定义 ContentType 进行写入。
-
-// ff:
-// obj:
-// w:
+// WriteJSON 将给定的接口对象序列化，并使用自定义 ContentType 进行写入。
 func WriteJSON(w http.ResponseWriter, obj any) error {
 	writeContentType(w, jsonContentType)
 	jsonBytes, err := json.Marshal(obj)
@@ -83,10 +73,7 @@ func WriteJSON(w http.ResponseWriter, obj any) error {
 	return err
 }
 
-// Render (IndentedJSON) 将给定的接口对象进行序列化，并使用自定义 ContentType 进行写入。
-
-// ff:
-// w:
+// Render (IndentedJSON) 将给定的接口对象进行序列化，并以自定义 ContentType 进行写入。
 func (r IndentedJSON) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	jsonBytes, err := json.MarshalIndent(r.Data, "", "    ")
@@ -98,24 +85,18 @@ func (r IndentedJSON) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (IndentedJSON) 写入 JSON ContentType。
-
-// ff:
-// w:
 func (r IndentedJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
-// Render (SecureJSON) 将给定的接口对象序列化，并使用自定义 ContentType 进行写入。
-
-// ff:
-// w:
+// Render (SecureJSON) 将给定的接口对象进行序列化，并使用自定义的 ContentType 进行写入。
 func (r SecureJSON) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	jsonBytes, err := json.Marshal(r.Data)
 	if err != nil {
 		return err
 	}
-// 如果jsonBytes是数组值
+	// 如果jsonBytes是数组值
 	if bytes.HasPrefix(jsonBytes, bytesconv.StringToBytes("[")) && bytes.HasSuffix(jsonBytes,
 		bytesconv.StringToBytes("]")) {
 		if _, err = w.Write(bytesconv.StringToBytes(r.Prefix)); err != nil {
@@ -127,18 +108,11 @@ func (r SecureJSON) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (SecureJSON) 写入 JSON ContentType。
-
-// ff:
-// w:
 func (r SecureJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }
 
-// Render (JsonpJSON) 将给定的接口对象进行序列化，并使用自定义的ContentType将其和对应的回调函数一起写入。
-
-// ff:
-// err:
-// w:
+// Render (JsonpJSON) 将给定的接口对象进行序列化，并使用自定义的ContentType将其与回调函数一起写入。
 func (r JsonpJSON) Render(w http.ResponseWriter) (err error) {
 	r.WriteContentType(w)
 	ret, err := json.Marshal(r.Data)
@@ -171,19 +145,12 @@ func (r JsonpJSON) Render(w http.ResponseWriter) (err error) {
 	return nil
 }
 
-// WriteContentType (JsonpJSON) 写入 Javascript ContentType。
-
-// ff:
-// w:
+// WriteContentType (JsonpJSON) 写入 Javascript 的 ContentType。
 func (r JsonpJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonpContentType)
 }
 
 // Render (AsciiJSON) 将给定的接口对象进行序列化，并以自定义的 ContentType 进行写入。
-
-// ff:
-// err:
-// w:
 func (r AsciiJSON) Render(w http.ResponseWriter) (err error) {
 	r.WriteContentType(w)
 	ret, err := json.Marshal(r.Data)
@@ -205,17 +172,11 @@ func (r AsciiJSON) Render(w http.ResponseWriter) (err error) {
 }
 
 // WriteContentType (AsciiJSON) 写入 JSON ContentType。
-
-// ff:
-// w:
 func (r AsciiJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonASCIIContentType)
 }
 
-// Render (PureJSON) 设置自定义 ContentType，并对给定的接口对象进行编码。
-
-// ff:
-// w:
+// Render (PureJSON) 设置自定义的ContentType，并对给定的接口对象进行编码。
 func (r PureJSON) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	encoder := json.NewEncoder(w)
@@ -224,9 +185,6 @@ func (r PureJSON) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (PureJSON) 写入自定义 ContentType。
-
-// ff:
-// w:
 func (r PureJSON) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, jsonContentType)
 }

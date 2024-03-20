@@ -14,10 +14,14 @@ import (
 	"strings"
 )
 
-// 服务器发送事件
-// W3C工作草案，2009年10月29日
+// Server-Sent 事件
+// W3C 工作草案 2009年10月29日
 // http://www.w3.org/TR/2009/WD-eventsource-20091029/
-// 这段Go语言代码注释是关于“Server-Sent Events”（服务器发送事件）的规范说明。该规范为W3C（万维网联盟）在2009年10月29日发布的工作草案版本，可以通过提供的链接访问详细的文档内容。Server-Sent Events是一项允许服务器向浏览器客户端单向推送实时更新的技术标准。
+// 
+// 注释翻译：
+// 服务端推送事件
+// W3C 在2009年10月29日发布的草案版本
+// 参考文档：http://www.w3.org/TR/2009/WD-eventsource-20091029/
 
 const ContentType = "text/event-stream;charset=utf-8"
 
@@ -39,34 +43,6 @@ type Event struct {
 	Data  interface{}
 }
 
-
-// ff:
-// event:
-// writer:
-
-// ff:
-// event:
-// writer:
-
-// ff:
-// event:
-// writer:
-
-// ff:
-// event:
-// writer:
-
-// ff:
-// event:
-// writer:
-
-// ff:
-// event:
-// writer:
-
-// ff:
-// event:
-// writer:
 func Encode(writer io.Writer, event Event) error {
 	w := checkWriter(writer)
 	writeId(w, event.Id)
@@ -115,53 +91,11 @@ func writeData(w stringWriter, data interface{}) error {
 	return nil
 }
 
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
 func (r Event) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	return Encode(w, r)
 }
 
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
-
-// ff:
-// w:
 func (r Event) WriteContentType(w http.ResponseWriter) {
 	header := w.Header()
 	header["Content-Type"] = contentType

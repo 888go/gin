@@ -17,14 +17,15 @@
 
 # <翻译开始>
 // Generator 定义了一个用于生成 ID 的函数。
-// 可选，默认值：func() string {
+// 可选。默认值：func() string {
 //   return uuid.New().String()
 // }
-// （译文）：// Generator 用于定义一个生成 ID 的函数。
-// 该参数可选，默认实现为：
+// 
+// 翻译：
+// Generator 描述了一个生成ID的函数。
+// 非必填项。默认值为：
 // func() string {
-//   // 使用uuid包生成新的UUID并返回其字符串形式
-//   return uuid.New().String()
+//   返回 uuid.New().String()
 // }
 # <翻译结束>
 
@@ -39,16 +40,7 @@
 
 
 <原文开始>
-		// Get id from request
-<原文结束>
-
-# <翻译开始>
-// 从请求中获取id
-# <翻译结束>
-
-
-<原文开始>
-		// Set the id to ensure that the requestid is in the response
+// Set the id to ensure that the requestid is in the response
 <原文结束>
 
 # <翻译开始>

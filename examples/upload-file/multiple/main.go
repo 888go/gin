@@ -9,14 +9,14 @@ import (
 
 func main() {
 	router := gin.Default()
-// 为多部分表单设置较低的内存限制(默认为32 MiB)
+	// 设置multipart表单的较低内存限制（默认为32 MiB）
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	router.Static("/", "./public")
 	router.POST("/upload", func(c *gin.Context) {
 		name := c.PostForm("name")
 		email := c.PostForm("email")
 
-// 多部分组成
+		// Multipart form
 		form, err := c.MultipartForm()
 		if err != nil {
 			c.String(http.StatusBadRequest, "get form err: %s", err.Error())

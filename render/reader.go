@@ -1,4 +1,4 @@
-// 版权所有 2018 Gin 核心团队。保留所有权利。
+// 版权所有 ? 2018 Gin 核心团队。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 
@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-// Reader 结构体包含了一个IO读取器及其长度，以及自定义的ContentType和其他头部信息。
+// Reader 包含了 IO 读取器及其长度，以及自定义的 ContentType 和其他头部信息。
 type Reader struct {
 	ContentType   string
 	ContentLength int64
@@ -18,11 +18,7 @@ type Reader struct {
 	Headers       map[string]string
 }
 
-// Render (Reader) 使用自定义的ContentType和头信息写入数据。
-
-// ff:
-// err:
-// w:
+// Render (Reader) 通过自定义的 ContentType 和头部信息写入数据。
 func (r Reader) Render(w http.ResponseWriter) (err error) {
 	r.WriteContentType(w)
 	if r.ContentLength >= 0 {
@@ -36,15 +32,12 @@ func (r Reader) Render(w http.ResponseWriter) (err error) {
 	return
 }
 
-// WriteContentType (读取器) 写入自定义 ContentType。
-
-// ff:
-// w:
+// WriteContentType (针对Reader) 写入自定义的 ContentType。
 func (r Reader) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, []string{r.ContentType})
 }
 
-// writeHeaders 写入自定义头部信息。
+// writeHeaders 写入自定义 Header。
 func (r Reader) writeHeaders(w http.ResponseWriter, headers map[string]string) {
 	header := w.Header()
 	for k, v := range headers {

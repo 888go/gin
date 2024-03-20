@@ -1,6 +1,8 @@
-// 由protoc-gen-go生成的代码
-// 不要编辑
-// 版本号:protoc-gen-go v1.28.1 protoc v3.21.5来源:pb/helloworld/v1/helloworld.proto
+// 该代码由 protoc-gen-go 自动生成。请勿直接编辑。
+// 版本信息：
+// 	protoc-gen-go v1.28.1
+// 	protoc        v3.21.5
+// 源文件：pb/helloworld/v1/helloworld.proto
 
 package v1
 
@@ -12,13 +14,13 @@ import (
 )
 
 const (
-// 验证生成的代码是否足够最新
+	// 验证此生成的代码是否足够新。
 	_ = protoimpl.EnforceVersion(20 - protoimpl.MinVersion)
-// 验证runtime/protoimpl是否足够最新
+	// 验证runtime/protoimpl是否足够新。
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// 包含用户名的请求消息
+// 请求消息，其中包含用户的名字。
 type HelloRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -27,20 +29,6 @@ type HelloRequest struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
 	if protoimpl.UnsafeEnabled {
@@ -50,40 +38,12 @@ func (x *HelloRequest) Reset() {
 	}
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (x *HelloRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*HelloRequest) ProtoMessage() {}
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_pb_helloworld_v1_helloworld_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
@@ -96,25 +56,11 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// 已弃用:使用HelloRequest.ProtoReflect.Descriptor代替
+// 已弃用：请改用 HelloRequest.ProtoReflect.Descriptor。
 func (*HelloRequest) Descriptor() ([]byte, []int) {
 	return file_pb_helloworld_v1_helloworld_proto_rawDescGZIP(), []int{0}
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (x *HelloRequest) GetName() string {
 	if x != nil {
 		return x.Name
@@ -122,7 +68,7 @@ func (x *HelloRequest) GetName() string {
 	return ""
 }
 
-// 包含问候语的响应消息
+// 响应消息，其中包含问候语
 type HelloReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -131,20 +77,6 @@ type HelloReply struct {
 	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (x *HelloReply) Reset() {
 	*x = HelloReply{}
 	if protoimpl.UnsafeEnabled {
@@ -154,40 +86,12 @@ func (x *HelloReply) Reset() {
 	}
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (x *HelloReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
 func (*HelloReply) ProtoMessage() {}
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (x *HelloReply) ProtoReflect() protoreflect.Message {
 	mi := &file_pb_helloworld_v1_helloworld_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
@@ -200,25 +104,11 @@ func (x *HelloReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// 已弃用:使用HelloReply.ProtoReflect.Descriptor代替
+// 已弃用：请改用 HelloReply.ProtoReflect.Descriptor。
 func (*HelloReply) Descriptor() ([]byte, []int) {
 	return file_pb_helloworld_v1_helloworld_proto_rawDescGZIP(), []int{1}
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (x *HelloReply) GetMessage() string {
 	if x != nil {
 		return x.Message
@@ -263,20 +153,21 @@ func file_pb_helloworld_v1_helloworld_proto_rawDescGZIP() []byte {
 
 var file_pb_helloworld_v1_helloworld_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_pb_helloworld_v1_helloworld_proto_goTypes = []interface{}{
-	(*HelloRequest)(nil), // 0: helloworld.v1.HelloRequest
-// （翻译）：// 0: 表示HelloRequest结构体在helloworld包的v1版本中
-	(*HelloReply)(nil),   // 1: helloworld.v1.HelloReply （翻译：// 1: helloworld.v1版本的HelloReply）
+	(*HelloRequest)(nil), // 0: helloworld.v1.HelloRequest 的中文翻译是：
+// 
+// 0: helloworld.v1.HelloRequest（HelloRequest 是 helloworld.v1 包中的结构体或接口类型）
+	(*HelloReply)(nil),   // 1: helloworld.v1.HelloReply （这是一条关于Go语言程序的注释，翻译为：）
+// 
+// 1: helloworld.v1.HelloReply 表示这是一个版本为v1的helloworld包中的HelloReply结构体或接口。
 }
 var file_pb_helloworld_v1_helloworld_proto_depIdxs = []int32{
-	0, // 0: helloworld.v1.Greeter
-// SayHello:要→helloworld.v1.HelloRequest
-	1, // 1: helloworld.v1.Greeter
-// SayHello: output_type→helloworld.v1.HelloReply
-	1, // [1:2]是output_type方法的子列表
-	0, // [01:1]是input_type方法的子列表
-	0, // [0:0]是扩展type_name的子列表
-	0, // [0:0]是扩展extendee的子列表
-	0, // [0:0]是字段type_name的子列表
+	0, // 0: helloworld.v1.Greeter.SayHello 方法的输入类型 -> helloworld.v1.HelloRequest
+	1, // 1: helloworld.v1.Greeter.SayHello 方法的输出类型为 helloworld.v1.HelloReply
+	1, // [1:2] 是方法输出类型对应的子列表
+	0, // [0:1] 是用于方法输入类型的子列表
+	0, // [0:0] 是用于扩展类型名的子列表
+	0, // [0:0] 是扩展实体的子列表
+	0, // [0:0] 是字段 type_name 的子列表
 }
 
 func init() { file_pb_helloworld_v1_helloworld_proto_init() }

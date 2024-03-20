@@ -20,7 +20,7 @@ const (
 
 var defaultRequiredHeaders = []string{requestTarget, date, digest}
 
-// Authenticator 是 Gin 框架的身份验证中间件。
+// Authenticator 是 Gin 框架的认证中间件。
 type Authenticator struct {
 	secrets    Secrets
 	validators []validator.Validator
@@ -32,93 +32,21 @@ type Option func(*Authenticator)
 
 // WithValidator 配置 Authenticator 以使用自定义验证器。
 // 默认的验证器基于时间和摘要。
-
-// ff:
-// validators:
-
-// ff:
-// validators:
-
-// ff:
-// validators:
-
-// ff:
-// validators:
-
-// ff:
-// validators:
-
-// ff:
-// validators:
-
-// ff:
-// validators:
 func WithValidator(validators ...validator.Validator) Option {
 	return func(a *Authenticator) {
 		a.validators = validators
 	}
 }
 
-// WithRequiredHeaders 是一个包含所有必需HTTP头的列表，客户端
-// 必须在签名字符串中包含这些头信息，以便请求被认为是有效的。
-// 如果未提供，创建的Authenticator实例将使用默认的defaultRequiredHeaders变量。
-
-// ff:
-// headers:
-
-// ff:
-// headers:
-
-// ff:
-// headers:
-
-// ff:
-// headers:
-
-// ff:
-// headers:
-
-// ff:
-// headers:
-
-// ff:
-// headers:
+// WithRequiredHeaders 是一个包含所有必需HTTP头的列表，客户端必须在签名字符串中包含这些头信息，以便请求被认为是有效的。
+// 如果未提供，则创建的Authenticator实例将使用默认的defaultRequiredHeaders变量。
 func WithRequiredHeaders(headers []string) Option {
 	return func(a *Authenticator) {
 		a.headers = headers
 	}
 }
 
-// NewAuthenticator 创建一个全新的 Authenticator 实例，其参数包括
-// 允许的权限列表以及请求头中所需的密钥和秘密键。
-
-// ff:
-// options:
-// secretKeys:
-
-// ff:
-// options:
-// secretKeys:
-
-// ff:
-// options:
-// secretKeys:
-
-// ff:
-// options:
-// secretKeys:
-
-// ff:
-// options:
-// secretKeys:
-
-// ff:
-// options:
-// secretKeys:
-
-// ff:
-// options:
-// secretKeys:
+// NewAuthenticator 创建一个具有给定允许权限和所需头部及密钥的新 Authenticator 实例。
 func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 	a := &Authenticator{secrets: secretKeys}
 
@@ -140,21 +68,7 @@ func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 	return a
 }
 
-// Authenticated 返回一个 gin 中间件，该中间件允许在参数中指定的权限。
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
+// Authenticated 返回一个 gin 中间件，该中间件允许在参数中给定的权限。
 func (a *Authenticator) Authenticated() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		sigHeader, err := NewSignatureHeader(c.Request)
@@ -197,7 +111,7 @@ func (a *Authenticator) Authenticated() gin.HandlerFunc {
 	}
 }
 
-// isValidHeader 检查是否所有服务器要求的头部都在头部列表中
+// isValidHeader 检查请求头中是否包含服务器所需的所有必需头部
 func (a *Authenticator) isValidHeader(headers []string) bool {
 	m := len(headers)
 	for _, h := range a.headers {

@@ -6,29 +6,29 @@
 <原文结束>
 
 # <翻译开始>
-// 版权所有2019 Gin Core Team
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2019 Gin 核心团队。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrMultiFileHeader multipart.FileHeader invalid
+// ErrMultiFileHeader multipart.FileHeader invalid
 <原文结束>
 
 # <翻译开始>
-// ErrMultiFileHeader多部分
-// FileHeader无效
+// ErrMultiFileHeader：multipart.FileHeader无效
 # <翻译结束>
 
 
 <原文开始>
-	// ErrMultiFileHeaderLenInvalid array for []*multipart.FileHeader len invalid
+// ErrMultiFileHeaderLenInvalid array for []*multipart.FileHeader len invalid
 <原文结束>
 
 # <翻译开始>
-// errmultifileheaderlen无效数组[]*multipart
-// 文件头len无效
+// ErrMultiFileHeaderLenInvalid 表示 []*multipart.FileHeader 的长度无效
+// 
+// 这段 Go 语言注释翻译成中文为：当用于表示多个文件头的 []*multipart.FileHeader 切片（数组）的长度不正确或无效时，会返回这个错误。
 # <翻译结束>
 
 
@@ -37,23 +37,6 @@
 <原文结束>
 
 # <翻译开始>
-// TrySet尝试通过绑定表单文件的多部分请求设置一个值
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// opt:
-// key:
-// field:
-// value:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// opt:
-// key:
-// field:
-// value:
+// TrySet 尝试通过包含表单文件的多部分请求设置值
 # <翻译结束>
 

@@ -50,21 +50,7 @@ func connectedUsers() uint64 {
 	return uint64(connected)
 }
 
-// Stats返回savedStats数据
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
+// Stats 返回保存的统计信息数据。
 func Stats() map[string]uint64 {
 	mutexStats.RLock()
 	defer mutexStats.RUnlock()

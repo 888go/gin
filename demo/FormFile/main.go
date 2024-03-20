@@ -5,7 +5,9 @@ import (
 	"net/http"
 )
 
-// https://topgoer.com/gin%E6%A1%86%E6%9E%B6/gin%E8%B7%AF%E7%94%B1/%E4%B8%8A%E4%BC%A0%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6.html
+// 该链接为Gin框架教程中关于单个文件上传的部分：
+// https://topgoer.com/gin框架/gin路由/上传单个文件.html
+// 此段Go代码中的注释仅包含一个URL链接，链接指向的是一个关于Gin框架的在线教程页面，具体讲解了如何在Gin框架中处理单个文件的上传功能。
 func main() {
 	r := gin.Default()
 	//限制上传最大尺寸
@@ -16,6 +18,7 @@ func main() {
 			c.String(500, "上传图片出错")
 		}
 		// c.JSON(200, gin.H{"message": file.Header.Context})
+// 使用c.JSON发送HTTP响应，状态码为200，并返回一个JSON对象。其中JSON对象包含一个键值对："message"对应file.Header.Context的值。
 		c.SaveUploadedFile(file, ".\\demo\\FormFile\\"+file.Filename)
 		c.String(http.StatusOK, ".\\demo\\FormFile\\"+file.Filename)
 	})

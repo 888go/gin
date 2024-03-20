@@ -53,12 +53,6 @@ func createFromFilesWithFuncs() Render {
 	return r
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestMissingTemplateOrName(t *testing.T) {
 	r := New()
 	tmpl := template.Must(template.New("test").Parse("Welcome to {{ .name }} template"))
@@ -71,12 +65,6 @@ func TestMissingTemplateOrName(t *testing.T) {
 	}, "template can not be nil")
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestAddFromFiles(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromFile()
@@ -91,12 +79,6 @@ func TestAddFromFiles(t *testing.T) {
 	assert.Equal(t, "<p>Test Multiple Template</p>\nHi, this is article template\n", w.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestAddFromGlob(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromGlob()
@@ -111,12 +93,6 @@ func TestAddFromGlob(t *testing.T) {
 	assert.Equal(t, "<p>Test Multiple Template</p>\nHi, this is login template\n", w.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestAddFromString(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromString()
@@ -131,12 +107,6 @@ func TestAddFromString(t *testing.T) {
 	assert.Equal(t, "Welcome to index template", w.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestAddFromStringsFruncs(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromStringsWithFuncs()
@@ -151,12 +121,6 @@ func TestAddFromStringsFruncs(t *testing.T) {
 	assert.Equal(t, "Welcome to index template", w.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestAddFromFilesFruncs(t *testing.T) {
 	router := gin.New()
 	router.HTMLRender = createFromFilesWithFuncs()
@@ -171,12 +135,6 @@ func TestAddFromFilesFruncs(t *testing.T) {
 	assert.Equal(t, "Welcome to index template\n", w.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestDuplicateTemplate(t *testing.T) {
 	assert.Panics(t, func() {
 		r := New()

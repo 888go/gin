@@ -3,10 +3,10 @@
 [![运行测试](https://github.com/gin-contrib/logger/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/gin-contrib/logger/actions/workflows/go.yml)
 [![codecov](https://codecov.io/gh/gin-contrib/logger/branch/master/graph/badge.svg)](https://codecov.io/gh/gin-contrib/logger)
 [![Go 代码质量报告](https://goreportcard.com/badge/github.com/gin-contrib/logger)](https://goreportcard.com/report/github.com/gin-contrib/logger)
-[![GoDoc 文档](https://godoc.org/github.com/gin-contrib/logger?status.svg)](https://godoc.org/github.com/gin-contrib/logger)
-[![加入聊天室 https://gitter.im/gin-gonic/gin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gin-gonic/gin)
+[![GoDoc](https://godoc.org/github.com/gin-contrib/logger?status.svg)](https://godoc.org/github.com/gin-contrib/logger)
+[![加入聊天 https://gitter.im/gin-gonic/gin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gin-gonic/gin)
 
-Gin 中间件/处理器，使用 [rs/zerolog](https://github.com/rs/zerolog) 来记录 URL 路径。
+Gin 中间件/处理器，用于使用 [rs/zerolog](https://github.com/rs/zerolog) 记录 URL 路径。
 ## Example
 
 ```go
@@ -108,7 +108,9 @@ func main() {
 }
 ```
 
-## # 运行应用服务器：
+## # 截图
+
+运行应用服务器：
 
 ```sh
 go run _example/main.go

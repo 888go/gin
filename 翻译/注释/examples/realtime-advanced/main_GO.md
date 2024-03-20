@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// ConfigRuntime设置操作系统线程数
+// ConfigRuntime 设置操作系统的线程数量。
 # <翻译结束>
 
 
@@ -13,7 +13,7 @@
 <原文结束>
 
 # <翻译开始>
-// StartWorkers通过例程启动starsWorker
+// StartWorkers 通过 goroutine 启动 starsWorker。
 # <翻译结束>
 
 
@@ -22,6 +22,6 @@
 <原文结束>
 
 # <翻译开始>
-// 通过设置路由器启动web服务器
+// StartGin 通过设置路由启动 Gin Web 服务器。
 # <翻译结束>
 

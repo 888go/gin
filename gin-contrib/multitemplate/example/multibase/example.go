@@ -40,7 +40,7 @@ func loadTemplates(templatesDir string) multitemplate.Renderer {
 		panic(err.Error())
 	}
 
-// 从articleLayouts/和articles/目录生成我们的templates映射
+	// 从 articleLayouts/ 和 articles/ 目录生成我们的 templates 映射
 	for _, article := range articles {
 		layoutCopy := make([]string, len(articleLayouts))
 		copy(layoutCopy, articleLayouts)
@@ -58,7 +58,7 @@ func loadTemplates(templatesDir string) multitemplate.Renderer {
 		panic(err.Error())
 	}
 
-// 从adminLayouts/和admins/目录生成我们的templates映射
+	// 从adminLayouts/和admins/目录生成我们的templates映射
 	for _, admin := range admins {
 		layoutCopy := make([]string, len(adminLayouts))
 		copy(layoutCopy, adminLayouts)

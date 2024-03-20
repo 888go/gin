@@ -4,7 +4,15 @@
 [![CodeQL](https://github.com/gin-contrib/i18n/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/gin-contrib/i18n/actions/workflows/codeql-analysis.yml)
 [![codecov](https://codecov.io/gh/gin-contrib/i18n/branch/master/graph/badge.svg?token=QNMN3KM28Y)](https://codecov.io/gh/gin-contrib/i18n)
 [![GoDoc](https://godoc.org/github.com/gin-contrib/i18n?status.svg)](https://godoc.org/github.com/gin-contrib/i18n)
-[![Go 项目报告](https://goreportcard.com/badge/github.com/gin-contrib/i18n)](https://goreportcard.com/report/github.com/gin-contrib/i18n)
+[![Go 项目评分](https://goreportcard.com/badge/github.com/gin-contrib/i18n)](https://goreportcard.com/report/github.com/gin-contrib/i18n)
+
+以上内容是关于 Gin 框架贡献的 i18n（国际化）组件的README信息摘要，包含如下内容：
+
+1. 运行测试：展示该项目在GitHub Actions上运行测试的状态。
+2. CodeQL：展示项目的CodeQL代码扫描分析状态。
+3. codecov：显示项目代码覆盖率的图形徽章，点击可查看详细覆盖率报告。
+4. GoDoc：指向该项目在GoDoc上的API文档链接。
+5. Go Report Card：显示该项目的Go语言质量报告，并提供了质量报告的访问链接。
 ## Usage
 
 Download and install it:
@@ -168,4 +176,4 @@ func main() {
 
 ## # 许可证
 
-本项目遵循MIT许可协议。有关完整许可文本，请参阅[LICENSE](LICENSE)文件。
+本项目采用 MIT 许可证。您可以在 [LICENSE](LICENSE) 文件中查看完整的许可证文本。

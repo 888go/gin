@@ -5,7 +5,8 @@ import (
 	"net/http"
 )
 
-// https://gin-gonic.com/zh-cn/docs/examples/serving-static-files/
+// 访问 gin-gonic.com/zh-cn/docs/examples/serving-static-files/
+// 以获取 Gin 框架关于服务静态文件的中文文档示例
 
 func main() {
 	router := gin.Default()

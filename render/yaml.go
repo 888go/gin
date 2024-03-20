@@ -1,4 +1,4 @@
-// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 
@@ -18,9 +18,6 @@ type YAML struct {
 var yamlContentType = []string{"application/x-yaml; charset=utf-8"}
 
 // Render (YAML) 将给定的接口对象进行序列化（marshals），并使用自定义 ContentType 写入数据。
-
-// ff:
-// w:
 func (r YAML) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 
@@ -34,9 +31,6 @@ func (r YAML) Render(w http.ResponseWriter) error {
 }
 
 // WriteContentType (YAML) 为响应写入 YAML ContentType。
-
-// ff:
-// w:
 func (r YAML) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, yamlContentType)
 }

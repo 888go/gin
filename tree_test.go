@@ -1,6 +1,6 @@
-// 版权所有2013朱利安施密特
-// 版权所有
-// 此源代码的使用受bsd风格的许可证的约束，该许可证可在https://github.com/julienschmidt/httprouter/blob/master/LICENSE上找到
+// 版权所有 ? 2013 Julien Schmidt。保留所有权利。
+// 本源代码的使用受 BSD 风格许可协议约束，该协议可在
+// https://github.com/julienschmidt/httprouter/blob/master/LICENSE 查阅
 
 package gin
 
@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-// 作为一种变通方法，因为我们不能比较函数或它们的地址
+// 由于我们无法比较函数或其地址，因此作为临时解决方案使用
 var fakeHandlerValue string
 
 func fakeHandler(val string) HandlersChain {
@@ -124,9 +124,9 @@ func TestTreeAddAndGet(t *testing.T) {
 		{"/hi", false, "/hi", nil},
 		{"/contact", false, "/contact", nil},
 		{"/co", false, "/co", nil},
-		{"/con", true, "", nil},  // 关键不匹配
-		{"/cona", true, "", nil}, // 关键不匹配
-		{"/no", true, "", nil},   // 没有匹配的子
+		{"/con", true, "", nil},  // key mismatch
+		{"/cona", true, "", nil}, // key mismatch
+		{"/no", true, "", nil},   // no matching child
 		{"/ab", false, "/ab", nil},
 		{"/α", false, "/α", nil},
 		{"/β", false, "/β", nil},
@@ -227,7 +227,9 @@ func TestTreeWildcard(t *testing.T) {
 		{"/aa/aa", false, "/aa/*xx", Params{Param{Key: "xx", Value: "/aa"}}},
 		{"/ab/ab", false, "/ab/*xx", Params{Param{Key: "xx", Value: "/ab"}}},
 		{"/a", false, "/:cc", Params{Param{Key: "cc", Value: "a"}}},
-// *错误的参数被截获新的PR句柄(/all /all/cc /a/cc)修复PR: https://github.com/gin-gonic/gin/pull/2796
+// * 遇到被拦截的参数错误
+// 新增 PR 处理方式（/all、/all/cc、/a/cc）
+// 修复 PR：https://github.com/gin-gonic/gin/pull/2796
 		{"/all", false, "/:cc", Params{Param{Key: "cc", Value: "all"}}},
 		{"/d", false, "/:cc", Params{Param{Key: "cc", Value: "d"}}},
 		{"/ad", false, "/:cc", Params{Param{Key: "cc", Value: "ad"}}},
@@ -463,7 +465,7 @@ func TestTreeDuplicatePath(t *testing.T) {
 			t.Fatalf("panic inserting route '%s': %v", route, recv)
 		}
 
-// 再次添加
+		// Add again
 		recv = catchPanic(func() {
 			tree.addRoute(route, nil)
 		})
@@ -472,7 +474,7 @@ func TestTreeDuplicatePath(t *testing.T) {
 		}
 	}
 
-// printChildren(树,““)
+	//printChildren(tree, "")
 
 	checkRequests(t, tree, testRequests{
 		{"/", false, "/", nil},
@@ -737,10 +739,10 @@ func TestTreeFindCaseInsensitivePath(t *testing.T) {
 		"/u/öpfêl",
 		"/v/Äpfêl/",
 		"/v/Öpfêl",
-		"/w/♬",  // 3字节
-		"/w/♭/", // 3字节, last byte differs
-		"/w/𠜎",  // 4字节
-		"/w/𠜏/", // 4字节
+		"/w/♬",  // 3 byte
+		"/w/♭/", // 3字节，最后一字节不同
+		"/w/𠜎",  // 4 byte
+		"/w/𠜏/", // 4 byte
 		longPath,
 	}
 
@@ -753,7 +755,8 @@ func TestTreeFindCaseInsensitivePath(t *testing.T) {
 		}
 	}
 
-// Check out == in查看所有fixTrailingSlash = true的注册路由
+// 查看所有已注册路由中的 `== in`
+// 当 fixTrailingSlash 设置为 true 时
 	for _, route := range routes {
 		out, found := tree.findCaseInsensitivePath(route, true)
 		if !found {
@@ -762,7 +765,7 @@ func TestTreeFindCaseInsensitivePath(t *testing.T) {
 			t.Errorf("Wrong result for route '%s': %s", route, string(out))
 		}
 	}
-// 使用fixTrailingSlash = false
+	// 当 fixTrailingSlash 设置为 false 时
 	for _, route := range routes {
 		out, found := tree.findCaseInsensitivePath(route, false)
 		if !found {
@@ -844,12 +847,11 @@ func TestTreeFindCaseInsensitivePath(t *testing.T) {
 			return
 		}
 	}
-// 使用fixTrailingSlash = false
+	// 当 fixTrailingSlash 设置为 false 时
 	for _, test := range tests {
 		out, found := tree.findCaseInsensitivePath(test.in, false)
 		if test.slash {
-			if found { // test需要一个trailingSlash修复
-// 一定不能找到它!
+			if found { // 测试需要进行尾部斜杠修正。确保它不会被找到！
 				t.Errorf("Found without fixTrailingSlash: %s; got %s", test.in, string(out))
 			}
 		} else {
@@ -869,10 +871,10 @@ func TestTreeInvalidNodeType(t *testing.T) {
 	tree.addRoute("/", fakeHandler("/"))
 	tree.addRoute("/:page", fakeHandler("/:page"))
 
-// 设置无效节点类型
+	// set invalid node type
 	tree.children[0].nType = 42
 
-// 普通查找
+	// normal lookup
 	recv := catchPanic(func() {
 		tree.getValue("/test", nil, getSkippedNodes(), false)
 	})
@@ -880,7 +882,7 @@ func TestTreeInvalidNodeType(t *testing.T) {
 		t.Fatalf("Expected panic '"+panicMsg+"', got '%v'", recv)
 	}
 
-// 不区分大小写的查询
+	// 不区分大小写的查找
 	recv = catchPanic(func() {
 		tree.findCaseInsensitivePath("/test", true)
 	})
@@ -891,14 +893,14 @@ func TestTreeInvalidNodeType(t *testing.T) {
 
 func TestTreeInvalidParamsType(t *testing.T) {
 	tree := &node{}
-// 使用通配符添加子节点
+	// 添加一个带有通配符的子节点
 	route := "/:path"
 	tree.addRoute(route, fakeHandler(route))
 
-// 设置无效的参数类型
+	// 设置无效的Params类型
 	params := make(Params, 0)
 
-// 尝试触发超出容量0范围的切片边界
+	// 尝试通过容量为0触发切片越界
 	tree.getValue("/test", &params, getSkippedNodes(), false)
 }
 
@@ -944,7 +946,7 @@ func TestTreeWildcardConflictEx(t *testing.T) {
 	}
 
 	for _, conflict := range conflicts {
-// 我必须重新创建一个“树”，因为当循环从“addRoute”函数引发的Panic中恢复时，“树”将处于不一致的状态
+// 我必须重新创建一个“树”，因为当循环从由`addRoute`函数抛出的panic中恢复时，“树”将处于不一致的状态。
 		tree := &node{}
 		routes := [...]string{
 			"/con:tact",

@@ -4,6 +4,6 @@
 <原文结束>
 
 # <翻译开始>
-// Assets返回go-assets文件系统
+// Assets 返回 go-assets 文件系统
 # <翻译结束>
 

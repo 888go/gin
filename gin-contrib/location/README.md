@@ -5,7 +5,7 @@
 [![Go 代码质量报告](https://goreportcard.com/badge/github.com/gin-contrib/location)](https://goreportcard.com/report/github.com/gin-contrib/location)
 [![GoDoc](https://godoc.org/github.com/gin-contrib/location?status.svg)](https://godoc.org/github.com/gin-contrib/location)
 
-这个 Gin 中间件可以用来自动查找并公开服务器的主机名和协议，通过检查传入的 `http.Request` 中的信息。如果不使用这个插件，则需要显式地通过命令行参数或环境变量向服务器提供此类信息。
+这个 Gin 中间件可以用于自动发现并公开服务器的主机名和协议，通过检查传入的 `http.Request` 中的信息。如果不使用此插件，替代方案则是显式地通过命令行参数或环境变量向服务器提供这些信息。
 ## Usage
 
 ### # 开始使用
@@ -16,14 +16,14 @@
 go get github.com/gin-contrib/location
 ```
 
-在代码中导入：
+在你的代码中导入：
 
 ```go
 import "github.com/gin-contrib/location"
 ```
 
 #
-## # 默认
+## # 默认设置
 
 ```go
 package main
@@ -34,27 +34,26 @@ import (
 )
 
 func main() {
-  // 初始化路由
+// 初始化路由
   router := gin.Default()
 
-  // 配置自动检测 scheme（协议）和 host（主机）
-  // - 当无法确定默认 scheme 时，使用 http
-  // - 当无法确定默认 host 时，使用 localhost:8080
+// 配置自动检测请求的scheme（协议）和host（主机）
+// - 当无法确定默认scheme时，使用http
+// - 当无法确定默认host时，使用localhost:8080
   router.Use(location.Default())
 
-  // 定义 GET 请求处理函数
+// 定义GET请求根路径处理函数
   router.GET("/", func(c *gin.Context) {
-    // 获取请求的 URL 信息
+// 获取当前请求的URL信息
     url := location.Get(c)
 
-    // 可以通过以下方式获取 URL 的各个部分：
-    // url.Scheme   // 协议（http、https 等）
-    // url.Host     // 主机（包括域名和端口）
-    // url.Path     // 路径
-
+// 可以通过url对象获取如下信息：
+// url.Scheme   // 请求协议（http或https等）
+// url.Host     // 主机名及端口号
+// url.Path     // 请求路径
   })
 
-  // 运行服务器
+// 启动服务器监听路由
   router.Run()
 }
 ```
@@ -69,12 +68,13 @@ import (
 )
 
 func main() {
+// 初始化路由
   router := gin.Default()
 
-// 配置自动检测 scheme（协议）和 host（主机），并设置回退为 https://foo.com/base
-// - 当无法确定默认协议时使用 https
-// - 当无法确定默认主机时使用 foo.com
-// - 将 /base 作为路径包含在内
+// 配置自动检测请求的 scheme（协议）和 host（主机），默认为 https://foo.com/base
+// - 当无法确定默认 scheme 时，使用 https
+// - 当无法确定默认 host 时，使用 foo.com
+// - 路径包含 /base
   router.Use(location.New(location.Config{
     Scheme: "https",
     Host: "foo.com",
@@ -82,20 +82,24 @@ func main() {
     Headers: location.Headers{Scheme: "X-Forwarded-Proto", Host: "X-Forwarded-For"},
   }))
 
+// 定义 GET 请求处理器
   router.GET("/", func(c *gin.Context) {
+// 获取当前请求的 URL 信息
     url := location.Get(c)
 
-// url.Scheme 获取协议
-// url.Host 获取主机
-// url.Path 获取路径
+// 使用以下属性获取 URL 的各个部分
+// url.Scheme （协议）
+// url.Host   （主机）
+// url.Path   （路径）
   })
 
+// 运行服务器
   router.Run()
 }
 ```
-## # 贡献
+## # 参与贡献
 
- Fork（派生） -> Patch（打补丁） -> Push（推送） -> Pull Request（拉取请求）
+ Fork（分叉） -> Patch（打补丁） -> Push（推送） -> Pull Request（拉取请求）
 ## License
 
 MIT

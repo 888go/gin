@@ -1,4 +1,4 @@
-// 版权声明 2014 Manu Martinez-Almeida。保留所有权利。
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
 // 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 
@@ -15,10 +15,6 @@ type Data struct {
 }
 
 // Render (Data) 使用自定义的ContentType写入数据。
-
-// ff:
-// err:
-// w:
 func (r Data) Render(w http.ResponseWriter) (err error) {
 	r.WriteContentType(w)
 	_, err = w.Write(r.Data)
@@ -26,9 +22,6 @@ func (r Data) Render(w http.ResponseWriter) (err error) {
 }
 
 // WriteContentType (Data) 写入自定义 ContentType。
-
-// ff:
-// w:
 func (r Data) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, []string{r.ContentType})
 }

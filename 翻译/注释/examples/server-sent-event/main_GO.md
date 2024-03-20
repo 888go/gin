@@ -5,43 +5,34 @@
 <原文结束>
 
 # <翻译开始>
-// 它保留当前附加的客户机列表，并向这些客户机广播事件
+// 它维护一个当前已连接的客户端列表，并向这些客户端广播事件。
 # <翻译结束>
 
 
 <原文开始>
-	// Events are pushed to this channel by the main events-gathering routine
+// Events are pushed to this channel by the main events-gathering routine
 <原文结束>
 
 # <翻译开始>
-// 事件由主事件收集例程推送到此通道
+// 主要事件收集程序会将事件推送到此通道
 # <翻译结束>
 
 
 <原文开始>
-	// New client connections
+// Closed client connections
 <原文结束>
 
 # <翻译开始>
-// 新的客户端连接
+// 已关闭的客户端连接
 # <翻译结束>
 
 
 <原文开始>
-	// Closed client connections
+// Total client connections
 <原文结束>
 
 # <翻译开始>
-// 关闭的客户端连接
-# <翻译结束>
-
-
-<原文开始>
-	// Total client connections
-<原文结束>
-
-# <翻译开始>
-// 客户端总连接数
+// 总客户端连接数
 # <翻译结束>
 
 
@@ -50,12 +41,12 @@
 <原文结束>
 
 # <翻译开始>
-// 将新事件消息广播到所有已注册的客户端连接通道
+// 新的事件消息将被广播到所有已注册的客户端连接通道
 # <翻译结束>
 
 
 <原文开始>
-	// Initialize new streaming server
+// Initialize new streaming server
 <原文结束>
 
 # <翻译开始>
@@ -64,29 +55,20 @@
 
 
 <原文开始>
-	// We are streaming current time to clients in the interval 10 seconds
+// We are streaming current time to clients in the interval 10 seconds
 <原文结束>
 
 # <翻译开始>
-// 我们以10秒的间隔将当前时间流式传输给客户端
+// 我们以10秒间隔向客户端流式传输当前时间
 # <翻译结束>
 
 
 <原文开始>
-			// Send current time to clients message channel
+// Send current time to clients message channel
 <原文结束>
 
 # <翻译开始>
-// 发送当前时间到客户端消息通道
-# <翻译结束>
-
-
-<原文开始>
-	// Basic Authentication
-<原文结束>
-
-# <翻译开始>
-// 基本身份验证
+// 将当前时间发送到客户端消息通道
 # <翻译结束>
 
 
@@ -95,7 +77,7 @@
 <原文结束>
 
 # <翻译开始>
-// 用户名:admin，密码:admin123
+// 用户名：admin，密码：admin123
 # <翻译结束>
 
 
@@ -105,25 +87,17 @@
 <原文结束>
 
 # <翻译开始>
-// 授权客户端可以流式传输事件
+// 授权的客户端可以流式接收该事件
+// 添加事件流传输所需的头部信息
 # <翻译结束>
 
 
 <原文开始>
-			// Stream message to client from message channel
+// Stream message to client from message channel
 <原文结束>
 
 # <翻译开始>
-// 从消息通道流消息到客户端
-# <翻译结束>
-
-
-<原文开始>
-	// Parse Static files
-<原文结束>
-
-# <翻译开始>
-// 解析静态文件
+// 从消息通道向客户端流式传输消息
 # <翻译结束>
 
 
@@ -142,13 +116,13 @@
 <原文结束>
 
 # <翻译开始>
-// 它监听来自客户端的所有传入请求
-// 处理添加和删除客户端以及向客户端广播消息
+// 它监听来自客户端的所有入站请求。
+// 处理客户端的添加和移除，并向客户端广播消息。
 # <翻译结束>
 
 
 <原文开始>
-		// Add new available client
+// Add new available client
 <原文结束>
 
 # <翻译开始>
@@ -157,16 +131,7 @@
 
 
 <原文开始>
-		// Remove closed client
-<原文结束>
-
-# <翻译开始>
-// 删除关闭的客户端
-# <翻译结束>
-
-
-<原文开始>
-		// Broadcast message to client
+// Broadcast message to client
 <原文结束>
 
 # <翻译开始>
@@ -175,7 +140,7 @@
 
 
 <原文开始>
-		// Initialize client channel
+// Initialize client channel
 <原文结束>
 
 # <翻译开始>
@@ -184,19 +149,19 @@
 
 
 <原文开始>
-		// Send new connection to event server
+// Send new connection to event server
 <原文结束>
 
 # <翻译开始>
-// 向事件服务器发送新连接
+// 将新的连接发送至事件服务器
 # <翻译结束>
 
 
 <原文开始>
-			// Send closed connection to event server
+// Send closed connection to event server
 <原文结束>
 
 # <翻译开始>
-// 向事件服务器发送关闭的连接
+// 将关闭的连接发送到事件服务器
 # <翻译结束>
 

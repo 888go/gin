@@ -7,7 +7,7 @@ import (
 )
 
 const (
-// DefaultPrefix 是 pprof 的默认 URL 前缀
+	// DefaultPrefix 是pprof的默认URL前缀
 	DefaultPrefix = "/debug/pprof"
 )
 
@@ -19,72 +19,14 @@ func getPrefix(prefixOptions ...string) string {
 	return prefix
 }
 
-// 注册 net/http/pprof 包中标准的 HandlerFuncs 到提供的 gin.Engine 中。
-// prefixOptions 是可选参数。如果不提供 prefixOptions，则使用默认路径前缀，
-// 否则将使用第一个 prefixOptions 作为路径前缀。
-// 这段代码注释是为一个 Go 函数写的，这个函数的功能是将 `net/http/pprof` 包中的性能分析处理器注册到 Gin 框架的路由引擎中，并且允许自定义路径前缀。
-
-// ff:
-// prefixOptions:
-// r:
-
-// ff:
-// prefixOptions:
-// r:
-
-// ff:
-// prefixOptions:
-// r:
-
-// ff:
-// prefixOptions:
-// r:
-
-// ff:
-// prefixOptions:
-// r:
-
-// ff:
-// prefixOptions:
-// r:
-
-// ff:
-// prefixOptions:
-// r:
+// 使用提供的gin.Engine注册net/http/pprof包中的标准HandlerFuncs。
+// prefixOptions是可选的。如果不提供prefixOptions，则使用默认路径前缀，否则将使用第一个prefixOptions作为路径前缀。
 func Register(r *gin.Engine, prefixOptions ...string) {
 	RouteRegister(&(r.RouterGroup), prefixOptions...)
 }
 
-// RouteRegister 将来自 net/http/pprof 包的标准 HandlerFuncs 注册到提供的 gin.GrouterGroup。
-// prefixOptions 是可选的。如果不提供 prefixOptions，则使用默认路径前缀，否则将使用第一个 prefixOptions 作为路径前缀。
-
-// ff:
-// prefixOptions:
-// rg:
-
-// ff:
-// prefixOptions:
-// rg:
-
-// ff:
-// prefixOptions:
-// rg:
-
-// ff:
-// prefixOptions:
-// rg:
-
-// ff:
-// prefixOptions:
-// rg:
-
-// ff:
-// prefixOptions:
-// rg:
-
-// ff:
-// prefixOptions:
-// rg:
+// RouteRegister 将标准的来自 net/http/pprof 包中的 HandlerFuncs 与提供的 gin.GrouterGroup 进行注册。
+// prefixOptions 是可选参数。如果不提供 prefixOptions，将使用默认路径前缀；否则，首个 prefixOptions 将作为路径前缀。
 func RouteRegister(rg *gin.RouterGroup, prefixOptions ...string) {
 	prefix := getPrefix(prefixOptions...)
 

@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package binding
 
@@ -18,10 +18,6 @@ func (protobufBinding) Name() string {
 	return "protobuf"
 }
 
-
-// ff:
-// obj:
-// req:
 func (b protobufBinding) Bind(req *http.Request, obj any) error {
 	buf, err := io.ReadAll(req.Body)
 	if err != nil {
@@ -38,7 +34,8 @@ func (protobufBinding) BindBody(body []byte, obj any) error {
 	if err := proto.Unmarshal(body, msg); err != nil {
 		return err
 	}
-// 这里返回validate(obj)也是一样的，但是到目前为止，我们还不能将' binding:"" '添加到由gen-proto自动生成的结构中
+// 这里相当于返回 validate(obj)，但现在我们还不能在由 gen-proto 自动生成的结构体上添加
+// `binding:""` 这个注解
 	return nil
-// 返回验证(obj)
+	// return validate(obj)
 }

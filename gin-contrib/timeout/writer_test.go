@@ -13,12 +13,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestWriteHeader(t *testing.T) {
 	code1 := 99
 	errmsg1 := fmt.Sprintf("invalid http status code: %d", code1)
@@ -34,12 +28,6 @@ func TestWriteHeader(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestWriteHeader_SkipMinusOne(t *testing.T) {
 	code := -1
 
@@ -50,12 +38,6 @@ func TestWriteHeader_SkipMinusOne(t *testing.T) {
 	})
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestWriter_Status(t *testing.T) {
 	r := gin.New()
 
@@ -87,7 +69,7 @@ func TestWriter_Status(t *testing.T) {
 	assert.Equal(t, strconv.Itoa(http.StatusInternalServerError), req.Header.Get("X-Status-Code-MW-Set"))
 }
 
-// testNew 是 New() 函数的一个副本，对其内部的 timeoutHandler() 函数做了一个小改动。
+// testNew是对New()的一个副本，对其timeoutHandler()函数做了微小改动。
 // 参考：https://github.com/gin-contrib/timeout/issues/31
 func testNew(duration time.Duration) gin.HandlerFunc {
 	return New(
@@ -97,7 +79,7 @@ func testNew(duration time.Duration) gin.HandlerFunc {
 	)
 }
 
-// timeoutHandler 返回一个处理器，该处理器会返回一个504 Gateway Timeout错误。
+// timeoutHandler 返回一个处理器，该处理器返回一个 504 网关超时错误。
 func timeoutHandler() gin.HandlerFunc {
 	gatewayTimeoutErr := struct {
 		Error string `json:"error"`
@@ -113,12 +95,6 @@ func timeoutHandler() gin.HandlerFunc {
 }
 
 // TestHTTPStatusCode 测试响应的 HTTP 状态码。
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestHTTPStatusCode(t *testing.T) {
 	gin.SetMode(gin.ReleaseMode)
 

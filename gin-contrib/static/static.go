@@ -22,34 +22,6 @@ type localFileSystem struct {
 	indexes bool
 }
 
-
-// ff:
-// indexes:
-// root:
-
-// ff:
-// indexes:
-// root:
-
-// ff:
-// indexes:
-// root:
-
-// ff:
-// indexes:
-// root:
-
-// ff:
-// indexes:
-// root:
-
-// ff:
-// indexes:
-// root:
-
-// ff:
-// indexes:
-// root:
 func LocalFile(root string, indexes bool) *localFileSystem {
 	return &localFileSystem{
 		FileSystem: gin.Dir(root, indexes),
@@ -58,34 +30,6 @@ func LocalFile(root string, indexes bool) *localFileSystem {
 	}
 }
 
-
-// ff:
-// filepath:
-// prefix:
-
-// ff:
-// filepath:
-// prefix:
-
-// ff:
-// filepath:
-// prefix:
-
-// ff:
-// filepath:
-// prefix:
-
-// ff:
-// filepath:
-// prefix:
-
-// ff:
-// filepath:
-// prefix:
-
-// ff:
-// filepath:
-// prefix:
 func (l *localFileSystem) Exists(prefix string, filepath string) bool {
 	if p := strings.TrimPrefix(filepath, prefix); len(p) < len(filepath) {
 		name := path.Join(l.root, p)
@@ -107,67 +51,11 @@ func (l *localFileSystem) Exists(prefix string, filepath string) bool {
 	return false
 }
 
-
-// ff:
-// root:
-// urlPrefix:
-
-// ff:
-// root:
-// urlPrefix:
-
-// ff:
-// root:
-// urlPrefix:
-
-// ff:
-// root:
-// urlPrefix:
-
-// ff:
-// root:
-// urlPrefix:
-
-// ff:
-// root:
-// urlPrefix:
-
-// ff:
-// root:
-// urlPrefix:
 func ServeRoot(urlPrefix, root string) gin.HandlerFunc {
 	return Serve(urlPrefix, LocalFile(root, false))
 }
 
-// Static 返回一个中间件处理程序，用于在指定目录中提供静态文件服务。
-
-// ff:
-// fs:
-// urlPrefix:
-
-// ff:
-// fs:
-// urlPrefix:
-
-// ff:
-// fs:
-// urlPrefix:
-
-// ff:
-// fs:
-// urlPrefix:
-
-// ff:
-// fs:
-// urlPrefix:
-
-// ff:
-// fs:
-// urlPrefix:
-
-// ff:
-// fs:
-// urlPrefix:
+// Static 返回一个中间件处理器，用于在指定目录下提供静态文件服务。
 func Serve(urlPrefix string, fs ServeFileSystem) gin.HandlerFunc {
 	fileserver := http.FileServer(fs)
 	if urlPrefix != "" {

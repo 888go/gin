@@ -26,7 +26,7 @@ func main() {
 
 	r.GET("/", func(c *gin.Context) {
 		if pusher := c.Writer.Pusher(); pusher != nil {
-// 使用push . push()执行服务器推送
+			// 使用pusher.Push()进行服务器推送
 			if err := pusher.Push("/assets/app.js", nil); err != nil {
 				log.Printf("Failed to push: %v", err)
 			}
@@ -36,6 +36,6 @@ func main() {
 		})
 	})
 
-// 在https://127.0.0.1:8080中监听和服务器
+	// 在 https://127.0.0.1:8080 上监听并服务
 	r.RunTLS(":8080", "./testdata/server.pem", "./testdata/server.key")
 }

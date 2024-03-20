@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// Authenticator 是 Gin 框架的身份验证中间件。
+// Authenticator 是 Gin 框架的认证中间件。
 # <翻译结束>
 
 
@@ -35,9 +35,8 @@
 <原文结束>
 
 # <翻译开始>
-// WithRequiredHeaders 是一个包含所有必需HTTP头的列表，客户端
-// 必须在签名字符串中包含这些头信息，以便请求被认为是有效的。
-// 如果未提供，创建的Authenticator实例将使用默认的defaultRequiredHeaders变量。
+// WithRequiredHeaders 是一个包含所有必需HTTP头的列表，客户端必须在签名字符串中包含这些头信息，以便请求被认为是有效的。
+// 如果未提供，则创建的Authenticator实例将使用默认的defaultRequiredHeaders变量。
 # <翻译结束>
 
 
@@ -47,8 +46,7 @@
 <原文结束>
 
 # <翻译开始>
-// NewAuthenticator 创建一个全新的 Authenticator 实例，其参数包括
-// 允许的权限列表以及请求头中所需的密钥和秘密键。
+// NewAuthenticator 创建一个具有给定允许权限和所需头部及密钥的新 Authenticator 实例。
 # <翻译结束>
 
 
@@ -57,7 +55,7 @@
 <原文结束>
 
 # <翻译开始>
-// Authenticated 返回一个 gin 中间件，该中间件允许在参数中指定的权限。
+// Authenticated 返回一个 gin 中间件，该中间件允许在参数中给定的权限。
 # <翻译结束>
 
 
@@ -66,19 +64,6 @@
 <原文结束>
 
 # <翻译开始>
-// isValidHeader 检查是否所有服务器要求的头部都在头部列表中
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// options:
-// secretKeys:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// options:
-// secretKeys:
+// isValidHeader 检查请求头中是否包含服务器所需的所有必需头部
 # <翻译结束>
 

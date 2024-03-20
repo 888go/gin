@@ -4,7 +4,7 @@
 <原文结束>
 
 # <翻译开始>
-// MemcachedStore表示具有memcached持久性的缓存
+// MemcachedStore 表示使用 Memcached 作为持久化存储的缓存
 # <翻译结束>
 
 
@@ -13,7 +13,7 @@
 <原文结束>
 
 # <翻译开始>
-// NewMemcachedStore返回一个MemcachedStore
+// NewMemcachedStore 返回一个 MemcachedStore 实例
 # <翻译结束>
 
 
@@ -22,7 +22,7 @@
 <原文结束>
 
 # <翻译开始>
-// 设置方法请参见CacheStore界面
+// Set（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -31,7 +31,7 @@
 <原文结束>
 
 # <翻译开始>
-// 添加(见CacheStore接口)
+// Add （参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -40,7 +40,7 @@
 <原文结束>
 
 # <翻译开始>
-// 替换(参见CacheStore接口)
+// Replace（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -49,7 +49,7 @@
 <原文结束>
 
 # <翻译开始>
-// 获取(参见CacheStore接口)
+// Get（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -58,7 +58,7 @@
 <原文结束>
 
 # <翻译开始>
-// 删除(参见CacheStore界面)
+// Delete（参考 CacheStore 接口）
 # <翻译结束>
 
 
@@ -67,7 +67,7 @@
 <原文结束>
 
 # <翻译开始>
-// 增量(见CacheStore接口)
+// 自增（参见 CacheStore 接口）
 # <翻译结束>
 
 
@@ -76,7 +76,7 @@
 <原文结束>
 
 # <翻译开始>
-// 递减(见CacheStore接口)
+// 减量（参考 CacheStore 接口）
 # <翻译结束>
 
 
@@ -85,34 +85,6 @@
 <原文结束>
 
 # <翻译开始>
-// 刷新(见CacheStore接口)
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// defaultExpiration:
-// hostList:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// defaultExpiration:
-// hostList:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// expires:
-// value:
-// key:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// expires:
-// value:
-// key:
+// Flush（参考 CacheStore 接口）
 # <翻译结束>
 

@@ -6,36 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
-# <翻译结束>
-
-
-<原文开始>
-	// RUN
-<原文结束>
-
-# <翻译开始>
-// 运行
-# <翻译结束>
-
-
-<原文开始>
-	// TEST
-<原文结束>
-
-# <翻译开始>
-// 测试
-# <翻译结束>
-
-
-<原文开始>
-	// NoMethod disabled
-<原文结束>
-
-# <翻译开始>
-// NoMethod禁用
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -45,25 +18,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestFailHandlersChain -确保Fail中断以fifo顺序使用中间件以及Abort
-# <翻译结束>
-
-
-<原文开始>
-	// SETUP
-<原文结束>
-
-# <翻译开始>
-// 设置
-# <翻译结束>
-
-
-<原文开始>
-//nolint: errcheck
-<原文结束>
-
-# <翻译开始>
-// nolint: errcheck
-// 翻译：// 不进行errcheck检查
+// TestFailHandlersChain - 确保 Fail 中断会按照先进先出（FIFO）顺序使用中间件，
+// 同时也会中断执行链
 # <翻译结束>
 

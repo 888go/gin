@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -19,8 +19,7 @@
 <原文结束>
 
 # <翻译开始>
-// EnableDecoderUseNumber用于调用JSON Decoder实例上的UseNumber方法
-// UseNumber导致解码器将一个数字反编组为一个any，作为一个number而不是一个float64
+// EnableDecoderUseNumber 用于调用 JSON 解码器实例上的 UseNumber 方法。启用 UseNumber 后，解码器将在反序列化数字时将其解析为 Number 类型而不是 float64 类型并存储到 any 类型变量中。
 # <翻译结束>
 
 
@@ -32,7 +31,6 @@
 <原文结束>
 
 # <翻译开始>
-// EnableDecoderDisallowUnknownFields用于调用JSON Decoder实例上的DisallowUnknownFields方法
-// DisallowUnknownFields导致解码器返回一个错误，当目标是一个结构，并且输入包含的对象键与目标中任何非忽略的导出字段不匹配时
+// EnableDecoderDisallowUnknownFields 用于调用 JSON 解码器实例上的 DisallowUnknownFields 方法。该方法启用后，当目标是一个结构体且输入包含与目标中非忽略的导出字段不匹配的对象键时，解码器会返回一个错误。
 # <翻译结束>
 

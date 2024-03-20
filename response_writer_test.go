@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -12,8 +12,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TODO函数(w *responseWriter)劫持()()康涅狄格州,* bufio
-// ReadWriter，错误){func (w *responseWriter) CloseNotify() <-chan bool {func (w *responseWriter) Flush() {
+// TODO：待办事项（需要实现或处理）
+// func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+//   // 函数功能：Hijack方法，获取原始的网络连接、读写缓冲器和可能发生的错误
+//   
+// func (w *responseWriter) CloseNotify() <-chan bool {
+//   // 函数功能：CloseNotify方法，返回一个只读通道，当客户端连接关闭时，该通道会接收到一个布尔值true通知
+//   
+// func (w *responseWriter) Flush() {
+//   // 函数功能：Flush方法，用于立即将响应数据刷新到客户端，通常用于在HTTP流式传输中强制发送已缓存的数据
 
 var (
 	_ ResponseWriter      = &responseWriter{}
@@ -131,7 +138,7 @@ func TestResponseWriterFlush(t *testing.T) {
 	}))
 	defer testServer.Close()
 
-// 应该返回500
+	// should return 500
 	resp, err := http.Get(testServer.URL)
 	assert.NoError(t, err)
 	assert.Equal(t, http.StatusInternalServerError, resp.StatusCode)
@@ -151,12 +158,11 @@ func TestResponseWriterStatusCode(t *testing.T) {
 
 	w.WriteHeader(http.StatusUnauthorized)
 
-// 状态必须是200，尽管我们试图改变它
+	// 状态码必须为200，尽管我们尝试改变它
 	assert.Equal(t, http.StatusOK, w.Status())
 }
 
-// mockPusherResponseWriter是一个http
-// 实现http. push的ResponseWriter
+// mockPusherResponseWriter 是一个实现了 http.Pusher 接口的 http.ResponseWriter。
 type mockPusherResponseWriter struct {
 	http.ResponseWriter
 }
@@ -165,8 +171,7 @@ func (m *mockPusherResponseWriter) Push(target string, opts *http.PushOptions) e
 	return nil
 }
 
-// nonPusherResponseWriter是一个http
-// 没有实现http. push的ResponseWriter
+// nonPusherResponseWriter 是一个 http.ResponseWriter，但它并不实现 http.Pusher 接口。
 type nonPusherResponseWriter struct {
 	http.ResponseWriter
 }

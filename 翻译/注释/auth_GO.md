@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -17,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// AuthUserKey是基本验证中用户凭据的cookie名称
+// AuthUserKey 是基本认证中用于存储用户凭证的cookie名称。
 # <翻译结束>
 
 
@@ -26,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// Accounts为授权登录的用户/通行证列表定义一个键/值
+// Accounts 定义了一个用于存储授权登录用户/密码键值对的列表。
 # <翻译结束>
 
 
@@ -38,28 +38,27 @@
 <原文结束>
 
 # <翻译开始>
-// BasicAuthForRealm返回一个基本HTTP授权中间件
-// 它接受一个map[string]字符串作为参数，其中键是用户名，值是密码，以及Realm的名称
-// 如果领域为空，则“授权需要”;将默认使用
-// (见http://tools.ietf.org/html/rfc2617 - 1.2节)
+// BasicAuthForRealm 返回一个基础HTTP身份验证中间件。它接受两个参数：一个map[string]string，其中键是用户名，值是密码；以及一个realm（领域）名称。
+// 如果realm为空，则默认使用"Authorization Required"。
+// （参见http://tools.ietf.org/html/rfc2617#section-1.2）
 # <翻译结束>
 
 
 <原文开始>
-		// Search user in the slice of allowed credentials
+// Search user in the slice of allowed credentials
 <原文结束>
 
 # <翻译开始>
-// 在允许的凭据片中搜索用户
+// 在允许的凭据切片中搜索用户
 # <翻译结束>
 
 
 <原文开始>
-			// Credentials doesn't match, we return 401 and abort handlers chain.
+// Credentials doesn't match, we return 401 and abort handlers chain.
 <原文结束>
 
 # <翻译开始>
-// 凭证不匹配，我们返回401并中止处理程序链
+// 凭证不匹配，我们返回 401 状态码并中断处理程序链。
 # <翻译结束>
 
 
@@ -69,7 +68,8 @@
 <原文结束>
 
 # <翻译开始>
-// 找到用户凭据，在此上下文中将用户id设置为密钥AuthUserKey，稍后可以使用c.MustGet(gin.AuthUserKey)读取用户id
+// 已找到用户凭据，将用户的ID设置为当前上下文中的AuthUserKey键，稍后可以通过
+// c.MustGet(gin.AuthUserKey)读取用户的ID。
 # <翻译结束>
 
 
@@ -79,20 +79,7 @@
 <原文结束>
 
 # <翻译开始>
-// BasicAuth返回一个基本HTTP授权中间件
-// 它接受一个map[string]字符串作为参数，其中键是用户名，值是密码
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// realm:
-// accounts:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// realm:
-// accounts:
+// BasicAuth 返回一个基础HTTP授权中间件。它接受一个map[string]string作为参数，
+// 其中键是用户名，值是密码。
 # <翻译结束>
 

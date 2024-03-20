@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -17,34 +17,34 @@
 <原文结束>
 
 # <翻译开始>
-// EnvGinMode为gin模式的环境名
+// EnvGinMode 指示 Gin 模式的环境名称。
 # <翻译结束>
 
 
 <原文开始>
-	// DebugMode indicates gin mode is debug.
+// DebugMode indicates gin mode is debug.
 <原文结束>
 
 # <翻译开始>
-// DebugMode表示gin模式为debug
+// DebugMode 指示 gin 模式为调试模式。
 # <翻译结束>
 
 
 <原文开始>
-	// ReleaseMode indicates gin mode is release.
+// ReleaseMode indicates gin mode is release.
 <原文结束>
 
 # <翻译开始>
-// ReleaseMode表示gin模式为release
+// ReleaseMode 表示 gin 模式为发布模式。
 # <翻译结束>
 
 
 <原文开始>
-	// TestMode indicates gin mode is test.
+// TestMode indicates gin mode is test.
 <原文结束>
 
 # <翻译开始>
-// TestMode表示gin模式为test
+// TestMode 表示 gin 模式为测试模式。
 # <翻译结束>
 
 
@@ -60,11 +60,12 @@
 <原文结束>
 
 # <翻译开始>
-// defaultwwriter是默认的io
-// Gin用于调试输出和中间件输出的写入器，如Logger()或Recovery()
-// 请注意，Logger和Recovery都提供了自定义的方式来配置它们的输出
-// 要在Windows中支持着色，请使用:import "github.com/mattn/go-colorable"杜松子酒
-// defaultwwriter = colorable.NewColorableStdout()
+// DefaultWriter 是 Gin 默认使用的 io.Writer，用于调试输出以及中间件输出，如 Logger() 和 Recovery()。
+// 注意，Logger 和 Recovery 都提供了自定义配置其输出 io.Writer 的方法。
+// 若要在 Windows 系统中支持彩色输出，请使用：
+//
+//	导入 "github.com/mattn/go-colorable"
+//	gin.DefaultWriter = colorable.NewColorableStdout()
 # <翻译结束>
 
 
@@ -73,8 +74,7 @@
 <原文结束>
 
 # <翻译开始>
-// DefaultErrorWriter是默认io
-// Gin用来调试错误的写入器
+// DefaultErrorWriter 是 Gin 默认使用的 io.Writer，用于调试错误
 # <翻译结束>
 
 
@@ -83,7 +83,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetMode根据输入的字符串设置gin模式
+// SetMode 根据输入的字符串设置 gin 模式。
 # <翻译结束>
 
 
@@ -92,7 +92,7 @@
 <原文结束>
 
 # <翻译开始>
-// DisableBindValidation关闭默认验证器
+// DisableBindValidation 关闭默认的验证器。
 # <翻译结束>
 
 
@@ -102,8 +102,8 @@
 <原文结束>
 
 # <翻译开始>
-// EnableJsonDecoderUseNumber为绑定设置为true
-// EnableDecoderUseNumber以调用JSON Decoder实例上的UseNumber方法
+// EnableJsonDecoderUseNumber 将参数设置为 true 以启用 binding.EnableDecoderUseNumber，
+// 这样就会在 JSON 解码器实例上调用 UseNumber 方法。
 # <翻译结束>
 
 
@@ -113,8 +113,8 @@
 <原文结束>
 
 # <翻译开始>
-// EnableJsonDecoderDisallowUnknownFields为绑定设置为true
-// EnableDecoderDisallowUnknownFields调用JSON Decoder实例上的DisallowUnknownFields方法
+// EnableJsonDecoderDisallowUnknownFields 将 binding.EnableDecoderDisallowUnknownFields 设为 true，
+// 以便在 JSON 解码器实例上调用 DisallowUnknownFields 方法。
 # <翻译结束>
 
 
@@ -123,6 +123,6 @@
 <原文结束>
 
 # <翻译开始>
-// Mode返回当前gin模式
+// Mode 返回当前 gin 模式。
 # <翻译结束>
 

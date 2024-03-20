@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -17,61 +17,61 @@
 <原文结束>
 
 # <翻译开始>
-// ErrorType是在gin规范中定义的无符号64位错误代码
+// ErrorType 是一个无符号的64位错误代码，遵循gin规范定义。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrorTypeBind is used when Context.Bind() fails.
+// ErrorTypeBind is used when Context.Bind() fails.
 <原文结束>
 
 # <翻译开始>
-// 当Context.Bind()失败时使用ErrorTypeBind
+// ErrorTypeBind 用于当 Context.Bind() 失败时。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrorTypeRender is used when Context.Render() fails.
+// ErrorTypeRender is used when Context.Render() fails.
 <原文结束>
 
 # <翻译开始>
-// 当Context.Render()失败时使用ErrorTypeRender
+// ErrorTypeRender 用于当 Context.Render() 失败时。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrorTypePrivate indicates a private error.
+// ErrorTypePrivate indicates a private error.
 <原文结束>
 
 # <翻译开始>
-// ErrorTypePrivate私有错误
+// ErrorTypePrivate 表示一个私有错误。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrorTypePublic indicates a public error.
+// ErrorTypePublic indicates a public error.
 <原文结束>
 
 # <翻译开始>
-// ErrorTypePublic表示公共错误
+// ErrorTypePublic 表示一个公开的错误。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrorTypeAny indicates any other error.
+// ErrorTypeAny indicates any other error.
 <原文结束>
 
 # <翻译开始>
-// ErrorTypeAny表示任何其他错误
+// ErrorTypeAny 表示任何其他错误。
 # <翻译结束>
 
 
 <原文开始>
-	// ErrorTypeNu indicates any other error.
+// ErrorTypeNu indicates any other error.
 <原文结束>
 
 # <翻译开始>
-// ErrorTypeNu表示任何其他错误
+// ErrorTypeNu 表示任何其他错误。
 # <翻译结束>
 
 
@@ -80,7 +80,7 @@
 <原文结束>
 
 # <翻译开始>
-// Error表示错误的说明
+// Error代表了一个错误的规格说明。
 # <翻译结束>
 
 
@@ -89,7 +89,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetType设置错误的类型
+// SetType 设置错误的类型。
 # <翻译结束>
 
 
@@ -98,7 +98,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetMeta设置错误的元数据
+// SetMeta 设置错误的元数据。
 # <翻译结束>
 
 
@@ -107,7 +107,7 @@
 <原文结束>
 
 # <翻译开始>
-// JSON创建一个格式正确的JSON
+// JSON 创建一个格式正确的 JSON
 # <翻译结束>
 
 
@@ -116,8 +116,7 @@
 <原文结束>
 
 # <翻译开始>
-// MarshalJSON实现json
-// Marshaller接口
+// MarshalJSON 实现了 json.Marshaller 接口。
 # <翻译结束>
 
 
@@ -126,7 +125,7 @@
 <原文结束>
 
 # <翻译开始>
-// Error实现错误接口
+// Error 实现了 error 接口。
 # <翻译结束>
 
 
@@ -135,7 +134,7 @@
 <原文结束>
 
 # <翻译开始>
-// IsType判断一个错误
+// IsType 判断一个错误。
 # <翻译结束>
 
 
@@ -144,7 +143,7 @@
 <原文结束>
 
 # <翻译开始>
-// Unwrap返回包装后的错误，以允许与errors.Is()、errors.As()和errors.Unwrap()互操作
+// Unwrap 返回封装的错误，以便与 errors.Is()、errors.As() 和 errors.Unwrap() 之间进行互操作性
 # <翻译结束>
 
 
@@ -154,8 +153,7 @@
 <原文结束>
 
 # <翻译开始>
-// ByType返回经过字节过滤的只读副本
-// 即ByType(gin.ErrorTypePublic)返回一个类型=ErrorTypePublic的错误切片
+// ByType 返回一个只读副本，其中包含了经过过滤的错误信息。具体来说，ByType(gin.ErrorTypePublic) 将返回一个类型为 ErrorTypePublic 的错误信息切片。
 # <翻译结束>
 
 
@@ -165,9 +163,8 @@
 <原文结束>
 
 # <翻译开始>
-// Last返回切片中的最后一个错误
-// 如果数组为空，则返回nil
-// 错误的快捷方式[len(errors)-1]
+// Last 函数返回切片中的最后一个错误。如果该数组为空，则返回 nil。
+// 这是 errors[len(errors)-1] 的快捷方式。
 # <翻译结束>
 
 
@@ -182,7 +179,12 @@
 <原文结束>
 
 # <翻译开始>
-// Errors返回一个包含所有错误消息的数组
-// 示例:c.Error(errors.New("first")) c.Error(errors.New("second")) c. errors (errors.New("third")) c. errors () == []string{"first"， "second"， "third"}
+// Errors 返回包含所有错误消息的数组。
+// 示例：
+//
+//	c.Error(errors.New("第一个错误"))
+//	c.Error(errors.New("第二个错误"))
+//	c.Error(errors.New("第三个错误"))
+//	c.Errors.Errors() // == []string{"第一个", "第二个", "第三个"}
 # <翻译结束>
 

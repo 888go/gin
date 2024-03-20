@@ -29,21 +29,7 @@ type responseCache struct {
 	Data   []byte
 }
 
-// RegisterResponseCacheGob用encoding/gob包注册responseCache类型
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
+// RegisterResponseCacheGob 注册 responseCache 类型到 encoding/gob 包中
 func RegisterResponseCacheGob() {
 	gob.Register(responseCache{})
 }
@@ -59,28 +45,7 @@ type cachedWriter struct {
 
 var _ gin.ResponseWriter = &cachedWriter{}
 
-// CreateKey为给定字符串创建包特定的键
-
-// ff:
-// u:
-
-// ff:
-// u:
-
-// ff:
-// u:
-
-// ff:
-// u:
-
-// ff:
-// u:
-
-// ff:
-// u:
-
-// ff:
-// u:
+// CreateKey 为给定的字符串创建一个特定于包的密钥
 func CreateKey(u string) string {
 	return urlEscape(PageCachePrefix, u)
 }
@@ -103,90 +68,20 @@ func newCachedWriter(store persistence.CacheStore, expire time.Duration, writer 
 	return &cachedWriter{writer, 0, false, store, expire, key}
 }
 
-
-// ff:
-// code:
-
-// ff:
-// code:
-
-// ff:
-// code:
-
-// ff:
-// code:
-
-// ff:
-// code:
-
-// ff:
-// code:
-
-// ff:
-// code:
 func (w *cachedWriter) WriteHeader(code int) {
 	w.status = code
 	w.written = true
 	w.ResponseWriter.WriteHeader(code)
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (w *cachedWriter) Status() int {
 	return w.ResponseWriter.Status()
 }
 
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
-
-// ff:
 func (w *cachedWriter) Written() bool {
 	return w.ResponseWriter.Written()
 }
 
-
-// ff:
-// data:
-
-// ff:
-// data:
-
-// ff:
-// data:
-
-// ff:
-// data:
-
-// ff:
-// data:
-
-// ff:
-// data:
-
-// ff:
-// data:
 func (w *cachedWriter) Write(data []byte) (int, error) {
 	ret, err := w.ResponseWriter.Write(data)
 	if err == nil {
@@ -196,7 +91,7 @@ func (w *cachedWriter) Write(data []byte) (int, error) {
 			data = append(cache.Data, data...)
 		}
 
-// 缓存状态码&lt的响应;300
+		//缓存状态码小于300的响应
 		if w.Status() < 300 {
 			val := responseCache{
 				w.Status(),
@@ -204,50 +99,17 @@ func (w *cachedWriter) Write(data []byte) (int, error) {
 				data,
 			}
 			err = store.Set(w.key, val, w.expire)
-// 如果err != nil{需要logger}
+// 如果err不为nil {
+//   // 需要使用日志记录器
+// }
 		}
 	}
 	return ret, err
 }
 
-
-// ff:
-// err:
-// n:
-// data:
-
-// ff:
-// err:
-// n:
-// data:
-
-// ff:
-// err:
-// n:
-// data:
-
-// ff:
-// err:
-// n:
-// data:
-
-// ff:
-// err:
-// n:
-// data:
-
-// ff:
-// err:
-// n:
-// data:
-
-// ff:
-// err:
-// n:
-// data:
 func (w *cachedWriter) WriteString(data string) (n int, err error) {
 	ret, err := w.ResponseWriter.WriteString(data)
-	//cache responses with a status code < 300
+	//缓存状态码小于300的响应
 	if err == nil && w.Status() < 300 {
 		store := w.store
 		val := responseCache{
@@ -260,28 +122,7 @@ func (w *cachedWriter) WriteString(data string) (n int, err error) {
 	return ret, err
 }
 
-// 缓存的中间件
-
-// ff:
-// store:
-
-// ff:
-// store:
-
-// ff:
-// store:
-
-// ff:
-// store:
-
-// ff:
-// store:
-
-// ff:
-// store:
-
-// ff:
-// store:
+// Cache Middleware
 func Cache(store *persistence.CacheStore) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Set(CACHE_MIDDLEWARE_KEY, store)
@@ -289,34 +130,6 @@ func Cache(store *persistence.CacheStore) gin.HandlerFunc {
 	}
 }
 
-
-// ff:
-// expire:
-// store:
-
-// ff:
-// expire:
-// store:
-
-// ff:
-// expire:
-// store:
-
-// ff:
-// expire:
-// store:
-
-// ff:
-// expire:
-// store:
-
-// ff:
-// expire:
-// store:
-
-// ff:
-// expire:
-// store:
 func SiteCache(store persistence.CacheStore, expire time.Duration) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var cache responseCache
@@ -336,42 +149,7 @@ func SiteCache(store persistence.CacheStore, expire time.Duration) gin.HandlerFu
 	}
 }
 
-// CachePage装饰
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
+// CachePage Decorator
 func CachePage(store persistence.CacheStore, expire time.Duration, handle gin.HandlerFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var cache responseCache
@@ -381,12 +159,12 @@ func CachePage(store persistence.CacheStore, expire time.Duration, handle gin.Ha
 			if err != persistence.ErrCacheMiss {
 				log.Println(err.Error())
 			}
-// 取代的作家
+			// replace writer
 			writer := newCachedWriter(store, expire, c.Writer, key)
 			c.Writer = writer
 			handle(c)
 
-// 删除已终止上下文的缓存
+			// 清除已中止上下文的缓存
 			if c.IsAborted() {
 				_ = store.Delete(key)
 			}
@@ -402,42 +180,7 @@ func CachePage(store persistence.CacheStore, expire time.Duration, handle gin.Ha
 	}
 }
 
-// CachePageWithoutQuery增加忽略GET查询参数的功能
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
+// CachePageWithoutQuery 添加忽略GET请求参数的能力。
 func CachePageWithoutQuery(store persistence.CacheStore, expire time.Duration, handle gin.HandlerFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var cache responseCache
@@ -446,7 +189,7 @@ func CachePageWithoutQuery(store persistence.CacheStore, expire time.Duration, h
 			if err != persistence.ErrCacheMiss {
 				log.Println(err.Error())
 			}
-// 取代的作家
+			// replace writer
 			writer := newCachedWriter(store, expire, c.Writer, key)
 			c.Writer = writer
 			handle(c)
@@ -462,42 +205,7 @@ func CachePageWithoutQuery(store persistence.CacheStore, expire time.Duration, h
 	}
 }
 
-// CachePageAtomic装饰
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
+// CachePageAtomic 装饰器
 func CachePageAtomic(store persistence.CacheStore, expire time.Duration, handle gin.HandlerFunc) gin.HandlerFunc {
 	var m sync.Mutex
 	p := CachePage(store, expire, handle)
@@ -508,41 +216,6 @@ func CachePageAtomic(store persistence.CacheStore, expire time.Duration, handle 
 	}
 }
 
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
-
-// ff:
-// handle:
-// expire:
-// store:
 func CachePageWithoutHeader(store persistence.CacheStore, expire time.Duration, handle gin.HandlerFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var cache responseCache
@@ -552,12 +225,12 @@ func CachePageWithoutHeader(store persistence.CacheStore, expire time.Duration, 
 			if err != persistence.ErrCacheMiss {
 				log.Println(err.Error())
 			}
-// 取代的作家
+			// replace writer
 			writer := newCachedWriter(store, expire, c.Writer, key)
 			c.Writer = writer
 			handle(c)
 
-// 删除已终止上下文的缓存
+			// 清除已中止上下文的缓存
 			if c.IsAborted() {
 				_ = store.Delete(key)
 			}

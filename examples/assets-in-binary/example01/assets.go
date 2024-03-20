@@ -11,7 +11,7 @@ var (
 	_Assets3737a75b5254ed1f6d588b40a3449721f9ea86c2 = "<!doctype html>\n<body>\n  <p>Hello, {{.Foo}}</p>\n</body>\n"
 )
 
-// Assets返回go-assets文件系统
+// Assets 返回 go-assets 文件系统
 var Assets = assets.NewFileSystem(map[string][]string{"/": {"html"}, "/html": {"bar.tmpl", "index.tmpl"}}, map[string]*assets.File{
 	"/": {
 		Path:     "/",

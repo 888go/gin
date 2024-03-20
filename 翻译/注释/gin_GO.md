@@ -6,38 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
-# <翻译结束>
-
-
-<原文开始>
-// 32 MB
-<原文结束>
-
-# <翻译开始>
-// 32 MB （32兆字节）
-# <翻译结束>
-
-
-<原文开始>
-// 0.0.0.0/0 (IPv4)
-<原文结束>
-
-# <翻译开始>
-// 0.0.0.0/0 (IPv4) （IPv4地址）：表示整个IPv4地址空间的通配符，相当于所有IPv4地址的集合。
-# <翻译结束>
-
-
-<原文开始>
-// ::/0 (IPv6)
-<原文结束>
-
-# <翻译开始>
-// /:: 0 (IPv6) // （此注释内容较为简略，直译为“IPv6的/:: 0”）
-// 这个注释可能是在表示一个IPv6地址的特殊表示形式，"/::" 表示IPv6地址中的零压缩写法，其中 "::" 可以替换连续的一串零。当IPv6地址中包含较长的连续零时，可以使用这种简写方式。例如 "/::" 可以代表一串全零的部分，而 "0" 可能是指特定的IPv6地址部分（可能是指IPv6地址的剩余部分为全零）。
-// 但由于上下文不完整，这里的具体含义可能需要根据代码的实际应用场景来判断。
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -46,7 +17,7 @@
 <原文结束>
 
 # <翻译开始>
-// HandlerFunc定义了gin中间件使用的处理程序作为返回值
+// HandlerFunc 定义了 Gin 中间件用作返回值的处理器。
 # <翻译结束>
 
 
@@ -55,7 +26,7 @@
 <原文结束>
 
 # <翻译开始>
-// HandlersChain定义了一个handlerfuncc片
+// HandlersChain 定义了一个 HandlerFunc 切片。
 # <翻译结束>
 
 
@@ -64,8 +35,7 @@
 <原文结束>
 
 # <翻译开始>
-// Last返回链中的最后一个处理程序
-// 也就是说，最后一个处理器是主处理器
+// Last 返回链中的最后一个处理器。即，最后一个处理器是主处理器。
 # <翻译结束>
 
 
@@ -74,7 +44,7 @@
 <原文结束>
 
 # <翻译开始>
-// RouteInfo表示一个请求路由的规范，它包含方法、路径和它的处理器
+// RouteInfo 表示请求路由的规范，其中包含方法、路径及其处理程序。
 # <翻译结束>
 
 
@@ -83,16 +53,7 @@
 <原文结束>
 
 # <翻译开始>
-// RoutesInfo定义了一个RouteInfo切片
-# <翻译结束>
-
-
-<原文开始>
-// Trusted platforms
-<原文结束>
-
-# <翻译开始>
-// 信任的平台
+// RoutesInfo 定义了一个 RouteInfo 切片。
 # <翻译结束>
 
 
@@ -102,8 +63,7 @@
 <原文结束>
 
 # <翻译开始>
-// 在Google应用引擎上运行时的平台googleappengine
-// 信任X-Appengine-Remote-Addr来确定客户端的IP
+// PlatformGoogleAppEngine：当在 Google App Engine 上运行时。信任 X-Appengine-Remote-Addr 头部来确定客户端的 IP 地址
 # <翻译结束>
 
 
@@ -113,8 +73,8 @@
 <原文结束>
 
 # <翻译开始>
-// 使用Cloudflare的CDN时的平台Cloudflare
-// Trust CF-Connecting-IP用于确定客户端的IP
+// PlatformCloudflare 当使用Cloudflare的CDN时。信任CF-Connecting-IP来确定
+// 客户端的IP地址
 # <翻译结束>
 
 
@@ -124,8 +84,8 @@
 <原文结束>
 
 # <翻译开始>
-// 引擎是框架的实例，它包含了复用器、中间件和配置设置
-// 使用New()或Default()创建Engine实例
+// Engine 是框架的实例，它包含了多路复用器（muxer）、中间件和配置设置。
+// 通过使用 New() 或 Default() 创建 Engine 的一个实例。
 # <翻译结束>
 
 
@@ -138,8 +98,8 @@
 <原文结束>
 
 # <翻译开始>
-// RedirectTrailingSlash在当前路由不能匹配的情况下启用自动重定向，但是存在一个带有(不带有)尾斜杠的路径处理程序
-// 例如，如果请求/foo/，但只存在/foo的路由，则客户端被重定向到/foo, GET请求的http状态码为301，所有其他请求方法的http状态码为307
+// RedirectTrailingSlash 功能会自动重定向，当当前路由无法匹配，但存在一个与请求路径（有或无尾部斜杠）相匹配的处理程序时。
+// 例如，如果请求了 /foo/，但仅存在 /foo 的路由，则客户端将被重定向到 /foo，并根据请求方法的不同返回不同的HTTP状态码：对于GET请求返回301，对于所有其他请求方法返回307。
 # <翻译结束>
 
 
@@ -156,12 +116,13 @@
 <原文结束>
 
 # <翻译开始>
-// RedirectFixedPath如果启用，如果没有为它注册句柄，路由器会尝试修复当前的请求路径
-// 首先是多余的路径元素，比如…/或被移除
-// 之后，路由器会对清理后的路径进行不区分大小写的查找
-// 如果能找到该路由的句柄，路由器就会重定向到正确的路径，GET请求的状态码为301，其他所有请求方法的状态码为307
-// 例如/FOO和/..Foo可以重定向到/ Foo
-// RedirectTrailingSlash与此选项无关
+// RedirectFixedPath：如果启用，当没有为当前请求路径注册处理程序时，路由器尝试修复该路径。
+// 首先移除诸如 ../ 或 // 等多余的路径元素。
+// 然后，路由器对清理后的路径进行不区分大小写的查找。
+// 如果能找到与此路由匹配的处理程序，路由器将根据请求方法进行重定向：
+// 对于 GET 请求，状态码为 301；对于所有其他请求方法，状态码为 307。
+// 例如，/FOO 和 /..//Foo 可能会被重定向到 /foo。
+// 该选项与 RedirectTrailingSlash 选项独立。
 # <翻译结束>
 
 
@@ -175,9 +136,9 @@
 <原文结束>
 
 # <翻译开始>
-// handlemethodnotalallowed如果使能，如果当前请求不能被路由，则路由器检查当前路由是否允许另一个方法
-// 如果是这种情况，请求将返回“方法不允许”和HTTP状态码405
-// 如果不允许使用其他方法，则将请求委托给NotFound处理程序
+// 如果启用HandleMethodNotAllowed，当当前请求无法被路由时，路由器会检查当前路由是否允许其他方法。
+// 如果存在其他允许的方法，请求将得到响应'方法不允许'（Method Not Allowed）以及HTTP状态码405。
+// 若没有其他方法被允许，则该请求会被转发至NotFound处理器进行处理。
 # <翻译结束>
 
 
@@ -189,8 +150,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果启用了ForwardedByClientIP，客户端IP将从与存储在' (*gin.Engine). remoteipheaders '匹配的请求头中解析
-// 如果没有获取到IP，则返回到从' (*gin.Context). request . remoteaddr '获取的IP
+// ForwardedByClientIP：如果启用，将会从请求头中解析客户端IP地址，这些请求头与存储在 `(*gin.Engine).RemoteIPHeaders` 中的相匹配。如果没有获取到IP地址，则会回退到通过 `(*gin.Context).Request.RemoteAddr` 获取的IP地址。
 # <翻译结束>
 
 
@@ -202,20 +162,19 @@
 <原文结束>
 
 # <翻译开始>
-// AppEngine已弃用
-// 已弃用:使用' TrustedPlatform ' WITH VALUE ' gin
-// 如果启用，它将信任一些以“X-AppEngine…”开头的标头
-// 以便与该PaaS更好地集成
+// AppEngine 已被弃用。
+// 废弃: 请改用 `TrustedPlatform`，并设置其值为 `gin.PlatformGoogleAppEngine`
+// #726 #755 如果启用，将会信任以 'X-AppEngine...' 开头的一些头部信息，
+// 以便更好地与该 PaaS（平台即服务）进行集成。
 # <翻译结束>
 
 
 <原文开始>
-	// UseRawPath if enabled, the url.RawPath will be used to find parameters.
+// UseRawPath if enabled, the url.RawPath will be used to find parameters.
 <原文结束>
 
 # <翻译开始>
-// UseRawPath如果启用，则为url
-// RawPath将用于查找参数
+// 如果启用UseRawPath，将使用url.RawPath来查找参数。
 # <翻译结束>
 
 
@@ -226,9 +185,9 @@
 <原文结束>
 
 # <翻译开始>
-// UnescapePathValues如果为true，则不转义路径值
-// 如果UseRawPath为false(默认情况下)，UnescapePathValues有效地为true，如url
-// 路径将被使用，它已经是未转义的
+// UnescapePathValues 如果设为 true，路径值将被解码。
+// 若 UseRawPath 为 false（默认情况），则 UnescapePathValues 实际上等同于 true，
+// 因为此时会使用已经解码过的 url.Path。
 # <翻译结束>
 
 
@@ -238,8 +197,8 @@
 <原文结束>
 
 # <翻译开始>
-// 即使使用额外的斜杠，也可以从URL解析RemoveExtraSlash参数
-// 见PR #1817和issue #1644
+// RemoveExtraSlash：即使存在额外的斜杠，参数也可以从URL中解析出来。
+// 参见PR #1817和问题#1644
 # <翻译结束>
 
 
@@ -251,9 +210,9 @@
 <原文结束>
 
 # <翻译开始>
-// RemoteIPHeaders获取客户端IP时使用的报头列表(*gin.Engine)
-// ForwardedByClientIP '是' true '和' (*gin.Context). request
-// RemoteAddr '被' (*gin.Engine). settrustedproxies() '定义的列表的至少一个网络源匹配
+// RemoteIPHeaders 是一个头部列表，当 `(*gin.Engine).ForwardedByClientIP` 设置为 `true` 时，
+// 如果 `(*gin.Context).Request.RemoteAddr` 与通过 `(*gin.Engine).SetTrustedProxies()` 方法定义的网络源列表中的至少一个匹配，
+// 则会使用这些头部来获取客户端 IP 地址。
 # <翻译结束>
 
 
@@ -263,8 +222,8 @@
 <原文结束>
 
 # <翻译开始>
-// TrustedPlatform设置为一个值为gin的常量
-// 例如，平台*信任由该平台设置的报头来确定客户端IP
+// TrustedPlatform 如果设置为gin.Platform*类型的常量值，表示信任该平台设置的头部信息，
+// 例如用于确定客户端IP地址
 # <翻译结束>
 
 
@@ -274,25 +233,25 @@
 <原文结束>
 
 # <翻译开始>
-// 给http的“maxMemory”参数的MaxMultipartMemory值请求的parsemmultipartform方法调用
+// MaxMultipartMemory 是提供给 http.Request 的 ParseMultipartForm 方法调用时的 'maxMemory' 参数的值。
 # <翻译结束>
 
 
 <原文开始>
-	// UseH2C enable h2c support.
+// UseH2C enable h2c support.
 <原文结束>
 
 # <翻译开始>
-// 启用h2c支持
+// UseH2C 启用 h2c 支持。
 # <翻译结束>
 
 
 <原文开始>
-	// ContextWithFallback enable fallback Context.Deadline(), Context.Done(), Context.Err() and Context.Value() when Context.Request.Context() is not nil.
+// ContextWithFallback enable fallback Context.Deadline(), Context.Done(), Context.Err() and Context.Value() when Context.Request.Context() is not nil.
 <原文结束>
 
 # <翻译开始>
-// 当Context.Request.Context()不是nil时，启用回退Context.Deadline()、Context.Done()、Context.Err()和Context.Value()
+// ContextWithFallback 用于当 Context.Request.Context() 不为空时，启用备用的 Context.Deadline()，Context.Done()，Context.Err() 和 Context.Value() 方法。
 # <翻译结束>
 
 
@@ -308,8 +267,14 @@
 <原文结束>
 
 # <翻译开始>
-// New返回一个新的空白Engine实例，没有附加任何中间件
-// 默认配置为:—RedirectTrailingSlash: true—RedirectFixedPath: false—handlemethodnotalallowed: false—ForwardedByClientIP: true—UseRawPath: false—UnescapePathValues: true
+// New 函数返回一个全新的、未附加任何中间件的空白 Engine 实例。
+// 默认配置为：
+// - RedirectTrailingSlash:  true （自动重定向末尾的斜杠）
+// - RedirectFixedPath:      false （不进行固定路径重定向）
+// - HandleMethodNotAllowed: false （不处理不允许的方法）
+// - ForwardedByClientIP:    true （通过客户端 IP 转发请求头）
+// - UseRawPath:             false （不使用原始路径，即不做 URL 解码）
+// - UnescapePathValues:     true （对路径中的参数值进行解码）
 # <翻译结束>
 
 
@@ -318,8 +283,7 @@
 <原文结束>
 
 # <翻译开始>
-// Default返回一个Engine实例，其中已经附加了Logger和Recovery中间件
-// 如果不使用默认的中间件,可以使用 gin.New()
+// Default 返回一个已附加了 Logger 和 Recovery 中间件的 Engine 实例。
 # <翻译结束>
 
 
@@ -328,7 +292,7 @@
 <原文结束>
 
 # <翻译开始>
-// Delims设置模板的左和右分隔符并返回Engine实例
+// Delims 设置模板左右分隔符，并返回一个 Engine 实例。
 # <翻译结束>
 
 
@@ -337,7 +301,7 @@
 <原文结束>
 
 # <翻译开始>
-// SecureJsonPrefix设置Context.SecureJSON中使用的SecureJsonPrefix
+// SecureJsonPrefix 设置在 Context.SecureJSON 中使用的 secureJSONPrefix。
 # <翻译结束>
 
 
@@ -347,7 +311,7 @@
 <原文结束>
 
 # <翻译开始>
-// LoadHTMLGlob加载由glob模式标识的HTML文件，并将结果与HTML渲染器相关联
+// LoadHTMLGlob 通过 glob 模式加载 HTML 文件，并将结果与 HTML 渲染器关联。
 # <翻译结束>
 
 
@@ -357,7 +321,8 @@
 <原文结束>
 
 # <翻译开始>
-// LoadHTMLFiles加载一段HTML文件，并将结果与HTML渲染器相关联
+// LoadHTMLFiles 加载一组 HTML 文件
+// 并将结果与 HTML 渲染器关联。
 # <翻译结束>
 
 
@@ -366,7 +331,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetHTMLTemplate将模板与HTML渲染器关联
+// SetHTMLTemplate 将一个模板与HTML渲染器关联。
 # <翻译结束>
 
 
@@ -375,7 +340,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetFuncMap设置用于template.FuncMap的FuncMap
+// SetFuncMap 用于设置用于 template.FuncMap 的 FuncMap。
 # <翻译结束>
 
 
@@ -384,8 +349,7 @@
 <原文结束>
 
 # <翻译开始>
-// NoRoute为NoRoute添加处理程序
-// 默认情况下，它返回404代码
+// NoRoute 添加处理函数，用于未找到路由的情况（NoRoute）。默认情况下返回404状态码。
 # <翻译结束>
 
 
@@ -394,8 +358,7 @@
 <原文结束>
 
 # <翻译开始>
-// NoMethod设置引擎时调用的处理程序
-// handlemethodnotalallowed = true
+// NoMethod 设置在 Engine.HandleMethodNotAllowed = true 时调用的处理器。
 # <翻译结束>
 
 
@@ -406,9 +369,9 @@
 <原文结束>
 
 # <翻译开始>
-// Use将全局中间件附加到路由器上
-// 也就是说，通过Use()附加的中间件将被包含在每个请求的处理程序链中
-// 甚至404、405、静态文件……例如，这是日志记录器或错误管理中间件的正确位置
+// Use 方法将一个全局中间件附加到路由。也就是说，通过Use()方法附加的中间件将会
+// 被包含在每一个请求的处理器链中。即便是404、405错误、静态文件等请求...
+// 例如，这里适合放置日志记录器或错误管理中间件。
 # <翻译结束>
 
 
@@ -418,7 +381,8 @@
 <原文结束>
 
 # <翻译开始>
-// Routes返回已注册路由的切片，其中包括一些有用的信息，例如:http方法、路径和处理程序名称
+// Routes 返回已注册路由的切片，其中包括一些有用的信息，比如：
+// HTTP 方法、路径以及处理器名称。
 # <翻译结束>
 
 
@@ -429,10 +393,9 @@
 <原文结束>
 
 # <翻译开始>
-// Run将路由器附加到http上
-// 服务器并开始监听和服务HTTP请求
-// 它是http的快捷方式
-// 注意:除非发生错误，否则此方法将无限期地阻塞调用例程
+// Run 将路由器附加到 http.Server，并开始监听和处理 HTTP 请求。
+// 这是 http.ListenAndServe(addr, router) 的一个快捷方式。
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用的 goroutine。
 # <翻译结束>
 
 
@@ -448,10 +411,7 @@
 <原文结束>
 
 # <翻译开始>
-// SetTrustedProxies设置了一个网络起源列表(IPv4地址，IPv4 cidr, IPv6地址或IPv6 cidr)，从其中信任请求的头包含替代客户端IP时' (* gin.com engine)
-// ForwardedByClientIP '为' true '
-// ' TrustedProxies '功能是默认启用的，它也默认信任所有代理
-// 如果您想禁用此功能，请使用Engine.SetTrustedProxies(nil)，然后Context.ClientIP()将直接返回远程地址
+// SetTrustedProxies 设置一个网络源列表（IPv4地址、IPv4 CIDR、IPv6地址或IPv6 CIDR），从这些源中信任请求头中包含的替代客户端IP。当`(*gin.Engine).ForwardedByClientIP`为`true`时生效。`TrustedProxies`特性默认启用，并且默认情况下信任所有代理。如果你想禁用此功能，使用Engine.SetTrustedProxies(nil)，那么Context.ClientIP()将直接返回远程地址。
 # <翻译结束>
 
 
@@ -460,8 +420,7 @@
 <原文结束>
 
 # <翻译开始>
-// isUnsafeTrustedProxies检查引擎
-// trustedCIDRs包含了所有的ip地址，如果有，则不安全(返回true)
+// isUnsafeTrustedProxies 检查 Engine.trustedCIDRs 是否包含全部IP，如果包含（返回 true），则表示不安全
 # <翻译结束>
 
 
@@ -470,8 +429,7 @@
 <原文结束>
 
 # <翻译开始>
-// parseTrustedProxies解析引擎
-// trustedproxy to engine . trustedidrs
+// parseTrustedProxies 将 Engine.trustedProxies 解析为 Engine.trustedCIDRs
 # <翻译结束>
 
 
@@ -480,7 +438,7 @@
 <原文结束>
 
 # <翻译开始>
-// isTrustedProxy会根据Engine.trustedCIDRs检查IP地址是否在可信列表中
+// isTrustedProxy 将根据 Engine.trustedCIDRs 检查 IP 地址是否在信任列表中
 # <翻译结束>
 
 
@@ -489,7 +447,7 @@
 <原文结束>
 
 # <翻译开始>
-// validateHeader将解析X-Forwarded-For报头并返回受信任的客户端IP地址
+// validateHeader 将解析 X-Forwarded-For 头部，并返回可信的客户端 IP 地址
 # <翻译结束>
 
 
@@ -499,7 +457,8 @@
 <原文结束>
 
 # <翻译开始>
-// 以相反的顺序检查ip，当发现不受信任的代理时停止
+// X-Forwarded-For 由代理服务器追加
+// 按照逆序检查 IP 地址，并在找到不可信的代理时停止
 # <翻译结束>
 
 
@@ -509,26 +468,25 @@
 <原文结束>
 
 # <翻译开始>
-// 解析IP的字符串表示形式并返回一个net
-// 具有最小字节表示的IP，如果输入无效则为nil
+// parseIP 将IP地址的字符串表示形式解析为 net.IP 类型，并返回一个字节表示形式最小的 IP，如果输入无效，则返回 nil。
 # <翻译结束>
 
 
 <原文开始>
-		// return ip in a 4-byte representation
+// return ip in a 4-byte representation
 <原文结束>
 
 # <翻译开始>
-// 返回4字节表示的IP
+// 返回一个4字节表示的IP地址
 # <翻译结束>
 
 
 <原文开始>
-	// return ip in a 16-byte representation or nil
+// return ip in a 16-byte representation or nil
 <原文结束>
 
 # <翻译开始>
-// 返回16字节表示形式的IP或nil
+// 返回一个16字节表示形式的IP地址，或返回nil
 # <翻译结束>
 
 
@@ -539,10 +497,9 @@
 <原文结束>
 
 # <翻译开始>
-// RunTLS将路由器附加到http
-// 服务器并开始监听和服务HTTPS(安全)请求
-// 它是http的快捷方式
-// 注意:除非发生错误，否则此方法将无限期地阻塞调用例程
+// RunTLS 将路由器附加到 http.Server，并开始监听和处理 HTTPS（安全）请求。
+// 这是 http.ListenAndServeTLS(addr, certFile, keyFile, router) 的快捷方式。
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用的goroutine。
 # <翻译结束>
 
 
@@ -553,9 +510,8 @@
 <原文结束>
 
 # <翻译开始>
-// RunUnix将路由器附加到http
-// 服务器并通过指定的unix套接字(即文件)开始侦听和服务HTTP请求
-// 注意:除非发生错误，否则此方法将无限期地阻塞调用例程
+// RunUnix将路由器连接到http.Server，并开始通过指定的UNIX套接字（即文件）监听和处理HTTP请求。
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用的goroutine。
 # <翻译结束>
 
 
@@ -566,9 +522,8 @@
 <原文结束>
 
 # <翻译开始>
-// RunFd将路由器附加到http
-// 服务器并通过指定的文件描述符开始侦听和服务HTTP请求
-// 注意:除非发生错误，否则此方法将无限期地阻塞调用例程
+// RunFd 将路由器连接到 http.Server，并开始通过指定的文件描述符监听和处理 HTTP 请求。
+// 注意：除非发生错误，否则此方法将无限期地阻塞调用它的 goroutine。
 # <翻译结束>
 
 
@@ -578,9 +533,7 @@
 <原文结束>
 
 # <翻译开始>
-// RunListener将路由器附加到http
-// 服务器并开始通过指定的网络侦听和服务HTTP请求
-// 侦听器
+// RunListener 将路由器附加到 http.Server，并开始通过指定的 net.Listener 监听和处理 HTTP 请求
 # <翻译结束>
 
 
@@ -589,8 +542,7 @@
 <原文结束>
 
 # <翻译开始>
-// ServeHTTP符合http
-// 处理程序接口
+// ServeHTTP 符合 http.Handler 接口。
 # <翻译结束>
 
 
@@ -601,27 +553,17 @@
 <原文结束>
 
 # <翻译开始>
-// HandleContext重新进入一个已经重写的上下文
-// 这可以通过将c.Request.URL.Path设置为新目标来实现
-// 免责声明:你可以循环自己来处理这个问题，明智地使用
+// HandleContext 重新进入一个已重写的上下文。这可以通过将 c.Request.URL.Path 设置为新的目标来完成。
+// 免责声明：你可以通过循环自身来处理这个问题，但请明智地使用。
 # <翻译结束>
 
 
 <原文开始>
-	// Find root of the tree for the given HTTP method
+// Find root of the tree for the given HTTP method
 <原文结束>
 
 # <翻译开始>
-// 查找给定HTTP方法的树的根
-# <翻译结束>
-
-
-<原文开始>
-		// Find route in tree
-<原文结束>
-
-# <翻译开始>
-// 在树中查找路由
+// 为给定的HTTP方法查找树的根节点
 # <翻译结束>
 
 
@@ -630,19 +572,6 @@
 <原文结束>
 
 # <翻译开始>
-// 永久重定向，请求使用GET方法
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// err:
-// listener:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// err:
-// listener:
+// 永久重定向，使用GET方法请求
 # <翻译结束>
 

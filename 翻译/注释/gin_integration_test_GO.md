@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// 版权所有2017马努·马丁内斯-阿尔梅达
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 ? 2017 Manu Martinez-Almeida。保留所有权利。
+// 本源代码的使用受 MIT 风格许可证协议约束，
+// 该协议可在 LICENSE 文件中查阅。
 # <翻译结束>
 
 
@@ -19,7 +19,9 @@
 <原文结束>
 
 # <翻译开始>
-// params[0]=url示例:http://127.0.0.1:8080/index(不能为空)params[1]=response status(自定义比较状态)默认值:"200 OK"Params[2]=响应体(自定义比较内容)默认值:"它工作"
+// params[0] = url 示例：http://127.0.0.1:8080/index （不能为空）
+// params[1] = 响应状态（自定义比较状态）默认值："200 OK"
+// params[2] = 响应体内容（自定义比较内容）默认值："it worked"
 # <翻译结束>
 
 
@@ -29,16 +31,17 @@
 <原文结束>
 
 # <翻译开始>
-// 必须等待程序启动并运行服务器，否则主线程将完成
+// 必须等待 goroutine 启动并运行服务器
+// 否则主线程将提前完成
 # <翻译结束>
 
 
 <原文开始>
-		// not supported by windows, it is unimplemented now
+// not supported by windows, it is unimplemented now
 <原文结束>
 
 # <翻译开始>
-// windows不支持，目前未实现
+// 不支持Windows系统，目前尚未实现
 # <翻译结束>
 
 
@@ -49,7 +52,12 @@
 <原文结束>
 
 # <翻译开始>
-// func TestWithHttptestWithSpecifiedPort(t *testing.T) {router:= New() router. get ("/example"， func(c *Context) {c. string (http. string)StatusOK， "它工作")})
+// 函数TestWithHttptestWithSpecifiedPort用于测试指定端口的功能
+// (接收一个*testing.T类型的参数t)
+// 
+// 创建一个新的路由实例router
+// 在router上注册GET方法的"/example"路由处理函数，当该路由被访问时，
+// 会调用传入的函数，向Context写入http.StatusOK状态码及字符串"it worked"作为响应内容
 # <翻译结束>
 
 
@@ -64,9 +72,10 @@
 <原文结束>
 
 # <翻译开始>
-// 1， _:= net.Listen("tcp"， ":8033") ts:= httptest
-// 服务器{监听器:1，配置:&http
-// Server{Handler: router}，} ts.Start() defer ts.Close()
+// 创建一个监听TCP端口8033的网络监听器，忽略可能的错误
+// 初始化一个httptest.Server结构体，其中Listener字段设置为上述创建的监听器，Config字段设置为一个http.Server指针，其Handler字段设置为router
+// 调用ts.Start()方法启动服务器
+// 使用defer关键字确保在函数结束时调用ts.Close()方法关闭服务器
 # <翻译结束>
 
 
@@ -76,15 +85,7 @@
 <原文结束>
 
 # <翻译开始>
-// testquest (t， "http://localhost:8033/example")}
-# <翻译结束>
-
-
-<原文开始>
-	// 404 not found
-<原文结束>
-
-# <翻译开始>
-// 404未找到
+// 测试请求(t, "http://localhost:8033/example")
+// }
 # <翻译结束>
 

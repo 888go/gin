@@ -1,6 +1,6 @@
 /*
 Package gin implements a HTTP web framework called gin.
 
-See https:// 更多关于杜松子酒的信息
+See https://gin-gonic.com/ for more information about gin.
 */
-package gin // 导入 "github.com/gin-gonic/gin" 包
+package gin // 导入 "github.com/gin-gonic/gin"

@@ -28,12 +28,12 @@ func typicalGetSet(t *testing.T, newCache cacheFactory) {
 	}
 }
 
-// 测试递增-递减用例
+// 测试自增自减的情况
 func incrDecr(t *testing.T, newCache cacheFactory) {
 	var err error
 	cache := newCache(t, time.Hour)
 
-// 正常的递增/递减操作
+	// 正常的增/减操作。
 	if err = cache.Set("int", 10, DEFAULT); err != nil {
 		t.Errorf("Error setting int: %s", err)
 	}
@@ -52,7 +52,7 @@ func incrDecr(t *testing.T, newCache cacheFactory) {
 		t.Errorf("Expected 10, was %d", newValue)
 	}
 
-// 增量的
+	// Increment wraparound
 	newValue, err = cache.Increment("int", math.MaxUint64-5)
 	if err != nil {
 		t.Errorf("Error wrapping around: %s", err)
@@ -61,7 +61,7 @@ func incrDecr(t *testing.T, newCache cacheFactory) {
 		t.Errorf("Expected wraparound 4, got %d", newValue)
 	}
 
-// 减量上限为0
+	// Decrement capped at 0
 	newValue, err = cache.Decrement("int", 25)
 	if err != nil {
 		t.Errorf("Error decrementing below 0: %s", err)
@@ -72,10 +72,10 @@ func incrDecr(t *testing.T, newCache cacheFactory) {
 }
 
 func expiration(t *testing.T, newCache cacheFactory) {
-// Memcached不支持小于1秒的过期时间
+	// memcached 不支持小于 1 秒的过期时间。
 	var err error
 	cache := newCache(t, time.Second)
-// 测试集w/ DEFAULT
+	// Test Set w/ DEFAULT
 	value := 10
 	if err := cache.Set("int", value, DEFAULT); err != nil {
 		t.Errorf("wrong to set cache, but got: %s", err)
@@ -86,7 +86,7 @@ func expiration(t *testing.T, newCache cacheFactory) {
 		t.Errorf("Expected CacheMiss, but got: %s", err)
 	}
 
-// 短时间测试集
+	// Test Set w/ short time
 	if err := cache.Set("int", value, time.Second); err != nil {
 		t.Errorf("wrong to set cache, but got: %s", err)
 	}
@@ -96,7 +96,7 @@ func expiration(t *testing.T, newCache cacheFactory) {
 		t.Errorf("Expected CacheMiss, but got: %s", err)
 	}
 
-// 测试集w/更长时间
+	// 测试集，包含更长的时间。
 	if err := cache.Set("int", value, time.Hour); err != nil {
 		t.Errorf("wrong to set cache, but got: %s", err)
 	}
@@ -106,7 +106,7 @@ func expiration(t *testing.T, newCache cacheFactory) {
 		t.Errorf("Expected to get the value, but got: %s", err)
 	}
 
-// 测试集w/ forever
+	// Test Set w/ forever.
 	if err := cache.Set("int", value, FOREVER); err != nil {
 		t.Errorf("wrong to set cache, but got: %s", err)
 	}
@@ -149,12 +149,12 @@ func testReplace(t *testing.T, newCache cacheFactory) {
 	var err error
 	cache := newCache(t, time.Hour)
 
-// 在空缓存中替换
+	// 在空缓存中替换。
 	if err = cache.Replace("notexist", 1, FOREVER); err != ErrNotStored && err != ErrCacheMiss {
 		t.Errorf("Replace in empty cache: expected ErrNotStored or ErrCacheMiss, got: %s", err)
 	}
 
-// 设置值为1，并用2替换
+	// 设置值为1，然后将其替换为2
 	if err = cache.Set("int", 1, time.Second); err != nil {
 		t.Errorf("Unexpected error: %s", err)
 	}
@@ -170,7 +170,7 @@ func testReplace(t *testing.T, newCache cacheFactory) {
 		t.Errorf("Expected 2, got %d", i)
 	}
 
-// 等待它过期并替换为3(不成功)
+	// 等待其过期并尝试用3替换（但未能成功）。
 	time.Sleep(2 * time.Second)
 	if err = cache.Replace("int", 3, time.Second); err != ErrNotStored && err != ErrCacheMiss {
 		t.Errorf("Expected ErrNotStored or ErrCacheMiss, got: %s", err)
@@ -183,24 +183,23 @@ func testReplace(t *testing.T, newCache cacheFactory) {
 func testAdd(t *testing.T, newCache cacheFactory) {
 	var err error
 	cache := newCache(t, time.Hour)
-// 添加到空缓存中
+	// Add to an empty cache.
 	if err = cache.Add("int", 1, time.Second); err != nil {
 		t.Errorf("Unexpected error adding to empty cache: %s", err)
 	}
 
-// 试着再加一次
-// (失败)
+	// 再次尝试添加。（失败）
 	if err = cache.Add("int", 2, time.Second); err != ErrNotStored {
 		t.Errorf("Expected ErrNotStored adding dupe to cache: %s", err)
 	}
 
-// 等待它过期，然后再次添加
+	// 等待它过期，然后再添加。
 	time.Sleep(2 * time.Second)
 	if err = cache.Add("int", 3, time.Second); err != nil {
 		t.Errorf("Unexpected error adding to cache: %s", err)
 	}
 
-// 获取并验证该值
+	// 获取并验证值。
 	var i int
 	if err = cache.Get("int", &i); err != nil {
 		t.Errorf("Unexpected error: %s", err)

@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -35,8 +35,7 @@ func TestError(t *testing.T) {
 	jsonBytes, _ := json.Marshal(err)
 	assert.Equal(t, "{\"error\":\"test error\",\"meta\":\"some data\"}", string(jsonBytes))
 
-	err.SetMeta(H{ // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	err.SetMeta(H{ //nolint: errcheck
 		"status": "200",
 		"data":   "some data",
 	})
@@ -46,8 +45,7 @@ func TestError(t *testing.T) {
 		"data":   "some data",
 	}, err.JSON())
 
-	err.SetMeta(H{ // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	err.SetMeta(H{ //nolint: errcheck
 		"error":  "custom error",
 		"status": "200",
 		"data":   "some data",
@@ -62,8 +60,7 @@ func TestError(t *testing.T) {
 		status string
 		data   string
 	}
-	err.SetMeta(customError{status: "200", data: "other data"}) // nolint: errcheck
-// 翻译：// 不进行errcheck检查
+	err.SetMeta(customError{status: "200", data: "other data"}) //nolint: errcheck
 	assert.Equal(t, customError{status: "200", data: "other data"}, err.JSON())
 }
 
@@ -113,20 +110,18 @@ type TestErr string
 
 func (e TestErr) Error() string { return string(e) }
 
-// testrorunwrap测试gin的行为
-// Error . is ()"“和“误差()
-// “errors.Is()“;和“误差()“;已经被添加到go 1.13的标准库中
+// TestErrorUnwrap 测试 gin.Error 与 "errors.Is()" 和 "errors.As()" 的交互行为。
+// "errors.Is()" 和 "errors.As()" 在 Go 1.13 版本中被添加到标准库中。
 func TestErrorUnwrap(t *testing.T) {
 	innerErr := TestErr("some error")
 
-// 2层包装:使用'fmt. error ("%w")'来包装杜松子酒
-// Error{}，它本身包装了innerErr
+	// 两层包装：使用 'fmt.Errorf("%w")' 来包装一个 gin.Error{}，该 gin.Error{} 自身又封装了内部错误 innerErr。
 	err := fmt.Errorf("wrapped: %w", &Error{
 		Err:  innerErr,
 		Type: ErrorTypeAny,
 	})
 
-// 检查'errors.Is()'和'errors.As()'的行为是否符合预期:
+	// 检查 'errors.Is()' 和 'errors.As()' 是否按预期工作：
 	assert.True(t, errors.Is(err, innerErr))
 	var testErr TestErr
 	assert.True(t, errors.As(err, &testErr))

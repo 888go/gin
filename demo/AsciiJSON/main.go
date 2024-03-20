@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// https://gin-gonic.com/zh-cn/docs/examples/ascii-json/
+// Gin框架官方文档示例：ASCII JSON（中文版）
 
 func main() {
 	r := gin.Default()

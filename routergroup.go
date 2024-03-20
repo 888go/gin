@@ -1,6 +1,6 @@
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin
 
@@ -12,10 +12,10 @@ import (
 )
 
 var (
-	// regEnLetter匹配http方法名的英文字母
+	// regEnLetter 匹配用于HTTP方法名称的英文字母
 	regEnLetter = regexp.MustCompile("^[A-Z]+$")
 
-	// RouterGroup的anyMethods:任何方法
+	// anyMethods 用于 RouterGroup 的任意方法
 	anyMethods = []string{
 		http.MethodGet, http.MethodPost, http.MethodPut, http.MethodPatch,
 		http.MethodHead, http.MethodOptions, http.MethodDelete, http.MethodConnect,
@@ -23,60 +23,25 @@ var (
 	}
 )
 
-// IRouter定义了所有路由器句柄接口，包括单个和组路由器
+// IRouter 定义了包括单个和组合路由在内的所有路由处理器接口。
 type IRouter interface {
 	IRoutes
 	Group(string, ...HandlerFunc) *RouterGroup
 }
 
-// irroutes定义了所有路由器句柄接口
+// IRoutes 定义了所有路由处理器的接口。
 type IRoutes interface {
-	// ff:中间件
-	// middleware:处理函数
-	Use(...HandlerFunc) IRoutes //hs:中间件
+	Use(...HandlerFunc) IRoutes
 
-	// ff:绑定
-	// handlers:处理函数
-	// relativePath:路由规则
-	// httpMethod:HTTP方法
-	Handle(string, string, ...HandlerFunc) IRoutes //hs:绑定
-
-	// ff:绑定Any
-	// handlers:处理函数
-	// relativePath:路由规则
-	Any(string, ...HandlerFunc) IRoutes //hs:绑定Any
-
-	// ff:绑定GET
-	// handlers:处理函数
-	// relativePath:路由规则
-	GET(string, ...HandlerFunc) IRoutes //hs:绑定GET
-
-	// ff:绑定POST
-	// handlers:处理函数
-	// relativePath:路由规则
-	POST(string, ...HandlerFunc) IRoutes //hs:绑定POST
-	// ff:绑定DELETE
-	// handlers:处理函数
-	// relativePath:路由规则
-	DELETE(string, ...HandlerFunc) IRoutes //hs:绑定DELETE
-
-	// ff:绑定PATCH
-	// handlers:处理函数
-	// relativePath:路由规则
-	PATCH(string, ...HandlerFunc) IRoutes //hs:绑定PATCH
-	// ff:绑定PUT
-	// handlers:处理函数
-	// relativePath:路由规则
-	PUT(string, ...HandlerFunc) IRoutes //hs:绑定PUT
-	// ff:绑定OPTIONS
-	// handlers:处理函数
-	// relativePath:路由规则
-	OPTIONS(string, ...HandlerFunc) IRoutes //hs:绑定OPTIONS
-	// ff:绑定HEAD
-	// handlers:处理函数
-	// relativePath:路由规则
-	HEAD(string, ...HandlerFunc) IRoutes //hs:绑定HEAD
-
+	Handle(string, string, ...HandlerFunc) IRoutes
+	Any(string, ...HandlerFunc) IRoutes
+	GET(string, ...HandlerFunc) IRoutes
+	POST(string, ...HandlerFunc) IRoutes
+	DELETE(string, ...HandlerFunc) IRoutes
+	PATCH(string, ...HandlerFunc) IRoutes
+	PUT(string, ...HandlerFunc) IRoutes
+	OPTIONS(string, ...HandlerFunc) IRoutes
+	HEAD(string, ...HandlerFunc) IRoutes
 	Match([]string, string, ...HandlerFunc) IRoutes
 
 	StaticFile(string, string) IRoutes
@@ -85,7 +50,7 @@ type IRoutes interface {
 	StaticFS(string, http.FileSystem) IRoutes
 }
 
-// RouterGroup在内部用于配置路由器，它与一个前缀和一组处理程序(中间件)相关联
+// RouterGroup 用于内部配置路由器，一个 RouterGroup 与一个前缀和一组处理器（中间件）关联。
 type RouterGroup struct {
 	Handlers HandlersChain
 	basePath string
@@ -95,22 +60,14 @@ type RouterGroup struct {
 
 var _ IRouter = (*RouterGroup)(nil)
 
-// 使用将中间件添加到组中，参见GitHub中的示例代码
-
-// ff:中间件
-// middleware:处理函数
+// Use 向组中添加中间件，参见 GitHub 中的示例代码。
 func (group *RouterGroup) Use(middleware ...HandlerFunc) IRoutes {
 	group.Handlers = append(group.Handlers, middleware...)
 	return group.returnObj()
 }
 
-// Group命令用于创建新的路由器组
-// 您应该添加所有具有相同中间件或相同路径前缀的路由
-// 例如，可以对使用公共中间件进行授权的所有路由进行分组
-
-// ff:创建分组路由
-// handlers:处理函数
-// relativePath:路由规则
+// Group 创建一个新的路由分组。你应该在此添加所有具有共同中间件或相同路径前缀的路由。
+// 例如，所有使用共同授权中间件的路由可以被归为一组。
 func (group *RouterGroup) Group(relativePath string, handlers ...HandlerFunc) *RouterGroup {
 	return &RouterGroup{
 		Handlers: group.combineHandlers(handlers),
@@ -119,10 +76,8 @@ func (group *RouterGroup) Group(relativePath string, handlers ...HandlerFunc) *R
 	}
 }
 
-// BasePath返回路由器组的基路径
-// 例如:v:= router.Group("/rest/n/v1/api")，则v. basepath()为"/rest/n/v1/api"
-
-// ff:取路由基础路径
+// BasePath 返回路由组的基础路径。
+// 例如，如果 v := router.Group("/rest/n/v1/api")，那么 v.BasePath() 的值就是 "/rest/n/v1/api"。
 func (group *RouterGroup) BasePath() string {
 	return group.basePath
 }
@@ -134,16 +89,13 @@ func (group *RouterGroup) handle(httpMethod, relativePath string, handlers Handl
 	return group.returnObj()
 }
 
-// Handle用给定的路径和方法注册一个新的请求句柄和中间件
-// 最后一个处理程序应该是真正的处理程序，其他的应该是中间件，可以并且应该在不同的路由之间共享
-// 参见GitHub中的示例代码
-// 对于GET、POST、PUT、PATCH和DELETE请求，可以使用各自的快捷函数
-// 此功能用于批量加载，并允许使用不太常用的非标准化或自定义方法(例如用于与代理的内部通信)
-
-// ff:绑定
-// handlers:处理函数
-// relativePath:路由规则
-// httpMethod:HTTP方法
+// Handle 注册一个新的请求处理程序和中间件，关联给定的路径和方法。
+// 最后一个处理器应该是真正的处理器，其他的应该是可以在不同路由间共享的中间件。
+// 请参阅 GitHub 上的示例代码。
+//
+// 对于 GET、POST、PUT、PATCH 和 DELETE 请求，可以分别使用相应的快捷函数。
+//
+// 该函数主要用于批量加载，并允许使用不太常用、非标准化或自定义的方法（例如，用于与代理的内部通信）。
 func (group *RouterGroup) Handle(httpMethod, relativePath string, handlers ...HandlerFunc) IRoutes {
 	if matched := regEnLetter.MatchString(httpMethod); !matched {
 		panic("http method " + httpMethod + " is not valid")
@@ -151,75 +103,43 @@ func (group *RouterGroup) Handle(httpMethod, relativePath string, handlers ...Ha
 	return group.handle(httpMethod, relativePath, handlers)
 }
 
-// POST是router.Handle("POST" path, handlers)的快捷方式
-
-// ff:绑定POST
-// handlers:处理函数
-// relativePath:路由规则
+// POST 是一个快捷方式，用于 router.Handle("POST", path, handlers)。
 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodPost, relativePath, handlers)
 }
 
-// GET是router.Handle("GET" path, handlers)的快捷方式
-
-// ff:绑定GET
-// handlers:处理函数
-// relativePath:路由规则
+// GET 是一个快捷方式，用于 router.Handle("GET", path, handlers)。
 func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodGet, relativePath, handlers)
 }
 
-// DELETE是router.Handle("DELETE"， path, handlers)的快捷方式
-
-// ff:绑定DELETE
-// handlers:处理函数
-// relativePath:路由规则
+// DELETE 是一个快捷方式，用于 router.Handle("DELETE", path, handlers)。
 func (group *RouterGroup) DELETE(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodDelete, relativePath, handlers)
 }
 
-// PATCH是router.Handle("PATCH" path, handlers)的快捷方式
-
-// ff:绑定PATCH
-// handlers:处理函数
-// relativePath:路由规则
+// PATCH 是一个快捷方式，用于 router.Handle("PATCH", path, handlers)。
 func (group *RouterGroup) PATCH(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodPatch, relativePath, handlers)
 }
 
-// PUT是router.Handle("PUT" path, handlers)的快捷方式
-
-// ff:绑定PUT
-// handlers:处理函数
-// relativePath:路由规则
+// PUT 是一个快捷方式，用于 router.Handle("PUT", path, handlers)。
 func (group *RouterGroup) PUT(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodPut, relativePath, handlers)
 }
 
-// OPTIONS是router.Handle("OPTIONS" path, handlers)的快捷方式
-
-// ff:绑定OPTIONS
-// handlers:处理函数
-// relativePath:路由规则
+// OPTIONS 是一个快捷方式，用于 router.Handle("OPTIONS", path, handlers)。
 func (group *RouterGroup) OPTIONS(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodOptions, relativePath, handlers)
 }
 
-// HEAD是router.Handle("HEAD" path, handlers)的快捷方式
-
-// ff:绑定HEAD
-// handlers:处理函数
-// relativePath:路由规则
+// HEAD 是一个快捷方式，用于router.Handle("HEAD", path, handlers)。
 func (group *RouterGroup) HEAD(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodHead, relativePath, handlers)
 }
 
-// Any注册了一个匹配所有HTTP方法的路由
-// Get, post, put, patch, head, options, delete, connect, trace
-
-// ff:绑定Any
-// handlers:处理函数
-// relativePath:路由规则
+// Any 注册一个路由，该路由会匹配所有 HTTP 方法。
+// 包括 GET, POST, PUT, PATCH, HEAD, OPTIONS, DELETE, CONNECT 和 TRACE。
 func (group *RouterGroup) Any(relativePath string, handlers ...HandlerFunc) IRoutes {
 	for _, method := range anyMethods {
 		group.handle(method, relativePath, handlers)
@@ -228,12 +148,7 @@ func (group *RouterGroup) Any(relativePath string, handlers ...HandlerFunc) IRou
 	return group.returnObj()
 }
 
-// Match注册一个与你声明的指定方法匹配的路由
-
-// ff:
-// handlers:
-// relativePath:
-// methods:
+// Match 注册一条路由，该路由会匹配你声明的指定方法。
 func (group *RouterGroup) Match(methods []string, relativePath string, handlers ...HandlerFunc) IRoutes {
 	for _, method := range methods {
 		group.handle(method, relativePath, handlers)
@@ -242,27 +157,21 @@ func (group *RouterGroup) Match(methods []string, relativePath string, handlers 
 	return group.returnObj()
 }
 
-// 为了服务本地文件系统的单个文件，StaticFile注册单个路由
-// router.StaticFile(“favicon.ico&quot“
-// /资源/ favicon.ico")
-
-// ff:
-// filepath:
-// relativePath:
+// StaticFile 注册一个单独的路由，以便从本地文件系统服务单个文件。
+// 示例：router.StaticFile("favicon.ico", "./resources/favicon.ico")
 func (group *RouterGroup) StaticFile(relativePath, filepath string) IRoutes {
 	return group.staticFileHandler(relativePath, func(c *Context) {
 		c.File(filepath)
 	})
 }
 
-// StaticFileFS的工作原理就像' StaticFile '，但一个自定义的' http
-// 可以用FileSystem代替
-// router. staticfiles ("favicon.ico"， " /resources/favicon.ico"， Dir{"."， false}) Gin默认使用:Gin .Dir()
-
-// ff:
-// fs:
-// filepath:
-// relativePath:
+// StaticFileFS 的工作方式与 `StaticFile` 类似，但是可以使用自定义的 `http.FileSystem`。
+// 示例：router.StaticFileFS("favicon.ico", "./resources/favicon.ico", Dir{".", false})
+// Gin 框架默认使用：gin.Dir()
+// 翻译：
+// StaticFileFS 与 `StaticFile` 功能类似，但允许使用自定义的 `http.FileSystem` 实例替代。
+// 例如：通过 router.StaticFileFS 将 favicon.ico 静态文件映射到 "./resources/favicon.ico"，并指定 Dir{".", false} 参数。
+// Gin 框架默认情况下使用的静态文件系统为 gin.Dir()。
 func (group *RouterGroup) StaticFileFS(relativePath, filepath string, fs http.FileSystem) IRoutes {
 	return group.staticFileHandler(relativePath, func(c *Context) {
 		c.FileFromFS(filepath, fs)
@@ -278,26 +187,17 @@ func (group *RouterGroup) staticFileHandler(relativePath string, handler Handler
 	return group.returnObj()
 }
 
-// 静态从给定的文件系统根目录提供文件
-// 内部http
-// 使用的是FileServer，因此是http
-// 使用NotFound来代替路由器的NotFound处理程序
-// 要使用操作系统的文件系统实现，使用:router.Static("/static"， "/var/www")
-
-// ff:
-// root:绑定文件夹
-// relativePath:URL路径前缀
+// Static 从给定的文件系统根目录提供文件服务。
+// 在内部使用了 http.FileServer，因此会使用 http.NotFound 替代 Router 的 NotFound 处理程序。
+// 要使用操作系统自身的文件系统实现，请按如下方式使用：
+//
+//	router.Static("/static", "/var/www")
 func (group *RouterGroup) Static(relativePath, root string) IRoutes {
 	return group.StaticFS(relativePath, Dir(root, false))
 }
 
-// StaticFS的工作原理就像' Static() '，但一个自定义的' http
-// 可以使用FileSystem’代替
-// Gin默认使用:Gin . dir ()
-
-// ff:
-// fs:
-// relativePath:
+// StaticFS的功能类似于`Static()`，但是可以使用自定义的`http.FileSystem`。
+// Gin默认使用: gin.Dir()
 func (group *RouterGroup) StaticFS(relativePath string, fs http.FileSystem) IRoutes {
 	if strings.Contains(relativePath, ":") || strings.Contains(relativePath, "*") {
 		panic("URL parameters can not be used when serving a static folder")
@@ -305,7 +205,7 @@ func (group *RouterGroup) StaticFS(relativePath string, fs http.FileSystem) IRou
 	handler := group.createStaticHandler(relativePath, fs)
 	urlPattern := path.Join(relativePath, "/*filepath")
 
-	// 注册GET和HEAD处理程序
+	// 注册 GET 和 HEAD 请求处理器
 	group.GET(urlPattern, handler)
 	group.HEAD(urlPattern, handler)
 	return group.returnObj()
@@ -321,12 +221,12 @@ func (group *RouterGroup) createStaticHandler(relativePath string, fs http.FileS
 		}
 
 		file := c.Param("filepath")
-		// 检查文件是否存在和/或我们是否有访问它的权限
+		// 检查文件是否存在，以及/或我们是否有权限访问它
 		f, err := fs.Open(file)
 		if err != nil {
 			c.Writer.WriteHeader(http.StatusNotFound)
 			c.handlers = group.engine.noRoute
-			// 重置指数
+			// Reset index
 			c.index = -1
 			return
 		}

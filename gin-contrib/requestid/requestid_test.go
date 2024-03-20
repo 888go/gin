@@ -16,12 +16,6 @@ func emptySuccessResponse(c *gin.Context) {
 	c.String(http.StatusOK, "")
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func Test_RequestID_CreateNew(t *testing.T) {
 	r := gin.New()
 	r.Use(New())
@@ -35,12 +29,6 @@ func Test_RequestID_CreateNew(t *testing.T) {
 	assert.NotEmpty(t, w.Header().Get(headerXRequestID))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func Test_RequestID_PassThru(t *testing.T) {
 	r := gin.New()
 	r.Use(New())
@@ -55,12 +43,6 @@ func Test_RequestID_PassThru(t *testing.T) {
 	assert.Equal(t, testXRequestID, w.Header().Get(headerXRequestID))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRequestIDWithCustomID(t *testing.T) {
 	r := gin.New()
 	r.Use(
@@ -80,12 +62,6 @@ func TestRequestIDWithCustomID(t *testing.T) {
 	assert.Equal(t, testXRequestID, w.Header().Get(headerXRequestID))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRequestIDWithCustomHeaderKey(t *testing.T) {
 	r := gin.New()
 	r.Use(
@@ -104,12 +80,6 @@ func TestRequestIDWithCustomHeaderKey(t *testing.T) {
 	assert.Equal(t, testXRequestID, w.Header().Get("customKey"))
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRequestIDWithHandler(t *testing.T) {
 	r := gin.New()
 	called := false
@@ -130,12 +100,6 @@ func TestRequestIDWithHandler(t *testing.T) {
 	assert.True(t, called)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRequestIDIsAttachedToRequestHeaders(t *testing.T) {
 	r := gin.New()
 
@@ -151,12 +115,6 @@ func TestRequestIDIsAttachedToRequestHeaders(t *testing.T) {
 	r.ServeHTTP(w, req)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRequestIDNotNilAfterGinCopy(t *testing.T) {
 	r := gin.New()
 	r.Use(New())

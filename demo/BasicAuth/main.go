@@ -5,7 +5,8 @@ import (
 	"net/http"
 )
 
-//https://gin-gonic.com/zh-cn/docs/examples/using-basicauth-middleware/
+// 访问 gin-gonic.com 的中文文档中“使用基本认证中间件”示例部分
+// （由于您提供的代码片段仅包含一个链接，故此翻译为对链接内容的描述性注释）
 
 // 模拟一些私人数据
 var secrets = gin.H{

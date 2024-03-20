@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// https://gin-gonic.com/zh-cn/docs/examples/custom-middleware/
+// Gin框架官方文档示例：自定义中间件（中文版）
 
 // 定义Logger中间件
 func Logger() gin.HandlerFunc {

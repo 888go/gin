@@ -18,22 +18,10 @@ func init() {
 	gin.SetMode(gin.TestMode)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCache(t *testing.T) {
-// 待办事项:单元测试
+	//TODO:unit test
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestWrite(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
@@ -50,12 +38,6 @@ func TestWrite(t *testing.T) {
 	assert.True(t, c.Writer.Written())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePage(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -72,12 +54,6 @@ func TestCachePage(t *testing.T) {
 	assert.Equal(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageExpire(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -95,14 +71,9 @@ func TestCachePageExpire(t *testing.T) {
 	assert.NotEqual(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageAtomic(t *testing.T) {
-// memoryDelayStore是InMemoryStore的包装器，设计用于模拟数据竞争(通过执行延迟写入)
+// memoryDelayStore 是 InMemoryStore 的一个包装器，
+// 旨在通过延迟写入模拟数据竞争（data race）场景
 	store := newDelayStore(60 * time.Second)
 
 	router := gin.New()
@@ -133,12 +104,6 @@ func TestCachePageAtomic(t *testing.T) {
 	}
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageWithoutHeader(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -157,12 +122,6 @@ func TestCachePageWithoutHeader(t *testing.T) {
 	assert.Equal(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageWithoutHeaderExpire(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -182,12 +141,6 @@ func TestCachePageWithoutHeaderExpire(t *testing.T) {
 	assert.NotEqual(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCacheHtmlFile(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -205,12 +158,6 @@ func TestCacheHtmlFile(t *testing.T) {
 	assert.Equal(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCacheHtmlFileExpire(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -229,12 +176,6 @@ func TestCacheHtmlFileExpire(t *testing.T) {
 	assert.NotEqual(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageAborted(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -252,12 +193,6 @@ func TestCachePageAborted(t *testing.T) {
 	assert.NotEqual(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePage400(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -275,12 +210,6 @@ func TestCachePage400(t *testing.T) {
 	assert.NotEqual(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageWithoutHeaderAborted(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -300,12 +229,6 @@ func TestCachePageWithoutHeaderAborted(t *testing.T) {
 	assert.NotEqual(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageWithoutHeader400(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -325,12 +248,6 @@ func TestCachePageWithoutHeader400(t *testing.T) {
 	assert.NotEqual(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageStatus207(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -348,12 +265,6 @@ func TestCachePageStatus207(t *testing.T) {
 	assert.Equal(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestCachePageWithoutQuery(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
@@ -370,12 +281,6 @@ func TestCachePageWithoutQuery(t *testing.T) {
 	assert.Equal(t, w1.Body.String(), w2.Body.String())
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestRegisterResponseCacheGob(t *testing.T) {
 	RegisterResponseCacheGob()
 	r := responseCache{Status: 200, Data: []byte("test")}
@@ -408,31 +313,11 @@ func newDelayStore(defaultExpiration time.Duration) *memoryDelayStore {
 	return v
 }
 
-
-// ff:
-// expires:
-// value:
-// key:
-
-// ff:
-// expires:
-// value:
-// key:
 func (c *memoryDelayStore) Set(key string, value interface{}, expires time.Duration) error {
 	time.Sleep(time.Millisecond * 3)
 	return c.InMemoryStore.Set(key, value, expires)
 }
 
-
-// ff:
-// expires:
-// value:
-// key:
-
-// ff:
-// expires:
-// value:
-// key:
 func (c *memoryDelayStore) Add(key string, value interface{}, expires time.Duration) error {
 	time.Sleep(time.Millisecond * 3)
 	return c.InMemoryStore.Add(key, value, expires)

@@ -6,9 +6,9 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
@@ -21,18 +21,11 @@
 <原文结束>
 
 # <翻译开始>
-// 单元测试TODO func (c *Context) File(filepath string) {func (c *Context) Negotiate(code int, config Negotiate) {BAD case: func (c *Context) Render(code int, Render Render)
-// 渲染，obj…any){测试重用上下文(使用池)时信息是否泄漏
-# <翻译结束>
-
-
-<原文开始>
-//nolint: errcheck
-<原文结束>
-
-# <翻译开始>
-// nolint: errcheck
-// 翻译：// 不进行errcheck检查
+// 单元测试 TODO
+// func (c *Context) File(filepath string) { //（待办事项：编写此函数的单元测试）
+// func (c *Context) Negotiate(code int, config Negotiate) { //（待办事项：编写此函数的单元测试）
+// 不良案例：func (c *Context) Render(code int, render render.Render, obj ...any) { //（这个函数设计可能存在问题）
+// 测试在重用 Contexts（利用 Pool）时，确保不会泄露信息
 # <翻译结束>
 
 
@@ -42,25 +35,17 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextSetGet测试在当前上下文中是否正确设置了参数，是否可以使用Get检索参数
+// TestContextSetGet 测试当前上下文中参数设置正确，
+// 并且可以使用 Get 方法成功获取。
 # <翻译结束>
 
 
 <原文开始>
-	// postform should not mess
+// postform should not mess
 <原文结束>
 
 # <翻译开始>
-// Postform不应该乱
-# <翻译结束>
-
-
-<原文开始>
-// here c.Request == nil
-<原文结束>
-
-# <翻译开始>
-// c.Request == nil 表示c的Request属性为空(nil)
+// postform 不应弄乱
 # <翻译结束>
 
 
@@ -71,7 +56,9 @@
 <原文结束>
 
 # <翻译开始>
-// 测试响应是否序列化为JSON, Content-Type是否设置为application/ JSON，是否转义了特殊的HTML字符
+// 测试响应是否已序列化为JSON格式
+// 并且Content-Type设置为application/json
+// 特殊HTML字符已转义
 # <翻译结束>
 
 
@@ -81,7 +68,8 @@
 <原文结束>
 
 # <翻译开始>
-// 测试响应是否序列化为JSONP，并且Content-Type设置为application/javascript
+// 测试响应是否被序列化为 JSONP
+// 并且 Content-Type 被设置为 application/javascript
 # <翻译结束>
 
 
@@ -91,7 +79,8 @@
 <原文结束>
 
 # <翻译开始>
-// 测试响应是否序列化为JSONP，并且Content-Type设置为application/json
+// 测试响应是否被序列化为JSONP格式
+// 并且Content-Type头被设置为application/json
 # <翻译结束>
 
 
@@ -100,7 +89,7 @@
 <原文结束>
 
 # <翻译开始>
-// 测试如果code为204，是否不呈现JSON
+// 测试当状态码为204时，不渲染任何JSON内容
 # <翻译结束>
 
 
@@ -110,7 +99,8 @@
 <原文结束>
 
 # <翻译开始>
-// 测试响应是否序列化为JSON(之前更改了内容类型)
+// 测试响应是否被序列化为JSON
+// 我们在之前更改了content-type
 # <翻译结束>
 
 
@@ -119,7 +109,7 @@
 <原文结束>
 
 # <翻译开始>
-// 测试如果code为204，是否不呈现自定义JSON
+// 测试当状态码为204时，不渲染任何自定义JSON
 # <翻译结束>
 
 
@@ -129,7 +119,8 @@
 <原文结束>
 
 # <翻译开始>
-// 测试响应是否序列化为安全JSON，并且Content-Type设置为application/ JSON
+// 测试响应被序列化为 Secure JSON
+// 并且 Content-Type 被设置为 application/json
 # <翻译结束>
 
 
@@ -140,7 +131,9 @@
 <原文结束>
 
 # <翻译开始>
-// 测试响应是否序列化为JSON, Content-Type是否设置为application/ JSON，是否保留特殊的HTML字符
+// 测试响应是否被序列化为JSON格式
+// 并且Content-Type设置为application/json
+// 同时保留特殊的HTML字符
 # <翻译结束>
 
 
@@ -150,17 +143,16 @@
 <原文结束>
 
 # <翻译开始>
-// 测试响应是否执行模板，并将Content-Type设置为text/html
+// 测试响应会执行模板并以 text/html 设置 Content-Type 进行响应
 # <翻译结束>
 
 
 <原文开始>
-	// print debug warning log when Engine.trees > 0
+// print debug warning log when Engine.trees > 0
 <原文结束>
 
 # <翻译开始>
-// 输出调试警告日志
-// 树比;0
+// 当 Engine.trees > 0 时，打印调试警告日志
 # <翻译结束>
 
 
@@ -169,7 +161,7 @@
 <原文结束>
 
 # <翻译开始>
-// 测试如果code为204，是否不呈现HTML
+// 测试当代码为204时不会渲染任何HTML内容
 # <翻译结束>
 
 
@@ -179,7 +171,8 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextXML测试响应是否序列化为XML，并且Content-Type是否设置为application/ XML
+// TestContextXML测试响应被序列化为XML格式
+// 并且Content-Type设置为application/xml
 # <翻译结束>
 
 
@@ -188,7 +181,7 @@
 <原文结束>
 
 # <翻译开始>
-// 测试如果代码为204，是否不呈现XML
+// 测试当代码为204时，不会输出任何XML内容
 # <翻译结束>
 
 
@@ -198,7 +191,8 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextString测试返回的响应内容类型是否设置为text/plain
+// TestContextString 测试响应返回时
+// 将 Content-Type 设置为 text/plain
 # <翻译结束>
 
 
@@ -207,7 +201,7 @@
 <原文结束>
 
 # <翻译开始>
-// 测试如果code为204，是否不呈现String
+// 测试当状态码为204时，不渲染任何字符串
 # <翻译结束>
 
 
@@ -217,7 +211,8 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextString测试返回的响应是否将Content-Type设置为text/html
+// TestContextString 测试响应返回时
+// 其Content-Type被设置为text/html
 # <翻译结束>
 
 
@@ -226,7 +221,7 @@
 <原文结束>
 
 # <翻译开始>
-// 测试如果code为204，是否不呈现HTML字符串
+// 测试当状态码为204时，不渲染任何HTML字符串
 # <翻译结束>
 
 
@@ -236,7 +231,7 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextData测试响应是否可以用指定的MIME类型从' bytestring '写入
+// TestContextData 测试响应能够通过 `bytestring` 指定的 MIME 类型写入
 # <翻译结束>
 
 
@@ -245,7 +240,7 @@
 <原文结束>
 
 # <翻译开始>
-// 测试如果code为204，是否不呈现自定义数据
+// 测试当代码为204时，不会渲染任何自定义数据
 # <翻译结束>
 
 
@@ -255,7 +250,8 @@
 <原文结束>
 
 # <翻译开始>
-// - type = '文本/平原;当go版本<= 1.16时，charset=utf-8'，否则，Content-Type='text/x-go;charset = utf - 8 '
+// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
+// 否则，Content-Type='text/x-go; charset=utf-8'
 # <翻译结束>
 
 
@@ -265,7 +261,8 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextRenderYAML测试响应是否被序列化为YAML，并且Content-Type设置为application/x-yaml
+// TestContextRenderYAML 测试响应被序列化为 YAML 格式
+// 并且 Content-Type 被设置为 application/x-yaml
 # <翻译结束>
 
 
@@ -275,7 +272,8 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextRenderTOML测试响应是否序列化为TOML，并且Content-Type设置为application/ TOML
+// TestContextRenderTOML 测试响应是否已序列化为 TOML 格式
+// 并且 Content-Type 已设置为 application/toml
 # <翻译结束>
 
 
@@ -286,16 +284,9 @@
 <原文结束>
 
 # <翻译开始>
-// TestContextRenderProtoBuf测试响应是否被序列化为ProtoBuf，并且Content-Type设置为application/x-protobuf，我们只使用示例ProtoBuf来检查响应是否正确
-# <翻译结束>
-
-
-<原文开始>
-// TODO
-<原文结束>
-
-# <翻译开始>
-// 一切
+// TestContextRenderProtoBuf 测试响应是否被序列化为 ProtoBuf
+// 并且 Content-Type 被设置为 application/x-protobuf
+// 我们仅使用示例 protobuf 来检查响应是否正确
 # <翻译结束>
 
 
@@ -305,93 +296,40 @@
 <原文结束>
 
 # <翻译开始>
-// 遗留测试(验证默认值不会破坏(不安全!)旧行为)
+// 向后兼容测试（验证默认设置不会破坏
+// （不安全！）的旧版行为）
 # <翻译结束>
 
 
 <原文开始>
-	// no port
+// Tests exercising the TrustedProxies functionality
 <原文结束>
 
 # <翻译开始>
-// 没有港口
+// 测试检验 TrustedProxies 功能的实现
 # <翻译结束>
 
 
 <原文开始>
-	// Tests exercising the TrustedProxies functionality
+// Disabled TrustedProxies feature
 <原文结束>
 
 # <翻译开始>
-// 测试执行TrustedProxies功能
+// 禁用 TrustedProxies 功能
 # <翻译结束>
 
 
 <原文开始>
-	// IPv6 support
+// Last proxy is trusted, but the RemoteAddr is not
 <原文结束>
 
 # <翻译开始>
-// IPv6支架
+// 最后的代理是可信的，但 RemoteAddr 不是
 # <翻译结束>
 
 
 <原文开始>
-	// No trusted proxies
-<原文结束>
-
-# <翻译开始>
-// 没有可信代理
-# <翻译结束>
-
-
-<原文开始>
-	// Disabled TrustedProxies feature
-<原文结束>
-
-# <翻译开始>
-// 禁用TrustedProxies特性
-# <翻译结束>
-
-
-<原文开始>
-	// Last proxy is trusted, but the RemoteAddr is not
-<原文结束>
-
-# <翻译开始>
-// 最后一个代理是可信的，但RemoteAddr不可信
-# <翻译结束>
-
-
-<原文开始>
-	// Only trust RemoteAddr
-<原文结束>
-
-# <翻译开始>
-// 只信任RemoteAddr
-# <翻译结束>
-
-
-<原文开始>
-	// All steps are trusted
-<原文结束>
-
-# <翻译开始>
-// 所有步骤都是可信的
-# <翻译结束>
-
-
-<原文开始>
-	// Use CIDR
-<原文结束>
-
-# <翻译开始>
-// 使用CIDR
-# <翻译结束>
-
-
-<原文开始>
-	// Use hostname that resolves to all the proxies
+// Use hostname that resolves to all the proxies
 <原文结束>
 
 # <翻译开始>
@@ -400,7 +338,7 @@
 
 
 <原文开始>
-	// Use hostname that returns an error
+// Use hostname that returns an error
 <原文结束>
 
 # <翻译开始>
@@ -409,11 +347,11 @@
 
 
 <原文开始>
-	// X-Forwarded-For has a non-IP element
+// X-Forwarded-For has a non-IP element
 <原文结束>
 
 # <翻译开始>
-// x - forward - for有一个非ip元素
+// X-Forwarded-For 包含非 IP 元素
 # <翻译结束>
 
 
@@ -424,31 +362,21 @@
 <原文结束>
 
 # <翻译开始>
-// LookupHost的结果有非ip元素
-// 这种情况不应该发生，但我们应该对其进行测试，以确保我们能够优雅地处理它
+// LookupHost 返回的结果包含非 IP 元素。这种情况本不应该发生，但我们应当对其进行测试以确保我们能够优雅地处理此类异常情况。
 # <翻译结束>
 
 
 <原文开始>
-	// Use custom TrustedPlatform header
+// Use custom TrustedPlatform header
 <原文结束>
 
 # <翻译开始>
-// 使用自定义TrustedPlatform头
+// 使用自定义 TrustedPlatform 头部
 # <翻译结束>
 
 
 <原文开始>
-	// wrong header
-<原文结束>
-
-# <翻译开始>
-// 错误的标题
-# <翻译结束>
-
-
-<原文开始>
-	// TrustedPlatform is empty
+// TrustedPlatform is empty
 <原文结束>
 
 # <翻译开始>
@@ -457,29 +385,11 @@
 
 
 <原文开始>
-	// Test the legacy flag
+// bodyA to typeA and typeB
 <原文结束>
 
 # <翻译开始>
-// 测试遗留标志
-# <翻译结束>
-
-
-<原文开始>
-// set fake content-type
-<原文结束>
-
-# <翻译开始>
-// 设置虚假内容类型
-# <翻译结束>
-
-
-<原文开始>
-		// bodyA to typeA and typeB
-<原文结束>
-
-# <翻译开始>
-// 身体a到类型a和类型b
+// 将bodyA转换为typeA和typeB
 # <翻译结束>
 
 
@@ -489,16 +399,16 @@
 <原文结束>
 
 # <翻译开始>
-// 当它绑定到类型a和类型b时，它发现主体不是类型b而是类型a
+// 当它绑定到 typeA 和 typeB 时，它发现主体不是 typeB，而是 typeA。
 # <翻译结束>
 
 
 <原文开始>
-		// bodyB to typeA and typeB
+// bodyB to typeA and typeB
 <原文结束>
 
 # <翻译开始>
-// 身体b到类型a和类型b
+// 将bodyB转换为typeA和typeB
 # <翻译结束>
 
 
@@ -508,80 +418,52 @@
 <原文结束>
 
 # <翻译开始>
-// 当它绑定到类型a和类型b时，它发现主体不是类型a而是类型b
+// 当它绑定到 typeA 和 typeB 时，会发现其实体不是 typeA，而是 typeB。
 # <翻译结束>
 
 
 <原文开始>
-	// Example request from spec: https://tools.ietf.org/html/rfc6455#section-1.2
+// Example request from spec: https://tools.ietf.org/html/rfc6455#section-1.2
 <原文结束>
 
 # <翻译开始>
-// 来自spec: https://tools.ietf.org/html/rfc6455#section-1.2的示例请求
+// 示例请求来自规范：https://tools.ietf.org/html/rfc6455#section-1.2
 # <翻译结束>
 
 
 <原文开始>
-	// Normal request, no websocket required.
+// Normal request, no websocket required.
 <原文结束>
 
 # <翻译开始>
-// 正常请求，不需要websocket
+// 正常请求，无需使用websocket。
 # <翻译结束>
 
 
 <原文开始>
-				// First assert must be executed after the second request
+// First assert must be executed after the second request
 <原文结束>
 
 # <翻译开始>
-// 第一个断言必须在第二个请求之后执行
+// 第一个断言必须在第二个请求执行后执行
 # <翻译结束>
 
 
 <原文开始>
-//nolint:staticcheck
+// enable ContextWithFallback feature flag
 <原文结束>
 
 # <翻译开始>
-// nolint: staticcheck
-// （翻译）：忽略静态检查工具对本行代码的检查。
+// 启用 ContextWithFallback 功能标志
 # <翻译结束>
 
 
 <原文开始>
-	// enable ContextWithFallback feature flag
+// start async goroutine for calling srv
 <原文结束>
 
 # <翻译开始>
-// 启用ContextWithFallback特性标志
-# <翻译结束>
-
-
-<原文开始>
-				// enable ContextWithFallback feature flag
-<原文结束>
-
-# <翻译开始>
-// 启用ContextWithFallback特性标志
-# <翻译结束>
-
-
-<原文开始>
-		// start async goroutine for calling srv
-<原文结束>
-
-# <翻译开始>
-// 启动调用SRV的异步例程
-# <翻译结束>
-
-
-<原文开始>
-// ensure request is done
-<原文结束>
-
-# <翻译开始>
-// 确保完成请求
+// 启动异步goroutine以调用srv
 # <翻译结束>
 
 
@@ -593,8 +475,8 @@
 <原文结束>
 
 # <翻译开始>
-// 当WriteHeaderNow()被调用时，Result()已经冻结了报头
-// 与此相比，这是响应报头将被刷新的时间
-// 维护这
+// 当 WriteHeaderNow() 被调用时，Result() 会冻结头部信息
+// 相对于此时，这是响应头将被刷新的时间点
+// 由于在 c.String 上进行响应刷新，因此第一个中间件无法设置 Header。请确认这一点
 # <翻译结束>
 

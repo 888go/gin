@@ -6,14 +6,14 @@
 <原文结束>
 
 # <翻译开始>
-// 版权声明 2022 Gin 核心团队。所有权利保留。
-// 本源代码的使用受 MIT 风格许可证约束，
+// 版权所有 ? 2022 Gin 核心团队。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
 // 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
 <原文开始>
-	// Marshal is exported by gin/json package.
+// Marshal is exported by gin/json package.
 <原文结束>
 
 # <翻译开始>
@@ -22,7 +22,7 @@
 
 
 <原文开始>
-	// Unmarshal is exported by gin/json package.
+// Unmarshal is exported by gin/json package.
 <原文结束>
 
 # <翻译开始>
@@ -31,29 +31,28 @@
 
 
 <原文开始>
-	// MarshalIndent is exported by gin/json package.
+// MarshalIndent is exported by gin/json package.
 <原文结束>
 
 # <翻译开始>
 // MarshalIndent 是 gin/json 包导出的方法。
-// （该方法用于）将数据按照指定的缩进格式转换为 JSON 格式的字符串。
 # <翻译结束>
 
 
 <原文开始>
-	// NewDecoder is exported by gin/json package.
+// NewDecoder is exported by gin/json package.
 <原文结束>
 
 # <翻译开始>
-// NewDecoder 是 gin/json 包导出的方法。
+// NewDecoder 由 gin/json 包导出。
 # <翻译结束>
 
 
 <原文开始>
-	// NewEncoder is exported by gin/json package.
+// NewEncoder is exported by gin/json package.
 <原文结束>
 
 # <翻译开始>
-// NewEncoder 由 gin/json 包导出。
+// NewEncoder 是由 gin/json 包导出的。
 # <翻译结束>
 

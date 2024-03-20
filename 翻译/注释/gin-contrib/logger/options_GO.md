@@ -13,7 +13,7 @@
 <原文结束>
 
 # <翻译开始>
-// WithLogger 设置自定义日志器函数
+// WithLogger 设置自定义日志记录器函数
 # <翻译结束>
 
 
@@ -31,7 +31,7 @@
 <原文结束>
 
 # <翻译开始>
-// WithUTC 返回一个时间t，其位置设置为UTC。
+// WithUTC 返回将时区设置为UTC的t。
 # <翻译结束>
 
 
@@ -50,22 +50,7 @@
 <原文结束>
 
 # <翻译开始>
-// WithWriter 更改默认输出 writer。
+// WithWriter 更改默认输出写入器。
 // 默认为 gin.DefaultWriter
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// fn:
-// zerolog.Logger:
-// *gin.Context:
 # <翻译结束>
 

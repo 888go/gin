@@ -9,20 +9,11 @@
 
 
 <原文开始>
-// mustGetMessage ...
-<原文结束>
-
-# <翻译开始>
-// mustGetMessage ... 必须获取消息...
-# <翻译结束>
-
-
-<原文开始>
 // loadMessageFiles load all file localize to bundle
 <原文结束>
 
 # <翻译开始>
-// loadMessageFiles 加载所有本地化文件到资源包中
+// loadMessageFiles 加载所有本地化文件到资源包
 # <翻译结束>
 
 
@@ -31,16 +22,16 @@
 <原文结束>
 
 # <翻译开始>
-// setLocalizerByLng 根据语言设置本地化器
+// setLocalizerByLng 通过语言设置本地化器
 # <翻译结束>
 
 
 <原文开始>
-	// set defaultLanguage if it isn't exist
+// set defaultLanguage if it isn't exist
 <原文结束>
 
 # <翻译开始>
-// 如果默认语言不存在，则设置默认语言
+// 如果defaultLanguage未设置，则设置它
 # <翻译结束>
 
 

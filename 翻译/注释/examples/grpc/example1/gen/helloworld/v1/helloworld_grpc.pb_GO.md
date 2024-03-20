@@ -8,9 +8,11 @@
 <原文结束>
 
 # <翻译开始>
-// 由protoc-gen-go-grpc生成的代码
-// 不要编辑
-// 版本号:- protoc-gen-go-grpc v1.2.0 - protoc v3.21.5
+// 由protoc-gen-go-grpc工具生成的代码。请勿编辑。
+// 版本信息：
+// - protoc-gen-go-grpc v1.2.0
+// - protoc             v3.21.5
+// 源文件：pb/helloworld/v1/helloworld.proto
 # <翻译结束>
 
 
@@ -21,8 +23,9 @@
 <原文结束>
 
 # <翻译开始>
-// 这是一个编译时断言，用于确保生成的文件与正在对其进行编译的grpc包兼容
-// 要求gRPC-Go v1.32.0或更高版本
+// 这是一个编译时断言，用于确保此生成文件
+// 与正在编译的gRPC包兼容。
+// 需要gRPC-Go v1.32.0或更高版本。
 # <翻译结束>
 
 
@@ -33,17 +36,9 @@
 <原文结束>
 
 # <翻译开始>
-// GreeterClient是greter服务的客户端API
-// 关于ctx使用和关闭/结束流rpc的语义，请参阅https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream
-# <翻译结束>
-
-
-<原文开始>
-	// Sends a greeting
-<原文结束>
-
-# <翻译开始>
-// 发送问候
+// GreeterClient 是 Greeter 服务的客户端 API。
+//
+// 关于 ctx 的使用语义以及关闭/结束流式 RPC，请参考 https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream。
 # <翻译结束>
 
 
@@ -54,8 +49,8 @@
 <原文结束>
 
 # <翻译开始>
-// GreeterServer是greter服务的服务器API
-// 为了向前兼容，所有实现必须嵌入unimplementgreeterserver
+// GreeterServer 是 Greeter 服务的服务器端 API。
+// 所有实现都必须嵌入 UnimplementedGreeterServer，以保证向前兼容性
 # <翻译结束>
 
 
@@ -64,7 +59,7 @@
 <原文结束>
 
 # <翻译开始>
-// UnimplementedGreeterServer必须被嵌入以具有向前兼容的实现
+// UnimplementedGreeterServer 需要被嵌入以确保兼容未来的实现。
 # <翻译结束>
 
 
@@ -75,8 +70,8 @@
 <原文结束>
 
 # <翻译开始>
-// UnsafeGreeterServer可以内嵌，以选择退出此服务的前向兼容性
-// 不建议使用此接口，因为向GreeterServer添加的方法将导致编译错误
+// UnsafeGreeterServer 可以被嵌入以选择性地退出此服务的向前兼容性。
+// 不建议使用此接口，因为向 GreeterServer 添加方法会导致编译错误。
 # <翻译结束>
 
 
@@ -87,26 +82,8 @@
 <原文结束>
 
 # <翻译开始>
-// Greeter_ServiceDesc是grpc
-// ServiceDesc表示迎宾服务
-// 它只适合与grpc直接使用
-// RegisterService，并且不能被自省或修改(即使作为副本)
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// *HelloReply:
-// opts:
-// in:
-// ctx:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// *HelloReply:
-// opts:
-// in:
-// ctx:
+// Greeter_ServiceDesc 是 Greeter 服务的 grpc.ServiceDesc。
+// 它仅用于直接配合 grpc.RegisterService 使用，
+// 不应被深入检查或修改（即使是作为副本）
 # <翻译结束>
 

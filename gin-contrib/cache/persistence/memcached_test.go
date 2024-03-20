@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// 这些测试需要在本地主机11211端口（默认设置）上运行的memcached服务
+// 这些测试需要在本地主机11211端口（默认端口）上运行的memcached
 const testServer = "localhost:11211"
 
 var newMemcachedStore = func(t *testing.T, defaultExpiration time.Duration) CacheStore {
@@ -21,62 +21,26 @@ var newMemcachedStore = func(t *testing.T, defaultExpiration time.Duration) Cach
 	panic("")
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestMemcachedCache_TypicalGetSet(t *testing.T) {
 	typicalGetSet(t, newMemcachedStore)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestMemcachedCache_IncrDecr(t *testing.T) {
 	incrDecr(t, newMemcachedStore)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestMemcachedCache_Expiration(t *testing.T) {
 	expiration(t, newMemcachedStore)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestMemcachedCache_EmptyCache(t *testing.T) {
 	emptyCache(t, newMemcachedStore)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestMemcachedCache_Replace(t *testing.T) {
 	testReplace(t, newMemcachedStore)
 }
 
-
-// ff:
-// t:
-
-// ff:
-// t:
 func TestMemcachedCache_Add(t *testing.T) {
 	testAdd(t, newMemcachedStore)
 }

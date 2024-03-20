@@ -6,27 +6,18 @@
 <原文结束>
 
 # <翻译开始>
-// Manu Martinez-Almeida版权所有
-// 版权所有
-// 此源代码的使用受MIT风格许可的约束，该许可可以在license文件中找到
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 # <翻译结束>
 
 
 <原文开始>
-// ResponseWriter ...
+// Status returns the HTTP response status code of the current request.
 <原文结束>
 
 # <翻译开始>
-// ResponseWriter……
-# <翻译结束>
-
-
-<原文开始>
-	// Status returns the HTTP response status code of the current request.
-<原文结束>
-
-# <翻译开始>
-// Status返回当前请求的HTTP响应状态码
+// Status 返回当前请求的HTTP响应状态码。
 # <翻译结束>
 
 
@@ -36,45 +27,44 @@
 <原文结束>
 
 # <翻译开始>
-// Size返回已经写入响应http主体的字节数
-// 看到写()
+// Size 返回已写入响应 http body 的字节数。
+// 参见 Written() 方法。
 # <翻译结束>
 
 
 <原文开始>
-	// WriteString writes the string into the response body.
+// WriteString writes the string into the response body.
 <原文结束>
 
 # <翻译开始>
-// WriteString将字符串写入响应体
+// WriteString 将字符串写入响应正文。
 # <翻译结束>
 
 
 <原文开始>
-	// Written returns true if the response body was already written.
+// Written returns true if the response body was already written.
 <原文结束>
 
 # <翻译开始>
-// 如果响应体已经写好，则write返回true
+// Written 返回 true，如果响应体已经被写入。
 # <翻译结束>
 
 
 <原文开始>
-	// WriteHeaderNow forces to write the http header (status code + headers).
+// WriteHeaderNow forces to write the http header (status code + headers).
 <原文结束>
 
 # <翻译开始>
-// WriteHeaderNow强制写入http报头(状态码+报头)
+// WriteHeaderNow 强制立即写入HTTP头部（状态码和头信息）。
 # <翻译结束>
 
 
 <原文开始>
-	// Pusher get the http.Pusher for server push
+// Pusher get the http.Pusher for server push
 <原文结束>
 
 # <翻译开始>
-// push获取http
-// 用于服务器推送的push
+// Pusher 获取用于服务器推送的 http.Pusher
 # <翻译结束>
 
 
@@ -83,8 +73,7 @@
 <原文结束>
 
 # <翻译开始>
-// Hijack实现http
-// 劫机者接口
+// Hijack 实现了 http.Hijacker 接口。
 # <翻译结束>
 
 
@@ -93,8 +82,7 @@
 <原文结束>
 
 # <翻译开始>
-// CloseNotify实现http
-// CloseNotifier接口
+// CloseNotify 实现了 http.CloseNotifier 接口。
 # <翻译结束>
 
 
@@ -103,50 +91,6 @@
 <原文结束>
 
 # <翻译开始>
-// Flush实现http
-// 冲洗装置接口
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// err:
-// n:
-// data:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// err:
-// n:
-// data:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// err:
-// n:
-// s:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// err:
-// n:
-// s:
-# <翻译结束>
-
-
-<原文开始>
-// ff:
-// *bufio.ReadWriter:
-// net.Conn:
-<原文结束>
-
-# <翻译开始>
-// ff:
-// *bufio.ReadWriter:
-// net.Conn:
+// Flush 实现了 http.Flusher 接口。
 # <翻译结束>
 
