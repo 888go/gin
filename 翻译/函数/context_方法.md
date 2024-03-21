@@ -182,12 +182,10 @@ key=名称
 
 [func (c *Context) GetPostFormMap(key string) (map#左中括号#string#右中括号#string, bool) {]
 ff=取参数Map值
-map[string]string=返回Map
 key=名称
 
 [func (c *Context) FormFile(name string) (*multipart.FileHeader, error) {]
 ff=取表单上传文件
-*multipart.FileHeader=文件对象
 name=名称
 
 [func (c *Context) MultipartForm() (*multipart.Form, error) {]
