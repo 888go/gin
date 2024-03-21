@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?> 
  <trees>
      <tree path="/examples" title="例子"/>
-     <tree path="/gin-contrib" title="插件"/>
+     <tree path="/gin-contrib" title="第三方中间件" extension="" presentableText="" tooltipTitle="" icon="" textColor=""
+           backgroundColor=""/>
      <tree path="/demo/Param" title="api参数"/>
      <tree path="/demo/DefaultQuery" title="url参数"/>
      <tree path="/demo" title="学习例子"/>
@@ -61,4 +62,12 @@
           backgroundColor=""/>
     <tree path="/mode.go" title="运行模式"/>
     <tree path="/binding/default_validator.go" title="默认效验器"/>
+    <tree path="/tree.go" title="URL参数"/>
+   <tree path="/testdata" title="单元测试数据"/>
+   <tree path="/internal" title="内部方法"/>
+   <tree path="/ginS" title="便捷方法"/>
+   <tree path="/docs" title="文档"/>
+   <tree path="/binding" title="内部调用包"/>
+   <tree path="/render" title="数据渲染"/>
+   <tree path="/test_helpers.go" title="单元测试"/>
 </trees>

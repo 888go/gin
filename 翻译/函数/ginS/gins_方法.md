@@ -114,3 +114,12 @@ handlers=处理函数s
 [func NoMethod(handlers ...gin.HandlerFunc) {]
 ff=绑定405
 handlers=处理函数s
+
+[func RunUnix(file string) (err error) {]
+ff=监听Unix
+err=错误
+file=文件路径
+
+[func RunFd(fd int) (err error) {]
+ff=监听Fd
+err=错误

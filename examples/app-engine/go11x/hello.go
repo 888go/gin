@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	
+
 	"github.com/888go/gin"
 )
 
@@ -19,7 +19,7 @@ func main() {
 	// 初始化一个新的Gin实例，不包含中间件
 	r := gin.New()
 
-	// Define handlers
+	// 定义处理程序
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Hello World!")
 	})

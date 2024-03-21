@@ -41,7 +41,7 @@ func Bind(val any) HandlerFunc {
 
 // WrapF 是一个用于包装 http.HandlerFunc 的辅助函数，并返回一个 Gin 中间件。
 
-// ff:
+// ff:包装F
 // f:
 func WrapF(f http.HandlerFunc) HandlerFunc {
 	return func(c *Context) {
@@ -51,7 +51,7 @@ func WrapF(f http.HandlerFunc) HandlerFunc {
 
 // WrapH 是一个辅助函数，用于封装 http.Handler，并返回一个 Gin 中间件。
 
-// ff:
+// ff:包装H
 // h:
 func WrapH(h http.Handler) HandlerFunc {
 	return func(c *Context) {

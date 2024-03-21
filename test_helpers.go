@@ -10,7 +10,7 @@ import (
 
 // CreateTestContext 返回一个用于测试的新鲜（即初始化的）引擎和上下文
 
-// ff:
+// ff:创建测试引擎与上下文
 // r:
 // c:
 // w:
@@ -24,7 +24,7 @@ func CreateTestContext(w http.ResponseWriter) (c *Context, r *Engine) {
 
 // CreateTestContextOnly 根据引擎为测试目的返回一个新的上下文副本
 
-// ff:
+// ff:创建测试上下文
 // c:
 // r:
 // w:
