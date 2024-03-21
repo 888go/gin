@@ -70,4 +70,6 @@
    <tree path="/binding" title="内部调用包"/>
    <tree path="/render" title="数据渲染"/>
    <tree path="/test_helpers.go" title="单元测试"/>
+   <tree path="/gin.go" title="gin方法"/>
+   <tree path="/logger.go" title="中间件"/>
 </trees>
