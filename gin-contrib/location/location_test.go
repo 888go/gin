@@ -107,7 +107,7 @@ var tests = []struct {
 		},
 	},
 
-	// X-Forwarded-Host host header
+	// X-Forwarded-Host：主机头
 	{
 		want: "http://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", Headers{

@@ -51,7 +51,7 @@ func WithDecompressFn(decompressFn func(c *gin类.Context)) Option {
 	}
 }
 
-// Using map for better lookup performance
+// 使用map以获得更好的查找性能
 type ExcludedExtensions map[string]bool
 
 func NewExcludedExtensions(extensions []string) ExcludedExtensions {

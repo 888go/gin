@@ -10,7 +10,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// Recovery middleware for sentry crash reporting
+// Recovery中间件用于Sentry崩溃报告
 func Recovery(client *raven.Client, onlyCrashes bool) gin类.HandlerFunc {
 
 	return func(c *gin类.Context) {

@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// Validator interface for checking if a request is valid or not
+// 验证器接口，用于检查请求是否有效
 type Validator interface {
 	Validate(*http.Request) error
 }

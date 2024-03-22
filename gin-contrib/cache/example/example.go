@@ -23,6 +23,6 @@ func main() {
 		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().Unix()))
 	}))
 
-	// Listen and Server in 0.0.0.0:8080
+	// 在0.0.0.0:8080监听并服务
 	_ = r.X监听(":8080")
 }

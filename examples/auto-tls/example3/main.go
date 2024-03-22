@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	// Create context that listens for the interrupt signal from the OS.
+	// 创建一个上下文，用于监听来自操作系统的中断信号。
 	ctx, stop := signal.NotifyContext(
 		context.Background(),
 		syscall.SIGINT,

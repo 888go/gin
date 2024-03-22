@@ -19,10 +19,10 @@ var rxURL = regexp.MustCompile(`^/regexp\d*`)
 func main() {
 	r := gin类.X创建()
 
-	// Add a logger middleware, which:
-	//   - Logs all requests, like a combined access and error log.
-	//   - Logs to stdout.
-	// r.Use(logger.SetLogger())
+// 添加一个日志中间件，其功能包括：
+//   - 记录所有请求，如同综合访问和错误日志。
+//   - 将日志记录到标准输出（stdout）中。
+// r.Use(logger.SetLogger())
 
 	// Example pong request.
 	r.X绑定GET("/pong", logger.SetLogger(), func(c *gin类.Context) {
@@ -38,21 +38,21 @@ func main() {
 		c.X输出文本(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example skip path request.
+	// 示例：跳过路径请求。
 	r.X绑定GET("/skip", logger.SetLogger(
 		logger.WithSkipPath([]string{"/skip"}),
 	), func(c *gin类.Context) {
 		c.X输出文本(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example skip path request.
+	// 示例：跳过路径请求。
 	r.X绑定GET("/regexp1", logger.SetLogger(
 		logger.WithSkipPathRegexps(rxURL),
 	), func(c *gin类.Context) {
 		c.X输出文本(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example skip path request.
+	// 示例：跳过路径请求。
 	r.X绑定GET("/regexp2", logger.SetLogger(
 		logger.WithSkipPathRegexps(rxURL),
 	), func(c *gin类.Context) {
@@ -81,7 +81,7 @@ func main() {
 		c.X输出文本(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Example of JSON format log
+	// JSON格式日志示例
 	r.X绑定GET("/json", logger.SetLogger(
 		logger.WithLogger(func(_ *gin类.Context, l zerolog.Logger) zerolog.Logger {
 			return l.Output(gin类.DefaultWriter).With().Logger()
@@ -90,7 +90,7 @@ func main() {
 		c.X输出文本(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// Listen and Server in 0.0.0.0:8080
+	// 在0.0.0.0:8080监听并服务
 	if err := r.X监听(":8080"); err != nil {
 		log.Fatal().Msg("can' start server with 8080 port")
 	}

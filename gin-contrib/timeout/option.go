@@ -10,21 +10,21 @@ import (
 // Option for timeout
 type Option func(*Timeout)
 
-// WithTimeout set timeout
+// WithTimeout 设置超时
 func WithTimeout(timeout time.Duration) Option {
 	return func(t *Timeout) {
 		t.timeout = timeout
 	}
 }
 
-// WithHandler add gin handler
+// WithHandler 添加 Gin 处理器
 func WithHandler(h gin类.HandlerFunc) Option {
 	return func(t *Timeout) {
 		t.handler = h
 	}
 }
 
-// WithResponse add gin handler
+// WithResponse 添加 Gin 处理器
 func WithResponse(h gin类.HandlerFunc) Option {
 	return func(t *Timeout) {
 		t.response = h

@@ -1,23 +1,22 @@
-# Gin websocket Client and server example
+# # Gin websocket 客户端和服务端示例
 
-This example shows a simple client and server.
+此示例展示了一个简单的客户端和服务器。
 
-The server echoes messages sent to it. The client sends a message every second and prints all messages received.
+服务器会回显发送给它的消息。客户端每隔一秒发送一条消息，并打印接收到的所有消息。
 
-To run the example, start the server:
+要运行此示例，请首先启动服务器：
 
 ```bash
 go run server/server.go
 ```
 
-Next, start the client:
+接下来，启动客户端：
 
 ```bash
 go run client/client.go
 ```
 
-The server includes a simple web client. To use the client, open [URL](http://127.0.0.1:8080) in the browser and follow the instructions on the page.
-
-## deps
+服务器中包含一个简单的网页客户端。要使用该客户端，请在浏览器中打开 [URL](http://127.0.0.1:8080) 并按照页面上的指示进行操作。
+## # 依赖项
 
 - [gorilla/websocket](https://github.com/gorilla/websocket)

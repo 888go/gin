@@ -12,7 +12,7 @@ const (
 	defaultTimeout = 5 * time.Second
 )
 
-// New wraps a handler and aborts the process of the handler if the timeout is reached
+// New 包装一个处理器，如果超时则中止处理器的执行过程
 func New(opts ...Option) gin类.HandlerFunc {
 	t := &Timeout{
 		timeout:  defaultTimeout,
@@ -20,13 +20,13 @@ func New(opts ...Option) gin类.HandlerFunc {
 		response: defaultResponse,
 	}
 
-	// Loop through each option
+	// 遍历每个选项
 	for _, opt := range opts {
 		if opt == nil {
 			panic("timeout Option not be nil")
 		}
 
-		// Call the option giving the instantiated
+		// 调用选项，传入已实例化的
 		opt(t)
 	}
 

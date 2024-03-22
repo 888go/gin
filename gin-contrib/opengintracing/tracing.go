@@ -1,6 +1,6 @@
-// Package opengintracing provides requests tracing functional using opentracing specification.
+// opengintracing 包提供基于 opentracing 规范的请求追踪功能。
 //
-// See https://github.com/opentracing/opentracing-go for more information
+// 有关更多信息，请参阅 https://github.com/opentracing/opentracing-go
 package opengintracing
 
 import (
@@ -13,14 +13,14 @@ import (
 
 const spanContextKey = "span"
 
-// Errors which may occur at operation time.
+// 在操作运行时可能会发生的错误。
 var (
 	ErrSpanNotFound = errors.New("span was not found in context")
 )
 
-// NewSpan returns gin.HandlerFunc (middleware) that starts a new span and injects it to request context.
+// NewSpan 返回gin.HandlerFunc（中间件），该函数会启动一个新的span并将其注入到请求上下文中。
 //
-// It calls ctx.Next() to measure execution time of all following handlers.
+// 它调用ctx.Next()来测量所有后续处理器的执行时间。
 func NewSpan(tracer opentracing.Tracer, operationName string, opts ...opentracing.StartSpanOption) gin类.HandlerFunc {
 	return func(ctx *gin类.Context) {
 		span := tracer.StartSpan(operationName, opts...)
@@ -31,19 +31,19 @@ func NewSpan(tracer opentracing.Tracer, operationName string, opts ...opentracin
 	}
 }
 
-// ParentSpanReferenceFunc determines how to reference parent span
+// ParentSpanReferenceFunc 确定如何引用父级 span
 //
-// See opentracing.SpanReferenceType
+// 参见 opentracing.SpanReferenceType
 type ParentSpanReferenceFunc func(opentracing.SpanContext) opentracing.StartSpanOption
 
-// SpanFromHeaders returns gin.HandlerFunc (middleware)
-// that extracts parent span data from HTTP headers in TextMap format and
-// starts a new span referenced to parent with ParentSpanReferenceFunc.
+// SpanFromHeaders 返回 gin.HandlerFunc（中间件）
+// 该函数从HTTP头部以TextMap格式提取父级span数据，
+// 并使用ParentSpanReferenceFunc开始一个新的引用了父级span的新span。
 //
-// It calls ctx.Next() to measure execution time of all following handlers.
+// 它调用ctx.Next()来测量所有后续处理器的执行时间。
 //
-// Behaviour on errors determined by abortOnErrors option.
-// If it set to true request handling will be aborted with error.
+// 错误处理的行为由abortOnErrors选项决定。
+// 如果将其设置为true，将会在出现错误时中止请求处理。
 func SpanFromHeaders(tracer opentracing.Tracer, operationName string, psr ParentSpanReferenceFunc,
 	abortOnErrors bool, advancedOpts ...opentracing.StartSpanOption,
 ) gin类.HandlerFunc {
@@ -66,14 +66,14 @@ func SpanFromHeaders(tracer opentracing.Tracer, operationName string, psr Parent
 	}
 }
 
-// SpanFromHeadersHTTPFmt returns gin.HandlerFunc (middleware)
-// that extracts parent span data from HTTP headers in HTTPHeaders format and
-// starts a new span referenced to parent with ParentSpanReferenceFunc.
+// SpanFromHeadersHTTPFmt 返回 gin.HandlerFunc（中间件）
+// 该函数从 HTTP 头部以 HTTPHeaders 格式提取父级 span 数据，
+// 并使用 ParentSpanReferenceFunc 开启一个新的引用了父级 span 的新 span。
 //
-// It calls ctx.Next() to measure execution time of all following handlers.
+// 它调用 ctx.Next() 来测量所有后续处理器的执行时间。
 //
-// Behaviour on errors determined by abortOnErrors option.
-// If it set to true request handling will be aborted with error.
+// 当出现错误时的行为由 abortOnErrors 选项决定。
+// 如果该选项设置为 true，请求处理将因错误而终止。
 func SpanFromHeadersHTTPFmt(tracer opentracing.Tracer, operationName string, psr ParentSpanReferenceFunc,
 	abortOnErrors bool, advancedOpts ...opentracing.StartSpanOption,
 ) gin类.HandlerFunc {
@@ -96,13 +96,11 @@ func SpanFromHeadersHTTPFmt(tracer opentracing.Tracer, operationName string, psr
 	}
 }
 
-// SpanFromContext returns gin.HandlerFunc (middleware) that extracts parent span from request context
-// and starts a new span as child of parent span.
+// SpanFromContext 返回一个gin.HandlerFunc（中间件），该中间件从请求上下文中提取父级span，并作为父级span的子级开始一个新的span。
 //
-// It calls ctx.Next() to measure execution time of all following handlers.
+// 它调用ctx.Next()来测量所有后续处理器的执行时间。
 //
-// Behaviour on errors determined by abortOnErrors option.
-// If it set to true request handling will be aborted with error.
+// 错误处理的行为由abortOnErrors选项决定。如果设置为true，将在出现错误时中止请求处理。
 func SpanFromContext(tracer opentracing.Tracer, operationName string, abortOnErrors bool,
 	advancedOpts ...opentracing.StartSpanOption,
 ) gin类.HandlerFunc {
@@ -127,13 +125,11 @@ func SpanFromContext(tracer opentracing.Tracer, operationName string, abortOnErr
 	}
 }
 
-// InjectToHeaders injects span meta-information to request headers.
+// InjectToHeaders 将跨度元信息注入到请求头中。
 //
-// It may be useful when you want to trace chained request (client->service 1->service 2).
-// In this case you have to save request headers (ctx.Request.Header) and pass it to next level request.
+// 当您想要跟踪链式请求（client->服务1->服务2）时，这可能很有用。在这种情况下，您需要保存请求头（ctx.Request.Header）并将其传递给下一级请求。
 //
-// Behaviour on errors determined by abortOnErrors option.
-// If it set to true request handling will be aborted with error.
+// 对于错误的行为由 abortOnErrors 选项决定。如果将其设置为 true，则会在出现错误时中止请求处理。
 func InjectToHeaders(tracer opentracing.Tracer, abortOnErrors bool) gin类.HandlerFunc {
 	return func(ctx *gin类.Context) {
 		var spanContext opentracing.SpanContext
@@ -151,7 +147,7 @@ func InjectToHeaders(tracer opentracing.Tracer, abortOnErrors bool) gin类.Handl
 	}
 }
 
-// GetSpan extracts span from context.
+// GetSpan 从上下文中提取跨度（span）。
 func GetSpan(ctx *gin类.Context) (span opentracing.Span, exists bool) {
 	spanI, _ := ctx.X取值(spanContextKey)
 	span, ok := spanI.(opentracing.Span)
@@ -159,7 +155,7 @@ func GetSpan(ctx *gin类.Context) (span opentracing.Span, exists bool) {
 	return
 }
 
-// MustGetSpan extracts span from context. It panics if span was not set.
+// MustGetSpan 从上下文中提取 span（跨度）。如果未设置 span，则会触发panic。
 func MustGetSpan(ctx *gin类.Context) opentracing.Span {
 	return ctx.X取值PANI(spanContextKey).(opentracing.Span)
 }

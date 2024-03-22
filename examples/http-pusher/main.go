@@ -26,7 +26,7 @@ func main() {
 
 	r.X绑定GET("/", func(c *gin类.Context) {
 		if pusher := c.Writer.Pusher(); pusher != nil {
-			// use pusher.Push() to do server push
+			// 使用pusher.Push()进行服务器推送
 			if err := pusher.Push("/assets/app.js", nil); err != nil {
 				log.Printf("Failed to push: %v", err)
 			}
@@ -36,6 +36,6 @@ func main() {
 		})
 	})
 
-	// Listen and Server in https://127.0.0.1:8080
+	// 在 https://127.0.0.1:8080 上监听并服务
 	r.X监听TLS(":8080", "./testdata/server.pem", "./testdata/server.key")
 }

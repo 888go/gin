@@ -17,7 +17,7 @@ type BindFile struct {
 
 func main() {
 	router := gin类.X创建默认对象()
-	// Set a lower memory limit for multipart forms (default is 32 MiB)
+	// 设置multipart表单的较低内存限制（默认为32 MiB）
 	router.X最大Multipart内存 = 8 << 20 // 8 MiB
 	router.X绑定静态文件目录("/", "./public")
 	router.X绑定POST("/upload", func(c *gin类.Context) {

@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	// DefaultPrefix url prefix of pprof
+	// DefaultPrefix 是pprof的默认URL前缀
 	DefaultPrefix = "/debug/pprof"
 )
 
@@ -19,16 +19,14 @@ func getPrefix(prefixOptions ...string) string {
 	return prefix
 }
 
-// Register the standard HandlerFuncs from the net/http/pprof package with
-// the provided gin.Engine. prefixOptions is a optional. If not prefixOptions,
-// the default path prefix is used, otherwise first prefixOptions will be path prefix.
+// 使用提供的gin.Engine注册net/http/pprof包中的标准HandlerFuncs。
+// prefixOptions是可选的。如果不提供prefixOptions，则使用默认路径前缀，否则将使用第一个prefixOptions作为路径前缀。
 func Register(r *gin类.Engine, prefixOptions ...string) {
 	RouteRegister(&(r.RouterGroup), prefixOptions...)
 }
 
-// RouteRegister the standard HandlerFuncs from the net/http/pprof package with
-// the provided gin.GrouterGroup. prefixOptions is a optional. If not prefixOptions,
-// the default path prefix is used, otherwise first prefixOptions will be path prefix.
+// RouteRegister 将标准的来自 net/http/pprof 包中的 HandlerFuncs 与提供的 gin.GrouterGroup 进行注册。
+// prefixOptions 是可选参数。如果不提供 prefixOptions，将使用默认路径前缀；否则，首个 prefixOptions 将作为路径前缀。
 func RouteRegister(rg *gin类.RouterGroup, prefixOptions ...string) {
 	prefix := getPrefix(prefixOptions...)
 

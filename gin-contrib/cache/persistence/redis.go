@@ -7,20 +7,20 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
-// RedisStore represents the cache with redis persistence
+// RedisStore代表了使用Redis进行持久化的缓存
 type RedisStore struct {
 	pool              *redis.Pool
 	defaultExpiration time.Duration
 }
 
-// NewRedisCache returns a RedisStore
-// until redigo supports sharding/clustering, only one host will be in hostList
+// NewRedisCache 返回一个 RedisStore
+// 由于 redigo 目前还不支持分片/集群，因此 hostList 中目前只能包含一个主机地址
 func NewRedisCache(host string, password string, defaultExpiration time.Duration) *RedisStore {
 	var pool = &redis.Pool{
 		MaxIdle:     5,
 		IdleTimeout: 240 * time.Second,
 		Dial: func() (redis.Conn, error) {
-			// the redis protocol should probably be made sett-able
+			// redis协议可能应该设置为可配置的
 			c, err := redis.Dial("tcp", host, redis.DialConnectTimeout(10*time.Second))
 			if err != nil {
 				return nil, err
@@ -39,9 +39,9 @@ func NewRedisCache(host string, password string, defaultExpiration time.Duration
 			}
 			return c, err
 		},
-		// custom connection test method
+		// 自定义连接测试方法
 		TestOnBorrow: func(c redis.Conn, t time.Time) error {
-			// don't need check connection every time.
+			// 不需要每次都检查连接。
 			if time.Since(t) < 30*time.Second {
 				return nil
 			}
@@ -55,20 +55,20 @@ func NewRedisCache(host string, password string, defaultExpiration time.Duration
 	return &RedisStore{pool, defaultExpiration}
 }
 
-// NewRedisCacheWithPool returns a RedisStore using the provided pool
-// until redigo supports sharding/clustering, only one host will be in hostList
+// NewRedisCacheWithPool 使用提供的连接池返回一个 RedisStore
+// 在 redigo 支持分片/集群之前，hostList 中将只包含一个主机地址
 func NewRedisCacheWithPool(pool *redis.Pool, defaultExpiration time.Duration) *RedisStore {
 	return &RedisStore{pool, defaultExpiration}
 }
 
-// Set (see CacheStore interface)
+// Set（参见 CacheStore 接口）
 func (c *RedisStore) Set(key string, value interface{}, expires time.Duration) error {
 	conn := c.pool.Get()
 	defer conn.Close()
 	return c.invoke(conn.Do, key, value, expires)
 }
 
-// Add (see CacheStore interface)
+// Add （参见 CacheStore 接口）
 func (c *RedisStore) Add(key string, value interface{}, expires time.Duration) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -78,7 +78,7 @@ func (c *RedisStore) Add(key string, value interface{}, expires time.Duration) e
 	return c.invoke(conn.Do, key, value, expires)
 }
 
-// Replace (see CacheStore interface)
+// Replace（参见 CacheStore 接口）
 func (c *RedisStore) Replace(key string, value interface{}, expires time.Duration) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -94,7 +94,7 @@ func (c *RedisStore) Replace(key string, value interface{}, expires time.Duratio
 
 }
 
-// Get (see CacheStore interface)
+// Get（参见 CacheStore 接口）
 func (c *RedisStore) Get(key string, ptrValue interface{}) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -114,7 +114,7 @@ func exists(conn redis.Conn, key string) bool {
 	return retval
 }
 
-// Delete (see CacheStore interface)
+// Delete（参考 CacheStore 接口）
 func (c *RedisStore) Delete(key string) error {
 	conn := c.pool.Get()
 	defer conn.Close()
@@ -125,14 +125,12 @@ func (c *RedisStore) Delete(key string) error {
 	return err
 }
 
-// Increment (see CacheStore interface)
+// 自增（参见 CacheStore 接口）
 func (c *RedisStore) Increment(key string, delta uint64) (uint64, error) {
 	conn := c.pool.Get()
 	defer conn.Close()
-	// Check for existance *before* increment as per the cache contract.
-	// redis will auto create the key, and we don't want that. Since we need to do increment
-	// ourselves instead of natively via INCRBY (redis doesn't support wrapping), we get the value
-	// and do the exists check this way to minimize calls to Redis
+// 根据缓存契约，在自增之前检查是否存在。
+// Redis 会自动创建键，但我们不希望这样。因为我们需要自己而不是通过原生的 INCRBY（Redis 不支持自增后循环）来执行自增操作，所以我们获取值并以这种方式进行存在性检查，以尽量减少对 Redis 的调用。
 	val, err := conn.Do("GET", key)
 	if val == nil {
 		return 0, ErrCacheMiss
@@ -153,18 +151,18 @@ func (c *RedisStore) Increment(key string, delta uint64) (uint64, error) {
 	return 0, err
 }
 
-// Decrement (see CacheStore interface)
+// 减量（参考 CacheStore 接口）
 func (c *RedisStore) Decrement(key string, delta uint64) (newValue uint64, err error) {
 	conn := c.pool.Get()
 	defer conn.Close()
-	// Check for existance *before* increment as per the cache contract.
-	// redis will auto create the key, and we don't want that, hence the exists call
+// 按照缓存契约，在递增前检查是否存在。
+// Redis 会自动创建键，但我们不希望这样，因此需要调用 exists 函数。
 	if !exists(conn, key) {
 		return 0, ErrCacheMiss
 	}
-	// Decrement contract says you can only go to 0
-	// so we go fetch the value and if the delta is greater than the amount,
-	// 0 out the value
+// Decrement contract 表示你只能减到0
+// 因此，我们获取当前值，如果减少的量大于该值，
+// 则将值置为0
 	currentVal, err := redis.Int64(conn.Do("GET", key))
 	if err == nil && delta > uint64(currentVal) {
 		tempint, err := redis.Int64(conn.Do("DECRBY", key, currentVal))
@@ -174,7 +172,7 @@ func (c *RedisStore) Decrement(key string, delta uint64) (newValue uint64, err e
 	return uint64(tempint), err
 }
 
-// Flush (see CacheStore interface)
+// Flush（参考 CacheStore 接口）
 func (c *RedisStore) Flush() error {
 	conn := c.pool.Get()
 	defer conn.Close()

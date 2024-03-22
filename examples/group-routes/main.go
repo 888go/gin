@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-	// Our server will live in the routes package
+	// 我们的服务器将存在于 routes 包中
 	routes.Run()
 }

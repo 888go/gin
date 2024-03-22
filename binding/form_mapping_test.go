@@ -1,6 +1,6 @@
-// Copyright 2019 Gin Core Team. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2019 Gin 核心团队。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package binding
 
@@ -248,7 +248,7 @@ func TestMappingArray(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, [2]int{3, 4}, s.Array)
 
-	// error - not enough vals
+	// 错误 - 参数不足
 	err = mappingByPtr(&s, formSource{"array": {"3"}}, "form")
 	assert.Error(t, err)
 

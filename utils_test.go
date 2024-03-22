@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin类
 
@@ -90,7 +90,7 @@ func TestFunctionName(t *testing.T) {
 }
 
 func somefunction() {
-	// this empty function is used by TestFunctionName()
+	// 这个空函数被TestFunctionName()测试函数使用
 }
 
 func TestJoinPaths(t *testing.T) {

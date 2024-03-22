@@ -16,7 +16,7 @@ func main() {
 		log.Printf("Defaulting to port %s", port)
 	}
 
-	// Starts a new Gin instance with no middle-ware
+	// 初始化一个新的Gin实例，不包含中间件
 	r := gin类.X创建()
 
 	// Define handlers
@@ -27,7 +27,7 @@ func main() {
 		c.X输出文本(http.StatusOK, "pong")
 	})
 
-	// Listen and serve on defined port
+	// 在定义的端口上监听并提供服务
 	log.Printf("Listening on port %s", port)
 	r.X监听(":" + port)
 }

@@ -68,13 +68,13 @@ func newCors(config Config) *cors {
 func (cors *cors) applyCors(c *gin类.Context) {
 	origin := c.X请求.Header.Get("Origin")
 	if len(origin) == 0 {
-		// request is not a CORS request
+		// 请求不是CORS请求
 		return
 	}
 	host := c.X请求.Host
 
 	if origin == "http://"+host || origin == "https://"+host {
-		// request is not a CORS request but have origin header.
+		// 请求不是CORS请求 but have origin header.
 		// for example, use fetch api
 		return
 	}

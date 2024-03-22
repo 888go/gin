@@ -14,7 +14,7 @@ var html = template.Must(template.New("chat_room").Parse(`
     <script> 
         $('#message_form').focus();
         $(document).ready(function() { 
-            // bind 'myForm' and provide a simple callback function 
+            // 绑定 'myForm' 并提供一个简单的回调函数
             $('#myForm').ajaxForm(function() {
                 $('#message_form').val('');
                 $('#message_form').focus();

@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin类
 
@@ -37,9 +37,7 @@ func TestLogger(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-	// I wrote these first (extending the above) but then realized they are more
-	// like integration tests because they test the whole logging process rather
-	// than individual functions.  Im not sure where these should go.
+// 我首先编写了这些（基于上述内容扩展），但随后意识到它们更像是集成测试，因为它们测试的是整个日志记录过程，而非单个函数。我不确定这些应该放在哪里。
 	buffer.Reset()
 	PerformRequest(router, "POST", "/example")
 	assert.Contains(t, buffer.String(), "200")
@@ -101,9 +99,7 @@ func TestLoggerWithConfig(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-	// I wrote these first (extending the above) but then realized they are more
-	// like integration tests because they test the whole logging process rather
-	// than individual functions.  Im not sure where these should go.
+// 我首先编写了这些（基于上述内容扩展），但随后意识到它们更像是集成测试，因为它们测试的是整个日志记录过程，而非单个函数。我不确定这些应该放在哪里。
 	buffer.Reset()
 	PerformRequest(router, "POST", "/example")
 	assert.Contains(t, buffer.String(), "200")
@@ -219,7 +215,7 @@ func TestLoggerWithConfigFormatting(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-	// LogFormatterParams test
+	// LogFormatterParams 测试
 	assert.NotNil(t, gotParam.X请求)
 	assert.NotEmpty(t, gotParam.X响应时间)
 	assert.Equal(t, 200, gotParam.X状态码)
@@ -323,7 +319,7 @@ func TestResetColor(t *testing.T) {
 }
 
 func TestIsOutputColor(t *testing.T) {
-	// test with isTerm flag true.
+	// 使用isTerm标志为true进行测试。
 	p := LogFormatterParams{
 		X是否输出到终端: true,
 	}
@@ -337,7 +333,7 @@ func TestIsOutputColor(t *testing.T) {
 	X关闭控制台颜色()
 	assert.Equal(t, false, p.IsOutputColor())
 
-	// test with isTerm flag false.
+	// 使用isTerm标志为false进行测试。
 	p = LogFormatterParams{
 		X是否输出到终端: false,
 	}
@@ -351,7 +347,7 @@ func TestIsOutputColor(t *testing.T) {
 	X关闭控制台颜色()
 	assert.Equal(t, false, p.IsOutputColor())
 
-	// reset console color mode.
+	// 重置控制台颜色模式。
 	consoleColorMode = autoColor
 }
 
@@ -421,7 +417,7 @@ func TestDisableConsoleColor(t *testing.T) {
 	X关闭控制台颜色()
 	assert.Equal(t, disableColor, consoleColorMode)
 
-	// reset console color mode.
+	// 重置控制台颜色模式。
 	consoleColorMode = autoColor
 }
 
@@ -431,6 +427,6 @@ func TestForceConsoleColor(t *testing.T) {
 	X开启控制台颜色()
 	assert.Equal(t, forceColor, consoleColorMode)
 
-	// reset console color mode.
+	// 重置控制台颜色模式。
 	consoleColorMode = autoColor
 }

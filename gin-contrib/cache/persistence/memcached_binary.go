@@ -7,24 +7,23 @@ import (
 	"github.com/memcachier/mc/v3"
 )
 
-// MemcachedBinaryStore represents the cache with memcached persistence using
-// the binary protocol
+// MemcachedBinaryStore代表使用二进制协议的缓存，其持久化机制为Memcached
 type MemcachedBinaryStore struct {
 	*mc.Client
 	defaultExpiration time.Duration
 }
 
-// NewMemcachedBinaryStore returns a MemcachedBinaryStore
+// NewMemcachedBinaryStore 返回一个 MemcachedBinaryStore
 func NewMemcachedBinaryStore(hostList, username, password string, defaultExpiration time.Duration) *MemcachedBinaryStore {
 	return &MemcachedBinaryStore{mc.NewMC(hostList, username, password), defaultExpiration}
 }
 
-// NewMemcachedBinaryStoreWithConfig returns a MemcachedBinaryStore using the provided configuration
+// NewMemcachedBinaryStoreWithConfig 使用提供的配置返回一个 MemcachedBinaryStore 实例
 func NewMemcachedBinaryStoreWithConfig(hostList, username, password string, defaultExpiration time.Duration, config *mc.Config) *MemcachedBinaryStore {
 	return &MemcachedBinaryStore{mc.NewMCwithConfig(hostList, username, password, config), defaultExpiration}
 }
 
-// Set (see CacheStore interface)
+// Set（参见 CacheStore 接口）
 func (s *MemcachedBinaryStore) Set(key string, value interface{}, expires time.Duration) error {
 	exp := s.getExpiration(expires)
 	b, err := utils.Serialize(value)
@@ -35,7 +34,7 @@ func (s *MemcachedBinaryStore) Set(key string, value interface{}, expires time.D
 	return convertMcError(err)
 }
 
-// Add (see CacheStore interface)
+// Add （参见 CacheStore 接口）
 func (s *MemcachedBinaryStore) Add(key string, value interface{}, expires time.Duration) error {
 	exp := s.getExpiration(expires)
 	b, err := utils.Serialize(value)
@@ -46,7 +45,7 @@ func (s *MemcachedBinaryStore) Add(key string, value interface{}, expires time.D
 	return convertMcError(err)
 }
 
-// Replace (see CacheStore interface)
+// Replace（参见 CacheStore 接口）
 func (s *MemcachedBinaryStore) Replace(key string, value interface{}, expires time.Duration) error {
 	exp := s.getExpiration(expires)
 	b, err := utils.Serialize(value)
@@ -57,7 +56,7 @@ func (s *MemcachedBinaryStore) Replace(key string, value interface{}, expires ti
 	return convertMcError(err)
 }
 
-// Get (see CacheStore interface)
+// Get（参见 CacheStore 接口）
 func (s *MemcachedBinaryStore) Get(key string, value interface{}) error {
 	val, _, _, err := s.Client.Get(key)
 	if err != nil {
@@ -66,31 +65,30 @@ func (s *MemcachedBinaryStore) Get(key string, value interface{}) error {
 	return utils.Deserialize([]byte(val), value)
 }
 
-// Delete (see CacheStore interface)
+// Delete（参考 CacheStore 接口）
 func (s *MemcachedBinaryStore) Delete(key string) error {
 	return convertMcError(s.Client.Del(key))
 }
 
-// Increment (see CacheStore interface)
+// 自增（参见 CacheStore 接口）
 func (s *MemcachedBinaryStore) Increment(key string, delta uint64) (uint64, error) {
 	n, _, err := s.Client.Incr(key, delta, 0, 0xffffffff, 0)
 	return n, convertMcError(err)
 }
 
-// Decrement (see CacheStore interface)
+// 减量（参考 CacheStore 接口）
 func (s *MemcachedBinaryStore) Decrement(key string, delta uint64) (uint64, error) {
 	n, _, err := s.Client.Decr(key, delta, 0, 0xffffffff, 0)
 	return n, convertMcError(err)
 }
 
-// Flush (see CacheStore interface)
+// Flush（参考 CacheStore 接口）
 func (s *MemcachedBinaryStore) Flush() error {
 	return convertMcError(s.Client.Flush(0))
 }
 
-// getExpiration converts a gin-contrib/cache expiration in the form of a
-// time.Duration to a valid memcached expiration either in seconds (<30 days)
-// or a Unix timestamp (>30 days)
+// getExpiration 将gin-contrib/cache中以time.Duration形式表示的过期时间转换为有效的memcached过期时间，
+// 过期时间要么表示为秒（小于30天），要么表示为Unix时间戳（大于30天）
 func (s *MemcachedBinaryStore) getExpiration(expires time.Duration) uint32 {
 	switch expires {
 	case DEFAULT:

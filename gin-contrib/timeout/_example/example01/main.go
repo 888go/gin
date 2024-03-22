@@ -22,7 +22,7 @@ func main() {
 		timeout.WithHandler(emptySuccessResponse),
 	))
 
-	// Listen and Server in 0.0.0.0:8080
+	// 在0.0.0.0:8080监听并服务
 	if err := r.X监听(":8080"); err != nil {
 		log.Fatal(err)
 	}

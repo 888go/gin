@@ -11,7 +11,7 @@ import (
 	"github.com/rollbar/rollbar-go"
 )
 
-// Recovery middleware for rollbar error monitoring
+// Recovery中间件用于Rollbar错误监控
 func Recovery(onlyCrashes bool) gin类.HandlerFunc {
 	return func(c *gin类.Context) {
 		defer func() {

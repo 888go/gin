@@ -15,7 +15,7 @@ const (
 	signingHeaders                = "headers"
 )
 
-// SignatureHeader contains basic info signature header
+// SignatureHeader 包含签名头的基本信息
 type SignatureHeader struct {
 	keyID     KeyID
 	headers   []string
@@ -23,7 +23,7 @@ type SignatureHeader struct {
 	algorithm string
 }
 
-// NewSignatureHeader new instance of SignatureHeader
+// NewSignatureHeader 创建一个新的 SignatureHeader 实例
 func NewSignatureHeader(r *http.Request) (*SignatureHeader, error) {
 	return parseHTTPRequest(r)
 }

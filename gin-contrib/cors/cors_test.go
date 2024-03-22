@@ -33,9 +33,8 @@ func performRequest(r http.Handler, method, origin string) *httptest.ResponseRec
 
 func performRequestWithHeaders(r http.Handler, method, origin string, header http.Header) *httptest.ResponseRecorder {
 	req, _ := http.NewRequestWithContext(context.Background(), method, "/", nil)
-	// From go/net/http/request.go:
-	// For incoming requests, the Host header is promoted to the
-	// Request.Host field and removed from the Header map.
+// 来自 go/net/http/request.go:
+// 对于传入的请求，Host 头部会被提升至 Request.Host 字段，并从 Header 映射中移除。
 	req.Host = header.Get("Host")
 	header.Del("Host")
 	if len(origin) > 0 {
@@ -284,14 +283,14 @@ func TestPassesAllowOrigins(t *testing.T) {
 		},
 	})
 
-	// no CORS request, origin == ""
+	// 没有CORS请求，origin（来源）为空字符串
 	w := performRequest(router, "GET", "")
 	assert.Equal(t, "get", w.Body.String())
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Origin"))
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Empty(t, w.Header().Get("Access-Control-Expose-Headers"))
 
-	// no CORS request, origin == host
+	// 无CORS请求，origin（来源）== host（主机）
 	h := http.Header{}
 	h.Set("Host", "facebook.com")
 	w = performRequestWithHeaders(router, "GET", "http://facebook.com", h)
@@ -320,7 +319,7 @@ func TestPassesAllowOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Empty(t, w.Header().Get("Access-Control-Expose-Headers"))
 
-	// allowed CORS prefligh request
+	// 允许CORS预检请求
 	w = performRequest(router, "OPTIONS", "http://github.com")
 	assert.Equal(t, http.StatusNoContent, w.Code)
 	assert.Equal(t, "http://github.com", w.Header().Get("Access-Control-Allow-Origin"))
@@ -329,7 +328,7 @@ func TestPassesAllowOrigins(t *testing.T) {
 	assert.Equal(t, "Content-Type,Timestamp", w.Header().Get("Access-Control-Allow-Headers"))
 	assert.Equal(t, "43200", w.Header().Get("Access-Control-Max-Age"))
 
-	// deny CORS prefligh request
+	// 拒绝CORS预检请求
 	w = performRequest(router, "OPTIONS", "http://example.com")
 	assert.Equal(t, http.StatusForbidden, w.Code)
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Origin"))
@@ -349,7 +348,7 @@ func TestPassesAllowAllOrigins(t *testing.T) {
 		MaxAge:           10 * time.Hour,
 	})
 
-	// no CORS request, origin == ""
+	// 没有CORS请求，origin（来源）为空字符串
 	w := performRequest(router, "GET", "")
 	assert.Equal(t, "get", w.Body.String())
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Origin"))
@@ -365,7 +364,7 @@ func TestPassesAllowAllOrigins(t *testing.T) {
 	assert.Empty(t, w.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Equal(t, "*", w.Header().Get("Access-Control-Allow-Origin"))
 
-	// allowed CORS prefligh request
+	// 允许CORS预检请求
 	w = performRequest(router, "OPTIONS", "https://facebook.com")
 	assert.Equal(t, http.StatusNoContent, w.Code)
 	assert.Equal(t, "*", w.Header().Get("Access-Control-Allow-Origin"))

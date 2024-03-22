@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package render
 
@@ -11,7 +11,7 @@ import (
 	"github.com/888go/gin/internal/bytesconv"
 )
 
-// String contains the given interface object slice and its format.
+// String 包含给定的接口对象切片及其格式。
 type String struct {
 	Format string
 	Data   []any
@@ -19,17 +19,17 @@ type String struct {
 
 var plainContentType = []string{"text/plain; charset=utf-8"}
 
-// Render (String) writes data with custom ContentType.
+// Render (String) 通过自定义 ContentType 写入数据。
 func (r String) Render(w http.ResponseWriter) error {
 	return WriteString(w, r.Format, r.Data)
 }
 
-// WriteContentType (String) writes Plain ContentType.
+// WriteContentType (字符串) 写入纯文本 ContentType。
 func (r String) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, plainContentType)
 }
 
-// WriteString writes data according to its format and write custom ContentType.
+// WriteString 根据其格式写入数据，并写入自定义 ContentType。
 func WriteString(w http.ResponseWriter, format string, data []any) (err error) {
 	writeContentType(w, plainContentType)
 	if len(data) > 0 {

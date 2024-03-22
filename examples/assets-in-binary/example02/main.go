@@ -16,7 +16,7 @@ func main() {
 	templ := template.Must(template.New("").ParseFS(f, "templates/*.tmpl", "templates/foo/*.tmpl"))
 	router.X设置Template模板(templ)
 
-	// example: /public/assets/images/example.png
+	// 示例：/public/assets/images/example.png
 	router.X绑定静态文件目录FS("/public", http.FS(f))
 
 	router.X绑定GET("/", func(c *gin类.Context) {

@@ -27,8 +27,8 @@ func main() {
 		AcceptLanguage:   []language.Tag{language.English, language.German, language.Chinese},
 		RootPath:         "./i18n/localizeJSON/",
 		UnmarshalFunc:    json.Unmarshal,
-		// After commenting this line, use defaultLoader
-		// it will be loaded from the file
+// 在注释掉这一行后，使用defaultLoader
+// 它将从文件中加载
 		Loader: &ginI18n.EmbedLoader{
 			FS: fs,
 		},

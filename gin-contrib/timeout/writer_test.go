@@ -69,8 +69,8 @@ func TestWriter_Status(t *testing.T) {
 	assert.Equal(t, strconv.Itoa(http.StatusInternalServerError), req.Header.Get("X-Status-Code-MW-Set"))
 }
 
-// testNew is a copy of New() with a small change to the timeoutHandler() function.
-// ref: https://github.com/gin-contrib/timeout/issues/31
+// testNew是对New()的一个副本，对其timeoutHandler()函数做了微小改动。
+// 参考：https://github.com/gin-contrib/timeout/issues/31
 func testNew(duration time.Duration) gin类.HandlerFunc {
 	return New(
 		WithTimeout(duration),
@@ -79,7 +79,7 @@ func testNew(duration time.Duration) gin类.HandlerFunc {
 	)
 }
 
-// timeoutHandler returns a handler that returns a 504 Gateway Timeout error.
+// timeoutHandler 返回一个处理器，该处理器返回一个 504 网关超时错误。
 func timeoutHandler() gin类.HandlerFunc {
 	gatewayTimeoutErr := struct {
 		Error string `json:"error"`
@@ -94,7 +94,7 @@ func timeoutHandler() gin类.HandlerFunc {
 	}
 }
 
-// TestHTTPStatusCode tests the HTTP status code of the response.
+// TestHTTPStatusCode 测试响应的 HTTP 状态码。
 func TestHTTPStatusCode(t *testing.T) {
 	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
 

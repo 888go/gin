@@ -145,7 +145,7 @@ func TestInvalidSign(t *testing.T) {
 	assert.Equal(t, ErrInvalidSign, c.X错误s[0])
 }
 
-// mock interface always return true
+// 该mock接口总是返回true
 type dateAlwaysValid struct{}
 
 func (v *dateAlwaysValid) Validate(r *http.Request) error { return nil }

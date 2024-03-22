@@ -7,18 +7,25 @@ import (
 
 var headerXRequestID string
 
-// Config defines the config for RequestID middleware
+// Config 定义了 RequestID 中间件的配置
 type config struct {
-	// Generator defines a function to generate an ID.
-	// Optional. Default: func() string {
-	//   return uuid.New().String()
-	// }
+// Generator 定义了一个用于生成 ID 的函数。
+// 可选。默认值：func() string {
+//   return uuid.New().String()
+// }
+// 
+// 翻译：
+// Generator 描述了一个生成ID的函数。
+// 非必填项。默认值为：
+// func() string {
+//   返回 uuid.New().String()
+// }
 	generator Generator
 	headerKey HeaderStrKey
 	handler   Handler
 }
 
-// New initializes the RequestID middleware.
+// New 初始化 RequestID 中间件。
 func New(opts ...Option) gin类.HandlerFunc {
 	cfg := &config{
 		generator: func() string {
@@ -43,13 +50,13 @@ func New(opts ...Option) gin类.HandlerFunc {
 		if cfg.handler != nil {
 			cfg.handler(c, rid)
 		}
-		// Set the id to ensure that the requestid is in the response
+		// 设置id以确保请求id在响应中
 		c.X设置响应协议头值(headerXRequestID, rid)
 		c.X中间件继续()
 	}
 }
 
-// Get returns the request identifier
+// Get 返回请求标识符
 func Get(c *gin类.Context) string {
 	return c.X取请求协议头值(headerXRequestID)
 }

@@ -29,7 +29,7 @@ type responseCache struct {
 	Data   []byte
 }
 
-// RegisterResponseCacheGob registers the responseCache type with the encoding/gob package
+// RegisterResponseCacheGob 注册 responseCache 类型到 encoding/gob 包中
 func RegisterResponseCacheGob() {
 	gob.Register(responseCache{})
 }
@@ -45,7 +45,7 @@ type cachedWriter struct {
 
 var _ gin类.ResponseWriter = &cachedWriter{}
 
-// CreateKey creates a package specific key for a given string
+// CreateKey 为给定的字符串创建一个特定于包的密钥
 func CreateKey(u string) string {
 	return urlEscape(PageCachePrefix, u)
 }
@@ -91,7 +91,7 @@ func (w *cachedWriter) Write(data []byte) (int, error) {
 			data = append(cache.Data, data...)
 		}
 
-		//cache responses with a status code < 300
+		//缓存状态码小于300的响应
 		if w.Status() < 300 {
 			val := responseCache{
 				w.Status(),
@@ -99,9 +99,9 @@ func (w *cachedWriter) Write(data []byte) (int, error) {
 				data,
 			}
 			err = store.Set(w.key, val, w.expire)
-			// if err != nil {
-			// 	// need logger
-			// }
+// 如果err不为nil {
+//   // 需要使用日志记录器
+// }
 		}
 	}
 	return ret, err
@@ -109,7 +109,7 @@ func (w *cachedWriter) Write(data []byte) (int, error) {
 
 func (w *cachedWriter) WriteString(data string) (n int, err error) {
 	ret, err := w.ResponseWriter.WriteString(data)
-	//cache responses with a status code < 300
+	//缓存状态码小于300的响应
 	if err == nil && w.Status() < 300 {
 		store := w.store
 		val := responseCache{
@@ -164,7 +164,7 @@ func CachePage(store persistence.CacheStore, expire time.Duration, handle gin类
 			c.Writer = writer
 			handle(c)
 
-			// Drop caches of aborted contexts
+			// 清除已中止上下文的缓存
 			if c.X是否已停止() {
 				_ = store.Delete(key)
 			}
@@ -180,7 +180,7 @@ func CachePage(store persistence.CacheStore, expire time.Duration, handle gin类
 	}
 }
 
-// CachePageWithoutQuery add ability to ignore GET query parameters.
+// CachePageWithoutQuery 添加忽略GET请求参数的能力。
 func CachePageWithoutQuery(store persistence.CacheStore, expire time.Duration, handle gin类.HandlerFunc) gin类.HandlerFunc {
 	return func(c *gin类.Context) {
 		var cache responseCache
@@ -205,7 +205,7 @@ func CachePageWithoutQuery(store persistence.CacheStore, expire time.Duration, h
 	}
 }
 
-// CachePageAtomic Decorator
+// CachePageAtomic 装饰器
 func CachePageAtomic(store persistence.CacheStore, expire time.Duration, handle gin类.HandlerFunc) gin类.HandlerFunc {
 	var m sync.Mutex
 	p := CachePage(store, expire, handle)
@@ -230,7 +230,7 @@ func CachePageWithoutHeader(store persistence.CacheStore, expire time.Duration, 
 			c.Writer = writer
 			handle(c)
 
-			// Drop caches of aborted contexts
+			// 清除已中止上下文的缓存
 			if c.X是否已停止() {
 				_ = store.Delete(key)
 			}

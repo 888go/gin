@@ -40,7 +40,7 @@ func loadTemplates(templatesDir string) multitemplate.Renderer {
 		panic(err.Error())
 	}
 
-	// Generate our templates map from our layouts/ and includes/ directories
+	// 从layouts/和includes/目录生成我们的templates映射
 	for _, include := range includes {
 		layoutCopy := make([]string, len(layouts))
 		copy(layoutCopy, layouts)

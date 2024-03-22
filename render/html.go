@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package render
 
@@ -9,27 +9,27 @@ import (
 	"net/http"
 )
 
-// Delims represents a set of Left and Right delimiters for HTML template rendering.
+// Delims 表示一组用于 HTML 模板渲染的左、右定界符。
 type Delims struct {
-	// Left delimiter, defaults to {{.
+	// 左侧分隔符，默认为 {{.
 	Left string
-	// Right delimiter, defaults to }}.
+	// 右侧分隔符，默认为 }}。
 	Right string
 }
 
-// HTMLRender interface is to be implemented by HTMLProduction and HTMLDebug.
+// HTMLRender 接口需要由 HTMLProduction 和 HTMLDebug 实现。
 type HTMLRender interface {
-	// Instance returns an HTML instance.
+	// Instance 返回一个 HTML 实例。
 	Instance(string, any) Render
 }
 
-// HTMLProduction contains template reference and its delims.
+// HTMLProduction 包含模板引用及其分隔符。
 type HTMLProduction struct {
 	Template *template.Template
 	Delims   Delims
 }
 
-// HTMLDebug contains template delims and pattern and function with file list.
+// HTMLDebug 包含模板分隔符、模式以及带文件列表的函数，主要用于调试HTML。
 type HTMLDebug struct {
 	Files   []string
 	Glob    string
@@ -37,7 +37,7 @@ type HTMLDebug struct {
 	FuncMap template.FuncMap
 }
 
-// HTML contains template reference and its name with given interface object.
+// HTML 包含模板引用及其名称，以及给定的接口对象。
 type HTML struct {
 	Template *template.Template
 	Name     string
@@ -46,7 +46,7 @@ type HTML struct {
 
 var htmlContentType = []string{"text/html; charset=utf-8"}
 
-// Instance (HTMLProduction) returns an HTML instance which it realizes Render interface.
+// Instance (HTMLProduction) 返回一个实现了Render接口的HTML实例。
 func (r HTMLProduction) Instance(name string, data any) Render {
 	return HTML{
 		Template: r.Template,
@@ -55,7 +55,7 @@ func (r HTMLProduction) Instance(name string, data any) Render {
 	}
 }
 
-// Instance (HTMLDebug) returns an HTML instance which it realizes Render interface.
+// Instance (HTMLDebug) 返回一个实现了Render接口的HTML实例。
 func (r HTMLDebug) Instance(name string, data any) Render {
 	return HTML{
 		Template: r.loadTemplate(),
@@ -76,7 +76,7 @@ func (r HTMLDebug) loadTemplate() *template.Template {
 	panic("the HTML debug render was created without files or glob pattern")
 }
 
-// Render (HTML) executes template and writes its result with custom ContentType for response.
+// Render (HTML) 执行模板并使用自定义的 ContentType 将其结果写入响应中。
 func (r HTML) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 
@@ -86,7 +86,7 @@ func (r HTML) Render(w http.ResponseWriter) error {
 	return r.Template.ExecuteTemplate(w, r.Name, r.Data)
 }
 
-// WriteContentType (HTML) writes HTML ContentType.
+// WriteContentType (HTML) 写入 HTML ContentType。
 func (r HTML) WriteContentType(w http.ResponseWriter) {
 	writeContentType(w, htmlContentType)
 }

@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package binding
 
@@ -19,10 +19,10 @@ import (
 var (
 	errUnknownType = errors.New("unknown type")
 
-	// ErrConvertMapStringSlice can not convert to map[string][]string
+	// ErrConvertMapStringSlice 无法转换为 map[string][]string
 	ErrConvertMapStringSlice = errors.New("can not convert to map slices of strings")
 
-	// ErrConvertToMapString can not convert to map[string]string
+	// ErrConvertToMapString 无法转换为 map[string]string
 	ErrConvertToMapString = errors.New("can not convert to map of strings")
 )
 
@@ -59,7 +59,7 @@ func mapFormByTag(ptr any, form map[string][]string, tag string) error {
 	return mappingByPtr(ptr, formSource(form), tag)
 }
 
-// setter tries to set value on a walking by fields of a struct
+// setter尝试通过遍历结构体字段来设置值
 type setter interface {
 	TrySet(value reflect.Value, field reflect.StructField, key string, opt setOptions) (isSet bool, err error)
 }
@@ -68,7 +68,7 @@ type formSource map[string][]string
 
 var _ setter = formSource(nil)
 
-// TrySet tries to set a value by request's form source (like map[string][]string)
+// TrySet 尝试通过请求的表单源（如 map[string][]string 类型）设置一个值
 func (form formSource) TrySet(value reflect.Value, field reflect.StructField, tagValue string, opt setOptions) (isSet bool, err error) {
 	return setByForm(value, field, form, tagValue, opt)
 }
@@ -79,7 +79,7 @@ func mappingByPtr(ptr any, setter setter, tag string) error {
 }
 
 func mapping(value reflect.Value, field reflect.StructField, setter setter, tag string) (bool, error) {
-	if field.Tag.Get(tag) == "-" { // just ignoring this field
+	if field.Tag.Get(tag) == "-" { // 忽略这个字段
 		return false, nil
 	}
 
@@ -144,10 +144,10 @@ func tryToSetValue(value reflect.Value, field reflect.StructField, setter setter
 	tagValue = field.Tag.Get(tag)
 	tagValue, opts := head(tagValue, ",")
 
-	if tagValue == "" { // default value is FieldName
+	if tagValue == "" { // 默认值为FieldName
 		tagValue = field.Name
 	}
-	if tagValue == "" { // when field is "emptyField" variable
+	if tagValue == "" { // 当字段为 "emptyField" 变量时
 		return false, nil
 	}
 

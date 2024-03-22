@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package binding
 
@@ -126,7 +126,7 @@ type FooStructForStructPointerType struct {
 }
 
 type FooStructForSliceMapType struct {
-	// Unknown type: not support map
+	// 未知类型：不支持map
 	SliceMapFoo []map[string]any `form:"slice_map_foo"`
 }
 
@@ -363,7 +363,7 @@ func TestBindingFormStringMap(t *testing.T) {
 	testBodyBindingStringMap(t, Form,
 		"/", "",
 		`foo=bar&hello=world`, "")
-	// Should pick the last value
+	// 应该选择最后的值
 	testBodyBindingStringMap(t, Form,
 		"/", "",
 		`foo=something&foo=bar&hello=world`, "")
@@ -478,7 +478,7 @@ func TestBindingYAML(t *testing.T) {
 }
 
 func TestBindingYAMLStringMap(t *testing.T) {
-	// YAML is a superset of JSON, so the test below is JSON (to avoid newlines)
+	// YAML 是 JSON 的超集，因此下面的测试内容是 JSON 格式（为了避免换行）
 	testBodyBindingStringMap(t, YAML,
 		"/", "/",
 		`{"foo": "bar", "hello": "world"}`, `{"nested": {"foo": "bar"}}`)
@@ -1254,7 +1254,7 @@ func testBodyBindingUseNumber(t *testing.T, b Binding, name, path, badPath, body
 	EnableDecoderUseNumber = true
 	err := b.Bind(req, &obj)
 	assert.NoError(t, err)
-	// we hope it is int64(123)
+	// 我们希望它是 int64(123)
 	v, e := obj.Foo.(json.Number).Int64()
 	assert.NoError(t, e)
 	assert.Equal(t, int64(123), v)
@@ -1273,8 +1273,8 @@ func testBodyBindingUseNumber2(t *testing.T, b Binding, name, path, badPath, bod
 	EnableDecoderUseNumber = false
 	err := b.Bind(req, &obj)
 	assert.NoError(t, err)
-	// it will return float64(123) if not use EnableDecoderUseNumber
-	// maybe it is not hoped
+// 如果不使用 EnableDecoderUseNumber，它将返回 float64(123)
+// 这可能不是期望的结果
 	assert.Equal(t, float64(123), obj.Foo)
 
 	obj = FooStructUseNumber{}

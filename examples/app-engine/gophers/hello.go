@@ -6,9 +6,9 @@ import (
 	"github.com/888go/gin"
 )
 
-// This function's name is a must. App Engine uses it to drive the requests properly.
+// 这个函数的名称是必须的。App Engine 使用它来正确地驱动请求。
 func init() {
-	// Starts a new Gin instance with no middle-ware
+	// 初始化一个新的Gin实例，不包含中间件
 	r := gin类.X创建()
 
 	// Define your handlers
@@ -19,6 +19,6 @@ func init() {
 		c.X输出文本(http.StatusOK, "pong")
 	})
 
-	// Handle all requests using net/http
+	// 使用net/http处理所有请求
 	http.Handle("/", r)
 }

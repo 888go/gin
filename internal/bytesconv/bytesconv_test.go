@@ -1,6 +1,6 @@
-// Copyright 2020 Gin Core Team. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 ? 2020 Gin 核心团队。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package bytesconv
 
@@ -37,9 +37,9 @@ func TestBytesToString(t *testing.T) {
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const (
-	letterIdxBits = 6                    // 6 bits to represent a letter index
-	letterIdxMask = 1<<letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
-	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
+	letterIdxBits = 6                    // 使用6位表示字母索引
+	letterIdxMask = 1<<letterIdxBits - 1 // 所有为1的位，数量与letterIdxBits相同
+	letterIdxMax  = 63 / letterIdxBits   // 符合63位的字母索引数量
 )
 
 var src = rand.NewSource(time.Now().UnixNano())
@@ -47,7 +47,7 @@ var src = rand.NewSource(time.Now().UnixNano())
 func RandStringBytesMaskImprSrcSB(n int) string {
 	sb := strings.Builder{}
 	sb.Grow(n)
-	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
+	// A src.Int63() 生成63个随机位，足够用于letterIdxMax个字符！
 	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i >= 0; {
 		if remain == 0 {
 			cache, remain = src.Int63(), letterIdxMax
@@ -72,7 +72,7 @@ func TestStringToBytes(t *testing.T) {
 	}
 }
 
-// go test -v -run=none -bench=^BenchmarkBytesConv -benchmem=true
+// 运行命令：go test -v（详细模式）-run=none（不运行任何正常测试用例）-bench=^BenchmarkBytesConv（仅运行名称以"BenchmarkBytesConv"开头的基准测试）-benchmem=true（在基准测试中包含内存分配统计信息）
 
 func BenchmarkBytesConvBytesToStrRaw(b *testing.B) {
 	for i := 0; i < b.N; i++ {

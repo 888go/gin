@@ -9,17 +9,17 @@ func newI18n(opts ...Option) GinI18n {
 	// init ins
 	ins := &ginI18nImpl{}
 
-	// set ins property from opts
+	// 从opts设置ins属性
 	for _, opt := range opts {
 		opt(ins)
 	}
 
-	// 	if bundle isn't constructed then assign it from default
+	// 如果bundle未构建，则从默认值中分配它
 	if ins.bundle == nil {
 		ins.setBundle(defaultBundleConfig)
 	}
 
-	// if getLngHandler isn't constructed then assign it from default
+	// 如果getLngHandler尚未构建，则从默认值中赋值
 	if ins.getLngHandler == nil {
 		ins.getLngHandler = defaultGetLngHandler
 	}
@@ -35,33 +35,33 @@ func Localize(opts ...Option) gin类.HandlerFunc {
 	}
 }
 
-// GetMessage get the i18n message with error handling
-// param is one of these type: messageID, *i18n.LocalizeConfig
-// Example:
-// GetMessage(context, "hello") // messageID is hello
+// GetMessage 获取带有错误处理功能的国际化消息
+// 参数可以是以下类型之一：messageID, *i18n.LocalizeConfig
+// 示例：
+// GetMessage(context, "hello") // messageID 为 "hello"
 //
-//	GetMessage(context, &i18n.LocalizeConfig{
-//	  MessageID: "welcomeWithName",
-//	  TemplateData: map[string]string{
-//	    "name": context.Param("name"),
-//	  },
-//	})
+// GetMessage(context, &i18n.LocalizeConfig{
+//   MessageID: "welcomeWithName", // 消息ID为 "welcomeWithName"
+//   TemplateData: map[string]string{ // 模板数据
+//     "name": context.Param("name"), // 将 "name" 参数值注入模板
+//   },
+// })
 func GetMessage(context *gin类.Context, param interface{}) (string, error) {
 	atI18n := context.Value("i18n").(GinI18n)
 	return atI18n.getMessage(context, param)
 }
 
-// MustGetMessage get the i18n message without error handling
-// param is one of these type: messageID, *i18n.LocalizeConfig
-// Example:
-// MustGetMessage(context, "hello") // messageID is hello
+// MustGetMessage 获取i18n消息，不进行错误处理
+// 参数可以是以下类型之一：messageID, *i18n.LocalizeConfig
+// 示例：
+// MustGetMessage(context, "hello") // messageID 为 "hello"
 //
-//	MustGetMessage(context, &i18n.LocalizeConfig{
-//	  MessageID: "welcomeWithName",
-//	  TemplateData: map[string]string{
-//	    "name": context.Param("name"),
-//	  },
-//	})
+// MustGetMessage(context, &i18n.LocalizeConfig{
+//   MessageID: "welcomeWithName",
+//   TemplateData: map[string]string{
+//     "name": context.Param("name"),
+//   },
+// })
 func MustGetMessage(context *gin类.Context, param interface{}) string {
 	atI18n := context.X取值PANI("i18n").(GinI18n)
 	return atI18n.mustGetMessage(context, param)

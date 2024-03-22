@@ -13,19 +13,19 @@ func main() {
 	StartGin()
 }
 
-// ConfigRuntime sets the number of operating system threads.
+// ConfigRuntime 设置操作系统的线程数量。
 func ConfigRuntime() {
 	nuCPU := runtime.NumCPU()
 	runtime.GOMAXPROCS(nuCPU)
 	fmt.Printf("Running with %d CPUs\n", nuCPU)
 }
 
-// StartWorkers start starsWorker by goroutine.
+// StartWorkers 通过 goroutine 启动 starsWorker。
 func StartWorkers() {
 	go statsWorker()
 }
 
-// StartGin starts gin web server with setting router.
+// StartGin 通过设置路由启动 Gin Web 服务器。
 func StartGin() {
 	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
 

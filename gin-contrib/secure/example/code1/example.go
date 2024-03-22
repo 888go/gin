@@ -29,7 +29,7 @@ func main() {
 		c.X输出文本(200, "pong")
 	})
 
-	// Listen and Server in 0.0.0.0:8080
+	// 在0.0.0.0:8080监听并服务
 	if err := router.X监听(); err != nil {
 		log.Fatal(err)
 	}

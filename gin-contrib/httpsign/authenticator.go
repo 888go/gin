@@ -20,35 +20,33 @@ const (
 
 var defaultRequiredHeaders = []string{requestTarget, date, digest}
 
-// Authenticator is the gin authenticator middleware.
+// Authenticator 是 Gin 框架的认证中间件。
 type Authenticator struct {
 	secrets    Secrets
 	validators []validator.Validator
 	headers    []string
 }
 
-// Option is the option to the Authenticator constructor.
+// Option 是 Authenticator 构造函数的选项。
 type Option func(*Authenticator)
 
-// WithValidator configures the Authenticator to use custom validator.
-// The default validators are time based and digest.
+// WithValidator 配置 Authenticator 以使用自定义验证器。
+// 默认的验证器基于时间和摘要。
 func WithValidator(validators ...validator.Validator) Option {
 	return func(a *Authenticator) {
 		a.validators = validators
 	}
 }
 
-// WithRequiredHeaders is list of all requires HTTP headers that the client
-// have to include in the singing string for the request to be considered valid.
-// If not provided, the created Authenticator instance will use defaultRequiredHeaders variable.
+// WithRequiredHeaders 是一个包含所有必需HTTP头的列表，客户端必须在签名字符串中包含这些头信息，以便请求被认为是有效的。
+// 如果未提供，则创建的Authenticator实例将使用默认的defaultRequiredHeaders变量。
 func WithRequiredHeaders(headers []string) Option {
 	return func(a *Authenticator) {
 		a.headers = headers
 	}
 }
 
-// NewAuthenticator creates a new Authenticator instance with
-// given allowed permissions and required header and secret keys.
+// NewAuthenticator 创建一个具有给定允许权限和所需头部及密钥的新 Authenticator 实例。
 func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 	a := &Authenticator{secrets: secretKeys}
 
@@ -70,7 +68,7 @@ func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 	return a
 }
 
-// Authenticated returns a gin middleware which permits given permissions in parameter.
+// Authenticated 返回一个 gin 中间件，该中间件允许在参数中给定的权限。
 func (a *Authenticator) Authenticated() gin类.HandlerFunc {
 	return func(c *gin类.Context) {
 		sigHeader, err := NewSignatureHeader(c.X请求)
@@ -113,7 +111,7 @@ func (a *Authenticator) Authenticated() gin类.HandlerFunc {
 	}
 }
 
-// isValidHeader check if all server required header is in header list
+// isValidHeader 检查请求头中是否包含服务器所需的所有必需头部
 func (a *Authenticator) isValidHeader(headers []string) bool {
 	m := len(headers)
 	for _, h := range a.headers {

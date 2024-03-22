@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin类
 
@@ -23,23 +23,23 @@ type ResponseWriter interface {
 	http.Flusher
 	http.CloseNotifier
 
-	// Status returns the HTTP response status code of the current request.
+	// Status 返回当前请求的HTTP响应状态码。
 	Status() int
 
-	// Size returns the number of bytes already written into the response http body.
-	// See Written()
+// Size 返回已写入响应 http body 的字节数。
+// 参见 Written() 方法。
 	Size() int
 
-	// WriteString writes the string into the response body.
+	// WriteString 将字符串写入响应正文。
 	WriteString(string) (int, error)
 
-	// Written returns true if the response body was already written.
+	// Written 返回 true，如果响应体已经被写入。
 	Written() bool
 
-	// WriteHeaderNow forces to write the http header (status code + headers).
+	// WriteHeaderNow 强制立即写入HTTP头部（状态码和头信息）。
 	WriteHeaderNow()
 
-	// Pusher get the http.Pusher for server push
+	// Pusher 获取用于服务器推送的 http.Pusher
 	Pusher() http.Pusher
 }
 
@@ -104,7 +104,7 @@ func (w *responseWriter) Written() bool {
 	return w.size != noWritten
 }
 
-// Hijack implements the http.Hijacker interface.
+// Hijack 实现了 http.Hijacker 接口。
 func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	if w.size < 0 {
 		w.size = 0
@@ -112,12 +112,12 @@ func (w *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
 	return w.ResponseWriter.(http.Hijacker).Hijack()
 }
 
-// CloseNotify implements the http.CloseNotifier interface.
+// CloseNotify 实现了 http.CloseNotifier 接口。
 func (w *responseWriter) CloseNotify() <-chan bool {
 	return w.ResponseWriter.(http.CloseNotifier).CloseNotify()
 }
 
-// Flush implements the http.Flusher interface.
+// Flush 实现了 http.Flusher 接口。
 func (w *responseWriter) Flush() {
 	w.WriteHeaderNow()
 	w.ResponseWriter.(http.Flusher).Flush()

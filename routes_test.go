@@ -1,6 +1,6 @@
-// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
+// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
+// 使用本源代码受 MIT 风格许可证约束，
+// 该许可证可在 LICENSE 文件中找到。
 
 package gin类
 
@@ -20,7 +20,7 @@ type header struct {
 	Value string
 }
 
-// PerformRequest for testing gin router.
+// PerformRequest 用于测试 gin 路由器。
 func PerformRequest(r http.Handler, method, path string, headers ...header) *httptest.ResponseRecorder {
 	req := httptest.NewRequest(method, path, nil)
 	for _, h := range headers {
@@ -50,7 +50,7 @@ func testRouteOK(method string, t *testing.T) {
 	assert.True(t, passedAny)
 }
 
-// TestSingleRouteOK tests that POST route is correctly invoked.
+// TestSingleRouteOK 测试 POST 路由是否被正确调用。
 func testRouteNotOK(method string, t *testing.T) {
 	passed := false
 	router := X创建()
@@ -64,7 +64,7 @@ func testRouteNotOK(method string, t *testing.T) {
 	assert.Equal(t, http.StatusNotFound, w.Code)
 }
 
-// TestSingleRouteOK tests that POST route is correctly invoked.
+// TestSingleRouteOK 测试 POST 路由是否被正确调用。
 func testRouteNotOK2(method string, t *testing.T) {
 	passed := false
 	router := X创建()
@@ -272,7 +272,7 @@ func TestRouteRedirectFixedPath(t *testing.T) {
 	assert.Equal(t, http.StatusTemporaryRedirect, w.Code)
 }
 
-// TestContextParamsGet tests that a parameter can be parsed from the URL.
+// TestContextParamsGet 测试从URL中解析参数的功能。
 func TestRouteParamsByName(t *testing.T) {
 	name := ""
 	lastName := ""
@@ -304,7 +304,7 @@ func TestRouteParamsByName(t *testing.T) {
 	assert.Equal(t, "/is/super/great", wild)
 }
 
-// TestContextParamsGet tests that a parameter can be parsed from the URL even with extra slashes.
+// TestContextParamsGet 测试即使存在额外的斜杠，也能从 URL 中解析出参数。
 func TestRouteParamsByNameWithExtraSlash(t *testing.T) {
 	name := ""
 	lastName := ""
@@ -337,9 +337,7 @@ func TestRouteParamsByNameWithExtraSlash(t *testing.T) {
 	assert.Equal(t, "/is/super/great", wild)
 }
 
-// TestRouteParamsNotEmpty tests that context parameters will be set
-// even if a route with params/wildcards is registered after the context
-// initialisation (which happened in a previous requets).
+// TestRouteParamsNotEmpty 测试即使在初始化上下文（已在先前请求中发生）后注册了带有参数/通配符的路由，上下文参数也会被设置。
 func TestRouteParamsNotEmpty(t *testing.T) {
 	name := ""
 	lastName := ""
@@ -376,7 +374,7 @@ func TestRouteParamsNotEmpty(t *testing.T) {
 	assert.Equal(t, "/is/super/great", wild)
 }
 
-// TestHandleStaticFile - ensure the static file handles properly
+// TestHandleStaticFile - 确保静态文件处理正常
 func TestRouteStaticFile(t *testing.T) {
 	// SETUP file
 	testRoot, _ := os.Getwd()
@@ -411,7 +409,7 @@ func TestRouteStaticFile(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w3.Code)
 }
 
-// TestHandleStaticFile - ensure the static file handles properly
+// TestHandleStaticFile - 确保静态文件处理正常
 func TestRouteStaticFileFS(t *testing.T) {
 	// SETUP file
 	testRoot, _ := os.Getwd()
@@ -445,7 +443,7 @@ func TestRouteStaticFileFS(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w3.Code)
 }
 
-// TestHandleStaticDir - ensure the root/sub dir handles properly
+// TestHandleStaticDir - 确保根目录/子目录正确处理
 func TestRouteStaticListingDir(t *testing.T) {
 	router := X创建()
 	router.X绑定静态文件目录FS("/", Dir("./", true))
@@ -457,7 +455,7 @@ func TestRouteStaticListingDir(t *testing.T) {
 	assert.Equal(t, "text/html; charset=utf-8", w.Header().Get("Content-Type"))
 }
 
-// TestHandleHeadToDir - ensure the root/sub dir handles properly
+// TestHandleHeadToDir - 确保根目录/子目录处理正确
 func TestRouteStaticNoListing(t *testing.T) {
 	router := X创建()
 	router.X绑定静态文件目录("/", "./")
@@ -481,8 +479,8 @@ func TestRouterMiddlewareAndStatic(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Body.String(), "package gin")
-	// Content-Type='text/plain; charset=utf-8' when go version <= 1.16,
-	// else, Content-Type='text/x-go; charset=utf-8'
+// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
+// 否则，Content-Type='text/x-go; charset=utf-8'
 	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
 	assert.NotEqual(t, w.Header().Get("Last-Modified"), "Mon, 02 Jan 2006 15:04:05 MST")
 	assert.Equal(t, "Mon, 02 Jan 2006 15:04:05 MST", w.Header().Get("Expires"))
@@ -507,7 +505,7 @@ func TestRouteNotAllowedEnabled(t *testing.T) {
 func TestRouteNotAllowedEnabled2(t *testing.T) {
 	router := X创建()
 	router.HandleMethodNotAllowed = true
-	// add one methodTree to trees
+	// 向trees添加一个methodTree
 	router.addRoute(http.MethodPost, "/", HandlersChain{func(_ *Context) {}})
 	router.X绑定GET("/path2", func(c *Context) {})
 	w := PerformRequest(router, http.MethodPost, "/path2")
@@ -581,7 +579,7 @@ func TestRouterNotFound(t *testing.T) {
 		}
 	}
 
-	// Test custom not found handler
+	// 测试自定义未找到处理器
 	var notFound bool
 	router.X绑定404(func(c *Context) {
 		c.X停止并带状态码(http.StatusNotFound)
@@ -591,19 +589,19 @@ func TestRouterNotFound(t *testing.T) {
 	assert.Equal(t, http.StatusNotFound, w.Code)
 	assert.True(t, notFound)
 
-	// Test other method than GET (want 307 instead of 301)
+	// 测试非GET方法（期望返回307而非301）
 	router.X绑定PATCH("/path", func(c *Context) {})
 	w = PerformRequest(router, http.MethodPatch, "/path/")
 	assert.Equal(t, http.StatusTemporaryRedirect, w.Code)
 	assert.Equal(t, "map[Location:[/path]]", fmt.Sprint(w.Header()))
 
-	// Test special case where no node for the prefix "/" exists
+	// 测试特殊情况，其中前缀 "/" 对应的节点不存在
 	router = X创建()
 	router.X绑定GET("/a", func(c *Context) {})
 	w = PerformRequest(router, http.MethodGet, "/")
 	assert.Equal(t, http.StatusNotFound, w.Code)
 
-	// Reproduction test for the bug of issue #2843
+	// 用于重现问题#2843的bug测试
 	router = X创建()
 	router.X绑定404(func(c *Context) {
 		if c.X请求.RequestURI == "/login" {
@@ -643,11 +641,11 @@ func TestRouterStaticFSFileNotFound(t *testing.T) {
 	})
 }
 
-// Reproduction test for the bug of issue #1805
+// 用于重现问题 #1805 的 bug 测试
 func TestMiddlewareCalledOnceByRouterStaticFSNotFound(t *testing.T) {
 	router := X创建()
 
-	// Middleware must be called just only once by per request.
+	// 中间件必须在每个请求中仅调用一次。
 	middlewareCalledNum := 0
 	router.X中间件(func(c *Context) {
 		middlewareCalledNum++
@@ -737,7 +735,7 @@ func TestRouteContextHoldsFullPath(t *testing.T) {
 	for _, route := range routes {
 		actualRoute := route
 		router.X绑定GET(route, func(c *Context) {
-			// For each defined route context should contain its full path
+			// 对于每个已定义的路由，其上下文应包含完整的路径
 			assert.Equal(t, actualRoute, c.X取路由路径())
 			c.X停止并带状态码(http.StatusOK)
 		})
@@ -750,7 +748,7 @@ func TestRouteContextHoldsFullPath(t *testing.T) {
 
 	// Test not found
 	router.X中间件(func(c *Context) {
-		// For not found routes full path is empty
+		// 对于未找到的路由，其完整路径为空
 		assert.Equal(t, "", c.X取路由路径())
 	})
 

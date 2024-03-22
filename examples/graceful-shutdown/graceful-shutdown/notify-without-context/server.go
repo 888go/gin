@@ -27,26 +27,24 @@ func main() {
 		Handler: router,
 	}
 
-	// Initializing the server in a goroutine so that
-	// it won't block the graceful shutdown handling below
+// 在一个goroutine中初始化服务器，以便于
+// 不会阻塞下面的优雅关闭处理流程
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
 
-	// Wait for interrupt signal to gracefully shutdown the server with
-	// a timeout of 5 seconds.
+// 等待中断信号以优雅地关闭服务器，超时时间为5秒。
 	quit := make(chan os.Signal, 1)
-	// kill (no param) default send syscall.SIGTERM
-	// kill -2 is syscall.SIGINT
-	// kill -9 is syscall.SIGKILL but can't be catch, so don't need add it
+// (无参数) kill 默认发送 syscall.SIGTERM
+// kill -2 等同于 syscall.SIGINT
+// kill -9 等同于 syscall.SIGKILL，但无法被捕获，因此不需要添加它
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 	log.Println("Shutting down server...")
 
-	// The context is used to inform the server it has 5 seconds to finish
-	// the request it is currently handling
+// 上下文用于通知服务器，它有5秒钟的时间来完成当前正在处理的请求
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {

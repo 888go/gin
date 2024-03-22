@@ -35,10 +35,15 @@ func BinaryFileSystem(root string) *binaryFileSystem {
 	}
 }
 
-// Usage
+// 使用方法
 // $ go-bindata data/
 // $ go build && ./bindata
-//
+// 
+// 这段注释的中文翻译是：
+// 
+// 用法
+// $ 运行命令 go-bindata 并指定数据目录：data/
+// $ 执行构建命令 go build，然后运行生成的可执行文件 ./bindata
 func main() {
 	r := gin类.X创建默认对象()
 
@@ -46,7 +51,7 @@ func main() {
 	r.X绑定GET("/ping", func(c *gin类.Context) {
 		c.X输出文本(200, "test")
 	})
-	// Listen and Server in 0.0.0.0:8080
+	// 在0.0.0.0:8080监听并服务
 	if err := r.X监听(":8080"); err != nil {
 		log.Fatal(err)
 	}

@@ -35,7 +35,7 @@ func performRequest(router *gin类.Engine, path string) *httptest.ResponseRecord
 
 func TestNoConfig(t *testing.T) {
 	router := newServer(Config{
-		// Intentionally left blank.
+		// 故意留空。
 	})
 
 	w := performRequest(router, "http://example.com/foo")

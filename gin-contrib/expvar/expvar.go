@@ -7,7 +7,7 @@ import (
 	"github.com/888go/gin"
 )
 
-// Handler for gin framework
+// Gin框架处理器
 func Handler() gin类.HandlerFunc {
 	return func(c *gin类.Context) {
 		w := c.Writer

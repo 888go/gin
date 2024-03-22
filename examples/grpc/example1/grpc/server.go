@@ -11,12 +11,12 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-// server is used to implement helloworld.GreeterServer.
+// server 用于实现 helloworld.GreeterServer。
 type server struct {
 	v1.UnimplementedGreeterServer
 }
 
-// SayHello implements helloworld.GreeterServer
+// SayHello 实现了 helloworld.GreeterServer 接口
 func (s *server) SayHello(ctx context.Context, in *v1.HelloRequest) (*v1.HelloReply, error) {
 	return &v1.HelloReply{Message: "Hello " + in.Name}, nil
 }
@@ -29,7 +29,7 @@ func main() {
 	s := grpc.NewServer()
 	v1.RegisterGreeterServer(s, &server{})
 
-	// Register reflection service on gRPC server.
+	// 在gRPC服务器上注册反射服务。
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

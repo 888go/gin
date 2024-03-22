@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	// Set up a connection to the server.
+	// 设置与服务器的连接。
 	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
@@ -25,7 +25,7 @@ func main() {
 	r.X绑定GET("/rest/n/:name", func(c *gin类.Context) {
 		name := c.X取API参数值("name")
 
-		// Contact the server and print out its response.
+		// 联系服务器并打印其响应。
 		req := &v1.HelloRequest{Name: name}
 		res, err := client.SayHello(c, req)
 		if err != nil {

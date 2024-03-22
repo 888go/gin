@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	// Create context that listens for the interrupt signal from the OS.
+	// 创建一个上下文，用于监听来自操作系统的中断信号。
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
@@ -29,23 +29,22 @@ func main() {
 		Handler: router,
 	}
 
-	// Initializing the server in a goroutine so that
-	// it won't block the graceful shutdown handling below
+// 在一个goroutine中初始化服务器，以便于
+// 不会阻塞下面的优雅关闭处理流程
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
 
-	// Listen for the interrupt signal.
+	// 监听中断信号。
 	<-ctx.Done()
 
-	// Restore default behavior on the interrupt signal and notify user of shutdown.
+	// 恢复对中断信号的默认处理行为，并通知用户系统即将关闭。
 	stop()
 	log.Println("shutting down gracefully, press Ctrl+C again to force")
 
-	// The context is used to inform the server it has 5 seconds to finish
-	// the request it is currently handling
+// 上下文用于通知服务器，它有5秒钟的时间来完成当前正在处理的请求
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
