@@ -8,19 +8,19 @@ import (
 	"github.com/888go/gin"
 )
 
-func handler(ctx *gin.Context) {
-	val := ctx.PostForm("b")
-	if len(ctx.Errors) > 0 {
+func handler(ctx *gin类.Context) {
+	val := ctx.X取表单参数值("b")
+	if len(ctx.X错误s) > 0 {
 		return
 	}
-	ctx.String(http.StatusOK, "got %s\n", val)
+	ctx.X输出文本(http.StatusOK, "got %s\n", val)
 }
 
 func main() {
-	r := gin.Default()
-	r.Use(limits.RequestSizeLimiter(10))
-	r.POST("/", handler)
-	if err := r.Run(":8080"); err != nil {
+	r := gin类.X创建默认对象()
+	r.X中间件(limits.RequestSizeLimiter(10))
+	r.X绑定POST("/", handler)
+	if err := r.X监听(":8080"); err != nil {
 		log.Fatal(err)
 	}
 }

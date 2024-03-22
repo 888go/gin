@@ -9,19 +9,19 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 
-// 配置自动检测 scheme（协议）和 host（主机）
-// - 当无法确定默认 scheme 时，使用 http
-// - 当无法确定默认 host 时，使用 localhost:8080
-	router.Use(location.Default())
+	// configure to automatically detect scheme and host
+	// - use http when default scheme cannot be determined
+	// - use localhost:8080 when default host cannot be determined
+	router.X中间件(location.Default())
 
-	router.GET("/", func(c *gin.Context) {
+	router.X绑定GET("/", func(c *gin类.Context) {
 		url := location.Get(c)
-		c.String(http.StatusOK, url.String())
+		c.X输出文本(http.StatusOK, url.String())
 	})
 
-	if err := router.Run(); err != nil {
+	if err := router.X监听(); err != nil {
 		log.Fatal(err)
 	}
 }

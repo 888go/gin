@@ -9,11 +9,11 @@ import (
 )
 
 func main() {
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 
 	// Ping handler
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
+	r.X绑定GET("/ping", func(c *gin类.Context) {
+		c.X输出文本(200, "pong")
 	})
 
 	m := autocert.Manager{

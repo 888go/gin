@@ -8,11 +8,11 @@ import (
 )
 
 func main() {
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 
-	r.GET("/debug/vars", expvar.Handler())
+	r.X绑定GET("/debug/vars", expvar.Handler())
 
-	if err := r.Run(":8080"); err != nil {
+	if err := r.X监听(":8080"); err != nil {
 		log.Fatal(err)
 	}
 }

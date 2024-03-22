@@ -7,65 +7,57 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 
 	// version 1
-	apiV1 := router.Group("/v1")
+	apiV1 := router.X创建分组路由("/v1")
 
-	apiV1.GET("users", func(c *gin.Context) {
-		c.JSON(http.StatusOK, "List Of V1 Users")
+	apiV1.X绑定GET("users", func(c *gin类.Context) {
+		c.X输出JSON(http.StatusOK, "List Of V1 Users")
 	})
 
-	// 只有经过授权的人员才能添加用户
-	authV1 := apiV1.Group("/", AuthMiddleWare())
+	// User only can be added by authorized person
+	authV1 := apiV1.X创建分组路由("/", AuthMiddleWare())
 
-	authV1.POST("users/add", AddV1User)
+	authV1.X绑定POST("users/add", AddV1User)
 
 	// version 2
-	apiV2 := router.Group("/v2")
+	apiV2 := router.X创建分组路由("/v2")
 
-	apiV2.GET("users", func(c *gin.Context) {
-		c.JSON(http.StatusOK, "List Of V2 Users")
+	apiV2.X绑定GET("users", func(c *gin类.Context) {
+		c.X输出JSON(http.StatusOK, "List Of V2 Users")
 	})
 
-	// 只有经过授权的人员才能添加用户
-	authV2 := apiV2.Group("/", AuthMiddleWare())
+	// User only can be added by authorized person
+	authV2 := apiV2.X创建分组路由("/", AuthMiddleWare())
 
-	authV2.POST("users/add", AddV2User)
+	authV2.X绑定POST("users/add", AddV2User)
 
-	_ = router.Run(":8081")
+	_ = router.X监听(":8081")
 }
 
-
-// ff:
-// c:
-func AddV1User(c *gin.Context) {
+func AddV1User(c *gin类.Context) {
 	// AddUser
 
-	c.JSON(http.StatusOK, "V1 User added")
+	c.X输出JSON(http.StatusOK, "V1 User added")
 }
 
-
-// ff:
-// c:
-func AddV2User(c *gin.Context) {
+func AddV2User(c *gin类.Context) {
 	// AddUser
 
-	c.JSON(http.StatusOK, "V2 User added")
+	c.X输出JSON(http.StatusOK, "V2 User added")
 }
 
-
-// ff:
-func AuthMiddleWare() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// 在这里，您可以添加您的认证方法以授权用户。
-		username := c.PostForm("user")
-		password := c.PostForm("password")
+func AuthMiddleWare() gin类.HandlerFunc {
+	return func(c *gin类.Context) {
+		// here you can add your authentication method to authorize users.
+		username := c.X取表单参数值("user")
+		password := c.X取表单参数值("password")
 
 		if username == "foo" && password == "bar" {
 			return
 		} else {
-			c.AbortWithStatus(http.StatusUnauthorized)
+			c.X停止并带状态码(http.StatusUnauthorized)
 		}
 	}
 }

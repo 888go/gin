@@ -15,7 +15,7 @@ import (
 )
 
 func init() {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 }
 
 func buildDummyLogger() (*zap.Logger, *observer.ObservedLogs) {
@@ -37,16 +37,16 @@ func timestampLocationCheck(t *testing.T, timestampStr string, location *time.Lo
 }
 
 func TestGinzap(t *testing.T) {
-	r := gin.New()
+	r := gin类.X创建()
 
 	utcLogger, utcLoggerObserved := buildDummyLogger()
-	r.Use(Ginzap(utcLogger, time.RFC3339, true))
+	r.X中间件(Ginzap(utcLogger, time.RFC3339, true))
 
 	localLogger, localLoggerObserved := buildDummyLogger()
-	r.Use(Ginzap(localLogger, time.RFC3339, false))
+	r.X中间件(Ginzap(localLogger, time.RFC3339, false))
 
-	r.GET("/test", func(c *gin.Context) {
-		c.JSON(204, nil)
+	r.X绑定GET("/test", func(c *gin类.Context) {
+		c.X输出JSON(204, nil)
 	})
 
 	res1 := httptest.NewRecorder()
@@ -80,22 +80,22 @@ func TestGinzap(t *testing.T) {
 }
 
 func TestGinzapWithConfig(t *testing.T) {
-	r := gin.New()
+	r := gin类.X创建()
 
 	utcLogger, utcLoggerObserved := buildDummyLogger()
-	r.Use(GinzapWithConfig(utcLogger, &Config{
+	r.X中间件(GinzapWithConfig(utcLogger, &Config{
 		TimeFormat:   time.RFC3339,
 		UTC:          true,
 		SkipPaths:    []string{"/no_log"},
 		DefaultLevel: zapcore.WarnLevel,
 	}))
 
-	r.GET("/test", func(c *gin.Context) {
-		c.JSON(204, nil)
+	r.X绑定GET("/test", func(c *gin类.Context) {
+		c.X输出JSON(204, nil)
 	})
 
-	r.GET("/no_log", func(c *gin.Context) {
-		c.JSON(204, nil)
+	r.X绑定GET("/no_log", func(c *gin类.Context) {
+		c.X输出JSON(204, nil)
 	})
 
 	res1 := httptest.NewRecorder()

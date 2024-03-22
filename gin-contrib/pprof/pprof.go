@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	// DefaultPrefix 是pprof的默认URL前缀
+	// DefaultPrefix url prefix of pprof
 	DefaultPrefix = "/debug/pprof"
 )
 
@@ -19,38 +19,32 @@ func getPrefix(prefixOptions ...string) string {
 	return prefix
 }
 
-// 使用提供的gin.Engine注册net/http/pprof包中的标准HandlerFuncs。
-// prefixOptions是可选的。如果不提供prefixOptions，则使用默认路径前缀，否则将使用第一个prefixOptions作为路径前缀。
-
-// ff:
-// prefixOptions:
-// r:
-func Register(r *gin.Engine, prefixOptions ...string) {
+// Register the standard HandlerFuncs from the net/http/pprof package with
+// the provided gin.Engine. prefixOptions is a optional. If not prefixOptions,
+// the default path prefix is used, otherwise first prefixOptions will be path prefix.
+func Register(r *gin类.Engine, prefixOptions ...string) {
 	RouteRegister(&(r.RouterGroup), prefixOptions...)
 }
 
-// RouteRegister 将标准的来自 net/http/pprof 包中的 HandlerFuncs 与提供的 gin.GrouterGroup 进行注册。
-// prefixOptions 是可选参数。如果不提供 prefixOptions，将使用默认路径前缀；否则，首个 prefixOptions 将作为路径前缀。
-
-// ff:
-// prefixOptions:
-// rg:
-func RouteRegister(rg *gin.RouterGroup, prefixOptions ...string) {
+// RouteRegister the standard HandlerFuncs from the net/http/pprof package with
+// the provided gin.GrouterGroup. prefixOptions is a optional. If not prefixOptions,
+// the default path prefix is used, otherwise first prefixOptions will be path prefix.
+func RouteRegister(rg *gin类.RouterGroup, prefixOptions ...string) {
 	prefix := getPrefix(prefixOptions...)
 
-	prefixRouter := rg.Group(prefix)
+	prefixRouter := rg.X创建分组路由(prefix)
 	{
-		prefixRouter.GET("/", gin.WrapF(pprof.Index))
-		prefixRouter.GET("/cmdline", gin.WrapF(pprof.Cmdline))
-		prefixRouter.GET("/profile", gin.WrapF(pprof.Profile))
-		prefixRouter.POST("/symbol", gin.WrapF(pprof.Symbol))
-		prefixRouter.GET("/symbol", gin.WrapF(pprof.Symbol))
-		prefixRouter.GET("/trace", gin.WrapF(pprof.Trace))
-		prefixRouter.GET("/allocs", gin.WrapH(pprof.Handler("allocs")))
-		prefixRouter.GET("/block", gin.WrapH(pprof.Handler("block")))
-		prefixRouter.GET("/goroutine", gin.WrapH(pprof.Handler("goroutine")))
-		prefixRouter.GET("/heap", gin.WrapH(pprof.Handler("heap")))
-		prefixRouter.GET("/mutex", gin.WrapH(pprof.Handler("mutex")))
-		prefixRouter.GET("/threadcreate", gin.WrapH(pprof.Handler("threadcreate")))
+		prefixRouter.X绑定GET("/", gin类.WrapF(pprof.Index))
+		prefixRouter.X绑定GET("/cmdline", gin类.WrapF(pprof.Cmdline))
+		prefixRouter.X绑定GET("/profile", gin类.WrapF(pprof.Profile))
+		prefixRouter.X绑定POST("/symbol", gin类.WrapF(pprof.Symbol))
+		prefixRouter.X绑定GET("/symbol", gin类.WrapF(pprof.Symbol))
+		prefixRouter.X绑定GET("/trace", gin类.WrapF(pprof.Trace))
+		prefixRouter.X绑定GET("/allocs", gin类.WrapH(pprof.Handler("allocs")))
+		prefixRouter.X绑定GET("/block", gin类.WrapH(pprof.Handler("block")))
+		prefixRouter.X绑定GET("/goroutine", gin类.WrapH(pprof.Handler("goroutine")))
+		prefixRouter.X绑定GET("/heap", gin类.WrapH(pprof.Handler("heap")))
+		prefixRouter.X绑定GET("/mutex", gin类.WrapH(pprof.Handler("mutex")))
+		prefixRouter.X绑定GET("/threadcreate", gin类.WrapH(pprof.Handler("threadcreate")))
 	}
 }

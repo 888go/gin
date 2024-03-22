@@ -1,6 +1,6 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package render
 
@@ -8,11 +8,11 @@ import (
 	"net/http"
 )
 
-// Render接口需要被JSON、XML、HTML、YAML等实现。
+// Render interface is to be implemented by JSON, XML, HTML, YAML and so on.
 type Render interface {
-	// Render通过自定义的ContentType写入数据。
+	// Render writes data with custom ContentType.
 	Render(http.ResponseWriter) error
-	// WriteContentType 写入自定义 ContentType。
+	// WriteContentType writes custom ContentType.
 	WriteContentType(w http.ResponseWriter)
 }
 

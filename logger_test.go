@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"errors"
@@ -16,20 +16,20 @@ import (
 )
 
 func init() {
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 }
 
 func TestLogger(t *testing.T) {
 	buffer := new(strings.Builder)
-	router := New()
-	router.Use(LoggerWithWriter(buffer))
-	router.GET("/example", func(c *Context) {})
-	router.POST("/example", func(c *Context) {})
-	router.PUT("/example", func(c *Context) {})
-	router.DELETE("/example", func(c *Context) {})
-	router.PATCH("/example", func(c *Context) {})
-	router.HEAD("/example", func(c *Context) {})
-	router.OPTIONS("/example", func(c *Context) {})
+	router := X创建()
+	router.X中间件(LoggerWithWriter(buffer))
+	router.X绑定GET("/example", func(c *Context) {})
+	router.X绑定POST("/example", func(c *Context) {})
+	router.X绑定PUT("/example", func(c *Context) {})
+	router.X绑定DELETE("/example", func(c *Context) {})
+	router.X绑定PATCH("/example", func(c *Context) {})
+	router.X绑定HEAD("/example", func(c *Context) {})
+	router.X绑定OPTIONS("/example", func(c *Context) {})
 
 	PerformRequest(router, "GET", "/example?a=100")
 	assert.Contains(t, buffer.String(), "200")
@@ -37,7 +37,9 @@ func TestLogger(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-// 我首先编写了这些（基于上述内容扩展），但随后意识到它们更像是集成测试，因为它们测试的是整个日志记录过程，而非单个函数。我不确定这些应该放在哪里。
+	// I wrote these first (extending the above) but then realized they are more
+	// like integration tests because they test the whole logging process rather
+	// than individual functions.  Im not sure where these should go.
 	buffer.Reset()
 	PerformRequest(router, "POST", "/example")
 	assert.Contains(t, buffer.String(), "200")
@@ -83,15 +85,15 @@ func TestLogger(t *testing.T) {
 
 func TestLoggerWithConfig(t *testing.T) {
 	buffer := new(strings.Builder)
-	router := New()
-	router.Use(LoggerWithConfig(LoggerConfig{Output: buffer}))
-	router.GET("/example", func(c *Context) {})
-	router.POST("/example", func(c *Context) {})
-	router.PUT("/example", func(c *Context) {})
-	router.DELETE("/example", func(c *Context) {})
-	router.PATCH("/example", func(c *Context) {})
-	router.HEAD("/example", func(c *Context) {})
-	router.OPTIONS("/example", func(c *Context) {})
+	router := X创建()
+	router.X中间件(LoggerWithConfig(LoggerConfig{Output: buffer}))
+	router.X绑定GET("/example", func(c *Context) {})
+	router.X绑定POST("/example", func(c *Context) {})
+	router.X绑定PUT("/example", func(c *Context) {})
+	router.X绑定DELETE("/example", func(c *Context) {})
+	router.X绑定PATCH("/example", func(c *Context) {})
+	router.X绑定HEAD("/example", func(c *Context) {})
+	router.X绑定OPTIONS("/example", func(c *Context) {})
 
 	PerformRequest(router, "GET", "/example?a=100")
 	assert.Contains(t, buffer.String(), "200")
@@ -99,7 +101,9 @@ func TestLoggerWithConfig(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-// 我首先编写了这些（基于上述内容扩展），但随后意识到它们更像是集成测试，因为它们测试的是整个日志记录过程，而非单个函数。我不确定这些应该放在哪里。
+	// I wrote these first (extending the above) but then realized they are more
+	// like integration tests because they test the whole logging process rather
+	// than individual functions.  Im not sure where these should go.
 	buffer.Reset()
 	PerformRequest(router, "POST", "/example")
 	assert.Contains(t, buffer.String(), "200")
@@ -152,19 +156,19 @@ func TestLoggerWithFormatter(t *testing.T) {
 		DefaultWriter = d
 	}()
 
-	router := New()
-	router.Use(LoggerWithFormatter(func(param LogFormatterParams) string {
+	router := X创建()
+	router.X中间件(X中间件函数_自定义日志格式(func(param LogFormatterParams) string {
 		return fmt.Sprintf("[FORMATTER TEST] %v | %3d | %13v | %15s | %-7s %#v\n%s",
-			param.TimeStamp.Format("2006/01/02 - 15:04:05"),
-			param.StatusCode,
-			param.Latency,
-			param.ClientIP,
-			param.Method,
-			param.Path,
-			param.ErrorMessage,
+			param.X响应时间.Format("2006/01/02 - 15:04:05"),
+			param.X状态码,
+			param.X时长,
+			param.X客户端IP,
+			param.X方法,
+			param.X路径,
+			param.X错误信息,
 		)
 	}))
-	router.GET("/example", func(c *Context) {})
+	router.X绑定GET("/example", func(c *Context) {})
 	PerformRequest(router, "GET", "/example?a=100")
 
 	// output test
@@ -180,30 +184,30 @@ func TestLoggerWithConfigFormatting(t *testing.T) {
 	var gotKeys map[string]any
 	buffer := new(strings.Builder)
 
-	router := New()
+	router := X创建()
 	router.engine.trustedCIDRs, _ = router.engine.prepareTrustedCIDRs()
 
-	router.Use(LoggerWithConfig(LoggerConfig{
+	router.X中间件(LoggerWithConfig(LoggerConfig{
 		Output: buffer,
 		Formatter: func(param LogFormatterParams) string {
 			// for assert test
 			gotParam = param
 
 			return fmt.Sprintf("[FORMATTER TEST] %v | %3d | %13v | %15s | %-7s %s\n%s",
-				param.TimeStamp.Format("2006/01/02 - 15:04:05"),
-				param.StatusCode,
-				param.Latency,
-				param.ClientIP,
-				param.Method,
-				param.Path,
-				param.ErrorMessage,
+				param.X响应时间.Format("2006/01/02 - 15:04:05"),
+				param.X状态码,
+				param.X时长,
+				param.X客户端IP,
+				param.X方法,
+				param.X路径,
+				param.X错误信息,
 			)
 		},
 	}))
-	router.GET("/example", func(c *Context) {
+	router.X绑定GET("/example", func(c *Context) {
 		// set dummy ClientIP
-		c.Request.Header.Set("X-Forwarded-For", "20.20.20.20")
-		gotKeys = c.Keys
+		c.X请求.Header.Set("X-Forwarded-For", "20.20.20.20")
+		gotKeys = c.X上下文设置值Map
 		time.Sleep(time.Millisecond)
 	})
 	PerformRequest(router, "GET", "/example?a=100")
@@ -215,62 +219,62 @@ func TestLoggerWithConfigFormatting(t *testing.T) {
 	assert.Contains(t, buffer.String(), "/example")
 	assert.Contains(t, buffer.String(), "a=100")
 
-	// LogFormatterParams 测试
-	assert.NotNil(t, gotParam.Request)
-	assert.NotEmpty(t, gotParam.TimeStamp)
-	assert.Equal(t, 200, gotParam.StatusCode)
-	assert.NotEmpty(t, gotParam.Latency)
-	assert.Equal(t, "20.20.20.20", gotParam.ClientIP)
-	assert.Equal(t, "GET", gotParam.Method)
-	assert.Equal(t, "/example?a=100", gotParam.Path)
-	assert.Empty(t, gotParam.ErrorMessage)
-	assert.Equal(t, gotKeys, gotParam.Keys)
+	// LogFormatterParams test
+	assert.NotNil(t, gotParam.X请求)
+	assert.NotEmpty(t, gotParam.X响应时间)
+	assert.Equal(t, 200, gotParam.X状态码)
+	assert.NotEmpty(t, gotParam.X时长)
+	assert.Equal(t, "20.20.20.20", gotParam.X客户端IP)
+	assert.Equal(t, "GET", gotParam.X方法)
+	assert.Equal(t, "/example?a=100", gotParam.X路径)
+	assert.Empty(t, gotParam.X错误信息)
+	assert.Equal(t, gotKeys, gotParam.X上下文设置值map)
 }
 
 func TestDefaultLogFormatter(t *testing.T) {
 	timeStamp := time.Unix(1544173902, 0).UTC()
 
 	termFalseParam := LogFormatterParams{
-		TimeStamp:    timeStamp,
-		StatusCode:   200,
-		Latency:      time.Second * 5,
-		ClientIP:     "20.20.20.20",
-		Method:       "GET",
-		Path:         "/",
-		ErrorMessage: "",
-		isTerm:       false,
+		X响应时间:    timeStamp,
+		X状态码:   200,
+		X时长:      time.Second * 5,
+		X客户端IP:     "20.20.20.20",
+		X方法:       "GET",
+		X路径:         "/",
+		X错误信息: "",
+		X是否输出到终端:       false,
 	}
 
 	termTrueParam := LogFormatterParams{
-		TimeStamp:    timeStamp,
-		StatusCode:   200,
-		Latency:      time.Second * 5,
-		ClientIP:     "20.20.20.20",
-		Method:       "GET",
-		Path:         "/",
-		ErrorMessage: "",
-		isTerm:       true,
+		X响应时间:    timeStamp,
+		X状态码:   200,
+		X时长:      time.Second * 5,
+		X客户端IP:     "20.20.20.20",
+		X方法:       "GET",
+		X路径:         "/",
+		X错误信息: "",
+		X是否输出到终端:       true,
 	}
 	termTrueLongDurationParam := LogFormatterParams{
-		TimeStamp:    timeStamp,
-		StatusCode:   200,
-		Latency:      time.Millisecond * 9876543210,
-		ClientIP:     "20.20.20.20",
-		Method:       "GET",
-		Path:         "/",
-		ErrorMessage: "",
-		isTerm:       true,
+		X响应时间:    timeStamp,
+		X状态码:   200,
+		X时长:      time.Millisecond * 9876543210,
+		X客户端IP:     "20.20.20.20",
+		X方法:       "GET",
+		X路径:         "/",
+		X错误信息: "",
+		X是否输出到终端:       true,
 	}
 
 	termFalseLongDurationParam := LogFormatterParams{
-		TimeStamp:    timeStamp,
-		StatusCode:   200,
-		Latency:      time.Millisecond * 9876543210,
-		ClientIP:     "20.20.20.20",
-		Method:       "GET",
-		Path:         "/",
-		ErrorMessage: "",
-		isTerm:       false,
+		X响应时间:    timeStamp,
+		X状态码:   200,
+		X时长:      time.Millisecond * 9876543210,
+		X客户端IP:     "20.20.20.20",
+		X方法:       "GET",
+		X路径:         "/",
+		X错误信息: "",
+		X是否输出到终端:       false,
 	}
 
 	assert.Equal(t, "[GIN] 2018/12/07 - 09:11:42 | 200 |            5s |     20.20.20.20 | GET      \"/\"\n", defaultLogFormatter(termFalseParam))
@@ -283,7 +287,7 @@ func TestDefaultLogFormatter(t *testing.T) {
 func TestColorForMethod(t *testing.T) {
 	colorForMethod := func(method string) string {
 		p := LogFormatterParams{
-			Method: method,
+			X方法: method,
 		}
 		return p.MethodColor()
 	}
@@ -301,7 +305,7 @@ func TestColorForMethod(t *testing.T) {
 func TestColorForStatus(t *testing.T) {
 	colorForStatus := func(code int) string {
 		p := LogFormatterParams{
-			StatusCode: code,
+			X状态码: code,
 		}
 		return p.StatusCodeColor()
 	}
@@ -319,50 +323,50 @@ func TestResetColor(t *testing.T) {
 }
 
 func TestIsOutputColor(t *testing.T) {
-	// 使用isTerm标志为true进行测试。
+	// test with isTerm flag true.
 	p := LogFormatterParams{
-		isTerm: true,
+		X是否输出到终端: true,
 	}
 
 	consoleColorMode = autoColor
 	assert.Equal(t, true, p.IsOutputColor())
 
-	ForceConsoleColor()
+	X开启控制台颜色()
 	assert.Equal(t, true, p.IsOutputColor())
 
-	DisableConsoleColor()
+	X关闭控制台颜色()
 	assert.Equal(t, false, p.IsOutputColor())
 
-	// 使用isTerm标志为false进行测试。
+	// test with isTerm flag false.
 	p = LogFormatterParams{
-		isTerm: false,
+		X是否输出到终端: false,
 	}
 
 	consoleColorMode = autoColor
 	assert.Equal(t, false, p.IsOutputColor())
 
-	ForceConsoleColor()
+	X开启控制台颜色()
 	assert.Equal(t, true, p.IsOutputColor())
 
-	DisableConsoleColor()
+	X关闭控制台颜色()
 	assert.Equal(t, false, p.IsOutputColor())
 
-	// 重置控制台颜色模式。
+	// reset console color mode.
 	consoleColorMode = autoColor
 }
 
 func TestErrorLogger(t *testing.T) {
-	router := New()
-	router.Use(ErrorLogger())
-	router.GET("/error", func(c *Context) {
-		c.Error(errors.New("this is an error")) //nolint: errcheck
+	router := X创建()
+	router.X中间件(ErrorLogger())
+	router.X绑定GET("/error", func(c *Context) {
+		c.X错误(errors.New("this is an error")) //nolint: errcheck
 	})
-	router.GET("/abort", func(c *Context) {
-		c.AbortWithError(http.StatusUnauthorized, errors.New("no authorized")) //nolint: errcheck
+	router.X绑定GET("/abort", func(c *Context) {
+		c.X停止并带状态码与错误(http.StatusUnauthorized, errors.New("no authorized")) //nolint: errcheck
 	})
-	router.GET("/print", func(c *Context) {
-		c.Error(errors.New("this is an error")) //nolint: errcheck
-		c.String(http.StatusInternalServerError, "hola!")
+	router.X绑定GET("/print", func(c *Context) {
+		c.X错误(errors.New("this is an error")) //nolint: errcheck
+		c.X输出文本(http.StatusInternalServerError, "hola!")
 	})
 
 	w := PerformRequest(router, "GET", "/error")
@@ -380,10 +384,10 @@ func TestErrorLogger(t *testing.T) {
 
 func TestLoggerWithWriterSkippingPaths(t *testing.T) {
 	buffer := new(strings.Builder)
-	router := New()
-	router.Use(LoggerWithWriter(buffer, "/skipped"))
-	router.GET("/logged", func(c *Context) {})
-	router.GET("/skipped", func(c *Context) {})
+	router := X创建()
+	router.X中间件(LoggerWithWriter(buffer, "/skipped"))
+	router.X绑定GET("/logged", func(c *Context) {})
+	router.X绑定GET("/skipped", func(c *Context) {})
 
 	PerformRequest(router, "GET", "/logged")
 	assert.Contains(t, buffer.String(), "200")
@@ -395,13 +399,13 @@ func TestLoggerWithWriterSkippingPaths(t *testing.T) {
 
 func TestLoggerWithConfigSkippingPaths(t *testing.T) {
 	buffer := new(strings.Builder)
-	router := New()
-	router.Use(LoggerWithConfig(LoggerConfig{
+	router := X创建()
+	router.X中间件(LoggerWithConfig(LoggerConfig{
 		Output:    buffer,
 		SkipPaths: []string{"/skipped"},
 	}))
-	router.GET("/logged", func(c *Context) {})
-	router.GET("/skipped", func(c *Context) {})
+	router.X绑定GET("/logged", func(c *Context) {})
+	router.X绑定GET("/skipped", func(c *Context) {})
 
 	PerformRequest(router, "GET", "/logged")
 	assert.Contains(t, buffer.String(), "200")
@@ -412,21 +416,21 @@ func TestLoggerWithConfigSkippingPaths(t *testing.T) {
 }
 
 func TestDisableConsoleColor(t *testing.T) {
-	New()
+	X创建()
 	assert.Equal(t, autoColor, consoleColorMode)
-	DisableConsoleColor()
+	X关闭控制台颜色()
 	assert.Equal(t, disableColor, consoleColorMode)
 
-	// 重置控制台颜色模式。
+	// reset console color mode.
 	consoleColorMode = autoColor
 }
 
 func TestForceConsoleColor(t *testing.T) {
-	New()
+	X创建()
 	assert.Equal(t, autoColor, consoleColorMode)
-	ForceConsoleColor()
+	X开启控制台颜色()
 	assert.Equal(t, forceColor, consoleColorMode)
 
-	// 重置控制台颜色模式。
+	// reset console color mode.
 	consoleColorMode = autoColor
 }

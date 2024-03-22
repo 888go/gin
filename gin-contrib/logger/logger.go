@@ -12,43 +12,40 @@ import (
 	"github.com/rs/zerolog"
 )
 
-type Fn func(*gin.Context, zerolog.Logger) zerolog.Logger
+type Fn func(*gin类.Context, zerolog.Logger) zerolog.Logger
 
-// Config 定义了 logger 中间件的配置
+// Config defines the config for logger middleware
 type config struct {
 	logger Fn
-	// UTC 是一个布尔值，表示是否使用 UTC 时区或本地时区。
+	// UTC a boolean stating whether to use UTC time zone or local.
 	utc             bool
 	skipPath        []string
 	skipPathRegexps []*regexp.Regexp
-// Output 是一个用于写入日志的writer。
-// 可选配置，默认值为gin.DefaultWriter。
+	// Output is a writer where logs are written.
+	// Optional. Default value is gin.DefaultWriter.
 	output io.Writer
-	// 用于状态码小于400的请求的日志级别
+	// the log level used for request with status code < 400
 	defaultLevel zerolog.Level
-	// 用于状态码在400至499之间的请求的日志级别
+	// the log level used for request with status code between 400 and 499
 	clientErrorLevel zerolog.Level
-	// 用于状态码大于等于500的请求的日志级别
+	// the log level used for request with status code >= 500
 	serverErrorLevel zerolog.Level
 }
 
 var isTerm bool = isatty.IsTerminal(os.Stdout.Fd())
 
-// SetLogger 初始化日志中间件。
-
-// ff:
-// opts:
-func SetLogger(opts ...Option) gin.HandlerFunc {
+// SetLogger initializes the logging middleware.
+func SetLogger(opts ...Option) gin类.HandlerFunc {
 	cfg := &config{
 		defaultLevel:     zerolog.InfoLevel,
 		clientErrorLevel: zerolog.WarnLevel,
 		serverErrorLevel: zerolog.ErrorLevel,
-		output:           gin.DefaultWriter,
+		output:           gin类.DefaultWriter,
 	}
 
-	// 遍历每个选项
+	// Loop through each option
 	for _, o := range opts {
-		// 调用选项，传入已实例化的
+		// Call the option giving the instantiated
 		o.apply(cfg)
 	}
 
@@ -70,19 +67,19 @@ func SetLogger(opts ...Option) gin.HandlerFunc {
 		With().
 		Timestamp().
 		Logger()
-	return func(c *gin.Context) {
+	return func(c *gin类.Context) {
 		if cfg.logger != nil {
 			l = cfg.logger(c, l)
 		}
 
 		start := time.Now()
-		path := c.Request.URL.Path
-		raw := c.Request.URL.RawQuery
+		path := c.X请求.URL.Path
+		raw := c.X请求.URL.RawQuery
 		if raw != "" {
 			path = path + "?" + raw
 		}
 
-		c.Next()
+		c.X中间件继续()
 		track := true
 
 		if _, ok := skip[path]; ok {
@@ -109,15 +106,15 @@ func SetLogger(opts ...Option) gin.HandlerFunc {
 
 			l = l.With().
 				Int("status", c.Writer.Status()).
-				Str("method", c.Request.Method).
+				Str("method", c.X请求.Method).
 				Str("path", path).
-				Str("ip", c.ClientIP()).
+				Str("ip", c.X取客户端ip()).
 				Dur("latency", latency).
-				Str("user_agent", c.Request.UserAgent()).Logger()
+				Str("user_agent", c.X请求.UserAgent()).Logger()
 
 			msg := "Request"
-			if len(c.Errors) > 0 {
-				msg = c.Errors.String()
+			if len(c.X错误s) > 0 {
+				msg = c.X错误s.String()
 			}
 
 			switch {
@@ -139,12 +136,8 @@ func SetLogger(opts ...Option) gin.HandlerFunc {
 	}
 }
 
-// ParseLevel将级别字符串转换为zerolog的Level值。
-// 如果输入字符串与已知值不匹配，则返回错误。
-
-// ff:
-// zerolog.Level:
-// levelStr:
+// ParseLevel converts a level string into a zerolog Level value.
+// returns an error if the input string does not match known values.
 func ParseLevel(levelStr string) (zerolog.Level, error) {
 	return zerolog.ParseLevel(levelStr)
 }

@@ -66,10 +66,10 @@ func TestMissingTemplateOrName(t *testing.T) {
 }
 
 func TestAddFromFiles(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromFile()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"title": "Test Multiple Template",
 		})
 	})
@@ -80,10 +80,10 @@ func TestAddFromFiles(t *testing.T) {
 }
 
 func TestAddFromGlob(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromGlob()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"title": "Test Multiple Template",
 		})
 	})
@@ -94,10 +94,10 @@ func TestAddFromGlob(t *testing.T) {
 }
 
 func TestAddFromString(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromString()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"name": "index",
 		})
 	})
@@ -108,10 +108,10 @@ func TestAddFromString(t *testing.T) {
 }
 
 func TestAddFromStringsFruncs(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromStringsWithFuncs()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"name": "index",
 		})
 	})
@@ -122,10 +122,10 @@ func TestAddFromStringsFruncs(t *testing.T) {
 }
 
 func TestAddFromFilesFruncs(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromFilesWithFuncs()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"name": "index",
 		})
 	})

@@ -22,54 +22,38 @@ type Options struct {
 	ExcludedExtensions   ExcludedExtensions
 	ExcludedPaths        ExcludedPaths
 	ExcludedPathesRegexs ExcludedPathesRegexs
-	DecompressFn         func(c *gin.Context)
+	DecompressFn         func(c *gin类.Context)
 }
 
 type Option func(*Options)
 
-
-// ff:
-// args:
 func WithExcludedExtensions(args []string) Option {
 	return func(o *Options) {
 		o.ExcludedExtensions = NewExcludedExtensions(args)
 	}
 }
 
-
-// ff:
-// args:
 func WithExcludedPaths(args []string) Option {
 	return func(o *Options) {
 		o.ExcludedPaths = NewExcludedPaths(args)
 	}
 }
 
-
-// ff:
-// args:
 func WithExcludedPathsRegexs(args []string) Option {
 	return func(o *Options) {
 		o.ExcludedPathesRegexs = NewExcludedPathesRegexs(args)
 	}
 }
 
-
-// ff:
-// decompressFn:
-// c:
-func WithDecompressFn(decompressFn func(c *gin.Context)) Option {
+func WithDecompressFn(decompressFn func(c *gin类.Context)) Option {
 	return func(o *Options) {
 		o.DecompressFn = decompressFn
 	}
 }
 
-// 使用map以获得更好的查找性能
+// Using map for better lookup performance
 type ExcludedExtensions map[string]bool
 
-
-// ff:
-// extensions:
 func NewExcludedExtensions(extensions []string) ExcludedExtensions {
 	res := make(ExcludedExtensions)
 	for _, e := range extensions {
@@ -78,9 +62,6 @@ func NewExcludedExtensions(extensions []string) ExcludedExtensions {
 	return res
 }
 
-
-// ff:
-// target:
 func (e ExcludedExtensions) Contains(target string) bool {
 	_, ok := e[target]
 	return ok
@@ -88,16 +69,10 @@ func (e ExcludedExtensions) Contains(target string) bool {
 
 type ExcludedPaths []string
 
-
-// ff:
-// paths:
 func NewExcludedPaths(paths []string) ExcludedPaths {
 	return ExcludedPaths(paths)
 }
 
-
-// ff:
-// requestURI:
 func (e ExcludedPaths) Contains(requestURI string) bool {
 	for _, path := range e {
 		if strings.HasPrefix(requestURI, path) {
@@ -109,9 +84,6 @@ func (e ExcludedPaths) Contains(requestURI string) bool {
 
 type ExcludedPathesRegexs []*regexp.Regexp
 
-
-// ff:
-// regexs:
 func NewExcludedPathesRegexs(regexs []string) ExcludedPathesRegexs {
 	result := make([]*regexp.Regexp, len(regexs))
 	for i, reg := range regexs {
@@ -120,9 +92,6 @@ func NewExcludedPathesRegexs(regexs []string) ExcludedPathesRegexs {
 	return result
 }
 
-
-// ff:
-// requestURI:
 func (e ExcludedPathesRegexs) Contains(requestURI string) bool {
 	for _, reg := range e {
 		if reg.MatchString(requestURI) {
@@ -132,19 +101,16 @@ func (e ExcludedPathesRegexs) Contains(requestURI string) bool {
 	return false
 }
 
-
-// ff:
-// c:
-func DefaultDecompressHandle(c *gin.Context) {
-	if c.Request.Body == nil {
+func DefaultDecompressHandle(c *gin类.Context) {
+	if c.X请求.Body == nil {
 		return
 	}
-	r, err := gzip.NewReader(c.Request.Body)
+	r, err := gzip.NewReader(c.X请求.Body)
 	if err != nil {
-		_ = c.AbortWithError(http.StatusBadRequest, err)
+		_ = c.X停止并带状态码与错误(http.StatusBadRequest, err)
 		return
 	}
-	c.Request.Header.Del("Content-Encoding")
-	c.Request.Header.Del("Content-Length")
-	c.Request.Body = r
+	c.X请求.Header.Del("Content-Encoding")
+	c.X请求.Header.Del("Content-Length")
+	c.X请求.Body = r
 }

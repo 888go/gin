@@ -26,12 +26,12 @@ func newLocation(config Config) *location {
 	}
 }
 
-func (l *location) applyToContext(c *gin.Context) {
+func (l *location) applyToContext(c *gin类.Context) {
 	value := new(url.URL)
-	value.Scheme = l.resolveScheme(c.Request)
-	value.Host = l.resolveHost(c.Request)
+	value.Scheme = l.resolveScheme(c.X请求)
+	value.Host = l.resolveHost(c.X请求)
 	value.Path = l.base
-	c.Set(key, value)
+	c.X设置值(key, value)
 }
 
 func (l *location) resolveScheme(r *http.Request) string {

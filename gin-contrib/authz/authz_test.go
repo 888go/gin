@@ -1,6 +1,6 @@
-// 版权所有 ? 2014 Manu Martinez-Almeida。保留所有权利。
-// 本源代码的使用受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package authz
 
@@ -14,7 +14,7 @@ import (
 	"github.com/888go/gin"
 )
 
-func testAuthzRequest(t *testing.T, router *gin.Engine, user string, path string, method string, code int) {
+func testAuthzRequest(t *testing.T, router *gin类.Engine, user string, path string, method string, code int) {
 	r, _ := http.NewRequestWithContext(context.Background(), method, path, nil)
 	r.SetBasicAuth(user, "123")
 	w := httptest.NewRecorder()
@@ -26,11 +26,11 @@ func testAuthzRequest(t *testing.T, router *gin.Engine, user string, path string
 }
 
 func TestBasic(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
-	router.Use(NewAuthorizer(e))
-	router.Any("/*anypath", func(c *gin.Context) {
-		c.Status(200)
+	router.X中间件(NewAuthorizer(e))
+	router.X绑定Any("/*anypath", func(c *gin类.Context) {
+		c.X设置状态码(200)
 	})
 
 	testAuthzRequest(t, router, "alice", "/dataset1/resource1", "GET", 200)
@@ -40,11 +40,11 @@ func TestBasic(t *testing.T) {
 }
 
 func TestPathWildcard(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
-	router.Use(NewAuthorizer(e))
-	router.Any("/*anypath", func(c *gin.Context) {
-		c.Status(200)
+	router.X中间件(NewAuthorizer(e))
+	router.X绑定Any("/*anypath", func(c *gin类.Context) {
+		c.X设置状态码(200)
 	})
 
 	testAuthzRequest(t, router, "bob", "/dataset2/resource1", "GET", 200)
@@ -63,14 +63,14 @@ func TestPathWildcard(t *testing.T) {
 }
 
 func TestRBAC(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	e, _ := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
-	router.Use(NewAuthorizer(e))
-	router.Any("/*anypath", func(c *gin.Context) {
-		c.Status(200)
+	router.X中间件(NewAuthorizer(e))
+	router.X绑定Any("/*anypath", func(c *gin类.Context) {
+		c.X设置状态码(200)
 	})
 
-	// Cathy 可以通过所有方法访问 /dataset1/* 下的所有资源，因为它具有 dataset1_admin 角色。
+	// cathy can access all /dataset1/* resources via all methods because it has the dataset1_admin role.
 	testAuthzRequest(t, router, "cathy", "/dataset1/item", "GET", 200)
 	testAuthzRequest(t, router, "cathy", "/dataset1/item", "POST", 200)
 	testAuthzRequest(t, router, "cathy", "/dataset1/item", "DELETE", 200)
@@ -78,7 +78,7 @@ func TestRBAC(t *testing.T) {
 	testAuthzRequest(t, router, "cathy", "/dataset2/item", "POST", 403)
 	testAuthzRequest(t, router, "cathy", "/dataset2/item", "DELETE", 403)
 
-	// 删除用户cathy的所有角色，因此cathy现在无法访问任何资源。
+	// delete all roles on user cathy, so cathy cannot access any resources now.
 	_, err := e.DeleteRolesForUser("cathy")
 	if err != nil {
 		t.Errorf("got error %v", err)

@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	// 创建一个上下文，用于监听来自操作系统的中断信号。
+	// Create context that listens for the interrupt signal from the OS.
 	ctx, stop := signal.NotifyContext(
 		context.Background(),
 		syscall.SIGINT,
@@ -20,11 +20,11 @@ func main() {
 	)
 	defer stop()
 
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 
 	// Ping handler
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(http.StatusOK, "pong")
+	r.X绑定GET("/ping", func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "pong")
 	})
 
 	log.Fatal(autotls.RunWithContext(ctx, r, "example1.com", "example2.com"))

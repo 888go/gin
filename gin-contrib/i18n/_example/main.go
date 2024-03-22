@@ -17,39 +17,39 @@ var fs embed.FS
 
 func main() {
 	// new gin engine
-	gin.SetMode(gin.ReleaseMode)
-	router := gin.New()
+	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
+	router := gin类.X创建()
 
 	// apply i18n middleware
-	router.Use(ginI18n.Localize(ginI18n.WithBundle(&ginI18n.BundleCfg{
+	router.X中间件(ginI18n.Localize(ginI18n.WithBundle(&ginI18n.BundleCfg{
 		DefaultLanguage:  language.English,
 		FormatBundleFile: "json",
 		AcceptLanguage:   []language.Tag{language.English, language.German, language.Chinese},
 		RootPath:         "./i18n/localizeJSON/",
 		UnmarshalFunc:    json.Unmarshal,
-// 在注释掉这一行后，使用defaultLoader
-// 它将从文件中加载
+		// After commenting this line, use defaultLoader
+		// it will be loaded from the file
 		Loader: &ginI18n.EmbedLoader{
 			FS: fs,
 		},
 	})))
 
-	router.GET("/", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, ginI18n.MustGetMessage(ctx, "welcome"))
+	router.X绑定GET("/", func(ctx *gin类.Context) {
+		ctx.X输出文本(http.StatusOK, ginI18n.MustGetMessage(ctx, "welcome"))
 	})
 
-	router.GET("/:name", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, ginI18n.MustGetMessage(
+	router.X绑定GET("/:name", func(ctx *gin类.Context) {
+		ctx.X输出文本(http.StatusOK, ginI18n.MustGetMessage(
 			ctx,
 			&i18n.LocalizeConfig{
 				MessageID: "welcomeWithName",
 				TemplateData: map[string]string{
-					"name": ctx.Param("name"),
+					"name": ctx.X取API参数值("name"),
 				},
 			}))
 	})
 
-	if err := router.Run(":8080"); err != nil {
+	if err := router.X监听(":8080"); err != nil {
 		log.Fatal(err)
 	}
 }

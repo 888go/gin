@@ -11,15 +11,15 @@ import (
 )
 
 func TestRequestSizeLimiterOK(t *testing.T) {
-	router := gin.New()
-	router.Use(RequestSizeLimiter(10))
-	router.POST("/test_ok", func(c *gin.Context) {
-		_, _ = ioutil.ReadAll(c.Request.Body)
-		if len(c.Errors) > 0 {
+	router := gin类.X创建()
+	router.X中间件(RequestSizeLimiter(10))
+	router.X绑定POST("/test_ok", func(c *gin类.Context) {
+		_, _ = ioutil.ReadAll(c.X请求.Body)
+		if len(c.X错误s) > 0 {
 			return
 		}
-		c.Request.Body.Close()
-		c.String(http.StatusOK, "OK")
+		c.X请求.Body.Close()
+		c.X输出文本(http.StatusOK, "OK")
 	})
 	resp := performRequest(http.MethodPost, "/test_ok", "big=abc", router)
 
@@ -29,15 +29,15 @@ func TestRequestSizeLimiterOK(t *testing.T) {
 }
 
 func TestRequestSizeLimiterOver(t *testing.T) {
-	router := gin.New()
-	router.Use(RequestSizeLimiter(10))
-	router.POST("/test_large", func(c *gin.Context) {
-		_, _ = ioutil.ReadAll(c.Request.Body)
-		if len(c.Errors) > 0 {
+	router := gin类.X创建()
+	router.X中间件(RequestSizeLimiter(10))
+	router.X绑定POST("/test_large", func(c *gin类.Context) {
+		_, _ = ioutil.ReadAll(c.X请求.Body)
+		if len(c.X错误s) > 0 {
 			return
 		}
-		c.Request.Body.Close()
-		c.String(http.StatusOK, "OK")
+		c.X请求.Body.Close()
+		c.X输出文本(http.StatusOK, "OK")
 	})
 	resp := performRequest(http.MethodPost, "/test_large", "big=abcdefghijklmnop", router)
 
@@ -46,7 +46,7 @@ func TestRequestSizeLimiterOver(t *testing.T) {
 	}
 }
 
-func performRequest(method, target, body string, router *gin.Engine) *httptest.ResponseRecorder {
+func performRequest(method, target, body string, router *gin类.Engine) *httptest.ResponseRecorder {
 	var buf *bytes.Buffer
 	if body != "" {
 		buf = new(bytes.Buffer)

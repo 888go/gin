@@ -11,34 +11,31 @@ import (
 	"github.com/rollbar/rollbar-go"
 )
 
-// Recovery中间件用于Rollbar错误监控
-
-// ff:
-// onlyCrashes:
-func Recovery(onlyCrashes bool) gin.HandlerFunc {
-	return func(c *gin.Context) {
+// Recovery middleware for rollbar error monitoring
+func Recovery(onlyCrashes bool) gin类.HandlerFunc {
+	return func(c *gin类.Context) {
 		defer func() {
 			if rval := recover(); rval != nil {
 				debug.PrintStack()
 
 				rollbar.Critical(errors.New(fmt.Sprint(rval)), getCallers(3), map[string]string{
-					"endpoint": c.Request.RequestURI,
+					"endpoint": c.X请求.RequestURI,
 				})
 
-				c.AbortWithStatus(http.StatusInternalServerError)
+				c.X停止并带状态码(http.StatusInternalServerError)
 			}
 
 			if !onlyCrashes {
-				for _, item := range c.Errors {
+				for _, item := range c.X错误s {
 					rollbar.Error(item.Err, map[string]string{
 						"meta":     fmt.Sprint(item.Meta),
-						"endpoint": c.Request.RequestURI,
+						"endpoint": c.X请求.RequestURI,
 					})
 				}
 			}
 		}()
 
-		c.Next()
+		c.X中间件继续()
 	}
 }
 

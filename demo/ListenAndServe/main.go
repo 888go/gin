@@ -8,7 +8,7 @@ import (
 
 // 参考链接：https://gin-gonic.com/zh-cn/docs/examples/custom-http-config/
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 
 	s := &http.Server{
 		Addr:           ":8080",

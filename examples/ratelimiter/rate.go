@@ -18,12 +18,12 @@ var (
 func init() {
 	log.SetFlags(0)
 	log.SetPrefix("[GIN] ")
-	log.SetOutput(gin.DefaultWriter)
+	log.SetOutput(gin类.DefaultWriter)
 }
 
-func leakBucket() gin.HandlerFunc {
+func leakBucket() gin类.HandlerFunc {
 	prev := time.Now()
-	return func(ctx *gin.Context) {
+	return func(ctx *gin类.Context) {
 		now := limit.Take()
 		log.Print(color.CyanString("%v", now.Sub(prev)))
 		prev = now
@@ -33,15 +33,15 @@ func leakBucket() gin.HandlerFunc {
 func ginRun(rps int) {
 	limit = ratelimit.New(rps)
 
-	app := gin.Default()
-	app.Use(leakBucket())
+	app := gin类.X创建默认对象()
+	app.X中间件(leakBucket())
 
-	app.GET("/rate", func(ctx *gin.Context) {
-		ctx.JSON(200, "rate limiting test")
+	app.X绑定GET("/rate", func(ctx *gin类.Context) {
+		ctx.X输出JSON(200, "rate limiting test")
 	})
 
 	log.Printf(color.CyanString("Current Rate Limit: %v requests/s", rps))
-	app.Run(":8080")
+	app.X监听(":8080")
 }
 
 func main() {

@@ -16,10 +16,10 @@ import (
 )
 
 func main() {
-	router := gin.Default()
-	router.GET("/", func(c *gin.Context) {
+	router := gin类.X创建默认对象()
+	router.X绑定GET("/", func(c *gin类.Context) {
 		time.Sleep(5 * time.Second)
-		c.String(http.StatusOK, "Welcome Gin Server")
+		c.X输出文本(http.StatusOK, "Welcome Gin Server")
 	})
 
 	srv := &http.Server{
@@ -27,24 +27,26 @@ func main() {
 		Handler: router,
 	}
 
-// 在一个goroutine中初始化服务器，以便于
-// 不会阻塞下面的优雅关闭处理流程
+	// Initializing the server in a goroutine so that
+	// it won't block the graceful shutdown handling below
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
 
-// 等待中断信号以优雅地关闭服务器，超时时间为5秒。
+	// Wait for interrupt signal to gracefully shutdown the server with
+	// a timeout of 5 seconds.
 	quit := make(chan os.Signal, 1)
-// (无参数) kill 默认发送 syscall.SIGTERM
-// kill -2 等同于 syscall.SIGINT
-// kill -9 等同于 syscall.SIGKILL，但无法被捕获，因此不需要添加它
+	// kill (no param) default send syscall.SIGTERM
+	// kill -2 is syscall.SIGINT
+	// kill -9 is syscall.SIGKILL but can't be catch, so don't need add it
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 	log.Println("Shutting down server...")
 
-// 上下文用于通知服务器，它有5秒钟的时间来完成当前正在处理的请求
+	// The context is used to inform the server it has 5 seconds to finish
+	// the request it is currently handling
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {

@@ -11,8 +11,8 @@ import (
 
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	r := gin.Default()
-	r.GET("/test_stream", func(c *gin.Context) {
+	r := gin类.X创建默认对象()
+	r.X绑定GET("/test_stream", func(c *gin类.Context) {
 		w := c.Writer
 		header := w.Header()
 		header.Set("Transfer-Encoding", "chunked")
@@ -38,7 +38,7 @@ func main() {
 		w.(http.Flusher).Flush()
 	})
 
-	r.Run("127.0.0.1:8080")
+	r.X监听("127.0.0.1:8080")
 }
 
 /*

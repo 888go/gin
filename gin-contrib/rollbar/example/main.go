@@ -13,10 +13,10 @@ func main() {
 	roll.SetToken("MY_TOKEN")
 	// roll.SetEnvironment("production") // defaults to "development"
 
-	r := gin.Default()
-	r.Use(rollbar.Recovery(true))
+	r := gin类.X创建默认对象()
+	r.X中间件(rollbar.Recovery(true))
 
-	if err := r.Run(":8080"); err != nil {
+	if err := r.X监听(":8080"); err != nil {
 		log.Fatal(err)
 	}
 }

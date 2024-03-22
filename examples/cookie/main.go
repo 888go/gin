@@ -6,36 +6,34 @@ import (
 	"github.com/888go/gin"
 )
 
-
-// ff:
-func CookieTool() gin.HandlerFunc {
-	return func(c *gin.Context) {
+func CookieTool() gin类.HandlerFunc {
+	return func(c *gin类.Context) {
 		// Get cookie
-		if cookie, err := c.Cookie("label"); err == nil {
+		if cookie, err := c.X取cookie值("label"); err == nil {
 			if cookie == "ok" {
-				c.Next()
+				c.X中间件继续()
 				return
 			}
 		}
 
-		// Cookie验证失败
-		c.JSON(http.StatusForbidden, gin.H{"error": "Forbidden with no cookie"})
-		c.Abort()
+		// Cookie verification failed
+		c.X输出JSON(http.StatusForbidden, gin类.H{"error": "Forbidden with no cookie"})
+		c.X停止()
 	}
 }
 
 func main() {
-	route := gin.Default()
+	route := gin类.X创建默认对象()
 
-	route.GET("/login", func(c *gin.Context) {
-		// 设置cookie（内容为 {"label": "ok" }），最大有效期为30秒。
-		c.SetCookie("label", "ok", 30, "/", "localhost", false, true)
-		c.String(200, "Login success!")
+	route.X绑定GET("/login", func(c *gin类.Context) {
+		// Set cookie {"label": "ok" }, maxAge 30 seconds.
+		c.X设置cookie值("label", "ok", 30, "/", "localhost", false, true)
+		c.X输出文本(200, "Login success!")
 	})
 
-	route.GET("/home", CookieTool(), func(c *gin.Context) {
-		c.JSON(200, gin.H{"data": "Your home page"})
+	route.X绑定GET("/home", CookieTool(), func(c *gin类.Context) {
+		c.X输出JSON(200, gin类.H{"data": "Your home page"})
 	})
 
-	route.Run(":8080")
+	route.X监听(":8080")
 }

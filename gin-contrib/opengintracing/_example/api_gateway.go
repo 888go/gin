@@ -26,14 +26,14 @@ func main() {
 	opentracing.SetGlobalTracer(trace)
 
 	// Set up routes
-	r := gin.Default()
-	r.POST("/service1",
+	r := gin类.X创建默认对象()
+	r.X绑定POST("/service1",
 		opengintracing.NewSpan(trace, "forward to service 1"),
 		service1handler)
-	r.POST("/service2",
+	r.X绑定POST("/service2",
 		opengintracing.NewSpan(trace, "forward to service 2"),
 		service2handler)
-	r.Run(":8000")
+	r.X监听(":8000")
 }
 
 func printHeaders(message string, header http.Header) {
@@ -43,11 +43,11 @@ func printHeaders(message string, header http.Header) {
 	}
 }
 
-func service1handler(c *gin.Context) {
+func service1handler(c *gin类.Context) {
 	span, found := opengintracing.GetSpan(c)
 	if found == false {
 		fmt.Println("Span not found")
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.X停止并带状态码(http.StatusInternalServerError)
 		return
 	}
 	req, _ := http.NewRequest("POST", "http://localhost:8001", nil)
@@ -57,27 +57,27 @@ func service1handler(c *gin.Context) {
 		opentracing.HTTPHeaders,
 		opentracing.HTTPHeadersCarrier(req.Header))
 
-	printHeaders("Incoming Headers", c.Request.Header)
+	printHeaders("Incoming Headers", c.X请求.Header)
 	printHeaders("Outgoing Headers", req.Header)
 
 	client := http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		c.AbortWithError(http.StatusInternalServerError, err)
+		c.X停止并带状态码与错误(http.StatusInternalServerError, err)
 		return
 	}
 	if resp.StatusCode != http.StatusOK {
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.X停止并带状态码(http.StatusInternalServerError)
 		return
 	}
-	c.Status(http.StatusOK)
+	c.X设置状态码(http.StatusOK)
 }
 
-func service2handler(c *gin.Context) {
+func service2handler(c *gin类.Context) {
 	span, found := opengintracing.GetSpan(c)
 	if found == false {
 		fmt.Println("Span not found")
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.X停止并带状态码(http.StatusInternalServerError)
 		return
 	}
 	req, _ := http.NewRequest("POST", "http://localhost:8002", nil)
@@ -86,18 +86,18 @@ func service2handler(c *gin.Context) {
 		opentracing.HTTPHeaders,
 		opentracing.HTTPHeadersCarrier(req.Header))
 
-	printHeaders("Incoming Headers", c.Request.Header)
+	printHeaders("Incoming Headers", c.X请求.Header)
 	printHeaders("Outgoing Headers", req.Header)
 
 	client := http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		c.AbortWithError(http.StatusInternalServerError, err)
+		c.X停止并带状态码与错误(http.StatusInternalServerError, err)
 		return
 	}
 	if resp.StatusCode != http.StatusOK {
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.X停止并带状态码(http.StatusInternalServerError)
 		return
 	}
-	c.Status(http.StatusOK)
+	c.X设置状态码(http.StatusOK)
 }

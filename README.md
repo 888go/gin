@@ -1,54 +1,56 @@
-# # Gin Web 框架
+# Gin Web Framework
 
 <img align="right" width="159px" src="https://raw.githubusercontent.com/gin-gonic/logo/master/color.png">
 
-[![构建状态](https://github.com/gin-gonic/gin/workflows/Run%20Tests/badge.svg?branch=master)](https://github.com/gin-gonic/gin/actions?query=branch%3Amaster)
-[![codecov 代码覆盖率](https://codecov.io/gh/gin-gonic/gin/branch/master/graph/badge.svg)](https://codecov.io/gh/gin-gonic/gin)
-[![Go 报告卡](https://goreportcard.com/badge/github.com/gin-gonic/gin)](https://goreportcard.com/report/github.com/gin-gonic/gin)
-[![GoDoc 文档](https://pkg.go.dev/badge/github.com/gin-gonic/gin?status.svg)](https://pkg.go.dev/github.com/gin-gonic/gin?tab=doc)
-[![Sourcegraph 源码搜索](https://sourcegraph.com/github.com/gin-gonic/gin/-/badge.svg)](https://sourcegraph.com/github.com/gin-gonic/gin?badge)
-[![开源助手](https://www.codetriage.com/gin-gonic/gin/badges/users.svg)](https://www.codetriage.com/gin-gonic/gin)
-[![发布版本](https://img.shields.io/github/release/gin-gonic/gin.svg?style=flat-square)](https://github.com/gin-gonic/gin/releases)
-[![待办事项](https://badgen.net/https/api.tickgit.com/badgen/github.com/gin-gonic/gin)](https://www.tickgit.com/browse?repo=github.com/gin-gonic/gin)
+[![Build Status](https://github.com/gin-gonic/gin/workflows/Run%20Tests/badge.svg?branch=master)](https://github.com/gin-gonic/gin/actions?query=branch%3Amaster)
+[![codecov](https://codecov.io/gh/gin-gonic/gin/branch/master/graph/badge.svg)](https://codecov.io/gh/gin-gonic/gin)
+[![Go Report Card](https://goreportcard.com/badge/github.com/gin-gonic/gin)](https://goreportcard.com/report/github.com/gin-gonic/gin)
+[![GoDoc](https://pkg.go.dev/badge/github.com/gin-gonic/gin?status.svg)](https://pkg.go.dev/github.com/gin-gonic/gin?tab=doc)
+[![Sourcegraph](https://sourcegraph.com/github.com/gin-gonic/gin/-/badge.svg)](https://sourcegraph.com/github.com/gin-gonic/gin?badge)
+[![Open Source Helpers](https://www.codetriage.com/gin-gonic/gin/badges/users.svg)](https://www.codetriage.com/gin-gonic/gin)
+[![Release](https://img.shields.io/github/release/gin-gonic/gin.svg?style=flat-square)](https://github.com/gin-gonic/gin/releases)
+[![TODOs](https://badgen.net/https/api.tickgit.com/badgen/github.com/gin-gonic/gin)](https://www.tickgit.com/browse?repo=github.com/gin-gonic/gin)
 
-Gin 是一个用 [Go](https://go.dev/) 编写的 Web 框架。它拥有类似 Martini 的简洁 API，由于采用了 [httprouter](https://github.com/julienschmidt/httprouter)，性能可达到比同类框架快至 40 倍的速度。如果您需要高性能和高生产力，您将会喜欢上 Gin。
+Gin is a web framework written in [Go](https://go.dev/). It features a martini-like API with performance that is up to 40 times faster thanks to [httprouter](https://github.com/julienschmidt/httprouter). If you need performance and good productivity, you will love Gin.
 
-**Gin 的主要特性包括：**
+**The key features of Gin are:**
 
-- 零分配路由器
-- 快速响应
-- 中间件支持
-- 稳定运行，避免崩溃
-- JSON 数据验证
-- 路由分组功能
-- 错误管理机制
-- 内置渲染功能
-- 易于扩展
+- Zero allocation router
+- Fast
+- Middleware support
+- Crash-free
+- JSON validation
+- Routes grouping
+- Error management
+- Rendering built-in
+- Extendable
+
+
 ## Getting started
 
-### # 先决条件
+### Prerequisites
 
-- **[Go](https://go.dev/)**: 最近 **三个主要版本** 中的任意一个 [发布版本](https://go.dev/doc/devel/release)（我们使用这些版本进行测试）。
-## # 获取 Gin
+- **[Go](https://go.dev/)**: any one of the **three latest major** [releases](https://go.dev/doc/devel/release) (we test it with these).
 
-随着对 [Go module](https://github.com/golang/go/wiki/Modules) 的支持，只需在您的代码中添加以下导入语句：
+### Getting Gin
 
-```go
+With [Go module](https://github.com/golang/go/wiki/Modules) support, simply add the following import
+
+```
 import "github.com/gin-gonic/gin"
 ```
 
-然后，执行 `go [build|run|test]` 将会自动获取所需的依赖包。
+to your code, and then `go [build|run|test]` will automatically fetch the necessary dependencies.
 
-如果没有 Go module 支持，可以通过运行以下 Go 命令来安装 `gin` 包：
+Otherwise, run the following Go command to install the `gin` package:
 
 ```sh
 $ go get -u github.com/gin-gonic/gin
 ```
 
-#
-## # 运行 Gin
+### Running Gin
 
-首先，你需要为使用 Gin 导入 Gin 包，一个最简单的例子如下所示的 `example.go`：
+First you need to import Gin package for using Gin, one simplest example likes the follow `example.go`:
 
 ```go
 package main
@@ -66,30 +68,28 @@ func main() {
       "message": "pong",
     })
   })
-  r.Run() // 在 0.0.0.0:8080 上监听并提供服务（对于 Windows 是 "localhost:8080"）
+  r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
-
 ```
 
-然后使用 Go 命令来运行这个示例：
+And use the Go command to run the demo:
 
 ```
-# # 运行example.go并在浏览器中访问0.0.0.0:8080/ping
-
-命令行操作：
-```shell
+# run example.go and visit 0.0.0.0:8080/ping on browser
 $ go run example.go
 ```
 
-（请注意，由于您提供的内容不完整，以上翻译可能在上下文中有所缺失。完整的命令应该是指示用户通过Go语言运行名为“example.go”的程序，并在运行后在浏览器中打开地址“0.0.0.0:8080/ping”来查看或测试结果。）
-## Learn more examples
+### Learn more examples
 
-#### # 快速开始
+#### Quick Start
 
-为了学习和实践更多示例，请阅读包含API示例和构建标签的[Gin快速开始](docs/doc.md)文档。
-## # 示例
+Learn and practice more examples, please read the [Gin Quick Start](docs/doc.md) which includes API examples and builds tag.
 
-在[Gin examples](https://github.com/gin-gonic/examples)仓库中，我们提供了一系列即用型示例，展示了Gin在各种应用场景下的使用方法。
+#### Examples
+
+A number of ready-to-run examples demonstrating various use cases of Gin on the [Gin examples](https://github.com/gin-gonic/examples) repository.
+
+
 ## Documentation
 
 See [API documentation and descriptions](https://godoc.org/github.com/gin-gonic/gin) for package.
@@ -105,11 +105,12 @@ All documentation is available on the Gin website.
 - [Turkish](https://gin-gonic.com/tr/docs/)
 - [Persian](https://gin-gonic.com/fa/docs/)
 
-### # 关于Gin的文章
+### Articles about Gin
 
-精选的优秀Gin框架文章列表：
+A curated list of awesome Gin framework.
 
-- [教程：使用Go和Gin开发RESTful API](https://go.dev/doc/tutorial/web-service-gin)
+- [Tutorial: Developing a RESTful API with Go and Gin](https://go.dev/doc/tutorial/web-service-gin)
+
 ## Benchmarks
 
 Gin uses a custom version of [HttpRouter](https://github.com/julienschmidt/httprouter), [see all benchmarks details](/BENCHMARKS.md).
@@ -153,21 +154,25 @@ Gin uses a custom version of [HttpRouter](https://github.com/julienschmidt/httpr
 - (4): Average Allocations per Repetition (allocs/op), lower is better
 
 
-## # 中间件
+## Middlewares
 
-你可以在[gin-contrib](https://github.com/gin-contrib)找到许多有用的Gin中间件。
-## # 用户
+You can find many useful Gin middlewares at [gin-contrib](https://github.com/gin-contrib).
 
-使用[Gin](https://github.com/gin-gonic/gin) web框架的优秀项目列表：
 
-- [gorush](https://github.com/appleboy/gorush)：一款用Go编写的推送通知服务器。
-- [fnproject](https://github.com/fnproject/fn)：容器原生、云平台无关的无服务器平台。
-- [photoprism](https://github.com/photoprism/photoprism)：基于Go和Google TensorFlow的照片管理工具。
-- [lura](https://github.com/luraproject/lura)：具有中间件功能的超高性能API网关。
-- [picfit](https://github.com/thoas/picfit)：一款用Go编写的图片缩放服务器。
-- [dkron](https://github.com/distribworks/dkron)：分布式、容错的工作调度系统。
-## # 贡献
+## Users
 
-Gin 由数百名贡献者共同完成。我们非常感谢您的帮助！
+Awesome project lists using [Gin](https://github.com/gin-gonic/gin) web framework.
 
-请参阅 [CONTRIBUTING](CONTRIBUTING.md) 以了解提交补丁和贡献工作流程的详细信息。
+* [gorush](https://github.com/appleboy/gorush): A push notification server written in Go.
+* [fnproject](https://github.com/fnproject/fn): The container native, cloud agnostic serverless platform.
+* [photoprism](https://github.com/photoprism/photoprism): Personal photo management powered by Go and Google TensorFlow.
+* [lura](https://github.com/luraproject/lura): Ultra performant API Gateway with middlewares.
+* [picfit](https://github.com/thoas/picfit): An image resizing server written in Go.
+* [dkron](https://github.com/distribworks/dkron): Distributed, fault tolerant job scheduling system.
+
+
+## Contributing
+
+Gin is the work of hundreds of contributors. We appreciate your help!
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details on submitting patches and the contribution workflow.

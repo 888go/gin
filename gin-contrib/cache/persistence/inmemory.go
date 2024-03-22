@@ -7,24 +7,17 @@ import (
 	"github.com/robfig/go-cache"
 )
 
-// InMemoryStore 表示使用内存持久化的缓存
+//InMemoryStore represents the cache with memory persistence
 type InMemoryStore struct {
 	cache.Cache
 }
 
-// NewInMemoryStore 返回一个 InMemoryStore
-
-// ff:
-// defaultExpiration:
+// NewInMemoryStore returns a InMemoryStore
 func NewInMemoryStore(defaultExpiration time.Duration) *InMemoryStore {
 	return &InMemoryStore{*cache.New(defaultExpiration, time.Minute)}
 }
 
-// Get（参见 CacheStore 接口）
-
-// ff:
-// value:
-// key:
+// Get (see CacheStore interface)
 func (c *InMemoryStore) Get(key string, value interface{}) error {
 	val, found := c.Cache.Get(key)
 	if !found {
@@ -39,24 +32,14 @@ func (c *InMemoryStore) Get(key string, value interface{}) error {
 	return ErrNotStored
 }
 
-// Set（参见 CacheStore 接口）
-
-// ff:
-// expires:
-// value:
-// key:
+// Set (see CacheStore interface)
 func (c *InMemoryStore) Set(key string, value interface{}, expires time.Duration) error {
-	// 注释：go-cache 能够识别 DEFAULT 和 FOREVER 的值
+	// NOTE: go-cache understands the values of DEFAULT and FOREVER
 	c.Cache.Set(key, value, expires)
 	return nil
 }
 
-// Add （参见 CacheStore 接口）
-
-// ff:
-// expires:
-// value:
-// key:
+// Add (see CacheStore interface)
 func (c *InMemoryStore) Add(key string, value interface{}, expires time.Duration) error {
 	err := c.Cache.Add(key, value, expires)
 	if err == cache.ErrKeyExists {
@@ -65,12 +48,7 @@ func (c *InMemoryStore) Add(key string, value interface{}, expires time.Duration
 	return err
 }
 
-// Replace（参见 CacheStore 接口）
-
-// ff:
-// expires:
-// value:
-// key:
+// Replace (see CacheStore interface)
 func (c *InMemoryStore) Replace(key string, value interface{}, expires time.Duration) error {
 	if err := c.Cache.Replace(key, value, expires); err != nil {
 		return ErrNotStored
@@ -78,10 +56,7 @@ func (c *InMemoryStore) Replace(key string, value interface{}, expires time.Dura
 	return nil
 }
 
-// Delete（参考 CacheStore 接口）
-
-// ff:
-// key:
+// Delete (see CacheStore interface)
 func (c *InMemoryStore) Delete(key string) error {
 	if found := c.Cache.Delete(key); !found {
 		return ErrCacheMiss
@@ -89,11 +64,7 @@ func (c *InMemoryStore) Delete(key string) error {
 	return nil
 }
 
-// 自增（参见 CacheStore 接口）
-
-// ff:
-// n:
-// key:
+// Increment (see CacheStore interface)
 func (c *InMemoryStore) Increment(key string, n uint64) (uint64, error) {
 	newValue, err := c.Cache.Increment(key, n)
 	if err == cache.ErrCacheMiss {
@@ -102,11 +73,7 @@ func (c *InMemoryStore) Increment(key string, n uint64) (uint64, error) {
 	return newValue, err
 }
 
-// 减量（参考 CacheStore 接口）
-
-// ff:
-// n:
-// key:
+// Decrement (see CacheStore interface)
 func (c *InMemoryStore) Decrement(key string, n uint64) (uint64, error) {
 	newValue, err := c.Cache.Decrement(key, n)
 	if err == cache.ErrCacheMiss {
@@ -115,9 +82,7 @@ func (c *InMemoryStore) Decrement(key string, n uint64) (uint64, error) {
 	return newValue, err
 }
 
-// Flush（参考 CacheStore 接口）
-
-// ff:
+// Flush (see CacheStore interface)
 func (c *InMemoryStore) Flush() error {
 	c.Cache.Flush()
 	return nil

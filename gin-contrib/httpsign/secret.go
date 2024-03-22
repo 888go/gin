@@ -7,11 +7,11 @@ import (
 // KeyID define type
 type KeyID string
 
-// Secret 定义密钥及其使用的算法
+// Secret define secret key and algorithm that key use
 type Secret struct {
 	Key       string
 	Algorithm crypto.Crypto
 }
 
-// 密钥映射表，其中keyID为键，secret为值
+// Secrets map with keyID and secret
 type Secrets map[KeyID]*Secret

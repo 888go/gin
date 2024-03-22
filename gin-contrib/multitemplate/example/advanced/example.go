@@ -9,20 +9,20 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 	router.HTMLRender = loadTemplates("./templates")
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index.html", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index.html", gin类.H{
 			"title": "Welcome!",
 		})
 	})
-	router.GET("/article", func(c *gin.Context) {
-		c.HTML(200, "article.html", gin.H{
+	router.X绑定GET("/article", func(c *gin类.Context) {
+		c.X输出html模板(200, "article.html", gin类.H{
 			"title": "Html5 Article Engine",
 		})
 	})
 
-	if err := router.Run(":8080"); err != nil {
+	if err := router.X监听(":8080"); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -40,7 +40,7 @@ func loadTemplates(templatesDir string) multitemplate.Renderer {
 		panic(err.Error())
 	}
 
-	// 从layouts/和includes/目录生成我们的templates映射
+	// Generate our templates map from our layouts/ and includes/ directories
 	for _, include := range includes {
 		layoutCopy := make([]string, len(layouts))
 		copy(layoutCopy, layouts)

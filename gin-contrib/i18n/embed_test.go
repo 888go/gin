@@ -17,22 +17,22 @@ import (
 )
 
 type server struct {
-	*gin.Engine
+	*gin类.Engine
 }
 
-func newEmbedServer(middleware ...gin.HandlerFunc) *server {
-	server := &server{gin.New()}
-	server.Use(middleware...)
+func newEmbedServer(middleware ...gin类.HandlerFunc) *server {
+	server := &server{gin类.X创建()}
+	server.X中间件(middleware...)
 
-	server.GET("/", func(context *gin.Context) {
-		context.String(http.StatusOK, MustGetMessage(context, "welcome"))
+	server.X绑定GET("/", func(context *gin类.Context) {
+		context.X输出文本(http.StatusOK, MustGetMessage(context, "welcome"))
 	})
 
-	server.GET("/:name", func(context *gin.Context) {
-		context.String(http.StatusOK, MustGetMessage(context, &i18n.LocalizeConfig{
+	server.X绑定GET("/:name", func(context *gin类.Context) {
+		context.X输出文本(http.StatusOK, MustGetMessage(context, &i18n.LocalizeConfig{
 			MessageID: "welcomeWithName",
 			TemplateData: map[string]string{
-				"name": context.Param("name"),
+				"name": context.X取API参数值("name"),
 			},
 		}))
 	})
@@ -62,8 +62,8 @@ var (
 		AcceptLanguage:   []language.Tag{language.English, language.German, language.Chinese},
 		RootPath:         "./testdata/localizeJSON/",
 		UnmarshalFunc:    json.Unmarshal,
-// 在注释掉这一行后，使用defaultLoader
-// 它将从文件中加载
+		// After commenting this line, use defaultLoader
+		// it will be loaded from the file
 		Loader: &EmbedLoader{fs},
 	})))
 )

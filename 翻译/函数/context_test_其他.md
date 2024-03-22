@@ -21,3 +21,7 @@ th=assert.Regexp(t, "^(.*/vendor/)?github.com/888go/gin.handlerNameTest$", c.Han
 [assert.Regexp(t, `^(.*/vendor/)?(github\.com/gin-gonic/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)]
 th=assert.Regexp(t, `^(.*/vendor/)?(github\.com/888go/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)
 代码块=		assert.Regexp(t, `^(.*/vendor/)?(github\.com/gin-gonic/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name) //th:assert.Regexp(t, `^(.*/vendor/)?(github\.com/888go/gin\.){1}(TestContextHandlerNames\.func.*){0,1}(handlerNameTest.*){0,1}`, name)               
+
+[assert.Contains(t, w.Body.String(), "func New() *Engine {")]
+th=assert.Contains(t, w.Body.String(), "func X创建() *Engine {")
+代码块=	assert.Contains(t, w.Body.String(), "func New() *Engine {") //th:assert.Contains(t, w.Body.String(), "func X创建() *Engine {")

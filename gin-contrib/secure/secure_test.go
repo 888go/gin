@@ -14,19 +14,19 @@ const (
 )
 
 func init() {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 }
 
-func newServer(options Config) *gin.Engine {
-	router := gin.New()
-	router.Use(New(options))
-	router.GET("/foo", func(c *gin.Context) {
-		c.String(200, testResponse)
+func newServer(options Config) *gin类.Engine {
+	router := gin类.X创建()
+	router.X中间件(New(options))
+	router.X绑定GET("/foo", func(c *gin类.Context) {
+		c.X输出文本(200, testResponse)
 	})
 	return router
 }
 
-func performRequest(router *gin.Engine, path string) *httptest.ResponseRecorder {
+func performRequest(router *gin类.Engine, path string) *httptest.ResponseRecorder {
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", path, nil)
 	router.ServeHTTP(w, req)
@@ -35,7 +35,7 @@ func performRequest(router *gin.Engine, path string) *httptest.ResponseRecorder 
 
 func TestNoConfig(t *testing.T) {
 	router := newServer(Config{
-		// 故意留空。
+		// Intentionally left blank.
 	})
 
 	w := performRequest(router, "http://example.com/foo")
@@ -123,9 +123,9 @@ func TestAllowHostsInDevMode(t *testing.T) {
 
 func TestBadHostHandler(t *testing.T) {
 
-	badHandler := func(c *gin.Context) {
-		c.String(http.StatusInternalServerError, "BadHost")
-		c.Abort()
+	badHandler := func(c *gin类.Context) {
+		c.X输出文本(http.StatusInternalServerError, "BadHost")
+		c.X停止()
 	}
 
 	router := newServer(Config{

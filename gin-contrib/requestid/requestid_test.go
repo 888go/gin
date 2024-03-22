@@ -12,14 +12,14 @@ import (
 
 const testXRequestID = "test-request-id"
 
-func emptySuccessResponse(c *gin.Context) {
-	c.String(http.StatusOK, "")
+func emptySuccessResponse(c *gin类.Context) {
+	c.X输出文本(http.StatusOK, "")
 }
 
 func Test_RequestID_CreateNew(t *testing.T) {
-	r := gin.New()
-	r.Use(New())
-	r.GET("/", emptySuccessResponse)
+	r := gin类.X创建()
+	r.X中间件(New())
+	r.X绑定GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
@@ -30,9 +30,9 @@ func Test_RequestID_CreateNew(t *testing.T) {
 }
 
 func Test_RequestID_PassThru(t *testing.T) {
-	r := gin.New()
-	r.Use(New())
-	r.GET("/", emptySuccessResponse)
+	r := gin类.X创建()
+	r.X中间件(New())
+	r.X绑定GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
@@ -44,15 +44,15 @@ func Test_RequestID_PassThru(t *testing.T) {
 }
 
 func TestRequestIDWithCustomID(t *testing.T) {
-	r := gin.New()
-	r.Use(
+	r := gin类.X创建()
+	r.X中间件(
 		New(
 			WithGenerator(func() string {
 				return testXRequestID
 			}),
 		),
 	)
-	r.GET("/", emptySuccessResponse)
+	r.X绑定GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
@@ -63,13 +63,13 @@ func TestRequestIDWithCustomID(t *testing.T) {
 }
 
 func TestRequestIDWithCustomHeaderKey(t *testing.T) {
-	r := gin.New()
-	r.Use(
+	r := gin类.X创建()
+	r.X中间件(
 		New(
 			WithCustomHeaderStrKey("customKey"),
 		),
 	)
-	r.GET("/", emptySuccessResponse)
+	r.X绑定GET("/", emptySuccessResponse)
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
@@ -81,11 +81,11 @@ func TestRequestIDWithCustomHeaderKey(t *testing.T) {
 }
 
 func TestRequestIDWithHandler(t *testing.T) {
-	r := gin.New()
+	r := gin类.X创建()
 	called := false
-	r.Use(
+	r.X中间件(
 		New(
-			WithHandler(func(c *gin.Context, requestID string) {
+			WithHandler(func(c *gin类.Context, requestID string) {
 				called = true
 				assert.Equal(t, testXRequestID, requestID)
 			}),
@@ -101,12 +101,12 @@ func TestRequestIDWithHandler(t *testing.T) {
 }
 
 func TestRequestIDIsAttachedToRequestHeaders(t *testing.T) {
-	r := gin.New()
+	r := gin类.X创建()
 
-	r.Use(New())
+	r.X中间件(New())
 
-	r.GET("/", func(c *gin.Context) {
-		result := c.GetHeader("X-Request-ID")
+	r.X绑定GET("/", func(c *gin类.Context) {
+		result := c.X取请求协议头值("X-Request-ID")
 		assert.NotEmpty(t, result)
 	})
 
@@ -116,11 +116,11 @@ func TestRequestIDIsAttachedToRequestHeaders(t *testing.T) {
 }
 
 func TestRequestIDNotNilAfterGinCopy(t *testing.T) {
-	r := gin.New()
-	r.Use(New())
+	r := gin类.X创建()
+	r.X中间件(New())
 
-	r.GET("/", func(c *gin.Context) {
-		copy := c.Copy()
+	r.X绑定GET("/", func(c *gin类.Context) {
+		copy := c.X取副本()
 		result := Get(copy)
 		assert.NotEmpty(t, result)
 	})

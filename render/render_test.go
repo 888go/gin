@@ -1,6 +1,6 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package render
 
@@ -21,8 +21,8 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-// TODO：单元测试
-// 测试错误
+// TODO unit tests
+// test errors
 
 func TestRenderJSON(t *testing.T) {
 	w := httptest.NewRecorder()
@@ -45,9 +45,7 @@ func TestRenderJSONError(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: 不支持的类型：chan int
-// 
-// 这条Go语言注释表示在处理JSON（JavaScript Object Notation）编码或解码时，遇到了不支持的数据类型"chan int"。在Go语言中，channel（通道）是一种特殊的类型，用于goroutine之间的通信，而JSON格式化或解析功能并不支持这种类型的变量。
+	// json: unsupported type: chan int
 	assert.Error(t, (JSON{data}).Render(w))
 }
 
@@ -69,9 +67,7 @@ func TestRenderIndentedJSONPanics(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: 不支持的类型：chan int
-// 
-// 这条Go语言注释表示在处理JSON（JavaScript Object Notation）编码或解码时，遇到了不支持的数据类型"chan int"。在Go语言中，channel（通道）是一种特殊的类型，用于goroutine之间的通信，而JSON格式化或解析功能并不支持这种类型的变量。
+	// json: unsupported type: chan int
 	err := (IndentedJSON{data}).Render(w)
 	assert.Error(t, err)
 }
@@ -108,9 +104,7 @@ func TestRenderSecureJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: 不支持的类型：chan int
-// 
-// 这条Go语言注释表示在处理JSON（JavaScript Object Notation）编码或解码时，遇到了不支持的数据类型"chan int"。在Go语言中，channel（通道）是一种特殊的类型，用于goroutine之间的通信，而JSON格式化或解析功能并不支持这种类型的变量。
+	// json: unsupported type: chan int
 	err := (SecureJSON{"while(1);", data}).Render(w)
 	assert.Error(t, err)
 }
@@ -171,14 +165,14 @@ func TestRenderJsonpJSONError(t *testing.T) {
 
 	cb := template.JSEscapeString(jsonpJSON.Callback)
 	ew.bufString = cb
-	err := jsonpJSON.Render(ew) // 在写回调时返回了错误
+	err := jsonpJSON.Render(ew) // error was returned while writing callback
 	assert.Equal(t, `write "`+cb+`" error`, err.Error())
 
 	ew.bufString = `(`
 	err = jsonpJSON.Render(ew)
 	assert.Equal(t, `write "`+`(`+`" error`, err.Error())
 
-	data, _ := json.Marshal(jsonpJSON.Data) // 在写入数据时返回了错误
+	data, _ := json.Marshal(jsonpJSON.Data) // error was returned while writing data
 	ew.bufString = string(data)
 	err = jsonpJSON.Render(ew)
 	assert.Equal(t, `write "`+string(data)+`" error`, err.Error())
@@ -207,9 +201,7 @@ func TestRenderJsonpJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: 不支持的类型：chan int
-// 
-// 这条Go语言注释表示在处理JSON（JavaScript Object Notation）编码或解码时，遇到了不支持的数据类型"chan int"。在Go语言中，channel（通道）是一种特殊的类型，用于goroutine之间的通信，而JSON格式化或解析功能并不支持这种类型的变量。
+	// json: unsupported type: chan int
 	err := (JsonpJSON{"x", data}).Render(w)
 	assert.Error(t, err)
 }
@@ -239,9 +231,7 @@ func TestRenderAsciiJSONFail(t *testing.T) {
 	w := httptest.NewRecorder()
 	data := make(chan int)
 
-	// json: 不支持的类型：chan int
-// 
-// 这条Go语言注释表示在处理JSON（JavaScript Object Notation）编码或解码时，遇到了不支持的数据类型"chan int"。在Go语言中，channel（通道）是一种特殊的类型，用于goroutine之间的通信，而JSON格式化或解析功能并不支持这种类型的变量。
+	// json: unsupported type: chan int
 	assert.Error(t, (AsciiJSON{data}).Render(w))
 }
 
@@ -259,7 +249,7 @@ func TestRenderPureJSON(t *testing.T) {
 
 type xmlmap map[string]any
 
-// 允许类型H与xml.Marshal一起使用
+// Allows type H to be used with xml.Marshal
 func (h xmlmap) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	start.Name = xml.Name{
 		Space: "",
@@ -332,7 +322,7 @@ func TestRenderTOMLFail(t *testing.T) {
 	assert.Error(t, err)
 }
 
-// 测试 Protobuf 渲染
+// test Protobuf rendering
 func TestRenderProtoBuf(t *testing.T) {
 	w := httptest.NewRecorder()
 	reps := []int64{int64(1), int64(2)}

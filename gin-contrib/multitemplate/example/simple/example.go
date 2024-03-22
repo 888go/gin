@@ -15,20 +15,20 @@ func createMyRender() multitemplate.Renderer {
 }
 
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 	router.HTMLRender = createMyRender()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"title": "Html5 Template Engine",
 		})
 	})
-	router.GET("/article", func(c *gin.Context) {
-		c.HTML(200, "article", gin.H{
+	router.X绑定GET("/article", func(c *gin类.Context) {
+		c.X输出html模板(200, "article", gin类.H{
 			"title": "Html5 Article Engine",
 		})
 	})
 
-	if err := router.Run(":8080"); err != nil {
+	if err := router.X监听(":8080"); err != nil {
 		log.Fatal(err)
 	}
 }

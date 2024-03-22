@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"fmt"
@@ -14,21 +14,19 @@ import (
 
 const ginSupportMinGoVer = 18
 
-// IsDebugging 返回一个布尔值，表示框架是否处于调试模式。
-// 若要关闭调试模式，请使用 SetMode(gin.ReleaseMode)。
-
-// ff:是否为调试模式
-func IsDebugging() bool {
+// IsDebugging returns true if the framework is running in debug mode.
+// Use SetMode(gin.ReleaseMode) to disable debug mode.
+func X是否为调试模式() bool {
 	return ginMode == debugCode
 }
 
-// DebugPrintRouteFunc 表示调试日志输出格式。
+// DebugPrintRouteFunc indicates debug log output format.
 var DebugPrintRouteFunc func(httpMethod, absolutePath, handlerName string, nuHandlers int)
 
 func debugPrintRoute(httpMethod, absolutePath string, handlers HandlersChain) {
-	if IsDebugging() {
+	if X是否为调试模式() {
 		nuHandlers := len(handlers)
-		handlerName := nameOfFunction(handlers.Last())
+		handlerName := nameOfFunction(handlers.X取最后一个处理函数())
 		if DebugPrintRouteFunc == nil {
 			debugPrint("%-6s %-25s --> %s (%d handlers)\n", httpMethod, absolutePath, handlerName, nuHandlers)
 		} else {
@@ -38,7 +36,7 @@ func debugPrintRoute(httpMethod, absolutePath string, handlers HandlersChain) {
 }
 
 func debugPrintLoadTemplate(tmpl *template.Template) {
-	if IsDebugging() {
+	if X是否为调试模式() {
 		var buf strings.Builder
 		for _, tmpl := range tmpl.Templates() {
 			buf.WriteString("\t- ")
@@ -50,7 +48,7 @@ func debugPrintLoadTemplate(tmpl *template.Template) {
 }
 
 func debugPrint(format string, values ...any) {
-	if IsDebugging() {
+	if X是否为调试模式() {
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -97,7 +95,7 @@ at initialization. ie. before any route is registered or the router is listening
 }
 
 func debugPrintError(err error) {
-	if err != nil && IsDebugging() {
+	if err != nil && X是否为调试模式() {
 		fmt.Fprintf(DefaultErrorWriter, "[GIN-debug] [ERROR] %v\n", err)
 	}
 }

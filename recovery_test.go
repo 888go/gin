@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"fmt"
@@ -18,11 +18,11 @@ import (
 
 func TestPanicClean(t *testing.T) {
 	buffer := new(strings.Builder)
-	router := New()
+	router := X创建()
 	password := "my-super-secret-password"
-	router.Use(RecoveryWithWriter(buffer))
-	router.GET("/recovery", func(c *Context) {
-		c.AbortWithStatus(http.StatusBadRequest)
+	router.X中间件(RecoveryWithWriter(buffer))
+	router.X绑定GET("/recovery", func(c *Context) {
+		c.X停止并带状态码(http.StatusBadRequest)
 		panic("Oupps, Houston, we have a problem")
 	})
 	// RUN
@@ -43,16 +43,16 @@ func TestPanicClean(t *testing.T) {
 	// TEST
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 
-	// 检查缓冲区中不包含密钥
+	// Check the buffer does not have the secret key
 	assert.NotContains(t, buffer.String(), password)
 }
 
-// TestPanicInHandler 断言在处理器中捕获到了 panic。
+// TestPanicInHandler assert that panic has been recovered.
 func TestPanicInHandler(t *testing.T) {
 	buffer := new(strings.Builder)
-	router := New()
-	router.Use(RecoveryWithWriter(buffer))
-	router.GET("/recovery", func(_ *Context) {
+	router := X创建()
+	router.X中间件(RecoveryWithWriter(buffer))
+	router.X绑定GET("/recovery", func(_ *Context) {
 		panic("Oupps, Houston, we have a problem")
 	})
 	// RUN
@@ -64,23 +64,23 @@ func TestPanicInHandler(t *testing.T) {
 	assert.Contains(t, buffer.String(), t.Name())
 	assert.NotContains(t, buffer.String(), "GET /recovery")
 
-	// Debug模式会打印请求
-	SetMode(DebugMode)
+	// Debug mode prints the request
+	X设置运行模式(X常量_运行模式_调试)
 	// RUN
 	w = PerformRequest(router, "GET", "/recovery")
 	// TEST
 	assert.Equal(t, http.StatusInternalServerError, w.Code)
 	assert.Contains(t, buffer.String(), "GET /recovery")
 
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 }
 
-// TestPanicWithAbort 断言即使使用了 context.Abort，也能捕获到 panic 异常。
+// TestPanicWithAbort assert that panic has been recovered even if context.Abort was used.
 func TestPanicWithAbort(t *testing.T) {
-	router := New()
-	router.Use(RecoveryWithWriter(nil))
-	router.GET("/recovery", func(c *Context) {
-		c.AbortWithStatus(http.StatusBadRequest)
+	router := X创建()
+	router.X中间件(RecoveryWithWriter(nil))
+	router.X绑定GET("/recovery", func(c *Context) {
+		c.X停止并带状态码(http.StatusBadRequest)
 		panic("Oupps, Houston, we have a problem")
 	})
 	// RUN
@@ -109,8 +109,8 @@ func TestFunction(t *testing.T) {
 	assert.Equal(t, dunno, bs)
 }
 
-// TestPanicWithBrokenPipe 断言 recovery 特别处理了
-// 向已断开连接的管道写入响应的情况
+// TestPanicWithBrokenPipe asserts that recovery specifically handles
+// writing responses to broken pipes
 func TestPanicWithBrokenPipe(t *testing.T) {
 	const expectCode = 204
 
@@ -123,14 +123,14 @@ func TestPanicWithBrokenPipe(t *testing.T) {
 		t.Run(expectMsg, func(t *testing.T) {
 			var buf strings.Builder
 
-			router := New()
-			router.Use(RecoveryWithWriter(&buf))
-			router.GET("/recovery", func(c *Context) {
+			router := X创建()
+			router.X中间件(RecoveryWithWriter(&buf))
+			router.X绑定GET("/recovery", func(c *Context) {
 				// Start writing response
-				c.Header("X-Test", "Value")
-				c.Status(expectCode)
+				c.X设置响应协议头值("X-Test", "Value")
+				c.X设置状态码(expectCode)
 
-				// 哎呀，客户端连接已关闭
+				// Oops. Client connection closed
 				e := &net.OpError{Err: &os.SyscallError{Err: errno}}
 				panic(e)
 			})
@@ -146,13 +146,13 @@ func TestPanicWithBrokenPipe(t *testing.T) {
 func TestCustomRecoveryWithWriter(t *testing.T) {
 	errBuffer := new(strings.Builder)
 	buffer := new(strings.Builder)
-	router := New()
+	router := X创建()
 	handleRecovery := func(c *Context, err any) {
 		errBuffer.WriteString(err.(string))
-		c.AbortWithStatus(http.StatusBadRequest)
+		c.X停止并带状态码(http.StatusBadRequest)
 	}
-	router.Use(CustomRecoveryWithWriter(buffer, handleRecovery))
-	router.GET("/recovery", func(_ *Context) {
+	router.X中间件(CustomRecoveryWithWriter(buffer, handleRecovery))
+	router.X绑定GET("/recovery", func(_ *Context) {
 		panic("Oupps, Houston, we have a problem")
 	})
 	// RUN
@@ -164,8 +164,8 @@ func TestCustomRecoveryWithWriter(t *testing.T) {
 	assert.Contains(t, buffer.String(), t.Name())
 	assert.NotContains(t, buffer.String(), "GET /recovery")
 
-	// Debug模式会打印请求
-	SetMode(DebugMode)
+	// Debug mode prints the request
+	X设置运行模式(X常量_运行模式_调试)
 	// RUN
 	w = PerformRequest(router, "GET", "/recovery")
 	// TEST
@@ -174,20 +174,20 @@ func TestCustomRecoveryWithWriter(t *testing.T) {
 
 	assert.Equal(t, strings.Repeat("Oupps, Houston, we have a problem", 2), errBuffer.String())
 
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 }
 
 func TestCustomRecovery(t *testing.T) {
 	errBuffer := new(strings.Builder)
 	buffer := new(strings.Builder)
-	router := New()
+	router := X创建()
 	DefaultErrorWriter = buffer
 	handleRecovery := func(c *Context, err any) {
 		errBuffer.WriteString(err.(string))
-		c.AbortWithStatus(http.StatusBadRequest)
+		c.X停止并带状态码(http.StatusBadRequest)
 	}
-	router.Use(CustomRecovery(handleRecovery))
-	router.GET("/recovery", func(_ *Context) {
+	router.X中间件(CustomRecovery(handleRecovery))
+	router.X绑定GET("/recovery", func(_ *Context) {
 		panic("Oupps, Houston, we have a problem")
 	})
 	// RUN
@@ -199,8 +199,8 @@ func TestCustomRecovery(t *testing.T) {
 	assert.Contains(t, buffer.String(), t.Name())
 	assert.NotContains(t, buffer.String(), "GET /recovery")
 
-	// Debug模式会打印请求
-	SetMode(DebugMode)
+	// Debug mode prints the request
+	X设置运行模式(X常量_运行模式_调试)
 	// RUN
 	w = PerformRequest(router, "GET", "/recovery")
 	// TEST
@@ -209,20 +209,20 @@ func TestCustomRecovery(t *testing.T) {
 
 	assert.Equal(t, strings.Repeat("Oupps, Houston, we have a problem", 2), errBuffer.String())
 
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 }
 
 func TestRecoveryWithWriterWithCustomRecovery(t *testing.T) {
 	errBuffer := new(strings.Builder)
 	buffer := new(strings.Builder)
-	router := New()
+	router := X创建()
 	DefaultErrorWriter = buffer
 	handleRecovery := func(c *Context, err any) {
 		errBuffer.WriteString(err.(string))
-		c.AbortWithStatus(http.StatusBadRequest)
+		c.X停止并带状态码(http.StatusBadRequest)
 	}
-	router.Use(RecoveryWithWriter(DefaultErrorWriter, handleRecovery))
-	router.GET("/recovery", func(_ *Context) {
+	router.X中间件(RecoveryWithWriter(DefaultErrorWriter, handleRecovery))
+	router.X绑定GET("/recovery", func(_ *Context) {
 		panic("Oupps, Houston, we have a problem")
 	})
 	// RUN
@@ -234,8 +234,8 @@ func TestRecoveryWithWriterWithCustomRecovery(t *testing.T) {
 	assert.Contains(t, buffer.String(), t.Name())
 	assert.NotContains(t, buffer.String(), "GET /recovery")
 
-	// Debug模式会打印请求
-	SetMode(DebugMode)
+	// Debug mode prints the request
+	X设置运行模式(X常量_运行模式_调试)
 	// RUN
 	w = PerformRequest(router, "GET", "/recovery")
 	// TEST
@@ -244,5 +244,5 @@ func TestRecoveryWithWriterWithCustomRecovery(t *testing.T) {
 
 	assert.Equal(t, strings.Repeat("Oupps, Houston, we have a problem", 2), errBuffer.String())
 
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 }

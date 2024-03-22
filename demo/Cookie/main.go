@@ -8,19 +8,19 @@ import (
 // 参考 Gin 框架官方文档（中文版）：https://gin-gonic.com/zh-cn/docs/examples/cookie/
 func main() {
 
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 
-	router.GET("/cookie", func(c *gin.Context) {
+	router.X绑定GET("/cookie", func(c *gin类.Context) {
 
-		cookie, err := c.Cookie("gin_cookie")
+		cookie, err := c.X取cookie值("gin_cookie")
 
 		if err != nil {
 			cookie = "NotSet"
-			c.SetCookie("gin_cookie", "test", 3600, "/", "localhost", false, true)
+			c.X设置cookie值("gin_cookie", "test", 3600, "/", "localhost", false, true)
 		}
 
 		fmt.Printf("Cookie value: %s \n", cookie)
 	})
 
-	router.Run()
+	router.X监听()
 }

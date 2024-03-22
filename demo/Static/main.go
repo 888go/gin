@@ -9,11 +9,11 @@ import (
 // 以获取 Gin 框架关于服务静态文件的中文文档示例
 
 func main() {
-	router := gin.Default()
-	router.Static("/assets", "./assets")
-	router.StaticFS("/more_static", http.Dir("my_file_system"))
-	router.StaticFile("/favicon.ico", "./resources/favicon.ico")
+	router := gin类.X创建默认对象()
+	router.X绑定静态文件目录("/assets", "./assets")
+	router.X绑定静态文件目录FS("/more_static", http.Dir("my_file_system"))
+	router.X绑定静态单文件("/favicon.ico", "./resources/favicon.ico")
 
 	// 监听并在 0.0.0.0:8080 上启动服务
-	router.Run(":8080")
+	router.X监听(":8080")
 }

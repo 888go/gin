@@ -9,7 +9,7 @@ var newInMemoryStore = func(_ *testing.T, defaultExpiration time.Duration) Cache
 	return NewInMemoryStore(defaultExpiration)
 }
 
-// 测试典型的缓存交互
+// Test typical cache interactions
 func TestInMemoryCache_TypicalGetSet(t *testing.T) {
 	typicalGetSet(t, newInMemoryStore)
 }

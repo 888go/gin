@@ -6,7 +6,7 @@ import (
 
 type (
 	// GetLngHandler ...
-	GetLngHandler = func(context *gin.Context, defaultLng string) string
+	GetLngHandler = func(context *gin类.Context, defaultLng string) string
 
 	// Option ...
 	Option func(GinI18n)

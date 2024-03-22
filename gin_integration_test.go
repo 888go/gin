@@ -1,8 +1,8 @@
-// 版权所有 ? 2017 Manu Martinez-Almeida。保留所有权利。
-// 本源代码的使用受 MIT 风格许可证协议约束，
-// 该协议可在 LICENSE 文件中查阅。
+// Copyright 2017 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"bufio"
@@ -18,13 +18,13 @@ import (
 	"sync"
 	"testing"
 	"time"
-
+	
 	"github.com/stretchr/testify/assert"
 )
 
-// params[0] = url 示例：http://127.0.0.1:8080/index （不能为空）
-// params[1] = 响应状态（自定义比较状态）默认值："200 OK"
-// params[2] = 响应体内容（自定义比较内容）默认值："it worked"
+// params[0]=url example:http://127.0.0.1:8080/index (cannot be empty)
+// params[1]=response status (custom compare status) default:"200 OK"
+// params[2]=response body (custom compare content)  default:"it worked"
 func testRequest(t *testing.T, params ...string) {
 
 	if len(params) == 0 {
@@ -63,22 +63,22 @@ func testRequest(t *testing.T, params ...string) {
 
 func TestRunEmpty(t *testing.T) {
 	os.Setenv("PORT", "")
-	router := New()
+	router := X创建()
 	go func() {
-		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
-		assert.NoError(t, router.Run())
+		router.X绑定GET("/example", func(c *Context) { c.X输出文本(http.StatusOK, "it worked") })
+		assert.NoError(t, router.X监听())
 	}()
-	// 必须等待 goroutine 启动并运行服务器
-	// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 
-	assert.Error(t, router.Run(":8080"))
+	assert.Error(t, router.X监听(":8080"))
 	testRequest(t, "http://localhost:8080/example")
 }
 
 func TestBadTrustedCIDRs(t *testing.T) {
-	router := New()
-	assert.Error(t, router.SetTrustedProxies([]string{"hello/world"}))
+	router := X创建()
+	assert.Error(t, router.X设置受信任代理([]string{"hello/world"}))
 }
 
 /* legacy tests
@@ -101,8 +101,8 @@ func TestBadTrustedCIDRsForRunUnix(t *testing.T) {
 		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 		assert.Error(t, router.RunUnix(unixTestSocket))
 	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 }
 
@@ -121,8 +121,8 @@ func TestBadTrustedCIDRsForRunFd(t *testing.T) {
 		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 		assert.Error(t, router.RunFd(int(socketFile.Fd())))
 	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 }
 
@@ -138,8 +138,8 @@ func TestBadTrustedCIDRsForRunListener(t *testing.T) {
 		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 		assert.Error(t, router.RunListener(listener))
 	}()
-// 必须等待 goroutine 启动并运行服务器
-// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 }
 
@@ -152,18 +152,18 @@ func TestBadTrustedCIDRsForRunTLS(t *testing.T) {
 */
 
 func TestRunTLS(t *testing.T) {
-	router := New()
+	router := X创建()
 	go func() {
-		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
+		router.X绑定GET("/example", func(c *Context) { c.X输出文本(http.StatusOK, "it worked") })
 
-		assert.NoError(t, router.RunTLS(":8443", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
+		assert.NoError(t, router.X监听TLS(":8443", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
 	}()
 
-	// 必须等待 goroutine 启动并运行服务器
-	// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 
-	assert.Error(t, router.RunTLS(":8443", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
+	assert.Error(t, router.X监听TLS(":8443", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
 	testRequest(t, "https://localhost:8443/example")
 }
 
@@ -180,67 +180,66 @@ func TestPusher(t *testing.T) {
 </html>
 `))
 
-	router := New()
-	router.Static("./assets", "./assets")
-	router.SetHTMLTemplate(html)
+	router := X创建()
+	router.X绑定静态文件目录("./assets", "./assets")
+	router.X设置Template模板(html)
 
 	go func() {
-		router.GET("/pusher", func(c *Context) {
+		router.X绑定GET("/pusher", func(c *Context) {
 			if pusher := c.Writer.Pusher(); pusher != nil {
 				err := pusher.Push("/assets/app.js", nil)
 				assert.NoError(t, err)
 			}
-			c.String(http.StatusOK, "it worked")
+			c.X输出文本(http.StatusOK, "it worked")
 		})
 
-		assert.NoError(t, router.RunTLS(":8449", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
+		assert.NoError(t, router.X监听TLS(":8449", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
 	}()
 
-	// 必须等待 goroutine 启动并运行服务器
-	// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 
-	assert.Error(t, router.RunTLS(":8449", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
+	assert.Error(t, router.X监听TLS(":8449", "./testdata/certificate/cert.pem", "./testdata/certificate/key.pem"))
 	testRequest(t, "https://localhost:8449/pusher")
 }
 
 func TestRunEmptyWithEnv(t *testing.T) {
 	os.Setenv("PORT", "3123")
-	router := New()
+	router := X创建()
 	go func() {
-		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
-		assert.NoError(t, router.Run())
+		router.X绑定GET("/example", func(c *Context) { c.X输出文本(http.StatusOK, "it worked") })
+		assert.NoError(t, router.X监听())
 	}()
-	// 必须等待 goroutine 启动并运行服务器
-	// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 
-	assert.Error(t, router.Run(":3123"))
+	assert.Error(t, router.X监听(":3123"))
 	testRequest(t, "http://localhost:3123/example")
 }
 
 func TestRunTooMuchParams(t *testing.T) {
-	router := New()
+	router := X创建()
 	assert.Panics(t, func() {
-		assert.NoError(t, router.Run("2", "2"))
+		assert.NoError(t, router.X监听("2", "2"))
 	})
 }
 
 func TestRunWithPort(t *testing.T) {
-	router := New()
+	router := X创建()
 	go func() {
-		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
-		assert.NoError(t, router.Run(":5150"))
+		router.X绑定GET("/example", func(c *Context) { c.X输出文本(http.StatusOK, "it worked") })
+		assert.NoError(t, router.X监听(":5150"))
 	}()
-	// 必须等待 goroutine 启动并运行服务器
-	// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 
-	assert.Error(t, router.Run(":5150"))
+	assert.Error(t, router.X监听(":5150"))
 	testRequest(t, "http://localhost:5150/example")
 }
 
-//
 //func TestUnixSocket(t *testing.T) {
 //	router := New()
 //
@@ -252,8 +251,8 @@ func TestRunWithPort(t *testing.T) {
 //		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 //		assert.NoError(t, router.RunUnix(unixTestSocket))
 //	}()
-//// 必须等待 goroutine 启动并运行服务器
-//// 否则主线程将提前完成
+//	// have to wait for the goroutine to start and run the server
+//	// otherwise the main thread will complete
 //	time.Sleep(5 * time.Millisecond)
 //
 //	c, err := net.Dial("unix", unixTestSocket)
@@ -270,12 +269,12 @@ func TestRunWithPort(t *testing.T) {
 //}
 
 func TestBadUnixSocket(t *testing.T) {
-	router := New()
-	assert.Error(t, router.RunUnix("#/tmp/unix_unit_test"))
+	router := X创建()
+	assert.Error(t, router.X监听Unix("#/tmp/unix_unit_test"))
 }
 
 func TestFileDescriptor(t *testing.T) {
-	router := New()
+	router := X创建()
 
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
 	assert.NoError(t, err)
@@ -283,7 +282,7 @@ func TestFileDescriptor(t *testing.T) {
 	assert.NoError(t, err)
 	socketFile, err := listener.File()
 	if isWindows() {
-		// 不支持Windows系统，目前尚未实现
+		// not supported by windows, it is unimplemented now
 		assert.Error(t, err)
 	} else {
 		assert.NoError(t, err)
@@ -294,11 +293,11 @@ func TestFileDescriptor(t *testing.T) {
 	}
 
 	go func() {
-		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
-		assert.NoError(t, router.RunFd(int(socketFile.Fd())))
+		router.X绑定GET("/example", func(c *Context) { c.X输出文本(http.StatusOK, "it worked") })
+		assert.NoError(t, router.X监听Fd(int(socketFile.Fd())))
 	}()
-	// 必须等待 goroutine 启动并运行服务器
-	// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 
 	c, err := net.Dial("tcp", listener.Addr().String())
@@ -315,22 +314,22 @@ func TestFileDescriptor(t *testing.T) {
 }
 
 func TestBadFileDescriptor(t *testing.T) {
-	router := New()
-	assert.Error(t, router.RunFd(0))
+	router := X创建()
+	assert.Error(t, router.X监听Fd(0))
 }
 
 func TestListener(t *testing.T) {
-	router := New()
+	router := X创建()
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
 	assert.NoError(t, err)
 	listener, err := net.ListenTCP("tcp", addr)
 	assert.NoError(t, err)
 	go func() {
-		router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
-		assert.NoError(t, router.RunListener(listener))
+		router.X绑定GET("/example", func(c *Context) { c.X输出文本(http.StatusOK, "it worked") })
+		assert.NoError(t, router.X监听Listener(listener))
 	}()
-	// 必须等待 goroutine 启动并运行服务器
-	// 否则主线程将提前完成
+	// have to wait for the goroutine to start and run the server
+	// otherwise the main thread will complete
 	time.Sleep(5 * time.Millisecond)
 
 	c, err := net.Dial("tcp", listener.Addr().String())
@@ -347,18 +346,18 @@ func TestListener(t *testing.T) {
 }
 
 func TestBadListener(t *testing.T) {
-	router := New()
+	router := X创建()
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:10086")
 	assert.NoError(t, err)
 	listener, err := net.ListenTCP("tcp", addr)
 	assert.NoError(t, err)
 	listener.Close()
-	assert.Error(t, router.RunListener(listener))
+	assert.Error(t, router.X监听Listener(listener))
 }
 
 func TestWithHttptestWithAutoSelectedPort(t *testing.T) {
-	router := New()
-	router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
+	router := X创建()
+	router.X绑定GET("/example", func(c *Context) { c.X输出文本(http.StatusOK, "it worked") })
 
 	ts := httptest.NewServer(router)
 	defer ts.Close()
@@ -367,12 +366,12 @@ func TestWithHttptestWithAutoSelectedPort(t *testing.T) {
 }
 
 func TestConcurrentHandleContext(t *testing.T) {
-	router := New()
-	router.GET("/", func(c *Context) {
-		c.Request.URL.Path = "/example"
-		router.HandleContext(c)
+	router := X创建()
+	router.X绑定GET("/", func(c *Context) {
+		c.X请求.URL.Path = "/example"
+		router.HandleContext底层方法(c)
 	})
-	router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
+	router.X绑定GET("/example", func(c *Context) { c.X输出文本(http.StatusOK, "it worked") })
 
 	var wg sync.WaitGroup
 	iterations := 200
@@ -386,19 +385,19 @@ func TestConcurrentHandleContext(t *testing.T) {
 	wg.Wait()
 }
 
-// 函数TestWithHttptestWithSpecifiedPort用于测试指定端口的功能
-// (接收一个*testing.T类型的参数t)
-//
-// 创建一个新的路由实例router
-// 在router上注册GET方法的"/example"路由处理函数，当该路由被访问时，
-// 会调用传入的函数，向Context写入http.StatusOK状态码及字符串"it worked"作为响应内容
+// func TestWithHttptestWithSpecifiedPort(t *testing.T) {
+// 	router := New()
+// 	router.GET("/example", func(c *Context) { c.String(http.StatusOK, "it worked") })
 
-// 创建一个监听TCP端口8033的网络监听器，忽略可能的错误
-// 初始化一个httptest.Server结构体，其中Listener字段设置为上述创建的监听器，Config字段设置为一个http.Server指针，其Handler字段设置为router
-// 调用ts.Start()方法启动服务器
-// 使用defer关键字确保在函数结束时调用ts.Close()方法关闭服务器
+// 	l, _ := net.Listen("tcp", ":8033")
+// 	ts := httptest.Server{
+// 		Listener: l,
+// 		Config:   &http.Server{Handler: router},
+// 	}
+// 	ts.Start()
+// 	defer ts.Close()
 
-// 测试请求(t, "http://localhost:8033/example")
+// 	testRequest(t, "http://localhost:8033/example")
 // }
 
 func testGetRequestHandler(t *testing.T, h http.Handler, url string) {
@@ -413,44 +412,44 @@ func testGetRequestHandler(t *testing.T, h http.Handler, url string) {
 }
 
 func TestTreeRunDynamicRouting(t *testing.T) {
-	router := New()
-	router.GET("/aa/*xx", func(c *Context) { c.String(http.StatusOK, "/aa/*xx") })
-	router.GET("/ab/*xx", func(c *Context) { c.String(http.StatusOK, "/ab/*xx") })
-	router.GET("/", func(c *Context) { c.String(http.StatusOK, "home") })
-	router.GET("/:cc", func(c *Context) { c.String(http.StatusOK, "/:cc") })
-	router.GET("/c1/:dd/e", func(c *Context) { c.String(http.StatusOK, "/c1/:dd/e") })
-	router.GET("/c1/:dd/e1", func(c *Context) { c.String(http.StatusOK, "/c1/:dd/e1") })
-	router.GET("/c1/:dd/f1", func(c *Context) { c.String(http.StatusOK, "/c1/:dd/f1") })
-	router.GET("/c1/:dd/f2", func(c *Context) { c.String(http.StatusOK, "/c1/:dd/f2") })
-	router.GET("/:cc/cc", func(c *Context) { c.String(http.StatusOK, "/:cc/cc") })
-	router.GET("/:cc/:dd/ee", func(c *Context) { c.String(http.StatusOK, "/:cc/:dd/ee") })
-	router.GET("/:cc/:dd/f", func(c *Context) { c.String(http.StatusOK, "/:cc/:dd/f") })
-	router.GET("/:cc/:dd/:ee/ff", func(c *Context) { c.String(http.StatusOK, "/:cc/:dd/:ee/ff") })
-	router.GET("/:cc/:dd/:ee/:ff/gg", func(c *Context) { c.String(http.StatusOK, "/:cc/:dd/:ee/:ff/gg") })
-	router.GET("/:cc/:dd/:ee/:ff/:gg/hh", func(c *Context) { c.String(http.StatusOK, "/:cc/:dd/:ee/:ff/:gg/hh") })
-	router.GET("/get/test/abc/", func(c *Context) { c.String(http.StatusOK, "/get/test/abc/") })
-	router.GET("/get/:param/abc/", func(c *Context) { c.String(http.StatusOK, "/get/:param/abc/") })
-	router.GET("/something/:paramname/thirdthing", func(c *Context) { c.String(http.StatusOK, "/something/:paramname/thirdthing") })
-	router.GET("/something/secondthing/test", func(c *Context) { c.String(http.StatusOK, "/something/secondthing/test") })
-	router.GET("/get/abc", func(c *Context) { c.String(http.StatusOK, "/get/abc") })
-	router.GET("/get/:param", func(c *Context) { c.String(http.StatusOK, "/get/:param") })
-	router.GET("/get/abc/123abc", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc") })
-	router.GET("/get/abc/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/:param") })
-	router.GET("/get/abc/123abc/xxx8", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc/xxx8") })
-	router.GET("/get/abc/123abc/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc/:param") })
-	router.GET("/get/abc/123abc/xxx8/1234", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc/xxx8/1234") })
-	router.GET("/get/abc/123abc/xxx8/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc/xxx8/:param") })
-	router.GET("/get/abc/123abc/xxx8/1234/ffas", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc/xxx8/1234/ffas") })
-	router.GET("/get/abc/123abc/xxx8/1234/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc/xxx8/1234/:param") })
-	router.GET("/get/abc/123abc/xxx8/1234/kkdd/12c", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc/xxx8/1234/kkdd/12c") })
-	router.GET("/get/abc/123abc/xxx8/1234/kkdd/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abc/xxx8/1234/kkdd/:param") })
-	router.GET("/get/abc/:param/test", func(c *Context) { c.String(http.StatusOK, "/get/abc/:param/test") })
-	router.GET("/get/abc/123abd/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abd/:param") })
-	router.GET("/get/abc/123abddd/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abddd/:param") })
-	router.GET("/get/abc/123/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123/:param") })
-	router.GET("/get/abc/123abg/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abg/:param") })
-	router.GET("/get/abc/123abf/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abf/:param") })
-	router.GET("/get/abc/123abfff/:param", func(c *Context) { c.String(http.StatusOK, "/get/abc/123abfff/:param") })
+	router := X创建()
+	router.X绑定GET("/aa/*xx", func(c *Context) { c.X输出文本(http.StatusOK, "/aa/*xx") })
+	router.X绑定GET("/ab/*xx", func(c *Context) { c.X输出文本(http.StatusOK, "/ab/*xx") })
+	router.X绑定GET("/", func(c *Context) { c.X输出文本(http.StatusOK, "home") })
+	router.X绑定GET("/:cc", func(c *Context) { c.X输出文本(http.StatusOK, "/:cc") })
+	router.X绑定GET("/c1/:dd/e", func(c *Context) { c.X输出文本(http.StatusOK, "/c1/:dd/e") })
+	router.X绑定GET("/c1/:dd/e1", func(c *Context) { c.X输出文本(http.StatusOK, "/c1/:dd/e1") })
+	router.X绑定GET("/c1/:dd/f1", func(c *Context) { c.X输出文本(http.StatusOK, "/c1/:dd/f1") })
+	router.X绑定GET("/c1/:dd/f2", func(c *Context) { c.X输出文本(http.StatusOK, "/c1/:dd/f2") })
+	router.X绑定GET("/:cc/cc", func(c *Context) { c.X输出文本(http.StatusOK, "/:cc/cc") })
+	router.X绑定GET("/:cc/:dd/ee", func(c *Context) { c.X输出文本(http.StatusOK, "/:cc/:dd/ee") })
+	router.X绑定GET("/:cc/:dd/f", func(c *Context) { c.X输出文本(http.StatusOK, "/:cc/:dd/f") })
+	router.X绑定GET("/:cc/:dd/:ee/ff", func(c *Context) { c.X输出文本(http.StatusOK, "/:cc/:dd/:ee/ff") })
+	router.X绑定GET("/:cc/:dd/:ee/:ff/gg", func(c *Context) { c.X输出文本(http.StatusOK, "/:cc/:dd/:ee/:ff/gg") })
+	router.X绑定GET("/:cc/:dd/:ee/:ff/:gg/hh", func(c *Context) { c.X输出文本(http.StatusOK, "/:cc/:dd/:ee/:ff/:gg/hh") })
+	router.X绑定GET("/get/test/abc/", func(c *Context) { c.X输出文本(http.StatusOK, "/get/test/abc/") })
+	router.X绑定GET("/get/:param/abc/", func(c *Context) { c.X输出文本(http.StatusOK, "/get/:param/abc/") })
+	router.X绑定GET("/something/:paramname/thirdthing", func(c *Context) { c.X输出文本(http.StatusOK, "/something/:paramname/thirdthing") })
+	router.X绑定GET("/something/secondthing/test", func(c *Context) { c.X输出文本(http.StatusOK, "/something/secondthing/test") })
+	router.X绑定GET("/get/abc", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc") })
+	router.X绑定GET("/get/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/:param") })
+	router.X绑定GET("/get/abc/123abc", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc") })
+	router.X绑定GET("/get/abc/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/:param") })
+	router.X绑定GET("/get/abc/123abc/xxx8", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc/xxx8") })
+	router.X绑定GET("/get/abc/123abc/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc/:param") })
+	router.X绑定GET("/get/abc/123abc/xxx8/1234", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc/xxx8/1234") })
+	router.X绑定GET("/get/abc/123abc/xxx8/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc/xxx8/:param") })
+	router.X绑定GET("/get/abc/123abc/xxx8/1234/ffas", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc/xxx8/1234/ffas") })
+	router.X绑定GET("/get/abc/123abc/xxx8/1234/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc/xxx8/1234/:param") })
+	router.X绑定GET("/get/abc/123abc/xxx8/1234/kkdd/12c", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc/xxx8/1234/kkdd/12c") })
+	router.X绑定GET("/get/abc/123abc/xxx8/1234/kkdd/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abc/xxx8/1234/kkdd/:param") })
+	router.X绑定GET("/get/abc/:param/test", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/:param/test") })
+	router.X绑定GET("/get/abc/123abd/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abd/:param") })
+	router.X绑定GET("/get/abc/123abddd/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abddd/:param") })
+	router.X绑定GET("/get/abc/123/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123/:param") })
+	router.X绑定GET("/get/abc/123abg/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abg/:param") })
+	router.X绑定GET("/get/abc/123abf/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abf/:param") })
+	router.X绑定GET("/get/abc/123abfff/:param", func(c *Context) { c.X输出文本(http.StatusOK, "/get/abc/123abfff/:param") })
 
 	ts := httptest.NewServer(router)
 	defer ts.Close()

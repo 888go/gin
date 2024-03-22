@@ -455,15 +455,4 @@ ff=NegotiateFormat底层方法
 ff=SetAccepted底层方法
 formats=类型名称s
 
-[func (c *Context) Deadline() (deadline time.Time, ok bool) {]
-ff=Deadline底层方法
-
-[func (c *Context) Done() <-chan struct{} {]
-ff=Done底层方法
-
-[func (c *Context) Err() error {]
-ff=取上下文错误
-
-[func (c *Context) Value(key any) any {]
-ff=取上下文值
-key=名称
+ 

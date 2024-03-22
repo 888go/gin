@@ -17,8 +17,8 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 }
 
 func TestHandler(t *testing.T) {
-	router := gin.New()
-	router.GET("/debug/vars", Handler())
+	router := gin类.X创建()
+	router.X绑定GET("/debug/vars", Handler())
 
 	w := performRequest(router, "GET", "/debug/vars")
 	assert.Equal(t, w.Code, 200)

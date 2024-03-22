@@ -16,24 +16,24 @@ type Login struct {
 func main() {
 	// 1.创建路由
 	// 默认使用了2个中间件Logger(), Recovery()
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 	// JSON绑定
-	r.POST("loginJSON", func(c *gin.Context) {
+	r.X绑定POST("loginJSON", func(c *gin类.Context) {
 		// 声明接收的变量
 		var json Login
 		// 将request的body中的数据，自动按照json格式解析到结构体
-		if err := c.ShouldBindJSON(&json); err != nil {
+		if err := c.X取JSON参数到指针(&json); err != nil {
 			// 返回错误信息
 			// gin.H封装了生成json数据的工具
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.X输出JSON(http.StatusBadRequest, gin类.H{"error": err.Error()})
 			return
 		}
 		// 判断用户名密码是否正确
 		if json.User != "root" || json.Pssword != "admin" {
-			c.JSON(http.StatusBadRequest, gin.H{"status": "304"})
+			c.X输出JSON(http.StatusBadRequest, gin类.H{"status": "304"})
 			return
 		}
-		c.JSON(http.StatusOK, gin.H{"status": "200"})
+		c.X输出JSON(http.StatusOK, gin类.H{"status": "200"})
 	})
-	r.Run(":8000")
+	r.X监听(":8000")
 }

@@ -17,27 +17,24 @@ var (
 	_ Renderer          = DynamicRender{}
 )
 
-// NewDynamic 是用于创建动态模板的构造函数
-
-// ff:
+// NewDynamic is the constructor for Dynamic templates
 func NewDynamic() DynamicRender {
 	return make(DynamicRender)
 }
 
-// NewRenderer 允许创建一个基于启用的 gin 模式无关的多模板渲染器
-
-// ff:
+// NewRenderer allows create an agnostic multitemplate renderer
+// depending on enabled gin mode
 func NewRenderer() Renderer {
-	if gin.IsDebugging() {
+	if gin类.X是否为调试模式() {
 		return NewDynamic()
 	}
 	return New()
 }
 
-// 动态构建器的类型
+// Type of dynamic builder
 type builderType int
 
-// 动态构建器类型
+// Types of dynamic builders
 const (
 	templateType builderType = iota
 	filesTemplateType
@@ -47,7 +44,7 @@ const (
 	filesFuncTemplateType
 )
 
-// 动态模板构建器
+// Builder for dynamic templates
 type templateBuilder struct {
 	buildType       builderType
 	tmpl            *template.Template
@@ -83,10 +80,6 @@ func (tb templateBuilder) buildTemplate() *template.Template {
 }
 
 // Add new template
-
-// ff:
-// tmpl:
-// name:
 func (r DynamicRender) Add(name string, tmpl *template.Template) {
 	if tmpl == nil {
 		panic("template cannot be nil")
@@ -99,11 +92,7 @@ func (r DynamicRender) Add(name string, tmpl *template.Template) {
 	r[name] = builder
 }
 
-// AddFromFiles 从文件中加载并添加模板
-
-// ff:
-// files:
-// name:
+// AddFromFiles supply add template from files
 func (r DynamicRender) AddFromFiles(name string, files ...string) *template.Template {
 	builder := &templateBuilder{templateName: name, files: files}
 	builder.buildType = filesTemplateType
@@ -111,11 +100,7 @@ func (r DynamicRender) AddFromFiles(name string, files ...string) *template.Temp
 	return builder.buildTemplate()
 }
 
-// AddFromGlob 从全局路径提供添加模板的功能
-
-// ff:
-// glob:
-// name:
+// AddFromGlob supply add template from global path
 func (r DynamicRender) AddFromGlob(name, glob string) *template.Template {
 	builder := &templateBuilder{templateName: name, glob: glob}
 	builder.buildType = globTemplateType
@@ -123,11 +108,7 @@ func (r DynamicRender) AddFromGlob(name, glob string) *template.Template {
 	return builder.buildTemplate()
 }
 
-// AddFromString 从字符串中提供添加模板
-
-// ff:
-// templateString:
-// name:
+// AddFromString supply add template from strings
 func (r DynamicRender) AddFromString(name, templateString string) *template.Template {
 	builder := &templateBuilder{templateName: name, templateString: templateString}
 	builder.buildType = stringTemplateType
@@ -135,12 +116,7 @@ func (r DynamicRender) AddFromString(name, templateString string) *template.Temp
 	return builder.buildTemplate()
 }
 
-// AddFromStringsFuncs 从字符串提供添加模板功能
-
-// ff:
-// templateStrings:
-// funcMap:
-// name:
+// AddFromStringsFuncs supply add template from strings
 func (r DynamicRender) AddFromStringsFuncs(name string, funcMap template.FuncMap, templateStrings ...string) *template.Template {
 	builder := &templateBuilder{
 		templateName: name, funcMap: funcMap,
@@ -151,12 +127,7 @@ func (r DynamicRender) AddFromStringsFuncs(name string, funcMap template.FuncMap
 	return builder.buildTemplate()
 }
 
-// AddFromFilesFuncs 用于提供从文件添加模板的回调函数
-
-// ff:
-// files:
-// funcMap:
-// name:
+// AddFromFilesFuncs supply add template from file callback func
 func (r DynamicRender) AddFromFilesFuncs(name string, funcMap template.FuncMap, files ...string) *template.Template {
 	tname := filepath.Base(files[0])
 	builder := &templateBuilder{templateName: tname, funcMap: funcMap, files: files}
@@ -165,11 +136,7 @@ func (r DynamicRender) AddFromFilesFuncs(name string, funcMap template.FuncMap, 
 	return builder.buildTemplate()
 }
 
-// 实例提供渲染字符串
-
-// ff:
-// data:
-// name:
+// Instance supply render string
 func (r DynamicRender) Instance(name string, data interface{}) render.Render {
 	builder, ok := r[name]
 	if !ok {

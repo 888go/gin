@@ -21,16 +21,9 @@ type Loader interface {
 
 type LoaderFunc func(path string) ([]byte, error)
 
-
-// ff:
-// path:
-// path:
 func (f LoaderFunc) LoadMessage(path string) ([]byte, error) { return f(path) }
 
 // WithBundle ...
-
-// ff:
-// config:
 func WithBundle(config *BundleCfg) Option {
 	return func(g GinI18n) {
 		if config.Loader == nil {
@@ -41,9 +34,6 @@ func WithBundle(config *BundleCfg) Option {
 }
 
 // WithGetLngHandle ...
-
-// ff:
-// handler:
 func WithGetLngHandle(handler GetLngHandler) Option {
 	return func(g GinI18n) {
 		g.setGetLngHandler(handler)

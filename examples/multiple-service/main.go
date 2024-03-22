@@ -12,12 +12,12 @@ import (
 var g errgroup.Group
 
 func router01() http.Handler {
-	e := gin.New()
-	e.Use(gin.Recovery())
-	e.GET("/", func(c *gin.Context) {
-		c.JSON(
+	e := gin类.X创建()
+	e.X中间件(gin类.Recovery())
+	e.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出JSON(
 			http.StatusOK,
-			gin.H{
+			gin类.H{
 				"code":  http.StatusOK,
 				"error": "Welcome server 01",
 			},
@@ -28,12 +28,12 @@ func router01() http.Handler {
 }
 
 func router02() http.Handler {
-	e := gin.New()
-	e.Use(gin.Recovery())
-	e.GET("/", func(c *gin.Context) {
-		c.JSON(
+	e := gin类.X创建()
+	e.X中间件(gin类.Recovery())
+	e.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出JSON(
 			http.StatusOK,
-			gin.H{
+			gin类.H{
 				"code":  http.StatusOK,
 				"error": "Welcome server 02",
 			},

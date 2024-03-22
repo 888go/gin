@@ -8,31 +8,31 @@ import (
 )
 
 func main() {
-	router := gin.Default()
-	// 设置multipart表单的较低内存限制（默认为32 MiB）
-	router.MaxMultipartMemory = 8 << 20 // 8 MiB
-	router.Static("/", "./public")
-	router.POST("/upload", func(c *gin.Context) {
-		name := c.PostForm("name")
-		email := c.PostForm("email")
+	router := gin类.X创建默认对象()
+	// Set a lower memory limit for multipart forms (default is 32 MiB)
+	router.X最大Multipart内存 = 8 << 20 // 8 MiB
+	router.X绑定静态文件目录("/", "./public")
+	router.X绑定POST("/upload", func(c *gin类.Context) {
+		name := c.X取表单参数值("name")
+		email := c.X取表单参数值("email")
 
 		// Multipart form
-		form, err := c.MultipartForm()
+		form, err := c.X取表单multipart对象()
 		if err != nil {
-			c.String(http.StatusBadRequest, "get form err: %s", err.Error())
+			c.X输出文本(http.StatusBadRequest, "get form err: %s", err.Error())
 			return
 		}
 		files := form.File["files"]
 
 		for _, file := range files {
 			filename := filepath.Base(file.Filename)
-			if err := c.SaveUploadedFile(file, filename); err != nil {
-				c.String(http.StatusBadRequest, "upload file err: %s", err.Error())
+			if err := c.X保存上传文件(file, filename); err != nil {
+				c.X输出文本(http.StatusBadRequest, "upload file err: %s", err.Error())
 				return
 			}
 		}
 
-		c.String(http.StatusOK, "Uploaded successfully %d files with fields name=%s and email=%s.", len(files), name, email)
+		c.X输出文本(http.StatusOK, "Uploaded successfully %d files with fields name=%s and email=%s.", len(files), name, email)
 	})
-	router.Run(":8080")
+	router.X监听(":8080")
 }

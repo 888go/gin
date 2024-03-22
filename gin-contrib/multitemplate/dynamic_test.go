@@ -63,10 +63,10 @@ func TestMissingTemplateOrNameDynamic(t *testing.T) {
 }
 
 func TestAddFromFilesDynamic(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromFileDynamic()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"title": "Test Multiple Template",
 		})
 	})
@@ -77,10 +77,10 @@ func TestAddFromFilesDynamic(t *testing.T) {
 }
 
 func TestAddFromGlobDynamic(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromGlobDynamic()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"title": "Test Multiple Template",
 		})
 	})
@@ -91,10 +91,10 @@ func TestAddFromGlobDynamic(t *testing.T) {
 }
 
 func TestAddFromStringDynamic(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromStringDynamic()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"name": "index",
 		})
 	})
@@ -105,10 +105,10 @@ func TestAddFromStringDynamic(t *testing.T) {
 }
 
 func TestAddFromStringsFruncsDynamic(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromStringsWithFuncsDynamic()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"name": "index",
 		})
 	})
@@ -119,10 +119,10 @@ func TestAddFromStringsFruncsDynamic(t *testing.T) {
 }
 
 func TestAddFromFilesFruncsDynamic(t *testing.T) {
-	router := gin.New()
+	router := gin类.X创建()
 	router.HTMLRender = createFromFilesWithFuncsDynamic()
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(200, "index", gin类.H{
 			"name": "index",
 		})
 	})
@@ -149,9 +149,9 @@ func TestTemplateNotFound(t *testing.T) {
 }
 
 func TestNotDynamicMode(t *testing.T) {
-	gin.SetMode("test")
+	gin类.X设置运行模式("test")
 	TestAddFromFilesDynamic(t)
-	gin.SetMode("debug")
+	gin类.X设置运行模式("debug")
 }
 
 func TestAddTemplate(t *testing.T) {

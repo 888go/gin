@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-
+	
 	"github.com/888go/gin"
 )
 
@@ -16,18 +16,18 @@ func main() {
 		log.Printf("Defaulting to port %s", port)
 	}
 
-	// 初始化一个新的Gin实例，不包含中间件
-	r := gin.New()
+	// Starts a new Gin instance with no middle-ware
+	r := gin类.X创建()
 
-	// 定义处理程序
-	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Hello World!")
+	// Define handlers
+	r.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "Hello World!")
 	})
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(http.StatusOK, "pong")
+	r.X绑定GET("/ping", func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "pong")
 	})
 
-	// 在定义的端口上监听并提供服务
+	// Listen and serve on defined port
 	log.Printf("Listening on port %s", port)
-	r.Run(":" + port)
+	r.X监听(":" + port)
 }

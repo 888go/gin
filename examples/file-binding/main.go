@@ -16,28 +16,28 @@ type BindFile struct {
 }
 
 func main() {
-	router := gin.Default()
-	// 设置multipart表单的较低内存限制（默认为32 MiB）
-	router.MaxMultipartMemory = 8 << 20 // 8 MiB
-	router.Static("/", "./public")
-	router.POST("/upload", func(c *gin.Context) {
+	router := gin类.X创建默认对象()
+	// Set a lower memory limit for multipart forms (default is 32 MiB)
+	router.X最大Multipart内存 = 8 << 20 // 8 MiB
+	router.X绑定静态文件目录("/", "./public")
+	router.X绑定POST("/upload", func(c *gin类.Context) {
 		var bindFile BindFile
 
 		// Bind file
-		if err := c.ShouldBind(&bindFile); err != nil {
-			c.String(http.StatusBadRequest, fmt.Sprintf("err: %s", err.Error()))
+		if err := c.X取参数到指针(&bindFile); err != nil {
+			c.X输出文本(http.StatusBadRequest, fmt.Sprintf("err: %s", err.Error()))
 			return
 		}
 
 		// Save uploaded file
 		file := bindFile.File
 		dst := filepath.Base(file.Filename)
-		if err := c.SaveUploadedFile(file, dst); err != nil {
-			c.String(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
+		if err := c.X保存上传文件(file, dst); err != nil {
+			c.X输出文本(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
 			return
 		}
 
-		c.String(http.StatusOK, fmt.Sprintf("File %s uploaded successfully with fields name=%s and email=%s.", file.Filename, bindFile.Name, bindFile.Email))
+		c.X输出文本(http.StatusOK, fmt.Sprintf("File %s uploaded successfully with fields name=%s and email=%s.", file.Filename, bindFile.Name, bindFile.Email))
 	})
-	router.Run(":8080")
+	router.X监听(":8080")
 }

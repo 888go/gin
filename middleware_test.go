@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"errors"
@@ -16,22 +16,22 @@ import (
 
 func TestMiddlewareGeneralCase(t *testing.T) {
 	signature := ""
-	router := New()
-	router.Use(func(c *Context) {
+	router := X创建()
+	router.X中间件(func(c *Context) {
 		signature += "A"
-		c.Next()
+		c.X中间件继续()
 		signature += "B"
 	})
-	router.Use(func(c *Context) {
+	router.X中间件(func(c *Context) {
 		signature += "C"
 	})
-	router.GET("/", func(c *Context) {
+	router.X绑定GET("/", func(c *Context) {
 		signature += "D"
 	})
-	router.NoRoute(func(c *Context) {
+	router.X绑定404(func(c *Context) {
 		signature += " X "
 	})
-	router.NoMethod(func(c *Context) {
+	router.X绑定405(func(c *Context) {
 		signature += " XX "
 	})
 	// RUN
@@ -44,30 +44,30 @@ func TestMiddlewareGeneralCase(t *testing.T) {
 
 func TestMiddlewareNoRoute(t *testing.T) {
 	signature := ""
-	router := New()
-	router.Use(func(c *Context) {
+	router := X创建()
+	router.X中间件(func(c *Context) {
 		signature += "A"
-		c.Next()
+		c.X中间件继续()
 		signature += "B"
 	})
-	router.Use(func(c *Context) {
+	router.X中间件(func(c *Context) {
 		signature += "C"
-		c.Next()
-		c.Next()
-		c.Next()
-		c.Next()
+		c.X中间件继续()
+		c.X中间件继续()
+		c.X中间件继续()
+		c.X中间件继续()
 		signature += "D"
 	})
-	router.NoRoute(func(c *Context) {
+	router.X绑定404(func(c *Context) {
 		signature += "E"
-		c.Next()
+		c.X中间件继续()
 		signature += "F"
 	}, func(c *Context) {
 		signature += "G"
-		c.Next()
+		c.X中间件继续()
 		signature += "H"
 	})
-	router.NoMethod(func(c *Context) {
+	router.X绑定405(func(c *Context) {
 		signature += " X "
 	})
 	// RUN
@@ -80,31 +80,31 @@ func TestMiddlewareNoRoute(t *testing.T) {
 
 func TestMiddlewareNoMethodEnabled(t *testing.T) {
 	signature := ""
-	router := New()
+	router := X创建()
 	router.HandleMethodNotAllowed = true
-	router.Use(func(c *Context) {
+	router.X中间件(func(c *Context) {
 		signature += "A"
-		c.Next()
+		c.X中间件继续()
 		signature += "B"
 	})
-	router.Use(func(c *Context) {
+	router.X中间件(func(c *Context) {
 		signature += "C"
-		c.Next()
+		c.X中间件继续()
 		signature += "D"
 	})
-	router.NoMethod(func(c *Context) {
+	router.X绑定405(func(c *Context) {
 		signature += "E"
-		c.Next()
+		c.X中间件继续()
 		signature += "F"
 	}, func(c *Context) {
 		signature += "G"
-		c.Next()
+		c.X中间件继续()
 		signature += "H"
 	})
-	router.NoRoute(func(c *Context) {
+	router.X绑定404(func(c *Context) {
 		signature += " X "
 	})
-	router.POST("/", func(c *Context) {
+	router.X绑定POST("/", func(c *Context) {
 		signature += " XX "
 	})
 	// RUN
@@ -117,34 +117,34 @@ func TestMiddlewareNoMethodEnabled(t *testing.T) {
 
 func TestMiddlewareNoMethodDisabled(t *testing.T) {
 	signature := ""
-	router := New()
+	router := X创建()
 
 	// NoMethod disabled
 	router.HandleMethodNotAllowed = false
 
-	router.Use(func(c *Context) {
+	router.X中间件(func(c *Context) {
 		signature += "A"
-		c.Next()
+		c.X中间件继续()
 		signature += "B"
 	})
-	router.Use(func(c *Context) {
+	router.X中间件(func(c *Context) {
 		signature += "C"
-		c.Next()
+		c.X中间件继续()
 		signature += "D"
 	})
-	router.NoMethod(func(c *Context) {
+	router.X绑定405(func(c *Context) {
 		signature += "E"
-		c.Next()
+		c.X中间件继续()
 		signature += "F"
 	}, func(c *Context) {
 		signature += "G"
-		c.Next()
+		c.X中间件继续()
 		signature += "H"
 	})
-	router.NoRoute(func(c *Context) {
+	router.X绑定404(func(c *Context) {
 		signature += " X "
 	})
-	router.POST("/", func(c *Context) {
+	router.X绑定POST("/", func(c *Context) {
 		signature += " XX "
 	})
 
@@ -158,19 +158,19 @@ func TestMiddlewareNoMethodDisabled(t *testing.T) {
 
 func TestMiddlewareAbort(t *testing.T) {
 	signature := ""
-	router := New()
-	router.Use(func(c *Context) {
+	router := X创建()
+	router.X中间件(func(c *Context) {
 		signature += "A"
 	})
-	router.Use(func(c *Context) {
+	router.X中间件(func(c *Context) {
 		signature += "C"
-		c.AbortWithStatus(http.StatusUnauthorized)
-		c.Next()
+		c.X停止并带状态码(http.StatusUnauthorized)
+		c.X中间件继续()
 		signature += "D"
 	})
-	router.GET("/", func(c *Context) {
+	router.X绑定GET("/", func(c *Context) {
 		signature += " X "
-		c.Next()
+		c.X中间件继续()
 		signature += " XX "
 	})
 
@@ -184,16 +184,16 @@ func TestMiddlewareAbort(t *testing.T) {
 
 func TestMiddlewareAbortHandlersChainAndNext(t *testing.T) {
 	signature := ""
-	router := New()
-	router.Use(func(c *Context) {
+	router := X创建()
+	router.X中间件(func(c *Context) {
 		signature += "A"
-		c.Next()
-		c.AbortWithStatus(http.StatusGone)
+		c.X中间件继续()
+		c.X停止并带状态码(http.StatusGone)
 		signature += "B"
 	})
-	router.GET("/", func(c *Context) {
+	router.X绑定GET("/", func(c *Context) {
 		signature += "C"
-		c.Next()
+		c.X中间件继续()
 	})
 	// RUN
 	w := PerformRequest(router, "GET", "/")
@@ -203,19 +203,19 @@ func TestMiddlewareAbortHandlersChainAndNext(t *testing.T) {
 	assert.Equal(t, "ACB", signature)
 }
 
-// TestFailHandlersChain - 确保 Fail 中断会按照先进先出（FIFO）顺序使用中间件，
-// 同时也会中断执行链
+// TestFailHandlersChain - ensure that Fail interrupt used middleware in fifo order as
+// as well as Abort
 func TestMiddlewareFailHandlersChain(t *testing.T) {
 	// SETUP
 	signature := ""
-	router := New()
-	router.Use(func(context *Context) {
+	router := X创建()
+	router.X中间件(func(context *Context) {
 		signature += "A"
-		context.AbortWithError(http.StatusInternalServerError, errors.New("foo")) //nolint: errcheck
+		context.X停止并带状态码与错误(http.StatusInternalServerError, errors.New("foo")) //nolint: errcheck
 	})
-	router.Use(func(context *Context) {
+	router.X中间件(func(context *Context) {
 		signature += "B"
-		context.Next()
+		context.X中间件继续()
 		signature += "C"
 	})
 	// RUN
@@ -227,20 +227,20 @@ func TestMiddlewareFailHandlersChain(t *testing.T) {
 }
 
 func TestMiddlewareWrite(t *testing.T) {
-	router := New()
-	router.Use(func(c *Context) {
-		c.String(http.StatusBadRequest, "hola\n")
+	router := X创建()
+	router.X中间件(func(c *Context) {
+		c.X输出文本(http.StatusBadRequest, "hola\n")
 	})
-	router.Use(func(c *Context) {
-		c.XML(http.StatusBadRequest, H{"foo": "bar"})
+	router.X中间件(func(c *Context) {
+		c.X输出XML(http.StatusBadRequest, H{"foo": "bar"})
 	})
-	router.Use(func(c *Context) {
-		c.JSON(http.StatusBadRequest, H{"foo": "bar"})
+	router.X中间件(func(c *Context) {
+		c.X输出JSON(http.StatusBadRequest, H{"foo": "bar"})
 	})
-	router.GET("/", func(c *Context) {
-		c.JSON(http.StatusBadRequest, H{"foo": "bar"})
+	router.X绑定GET("/", func(c *Context) {
+		c.X输出JSON(http.StatusBadRequest, H{"foo": "bar"})
 	}, func(c *Context) {
-		c.Render(http.StatusBadRequest, sse.Event{
+		c.Render底层方法(http.StatusBadRequest, sse.Event{
 			Event: "test",
 			Data:  "message",
 		})

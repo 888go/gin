@@ -6,37 +6,37 @@ import (
 	"github.com/888go/gin"
 )
 
-func newPublicError(msg string) *gin.Error {
-	return &gin.Error{
+func newPublicError(msg string) *gin类.Error {
+	return &gin类.Error{
 		Err:  errors.New(msg),
-		Type: gin.ErrorTypePublic,
+		Type: gin类.ErrorTypePublic,
 	}
 }
 
 var (
-	// ErrInvalidAuthorizationHeader 当获取到格式无效的Authorization头时返回错误
+	// ErrInvalidAuthorizationHeader error when get invalid format of Authorization header
 	ErrInvalidAuthorizationHeader = newPublicError("Authorization header format is incorrect")
-	// ErrInvalidKeyID 当Header中的KeyID未提供时返回错误
+	// ErrInvalidKeyID error when KeyID in header does not provided
 	ErrInvalidKeyID = newPublicError("Invalid keyId")
-	// ErrDateNotFound 当头部中未找到日期时返回的错误
+	// ErrDateNotFound error when no date in header
 	ErrDateNotFound = newPublicError("There is no Date on Headers")
-	// ErrIncorrectAlgorithm 当头文件中的算法与密钥不匹配时产生的错误
+	// ErrIncorrectAlgorithm error when Algorithm in header does not match with secret key
 	ErrIncorrectAlgorithm = newPublicError("Algorithm does not match")
-	// ErrHeaderNotEnough：当需求头信息没有出现在头部字段时返回的错误
+	// ErrHeaderNotEnough error when requirements header do not appear on header field
 	ErrHeaderNotEnough = newPublicError("Header field is not match requirement")
-	// ErrNoSignature 当在头部未找到签名时返回的错误
+	// ErrNoSignature error when no Signature not found in header
 	ErrNoSignature = newPublicError("No Signature header found in request")
-	// ErrInvalidSign 当签名字符串不匹配时产生的错误
+	// ErrInvalidSign error when signing string do not match
 	ErrInvalidSign = newPublicError("Invalid sign")
-	// ErrMissingKeyID 当keyId未在header中时产生的错误
+	// ErrMissingKeyID error when keyId not in header
 	ErrMissingKeyID = newPublicError("keyId must be on header")
-	// ErrMissingSignature 当签名不在头部时返回错误
+	// ErrMissingSignature error when signature not in header
 	ErrMissingSignature = newPublicError("signature must be on header")
 
-	// ErrUnterminatedParameter 当无法解析值时产生的错误
+	// ErrUnterminatedParameter err when could not parse value
 	ErrUnterminatedParameter = newPublicError("Unterminated parameter")
-	// ErrMisingDoubleQuote 当字符 = 后面缺少双引号时的错误
+	// ErrMisingDoubleQuote err when after character = not have double quote
 	ErrMisingDoubleQuote = newPublicError(`Missing " after = character`)
-	// ErrMisingEqualCharacter 当在 " 或 , 字符前缺少等号（=）时的错误
+	// ErrMisingEqualCharacter err when there is no character = before " or , character
 	ErrMisingEqualCharacter = newPublicError(`Missing = character =`)
 )

@@ -10,9 +10,10 @@ import (
 )
 
 type (
-// Secure 是一个中间件，用于帮助设置一些基本的安全功能。可以通过提供一个 secure.Options 结构体来配置要启用哪些功能，并且可以覆盖一些默认值。
+	// Secure is a middleware that helps setup a few basic security features. A single secure.Options struct can be
+	// provided to configure which features should be enabled, and the ability to override a few of the default values.
 	policy struct {
-		// 使用Options结构体来自定义Secure。
+		// Customize Secure with an Options struct.
 		config       Config
 		fixedHeaders []header
 	}
@@ -23,7 +24,7 @@ type (
 	}
 )
 
-// 使用提供的选项构建一个新的Policy实例。
+// Constructs a new Policy instance with supplied options.
 func newPolicy(config Config) *policy {
 	policy := &policy{}
 	policy.loadConfig(config)
@@ -41,7 +42,7 @@ func (p *policy) loadConfig(config Config) {
 		p.addHeader("X-Frame-Options", "DENY")
 	}
 
-	// 内容类型选项头。
+	// Content Type Options header.
 	if config.ContentTypeNosniff {
 		p.addHeader("X-Content-Type-Options", "nosniff")
 	}
@@ -51,7 +52,7 @@ func (p *policy) loadConfig(config Config) {
 		p.addHeader("X-Xss-Protection", "1; mode=block")
 	}
 
-	// 内容安全策略头。
+	// Content Security Policy header.
 	if len(config.ContentSecurityPolicy) > 0 {
 		p.addHeader("Content-Security-Policy", config.ContentSecurityPolicy)
 	}
@@ -60,21 +61,21 @@ func (p *policy) loadConfig(config Config) {
 		p.addHeader("Referrer-Policy", config.ReferrerPolicy)
 	}
 
-	// 严格传输安全（Strict Transport Security）头部。
+	// Strict Transport Security header.
 	if config.STSSeconds != 0 {
 		stsSub := ""
 		if config.STSIncludeSubdomains {
 			stsSub = "; includeSubdomains"
 		}
 
-// TODO：待办事项
-// "max-age=%d%s" 需重构
+		// TODO
+		// "max-age=%d%s" refactor
 		p.addHeader(
 			"Strict-Transport-Security",
 			fmt.Sprintf("max-age=%d%s", config.STSSeconds, stsSub))
 	}
 
-	// X-Download-Options 头部信息。
+	// X-Download-Options header.
 	if config.IENoOpen {
 		p.addHeader("X-Download-Options", "noopen")
 	}
@@ -92,7 +93,7 @@ func (p *policy) addHeader(key string, value string) {
 	})
 }
 
-func (p *policy) applyToContext(c *gin.Context) bool {
+func (p *policy) applyToContext(c *gin类.Context) bool {
 	if !p.config.IsDevelopment {
 		p.writeSecureHeaders(c)
 
@@ -106,21 +107,21 @@ func (p *policy) applyToContext(c *gin.Context) bool {
 	return true
 }
 
-func (p *policy) writeSecureHeaders(c *gin.Context) {
+func (p *policy) writeSecureHeaders(c *gin类.Context) {
 	header := c.Writer.Header()
 	for _, pair := range p.fixedHeaders {
 		header[pair.key] = pair.value
 	}
 }
 
-func (p *policy) checkAllowHosts(c *gin.Context) bool {
+func (p *policy) checkAllowHosts(c *gin类.Context) bool {
 	if len(p.config.AllowedHosts) == 0 {
 		return true
 	}
 
-	host := c.Request.Host
+	host := c.X请求.Host
 	if len(host) == 0 {
-		host = c.Request.URL.Host
+		host = c.X请求.URL.Host
 	}
 
 	for _, allowedHost := range p.config.AllowedHosts {
@@ -132,13 +133,13 @@ func (p *policy) checkAllowHosts(c *gin.Context) bool {
 	if p.config.BadHostHandler != nil {
 		p.config.BadHostHandler(c)
 	} else {
-		c.AbortWithStatus(403)
+		c.X停止并带状态码(403)
 	}
 
 	return false
 }
 
-// 检查一个主机（可能带有端口号）是否为IPV4地址
+// checks if a host (possibly with trailing port) is an IPV4 address
 func isIPV4(host string) bool {
 	if index := strings.IndexByte(host, ':'); index != -1 {
 		host = host[:index]
@@ -170,19 +171,19 @@ func (p *policy) isSSLRequest(req *http.Request) bool {
 	return false
 }
 
-func (p *policy) checkSSL(c *gin.Context) bool {
+func (p *policy) checkSSL(c *gin类.Context) bool {
 	if !p.config.SSLRedirect {
 		return true
 	}
 
-	req := c.Request
+	req := c.X请求
 	isSSLRequest := p.isSSLRequest(req)
 	if isSSLRequest {
 		return true
 	}
 
-// TODO：（待办事项）
-// req.Host 与 req.URL.Host 的对比
+	// TODO
+	// req.Host vs req.URL.Host
 	url := req.URL
 	url.Scheme = "https"
 	url.Host = req.Host
@@ -195,7 +196,7 @@ func (p *policy) checkSSL(c *gin.Context) bool {
 	if p.config.SSLTemporaryRedirect {
 		status = http.StatusTemporaryRedirect
 	}
-	c.Redirect(status, url.String())
-	c.Abort()
+	c.X重定向(status, url.String())
+	c.X停止()
 	return false
 }

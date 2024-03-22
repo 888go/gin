@@ -14,10 +14,10 @@ import (
 )
 
 func main() {
-	router := gin.Default()
-	router.GET("/", func(c *gin.Context) {
+	router := gin类.X创建默认对象()
+	router.X绑定GET("/", func(c *gin类.Context) {
 		time.Sleep(5 * time.Second)
-		c.String(http.StatusOK, "Welcome Gin Server")
+		c.X输出文本(http.StatusOK, "Welcome Gin Server")
 	})
 
 	server := &http.Server{

@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"flag"
@@ -14,56 +14,56 @@ import (
 )
 
 func init() {
-	os.Setenv(EnvGinMode, TestMode)
+	os.Setenv(EnvGinMode, X常量_运行模式_测试)
 }
 
 func TestSetMode(t *testing.T) {
 	assert.Equal(t, testCode, ginMode)
-	assert.Equal(t, TestMode, Mode())
+	assert.Equal(t, X常量_运行模式_测试, X取运行模式())
 	os.Unsetenv(EnvGinMode)
 
-	SetMode("")
+	X设置运行模式("")
 	assert.Equal(t, testCode, ginMode)
-	assert.Equal(t, TestMode, Mode())
+	assert.Equal(t, X常量_运行模式_测试, X取运行模式())
 
 	tmp := flag.CommandLine
 	flag.CommandLine = flag.NewFlagSet("", flag.ContinueOnError)
-	SetMode("")
+	X设置运行模式("")
 	assert.Equal(t, debugCode, ginMode)
-	assert.Equal(t, DebugMode, Mode())
+	assert.Equal(t, X常量_运行模式_调试, X取运行模式())
 	flag.CommandLine = tmp
 
-	SetMode(DebugMode)
+	X设置运行模式(X常量_运行模式_调试)
 	assert.Equal(t, debugCode, ginMode)
-	assert.Equal(t, DebugMode, Mode())
+	assert.Equal(t, X常量_运行模式_调试, X取运行模式())
 
-	SetMode(ReleaseMode)
+	X设置运行模式(X常量_运行模式_发布)
 	assert.Equal(t, releaseCode, ginMode)
-	assert.Equal(t, ReleaseMode, Mode())
+	assert.Equal(t, X常量_运行模式_发布, X取运行模式())
 
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 	assert.Equal(t, testCode, ginMode)
-	assert.Equal(t, TestMode, Mode())
+	assert.Equal(t, X常量_运行模式_测试, X取运行模式())
 
-	assert.Panics(t, func() { SetMode("unknown") })
+	assert.Panics(t, func() { X设置运行模式("unknown") })
 }
 
 func TestDisableBindValidation(t *testing.T) {
 	v := binding.Validator
 	assert.NotNil(t, binding.Validator)
-	DisableBindValidation()
+	X关闭Validator验证器()
 	assert.Nil(t, binding.Validator)
 	binding.Validator = v
 }
 
 func TestEnableJsonDecoderUseNumber(t *testing.T) {
 	assert.False(t, binding.EnableDecoderUseNumber)
-	EnableJsonDecoderUseNumber()
+	X启用Json解码器使用Number()
 	assert.True(t, binding.EnableDecoderUseNumber)
 }
 
 func TestEnableJsonDecoderDisallowUnknownFields(t *testing.T) {
 	assert.False(t, binding.EnableDecoderDisallowUnknownFields)
-	EnableJsonDecoderDisallowUnknownFields()
+	X启用json解码器禁止未知字段()
 	assert.True(t, binding.EnableDecoderDisallowUnknownFields)
 }

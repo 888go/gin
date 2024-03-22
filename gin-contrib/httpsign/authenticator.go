@@ -20,43 +20,35 @@ const (
 
 var defaultRequiredHeaders = []string{requestTarget, date, digest}
 
-// Authenticator 是 Gin 框架的认证中间件。
+// Authenticator is the gin authenticator middleware.
 type Authenticator struct {
 	secrets    Secrets
 	validators []validator.Validator
 	headers    []string
 }
 
-// Option 是 Authenticator 构造函数的选项。
+// Option is the option to the Authenticator constructor.
 type Option func(*Authenticator)
 
-// WithValidator 配置 Authenticator 以使用自定义验证器。
-// 默认的验证器基于时间和摘要。
-
-// ff:
-// validators:
+// WithValidator configures the Authenticator to use custom validator.
+// The default validators are time based and digest.
 func WithValidator(validators ...validator.Validator) Option {
 	return func(a *Authenticator) {
 		a.validators = validators
 	}
 }
 
-// WithRequiredHeaders 是一个包含所有必需HTTP头的列表，客户端必须在签名字符串中包含这些头信息，以便请求被认为是有效的。
-// 如果未提供，则创建的Authenticator实例将使用默认的defaultRequiredHeaders变量。
-
-// ff:
-// headers:
+// WithRequiredHeaders is list of all requires HTTP headers that the client
+// have to include in the singing string for the request to be considered valid.
+// If not provided, the created Authenticator instance will use defaultRequiredHeaders variable.
 func WithRequiredHeaders(headers []string) Option {
 	return func(a *Authenticator) {
 		a.headers = headers
 	}
 }
 
-// NewAuthenticator 创建一个具有给定允许权限和所需头部及密钥的新 Authenticator 实例。
-
-// ff:
-// options:
-// secretKeys:
+// NewAuthenticator creates a new Authenticator instance with
+// given allowed permissions and required header and secret keys.
 func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 	a := &Authenticator{secrets: secretKeys}
 
@@ -78,52 +70,50 @@ func NewAuthenticator(secretKeys Secrets, options ...Option) *Authenticator {
 	return a
 }
 
-// Authenticated 返回一个 gin 中间件，该中间件允许在参数中给定的权限。
-
-// ff:
-func (a *Authenticator) Authenticated() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		sigHeader, err := NewSignatureHeader(c.Request)
+// Authenticated returns a gin middleware which permits given permissions in parameter.
+func (a *Authenticator) Authenticated() gin类.HandlerFunc {
+	return func(c *gin类.Context) {
+		sigHeader, err := NewSignatureHeader(c.X请求)
 		if err != nil {
-			_ = c.AbortWithError(http.StatusUnauthorized, err)
+			_ = c.X停止并带状态码与错误(http.StatusUnauthorized, err)
 			return
 		}
 		for _, v := range a.validators {
-			if err := v.Validate(c.Request); err != nil {
-				_ = c.AbortWithError(http.StatusBadRequest, err)
+			if err := v.Validate(c.X请求); err != nil {
+				_ = c.X停止并带状态码与错误(http.StatusBadRequest, err)
 				return
 			}
 		}
 		if !a.isValidHeader(sigHeader.headers) {
-			_ = c.AbortWithError(http.StatusBadRequest, ErrHeaderNotEnough)
+			_ = c.X停止并带状态码与错误(http.StatusBadRequest, ErrHeaderNotEnough)
 			return
 		}
 
 		secret, err := a.getSecret(sigHeader.keyID, sigHeader.algorithm)
 		if err != nil {
 			if err == ErrInvalidKeyID {
-				_ = c.AbortWithError(http.StatusUnauthorized, err)
+				_ = c.X停止并带状态码与错误(http.StatusUnauthorized, err)
 				return
 			}
-			_ = c.AbortWithError(http.StatusBadRequest, err)
+			_ = c.X停止并带状态码与错误(http.StatusBadRequest, err)
 			return
 		}
-		signString := constructSignMessage(c.Request, sigHeader.headers)
+		signString := constructSignMessage(c.X请求, sigHeader.headers)
 		signature, err := secret.Algorithm.Sign(signString, secret.Key)
 		if err != nil {
-			_ = c.AbortWithError(http.StatusInternalServerError, err)
+			_ = c.X停止并带状态码与错误(http.StatusInternalServerError, err)
 			return
 		}
 		signatureBase64 := base64.StdEncoding.EncodeToString(signature)
 		if signatureBase64 != sigHeader.signature {
-			_ = c.AbortWithError(http.StatusUnauthorized, ErrInvalidSign)
+			_ = c.X停止并带状态码与错误(http.StatusUnauthorized, ErrInvalidSign)
 			return
 		}
-		c.Next()
+		c.X中间件继续()
 	}
 }
 
-// isValidHeader 检查请求头中是否包含服务器所需的所有必需头部
+// isValidHeader check if all server required header is in header list
 func (a *Authenticator) isValidHeader(headers []string) bool {
 	m := len(headers)
 	for _, h := range a.headers {

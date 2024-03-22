@@ -11,9 +11,6 @@ type EmbedLoader struct {
 	FS embed.FS
 }
 
-
-// ff:
-// path:
 func (c *EmbedLoader) LoadMessage(path string) ([]byte, error) {
 	return c.FS.ReadFile(path)
 }

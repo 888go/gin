@@ -39,24 +39,24 @@ func TestWriteHeader_SkipMinusOne(t *testing.T) {
 }
 
 func TestWriter_Status(t *testing.T) {
-	r := gin.New()
+	r := gin类.X创建()
 
-	r.Use(New(
+	r.X中间件(New(
 		WithTimeout(1*time.Second),
-		WithHandler(func(c *gin.Context) {
-			c.Next()
+		WithHandler(func(c *gin类.Context) {
+			c.X中间件继续()
 		}),
 		WithResponse(testResponse),
 	))
 
-	r.Use(func(c *gin.Context) {
-		c.Next()
+	r.X中间件(func(c *gin类.Context) {
+		c.X中间件继续()
 		statusInMW := c.Writer.Status()
-		c.Request.Header.Set("X-Status-Code-MW-Set", strconv.Itoa(statusInMW))
-		t.Logf("[%s] %s %s %d\n", time.Now().Format(time.RFC3339), c.Request.Method, c.Request.URL, statusInMW)
+		c.X请求.Header.Set("X-Status-Code-MW-Set", strconv.Itoa(statusInMW))
+		t.Logf("[%s] %s %s %d\n", time.Now().Format(time.RFC3339), c.X请求.Method, c.X请求.URL, statusInMW)
 	})
 
-	r.GET("/test", func(c *gin.Context) {
+	r.X绑定GET("/test", func(c *gin类.Context) {
 		c.Writer.WriteHeader(http.StatusInternalServerError)
 	})
 
@@ -69,41 +69,41 @@ func TestWriter_Status(t *testing.T) {
 	assert.Equal(t, strconv.Itoa(http.StatusInternalServerError), req.Header.Get("X-Status-Code-MW-Set"))
 }
 
-// testNew是对New()的一个副本，对其timeoutHandler()函数做了微小改动。
-// 参考：https://github.com/gin-contrib/timeout/issues/31
-func testNew(duration time.Duration) gin.HandlerFunc {
+// testNew is a copy of New() with a small change to the timeoutHandler() function.
+// ref: https://github.com/gin-contrib/timeout/issues/31
+func testNew(duration time.Duration) gin类.HandlerFunc {
 	return New(
 		WithTimeout(duration),
-		WithHandler(func(c *gin.Context) { c.Next() }),
+		WithHandler(func(c *gin类.Context) { c.X中间件继续() }),
 		WithResponse(timeoutHandler()),
 	)
 }
 
-// timeoutHandler 返回一个处理器，该处理器返回一个 504 网关超时错误。
-func timeoutHandler() gin.HandlerFunc {
+// timeoutHandler returns a handler that returns a 504 Gateway Timeout error.
+func timeoutHandler() gin类.HandlerFunc {
 	gatewayTimeoutErr := struct {
 		Error string `json:"error"`
 	}{
 		Error: "Timed out.",
 	}
 
-	return func(c *gin.Context) {
+	return func(c *gin类.Context) {
 		log.Printf("request timed out: [method=%s,path=%s]",
-			c.Request.Method, c.Request.URL.Path)
-		c.JSON(http.StatusGatewayTimeout, gatewayTimeoutErr)
+			c.X请求.Method, c.X请求.URL.Path)
+		c.X输出JSON(http.StatusGatewayTimeout, gatewayTimeoutErr)
 	}
 }
 
-// TestHTTPStatusCode 测试响应的 HTTP 状态码。
+// TestHTTPStatusCode tests the HTTP status code of the response.
 func TestHTTPStatusCode(t *testing.T) {
-	gin.SetMode(gin.ReleaseMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
 
 	type testCase struct {
 		Name          string
 		Method        string
 		Path          string
 		ExpStatusCode int
-		Handler       gin.HandlerFunc
+		Handler       gin类.HandlerFunc
 	}
 
 	var (
@@ -113,8 +113,8 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusOK,
-				Handler: func(ctx *gin.Context) {
-					ctx.String(http.StatusOK, "I'm text!")
+				Handler: func(ctx *gin类.Context) {
+					ctx.X输出文本(http.StatusOK, "I'm text!")
 				},
 			},
 			{
@@ -122,8 +122,8 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusCreated,
-				Handler: func(ctx *gin.Context) {
-					ctx.String(http.StatusCreated, "I'm created!")
+				Handler: func(ctx *gin类.Context) {
+					ctx.X输出文本(http.StatusCreated, "I'm created!")
 				},
 			},
 			{
@@ -131,8 +131,8 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusNoContent,
-				Handler: func(ctx *gin.Context) {
-					ctx.String(http.StatusNoContent, "")
+				Handler: func(ctx *gin类.Context) {
+					ctx.X输出文本(http.StatusNoContent, "")
 				},
 			},
 			{
@@ -140,8 +140,8 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusBadRequest,
-				Handler: func(ctx *gin.Context) {
-					ctx.String(http.StatusBadRequest, "")
+				Handler: func(ctx *gin类.Context) {
+					ctx.X输出文本(http.StatusBadRequest, "")
 				},
 			},
 			{
@@ -149,8 +149,8 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusOK,
-				Handler: func(ctx *gin.Context) {
-					ctx.JSON(http.StatusOK, gin.H{"field": "value"})
+				Handler: func(ctx *gin类.Context) {
+					ctx.X输出JSON(http.StatusOK, gin类.H{"field": "value"})
 				},
 			},
 			{
@@ -158,8 +158,8 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusCreated,
-				Handler: func(ctx *gin.Context) {
-					ctx.JSON(http.StatusCreated, gin.H{"field": "value"})
+				Handler: func(ctx *gin类.Context) {
+					ctx.X输出JSON(http.StatusCreated, gin类.H{"field": "value"})
 				},
 			},
 			{
@@ -167,8 +167,8 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusNoContent,
-				Handler: func(ctx *gin.Context) {
-					ctx.JSON(http.StatusNoContent, nil)
+				Handler: func(ctx *gin类.Context) {
+					ctx.X输出JSON(http.StatusNoContent, nil)
 				},
 			},
 			{
@@ -176,8 +176,8 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusBadRequest,
-				Handler: func(ctx *gin.Context) {
-					ctx.JSON(http.StatusBadRequest, nil)
+				Handler: func(ctx *gin类.Context) {
+					ctx.X输出JSON(http.StatusBadRequest, nil)
 				},
 			},
 			{
@@ -185,7 +185,7 @@ func TestHTTPStatusCode(t *testing.T) {
 				Method:        http.MethodGet,
 				Path:          "/me",
 				ExpStatusCode: http.StatusOK,
-				Handler:       func(ctx *gin.Context) {},
+				Handler:       func(ctx *gin类.Context) {},
 			},
 		}
 
@@ -198,10 +198,10 @@ func TestHTTPStatusCode(t *testing.T) {
 		t.Run(cases[i].Name, func(tt *testing.T) {
 			tt.Logf("Test case [%s]", cases[i].Name)
 
-			router := gin.Default()
+			router := gin类.X创建默认对象()
 
-			router.Use(testNew(1 * time.Second))
-			router.GET("/*root", cases[i].Handler)
+			router.X中间件(testNew(1 * time.Second))
+			router.X绑定GET("/*root", cases[i].Handler)
 
 			req, resp := initCase(cases[i])
 			router.ServeHTTP(resp, req)

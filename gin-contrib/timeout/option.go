@@ -10,43 +10,34 @@ import (
 // Option for timeout
 type Option func(*Timeout)
 
-// WithTimeout 设置超时
-
-// ff:
-// timeout:
+// WithTimeout set timeout
 func WithTimeout(timeout time.Duration) Option {
 	return func(t *Timeout) {
 		t.timeout = timeout
 	}
 }
 
-// WithHandler 添加 Gin 处理器
-
-// ff:
-// h:
-func WithHandler(h gin.HandlerFunc) Option {
+// WithHandler add gin handler
+func WithHandler(h gin类.HandlerFunc) Option {
 	return func(t *Timeout) {
 		t.handler = h
 	}
 }
 
-// WithResponse 添加 Gin 处理器
-
-// ff:
-// h:
-func WithResponse(h gin.HandlerFunc) Option {
+// WithResponse add gin handler
+func WithResponse(h gin类.HandlerFunc) Option {
 	return func(t *Timeout) {
 		t.response = h
 	}
 }
 
-func defaultResponse(c *gin.Context) {
-	c.String(http.StatusRequestTimeout, http.StatusText(http.StatusRequestTimeout))
+func defaultResponse(c *gin类.Context) {
+	c.X输出文本(http.StatusRequestTimeout, http.StatusText(http.StatusRequestTimeout))
 }
 
 // Timeout struct
 type Timeout struct {
 	timeout  time.Duration
-	handler  gin.HandlerFunc
-	response gin.HandlerFunc
+	handler  gin类.HandlerFunc
+	response gin类.HandlerFunc
 }

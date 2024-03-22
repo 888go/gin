@@ -13,8 +13,8 @@ var addr = flag.String("addr", ":8080", "http service address")
 
 var upgrader = websocket.Upgrader{} // use default option
 
-func echo(ctx *gin.Context) {
-	w,r := ctx.Writer, ctx.Request
+func echo(ctx *gin类.Context) {
+	w,r := ctx.Writer, ctx.X请求
 	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("upgrade:", err)
@@ -36,17 +36,17 @@ func echo(ctx *gin.Context) {
 	}
 }
 
-func home(c *gin.Context) {
-	homeTemplate.Execute(c.Writer, "ws://"+c.Request.Host+"/echo")
+func home(c *gin类.Context) {
+	homeTemplate.Execute(c.Writer, "ws://"+c.X请求.Host+"/echo")
 }
 
 func main() {
 	flag.Parse()
 	log.SetFlags(0)
-	r := gin.Default()
-	r.GET("/echo", echo)
-	r.GET("/", home)
-	log.Fatal(r.Run(*addr))
+	r := gin类.X创建默认对象()
+	r.X绑定GET("/echo", echo)
+	r.X绑定GET("/", home)
+	log.Fatal(r.X监听(*addr))
 }
 
 

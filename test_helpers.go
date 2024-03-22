@@ -1,33 +1,23 @@
-// 版权所有 ? 2017 Manu Martinez-Almeida。保留所有权利。
-// 本源代码的使用受 MIT 风格许可证协议约束，
-// 该协议可在 LICENSE 文件中查阅。
+// Copyright 2017 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"net/http"
 )
 
-// CreateTestContext 返回一个用于测试的新鲜（即初始化的）引擎和上下文
-
-// ff:创建测试引擎与上下文
-// r:
-// c:
-// w:
+// CreateTestContext returns a fresh engine and context for testing purposes
 func CreateTestContext(w http.ResponseWriter) (c *Context, r *Engine) {
-	r = New()
+	r = X创建()
 	c = r.allocateContext(0)
 	c.reset()
 	c.writermem.reset(w)
 	return
 }
 
-// CreateTestContextOnly 根据引擎为测试目的返回一个新的上下文副本
-
-// ff:创建测试上下文
-// c:
-// r:
-// w:
+// CreateTestContextOnly returns a fresh context base on the engine for testing purposes
 func CreateTestContextOnly(w http.ResponseWriter, r *Engine) (c *Context) {
 	c = r.allocateContext(r.maxParams)
 	c.reset()

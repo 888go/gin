@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 	pprof.Register(router)
-	router.Run(":8080")
+	router.X监听(":8080")
 }

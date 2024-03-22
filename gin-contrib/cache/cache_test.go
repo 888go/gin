@@ -15,7 +15,7 @@ import (
 )
 
 func init() {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 }
 
 func TestCache(t *testing.T) {
@@ -24,7 +24,7 @@ func TestCache(t *testing.T) {
 
 func TestWrite(t *testing.T) {
 	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
+	c, _ := gin类.CreateTestContext(w)
 
 	store := persistence.NewInMemoryStore(60 * time.Second)
 	writer := newCachedWriter(store, time.Second*3, c.Writer, "mykey")
@@ -41,9 +41,9 @@ func TestWrite(t *testing.T) {
 func TestCachePage(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_ping", CachePage(store, time.Second*3, func(c *gin.Context) {
-		c.String(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
+	router := gin类.X创建()
+	router.X绑定GET("/cache_ping", CachePage(store, time.Second*3, func(c *gin类.Context) {
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
 	}))
 
 	w1 := performRequest("GET", "/cache_ping", router)
@@ -57,9 +57,9 @@ func TestCachePage(t *testing.T) {
 func TestCachePageExpire(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_ping", CachePage(store, time.Second, func(c *gin.Context) {
-		c.String(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
+	router := gin类.X创建()
+	router.X绑定GET("/cache_ping", CachePage(store, time.Second, func(c *gin类.Context) {
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
 	}))
 
 	w1 := performRequest("GET", "/cache_ping", router)
@@ -72,13 +72,13 @@ func TestCachePageExpire(t *testing.T) {
 }
 
 func TestCachePageAtomic(t *testing.T) {
-// memoryDelayStore 是 InMemoryStore 的一个包装器，
-// 旨在通过延迟写入模拟数据竞争（data race）场景
+	// memoryDelayStore is a wrapper of a InMemoryStore
+	// designed to simulate data race (by doing a delayed write)
 	store := newDelayStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/atomic", CachePageAtomic(store, time.Second*5, func(c *gin.Context) {
-		c.String(200, "OK")
+	router := gin类.X创建()
+	router.X绑定GET("/atomic", CachePageAtomic(store, time.Second*5, func(c *gin类.Context) {
+		c.X输出文本(200, "OK")
 	}))
 
 	outp := make(chan string, 10)
@@ -107,9 +107,9 @@ func TestCachePageAtomic(t *testing.T) {
 func TestCachePageWithoutHeader(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_ping", CachePageWithoutHeader(store, time.Second*3, func(c *gin.Context) {
-		c.String(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
+	router := gin类.X创建()
+	router.X绑定GET("/cache_ping", CachePageWithoutHeader(store, time.Second*3, func(c *gin类.Context) {
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
 	}))
 
 	w1 := performRequest("GET", "/cache_ping", router)
@@ -125,9 +125,9 @@ func TestCachePageWithoutHeader(t *testing.T) {
 func TestCachePageWithoutHeaderExpire(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_ping", CachePage(store, time.Second, func(c *gin.Context) {
-		c.String(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
+	router := gin类.X创建()
+	router.X绑定GET("/cache_ping", CachePage(store, time.Second, func(c *gin类.Context) {
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
 	}))
 
 	w1 := performRequest("GET", "/cache_ping", router)
@@ -144,10 +144,10 @@ func TestCachePageWithoutHeaderExpire(t *testing.T) {
 func TestCacheHtmlFile(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.LoadHTMLFiles("example/template.html")
-	router.GET("/cache_html", CachePage(store, time.Second*3, func(c *gin.Context) {
-		c.HTML(http.StatusOK, "template.html", gin.H{"values": fmt.Sprint(time.Now().UnixNano())})
+	router := gin类.X创建()
+	router.X加载HTML模板文件("example/template.html")
+	router.X绑定GET("/cache_html", CachePage(store, time.Second*3, func(c *gin类.Context) {
+		c.X输出html模板(http.StatusOK, "template.html", gin类.H{"values": fmt.Sprint(time.Now().UnixNano())})
 	}))
 
 	w1 := performRequest("GET", "/cache_html", router)
@@ -161,10 +161,10 @@ func TestCacheHtmlFile(t *testing.T) {
 func TestCacheHtmlFileExpire(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.LoadHTMLFiles("example/template.html")
-	router.GET("/cache_html", CachePage(store, time.Second*1, func(c *gin.Context) {
-		c.HTML(http.StatusOK, "template.html", gin.H{"values": fmt.Sprint(time.Now().UnixNano())})
+	router := gin类.X创建()
+	router.X加载HTML模板文件("example/template.html")
+	router.X绑定GET("/cache_html", CachePage(store, time.Second*1, func(c *gin类.Context) {
+		c.X输出html模板(http.StatusOK, "template.html", gin类.H{"values": fmt.Sprint(time.Now().UnixNano())})
 	}))
 
 	w1 := performRequest("GET", "/cache_html", router)
@@ -179,9 +179,9 @@ func TestCacheHtmlFileExpire(t *testing.T) {
 func TestCachePageAborted(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_aborted", CachePage(store, time.Second*3, func(c *gin.Context) {
-		c.AbortWithStatusJSON(200, map[string]int64{"time": time.Now().UnixNano()})
+	router := gin类.X创建()
+	router.X绑定GET("/cache_aborted", CachePage(store, time.Second*3, func(c *gin类.Context) {
+		c.X停止并带状态码且返回JSON(200, map[string]int64{"time": time.Now().UnixNano()})
 	}))
 
 	w1 := performRequest("GET", "/cache_aborted", router)
@@ -196,9 +196,9 @@ func TestCachePageAborted(t *testing.T) {
 func TestCachePage400(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_400", CachePage(store, time.Second*3, func(c *gin.Context) {
-		c.String(400, fmt.Sprint(time.Now().UnixNano()))
+	router := gin类.X创建()
+	router.X绑定GET("/cache_400", CachePage(store, time.Second*3, func(c *gin类.Context) {
+		c.X输出文本(400, fmt.Sprint(time.Now().UnixNano()))
 	}))
 
 	w1 := performRequest("GET", "/cache_400", router)
@@ -213,9 +213,9 @@ func TestCachePage400(t *testing.T) {
 func TestCachePageWithoutHeaderAborted(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_aborted", CachePage(store, time.Second*3, func(c *gin.Context) {
-		c.AbortWithStatusJSON(200, map[string]int64{"time": time.Now().UnixNano()})
+	router := gin类.X创建()
+	router.X绑定GET("/cache_aborted", CachePage(store, time.Second*3, func(c *gin类.Context) {
+		c.X停止并带状态码且返回JSON(200, map[string]int64{"time": time.Now().UnixNano()})
 	}))
 
 	w1 := performRequest("GET", "/cache_aborted", router)
@@ -232,9 +232,9 @@ func TestCachePageWithoutHeaderAborted(t *testing.T) {
 func TestCachePageWithoutHeader400(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_400", CachePage(store, time.Second*3, func(c *gin.Context) {
-		c.String(400, fmt.Sprint(time.Now().UnixNano()))
+	router := gin类.X创建()
+	router.X绑定GET("/cache_400", CachePage(store, time.Second*3, func(c *gin类.Context) {
+		c.X输出文本(400, fmt.Sprint(time.Now().UnixNano()))
 	}))
 
 	w1 := performRequest("GET", "/cache_400", router)
@@ -251,9 +251,9 @@ func TestCachePageWithoutHeader400(t *testing.T) {
 func TestCachePageStatus207(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_207", CachePage(store, time.Second*3, func(c *gin.Context) {
-		c.String(207, fmt.Sprint(time.Now().UnixNano()))
+	router := gin类.X创建()
+	router.X绑定GET("/cache_207", CachePage(store, time.Second*3, func(c *gin类.Context) {
+		c.X输出文本(207, fmt.Sprint(time.Now().UnixNano()))
 	}))
 
 	w1 := performRequest("GET", "/cache_207", router)
@@ -268,9 +268,9 @@ func TestCachePageStatus207(t *testing.T) {
 func TestCachePageWithoutQuery(t *testing.T) {
 	store := persistence.NewInMemoryStore(60 * time.Second)
 
-	router := gin.New()
-	router.GET("/cache_without_query", CachePageWithoutQuery(store, time.Second*3, func(c *gin.Context) {
-		c.String(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
+	router := gin类.X创建()
+	router.X绑定GET("/cache_without_query", CachePageWithoutQuery(store, time.Second*3, func(c *gin类.Context) {
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().UnixNano()))
 	}))
 
 	w1 := performRequest("GET", "/cache_without_query?foo=1", router)
@@ -296,7 +296,7 @@ func TestRegisterResponseCacheGob(t *testing.T) {
 	assert.Nil(t, err)
 
 }
-func performRequest(method, target string, router *gin.Engine) *httptest.ResponseRecorder {
+func performRequest(method, target string, router *gin类.Engine) *httptest.ResponseRecorder {
 	r := httptest.NewRequest(method, target, nil)
 	w := httptest.NewRecorder()
 	router.ServeHTTP(w, r)

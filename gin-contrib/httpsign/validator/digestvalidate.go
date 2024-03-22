@@ -12,28 +12,23 @@ import (
 	"github.com/888go/gin"
 )
 
-// TODO: 支持更多摘要算法
+// TODO: support more digest
 
-// ErrInvalidDigest：当body的sha256值与提交的摘要不匹配时，返回该错误
-var ErrInvalidDigest = &gin.Error{
+// ErrInvalidDigest error when sha256 of body do not match with submitted digest
+var ErrInvalidDigest = &gin类.Error{
 	Err:  errors.New("sha256 of body is not match with digest"),
-	Type: gin.ErrorTypePublic,
+	Type: gin类.ErrorTypePublic,
 }
 
-// DigestValidator 检查请求头中的摘要是否与主体内容匹配
+// DigestValidator checking digest in header match body
 type DigestValidator struct{}
 
-// NewDigestValidator 返回新的DigestValidator的指针
-
-// ff:
+// NewDigestValidator return pointer of new DigestValidator
 func NewDigestValidator() *DigestValidator {
 	return &DigestValidator{}
 }
 
-// Validate在检查摘要与主体内容匹配时返回错误
-
-// ff:
-// r:
+// Validate return error when checking digest match body
 func (v *DigestValidator) Validate(r *http.Request) error {
 	headerDigest := r.Header.Get("digest")
 	digest, err := calculateDigest(r)
@@ -50,7 +45,7 @@ func calculateDigest(r *http.Request) (string, error) {
 	if r.ContentLength == 0 {
 		return "", nil
 	}
-	// TODO: 使用缓冲区读取正文以防止占用过多内存
+	// TODO: Read body using buffer to prevent using too much memory
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		return "", err

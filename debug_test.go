@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"errors"
@@ -19,52 +19,48 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TODO：待办事项（需要实现或改进的功能）
-// 
+// TODO
 // func debugRoute(httpMethod, absolutePath string, handlers HandlersChain) {
-//   // 函数功能：调试路由，接收HTTP方法、绝对路径和处理器链作为参数
-// 
 // func debugPrint(format string, values ...any) {
-//   // 函数功能：调试打印，接收一个格式字符串和任意数量的参数，用于输出调试信息
 
 func TestIsDebugging(t *testing.T) {
-	SetMode(DebugMode)
-	assert.True(t, IsDebugging())
-	SetMode(ReleaseMode)
-	assert.False(t, IsDebugging())
-	SetMode(TestMode)
-	assert.False(t, IsDebugging())
+	X设置运行模式(X常量_运行模式_调试)
+	assert.True(t, X是否为调试模式())
+	X设置运行模式(X常量_运行模式_发布)
+	assert.False(t, X是否为调试模式())
+	X设置运行模式(X常量_运行模式_测试)
+	assert.False(t, X是否为调试模式())
 }
 
 func TestDebugPrint(t *testing.T) {
 	re := captureOutput(t, func() {
-		SetMode(DebugMode)
-		SetMode(ReleaseMode)
+		X设置运行模式(X常量_运行模式_调试)
+		X设置运行模式(X常量_运行模式_发布)
 		debugPrint("DEBUG this!")
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 		debugPrint("DEBUG this!")
-		SetMode(DebugMode)
+		X设置运行模式(X常量_运行模式_调试)
 		debugPrint("these are %d %s", 2, "error messages")
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 	})
 	assert.Equal(t, "[GIN-debug] these are 2 error messages\n", re)
 }
 
 func TestDebugPrintError(t *testing.T) {
 	re := captureOutput(t, func() {
-		SetMode(DebugMode)
+		X设置运行模式(X常量_运行模式_调试)
 		debugPrintError(nil)
 		debugPrintError(errors.New("this is an error"))
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 	})
 	assert.Equal(t, "[GIN-debug] [ERROR] this is an error\n", re)
 }
 
 func TestDebugPrintRoutes(t *testing.T) {
 	re := captureOutput(t, func() {
-		SetMode(DebugMode)
+		X设置运行模式(X常量_运行模式_调试)
 		debugPrintRoute("GET", "/path/to/route/:param", HandlersChain{func(c *Context) {}, handlerNameTest})
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 	})
 	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param     --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
 }
@@ -74,37 +70,37 @@ func TestDebugPrintRouteFunc(t *testing.T) {
 		fmt.Fprintf(DefaultWriter, "[GIN-debug] %-6s %-40s --> %s (%d handlers)\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
 	re := captureOutput(t, func() {
-		SetMode(DebugMode)
+		X设置运行模式(X常量_运行模式_调试)
 		debugPrintRoute("GET", "/path/to/route/:param1/:param2", HandlersChain{func(c *Context) {}, handlerNameTest})
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 	})
 	assert.Regexp(t, `^\[GIN-debug\] GET    /path/to/route/:param1/:param2           --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
 }
 
 func TestDebugPrintLoadTemplate(t *testing.T) {
 	re := captureOutput(t, func() {
-		SetMode(DebugMode)
+		X设置运行模式(X常量_运行模式_调试)
 		templ := template.Must(template.New("").Delims("{[{", "}]}").ParseGlob("./testdata/template/hello.tmpl"))
 		debugPrintLoadTemplate(templ)
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 	})
 	assert.Regexp(t, `^\[GIN-debug\] Loaded HTML Templates \(2\): \n(\t- \n|\t- hello\.tmpl\n){2}\n`, re)
 }
 
 func TestDebugPrintWARNINGSetHTMLTemplate(t *testing.T) {
 	re := captureOutput(t, func() {
-		SetMode(DebugMode)
+		X设置运行模式(X常量_运行模式_调试)
 		debugPrintWARNINGSetHTMLTemplate()
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 	})
 	assert.Equal(t, "[GIN-debug] [WARNING] Since SetHTMLTemplate() is NOT thread-safe. It should only be called\nat initialization. ie. before any route is registered or the router is listening in a socket:\n\n\trouter := gin.Default()\n\trouter.SetHTMLTemplate(template) // << good place\n\n", re)
 }
 
 func TestDebugPrintWARNINGDefault(t *testing.T) {
 	re := captureOutput(t, func() {
-		SetMode(DebugMode)
+		X设置运行模式(X常量_运行模式_调试)
 		debugPrintWARNINGDefault()
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 	})
 	m, e := getMinVer(runtime.Version())
 	if e == nil && m < ginSupportMinGoVer {
@@ -116,9 +112,9 @@ func TestDebugPrintWARNINGDefault(t *testing.T) {
 
 func TestDebugPrintWARNINGNew(t *testing.T) {
 	re := captureOutput(t, func() {
-		SetMode(DebugMode)
+		X设置运行模式(X常量_运行模式_调试)
 		debugPrintWARNINGNew()
-		SetMode(TestMode)
+		X设置运行模式(X常量_运行模式_测试)
 	})
 	assert.Equal(t, "[GIN-debug] [WARNING] Running in \"debug\" mode. Switch to \"release\" mode in production.\n - using env:\texport GIN_MODE=release\n - using code:\tgin.SetMode(gin.ReleaseMode)\n\n", re)
 }

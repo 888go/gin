@@ -12,24 +12,21 @@ const (
 	defaultTimeout = 5 * time.Second
 )
 
-// New 包装一个处理器，如果超时则中止处理器的执行过程
-
-// ff:
-// opts:
-func New(opts ...Option) gin.HandlerFunc {
+// New wraps a handler and aborts the process of the handler if the timeout is reached
+func New(opts ...Option) gin类.HandlerFunc {
 	t := &Timeout{
 		timeout:  defaultTimeout,
 		handler:  nil,
 		response: defaultResponse,
 	}
 
-	// 遍历每个选项
+	// Loop through each option
 	for _, opt := range opts {
 		if opt == nil {
 			panic("timeout Option not be nil")
 		}
 
-		// 调用选项，传入已实例化的
+		// Call the option giving the instantiated
 		opt(t)
 	}
 
@@ -39,7 +36,7 @@ func New(opts ...Option) gin.HandlerFunc {
 
 	bufPool = &BufferPool{}
 
-	return func(c *gin.Context) {
+	return func(c *gin类.Context) {
 		finish := make(chan struct{}, 1)
 		panicChan := make(chan interface{}, 1)
 
@@ -66,7 +63,7 @@ func New(opts ...Option) gin.HandlerFunc {
 			panic(p)
 
 		case <-finish:
-			c.Next()
+			c.X中间件继续()
 			tw.mu.Lock()
 			defer tw.mu.Unlock()
 			dst := tw.ResponseWriter.Header()
@@ -81,7 +78,7 @@ func New(opts ...Option) gin.HandlerFunc {
 			bufPool.Put(buffer)
 
 		case <-time.After(t.timeout):
-			c.Abort()
+			c.X停止()
 			tw.mu.Lock()
 			defer tw.mu.Unlock()
 			tw.timeout = true

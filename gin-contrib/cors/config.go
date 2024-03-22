@@ -65,34 +65,34 @@ func newCors(config Config) *cors {
 	}
 }
 
-func (cors *cors) applyCors(c *gin.Context) {
-	origin := c.Request.Header.Get("Origin")
+func (cors *cors) applyCors(c *gin类.Context) {
+	origin := c.X请求.Header.Get("Origin")
 	if len(origin) == 0 {
-		// 请求不是CORS请求
+		// request is not a CORS request
 		return
 	}
-	host := c.Request.Host
+	host := c.X请求.Host
 
 	if origin == "http://"+host || origin == "https://"+host {
-		// 请求不是CORS请求 but have origin header.
+		// request is not a CORS request but have origin header.
 		// for example, use fetch api
 		return
 	}
 
 	if !cors.validateOrigin(origin) {
-		c.AbortWithStatus(http.StatusForbidden)
+		c.X停止并带状态码(http.StatusForbidden)
 		return
 	}
 
-	if c.Request.Method == "OPTIONS" {
+	if c.X请求.Method == "OPTIONS" {
 		cors.handlePreflight(c)
-		defer c.AbortWithStatus(cors.optionsResponseStatusCode)
+		defer c.X停止并带状态码(cors.optionsResponseStatusCode)
 	} else {
 		cors.handleNormal(c)
 	}
 
 	if !cors.allowAllOrigins {
-		c.Header("Access-Control-Allow-Origin", origin)
+		c.X设置响应协议头值("Access-Control-Allow-Origin", origin)
 	}
 }
 
@@ -130,14 +130,14 @@ func (cors *cors) validateOrigin(origin string) bool {
 	return false
 }
 
-func (cors *cors) handlePreflight(c *gin.Context) {
+func (cors *cors) handlePreflight(c *gin类.Context) {
 	header := c.Writer.Header()
 	for key, value := range cors.preflightHeaders {
 		header[key] = value
 	}
 }
 
-func (cors *cors) handleNormal(c *gin.Context) {
+func (cors *cors) handleNormal(c *gin类.Context) {
 	header := c.Writer.Header()
 	for key, value := range cors.normalHeaders {
 		header[key] = value

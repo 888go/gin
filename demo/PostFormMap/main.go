@@ -15,14 +15,14 @@ import (
 
 // 返回 ids: map[b:hello a:1234], names: map[second:tianou first:thinkerou]
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 
-	router.POST("/post", func(c *gin.Context) {
+	router.X绑定POST("/post", func(c *gin类.Context) {
 
-		ids := c.QueryMap("ids")
-		names := c.PostFormMap("names")
+		ids := c.X取URL参数Map值("ids")
+		names := c.X取表单参数Map值("names")
 
 		fmt.Printf("ids: %v; names: %v", ids, names)
 	})
-	router.Run(":8080")
+	router.X监听(":8080")
 }

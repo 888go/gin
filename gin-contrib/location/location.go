@@ -8,31 +8,32 @@ import (
 
 const key = "location"
 
-// Headers 代表用于映射方案和主机的头部字段。
+// Headers represents the header fields used to map schemes and host.
 type Headers struct {
 	Scheme string
 	Host   string
 }
 
-// Config 表示该中间件的所有可用选项。
+// Config represents all available options for the middleware.
 type Config struct {
-// Scheme是当无法从传入的http.Request中明确获知时，应使用的默认方案。
+	// Scheme is the default scheme that should be used when it cannot otherwise
+	// be ascertained from the incoming http.Request.
 	Scheme string
 
-// Host 是默认主机，当无法从传入的 http.Request 中明确获取时，应使用此主机。
+	// Host is the default host that should be used when it cannot otherwise
+	// be ascertained from the incoming http.Request.
 	Host string
 
-// Base 是基路径，应与进行路径重写操作的代理服务器结合使用。
+	// Base is the base path that should be used in conjunction with proxy
+	// servers that do path re-writing.
 	Base string
 
-// 该Header用于映射方案和主机。
-// 可以被覆盖以允许从自定义头部字段读取值。
+	// Header used to map schemes and host.
+	// May be overriden to allow reading values from custom header fields.
 	Headers Headers
 }
 
-// DefaultConfig 返回一个映射到本机的通用默认配置。
-
-// ff:
+// DefaultConfig returns a generic default configuration mapped to localhost.
 func DefaultConfig() Config {
 	return Config{
 		Host:   "localhost:8080",
@@ -44,32 +45,25 @@ func DefaultConfig() Config {
 	}
 }
 
-// 默认返回使用默认配置的位置中间件。
-
-// ff:
-func Default() gin.HandlerFunc {
+// Default returns the location middleware with default configuration.
+func Default() gin类.HandlerFunc {
 	config := DefaultConfig()
 	return New(config)
 }
 
-// New 函数返回一个使用用户自定义配置的 location 中间件。
-
-// ff:
-// config:
-func New(config Config) gin.HandlerFunc {
+// New returns the location middleware with user-defined custom configuration.
+func New(config Config) gin类.HandlerFunc {
 	location := newLocation(config)
 
-	return func(c *gin.Context) {
+	return func(c *gin类.Context) {
 		location.applyToContext(c)
 	}
 }
 
-// Get 从上下文获取传入 http.Request 的 Location 信息。如果未设置位置信息，则返回 nil 值。
-
-// ff:
-// c:
-func Get(c *gin.Context) *url.URL {
-	v, ok := c.Get(key)
+// Get returns the Location information for the incoming http.Request from the
+// context. If the location is not set a nil value is returned.
+func Get(c *gin类.Context) *url.URL {
+	v, ok := c.X取值(key)
 
 	if !ok {
 		return nil

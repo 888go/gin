@@ -30,11 +30,11 @@ func main() {
 	}
 
 	// Set up routes
-	r := gin.Default()
-	r.POST("",
+	r := gin类.X创建默认对象()
+	r.X绑定POST("",
 		opengintracing.SpanFromHeadersHTTPFmt(trace, "service1", fn, false),
 		handler)
-	r.Run(":8001")
+	r.X监听(":8001")
 }
 
 func printHeaders(message string, header http.Header) {
@@ -44,11 +44,11 @@ func printHeaders(message string, header http.Header) {
 	}
 }
 
-func handler(c *gin.Context) {
+func handler(c *gin类.Context) {
 	span, found := opengintracing.GetSpan(c)
 	if found == false {
 		fmt.Println("Span not found")
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.X停止并带状态码(http.StatusInternalServerError)
 		return
 	}
 	req, _ := http.NewRequest("POST", "http://localhost:8003", nil)
@@ -58,17 +58,17 @@ func handler(c *gin.Context) {
 		opentracing.HTTPHeaders,
 		opentracing.HTTPHeadersCarrier(req.Header))
 
-	printHeaders("Incoming headers", c.Request.Header)
+	printHeaders("Incoming headers", c.X请求.Header)
 	printHeaders("Outgoing headers", req.Header)
 
 	client := http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		c.AbortWithError(http.StatusInternalServerError, err)
+		c.X停止并带状态码与错误(http.StatusInternalServerError, err)
 		return
 	}
 	if resp.StatusCode != http.StatusOK {
 		fmt.Println("Unexpected response from service3")
 	}
-	c.Status(http.StatusOK)
+	c.X设置状态码(http.StatusOK)
 }

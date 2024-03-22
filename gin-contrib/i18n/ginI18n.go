@@ -19,8 +19,8 @@ type ginI18nImpl struct {
 	getLngHandler   GetLngHandler
 }
 
-// getMessage 通过 lng（语言代码）和 messageID 获取本地化消息
-func (i *ginI18nImpl) getMessage(ctx *gin.Context, param interface{}) (string, error) {
+// getMessage get localize message by lng and messageID
+func (i *ginI18nImpl) getMessage(ctx *gin类.Context, param interface{}) (string, error) {
 	lng := i.getLngHandler(ctx, i.defaultLanguage.String())
 	localizer := i.getLocalizerByLng(lng)
 
@@ -38,7 +38,7 @@ func (i *ginI18nImpl) getMessage(ctx *gin.Context, param interface{}) (string, e
 }
 
 // mustGetMessage ...
-func (i *ginI18nImpl) mustGetMessage(ctx *gin.Context, param interface{}) string {
+func (i *ginI18nImpl) mustGetMessage(ctx *gin类.Context, param interface{}) string {
 	message, _ := i.getMessage(ctx, param)
 	return message
 }
@@ -58,7 +58,7 @@ func (i *ginI18nImpl) setGetLngHandler(handler GetLngHandler) {
 	i.getLngHandler = handler
 }
 
-// loadMessageFiles 加载所有本地化文件到资源包
+// loadMessageFiles load all file localize to bundle
 func (i *ginI18nImpl) loadMessageFiles(config *BundleCfg) {
 	for _, lng := range config.AcceptLanguage {
 		src := path.Join(config.RootPath, lng.String()) + "." + config.FormatBundleFile
@@ -80,7 +80,7 @@ func (i *ginI18nImpl) loadMessageFile(config *BundleCfg, src string) error {
 	return nil
 }
 
-// setLocalizerByLng 通过语言设置本地化器
+// setLocalizerByLng set localizer by language
 func (i *ginI18nImpl) setLocalizerByLng(acceptLanguage []language.Tag) {
 	i.localizerByLng = map[string]*i18n.Localizer{}
 	for _, lng := range acceptLanguage {
@@ -88,14 +88,14 @@ func (i *ginI18nImpl) setLocalizerByLng(acceptLanguage []language.Tag) {
 		i.localizerByLng[lngStr] = i.newLocalizer(lngStr)
 	}
 
-	// 如果defaultLanguage未设置，则设置它
+	// set defaultLanguage if it isn't exist
 	defaultLng := i.defaultLanguage.String()
 	if _, hasDefaultLng := i.localizerByLng[defaultLng]; !hasDefaultLng {
 		i.localizerByLng[defaultLng] = i.newLocalizer(defaultLng)
 	}
 }
 
-// newLocalizer 通过语言创建一个本地化器
+// newLocalizer create a localizer by language
 func (i *ginI18nImpl) newLocalizer(lng string) *i18n.Localizer {
 	lngDefault := i.defaultLanguage.String()
 	lngs := []string{
@@ -113,7 +113,7 @@ func (i *ginI18nImpl) newLocalizer(lng string) *i18n.Localizer {
 	return localizer
 }
 
-// getLocalizerByLng 通过语言获取本地化器
+// getLocalizerByLng get localizer by language
 func (i *ginI18nImpl) getLocalizerByLng(lng string) *i18n.Localizer {
 	localizer, hasValue := i.localizerByLng[lng]
 	if hasValue {

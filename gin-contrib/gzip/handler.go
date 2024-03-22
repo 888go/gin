@@ -36,15 +36,12 @@ func newGzipHandler(level int, options ...Option) *gzipHandler {
 	return handler
 }
 
-
-// ff:
-// c:
-func (g *gzipHandler) Handle(c *gin.Context) {
-	if fn := g.DecompressFn; fn != nil && c.Request.Header.Get("Content-Encoding") == "gzip" {
+func (g *gzipHandler) Handle(c *gin类.Context) {
+	if fn := g.DecompressFn; fn != nil && c.X请求.Header.Get("Content-Encoding") == "gzip" {
 		fn(c)
 	}
 
-	if !g.shouldCompress(c.Request) {
+	if !g.shouldCompress(c.X请求) {
 		return
 	}
 
@@ -53,14 +50,14 @@ func (g *gzipHandler) Handle(c *gin.Context) {
 	defer gz.Reset(ioutil.Discard)
 	gz.Reset(c.Writer)
 
-	c.Header("Content-Encoding", "gzip")
-	c.Header("Vary", "Accept-Encoding")
+	c.X设置响应协议头值("Content-Encoding", "gzip")
+	c.X设置响应协议头值("Vary", "Accept-Encoding")
 	c.Writer = &gzipWriter{c.Writer, gz}
 	defer func() {
 		gz.Close()
-		c.Header("Content-Length", fmt.Sprint(c.Writer.Size()))
+		c.X设置响应协议头值("Content-Length", fmt.Sprint(c.Writer.Size()))
 	}()
-	c.Next()
+	c.X中间件继续()
 }
 
 func (g *gzipHandler) shouldCompress(req *http.Request) bool {

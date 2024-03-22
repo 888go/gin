@@ -10,36 +10,32 @@ import (
 	"github.com/888go/gin"
 )
 
-// Recovery中间件用于Sentry崩溃报告
+// Recovery middleware for sentry crash reporting
+func Recovery(client *raven.Client, onlyCrashes bool) gin类.HandlerFunc {
 
-// ff:
-// onlyCrashes:
-// client:
-func Recovery(client *raven.Client, onlyCrashes bool) gin.HandlerFunc {
-
-	return func(c *gin.Context) {
+	return func(c *gin类.Context) {
 		defer func() {
 			flags := map[string]string{
-				"endpoint": c.Request.RequestURI,
+				"endpoint": c.X请求.RequestURI,
 			}
 			if rval := recover(); rval != nil {
 				debug.PrintStack()
 				rvalStr := fmt.Sprint(rval)
 				client.CaptureMessage(rvalStr, flags, raven.NewException(errors.New(rvalStr), raven.NewStacktrace(2, 3, nil)),
-					raven.NewHttp(c.Request))
-				c.AbortWithStatus(http.StatusInternalServerError)
+					raven.NewHttp(c.X请求))
+				c.X停止并带状态码(http.StatusInternalServerError)
 			}
 			if !onlyCrashes {
-				for _, item := range c.Errors {
+				for _, item := range c.X错误s {
 					client.CaptureMessage(item.Error(), flags, &raven.Message{
 						Message: item.Error(),
 						Params:  []interface{}{item.Meta},
 					},
-						raven.NewHttp(c.Request))
+						raven.NewHttp(c.X请求))
 				}
 			}
 		}()
 
-		c.Next()
+		c.X中间件继续()
 	}
 }

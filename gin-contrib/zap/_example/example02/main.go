@@ -15,14 +15,14 @@ import (
 )
 
 func main() {
-	r := gin.New()
+	r := gin类.X创建()
 
 	logger, _ := zap.NewProduction()
 
-	r.Use(ginzap.GinzapWithConfig(logger, &ginzap.Config{
+	r.X中间件(ginzap.GinzapWithConfig(logger, &ginzap.Config{
 		UTC:        true,
 		TimeFormat: time.RFC3339,
-		Context: ginzap.Fn(func(c *gin.Context) []zapcore.Field {
+		Context: ginzap.Fn(func(c *gin类.Context) []zapcore.Field {
 			fields := []zapcore.Field{}
 			// log request ID
 			if requestID := c.Writer.Header().Get("X-Request-Id"); requestID != "" {
@@ -30,17 +30,17 @@ func main() {
 			}
 
 			// log trace and span ID
-			if trace.SpanFromContext(c.Request.Context()).SpanContext().IsValid() {
-				fields = append(fields, zap.String("trace_id", trace.SpanFromContext(c.Request.Context()).SpanContext().TraceID().String()))
-				fields = append(fields, zap.String("span_id", trace.SpanFromContext(c.Request.Context()).SpanContext().SpanID().String()))
+			if trace.SpanFromContext(c.X请求.Context()).SpanContext().IsValid() {
+				fields = append(fields, zap.String("trace_id", trace.SpanFromContext(c.X请求.Context()).SpanContext().TraceID().String()))
+				fields = append(fields, zap.String("span_id", trace.SpanFromContext(c.X请求.Context()).SpanContext().SpanID().String()))
 			}
 
 			// log request body
 			var body []byte
 			var buf bytes.Buffer
-			tee := io.TeeReader(c.Request.Body, &buf)
+			tee := io.TeeReader(c.X请求.Body, &buf)
 			body, _ = io.ReadAll(tee)
-			c.Request.Body = io.NopCloser(&buf)
+			c.X请求.Body = io.NopCloser(&buf)
 			fields = append(fields, zap.String("body", string(body)))
 
 			return fields
@@ -48,16 +48,16 @@ func main() {
 	}))
 
 	// Example ping request.
-	r.GET("/ping", func(c *gin.Context) {
+	r.X绑定GET("/ping", func(c *gin类.Context) {
 		c.Writer.Header().Add("X-Request-Id", "1234-5678-9012")
-		c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	r.POST("/ping", func(c *gin.Context) {
+	r.X绑定POST("/ping", func(c *gin类.Context) {
 		c.Writer.Header().Add("X-Request-Id", "9012-5678-1234")
-		c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
-	// 在0.0.0.0:8080监听并服务
-	r.Run(":8080")
+	// Listen and Server in 0.0.0.0:8080
+	r.X监听(":8080")
 }

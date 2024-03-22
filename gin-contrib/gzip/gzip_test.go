@@ -44,20 +44,20 @@ func (c *closeNotifyingRecorder) CloseNotify() <-chan bool {
 	return c.closed
 }
 
-func newServer() *gin.Engine {
-	// 初始化反向代理服务器
+func newServer() *gin类.Engine {
+	// init reverse proxy server
 	rServer := httptest.NewServer(new(rServer))
 	target, _ := url.Parse(rServer.URL)
 	rp := httputil.NewSingleHostReverseProxy(target)
 
-	router := gin.New()
-	router.Use(Gzip(DefaultCompression))
-	router.GET("/", func(c *gin.Context) {
-		c.Header("Content-Length", strconv.Itoa(len(testResponse)))
-		c.String(200, testResponse)
+	router := gin类.X创建()
+	router.X中间件(Gzip(DefaultCompression))
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X设置响应协议头值("Content-Length", strconv.Itoa(len(testResponse)))
+		c.X输出文本(200, testResponse)
 	})
-	router.Any("/reverse", func(c *gin.Context) {
-		rp.ServeHTTP(c.Writer, c.Request)
+	router.X绑定Any("/reverse", func(c *gin类.Context) {
+		rp.ServeHTTP(c.Writer, c.X请求)
 	})
 	return router
 }
@@ -89,10 +89,10 @@ func TestGzipPNG(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/image.png", nil)
 	req.Header.Add("Accept-Encoding", "gzip")
 
-	router := gin.New()
-	router.Use(Gzip(DefaultCompression))
-	router.GET("/image.png", func(c *gin.Context) {
-		c.String(200, "this is a PNG!")
+	router := gin类.X创建()
+	router.X中间件(Gzip(DefaultCompression))
+	router.X绑定GET("/image.png", func(c *gin类.Context) {
+		c.X输出文本(200, "this is a PNG!")
 	})
 
 	w := httptest.NewRecorder()
@@ -108,10 +108,10 @@ func TestExcludedExtensions(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/index.html", nil)
 	req.Header.Add("Accept-Encoding", "gzip")
 
-	router := gin.New()
-	router.Use(Gzip(DefaultCompression, WithExcludedExtensions([]string{".html"})))
-	router.GET("/index.html", func(c *gin.Context) {
-		c.String(200, "this is a HTML!")
+	router := gin类.X创建()
+	router.X中间件(Gzip(DefaultCompression, WithExcludedExtensions([]string{".html"})))
+	router.X绑定GET("/index.html", func(c *gin类.Context) {
+		c.X输出文本(200, "this is a HTML!")
 	})
 
 	w := httptest.NewRecorder()
@@ -128,10 +128,10 @@ func TestExcludedPaths(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "GET", "/api/books", nil)
 	req.Header.Add("Accept-Encoding", "gzip")
 
-	router := gin.New()
-	router.Use(Gzip(DefaultCompression, WithExcludedPaths([]string{"/api/"})))
-	router.GET("/api/books", func(c *gin.Context) {
-		c.String(200, "this is books!")
+	router := gin类.X创建()
+	router.X中间件(Gzip(DefaultCompression, WithExcludedPaths([]string{"/api/"})))
+	router.X绑定GET("/api/books", func(c *gin类.Context) {
+		c.X输出文本(200, "this is books!")
 	})
 
 	w := httptest.NewRecorder()
@@ -192,20 +192,20 @@ func TestDecompressGzip(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "POST", "/", buf)
 	req.Header.Add("Content-Encoding", "gzip")
 
-	router := gin.New()
-	router.Use(Gzip(DefaultCompression, WithDecompressFn(DefaultDecompressHandle)))
-	router.POST("/", func(c *gin.Context) {
-		if v := c.Request.Header.Get("Content-Encoding"); v != "" {
+	router := gin类.X创建()
+	router.X中间件(Gzip(DefaultCompression, WithDecompressFn(DefaultDecompressHandle)))
+	router.X绑定POST("/", func(c *gin类.Context) {
+		if v := c.X请求.Header.Get("Content-Encoding"); v != "" {
 			t.Errorf("unexpected `Content-Encoding`: %s header", v)
 		}
-		if v := c.Request.Header.Get("Content-Length"); v != "" {
+		if v := c.X请求.Header.Get("Content-Length"); v != "" {
 			t.Errorf("unexpected `Content-Length`: %s header", v)
 		}
-		data, err := c.GetRawData()
+		data, err := c.X取流数据()
 		if err != nil {
 			t.Fatal(err)
 		}
-		c.Data(200, "text/plain", data)
+		c.X输出字节集(200, "text/plain", data)
 	})
 
 	w := httptest.NewRecorder()
@@ -222,10 +222,10 @@ func TestDecompressGzipWithEmptyBody(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "POST", "/", nil)
 	req.Header.Add("Content-Encoding", "gzip")
 
-	router := gin.New()
-	router.Use(Gzip(DefaultCompression, WithDecompressFn(DefaultDecompressHandle)))
-	router.POST("/", func(c *gin.Context) {
-		c.String(200, "ok")
+	router := gin类.X创建()
+	router.X中间件(Gzip(DefaultCompression, WithDecompressFn(DefaultDecompressHandle)))
+	router.X绑定POST("/", func(c *gin类.Context) {
+		c.X输出文本(200, "ok")
 	})
 
 	w := httptest.NewRecorder()
@@ -242,10 +242,10 @@ func TestDecompressGzipWithIncorrectData(t *testing.T) {
 	req, _ := http.NewRequestWithContext(context.Background(), "POST", "/", bytes.NewReader([]byte(testResponse)))
 	req.Header.Add("Content-Encoding", "gzip")
 
-	router := gin.New()
-	router.Use(Gzip(DefaultCompression, WithDecompressFn(DefaultDecompressHandle)))
-	router.POST("/", func(c *gin.Context) {
-		c.String(200, "ok")
+	router := gin类.X创建()
+	router.X中间件(Gzip(DefaultCompression, WithDecompressFn(DefaultDecompressHandle)))
+	router.X绑定POST("/", func(c *gin类.Context) {
+		c.X输出文本(200, "ok")
 	})
 
 	w := httptest.NewRecorder()

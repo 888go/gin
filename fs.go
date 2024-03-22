@@ -1,8 +1,8 @@
-// 版权所有 ? 2017 Manu Martinez-Almeida。保留所有权利。
-// 本源代码的使用受 MIT 风格许可证协议约束，
-// 该协议可在 LICENSE 文件中查阅。
+// Copyright 2017 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"net/http"
@@ -17,13 +17,10 @@ type neuteredReaddirFile struct {
 	http.File
 }
 
-// Dir 返回一个可用于 http.FileServer() 的 http.FileSystem。它在 router.Static() 内部使用。
-// 如果 listDirectory 为 true，则其行为与 http.Dir() 相同；否则，它将返回一个文件系统，
-// 阻止 http.FileServer() 列出目录中的文件。
-
-// ff:
-// listDirectory:
-// root:
+// Dir returns a http.FileSystem that can be used by http.FileServer(). It is used internally
+// in router.Static().
+// if listDirectory == true, then it works the same as http.Dir() otherwise it returns
+// a filesystem that prevents http.FileServer() to list the directory files.
 func Dir(root string, listDirectory bool) http.FileSystem {
 	fs := http.Dir(root)
 	if listDirectory {
@@ -32,25 +29,17 @@ func Dir(root string, listDirectory bool) http.FileSystem {
 	return &onlyFilesFS{fs}
 }
 
-// Open 符合 http.Filesystem 接口。
-
-// ff:打开
-// http.File:
-// name:名称
-func (fs onlyFilesFS) Open(name string) (http.File, error) {
-	f, err := fs.fs.Open(name)
+// Open conforms to http.Filesystem.
+func (fs onlyFilesFS) Open(名称 string) (http.File, error) {
+	f, err := fs.fs.Open(名称)
 	if err != nil {
 		return nil, err
 	}
 	return neuteredReaddirFile{f}, nil
 }
 
-// Readdir 重写（覆盖）了 http.File 的默认实现。
-
-// ff:
-// []os.FileInfo:
-// _:
+// Readdir overrides the http.File default implementation.
 func (f neuteredReaddirFile) Readdir(_ int) ([]os.FileInfo, error) {
-	// 这将禁用目录列表
+	// this disables directory listing
 	return nil, nil
 }

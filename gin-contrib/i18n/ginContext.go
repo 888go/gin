@@ -4,18 +4,18 @@ import (
 	"github.com/888go/gin"
 )
 
-// defaultGetLngHandler ...（默认获取经度处理器）
-func defaultGetLngHandler(context *gin.Context, defaultLng string) string {
-	if context == nil || context.Request == nil {
+// defaultGetLngHandler ...
+func defaultGetLngHandler(context *gin类.Context, defaultLng string) string {
+	if context == nil || context.X请求 == nil {
 		return defaultLng
 	}
 
-	lng := context.GetHeader("Accept-Language")
+	lng := context.X取请求协议头值("Accept-Language")
 	if lng != "" {
 		return lng
 	}
 
-	lng = context.Query("lng")
+	lng = context.X取URL参数值("lng")
 	if lng == "" {
 		return defaultLng
 	}

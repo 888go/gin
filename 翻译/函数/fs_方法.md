@@ -13,5 +13,4 @@
 #     如待替换: type authPair struct { //zz:^type *authPair
 
 [func (fs onlyFilesFS) Open(name string) (http.File, error) {]
-ff=打开
 name=名称

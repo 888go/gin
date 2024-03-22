@@ -8,14 +8,14 @@ import (
 )
 
 func main() {
-	router := gin.Default()
-	adminGroup := router.Group("/admin", func(c *gin.Context) {
-		if c.Request.Header.Get("Authorization") != "foobar" {
-			c.AbortWithStatus(http.StatusForbidden)
+	router := gin类.X创建默认对象()
+	adminGroup := router.X创建分组路由("/admin", func(c *gin类.Context) {
+		if c.X请求.Header.Get("Authorization") != "foobar" {
+			c.X停止并带状态码(http.StatusForbidden)
 			return
 		}
-		c.Next()
+		c.X中间件继续()
 	})
 	pprof.RouteRegister(adminGroup, "pprof")
-	router.Run(":8080")
+	router.X监听(":8080")
 }

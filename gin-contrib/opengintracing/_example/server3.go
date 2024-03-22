@@ -30,23 +30,23 @@ func main() {
 	}
 
 	// Set up routes
-	r := gin.Default()
-	r.POST("",
+	r := gin类.X创建默认对象()
+	r.X绑定POST("",
 		opengintracing.SpanFromHeadersHTTPFmt(trace, "service3", fn, false),
 		handler)
-	r.Run(":8003")
+	r.X监听(":8003")
 }
 
-func handler(c *gin.Context) {
+func handler(c *gin类.Context) {
 	_, found := opengintracing.GetSpan(c)
 	if found == false {
 		fmt.Println("Span not found")
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.X停止并带状态码(http.StatusInternalServerError)
 		return
 	}
 	fmt.Println("Incoming Headers")
-	for k, v := range c.Request.Header {
+	for k, v := range c.X请求.Header {
 		fmt.Printf("%s: %s\n", k, v)
 	}
-	c.Status(http.StatusOK)
+	c.X设置状态码(http.StatusOK)
 }

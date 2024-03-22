@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 }
 
 var defaultHeaders = Headers {
@@ -107,7 +107,7 @@ var tests = []struct {
 		},
 	},
 
-	// X-Forwarded-Host：主机头
+	// X-Forwarded-Host host header
 	{
 		want: "http://bar.com/bar",
 		conf: Config{"http", "foo.com", "/bar", Headers{
@@ -125,8 +125,8 @@ var tests = []struct {
 
 func TestLocation(t *testing.T) {
 	for _, test := range tests {
-		c := new(gin.Context)
-		c.Request = test.req
+		c := new(gin类.Context)
+		c.X请求 = test.req
 		loc := newLocation(test.conf)
 		loc.applyToContext(c)
 
@@ -138,13 +138,13 @@ func TestLocation(t *testing.T) {
 	}
 }
 
-func defaultRouter() *gin.Engine {
-	router := gin.New()
-	router.Use(Default())
+func defaultRouter() *gin类.Engine {
+	router := gin类.X创建()
+	router.X中间件(Default())
 
-	router.GET("/", func(c *gin.Context) {
+	router.X绑定GET("/", func(c *gin类.Context) {
 		url := Get(c)
-		c.String(200, url.String())
+		c.X输出文本(200, url.String())
 	})
 
 	return router
@@ -164,13 +164,13 @@ func TestDefault(t *testing.T) {
 	assert.Equal(t, "http://localhost:8080", w.Body.String())
 }
 
-func customRouter(config Config) *gin.Engine {
-	router := gin.New()
-	router.Use(New(config))
+func customRouter(config Config) *gin类.Engine {
+	router := gin类.X创建()
+	router.X中间件(New(config))
 
-	router.GET("/", func(c *gin.Context) {
+	router.X绑定GET("/", func(c *gin类.Context) {
 		url := Get(c)
-		c.String(200, url.String())
+		c.X输出文本(200, url.String())
 	})
 
 	return router

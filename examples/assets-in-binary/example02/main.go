@@ -12,33 +12,33 @@ import (
 var f embed.FS
 
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 	templ := template.Must(template.New("").ParseFS(f, "templates/*.tmpl", "templates/foo/*.tmpl"))
-	router.SetHTMLTemplate(templ)
+	router.X设置Template模板(templ)
 
-	// 示例：/public/assets/images/example.png
-	router.StaticFS("/public", http.FS(f))
+	// example: /public/assets/images/example.png
+	router.X绑定静态文件目录FS("/public", http.FS(f))
 
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(http.StatusOK, "index.tmpl", gin类.H{
 			"title": "Main website",
 		})
 	})
 
-	router.GET("/foo", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "bar.tmpl", gin.H{
+	router.X绑定GET("/foo", func(c *gin类.Context) {
+		c.X输出html模板(http.StatusOK, "bar.tmpl", gin类.H{
 			"title": "Foo website",
 		})
 	})
 
-	router.GET("favicon.ico", func(c *gin.Context) {
+	router.X绑定GET("favicon.ico", func(c *gin类.Context) {
 		file, _ := f.ReadFile("assets/favicon.ico")
-		c.Data(
+		c.X输出字节集(
 			http.StatusOK,
 			"image/x-icon",
 			file,
 		)
 	})
 
-	router.Run(":8080")
+	router.X监听(":8080")
 }

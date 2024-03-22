@@ -59,7 +59,8 @@ func main() {
 		case <-interrupt:
 			log.Println("interrupt")
 
-// 通过发送关闭消息并随后等待（带超时）服务器关闭连接，从而干净地关闭连接。
+			// Cleanly close the connection by sending a close message and then
+			// waiting (with timeout) for the server to close the connection.
 			err := c.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
 			if err != nil {
 				log.Println("write close:", err)

@@ -10,23 +10,23 @@ import (
 )
 
 func main() {
-	r := gin.New()
+	r := gin类.X创建()
 	t, err := loadTemplate()
 	if err != nil {
 		panic(err)
 	}
-	r.SetHTMLTemplate(t)
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "/html/index.tmpl", gin.H{
+	r.X设置Template模板(t)
+	r.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出html模板(http.StatusOK, "/html/index.tmpl", gin类.H{
 			"Foo": "World",
 		})
 	})
-	r.GET("/bar", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "/html/bar.tmpl", gin.H{
+	r.X绑定GET("/bar", func(c *gin类.Context) {
+		c.X输出html模板(http.StatusOK, "/html/bar.tmpl", gin类.H{
 			"Bar": "World",
 		})
 	})
-	r.Run(":8080")
+	r.X监听(":8080")
 }
 
 func loadTemplate() (*template.Template, error) {

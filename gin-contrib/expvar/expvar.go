@@ -7,13 +7,11 @@ import (
 	"github.com/888go/gin"
 )
 
-// Gin框架处理器
-
-// ff:
-func Handler() gin.HandlerFunc {
-	return func(c *gin.Context) {
+// Handler for gin framework
+func Handler() gin类.HandlerFunc {
+	return func(c *gin类.Context) {
 		w := c.Writer
-		c.Header("Content-Type", "application/json; charset=utf-8")
+		c.X设置响应协议头值("Content-Type", "application/json; charset=utf-8")
 		_, _ = w.Write([]byte("{\n"))
 		first := true
 		expvar.Do(func(kv expvar.KeyValue) {
@@ -24,6 +22,6 @@ func Handler() gin.HandlerFunc {
 			fmt.Fprintf(w, "%q: %s", kv.Key, kv.Value)
 		})
 		_, _ = w.Write([]byte("\n}\n"))
-		c.AbortWithStatus(200)
+		c.X停止并带状态码(200)
 	}
 }

@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// 这些测试需要在本地主机6379端口（默认端口）上运行的Redis服务器
+// These tests require redis server running on localhost:6379 (the default)
 const redisTestServer = "localhost:6379"
 
 var newRedisStore = func(t *testing.T, defaultExpiration time.Duration) CacheStore {

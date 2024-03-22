@@ -17,17 +17,11 @@ var (
 )
 
 // New instance
-
-// ff:
 func New() Render {
 	return make(Render)
 }
 
 // Add new template
-
-// ff:
-// tmpl:
-// name:
 func (r Render) Add(name string, tmpl *template.Template) {
 	if tmpl == nil {
 		panic("template can not be nil")
@@ -41,45 +35,28 @@ func (r Render) Add(name string, tmpl *template.Template) {
 	r[name] = tmpl
 }
 
-// AddFromFiles 从文件中加载并添加模板
-
-// ff:
-// files:
-// name:
+// AddFromFiles supply add template from files
 func (r Render) AddFromFiles(name string, files ...string) *template.Template {
 	tmpl := template.Must(template.ParseFiles(files...))
 	r.Add(name, tmpl)
 	return tmpl
 }
 
-// AddFromGlob 从全局路径提供添加模板的功能
-
-// ff:
-// glob:
-// name:
+// AddFromGlob supply add template from global path
 func (r Render) AddFromGlob(name, glob string) *template.Template {
 	tmpl := template.Must(template.ParseGlob(glob))
 	r.Add(name, tmpl)
 	return tmpl
 }
 
-// AddFromString 从字符串中提供添加模板
-
-// ff:
-// templateString:
-// name:
+// AddFromString supply add template from strings
 func (r Render) AddFromString(name, templateString string) *template.Template {
 	tmpl := template.Must(template.New(name).Parse(templateString))
 	r.Add(name, tmpl)
 	return tmpl
 }
 
-// AddFromStringsFuncs 从字符串提供添加模板功能
-
-// ff:
-// templateStrings:
-// funcMap:
-// name:
+// AddFromStringsFuncs supply add template from strings
 func (r Render) AddFromStringsFuncs(name string, funcMap template.FuncMap, templateStrings ...string) *template.Template {
 	tmpl := template.New(name).Funcs(funcMap)
 
@@ -91,12 +68,7 @@ func (r Render) AddFromStringsFuncs(name string, funcMap template.FuncMap, templ
 	return tmpl
 }
 
-// AddFromFilesFuncs 用于提供从文件添加模板的回调函数
-
-// ff:
-// files:
-// funcMap:
-// name:
+// AddFromFilesFuncs supply add template from file callback func
 func (r Render) AddFromFilesFuncs(name string, funcMap template.FuncMap, files ...string) *template.Template {
 	tname := filepath.Base(files[0])
 	tmpl := template.Must(template.New(tname).Funcs(funcMap).ParseFiles(files...))
@@ -104,11 +76,7 @@ func (r Render) AddFromFilesFuncs(name string, funcMap template.FuncMap, files .
 	return tmpl
 }
 
-// 实例提供渲染字符串
-
-// ff:
-// data:
-// name:
+// Instance supply render string
 func (r Render) Instance(name string, data interface{}) render.Render {
 	return render.HTML{
 		Template: r[name],

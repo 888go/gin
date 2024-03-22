@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"encoding/xml"
@@ -15,13 +15,10 @@ import (
 	"unicode"
 )
 
-// BindKey 指示一个默认的绑定键。
+// BindKey indicates a default bind key.
 const BindKey = "_gin-gonic/gin/bindkey"
 
-// Bind 是一个辅助函数，用于给定的接口对象并返回 Gin 中间件。
-
-// ff:
-// val:
+// Bind is a helper function for given interface object and returns a Gin middleware.
 func Bind(val any) HandlerFunc {
 	value := reflect.ValueOf(val)
 	if value.Kind() == reflect.Ptr {
@@ -33,40 +30,30 @@ func Bind(val any) HandlerFunc {
 
 	return func(c *Context) {
 		obj := reflect.New(typ).Interface()
-		if c.Bind(obj) == nil {
-			c.Set(BindKey, obj)
+		if c.X取参数到指针PANI(obj) == nil {
+			c.X设置值(BindKey, obj)
 		}
 	}
 }
 
-// WrapF 是一个用于包装 http.HandlerFunc 的辅助函数，并返回一个 Gin 中间件。
-
-// ff:包装F
-// f:
+// WrapF is a helper function for wrapping http.HandlerFunc and returns a Gin middleware.
 func WrapF(f http.HandlerFunc) HandlerFunc {
 	return func(c *Context) {
-		f(c.Writer, c.Request)
+		f(c.Writer, c.X请求)
 	}
 }
 
-// WrapH 是一个辅助函数，用于封装 http.Handler，并返回一个 Gin 中间件。
-
-// ff:包装H
-// h:
+// WrapH is a helper function for wrapping http.Handler and returns a Gin middleware.
 func WrapH(h http.Handler) HandlerFunc {
 	return func(c *Context) {
-		h.ServeHTTP(c.Writer, c.Request)
+		h.ServeHTTP(c.Writer, c.X请求)
 	}
 }
 
-// H 是 map[string]any 的一个快捷方式
+// H is a shortcut for map[string]any
 type H map[string]any
 
-// MarshalXML 允许类型 H 与 xml.Marshal 函数配合使用。
-
-// ff:
-// start:
-// e:
+// MarshalXML allows type H to be used with xml.Marshal.
 func (h H) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	start.Name = xml.Name{
 		Space: "",
@@ -166,7 +153,7 @@ func resolveAddress(addr []string) string {
 	}
 }
 
-// 来源：https://stackoverflow.com/questions/53069040/检查一个字符串是否只包含ASCII字符
+// https://stackoverflow.com/questions/53069040/checking-a-string-contains-only-ascii-characters
 func isASCII(s string) bool {
 	for i := 0; i < len(s); i++ {
 		if s[i] > unicode.MaxASCII {

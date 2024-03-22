@@ -35,16 +35,16 @@ func TestEmptyDirectory(t *testing.T) {
 
 	dir, filename := filepath.Split(f.Name())
 
-	router := gin.New()
-	router.Use(ServeRoot("/", dir))
-	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "index")
+	router := gin类.X创建()
+	router.X中间件(ServeRoot("/", dir))
+	router.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "index")
 	})
-	router.GET("/a", func(c *gin.Context) {
-		c.String(http.StatusOK, "a")
+	router.X绑定GET("/a", func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "a")
 	})
-	router.GET("/"+filename, func(c *gin.Context) {
-		c.String(http.StatusOK, "this is not printed")
+	router.X绑定GET("/"+filename, func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "this is not printed")
 	})
 	w := performRequest(router, "GET", "/")
 	assert.Equal(t, w.Code, http.StatusOK)
@@ -61,10 +61,10 @@ func TestEmptyDirectory(t *testing.T) {
 	assert.Equal(t, w.Code, http.StatusOK)
 	assert.Equal(t, w.Body.String(), "a")
 
-	router2 := gin.New()
-	router2.Use(ServeRoot("/static", dir))
-	router2.GET("/"+filename, func(c *gin.Context) {
-		c.String(http.StatusOK, "this is printed")
+	router2 := gin类.X创建()
+	router2.X中间件(ServeRoot("/static", dir))
+	router2.X绑定GET("/"+filename, func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "this is printed")
 	})
 
 	w = performRequest(router2, "GET", "/")
@@ -72,8 +72,8 @@ func TestEmptyDirectory(t *testing.T) {
 
 	w = performRequest(router2, "GET", "/static")
 	assert.Equal(t, w.Code, 404)
-	router2.GET("/static", func(c *gin.Context) {
-		c.String(http.StatusOK, "index")
+	router2.X绑定GET("/static", func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "index")
 	})
 
 	w = performRequest(router2, "GET", "/static")
@@ -101,8 +101,8 @@ func TestIndex(t *testing.T) {
 
 	dir, filename := filepath.Split(f.Name())
 
-	router := gin.New()
-	router.Use(ServeRoot("/", dir))
+	router := gin类.X创建()
+	router.X中间件(ServeRoot("/", dir))
 
 	w := performRequest(router, "GET", "/"+filename)
 	assert.Equal(t, w.Code, 301)
@@ -124,8 +124,8 @@ func TestListIndex(t *testing.T) {
 	f.Close()
 
 	dir, filename := filepath.Split(f.Name())
-	router := gin.New()
-	router.Use(Serve("/", LocalFile(dir, true)))
+	router := gin类.X创建()
+	router.X中间件(Serve("/", LocalFile(dir, true)))
 
 	w := performRequest(router, "GET", "/"+filename)
 	assert.Equal(t, w.Code, http.StatusOK)

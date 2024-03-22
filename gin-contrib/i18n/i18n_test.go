@@ -12,27 +12,27 @@ import (
 )
 
 // newServer ...
-func newServer() *gin.Engine {
-	router := gin.New()
-	router.Use(Localize())
+func newServer() *gin类.Engine {
+	router := gin类.X创建()
+	router.X中间件(Localize())
 
-	router.GET("/", func(context *gin.Context) {
-		context.String(http.StatusOK, MustGetMessage(context, "welcome"))
+	router.X绑定GET("/", func(context *gin类.Context) {
+		context.X输出文本(http.StatusOK, MustGetMessage(context, "welcome"))
 	})
 
-	router.GET("/:name", func(context *gin.Context) {
-		context.String(http.StatusOK, MustGetMessage(context, &i18n.LocalizeConfig{
+	router.X绑定GET("/:name", func(context *gin类.Context) {
+		context.X输出文本(http.StatusOK, MustGetMessage(context, &i18n.LocalizeConfig{
 			MessageID: "welcomeWithName",
 			TemplateData: map[string]string{
-				"name": context.Param("name"),
+				"name": context.X取API参数值("name"),
 			},
 		}))
 	})
-	router.GET("/age/:age", func(context *gin.Context) {
-		context.String(http.StatusOK, MustGetMessage(context, i18n.LocalizeConfig{
+	router.X绑定GET("/age/:age", func(context *gin类.Context) {
+		context.X输出文本(http.StatusOK, MustGetMessage(context, i18n.LocalizeConfig{
 			MessageID: "welcomeWithAge",
 			TemplateData: map[string]string{
-				"age": context.Param("age"),
+				"age": context.X取API参数值("age"),
 			},
 		}))
 	})

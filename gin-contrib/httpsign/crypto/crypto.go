@@ -1,6 +1,6 @@
 package crypto
 
-// Crypto接口，用于签名算法
+// Crypto interface for signing algorithm
 type Crypto interface {
 	Name() string
 	Sign(msg string, secret string) ([]byte, error)

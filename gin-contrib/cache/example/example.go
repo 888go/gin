@@ -4,25 +4,25 @@ import (
 	"fmt"
 	"time"
 	
+	"github.com/888go/gin"
 	"github.com/888go/gin/gin-contrib/cache"
 	"github.com/888go/gin/gin-contrib/cache/persistence"
-	"github.com/888go/gin"
 )
 
 func main() {
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 
 	store := persistence.NewInMemoryStore(60 * time.Second)
 	// Non-cached Page
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
+	r.X绑定GET("/ping", func(c *gin类.Context) {
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().Unix()))
 	})
 
 	// Cached Page
-	r.GET("/cache_ping", cache.CachePage(store, time.Minute, func(c *gin.Context) {
-		c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
+	r.X绑定GET("/cache_ping", cache.CachePage(store, time.Minute, func(c *gin类.Context) {
+		c.X输出文本(200, "pong "+fmt.Sprint(time.Now().Unix()))
 	}))
 
-	// 在0.0.0.0:8080监听并服务
-	_ = r.Run(":8080")
+	// Listen and Server in 0.0.0.0:8080
+	_ = r.X监听(":8080")
 }

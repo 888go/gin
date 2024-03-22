@@ -10,19 +10,19 @@ import (
 )
 
 func TestRecovery(t *testing.T) {
-	gin.SetMode(gin.TestMode)
-	router := gin.New()
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
+	router := gin类.X创建()
 
-	router.Use(Recovery(false))
+	router.X中间件(Recovery(false))
 
-	router.GET("/", func(c *gin.Context) {
+	router.X绑定GET("/", func(c *gin类.Context) {
 		baseError := errors.New("test error")
-		err := &gin.Error{
+		err := &gin类.Error{
 			Err:  baseError,
-			Type: gin.ErrorTypePublic,
+			Type: gin类.ErrorTypePublic,
 		}
 		_ = err.SetMeta("some data")
-		_ = c.Error(err)
+		_ = c.X错误(err)
 
 		panic("occurs panic")
 	})
@@ -31,7 +31,7 @@ func TestRecovery(t *testing.T) {
 	assert.Equal(t, 500, w.Code)
 }
 
-func performRequest(method, target string, router *gin.Engine) *httptest.ResponseRecorder {
+func performRequest(method, target string, router *gin类.Engine) *httptest.ResponseRecorder {
 	r := httptest.NewRequest(method, target, nil)
 	w := httptest.NewRecorder()
 	router.ServeHTTP(w, r)

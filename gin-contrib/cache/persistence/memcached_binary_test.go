@@ -7,7 +7,7 @@ import (
 	"github.com/memcachier/mc/v3"
 )
 
-// 这些测试需要在本地主机11211端口（默认端口）上运行的memcached
+// These tests require memcached running on localhost:11211 (the default)
 const localhost = "localhost:11211"
 
 var newMcStore = func(t *testing.T, defaultExpiration time.Duration) CacheStore {

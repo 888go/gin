@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"crypto/tls"
@@ -28,22 +28,22 @@ func formatAsDate(t time.Time) string {
 }
 
 func setupHTMLFiles(t *testing.T, mode string, tls bool, loadMethod func(*Engine)) *httptest.Server {
-	SetMode(mode)
-	defer SetMode(TestMode)
+	X设置运行模式(mode)
+	defer X设置运行模式(X常量_运行模式_测试)
 
 	var router *Engine
 	captureOutput(t, func() {
-		router = New()
-		router.Delims("{[{", "}]}")
-		router.SetFuncMap(template.FuncMap{
+		router = X创建()
+		router.X设置模板分隔符("{[{", "}]}")
+		router.X设置Template模板函数(template.FuncMap{
 			"formatAsDate": formatAsDate,
 		})
 		loadMethod(router)
-		router.GET("/test", func(c *Context) {
-			c.HTML(http.StatusOK, "hello.tmpl", map[string]string{"name": "world"})
+		router.X绑定GET("/test", func(c *Context) {
+			c.X输出html模板(http.StatusOK, "hello.tmpl", map[string]string{"name": "world"})
 		})
-		router.GET("/raw", func(c *Context) {
-			c.HTML(http.StatusOK, "raw.tmpl", map[string]any{
+		router.X绑定GET("/raw", func(c *Context) {
+			c.X输出html模板(http.StatusOK, "raw.tmpl", map[string]any{
 				"now": time.Date(2017, 07, 01, 0, 0, 0, 0, time.UTC),
 			})
 		})
@@ -63,10 +63,10 @@ func setupHTMLFiles(t *testing.T, mode string, tls bool, loadMethod func(*Engine
 func TestLoadHTMLGlobDebugMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		DebugMode,
+		X常量_运行模式_调试,
 		false,
 		func(router *Engine) {
-			router.LoadHTMLGlob("./testdata/template/*")
+			router.X加载HTML模板目录("./testdata/template/*")
 		},
 	)
 	defer ts.Close()
@@ -85,13 +85,13 @@ func TestH2c(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	r := Default()
-	r.UseH2C = true
-	r.GET("/", func(c *Context) {
-		c.String(200, "<h1>Hello world</h1>")
+	r := X创建默认对象()
+	r.X启用h2c支持 = true
+	r.X绑定GET("/", func(c *Context) {
+		c.X输出文本(200, "<h1>Hello world</h1>")
 	})
 	go func() {
-		err := http.Serve(ln, r.Handler())
+		err := http.Serve(ln, r.X取主处理程序())
 		if err != nil {
 			t.Log(err)
 		}
@@ -121,10 +121,10 @@ func TestH2c(t *testing.T) {
 func TestLoadHTMLGlobTestMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		TestMode,
+		X常量_运行模式_测试,
 		false,
 		func(router *Engine) {
-			router.LoadHTMLGlob("./testdata/template/*")
+			router.X加载HTML模板目录("./testdata/template/*")
 		},
 	)
 	defer ts.Close()
@@ -141,10 +141,10 @@ func TestLoadHTMLGlobTestMode(t *testing.T) {
 func TestLoadHTMLGlobReleaseMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		ReleaseMode,
+		X常量_运行模式_发布,
 		false,
 		func(router *Engine) {
-			router.LoadHTMLGlob("./testdata/template/*")
+			router.X加载HTML模板目录("./testdata/template/*")
 		},
 	)
 	defer ts.Close()
@@ -161,15 +161,15 @@ func TestLoadHTMLGlobReleaseMode(t *testing.T) {
 func TestLoadHTMLGlobUsingTLS(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		DebugMode,
+		X常量_运行模式_调试,
 		true,
 		func(router *Engine) {
-			router.LoadHTMLGlob("./testdata/template/*")
+			router.X加载HTML模板目录("./testdata/template/*")
 		},
 	)
 	defer ts.Close()
 
-	// 使用 InsecureSkipVerify 以避免出现 `x509: 证书由未知机构签名` 的错误
+	// Use InsecureSkipVerify for avoiding `x509: certificate signed by unknown authority` error
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
@@ -188,10 +188,10 @@ func TestLoadHTMLGlobUsingTLS(t *testing.T) {
 func TestLoadHTMLGlobFromFuncMap(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		DebugMode,
+		X常量_运行模式_调试,
 		false,
 		func(router *Engine) {
-			router.LoadHTMLGlob("./testdata/template/*")
+			router.X加载HTML模板目录("./testdata/template/*")
 		},
 	)
 	defer ts.Close()
@@ -206,11 +206,11 @@ func TestLoadHTMLGlobFromFuncMap(t *testing.T) {
 }
 
 func init() {
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 }
 
 func TestCreateEngine(t *testing.T) {
-	router := New()
+	router := X创建()
 	assert.Equal(t, "/", router.basePath)
 	assert.Equal(t, router.engine, router)
 	assert.Empty(t, router.Handlers)
@@ -219,10 +219,10 @@ func TestCreateEngine(t *testing.T) {
 func TestLoadHTMLFilesTestMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		TestMode,
+		X常量_运行模式_测试,
 		false,
 		func(router *Engine) {
-			router.LoadHTMLFiles("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
+			router.X加载HTML模板文件("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
 		},
 	)
 	defer ts.Close()
@@ -239,10 +239,10 @@ func TestLoadHTMLFilesTestMode(t *testing.T) {
 func TestLoadHTMLFilesDebugMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		DebugMode,
+		X常量_运行模式_调试,
 		false,
 		func(router *Engine) {
-			router.LoadHTMLFiles("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
+			router.X加载HTML模板文件("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
 		},
 	)
 	defer ts.Close()
@@ -259,10 +259,10 @@ func TestLoadHTMLFilesDebugMode(t *testing.T) {
 func TestLoadHTMLFilesReleaseMode(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		ReleaseMode,
+		X常量_运行模式_发布,
 		false,
 		func(router *Engine) {
-			router.LoadHTMLFiles("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
+			router.X加载HTML模板文件("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
 		},
 	)
 	defer ts.Close()
@@ -279,15 +279,15 @@ func TestLoadHTMLFilesReleaseMode(t *testing.T) {
 func TestLoadHTMLFilesUsingTLS(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		TestMode,
+		X常量_运行模式_测试,
 		true,
 		func(router *Engine) {
-			router.LoadHTMLFiles("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
+			router.X加载HTML模板文件("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
 		},
 	)
 	defer ts.Close()
 
-	// 使用 InsecureSkipVerify 以避免出现 `x509: 证书由未知机构签名` 的错误
+	// Use InsecureSkipVerify for avoiding `x509: certificate signed by unknown authority` error
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
@@ -306,10 +306,10 @@ func TestLoadHTMLFilesUsingTLS(t *testing.T) {
 func TestLoadHTMLFilesFuncMap(t *testing.T) {
 	ts := setupHTMLFiles(
 		t,
-		TestMode,
+		X常量_运行模式_测试,
 		false,
 		func(router *Engine) {
-			router.LoadHTMLFiles("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
+			router.X加载HTML模板文件("./testdata/template/hello.tmpl", "./testdata/template/raw.tmpl")
 		},
 	)
 	defer ts.Close()
@@ -324,7 +324,7 @@ func TestLoadHTMLFilesFuncMap(t *testing.T) {
 }
 
 func TestAddRoute(t *testing.T) {
-	router := New()
+	router := X创建()
 	router.addRoute("GET", "/", HandlersChain{func(_ *Context) {}})
 
 	assert.Len(t, router.trees, 1)
@@ -342,7 +342,7 @@ func TestAddRoute(t *testing.T) {
 }
 
 func TestAddRouteFails(t *testing.T) {
-	router := New()
+	router := X创建()
 	assert.Panics(t, func() { router.addRoute("", "/", HandlersChain{func(_ *Context) {}}) })
 	assert.Panics(t, func() { router.addRoute("GET", "a", HandlersChain{func(_ *Context) {}}) })
 	assert.Panics(t, func() { router.addRoute("GET", "/", HandlersChain{}) })
@@ -354,7 +354,7 @@ func TestAddRouteFails(t *testing.T) {
 }
 
 func TestCreateDefaultRouter(t *testing.T) {
-	router := Default()
+	router := X创建默认对象()
 	assert.Len(t, router.Handlers, 2)
 }
 
@@ -362,16 +362,16 @@ func TestNoRouteWithoutGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
 
-	router := New()
+	router := X创建()
 
-	router.NoRoute(middleware0)
+	router.X绑定404(middleware0)
 	assert.Nil(t, router.Handlers)
 	assert.Len(t, router.noRoute, 1)
 	assert.Len(t, router.allNoRoute, 1)
 	compareFunc(t, router.noRoute[0], middleware0)
 	compareFunc(t, router.allNoRoute[0], middleware0)
 
-	router.NoRoute(middleware1, middleware0)
+	router.X绑定404(middleware1, middleware0)
 	assert.Len(t, router.noRoute, 2)
 	assert.Len(t, router.allNoRoute, 2)
 	compareFunc(t, router.noRoute[0], middleware1)
@@ -385,10 +385,10 @@ func TestNoRouteWithGlobalHandlers(t *testing.T) {
 	var middleware1 HandlerFunc = func(c *Context) {}
 	var middleware2 HandlerFunc = func(c *Context) {}
 
-	router := New()
-	router.Use(middleware2)
+	router := X创建()
+	router.X中间件(middleware2)
 
-	router.NoRoute(middleware0)
+	router.X绑定404(middleware0)
 	assert.Len(t, router.allNoRoute, 2)
 	assert.Len(t, router.Handlers, 1)
 	assert.Len(t, router.noRoute, 1)
@@ -398,7 +398,7 @@ func TestNoRouteWithGlobalHandlers(t *testing.T) {
 	compareFunc(t, router.allNoRoute[0], middleware2)
 	compareFunc(t, router.allNoRoute[1], middleware0)
 
-	router.Use(middleware1)
+	router.X中间件(middleware1)
 	assert.Len(t, router.allNoRoute, 3)
 	assert.Len(t, router.Handlers, 2)
 	assert.Len(t, router.noRoute, 1)
@@ -415,16 +415,16 @@ func TestNoMethodWithoutGlobalHandlers(t *testing.T) {
 	var middleware0 HandlerFunc = func(c *Context) {}
 	var middleware1 HandlerFunc = func(c *Context) {}
 
-	router := New()
+	router := X创建()
 
-	router.NoMethod(middleware0)
+	router.X绑定405(middleware0)
 	assert.Empty(t, router.Handlers)
 	assert.Len(t, router.noMethod, 1)
 	assert.Len(t, router.allNoMethod, 1)
 	compareFunc(t, router.noMethod[0], middleware0)
 	compareFunc(t, router.allNoMethod[0], middleware0)
 
-	router.NoMethod(middleware1, middleware0)
+	router.X绑定405(middleware1, middleware0)
 	assert.Len(t, router.noMethod, 2)
 	assert.Len(t, router.allNoMethod, 2)
 	compareFunc(t, router.noMethod[0], middleware1)
@@ -441,10 +441,10 @@ func TestNoMethodWithGlobalHandlers(t *testing.T) {
 	var middleware1 HandlerFunc = func(c *Context) {}
 	var middleware2 HandlerFunc = func(c *Context) {}
 
-	router := New()
-	router.Use(middleware2)
+	router := X创建()
+	router.X中间件(middleware2)
 
-	router.NoMethod(middleware0)
+	router.X绑定405(middleware0)
 	assert.Len(t, router.allNoMethod, 2)
 	assert.Len(t, router.Handlers, 1)
 	assert.Len(t, router.noMethod, 1)
@@ -454,7 +454,7 @@ func TestNoMethodWithGlobalHandlers(t *testing.T) {
 	compareFunc(t, router.allNoMethod[0], middleware2)
 	compareFunc(t, router.allNoMethod[1], middleware0)
 
-	router.Use(middleware1)
+	router.X中间件(middleware1)
 	assert.Len(t, router.allNoMethod, 3)
 	assert.Len(t, router.Handlers, 2)
 	assert.Len(t, router.noMethod, 1)
@@ -476,56 +476,56 @@ func compareFunc(t *testing.T, a, b any) {
 }
 
 func TestListOfRoutes(t *testing.T) {
-	router := New()
-	router.GET("/favicon.ico", handlerTest1)
-	router.GET("/", handlerTest1)
-	group := router.Group("/users")
+	router := X创建()
+	router.X绑定GET("/favicon.ico", handlerTest1)
+	router.X绑定GET("/", handlerTest1)
+	group := router.X创建分组路由("/users")
 	{
-		group.GET("/", handlerTest2)
-		group.GET("/:id", handlerTest1)
-		group.POST("/:id", handlerTest2)
+		group.X绑定GET("/", handlerTest2)
+		group.X绑定GET("/:id", handlerTest1)
+		group.X绑定POST("/:id", handlerTest2)
 	}
-	router.Static("/static", ".")
+	router.X绑定静态文件目录("/static", ".")
 
-	list := router.Routes()
+	list := router.X取路由数组()
 
 	assert.Len(t, list, 7)
 	assertRoutePresent(t, list, RouteInfo{
-		Method:  "GET",
-		Path:    "/favicon.ico",
+		X方法:  "GET",
+		X路径:    "/favicon.ico",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
 	})
 	assertRoutePresent(t, list, RouteInfo{
-		Method:  "GET",
-		Path:    "/",
+		X方法:  "GET",
+		X路径:    "/",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
 	})
 	assertRoutePresent(t, list, RouteInfo{
-		Method:  "GET",
-		Path:    "/users/",
+		X方法:  "GET",
+		X路径:    "/users/",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",
 	})
 	assertRoutePresent(t, list, RouteInfo{
-		Method:  "GET",
-		Path:    "/users/:id",
+		X方法:  "GET",
+		X路径:    "/users/:id",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
 	})
 	assertRoutePresent(t, list, RouteInfo{
-		Method:  "POST",
-		Path:    "/users/:id",
+		X方法:  "POST",
+		X路径:    "/users/:id",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",
 	})
 }
 
 func TestEngineHandleContext(t *testing.T) {
-	r := New()
-	r.GET("/", func(c *Context) {
-		c.Request.URL.Path = "/v2"
-		r.HandleContext(c)
+	r := X创建()
+	r.X绑定GET("/", func(c *Context) {
+		c.X请求.URL.Path = "/v2"
+		r.HandleContext底层方法(c)
 	})
-	v2 := r.Group("/v2")
+	v2 := r.X创建分组路由("/v2")
 	{
-		v2.GET("/", func(c *Context) {})
+		v2.X绑定GET("/", func(c *Context) {})
 	}
 
 	assert.NotPanics(t, func() {
@@ -539,12 +539,12 @@ func TestEngineHandleContextManyReEntries(t *testing.T) {
 
 	var handlerCounter, middlewareCounter int64
 
-	r := New()
-	r.Use(func(c *Context) {
+	r := X创建()
+	r.X中间件(func(c *Context) {
 		atomic.AddInt64(&middlewareCounter, 1)
 	})
-	r.GET("/:count", func(c *Context) {
-		countStr := c.Param("count")
+	r.X绑定GET("/:count", func(c *Context) {
+		countStr := c.X取API参数值("count")
 		count, err := strconv.Atoi(countStr)
 		assert.NoError(t, err)
 
@@ -554,8 +554,8 @@ func TestEngineHandleContextManyReEntries(t *testing.T) {
 
 		switch {
 		case count > 0:
-			c.Request.URL.Path = "/" + strconv.Itoa(count-1)
-			r.HandleContext(c)
+			c.X请求.URL.Path = "/" + strconv.Itoa(count-1)
+			r.HandleContext底层方法(c)
 		}
 	}, func(c *Context) {
 		atomic.AddInt64(&handlerCounter, 1)
@@ -572,12 +572,12 @@ func TestEngineHandleContextManyReEntries(t *testing.T) {
 }
 
 func TestPrepareTrustedCIRDsWith(t *testing.T) {
-	r := New()
+	r := X创建()
 
 	// valid ipv4 cidr
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("0.0.0.0/0")}
-		err := r.SetTrustedProxies([]string{"0.0.0.0/0"})
+		err := r.X设置受信任代理([]string{"0.0.0.0/0"})
 
 		assert.NoError(t, err)
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
@@ -585,7 +585,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 
 	// invalid ipv4 cidr
 	{
-		err := r.SetTrustedProxies([]string{"192.168.1.33/33"})
+		err := r.X设置受信任代理([]string{"192.168.1.33/33"})
 
 		assert.Error(t, err)
 	}
@@ -594,7 +594,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("192.168.1.33/32")}
 
-		err := r.SetTrustedProxies([]string{"192.168.1.33"})
+		err := r.X设置受信任代理([]string{"192.168.1.33"})
 
 		assert.NoError(t, err)
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
@@ -602,7 +602,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 
 	// invalid ipv4 address
 	{
-		err := r.SetTrustedProxies([]string{"192.168.1.256"})
+		err := r.X设置受信任代理([]string{"192.168.1.256"})
 
 		assert.Error(t, err)
 	}
@@ -610,7 +610,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 	// valid ipv6 address
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("2002:0000:0000:1234:abcd:ffff:c0a8:0101/128")}
-		err := r.SetTrustedProxies([]string{"2002:0000:0000:1234:abcd:ffff:c0a8:0101"})
+		err := r.X设置受信任代理([]string{"2002:0000:0000:1234:abcd:ffff:c0a8:0101"})
 
 		assert.NoError(t, err)
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
@@ -618,7 +618,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 
 	// invalid ipv6 address
 	{
-		err := r.SetTrustedProxies([]string{"gggg:0000:0000:1234:abcd:ffff:c0a8:0101"})
+		err := r.X设置受信任代理([]string{"gggg:0000:0000:1234:abcd:ffff:c0a8:0101"})
 
 		assert.Error(t, err)
 	}
@@ -626,7 +626,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 	// valid ipv6 cidr
 	{
 		expectedTrustedCIDRs := []*net.IPNet{parseCIDR("::/0")}
-		err := r.SetTrustedProxies([]string{"::/0"})
+		err := r.X设置受信任代理([]string{"::/0"})
 
 		assert.NoError(t, err)
 		assert.Equal(t, expectedTrustedCIDRs, r.trustedCIDRs)
@@ -634,7 +634,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 
 	// invalid ipv6 cidr
 	{
-		err := r.SetTrustedProxies([]string{"gggg:0000:0000:1234:abcd:ffff:c0a8:0101/129"})
+		err := r.X设置受信任代理([]string{"gggg:0000:0000:1234:abcd:ffff:c0a8:0101/129"})
 
 		assert.Error(t, err)
 	}
@@ -646,7 +646,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 			parseCIDR("192.168.0.0/16"),
 			parseCIDR("172.16.0.1/32"),
 		}
-		err := r.SetTrustedProxies([]string{
+		err := r.X设置受信任代理([]string{
 			"::/0",
 			"192.168.0.0/16",
 			"172.16.0.1",
@@ -658,7 +658,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 
 	// invalid combination
 	{
-		err := r.SetTrustedProxies([]string{
+		err := r.X设置受信任代理([]string{
 			"::/0",
 			"192.168.0.0/16",
 			"172.16.0.256",
@@ -669,7 +669,7 @@ func TestPrepareTrustedCIRDsWith(t *testing.T) {
 
 	// nil value
 	{
-		err := r.SetTrustedProxies(nil)
+		err := r.X设置受信任代理(nil)
 
 		assert.Nil(t, r.trustedCIDRs)
 		assert.Nil(t, err)
@@ -686,7 +686,7 @@ func parseCIDR(cidr string) *net.IPNet {
 
 func assertRoutePresent(t *testing.T, gotRoutes RoutesInfo, wantRoute RouteInfo) {
 	for _, gotRoute := range gotRoutes {
-		if gotRoute.Path == wantRoute.Path && gotRoute.Method == wantRoute.Method {
+		if gotRoute.X路径 == wantRoute.X路径 && gotRoute.X方法 == wantRoute.X方法 {
 			assert.Regexp(t, wantRoute.Handler, gotRoute.Handler)
 			return
 		}

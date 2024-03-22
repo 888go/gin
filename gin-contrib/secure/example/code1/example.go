@@ -8,9 +8,9 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 
-	router.Use(secure.New(secure.Config{
+	router.X中间件(secure.New(secure.Config{
 		AllowedHosts:          []string{"example.com", "ssl.example.com"},
 		SSLRedirect:           true,
 		SSLHost:               "ssl.example.com",
@@ -25,12 +25,12 @@ func main() {
 		SSLProxyHeaders:       map[string]string{"X-Forwarded-Proto": "https"},
 	}))
 
-	router.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
+	router.X绑定GET("/ping", func(c *gin类.Context) {
+		c.X输出文本(200, "pong")
 	})
 
-	// 在0.0.0.0:8080监听并服务
-	if err := router.Run(); err != nil {
+	// Listen and Server in 0.0.0.0:8080
+	if err := router.X监听(); err != nil {
 		log.Fatal(err)
 	}
 }

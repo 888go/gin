@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"crypto/subtle"
@@ -13,10 +13,10 @@ import (
 	"github.com/888go/gin/internal/bytesconv"
 )
 
-// AuthUserKey 是基本认证中用于存储用户凭证的cookie名称。
+// AuthUserKey is the cookie name for user credential in basic auth.
 const AuthUserKey = "user"
 
-// Accounts 定义了一个用于存储授权登录用户/密码键值对的列表。
+// Accounts defines a key/value for user/pass list of authorized logins.
 type Accounts map[string]string
 
 type authPair struct {
@@ -38,42 +38,36 @@ func (a authPairs) searchCredential(authValue string) (string, bool) {
 	return "", false
 }
 
-// BasicAuthForRealm 返回一个基础HTTP身份验证中间件。它接受两个参数：一个map[string]string，其中键是用户名，值是密码；以及一个realm（领域）名称。
-// 如果realm为空，则默认使用"Authorization Required"。
-// （参见http://tools.ietf.org/html/rfc2617#section-1.2）
-
-// ff:中间件函数_简单认证2
-// realm:
-// accounts:账号密码Map
-func BasicAuthForRealm(accounts Accounts, realm string) HandlerFunc {
+// BasicAuthForRealm returns a Basic HTTP Authorization middleware. It takes as arguments a map[string]string where
+// the key is the user name and the value is the password, as well as the name of the Realm.
+// If the realm is empty, "Authorization Required" will be used by default.
+// (see http://tools.ietf.org/html/rfc2617#section-1.2)
+func X中间件函数_简单认证2(账号密码Map Accounts, realm string) HandlerFunc {
 	if realm == "" {
 		realm = "Authorization Required"
 	}
 	realm = "Basic realm=" + strconv.Quote(realm)
-	pairs := processAccounts(accounts)
+	pairs := processAccounts(账号密码Map)
 	return func(c *Context) {
-		// 在允许的凭据切片中搜索用户
+		// Search user in the slice of allowed credentials
 		user, found := pairs.searchCredential(c.requestHeader("Authorization"))
 		if !found {
-			// 凭证不匹配，我们返回 401 状态码并中断处理程序链。
-			c.Header("WWW-Authenticate", realm)
-			c.AbortWithStatus(http.StatusUnauthorized)
+			// Credentials doesn't match, we return 401 and abort handlers chain.
+			c.X设置响应协议头值("WWW-Authenticate", realm)
+			c.X停止并带状态码(http.StatusUnauthorized)
 			return
 		}
 
-		// 已找到用户凭据，将用户的ID设置为当前上下文中的AuthUserKey键，稍后可以通过
-		// c.MustGet(gin.AuthUserKey)读取用户的ID。
-		c.Set(AuthUserKey, user)
+		// The user credentials was found, set user's id to key AuthUserKey in this context, the user's id can be read later using
+		// c.MustGet(gin.AuthUserKey).
+		c.X设置值(AuthUserKey, user)
 	}
 }
 
-// BasicAuth 返回一个基础HTTP授权中间件。它接受一个map[string]string作为参数，
-// 其中键是用户名，值是密码。
-
-// ff:中间件函数_简单认证
-// accounts:账号密码Map
-func BasicAuth(accounts Accounts) HandlerFunc {
-	return BasicAuthForRealm(accounts, "")
+// BasicAuth returns a Basic HTTP Authorization middleware. It takes as argument a map[string]string where
+// the key is the user name and the value is the password.
+func X中间件函数_简单认证(账号密码Map Accounts) HandlerFunc {
+	return X中间件函数_简单认证2(账号密码Map, "")
 }
 
 func processAccounts(accounts Accounts) authPairs {

@@ -9,51 +9,52 @@ import (
 	"github.com/888go/gin"
 )
 
-// 它维护一个当前已连接的客户端列表，并向这些客户端广播事件。
+// It keeps a list of clients those are currently attached
+// and broadcasting events to those clients.
 type Event struct {
-	// 主要事件收集程序会将事件推送到此通道
+	// Events are pushed to this channel by the main events-gathering routine
 	Message chan string
 
 	// New client connections
 	NewClients chan chan string
 
-	// 已关闭的客户端连接
+	// Closed client connections
 	ClosedClients chan chan string
 
-	// 总客户端连接数
+	// Total client connections
 	TotalClients map[chan string]bool
 }
 
-// 新的事件消息将被广播到所有已注册的客户端连接通道
+// New event messages are broadcast to all registered client connection channels
 type ClientChan chan string
 
 func main() {
-	router := gin.Default()
+	router := gin类.X创建默认对象()
 
-	// 初始化新的流媒体服务器
+	// Initialize new streaming server
 	stream := NewServer()
 
-	// 我们以10秒间隔向客户端流式传输当前时间
+	// We are streaming current time to clients in the interval 10 seconds
 	go func() {
 		for {
 			time.Sleep(time.Second * 10)
 			now := time.Now().Format("2006-01-02 15:04:05")
 			currentTime := fmt.Sprintf("The Current Time Is %v", now)
 
-			// 将当前时间发送到客户端消息通道
+			// Send current time to clients message channel
 			stream.Message <- currentTime
 		}
 	}()
 
 	// Basic Authentication
-	authorized := router.Group("/", gin.BasicAuth(gin.Accounts{
-		"admin": "admin123", // 用户名：admin，密码：admin123
+	authorized := router.X创建分组路由("/", gin类.X中间件函数_简单认证(gin类.Accounts{
+		"admin": "admin123", // username : admin, password : admin123
 	}))
 
-// 授权的客户端可以流式接收该事件
-// 添加事件流传输所需的头部信息
-	authorized.GET("/stream", HeadersMiddleware(), stream.serveHTTP(), func(c *gin.Context) {
-		v, ok := c.Get("clientChan")
+	// Authorized client can stream the event
+	// Add event-streaming headers
+	authorized.X绑定GET("/stream", HeadersMiddleware(), stream.serveHTTP(), func(c *gin类.Context) {
+		v, ok := c.X取值("clientChan")
 		if !ok {
 			return
 		}
@@ -62,7 +63,7 @@ func main() {
 			return
 		}
 		c.Stream(func(w io.Writer) bool {
-			// 从消息通道向客户端流式传输消息
+			// Stream message to client from message channel
 			if msg, ok := <-clientChan; ok {
 				c.SSEvent("message", msg)
 				return true
@@ -72,15 +73,12 @@ func main() {
 	})
 
 	// Parse Static files
-	router.StaticFile("/", "./public/index.html")
+	router.X绑定静态单文件("/", "./public/index.html")
 
-	router.Run(":8085")
+	router.X监听(":8085")
 }
 
-// 初始化事件并开始处理请求
-
-// ff:
-// event:
+// Initialize event and Start procnteessing requests
 func NewServer() (event *Event) {
 	event = &Event{
 		Message:       make(chan string),
@@ -94,12 +92,12 @@ func NewServer() (event *Event) {
 	return
 }
 
-// 它监听来自客户端的所有入站请求。
-// 处理客户端的添加和移除，并向客户端广播消息。
+// It Listens all incoming requests from clients.
+// Handles addition and removal of clients and broadcast messages to clients.
 func (stream *Event) listen() {
 	for {
 		select {
-		// 添加新的可用客户端
+		// Add new available client
 		case client := <-stream.NewClients:
 			stream.TotalClients[client] = true
 			log.Printf("Client added. %d registered clients", len(stream.TotalClients))
@@ -110,7 +108,7 @@ func (stream *Event) listen() {
 			close(client)
 			log.Printf("Removed client. %d registered clients", len(stream.TotalClients))
 
-		// 向客户端广播消息
+		// Broadcast message to client
 		case eventMsg := <-stream.Message:
 			for clientMessageChan := range stream.TotalClients {
 				clientMessageChan <- eventMsg
@@ -119,33 +117,31 @@ func (stream *Event) listen() {
 	}
 }
 
-func (stream *Event) serveHTTP() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// 初始化客户端通道
+func (stream *Event) serveHTTP() gin类.HandlerFunc {
+	return func(c *gin类.Context) {
+		// Initialize client channel
 		clientChan := make(ClientChan)
 
-		// 将新的连接发送至事件服务器
+		// Send new connection to event server
 		stream.NewClients <- clientChan
 
 		defer func() {
-			// 将关闭的连接发送到事件服务器
+			// Send closed connection to event server
 			stream.ClosedClients <- clientChan
 		}()
 
-		c.Set("clientChan", clientChan)
+		c.X设置值("clientChan", clientChan)
 
-		c.Next()
+		c.X中间件继续()
 	}
 }
 
-
-// ff:
-func HeadersMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
+func HeadersMiddleware() gin类.HandlerFunc {
+	return func(c *gin类.Context) {
 		c.Writer.Header().Set("Content-Type", "text/event-stream")
 		c.Writer.Header().Set("Cache-Control", "no-cache")
 		c.Writer.Header().Set("Connection", "keep-alive")
 		c.Writer.Header().Set("Transfer-Encoding", "chunked")
-		c.Next()
+		c.X中间件继续()
 	}
 }

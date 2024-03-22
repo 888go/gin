@@ -25,10 +25,10 @@ hs=时长
 hs=客户端IP
 
 [Method string]
-hs=HTTP方法
+hs=方法
 
 [Path string]
-hs=请求路径
+hs=路径
 
 [ErrorMessage string]
 hs=错误信息
@@ -41,3 +41,6 @@ hs=响应体大小
 
 [Keys map#左中括号#string#右中括号#any]
 hs=上下文设置值map
+
+[Request *http.Request]
+hs=请求

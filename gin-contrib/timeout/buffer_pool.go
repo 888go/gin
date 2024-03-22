@@ -5,15 +5,13 @@ import (
 	"sync"
 )
 
-// BufferPool 表示一个缓冲区池。
+// BufferPool represents a pool of buffers.
 type BufferPool struct {
 	pool sync.Pool
 }
 
-// Get 从缓冲池返回一个缓冲区。
-// 如果缓冲池为空，则创建并返回一个新的缓冲区。
-
-// ff:
+// Get returns a buffer from the buffer pool.
+// If the pool is empty, a new buffer is created and returned.
 func (p *BufferPool) Get() *bytes.Buffer {
 	buf := p.pool.Get()
 	if buf == nil {
@@ -22,10 +20,7 @@ func (p *BufferPool) Get() *bytes.Buffer {
 	return buf.(*bytes.Buffer)
 }
 
-// Put 将缓冲区放回池中。
-
-// ff:
-// buf:
+// Put adds a buffer back to the pool.
 func (p *BufferPool) Put(buf *bytes.Buffer) {
 	p.pool.Put(buf)
 }

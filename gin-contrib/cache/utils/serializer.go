@@ -7,10 +7,7 @@ import (
 	"strconv"
 )
 
-// Serialize 将传入的值转换为 []byte 类型并返回
-
-// ff:
-// value:
+// Serialize returns a []byte representing the passed value
 func Serialize(value interface{}) ([]byte, error) {
 	if bytes, ok := value.([]byte); ok {
 		return bytes, nil
@@ -31,12 +28,7 @@ func Serialize(value interface{}) ([]byte, error) {
 	return b.Bytes(), nil
 }
 
-// Deserialize 将传入的 []byte 反序列化为给定的 ptr interface{}
-
-// ff:
-// err:
-// ptr:
-// byt:
+// Deserialize deserialices the passed []byte into a the passed ptr interface{}
 func Deserialize(byt []byte, ptr interface{}) (err error) {
 	if bytes, ok := ptr.(*[]byte); ok {
 		*bytes = byt

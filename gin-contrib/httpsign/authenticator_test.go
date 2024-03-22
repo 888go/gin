@@ -52,11 +52,11 @@ var (
 	requestTime     = time.Date(2018, time.October, 22, 0o7, 0o0, 0o7, 0o0, time.UTC)
 )
 
-func runTest(secretKeys Secrets, headers []string, v []validator.Validator, req *http.Request) *gin.Context {
-	gin.SetMode(gin.TestMode)
+func runTest(secretKeys Secrets, headers []string, v []validator.Validator, req *http.Request) *gin类.Context {
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 	auth := NewAuthenticator(secretKeys, WithRequiredHeaders(headers), WithValidator(v...))
-	c, _ := gin.CreateTestContext(httptest.NewRecorder())
-	c.Request = req
+	c, _ := gin类.CreateTestContext(httptest.NewRecorder())
+	c.X请求 = req
 	auth.Authenticated()(c)
 	return c
 }
@@ -73,7 +73,7 @@ func TestAuthenticatedHeaderNoSignature(t *testing.T) {
 	require.NoError(t, err)
 	c := runTest(secrets, requiredHeaders, nil, req)
 	assert.Equal(t, http.StatusUnauthorized, c.Writer.Status())
-	assert.Equal(t, ErrNoSignature, c.Errors[0])
+	assert.Equal(t, ErrNoSignature, c.X错误s[0])
 }
 
 func TestAuthenticatedHeaderInvalidSignature(t *testing.T) {
@@ -82,7 +82,7 @@ func TestAuthenticatedHeaderInvalidSignature(t *testing.T) {
 	req.Header.Set(authorizationHeader, "hello")
 	c := runTest(secrets, requiredHeaders, nil, req)
 	assert.Equal(t, http.StatusUnauthorized, c.Writer.Status())
-	assert.Equal(t, ErrInvalidAuthorizationHeader, c.Errors[0])
+	assert.Equal(t, ErrInvalidAuthorizationHeader, c.X错误s[0])
 }
 
 func TestAuthenticatedHeaderWrongKey(t *testing.T) {
@@ -93,7 +93,7 @@ func TestAuthenticatedHeaderWrongKey(t *testing.T) {
 	req.Header.Set("Date", time.Now().UTC().Format(http.TimeFormat))
 	c := runTest(secrets, requiredHeaders, nil, req)
 	assert.Equal(t, http.StatusUnauthorized, c.Writer.Status())
-	assert.Equal(t, ErrInvalidKeyID, c.Errors[0])
+	assert.Equal(t, ErrInvalidKeyID, c.X错误s[0])
 }
 
 func TestAuthenticateDateNotAccept(t *testing.T) {
@@ -104,7 +104,7 @@ func TestAuthenticateDateNotAccept(t *testing.T) {
 	req.Header.Set("Date", time.Date(1990, time.October, 20, 0, 0, 0, 0, time.UTC).Format(http.TimeFormat))
 	c := runTest(secrets, requiredHeaders, nil, req)
 	assert.Equal(t, http.StatusBadRequest, c.Writer.Status())
-	assert.Equal(t, validator.ErrDateNotInRange, c.Errors[0])
+	assert.Equal(t, validator.ErrDateNotInRange, c.X错误s[0])
 }
 
 func TestAuthenticateInvalidRequiredHeader(t *testing.T) {
@@ -118,7 +118,7 @@ func TestAuthenticateInvalidRequiredHeader(t *testing.T) {
 
 	c := runTest(secrets, requiredHeaders, nil, req)
 	assert.Equal(t, http.StatusBadRequest, c.Writer.Status())
-	assert.Equal(t, ErrHeaderNotEnough, c.Errors[0])
+	assert.Equal(t, ErrHeaderNotEnough, c.X错误s[0])
 }
 
 func TestAuthenticateInvalidAlgo(t *testing.T) {
@@ -130,7 +130,7 @@ func TestAuthenticateInvalidAlgo(t *testing.T) {
 
 	c := runTest(secrets, requiredHeaders, nil, req)
 	assert.Equal(t, http.StatusBadRequest, c.Writer.Status())
-	assert.Equal(t, ErrIncorrectAlgorithm, c.Errors[0])
+	assert.Equal(t, ErrIncorrectAlgorithm, c.X错误s[0])
 }
 
 func TestInvalidSign(t *testing.T) {
@@ -142,10 +142,10 @@ func TestInvalidSign(t *testing.T) {
 
 	c := runTest(secrets, requiredHeaders, nil, req)
 	assert.Equal(t, http.StatusUnauthorized, c.Writer.Status())
-	assert.Equal(t, ErrInvalidSign, c.Errors[0])
+	assert.Equal(t, ErrInvalidSign, c.X错误s[0])
 }
 
-// 该mock接口总是返回true
+// mock interface always return true
 type dateAlwaysValid struct{}
 
 func (v *dateAlwaysValid) Validate(r *http.Request) error { return nil }
@@ -155,28 +155,28 @@ var mockValidator = []validator.Validator{
 	validator.NewDigestValidator(),
 }
 
-func httpTestGet(c *gin.Context) {
-	c.JSON(http.StatusOK,
-		gin.H{
+func httpTestGet(c *gin类.Context) {
+	c.X输出JSON(http.StatusOK,
+		gin类.H{
 			"success": true,
 		})
 }
 
-func httpTestPost(c *gin.Context) {
-	body, err := c.GetRawData()
+func httpTestPost(c *gin类.Context) {
+	body, err := c.X取流数据()
 	if err != nil {
-		c.AbortWithStatus(http.StatusInternalServerError)
+		c.X停止并带状态码(http.StatusInternalServerError)
 	}
-	c.Render(http.StatusOK, render.Data{Data: body})
+	c.Render底层方法(http.StatusOK, render.Data{Data: body})
 }
 
 func TestHttpInvalidRequest(t *testing.T) {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 	auth := NewAuthenticator(secrets, WithValidator(mockValidator...))
-	r.Use(auth.Authenticated())
-	r.GET("/", httpTestGet)
+	r.X中间件(auth.Authenticated())
+	r.X绑定GET("/", httpTestGet)
 
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -191,12 +191,12 @@ func TestHttpInvalidRequest(t *testing.T) {
 }
 
 func TestHttpInvalidDigest(t *testing.T) {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 	auth := NewAuthenticator(secrets, WithValidator(mockValidator...))
-	r.Use(auth.Authenticated())
-	r.POST("/", httpTestPost)
+	r.X中间件(auth.Authenticated())
+	r.X绑定POST("/", httpTestPost)
 
 	req, err := http.NewRequestWithContext(context.Background(), "POST", "/", strings.NewReader(sampleBodyContent))
 	require.NoError(t, err)
@@ -212,12 +212,12 @@ func TestHttpInvalidDigest(t *testing.T) {
 }
 
 func TestHttpValidRequest(t *testing.T) {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 	auth := NewAuthenticator(secrets, WithValidator(mockValidator...))
-	r.Use(auth.Authenticated())
-	r.GET("/", httpTestGet)
+	r.X中间件(auth.Authenticated())
+	r.X绑定GET("/", httpTestGet)
 
 	req, err := http.NewRequestWithContext(context.Background(), "GET", "/", nil)
 	require.NoError(t, err)
@@ -232,12 +232,12 @@ func TestHttpValidRequest(t *testing.T) {
 }
 
 func TestHttpValidRequestBody(t *testing.T) {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 	auth := NewAuthenticator(secrets, WithValidator(mockValidator...))
-	r.Use(auth.Authenticated())
-	r.POST("/", httpTestPost)
+	r.X中间件(auth.Authenticated())
+	r.X绑定POST("/", httpTestPost)
 
 	req, err := http.NewRequestWithContext(context.Background(), "POST", "/", strings.NewReader(sampleBodyContent))
 	require.NoError(t, err)
@@ -256,12 +256,12 @@ func TestHttpValidRequestBody(t *testing.T) {
 }
 
 func TestHttpValidRequestHost(t *testing.T) {
-	gin.SetMode(gin.TestMode)
+	gin类.X设置运行模式(gin类.X常量_运行模式_测试)
 
-	r := gin.Default()
+	r := gin类.X创建默认对象()
 	auth := NewAuthenticator(secrets, WithValidator(mockValidator...))
-	r.Use(auth.Authenticated())
-	r.POST("/", httpTestPost)
+	r.X中间件(auth.Authenticated())
+	r.X绑定POST("/", httpTestPost)
 
 	requestURL := fmt.Sprintf("http://%s/", requestHost)
 	req, err := http.NewRequestWithContext(context.Background(), "POST", requestURL, strings.NewReader(sampleBodyContent))

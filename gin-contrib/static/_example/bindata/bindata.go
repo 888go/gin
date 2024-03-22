@@ -47,11 +47,9 @@ func data_index_html() ([]byte, error) {
 	)
 }
 
-// Asset 函数加载并返回指定名称的资源。
-// 如果无法找到该资源或无法加载，则返回错误。
-
-// ff:
-// name:
+// Asset loads and returns the asset for the given name.
+// It returns an error if the asset could not be found or
+// could not be loaded.
 func Asset(name string) ([]byte, error) {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	if f, ok := _bindata[cannonicalName]; ok {
@@ -60,9 +58,7 @@ func Asset(name string) ([]byte, error) {
 	return nil, fmt.Errorf("Asset %s not found", name)
 }
 
-// AssetNames 返回资产的名称列表。
-
-// ff:
+// AssetNames returns the names of the assets.
 func AssetNames() []string {
 	names := make([]string, 0, len(_bindata))
 	for name := range _bindata {
@@ -71,24 +67,23 @@ func AssetNames() []string {
 	return names
 }
 
-// _bindata 是一个表格，用于存储每个资产生成器，并将其映射到对应的名称。
+// _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() ([]byte, error){
 	"data/index.html": data_index_html,
 }
 
-// AssetDir 返回指定目录及其子目录下，由 go-bindata 嵌入到文件中的文件名列表。
-// 例如，如果你在 data/... 目录下运行 go-bindata，并且 data 目录包含以下层次结构：
+// AssetDir returns the file names below a certain
+// directory embedded in the file by go-bindata.
+// For example if you run go-bindata on data/... and data contains the
+// following hierarchy:
 //     data/
 //       foo.txt
 //       img/
 //         a.png
 //         b.png
-// 那么 AssetDir("data") 将返回 []string{"foo.txt", "img"}
-// 而 AssetDir("data/img") 则会返回 []string{"a.png", "b.png"}
-// 对于 AssetDir("foo.txt") 和 AssetDir("notexist")，它们将返回错误
-
-// ff:
-// name:
+// then AssetDir("data") would return []string{"foo.txt", "img"}
+// AssetDir("data/img") would return []string{"a.png", "b.png"}
+// AssetDir("foo.txt") and AssetDir("notexist") would return an error
 func AssetDir(name string) ([]string, error) {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	pathList := strings.Split(cannonicalName, "/")
@@ -120,11 +115,7 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 	}},
 }}
 
-// AssetInfo 返回指定路径的文件信息
-
-// ff:
-// os.FileInfo:
-// path:
+// AssetInfo returns file info of given path
 func AssetInfo(path string) (os.FileInfo, error) {
 	return os.Stat(path)
 }

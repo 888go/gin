@@ -1,8 +1,8 @@
-// 版权所有 ? 2017 Manu Martinez-Almeida。保留所有权利。
-// 本源代码的使用受 MIT 风格许可证协议约束，
-// 该协议可在 LICENSE 文件中查阅。
+// Copyright 2017 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"html/template"
@@ -12,112 +12,112 @@ import (
 )
 
 func BenchmarkOneRoute(B *testing.B) {
-	router := New()
-	router.GET("/ping", func(c *Context) {})
+	router := X创建()
+	router.X绑定GET("/ping", func(c *Context) {})
 	runRequest(B, router, "GET", "/ping")
 }
 
 func BenchmarkRecoveryMiddleware(B *testing.B) {
-	router := New()
-	router.Use(Recovery())
-	router.GET("/", func(c *Context) {})
+	router := X创建()
+	router.X中间件(Recovery())
+	router.X绑定GET("/", func(c *Context) {})
 	runRequest(B, router, "GET", "/")
 }
 
 func BenchmarkLoggerMiddleware(B *testing.B) {
-	router := New()
-	router.Use(LoggerWithWriter(newMockWriter()))
-	router.GET("/", func(c *Context) {})
+	router := X创建()
+	router.X中间件(LoggerWithWriter(newMockWriter()))
+	router.X绑定GET("/", func(c *Context) {})
 	runRequest(B, router, "GET", "/")
 }
 
 func BenchmarkManyHandlers(B *testing.B) {
-	router := New()
-	router.Use(Recovery(), LoggerWithWriter(newMockWriter()))
-	router.Use(func(c *Context) {})
-	router.Use(func(c *Context) {})
-	router.GET("/ping", func(c *Context) {})
+	router := X创建()
+	router.X中间件(Recovery(), LoggerWithWriter(newMockWriter()))
+	router.X中间件(func(c *Context) {})
+	router.X中间件(func(c *Context) {})
+	router.X绑定GET("/ping", func(c *Context) {})
 	runRequest(B, router, "GET", "/ping")
 }
 
 func Benchmark5Params(B *testing.B) {
 	DefaultWriter = os.Stdout
-	router := New()
-	router.Use(func(c *Context) {})
-	router.GET("/param/:param1/:params2/:param3/:param4/:param5", func(c *Context) {})
+	router := X创建()
+	router.X中间件(func(c *Context) {})
+	router.X绑定GET("/param/:param1/:params2/:param3/:param4/:param5", func(c *Context) {})
 	runRequest(B, router, "GET", "/param/path/to/parameter/john/12345")
 }
 
 func BenchmarkOneRouteJSON(B *testing.B) {
-	router := New()
+	router := X创建()
 	data := struct {
 		Status string `json:"status"`
 	}{"ok"}
-	router.GET("/json", func(c *Context) {
-		c.JSON(http.StatusOK, data)
+	router.X绑定GET("/json", func(c *Context) {
+		c.X输出JSON(http.StatusOK, data)
 	})
 	runRequest(B, router, "GET", "/json")
 }
 
 func BenchmarkOneRouteHTML(B *testing.B) {
-	router := New()
+	router := X创建()
 	t := template.Must(template.New("index").Parse(`
 		<html><body><h1>{{.}}</h1></body></html>`))
-	router.SetHTMLTemplate(t)
+	router.X设置Template模板(t)
 
-	router.GET("/html", func(c *Context) {
-		c.HTML(http.StatusOK, "index", "hola")
+	router.X绑定GET("/html", func(c *Context) {
+		c.X输出html模板(http.StatusOK, "index", "hola")
 	})
 	runRequest(B, router, "GET", "/html")
 }
 
 func BenchmarkOneRouteSet(B *testing.B) {
-	router := New()
-	router.GET("/ping", func(c *Context) {
-		c.Set("key", "value")
+	router := X创建()
+	router.X绑定GET("/ping", func(c *Context) {
+		c.X设置值("key", "value")
 	})
 	runRequest(B, router, "GET", "/ping")
 }
 
 func BenchmarkOneRouteString(B *testing.B) {
-	router := New()
-	router.GET("/text", func(c *Context) {
-		c.String(http.StatusOK, "this is a plain text")
+	router := X创建()
+	router.X绑定GET("/text", func(c *Context) {
+		c.X输出文本(http.StatusOK, "this is a plain text")
 	})
 	runRequest(B, router, "GET", "/text")
 }
 
 func BenchmarkManyRoutesFist(B *testing.B) {
-	router := New()
-	router.Any("/ping", func(c *Context) {})
+	router := X创建()
+	router.X绑定Any("/ping", func(c *Context) {})
 	runRequest(B, router, "GET", "/ping")
 }
 
 func BenchmarkManyRoutesLast(B *testing.B) {
-	router := New()
-	router.Any("/ping", func(c *Context) {})
+	router := X创建()
+	router.X绑定Any("/ping", func(c *Context) {})
 	runRequest(B, router, "OPTIONS", "/ping")
 }
 
 func Benchmark404(B *testing.B) {
-	router := New()
-	router.Any("/something", func(c *Context) {})
-	router.NoRoute(func(c *Context) {})
+	router := X创建()
+	router.X绑定Any("/something", func(c *Context) {})
+	router.X绑定404(func(c *Context) {})
 	runRequest(B, router, "GET", "/ping")
 }
 
 func Benchmark404Many(B *testing.B) {
-	router := New()
-	router.GET("/", func(c *Context) {})
-	router.GET("/path/to/something", func(c *Context) {})
-	router.GET("/post/:id", func(c *Context) {})
-	router.GET("/view/:id", func(c *Context) {})
-	router.GET("/favicon.ico", func(c *Context) {})
-	router.GET("/robots.txt", func(c *Context) {})
-	router.GET("/delete/:id", func(c *Context) {})
-	router.GET("/user/:id/:mode", func(c *Context) {})
+	router := X创建()
+	router.X绑定GET("/", func(c *Context) {})
+	router.X绑定GET("/path/to/something", func(c *Context) {})
+	router.X绑定GET("/post/:id", func(c *Context) {})
+	router.X绑定GET("/view/:id", func(c *Context) {})
+	router.X绑定GET("/favicon.ico", func(c *Context) {})
+	router.X绑定GET("/robots.txt", func(c *Context) {})
+	router.X绑定GET("/delete/:id", func(c *Context) {})
+	router.X绑定GET("/user/:id/:mode", func(c *Context) {})
 
-	router.NoRoute(func(c *Context) {})
+	router.X绑定404(func(c *Context) {})
 	runRequest(B, router, "GET", "/viewfake")
 }
 

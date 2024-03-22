@@ -30,20 +30,20 @@ func performRequest(r http.Handler, method, path string, headers ...header) *htt
 
 func TestLogger(t *testing.T) {
 	buffer := new(bytes.Buffer)
-	gin.SetMode(gin.ReleaseMode)
-	r := gin.New()
-	r.Use(SetLogger(WithWriter(buffer)))
-	r.GET("/example", func(c *gin.Context) {})
-	r.POST("/example", func(c *gin.Context) {
-		c.String(http.StatusBadRequest, "ok")
+	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
+	r := gin类.X创建()
+	r.X中间件(SetLogger(WithWriter(buffer)))
+	r.X绑定GET("/example", func(c *gin类.Context) {})
+	r.X绑定POST("/example", func(c *gin类.Context) {
+		c.X输出文本(http.StatusBadRequest, "ok")
 	})
-	r.PUT("/example", func(c *gin.Context) {
-		c.String(http.StatusBadGateway, "ok")
+	r.X绑定PUT("/example", func(c *gin类.Context) {
+		c.X输出文本(http.StatusBadGateway, "ok")
 	})
-	r.DELETE("/example", func(c *gin.Context) {})
-	r.PATCH("/example", func(c *gin.Context) {})
-	r.HEAD("/example", func(c *gin.Context) {})
-	r.OPTIONS("/example", func(c *gin.Context) {})
+	r.X绑定DELETE("/example", func(c *gin类.Context) {})
+	r.X绑定PATCH("/example", func(c *gin类.Context) {})
+	r.X绑定HEAD("/example", func(c *gin类.Context) {})
+	r.X绑定OPTIONS("/example", func(c *gin类.Context) {})
 
 	resp := performRequest(r, "GET", "/example?a=100", header{"X-Request-Id", "123"})
 	assert.Equal(t, 200, resp.Code)
@@ -71,35 +71,35 @@ func TestLogger(t *testing.T) {
 
 func TestLoggerWithLogger(t *testing.T) {
 	buffer := new(bytes.Buffer)
-	gin.SetMode(gin.ReleaseMode)
-	r := gin.New()
-	r.GET("/example", SetLogger(
+	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
+	r := gin类.X创建()
+	r.X绑定GET("/example", SetLogger(
 		WithWriter(buffer),
 		WithUTC(true),
-		WithLogger(Fn(func(c *gin.Context, l zerolog.Logger) zerolog.Logger {
+		WithLogger(Fn(func(c *gin类.Context, l zerolog.Logger) zerolog.Logger {
 			return l.With().
 				Str("foo", "bar").
-				Str("path", c.Request.URL.Path).
+				Str("path", c.X请求.URL.Path).
 				Logger()
 		})),
-	), func(c *gin.Context) {})
+	), func(c *gin类.Context) {})
 
-	r.GET("/example2", SetLogger(
+	r.X绑定GET("/example2", SetLogger(
 		WithWriter(buffer),
 		WithSkipPath([]string{"/example2"}),
-	), func(c *gin.Context) {})
+	), func(c *gin类.Context) {})
 
 	rxURL := regexp.MustCompile(`^/regexp\d*`)
 
-	r.GET("/regexp01", SetLogger(
+	r.X绑定GET("/regexp01", SetLogger(
 		WithWriter(buffer),
 		WithSkipPathRegexps(rxURL),
-	), func(c *gin.Context) {})
+	), func(c *gin类.Context) {})
 
-	r.GET("/regexp02", SetLogger(
+	r.X绑定GET("/regexp02", SetLogger(
 		WithWriter(buffer),
 		WithSkipPathRegexps(rxURL),
-	), func(c *gin.Context) {})
+	), func(c *gin类.Context) {})
 
 	performRequest(r, "GET", "/example?a=100")
 	assert.Contains(t, buffer.String(), "foo")
@@ -123,20 +123,20 @@ func TestLoggerWithLogger(t *testing.T) {
 
 func TestLoggerWithLevels(t *testing.T) {
 	buffer := new(bytes.Buffer)
-	gin.SetMode(gin.ReleaseMode)
-	r := gin.New()
-	r.Use(SetLogger(
+	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
+	r := gin类.X创建()
+	r.X中间件(SetLogger(
 		WithWriter(buffer),
 		WithDefaultLevel(zerolog.DebugLevel),
 		WithClientErrorLevel(zerolog.ErrorLevel),
 		WithServerErrorLevel(zerolog.FatalLevel),
 	))
-	r.GET("/example", func(c *gin.Context) {})
-	r.POST("/example", func(c *gin.Context) {
-		c.String(http.StatusBadRequest, "ok")
+	r.X绑定GET("/example", func(c *gin类.Context) {})
+	r.X绑定POST("/example", func(c *gin类.Context) {
+		c.X输出文本(http.StatusBadRequest, "ok")
 	})
-	r.PUT("/example", func(c *gin.Context) {
-		c.String(http.StatusBadGateway, "ok")
+	r.X绑定PUT("/example", func(c *gin类.Context) {
+		c.X输出文本(http.StatusBadGateway, "ok")
 	})
 
 	performRequest(r, "GET", "/example?a=100")
@@ -189,11 +189,11 @@ func TestLoggerParseLevel(t *testing.T) {
 }
 
 func BenchmarkLogger(b *testing.B) {
-	gin.SetMode(gin.ReleaseMode)
-	r := gin.New()
-	r.Use(SetLogger(WithDefaultLevel(zerolog.Disabled)))
-	r.GET("/", func(ctx *gin.Context) {
-		ctx.Data(200, "text/plain", []byte("all good"))
+	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
+	r := gin类.X创建()
+	r.X中间件(SetLogger(WithDefaultLevel(zerolog.Disabled)))
+	r.X绑定GET("/", func(ctx *gin类.Context) {
+		ctx.X输出字节集(200, "text/plain", []byte("all good"))
 	})
 
 	b.ReportAllocs()

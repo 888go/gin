@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"bytes"
@@ -15,7 +15,7 @@ import (
 )
 
 func init() {
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 }
 
 func BenchmarkParseAccept(b *testing.B) {
@@ -36,9 +36,9 @@ func (t *testStruct) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 }
 
 func TestWrap(t *testing.T) {
-	router := New()
-	router.POST("/path", WrapH(&testStruct{t}))
-	router.GET("/path2", WrapF(func(w http.ResponseWriter, req *http.Request) {
+	router := X创建()
+	router.X绑定POST("/path", WrapH(&testStruct{t}))
+	router.X绑定GET("/path2", WrapF(func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, "GET", req.Method)
 		assert.Equal(t, "/path2", req.URL.Path)
 		w.WriteHeader(http.StatusBadRequest)
@@ -90,7 +90,7 @@ func TestFunctionName(t *testing.T) {
 }
 
 func somefunction() {
-	// 这个空函数被TestFunctionName()测试函数使用
+	// this empty function is used by TestFunctionName()
 }
 
 func TestJoinPaths(t *testing.T) {
@@ -114,10 +114,10 @@ type bindTestStruct struct {
 func TestBindMiddleware(t *testing.T) {
 	var value *bindTestStruct
 	var called bool
-	router := New()
-	router.GET("/", Bind(bindTestStruct{}), func(c *Context) {
+	router := X创建()
+	router.X绑定GET("/", Bind(bindTestStruct{}), func(c *Context) {
 		called = true
-		value = c.MustGet(BindKey).(*bindTestStruct)
+		value = c.X取值PANI(BindKey).(*bindTestStruct)
 	})
 	PerformRequest(router, "GET", "/?foo=hola&bar=10")
 	assert.True(t, called)

@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"encoding/base64"
@@ -83,10 +83,10 @@ func TestBasicAuthAuthorizationHeader(t *testing.T) {
 
 func TestBasicAuthSucceed(t *testing.T) {
 	accounts := Accounts{"admin": "password"}
-	router := New()
-	router.Use(BasicAuth(accounts))
-	router.GET("/login", func(c *Context) {
-		c.String(http.StatusOK, c.MustGet(AuthUserKey).(string))
+	router := X创建()
+	router.X中间件(X中间件函数_简单认证(accounts))
+	router.X绑定GET("/login", func(c *Context) {
+		c.X输出文本(http.StatusOK, c.X取值PANI(AuthUserKey).(string))
 	})
 
 	w := httptest.NewRecorder()
@@ -101,11 +101,11 @@ func TestBasicAuthSucceed(t *testing.T) {
 func TestBasicAuth401(t *testing.T) {
 	called := false
 	accounts := Accounts{"foo": "bar"}
-	router := New()
-	router.Use(BasicAuth(accounts))
-	router.GET("/login", func(c *Context) {
+	router := X创建()
+	router.X中间件(X中间件函数_简单认证(accounts))
+	router.X绑定GET("/login", func(c *Context) {
 		called = true
-		c.String(http.StatusOK, c.MustGet(AuthUserKey).(string))
+		c.X输出文本(http.StatusOK, c.X取值PANI(AuthUserKey).(string))
 	})
 
 	w := httptest.NewRecorder()
@@ -121,11 +121,11 @@ func TestBasicAuth401(t *testing.T) {
 func TestBasicAuth401WithCustomRealm(t *testing.T) {
 	called := false
 	accounts := Accounts{"foo": "bar"}
-	router := New()
-	router.Use(BasicAuthForRealm(accounts, "My Custom \"Realm\""))
-	router.GET("/login", func(c *Context) {
+	router := X创建()
+	router.X中间件(X中间件函数_简单认证2(accounts, "My Custom \"Realm\""))
+	router.X绑定GET("/login", func(c *Context) {
 		called = true
-		c.String(http.StatusOK, c.MustGet(AuthUserKey).(string))
+		c.X输出文本(http.StatusOK, c.X取值PANI(AuthUserKey).(string))
 	})
 
 	w := httptest.NewRecorder()

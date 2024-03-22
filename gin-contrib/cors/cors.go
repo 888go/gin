@@ -8,72 +8,70 @@ import (
 	"github.com/888go/gin"
 )
 
-// Config 表示该中间件的所有可用选项。
+// Config represents all available options for the middleware.
 type Config struct {
 	AllowAllOrigins bool
 
-// AllowOrigins 是一个跨域请求允许执行的源列表。
-// 如果列表中存在特殊的 "*" 值，则允许所有来源。
-// 默认值为 []
+	// AllowOrigins is a list of origins a cross-domain request can be executed from.
+	// If the special "*" value is present in the list, all origins will be allowed.
+	// Default value is []
 	AllowOrigins []string
 
-// AllowOriginFunc 是一个自定义函数，用于验证源。它接受一个 origin 参数，并在允许访问时返回 true，否则返回 false。如果设置了此选项，则忽略 AllowOrigins 的内容。
+	// AllowOriginFunc is a custom function to validate the origin. It takes the origin
+	// as an argument and returns true if allowed or false otherwise. If this option is
+	// set, the content of AllowOrigins is ignored.
 	AllowOriginFunc func(origin string) bool
 
-// AllowMethods 是一个方法列表，列出了客户端在跨域请求中允许使用的HTTP方法。默认值包括简单的方法（GET, POST, PUT, PATCH, DELETE, HEAD 和 OPTIONS）。
+	// AllowMethods is a list of methods the client is allowed to use with
+	// cross-domain requests. Default value is simple methods (GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS)
 	AllowMethods []string
 
-	// AllowPrivateNetwork 指示响应中是否应包含允许私有网络头
+	// AllowPrivateNetwork indicates whether the response should include allow private network header
 	AllowPrivateNetwork bool
 
-// AllowHeaders 是一个包含客户端在跨域请求中允许使用的非简单头信息的列表。
+	// AllowHeaders is list of non simple headers the client is allowed to use with
+	// cross-domain requests.
 	AllowHeaders []string
 
-// AllowCredentials 指示请求是否可以包含用户凭据，如cookies、HTTP认证或客户端SSL证书。
+	// AllowCredentials indicates whether the request can include user credentials like
+	// cookies, HTTP authentication or client side SSL certificates.
 	AllowCredentials bool
 
-// ExposeHeaders 表示哪些头部信息在 CORS（跨源资源共享）API 规范中是安全的，并可以暴露给 API。
+	// ExposeHeaders indicates which headers are safe to expose to the API of a CORS
+	// API specification
 	ExposeHeaders []string
 
-// MaxAge 指示预检请求结果可以被缓存的时间长度（精确到秒）
+	// MaxAge indicates how long (with second-precision) the results of a preflight request
+	// can be cached
 	MaxAge time.Duration
 
-	// 允许添加诸如 http://some-domain/*、https://api.* 或 http://some.*.subdomain.com 等来源
+	// Allows to add origins like http://some-domain/*, https://api.* or http://some.*.subdomain.com
 	AllowWildcard bool
 
-	// 允许使用流行的浏览器扩展程序架构
+	// Allows usage of popular browser extensions schemas
 	AllowBrowserExtensions bool
 
-	// 允许使用WebSocket协议
+	// Allows usage of WebSocket protocol
 	AllowWebSockets bool
 
-	// 允许使用 file:// 方案（危险！）仅在您 100% 确定需要时才使用它
+	// Allows usage of file:// schema (dangerous!) use it only when you 100% sure it's needed
 	AllowFiles bool
 
-	// 允许为旧版浏览器/客户端传入自定义的OPTIONS响应状态码
+	// Allows to pass custom OPTIONS response status code for old browsers / clients
 	OptionsResponseStatusCode int
 }
 
-// AddAllowMethods 允许添加自定义方法
-
-// ff:
-// methods:
+// AddAllowMethods is allowed to add custom methods
 func (c *Config) AddAllowMethods(methods ...string) {
 	c.AllowMethods = append(c.AllowMethods, methods...)
 }
 
-// AddAllowHeaders 允许添加自定义头
-
-// ff:
-// headers:
+// AddAllowHeaders is allowed to add custom headers
 func (c *Config) AddAllowHeaders(headers ...string) {
 	c.AllowHeaders = append(c.AllowHeaders, headers...)
 }
 
-// AddExposeHeaders 允许添加自定义暴露头
-
-// ff:
-// headers:
+// AddExposeHeaders is allowed to add custom expose headers
 func (c *Config) AddExposeHeaders(headers ...string) {
 	c.ExposeHeaders = append(c.ExposeHeaders, headers...)
 }
@@ -102,9 +100,7 @@ func (c Config) validateAllowedSchemas(origin string) bool {
 	return false
 }
 
-// Validate 是检查用户自定义配置的功能。
-
-// ff:
+// Validate is check configuration of user defined.
 func (c Config) Validate() error {
 	if c.AllowAllOrigins && (c.AllowOriginFunc != nil || len(c.AllowOrigins) > 0) {
 		return errors.New("conflict settings: all origins are allowed. AllowOriginFunc or AllowOrigins is not needed")
@@ -152,9 +148,7 @@ func (c Config) parseWildcardRules() [][]string {
 	return wRules
 }
 
-// DefaultConfig 返回一个映射到本机的通用默认配置。
-
-// ff:
+// DefaultConfig returns a generic default configuration mapped to localhost.
 func DefaultConfig() Config {
 	return Config{
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},
@@ -164,22 +158,17 @@ func DefaultConfig() Config {
 	}
 }
 
-// 默认返回使用默认配置的位置中间件。
-
-// ff:
-func Default() gin.HandlerFunc {
+// Default returns the location middleware with default configuration.
+func Default() gin类.HandlerFunc {
 	config := DefaultConfig()
 	config.AllowAllOrigins = true
 	return New(config)
 }
 
-// New 函数返回一个使用用户自定义配置的 location 中间件。
-
-// ff:
-// config:
-func New(config Config) gin.HandlerFunc {
+// New returns the location middleware with user-defined custom configuration.
+func New(config Config) gin类.HandlerFunc {
 	cors := newCors(config)
-	return func(c *gin.Context) {
+	return func(c *gin类.Context) {
 		cors.applyCors(c)
 	}
 }

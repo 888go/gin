@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"net/http"
@@ -12,23 +12,23 @@ import (
 )
 
 func init() {
-	SetMode(TestMode)
+	X设置运行模式(X常量_运行模式_测试)
 }
 
 func TestRouterGroupBasic(t *testing.T) {
-	router := New()
-	group := router.Group("/hola", func(c *Context) {})
-	group.Use(func(c *Context) {})
+	router := X创建()
+	group := router.X创建分组路由("/hola", func(c *Context) {})
+	group.X中间件(func(c *Context) {})
 
 	assert.Len(t, group.Handlers, 2)
-	assert.Equal(t, "/hola", group.BasePath())
+	assert.Equal(t, "/hola", group.X取路由基础路径())
 	assert.Equal(t, router, group.engine)
 
-	group2 := group.Group("manu")
-	group2.Use(func(c *Context) {}, func(c *Context) {})
+	group2 := group.X创建分组路由("manu")
+	group2.X中间件(func(c *Context) {}, func(c *Context) {})
 
 	assert.Len(t, group2.Handlers, 4)
-	assert.Equal(t, "/hola/manu", group2.BasePath())
+	assert.Equal(t, "/hola/manu", group2.X取路由基础路径())
 	assert.Equal(t, router, group2.engine)
 }
 
@@ -43,39 +43,39 @@ func TestRouterGroupBasicHandle(t *testing.T) {
 }
 
 func performRequestInGroup(t *testing.T, method string) {
-	router := New()
-	v1 := router.Group("v1", func(c *Context) {})
-	assert.Equal(t, "/v1", v1.BasePath())
+	router := X创建()
+	v1 := router.X创建分组路由("v1", func(c *Context) {})
+	assert.Equal(t, "/v1", v1.X取路由基础路径())
 
-	login := v1.Group("/login/", func(c *Context) {}, func(c *Context) {})
-	assert.Equal(t, "/v1/login/", login.BasePath())
+	login := v1.X创建分组路由("/login/", func(c *Context) {}, func(c *Context) {})
+	assert.Equal(t, "/v1/login/", login.X取路由基础路径())
 
 	handler := func(c *Context) {
-		c.String(http.StatusBadRequest, "the method was %s and index %d", c.Request.Method, c.index)
+		c.X输出文本(http.StatusBadRequest, "the method was %s and index %d", c.X请求.Method, c.index)
 	}
 
 	switch method {
 	case http.MethodGet:
-		v1.GET("/test", handler)
-		login.GET("/test", handler)
+		v1.X绑定GET("/test", handler)
+		login.X绑定GET("/test", handler)
 	case http.MethodPost:
-		v1.POST("/test", handler)
-		login.POST("/test", handler)
+		v1.X绑定POST("/test", handler)
+		login.X绑定POST("/test", handler)
 	case http.MethodPut:
-		v1.PUT("/test", handler)
-		login.PUT("/test", handler)
+		v1.X绑定PUT("/test", handler)
+		login.X绑定PUT("/test", handler)
 	case http.MethodPatch:
-		v1.PATCH("/test", handler)
-		login.PATCH("/test", handler)
+		v1.X绑定PATCH("/test", handler)
+		login.X绑定PATCH("/test", handler)
 	case http.MethodDelete:
-		v1.DELETE("/test", handler)
-		login.DELETE("/test", handler)
+		v1.X绑定DELETE("/test", handler)
+		login.X绑定DELETE("/test", handler)
 	case http.MethodHead:
-		v1.HEAD("/test", handler)
-		login.HEAD("/test", handler)
+		v1.X绑定HEAD("/test", handler)
+		login.X绑定HEAD("/test", handler)
 	case http.MethodOptions:
-		v1.OPTIONS("/test", handler)
-		login.OPTIONS("/test", handler)
+		v1.X绑定OPTIONS("/test", handler)
+		login.X绑定OPTIONS("/test", handler)
 	default:
 		panic("unknown method")
 	}
@@ -90,35 +90,35 @@ func performRequestInGroup(t *testing.T, method string) {
 }
 
 func TestRouterGroupInvalidStatic(t *testing.T) {
-	router := New()
+	router := X创建()
 	assert.Panics(t, func() {
-		router.Static("/path/:param", "/")
+		router.X绑定静态文件目录("/path/:param", "/")
 	})
 
 	assert.Panics(t, func() {
-		router.Static("/path/*param", "/")
+		router.X绑定静态文件目录("/path/*param", "/")
 	})
 }
 
 func TestRouterGroupInvalidStaticFile(t *testing.T) {
-	router := New()
+	router := X创建()
 	assert.Panics(t, func() {
-		router.StaticFile("/path/:param", "favicon.ico")
+		router.X绑定静态单文件("/path/:param", "favicon.ico")
 	})
 
 	assert.Panics(t, func() {
-		router.StaticFile("/path/*param", "favicon.ico")
+		router.X绑定静态单文件("/path/*param", "favicon.ico")
 	})
 }
 
 func TestRouterGroupInvalidStaticFileFS(t *testing.T) {
-	router := New()
+	router := X创建()
 	assert.Panics(t, func() {
-		router.StaticFileFS("/path/:param", "favicon.ico", Dir(".", false))
+		router.X绑定静态单文件FS("/path/:param", "favicon.ico", Dir(".", false))
 	})
 
 	assert.Panics(t, func() {
-		router.StaticFileFS("/path/*param", "favicon.ico", Dir(".", false))
+		router.X绑定静态单文件FS("/path/*param", "favicon.ico", Dir(".", false))
 	})
 }
 
@@ -127,69 +127,69 @@ func TestRouterGroupTooManyHandlers(t *testing.T) {
 		panicValue = "too many handlers"
 		maximumCnt = abortIndex
 	)
-	router := New()
+	router := X创建()
 	handlers1 := make([]HandlerFunc, maximumCnt-1)
-	router.Use(handlers1...)
+	router.X中间件(handlers1...)
 
 	handlers2 := make([]HandlerFunc, maximumCnt+1)
 	assert.PanicsWithValue(t, panicValue, func() {
-		router.Use(handlers2...)
+		router.X中间件(handlers2...)
 	})
 	assert.PanicsWithValue(t, panicValue, func() {
-		router.GET("/", handlers2...)
+		router.X绑定GET("/", handlers2...)
 	})
 }
 
 func TestRouterGroupBadMethod(t *testing.T) {
-	router := New()
+	router := X创建()
 	assert.Panics(t, func() {
-		router.Handle(http.MethodGet, "/")
+		router.X绑定(http.MethodGet, "/")
 	})
 	assert.Panics(t, func() {
-		router.Handle(" GET", "/")
+		router.X绑定(" GET", "/")
 	})
 	assert.Panics(t, func() {
-		router.Handle("GET ", "/")
+		router.X绑定("GET ", "/")
 	})
 	assert.Panics(t, func() {
-		router.Handle("", "/")
+		router.X绑定("", "/")
 	})
 	assert.Panics(t, func() {
-		router.Handle("PO ST", "/")
+		router.X绑定("PO ST", "/")
 	})
 	assert.Panics(t, func() {
-		router.Handle("1GET", "/")
+		router.X绑定("1GET", "/")
 	})
 	assert.Panics(t, func() {
-		router.Handle("PATCh", "/")
+		router.X绑定("PATCh", "/")
 	})
 }
 
 func TestRouterGroupPipeline(t *testing.T) {
-	router := New()
+	router := X创建()
 	testRoutesInterface(t, router)
 
-	v1 := router.Group("/v1")
+	v1 := router.X创建分组路由("/v1")
 	testRoutesInterface(t, v1)
 }
 
 func testRoutesInterface(t *testing.T, r IRoutes) {
 	handler := func(c *Context) {}
-	assert.Equal(t, r, r.Use(handler))
+	assert.Equal(t, r, r.X中间件(handler))
 
-	assert.Equal(t, r, r.Handle(http.MethodGet, "/handler", handler))
-	assert.Equal(t, r, r.Any("/any", handler))
-	assert.Equal(t, r, r.GET("/", handler))
-	assert.Equal(t, r, r.POST("/", handler))
-	assert.Equal(t, r, r.DELETE("/", handler))
-	assert.Equal(t, r, r.PATCH("/", handler))
-	assert.Equal(t, r, r.PUT("/", handler))
-	assert.Equal(t, r, r.OPTIONS("/", handler))
-	assert.Equal(t, r, r.HEAD("/", handler))
+	assert.Equal(t, r, r.X绑定(http.MethodGet, "/handler", handler))
+	assert.Equal(t, r, r.X绑定Any("/any", handler))
+	assert.Equal(t, r, r.X绑定GET("/", handler))
+	assert.Equal(t, r, r.X绑定POST("/", handler))
+	assert.Equal(t, r, r.X绑定DELETE("/", handler))
+	assert.Equal(t, r, r.X绑定PATCH("/", handler))
+	assert.Equal(t, r, r.X绑定PUT("/", handler))
+	assert.Equal(t, r, r.X绑定OPTIONS("/", handler))
+	assert.Equal(t, r, r.X绑定HEAD("/", handler))
 	assert.Equal(t, r, r.Match([]string{http.MethodPut, http.MethodPatch}, "/match", handler))
 
-	assert.Equal(t, r, r.StaticFile("/file", "."))
-	assert.Equal(t, r, r.StaticFileFS("/static2", ".", Dir(".", false)))
-	assert.Equal(t, r, r.Static("/static", "."))
-	assert.Equal(t, r, r.StaticFS("/static2", Dir(".", false)))
+	assert.Equal(t, r, r.X绑定静态单文件("/file", "."))
+	assert.Equal(t, r, r.X绑定静态单文件FS("/static2", ".", Dir(".", false)))
+	assert.Equal(t, r, r.X绑定静态文件目录("/static", "."))
+	assert.Equal(t, r, r.X绑定静态文件目录FS("/static2", Dir(".", false)))
 }

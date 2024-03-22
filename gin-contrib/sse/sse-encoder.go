@@ -1,6 +1,6 @@
-// 版权所有 ? 2014 Manu Martinez-Almeida。保留所有权利。
-// 本源代码的使用受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 package sse
 
@@ -14,14 +14,9 @@ import (
 	"strings"
 )
 
-// Server-Sent 事件
-// W3C 工作草案 2009年10月29日
+// Server-Sent Events
+// W3C Working Draft 29 October 2009
 // http://www.w3.org/TR/2009/WD-eventsource-20091029/
-// 
-// 注释翻译：
-// 服务端推送事件
-// W3C 在2009年10月29日发布的草案版本
-// 参考文档：http://www.w3.org/TR/2009/WD-eventsource-20091029/
 
 const ContentType = "text/event-stream;charset=utf-8"
 
@@ -43,10 +38,6 @@ type Event struct {
 	Data  interface{}
 }
 
-
-// ff:
-// event:
-// writer:
 func Encode(writer io.Writer, event Event) error {
 	w := checkWriter(writer)
 	writeId(w, event.Id)
@@ -95,17 +86,11 @@ func writeData(w stringWriter, data interface{}) error {
 	return nil
 }
 
-
-// ff:
-// w:
 func (r Event) Render(w http.ResponseWriter) error {
 	r.WriteContentType(w)
 	return Encode(w, r)
 }
 
-
-// ff:
-// w:
 func (r Event) WriteContentType(w http.ResponseWriter) {
 	header := w.Header()
 	header["Content-Type"] = contentType

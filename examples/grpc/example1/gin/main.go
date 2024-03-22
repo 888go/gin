@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	// 设置与服务器的连接。
+	// Set up a connection to the server.
 	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
@@ -21,27 +21,27 @@ func main() {
 	client := v1.NewGreeterClient(conn)
 
 	// Set up a http server.
-	r := gin.Default()
-	r.GET("/rest/n/:name", func(c *gin.Context) {
-		name := c.Param("name")
+	r := gin类.X创建默认对象()
+	r.X绑定GET("/rest/n/:name", func(c *gin类.Context) {
+		name := c.X取API参数值("name")
 
-		// 联系服务器并打印其响应。
+		// Contact the server and print out its response.
 		req := &v1.HelloRequest{Name: name}
 		res, err := client.SayHello(c, req)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{
+			c.X输出JSON(http.StatusInternalServerError, gin类.H{
 				"error": err.Error(),
 			})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{
+		c.X输出JSON(http.StatusOK, gin类.H{
 			"result": fmt.Sprint(res.Message),
 		})
 	})
 
 	// Run http server
-	if err := r.Run(":8080"); err != nil {
+	if err := r.X监听(":8080"); err != nil {
 		log.Fatalf("could not run server: %v", err)
 	}
 }

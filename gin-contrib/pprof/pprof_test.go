@@ -27,15 +27,15 @@ func Test_getPrefix(t *testing.T) {
 
 func TestRegisterAndRouteRegister(t *testing.T) {
 	bearerToken := "Bearer token"
-	gin.SetMode(gin.ReleaseMode)
-	r := gin.New()
+	gin类.X设置运行模式(gin类.X常量_运行模式_发布)
+	r := gin类.X创建()
 	Register(r)
-	adminGroup := r.Group("/admin", func(c *gin.Context) {
-		if c.Request.Header.Get("Authorization") != bearerToken {
-			c.AbortWithStatus(http.StatusForbidden)
+	adminGroup := r.X创建分组路由("/admin", func(c *gin类.Context) {
+		if c.X请求.Header.Get("Authorization") != bearerToken {
+			c.X停止并带状态码(http.StatusForbidden)
 			return
 		}
-		c.Next()
+		c.X中间件继续()
 	})
 	RouteRegister(adminGroup, "pprof")
 

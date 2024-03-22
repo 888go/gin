@@ -6,19 +6,19 @@ import (
 	"github.com/888go/gin"
 )
 
-// 这个函数的名称是必须的。App Engine 使用它来正确地驱动请求。
+// This function's name is a must. App Engine uses it to drive the requests properly.
 func init() {
-	// 初始化一个新的Gin实例，不包含中间件
-	r := gin.New()
+	// Starts a new Gin instance with no middle-ware
+	r := gin类.X创建()
 
 	// Define your handlers
-	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Hello World!")
+	r.X绑定GET("/", func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "Hello World!")
 	})
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(http.StatusOK, "pong")
+	r.X绑定GET("/ping", func(c *gin类.Context) {
+		c.X输出文本(http.StatusOK, "pong")
 	})
 
-	// 使用net/http处理所有请求
+	// Handle all requests using net/http
 	http.Handle("/", r)
 }

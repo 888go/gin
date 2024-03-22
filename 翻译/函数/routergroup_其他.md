@@ -53,3 +53,6 @@ hs=绑定静态文件目录
 
 [StaticFS(string, http.FileSystem) IRoutes]
 hs=绑定静态文件目录FS
+
+[Group(string, ...HandlerFunc) *RouterGroup]
+hs=创建分组路由

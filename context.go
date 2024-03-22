@@ -1,8 +1,8 @@
-// 版权所有 2014 Manu Martinez-Almeida。保留所有权利。
-// 使用本源代码受 MIT 风格许可证约束，
-// 该许可证可在 LICENSE 文件中找到。
+// Copyright 2014 Manu Martinez-Almeida. All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
-package gin
+package gin类
 
 import (
 	"errors"
@@ -19,12 +19,12 @@ import (
 	"sync"
 	"time"
 	
+	"github.com/gin-contrib/sse"
 	"github.com/888go/gin/binding"
 	"github.com/888go/gin/render"
-	"github.com/gin-contrib/sse"
 )
 
-// Content-Type MIME 是最常见的数据格式的 MIME 类型。
+// Content-Type MIME of the most common data formats.
 const (
 	MIMEJSON              = binding.MIMEJSON
 	MIMEHTML              = binding.MIMEHTML
@@ -37,22 +37,23 @@ const (
 	MIMETOML              = binding.MIMETOML
 )
 
-// BodyBytesKey 表示一个默认的正文字节键。
+// BodyBytesKey indicates a default body bytes key.
 const BodyBytesKey = "_gin-gonic/gin/bodybyteskey"
 
-// ContextKey 是一个键，用于在 Context 中返回其自身。
+// ContextKey is the key that a Context returns itself for.
 const ContextKey = "_gin-gonic/gin/contextkey"
 
-// abortIndex 表示在中止函数中常用的一个典型值。
+// abortIndex represents a typical value used in abort functions.
 const abortIndex int8 = math.MaxInt8 >> 1
 
-// Context 是 gin 中最重要的部分。它允许我们在中间件之间传递变量，管理流程，验证请求的 JSON，并例如渲染 JSON 响应。
+// Context is the most important part of gin. It allows us to pass variables between middleware,
+// manage the flow, validate the JSON of a request and render a JSON response for example.
 type Context struct {
 	writermem responseWriter
-	Request   *http.Request //hs:请求
+	X请求   *http.Request
 	Writer    ResponseWriter
 
-	Params   Params //hs:参数
+	X参数   Params
 	handlers HandlersChain
 	index    int8
 	fullPath string
@@ -61,25 +62,27 @@ type Context struct {
 	params       *Params
 	skippedNodes *[]skippedNode
 
-	// 这个互斥锁保护了Keys映射。
+	// This mutex protects Keys map.
 	mu sync.RWMutex
 
-	// Keys 是一组键值对，它在每个请求的上下文中具有唯一性。
-	Keys map[string]any //hs:上下文设置值Map
+	// Keys is a key/value pair exclusively for the context of each request.
+	X上下文设置值Map map[string]any
 
-	// Errors 是一个错误列表，其中包含了所有使用了此上下文的处理器/中间件所附加的错误。
-	Errors errorMsgs //hs:错误s
+	// Errors is a list of errors attached to all the handlers/middlewares who used this context.
+	X错误s errorMsgs
 
-	// Accepted 定义了一个手动接受的内容协商格式列表。
+	// Accepted defines a list of manually accepted formats for content negotiation.
 	Accepted []string
 
-	// queryCache 对从 c.Request.URL.Query() 获取的查询结果进行缓存。
+	// queryCache caches the query result from c.Request.URL.Query().
 	queryCache url.Values
 
-	// formCache 对 c.Request.PostForm 进行缓存，其中包含从 POST、PATCH 或 PUT 请求体参数解析得到的表单数据。
+	// formCache caches c.Request.PostForm, which contains the parsed form data from POST, PATCH,
+	// or PUT body parameters.
 	formCache url.Values
 
-	// SameSite 允许服务器定义一个 cookie 属性，使得浏览器无法在跨站请求中携带此 cookie。
+	// SameSite allows a server to define a cookie attribute making it impossible for
+	// the browser to send this cookie along with cross-site requests.
 	sameSite http.SameSite
 }
 
@@ -89,13 +92,13 @@ type Context struct {
 
 func (c *Context) reset() {
 	c.Writer = &c.writermem
-	c.Params = c.Params[:0]
+	c.X参数 = c.X参数[:0]
 	c.handlers = nil
 	c.index = -1
 
 	c.fullPath = ""
-	c.Keys = nil
-	c.Errors = c.Errors[:0]
+	c.X上下文设置值Map = nil
+	c.X错误s = c.X错误s[:0]
 	c.Accepted = nil
 	c.queryCache = nil
 	c.formCache = nil
@@ -104,43 +107,38 @@ func (c *Context) reset() {
 	*c.skippedNodes = (*c.skippedNodes)[:0]
 }
 
-// Copy 返回当前上下文的副本，该副本可以在请求范围之外安全使用。
-// 当需要将上下文传递给一个goroutine时，必须使用此方法。
-
-// ff:取副本
-func (c *Context) Copy() *Context {
+// Copy returns a copy of the current context that can be safely used outside the request's scope.
+// This has to be used when the context has to be passed to a goroutine.
+func (c *Context) X取副本() *Context {
 	cp := Context{
 		writermem: c.writermem,
-		Request:   c.Request,
-		Params:    c.Params,
+		X请求:   c.X请求,
+		X参数:    c.X参数,
 		engine:    c.engine,
 	}
 	cp.writermem.ResponseWriter = nil
 	cp.Writer = &cp.writermem
 	cp.index = abortIndex
 	cp.handlers = nil
-	cp.Keys = map[string]any{}
-	for k, v := range c.Keys {
-		cp.Keys[k] = v
+	cp.X上下文设置值Map = map[string]any{}
+	for k, v := range c.X上下文设置值Map {
+		cp.X上下文设置值Map[k] = v
 	}
-	paramCopy := make([]Param, len(cp.Params))
-	copy(paramCopy, cp.Params)
-	cp.Params = paramCopy
+	paramCopy := make([]Param, len(cp.X参数))
+	copy(paramCopy, cp.X参数)
+	cp.X参数 = paramCopy
 	return &cp
 }
 
-// HandlerName 返回主处理程序的名称。例如，如果处理程序是 "handleGetUsers()"，
-// 该函数将返回 "main.handleGetUsers"。
-
-// ff:取主处理程序名称
-func (c *Context) HandlerName() string {
-	return nameOfFunction(c.handlers.Last())
+// HandlerName returns the main handler's name. For example if the handler is "handleGetUsers()",
+// this function will return "main.handleGetUsers".
+func (c *Context) X取主处理程序名称() string {
+	return nameOfFunction(c.handlers.X取最后一个处理函数())
 }
 
-// HandlerNames 返回与此上下文关联的已注册处理程序的降序列表，遵循HandlerName()的语义
-
-// ff:取处理程序数组
-func (c *Context) HandlerNames() []string {
+// HandlerNames returns a list of all registered handlers for this context in descending order,
+// following the semantics of HandlerName()
+func (c *Context) X取处理程序数组() []string {
 	hn := make([]string, 0, len(c.handlers))
 	for _, val := range c.handlers {
 		hn = append(hn, nameOfFunction(val))
@@ -148,22 +146,18 @@ func (c *Context) HandlerNames() []string {
 	return hn
 }
 
-// Handler 返回主处理程序。
-
-// ff:取主处理程序
-func (c *Context) Handler() HandlerFunc {
-	return c.handlers.Last()
+// Handler returns the main handler.
+func (c *Context) X取主处理程序() HandlerFunc {
+	return c.handlers.X取最后一个处理函数()
 }
 
-// FullPath 返回已匹配路由的完整路径。对于未找到的路由，返回一个空字符串。
+// FullPath returns a matched route full path. For not found routes
+// returns an empty string.
 //
-// 示例：
-//   router.GET("/user/:id", func(c *gin.Context) {
-//       c.FullPath() == "/user/:id" // 将会返回 true
-//   })
-
-// ff:取路由路径
-func (c *Context) FullPath() string {
+//	router.GET("/user/:id", func(c *gin.Context) {
+//	    c.FullPath() == "/user/:id" // true
+//	})
+func (c *Context) X取路由路径() string {
 	return c.fullPath
 }
 
@@ -171,12 +165,10 @@ func (c *Context) FullPath() string {
 /*********** FLOW CONTROL ***********/
 /************************************/
 
-// Next 应仅在中间件内部使用。
-// 它在调用处理程序内部执行链中待处理的后续处理程序。
-// 参考 GitHub 上的示例。
-
-// ff:中间件继续
-func (c *Context) Next() {
+// Next should be used only inside middleware.
+// It executes the pending handlers in the chain inside the calling handler.
+// See example in GitHub.
+func (c *Context) X中间件继续() {
 	c.index++
 	for c.index < int8(len(c.handlers)) {
 		c.handlers[c.index](c)
@@ -184,88 +176,67 @@ func (c *Context) Next() {
 	}
 }
 
-// IsAborted 返回当前上下文是否已中止。
-
-// ff:是否已停止
-func (c *Context) IsAborted() bool {
+// IsAborted returns true if the current context was aborted.
+func (c *Context) X是否已停止() bool {
 	return c.index >= abortIndex
 }
 
-// Abort 阻止待处理的处理器被调用。请注意，这不会停止当前处理器。
-// 假设你有一个授权中间件用于验证当前请求是否已授权。
-// 如果授权失败（例如，密码不匹配），则调用 Abort 来确保该请求的剩余处理器不会被调用。
-
-// ff:停止
-func (c *Context) Abort() {
+// Abort prevents pending handlers from being called. Note that this will not stop the current handler.
+// Let's say you have an authorization middleware that validates that the current request is authorized.
+// If the authorization fails (ex: the password does not match), call Abort to ensure the remaining handlers
+// for this request are not called.
+func (c *Context) X停止() {
 	c.index = abortIndex
 }
 
-// AbortWithStatus 方法调用 `Abort()`，并使用指定的状态码写入头部信息。
-// 例如，在尝试验证请求失败时，可以这样使用：context.AbortWithStatus(401)。
-//
-// 注释翻译成中文如下：
-//
-// AbortWithStatus 函数会调用 `Abort()` 函数，并携带特定状态码设置响应头。
-// 举例来说，如果尝试验证请求失败，可以采用如下的方式：context.AbortWithStatus(401)。
-
-// ff:停止并带状态码
-// code:状态码
-func (c *Context) AbortWithStatus(code int) {
-	c.Status(code)
+// AbortWithStatus calls `Abort()` and writes the headers with the specified status code.
+// For example, a failed attempt to authenticate a request could use: context.AbortWithStatus(401).
+func (c *Context) X停止并带状态码(状态码 int) {
+	c.X设置状态码(状态码)
 	c.Writer.WriteHeaderNow()
-	c.Abort()
+	c.X停止()
 }
 
-// AbortWithStatusJSON 在内部调用`Abort()`和`JSON`方法。
-// 该方法中断执行链，写入状态码并返回一个JSON格式的响应体。
-// 同时将Content-Type设置为"application/json"。
-
-// ff:停止并带状态码且返回JSON
-// jsonObj:JSON结构
-// code:状态码
-func (c *Context) AbortWithStatusJSON(code int, jsonObj any) {
-	c.Abort()
-	c.JSON(code, jsonObj)
+// AbortWithStatusJSON calls `Abort()` and then `JSON` internally.
+// This method stops the chain, writes the status code and return a JSON body.
+// It also sets the Content-Type as "application/json".
+func (c *Context) X停止并带状态码且返回JSON(状态码 int, JSON结构 any) {
+	c.X停止()
+	c.X输出JSON(状态码, JSON结构)
 }
 
-// AbortWithError 在内部调用 `AbortWithStatus()` 和 `Error()`。
-// 该方法停止执行链，写入状态码并将指定错误推送到 `c.Errors`。
-// 有关更多详细信息，请参阅 Context.Error()。
-
-// ff:停止并带状态码与错误
-// err:错误
-// code:状态码
-func (c *Context) AbortWithError(code int, err error) *Error {
-	c.AbortWithStatus(code)
-	return c.Error(err)
+// AbortWithError calls `AbortWithStatus()` and `Error()` internally.
+// This method stops the chain, writes the status code and pushes the specified error to `c.Errors`.
+// See Context.Error() for more details.
+func (c *Context) X停止并带状态码与错误(状态码 int, 错误 error) *Error {
+	c.X停止并带状态码(状态码)
+	return c.X错误(错误)
 }
 
 /************************************/
 /********* ERROR MANAGEMENT *********/
 /************************************/
 
-// Error 将错误附着到当前上下文中。该错误会被推送到错误列表中。
-// 在请求解析过程中，对于发生的每个错误调用 Error 是一个好主意。
-// 可以使用中间件来收集所有错误，并将它们一起推送到数据库、打印日志或将其添加到HTTP响应中。
-// 如果err为nil，Error将会触发panic。
-
-// ff:错误
-// err:错误
-func (c *Context) Error(err error) *Error {
-	if err == nil {
+// Error attaches an error to the current context. The error is pushed to a list of errors.
+// It's a good idea to call Error for each error that occurred during the resolution of a request.
+// A middleware can be used to collect all the errors and push them to a database together,
+// print a log, or append it in the HTTP response.
+// Error will panic if err is nil.
+func (c *Context) X错误(错误 error) *Error {
+	if 错误 == nil {
 		panic("err is nil")
 	}
 
 	var parsedError *Error
-	ok := errors.As(err, &parsedError)
+	ok := errors.As(错误, &parsedError)
 	if !ok {
 		parsedError = &Error{
-			Err:  err,
+			Err:  错误,
 			Type: ErrorTypePrivate,
 		}
 	}
 
-	c.Errors = append(c.Errors, parsedError)
+	c.X错误s = append(c.X错误s, parsedError)
 	return parsedError
 }
 
@@ -273,199 +244,135 @@ func (c *Context) Error(err error) *Error {
 /******** METADATA MANAGEMENT********/
 /************************************/
 
-// Set 用于为当前上下文独占存储一个新的键值对。
-// 如果之前未使用过，它还会初始化 c.Keys。
-
-// ff:设置值
-// value:值
-// key:名称
-func (c *Context) Set(key string, value any) {
+// Set is used to store a new key/value pair exclusively for this context.
+// It also lazy initializes  c.Keys if it was not used previously.
+func (c *Context) X设置值(名称 string, 值 any) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	if c.Keys == nil {
-		c.Keys = make(map[string]any)
+	if c.X上下文设置值Map == nil {
+		c.X上下文设置值Map = make(map[string]any)
 	}
 
-	c.Keys[key] = value
+	c.X上下文设置值Map[名称] = 值
 }
 
-// Get 方法根据给定的键返回其对应的值，即：(value, true)。
-// 若该值不存在，则返回 (nil, false)。
-
-// ff:取值
-// exists:是否存在
-// value:返回值
-// key:名称
-func (c *Context) Get(key string) (value any, exists bool) {
+// Get returns the value for the given key, ie: (value, true).
+// If the value does not exist it returns (nil, false)
+func (c *Context) X取值(名称 string) (返回值 any, 是否存在 bool) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	value, exists = c.Keys[key]
+	返回值, 是否存在 = c.X上下文设置值Map[名称]
 	return
 }
 
-// MustGet 返回给定键对应的值，如果该键存在。否则，函数会触发panic异常。
-
-// ff:取值PANI
-// key:名称
-func (c *Context) MustGet(key string) any {
-	if value, exists := c.Get(key); exists {
+// MustGet returns the value for the given key if it exists, otherwise it panics.
+func (c *Context) X取值PANI(名称 string) any {
+	if value, exists := c.X取值(名称); exists {
 		return value
 	}
-	panic("Key \"" + key + "\" does not exist")
+	panic("Key \"" + 名称 + "\" does not exist")
 }
 
-// GetString 方法返回与键关联的值，以字符串形式。
-
-// ff:取文本值
-// s:返回值
-// key:名称
-func (c *Context) GetString(key string) (s string) {
-	if val, ok := c.Get(key); ok && val != nil {
-		s, _ = val.(string)
+// GetString returns the value associated with the key as a string.
+func (c *Context) X取文本值(名称 string) (返回值 string) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回值, _ = val.(string)
 	}
 	return
 }
 
-// GetBool返回与key关联的值，将其转化为布尔类型。
-
-// ff:取布尔值
-// b:返回值
-// key:名称
-func (c *Context) GetBool(key string) (b bool) {
-	if val, ok := c.Get(key); ok && val != nil {
-		b, _ = val.(bool)
+// GetBool returns the value associated with the key as a boolean.
+func (c *Context) X取布尔值(名称 string) (返回值 bool) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回值, _ = val.(bool)
 	}
 	return
 }
 
-// GetInt 通过键返回与其关联的整数值。
-
-// ff:取整数值
-// i:返回值
-// key:名称
-func (c *Context) GetInt(key string) (i int) {
-	if val, ok := c.Get(key); ok && val != nil {
-		i, _ = val.(int)
+// GetInt returns the value associated with the key as an integer.
+func (c *Context) X取整数值(名称 string) (返回值 int) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回值, _ = val.(int)
 	}
 	return
 }
 
-// GetInt64 以整数形式返回与键关联的值。
-
-// ff:取整数64位值
-// i64:返回值
-// key:名称
-func (c *Context) GetInt64(key string) (i64 int64) {
-	if val, ok := c.Get(key); ok && val != nil {
-		i64, _ = val.(int64)
+// GetInt64 returns the value associated with the key as an integer.
+func (c *Context) X取整数64位值(名称 string) (返回值 int64) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回值, _ = val.(int64)
 	}
 	return
 }
 
-// GetUint 返回与键关联的值，以无符号整数形式。
-
-// ff:取正整数值
-// ui:返回值
-// key:名称
-func (c *Context) GetUint(key string) (ui uint) {
-	if val, ok := c.Get(key); ok && val != nil {
-		ui, _ = val.(uint)
+// GetUint returns the value associated with the key as an unsigned integer.
+func (c *Context) X取正整数值(名称 string) (返回值 uint) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回值, _ = val.(uint)
 	}
 	return
 }
 
-// GetUint64返回与key关联的值，将其转化为无符号整数。
-
-// ff:取正整数64位值
-// ui64:返回值
-// key:名称
-func (c *Context) GetUint64(key string) (ui64 uint64) {
-	if val, ok := c.Get(key); ok && val != nil {
-		ui64, _ = val.(uint64)
+// GetUint64 returns the value associated with the key as an unsigned integer.
+func (c *Context) X取正整数64位值(名称 string) (返回值 uint64) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回值, _ = val.(uint64)
 	}
 	return
 }
 
-// GetFloat64 通过key返回关联的float64类型的值。
-
-// ff:取小数64位值
-// f64:返回值
-// key:名称
-func (c *Context) GetFloat64(key string) (f64 float64) {
-	if val, ok := c.Get(key); ok && val != nil {
-		f64, _ = val.(float64)
+// GetFloat64 returns the value associated with the key as a float64.
+func (c *Context) X取小数64位值(名称 string) (返回值 float64) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回值, _ = val.(float64)
 	}
 	return
 }
 
-// GetTime 函数通过键返回其关联的时间值。
-
-// ff:取时间值
-// t:返回值
-// key:名称
-func (c *Context) GetTime(key string) (t time.Time) {
-	if val, ok := c.Get(key); ok && val != nil {
-		t, _ = val.(time.Time)
+// GetTime returns the value associated with the key as time.
+func (c *Context) X取时间值(名称 string) (返回值 time.Time) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回值, _ = val.(time.Time)
 	}
 	return
 }
 
-// GetDuration返回与键关联的值，其类型为持续时间。
-
-// ff:取时长值
-// d:返回时长
-// key:名称
-func (c *Context) GetDuration(key string) (d time.Duration) {
-	if val, ok := c.Get(key); ok && val != nil {
-		d, _ = val.(time.Duration)
+// GetDuration returns the value associated with the key as a duration.
+func (c *Context) X取时长值(名称 string) (返回时长 time.Duration) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回时长, _ = val.(time.Duration)
 	}
 	return
 }
 
-// GetStringSlice 函数返回与键关联的值，该值为字符串切片。
-
-// ff:取数组值
-// ss:返回数组
-// key:名称
-func (c *Context) GetStringSlice(key string) (ss []string) {
-	if val, ok := c.Get(key); ok && val != nil {
-		ss, _ = val.([]string)
+// GetStringSlice returns the value associated with the key as a slice of strings.
+func (c *Context) X取数组值(名称 string) (返回数组 []string) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回数组, _ = val.([]string)
 	}
 	return
 }
 
-// GetStringMap 返回与键关联的值，该值为接口映射（map）类型。
-
-// ff:取Map值
-// sm:返回Map
-// key:名称
-func (c *Context) GetStringMap(key string) (sm map[string]any) {
-	if val, ok := c.Get(key); ok && val != nil {
-		sm, _ = val.(map[string]any)
+// GetStringMap returns the value associated with the key as a map of interfaces.
+func (c *Context) X取Map值(名称 string) (返回Map map[string]any) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回Map, _ = val.(map[string]any)
 	}
 	return
 }
 
-// GetStringMapString返回与键关联的值，该值为字符串映射（map）类型。
-
-// ff:取文本Map值
-// sms:返回Map
-// key:名称
-func (c *Context) GetStringMapString(key string) (sms map[string]string) {
-	if val, ok := c.Get(key); ok && val != nil {
-		sms, _ = val.(map[string]string)
+// GetStringMapString returns the value associated with the key as a map of strings.
+func (c *Context) X取文本Map值(名称 string) (返回Map map[string]string) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回Map, _ = val.(map[string]string)
 	}
 	return
 }
 
-// GetStringMapStringSlice 返回与键关联的值，该值为字符串到字符串切片的映射。
-
-// ff:取数组Map值
-// smss:返回数组Map
-// key:名称
-func (c *Context) GetStringMapStringSlice(key string) (smss map[string][]string) {
-	if val, ok := c.Get(key); ok && val != nil {
-		smss, _ = val.(map[string][]string)
+// GetStringMapStringSlice returns the value associated with the key as a map to a slice of strings.
+func (c *Context) X取数组Map值(名称 string) (返回数组Map map[string][]string) {
+	if val, ok := c.X取值(名称); ok && val != nil {
+		返回数组Map, _ = val.(map[string][]string)
 	}
 	return
 }
@@ -474,207 +381,155 @@ func (c *Context) GetStringMapStringSlice(key string) (smss map[string][]string)
 /************ INPUT DATA ************/
 /************************************/
 
-// Param 返回URL参数的值。
-// 这是c.Params.ByName(key)的一个快捷方式。
+// Param returns the value of the URL param.
+// It is a shortcut for c.Params.ByName(key)
 //
-// 示例：
-// 使用router.GET设置路由处理函数，访问"/user/:id"时，
-// ```go
-// router.GET("/user/:id", func(c *gin.Context) {
-//     // 当发送一个GET请求到/user/john
-//     id := c.Param("id") // 这时id的值为"john"
-//     // 当发送一个GET请求到/user/john/
-//     id := c.Param("id") // 这时id的值为"john/"
-// })
-// ```
-// 注：在上述示例中，":id"是一个动态参数，其值会被解析并存储到c.Param("id")中。
-
-// ff:取API参数值
-// key:名称
-func (c *Context) Param(key string) string {
-	return c.Params.ByName(key)
+//	router.GET("/user/:id", func(c *gin.Context) {
+//	    // a GET request to /user/john
+//	    id := c.Param("id") // id == "/john"
+//	    // a GET request to /user/john/
+//	    id := c.Param("id") // id == "/john/"
+//	})
+func (c *Context) X取API参数值(名称 string) string {
+	return c.X参数.ByName(名称)
 }
 
-// AddParam 将参数添加到上下文，并为了端到端测试的目的，用给定的值替换路径参数键
-// 示例路由："/user/:id"
+// AddParam adds param to context and
+// replaces path param key with given value for e2e testing purposes
+// Example Route: "/user/:id"
 // AddParam("id", 1)
-// 结果："/user/1"
-
-// ff:设置API参数值
-// value:值
-// key:名称
-func (c *Context) AddParam(key, value string) {
-	c.Params = append(c.Params, Param{Key: key, Value: value})
+// Result: "/user/1"
+func (c *Context) X设置API参数值(名称, 值 string) {
+	c.X参数 = append(c.X参数, Param{Key: 名称, Value: 值})
 }
 
-// Query方法返回键所对应的URL查询值，如果该值存在，则返回该值，否则返回一个空字符串 `("")`。
-// 这是 `c.Request.URL.Query().Get(key)` 的快捷方式。
+// Query returns the keyed url query value if it exists,
+// otherwise it returns an empty string `("")`.
+// It is shortcut for `c.Request.URL.Query().Get(key)`
 //
-//    GET /path?id=1234&name=Manu&value=
-//       c.Query("id") 返回 "1234"
-//       c.Query("name") 返回 "Manu"
-//       c.Query("value") 返回 ""
-//       c.Query("wtf") 返回 ""
-
-// ff:取URL参数值
-// value:返回值
-// key:名称
-func (c *Context) Query(key string) (value string) {
-	value, _ = c.GetQuery(key)
+//	    GET /path?id=1234&name=Manu&value=
+//		   c.Query("id") == "1234"
+//		   c.Query("name") == "Manu"
+//		   c.Query("value") == ""
+//		   c.Query("wtf") == ""
+func (c *Context) X取URL参数值(名称 string) (返回值 string) {
+	返回值, _ = c.X取URL参数值2(名称)
 	return
 }
 
-// DefaultQuery 返回键值对形式的URL查询参数的值，如果该参数存在，则返回其值；否则返回指定的defaultValue字符串。
-// 有关更多详细信息，请参阅：Query() 和 GetQuery()。
+// DefaultQuery returns the keyed url query value if it exists,
+// otherwise it returns the specified defaultValue string.
+// See: Query() and GetQuery() for further information.
 //
-// 示例：
-// 请求 GET /?name=Manu&lastname=
-// c.DefaultQuery("name", "unknown") 将返回 "Manu"
-// c.DefaultQuery("id", "none") 将返回 "none"
-// c.DefaultQuery("lastname", "none") 将返回 ""
-
-// ff:取URL参数值并带默认
-// defaultValue:默认值
-// key:名称
-func (c *Context) DefaultQuery(key, defaultValue string) string {
-	if value, ok := c.GetQuery(key); ok {
+//	GET /?name=Manu&lastname=
+//	c.DefaultQuery("name", "unknown") == "Manu"
+//	c.DefaultQuery("id", "none") == "none"
+//	c.DefaultQuery("lastname", "none") == ""
+func (c *Context) X取URL参数值并带默认(名称, 默认值 string) string {
+	if value, ok := c.X取URL参数值2(名称); ok {
 		return value
 	}
-	return defaultValue
+	return 默认值
 }
 
-// GetQuery 方法类似于 Query()，当给定键的 URL 查询值存在时，它返回该查询值及其对应的布尔值 `(value, true)`（即使该值是一个空字符串）；
-// 否则，它返回 `("", false)`。此方法是 `c.Request.URL.Query().Get(key)` 的快捷方式。
+// GetQuery is like Query(), it returns the keyed url query value
+// if it exists `(value, true)` (even when the value is an empty string),
+// otherwise it returns `("", false)`.
+// It is shortcut for `c.Request.URL.Query().Get(key)`
 //
-// 示例：
-// 请求 GET /?name=Manu&lastname=
-// ("Manu", true) 等价于 c.GetQuery("name")
-// ("", false) 等价于 c.GetQuery("id")
-// ("", true) 等价于 c.GetQuery("lastname")
-
-// ff:取URL参数值2
-// key:名称
-func (c *Context) GetQuery(key string) (string, bool) {
-	if values, ok := c.GetQueryArray(key); ok {
+//	GET /?name=Manu&lastname=
+//	("Manu", true) == c.GetQuery("name")
+//	("", false) == c.GetQuery("id")
+//	("", true) == c.GetQuery("lastname")
+func (c *Context) X取URL参数值2(名称 string) (string, bool) {
+	if values, ok := c.X取URL参数数组值2(名称); ok {
 		return values[0], ok
 	}
 	return "", false
 }
 
-// QueryArray 函数针对给定的查询键返回一个字符串切片。
-// 返回切片的长度取决于具有该键的参数的数量。
-
-// ff:取URL参数数组值
-// values:返回数组
-// key:名称
-func (c *Context) QueryArray(key string) (values []string) {
-	values, _ = c.GetQueryArray(key)
+// QueryArray returns a slice of strings for a given query key.
+// The length of the slice depends on the number of params with the given key.
+func (c *Context) X取URL参数数组值(名称 string) (返回数组 []string) {
+	返回数组, _ = c.X取URL参数数组值2(名称)
 	return
 }
 
 func (c *Context) initQueryCache() {
 	if c.queryCache == nil {
-		if c.Request != nil {
-			c.queryCache = c.Request.URL.Query()
+		if c.X请求 != nil {
+			c.queryCache = c.X请求.URL.Query()
 		} else {
 			c.queryCache = url.Values{}
 		}
 	}
 }
 
-// GetQueryArray 返回给定查询键的字符串切片，以及
-// 一个布尔值，表示该键是否存在至少一个值。
-
-// ff:取URL参数数组值2
-// ok:是否存在
-// values:返回数组
-// key:名称
-func (c *Context) GetQueryArray(key string) (values []string, ok bool) {
+// GetQueryArray returns a slice of strings for a given query key, plus
+// a boolean value whether at least one value exists for the given key.
+func (c *Context) X取URL参数数组值2(名称 string) (返回数组 []string, 是否存在 bool) {
 	c.initQueryCache()
-	values, ok = c.queryCache[key]
+	返回数组, 是否存在 = c.queryCache[名称]
 	return
 }
 
-// QueryMap 根据给定的查询键返回一个映射（map）。
-
-// ff:取URL参数Map值
-// dicts:返回Map
-// key:名称
-func (c *Context) QueryMap(key string) (dicts map[string]string) {
-	dicts, _ = c.GetQueryMap(key)
+// QueryMap returns a map for a given query key.
+func (c *Context) X取URL参数Map值(名称 string) (返回Map map[string]string) {
+	返回Map, _ = c.X取URL参数Map值2(名称)
 	return
 }
 
-// GetQueryMap 为给定的查询键返回一个映射（map），同时返回一个布尔值，
-// 表示该键是否存在至少一个值。
-
-// ff:取URL参数Map值2
-// map[string]string:
-// key:名称
-func (c *Context) GetQueryMap(key string) (map[string]string, bool) {
+// GetQueryMap returns a map for a given query key, plus a boolean value
+// whether at least one value exists for the given key.
+func (c *Context) X取URL参数Map值2(名称 string) (map[string]string, bool) {
 	c.initQueryCache()
-	return c.get(c.queryCache, key)
+	return c.get(c.queryCache, 名称)
 }
 
-// PostForm 返回从 POST 请求中 urlencoded 表单或 multipart 表单获取的指定键值，如果该键存在，则返回其对应的值；否则返回空字符串 `("")`。
-
-// ff:取表单参数值
-// value:返回值
-// key:名称
-func (c *Context) PostForm(key string) (value string) {
-	value, _ = c.GetPostForm(key)
+// PostForm returns the specified key from a POST urlencoded form or multipart form
+// when it exists, otherwise it returns an empty string `("")`.
+func (c *Context) X取表单参数值(名称 string) (返回值 string) {
+	返回值, _ = c.X取表单参数值2(名称)
 	return
 }
 
-// DefaultPostForm 函数在 POST 请求的 urlencoded 表单或 multipart 表单中查找指定键的值，
-// 如果该键存在，则返回对应的值，否则返回指定的 defaultValue 字符串。
-// 有关更多信息，请参阅 PostForm() 和 GetPostForm() 函数。
-
-// ff:取表单参数值并带默认
-// defaultValue:默认值
-// key:名称
-func (c *Context) DefaultPostForm(key, defaultValue string) string {
-	if value, ok := c.GetPostForm(key); ok {
+// DefaultPostForm returns the specified key from a POST urlencoded form or multipart form
+// when it exists, otherwise it returns the specified defaultValue string.
+// See: PostForm() and GetPostForm() for further information.
+func (c *Context) X取表单参数值并带默认(名称, 默认值 string) string {
+	if value, ok := c.X取表单参数值2(名称); ok {
 		return value
 	}
-	return defaultValue
+	return 默认值
 }
 
-// 以下是将给定的Go注释翻译成中文：
+// GetPostForm is like PostForm(key). It returns the specified key from a POST urlencoded
+// form or multipart form when it exists `(value, true)` (even when the value is an empty string),
+// otherwise it returns ("", false).
+// For example, during a PATCH request to update the user's email:
 //
-// GetPostForm 类似于 PostForm(key)。当存在时，它从POST urlencoded表单或multipart表单中返回指定键的值 `(value, true)`（即使该值为空字符串），
-// 否则返回 ("", false)。
-// 例如，在进行PATCH请求以更新用户邮箱时：
-//
-//	    email=mail@example.com  -->  ("mail@example.com", true) := GetPostForm("email") // 将邮箱设置为 "mail@example.com"
-//		   email=                  -->  ("", true) := GetPostForm("email") // 将邮箱设置为空字符串
-//	                            -->  ("", false) := GetPostForm("email") // 对邮箱不做任何处理
-
-// ff:取表单参数值2
-// key:名称
-func (c *Context) GetPostForm(key string) (string, bool) {
-	if values, ok := c.GetPostFormArray(key); ok {
+//	    email=mail@example.com  -->  ("mail@example.com", true) := GetPostForm("email") // set email to "mail@example.com"
+//		   email=                  -->  ("", true) := GetPostForm("email") // set email to ""
+//	                            -->  ("", false) := GetPostForm("email") // do nothing with email
+func (c *Context) X取表单参数值2(名称 string) (string, bool) {
+	if values, ok := c.X取参数数组值(名称); ok {
 		return values[0], ok
 	}
 	return "", false
 }
 
-// PostFormArray 为给定的表单键返回一个字符串切片。
-// 切片的长度取决于具有该键的参数的数量。
-
-// ff:取表单参数数组值
-// values:返回数组
-// key:名称
-func (c *Context) PostFormArray(key string) (values []string) {
-	values, _ = c.GetPostFormArray(key)
+// PostFormArray returns a slice of strings for a given form key.
+// The length of the slice depends on the number of params with the given key.
+func (c *Context) X取表单参数数组值(名称 string) (返回数组 []string) {
+	返回数组, _ = c.X取参数数组值(名称)
 	return
 }
 
 func (c *Context) initFormCache() {
 	if c.formCache == nil {
 		c.formCache = make(url.Values)
-		req := c.Request
-		if err := req.ParseMultipartForm(c.engine.MaxMultipartMemory); err != nil {
+		req := c.X请求
+		if err := req.ParseMultipartForm(c.engine.X最大Multipart内存); err != nil {
 			if !errors.Is(err, http.ErrNotMultipart) {
 				debugPrint("error on parse multipart form array: %v", err)
 			}
@@ -683,41 +538,28 @@ func (c *Context) initFormCache() {
 	}
 }
 
-// GetPostFormArray 针对给定表单键返回一个字符串切片，以及
-// 一个布尔值，表示该键是否存在至少一个值。
-
-// ff:取参数数组值
-// ok:是否存在
-// values:返回数组
-// key:名称
-func (c *Context) GetPostFormArray(key string) (values []string, ok bool) {
+// GetPostFormArray returns a slice of strings for a given form key, plus
+// a boolean value whether at least one value exists for the given key.
+func (c *Context) X取参数数组值(名称 string) (返回数组 []string, 是否存在 bool) {
 	c.initFormCache()
-	values, ok = c.formCache[key]
+	返回数组, 是否存在 = c.formCache[名称]
 	return
 }
 
-// PostFormMap 为给定的表单键返回一个映射（map）。
-
-// ff:取表单参数Map值
-// dicts:返回Map
-// key:名称
-func (c *Context) PostFormMap(key string) (dicts map[string]string) {
-	dicts, _ = c.GetPostFormMap(key)
+// PostFormMap returns a map for a given form key.
+func (c *Context) X取表单参数Map值(名称 string) (返回Map map[string]string) {
+	返回Map, _ = c.X取参数Map值(名称)
 	return
 }
 
-// GetPostFormMap 为给定的表单键返回一个映射，同时返回一个布尔值，
-// 表示是否存在至少一个为此给定键的值。
-
-// ff:取参数Map值
-// map[string]string:返回Map
-// key:名称
-func (c *Context) GetPostFormMap(key string) (map[string]string, bool) {
+// GetPostFormMap returns a map for a given form key, plus a boolean value
+// whether at least one value exists for the given key.
+func (c *Context) X取参数Map值(名称 string) (map[string]string, bool) {
 	c.initFormCache()
-	return c.get(c.formCache, key)
+	return c.get(c.formCache, 名称)
 }
 
-// get 是一个内部方法，它返回一个满足特定条件的地图（map）。
+// get is an internal method and returns a map which satisfies conditions.
 func (c *Context) get(m map[string][]string, key string) (map[string]string, bool) {
 	dicts := make(map[string]string)
 	exist := false
@@ -732,18 +574,14 @@ func (c *Context) get(m map[string][]string, key string) (map[string]string, boo
 	return dicts, exist
 }
 
-// FormFile返回提供的表单键所对应的第一个文件。
-
-// ff:取表单上传文件
-// *multipart.FileHeader:文件对象
-// name:名称
-func (c *Context) FormFile(name string) (*multipart.FileHeader, error) {
-	if c.Request.MultipartForm == nil {
-		if err := c.Request.ParseMultipartForm(c.engine.MaxMultipartMemory); err != nil {
+// FormFile returns the first file for the provided form key.
+func (c *Context) X取表单上传文件(名称 string) (*multipart.FileHeader, error) {
+	if c.X请求.MultipartForm == nil {
+		if err := c.X请求.ParseMultipartForm(c.engine.X最大Multipart内存); err != nil {
 			return nil, err
 		}
 	}
-	f, fh, err := c.Request.FormFile(name)
+	f, fh, err := c.X请求.FormFile(名称)
 	if err != nil {
 		return nil, err
 	}
@@ -751,32 +589,25 @@ func (c *Context) FormFile(name string) (*multipart.FileHeader, error) {
 	return fh, err
 }
 
-// MultipartForm 是已解析的多部分表单，包括文件上传。
-
-// ff:取表单multipart对象
-// *multipart.Form:
-func (c *Context) MultipartForm() (*multipart.Form, error) {
-	err := c.Request.ParseMultipartForm(c.engine.MaxMultipartMemory)
-	return c.Request.MultipartForm, err
+// MultipartForm is the parsed multipart form, including file uploads.
+func (c *Context) X取表单multipart对象() (*multipart.Form, error) {
+	err := c.X请求.ParseMultipartForm(c.engine.X最大Multipart内存)
+	return c.X请求.MultipartForm, err
 }
 
-// SaveUploadedFile 将表单文件上传到指定的dst。
-
-// ff:保存上传文件
-// dst:文件路径
-// file:文件对象
-func (c *Context) SaveUploadedFile(file *multipart.FileHeader, dst string) error {
-	src, err := file.Open()
+// SaveUploadedFile uploads the form file to specific dst.
+func (c *Context) X保存上传文件(文件对象 *multipart.FileHeader, 文件路径 string) error {
+	src, err := 文件对象.Open()
 	if err != nil {
 		return err
 	}
 	defer src.Close()
 
-	if err = os.MkdirAll(filepath.Dir(dst), 0750); err != nil {
+	if err = os.MkdirAll(filepath.Dir(文件路径), 0750); err != nil {
 		return err
 	}
 
-	out, err := os.Create(dst)
+	out, err := os.Create(文件路径)
 	if err != nil {
 		return err
 	}
@@ -786,243 +617,178 @@ func (c *Context) SaveUploadedFile(file *multipart.FileHeader, dst string) error
 	return err
 }
 
-// Bind 会根据 Method 和 Content-Type 自动选择绑定引擎，
-// 根据 "Content-Type" 头部的不同，使用不同的绑定方式，例如：
+// Bind checks the Method and Content-Type to select a binding engine automatically,
+// Depending on the "Content-Type" header different bindings are used, for example:
 //
-//	"application/json" --> JSON 绑定
-//	"application/xml"  --> XML 绑定
+//	"application/json" --> JSON binding
+//	"application/xml"  --> XML binding
 //
-// 若 Content-Type 为 "application/json"，它将把请求体解析为 JSON，同时可将 XML 视为 JSON 输入进行处理。
-// 它会将 json 数据解码到指定的结构体指针中。
-// 如果输入无效，则在响应中写入 400 错误，并设置 Content-Type 头部为 "text/plain"。
-
-// ff:取参数到指针PANI
-// obj:结构指针
-func (c *Context) Bind(obj any) error {
-	b := binding.Default(c.Request.Method, c.ContentType())
-	return c.MustBindWith(obj, b)
+// It parses the request's body as JSON if Content-Type == "application/json" using JSON or XML as a JSON input.
+// It decodes the json payload into the struct specified as a pointer.
+// It writes a 400 error and sets Content-Type header "text/plain" in the response if input is not valid.
+func (c *Context) X取参数到指针PANI(结构指针 any) error {
+	b := binding.Default(c.X请求.Method, c.X取协议头ContentType())
+	return c.X取参数到指针并按类型PANI(结构指针, b)
 }
 
-// BindJSON 是一个快捷方式，等同于 c.MustBindWith(obj, binding.JSON)。
-
-// ff:取JSON参数到指针PANI
-// obj:结构指针
-func (c *Context) BindJSON(obj any) error {
-	return c.MustBindWith(obj, binding.JSON)
+// BindJSON is a shortcut for c.MustBindWith(obj, binding.JSON).
+func (c *Context) X取JSON参数到指针PANI(结构指针 any) error {
+	return c.X取参数到指针并按类型PANI(结构指针, binding.JSON)
 }
 
-// BindXML 是一个快捷方式，用于 c.MustBindWith(obj, binding.BindXML)。
-//
-// 更详细的翻译：
-//
-// BindXML 是一个便捷方法，它等同于调用 c.MustBindWith(obj, binding.BindXML)。
-// 其中，c 通常代表上下文（Context），obj 代表要绑定的对象，binding.BindXML 表示使用 XML 绑定方式进行数据绑定。这个方法会确保 XML 数据成功绑定到对象上，如果绑定失败，则会触发 panic。
-
-// ff:取XML参数到指针PANI
-// obj:结构指针
-func (c *Context) BindXML(obj any) error {
-	return c.MustBindWith(obj, binding.XML)
+// BindXML is a shortcut for c.MustBindWith(obj, binding.BindXML).
+func (c *Context) X取XML参数到指针PANI(结构指针 any) error {
+	return c.X取参数到指针并按类型PANI(结构指针, binding.XML)
 }
 
-// BindQuery 是一个快捷方式，用于 c.MustBindWith(obj, binding.Query)。
-
-// ff:取URL参数到指针PANI
-// obj:结构指针
-func (c *Context) BindQuery(obj any) error {
-	return c.MustBindWith(obj, binding.Query)
+// BindQuery is a shortcut for c.MustBindWith(obj, binding.Query).
+func (c *Context) X取URL参数到指针PANI(结构指针 any) error {
+	return c.X取参数到指针并按类型PANI(结构指针, binding.Query)
 }
 
-// BindYAML 是一个快捷方式，等同于 c.MustBindWith(obj, binding.YAML)。
-
-// ff:取YAML参数到指针PANI
-// obj:结构指针
-func (c *Context) BindYAML(obj any) error {
-	return c.MustBindWith(obj, binding.YAML)
+// BindYAML is a shortcut for c.MustBindWith(obj, binding.YAML).
+func (c *Context) X取YAML参数到指针PANI(结构指针 any) error {
+	return c.X取参数到指针并按类型PANI(结构指针, binding.YAML)
 }
 
-// BindTOML 是一个快捷方式，用于 c.MustBindWith(obj, binding.TOML)。
-
-// ff:取TOML参数到指针PANI
-// obj:结构指针
-func (c *Context) BindTOML(obj any) error {
-	return c.MustBindWith(obj, binding.TOML)
+// BindTOML is a shortcut for c.MustBindWith(obj, binding.TOML).
+func (c *Context) X取TOML参数到指针PANI(结构指针 any) error {
+	return c.X取参数到指针并按类型PANI(结构指针, binding.TOML)
 }
 
-// BindHeader 是一个快捷方式，等同于 c.MustBindWith(obj, binding.Header)。
-
-// ff:取Header参数到指针PANI
-// obj:结构指针
-func (c *Context) BindHeader(obj any) error {
-	return c.MustBindWith(obj, binding.Header)
+// BindHeader is a shortcut for c.MustBindWith(obj, binding.Header).
+func (c *Context) X取Header参数到指针PANI(结构指针 any) error {
+	return c.X取参数到指针并按类型PANI(结构指针, binding.Header)
 }
 
-// BindUri通过binding.Uri将传递的结构体指针进行绑定。
-// 如果发生任何错误，它将使用HTTP 400中止请求。
-
-// ff:取Uri参数到指针PANI
-// obj:结构指针
-func (c *Context) BindUri(obj any) error {
-	if err := c.ShouldBindUri(obj); err != nil {
-		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) //nolint: errcheck
+// BindUri binds the passed struct pointer using binding.Uri.
+// It will abort the request with HTTP 400 if any error occurs.
+func (c *Context) X取Uri参数到指针PANI(结构指针 any) error {
+	if err := c.X取Uri参数到指针(结构指针); err != nil {
+		c.X停止并带状态码与错误(http.StatusBadRequest, err).SetType(ErrorTypeBind) //nolint: errcheck
 		return err
 	}
 	return nil
 }
 
-// MustBindWith 使用指定的绑定引擎绑定传入的结构体指针。
-// 如果在执行过程中出现任何错误，它将终止请求并返回HTTP状态码400。
-// 请参阅binding包以获取更多信息。
-
-// ff:取参数到指针并按类型PANI
-// b:类型
-// obj:结构指针
-func (c *Context) MustBindWith(obj any, b binding.Binding) error {
-	if err := c.ShouldBindWith(obj, b); err != nil {
-		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) //nolint: errcheck
+// MustBindWith binds the passed struct pointer using the specified binding engine.
+// It will abort the request with HTTP 400 if any error occurs.
+// See the binding package.
+func (c *Context) X取参数到指针并按类型PANI(结构指针 any, 类型 binding.Binding) error {
+	if err := c.X取参数到指针并按类型(结构指针, 类型); err != nil {
+		c.X停止并带状态码与错误(http.StatusBadRequest, err).SetType(ErrorTypeBind) //nolint: errcheck
 		return err
 	}
 	return nil
 }
 
-// ShouldBind 会根据 Method（请求方法）和 Content-Type（内容类型）自动选择一个绑定引擎，
-// 根据 "Content-Type" 头部的不同，采用不同的绑定方式，例如：
+// ShouldBind checks the Method and Content-Type to select a binding engine automatically,
+// Depending on the "Content-Type" header different bindings are used, for example:
 //
-//	"application/json" --> JSON 绑定
-//	"application/xml"  --> XML 绑定
+//	"application/json" --> JSON binding
+//	"application/xml"  --> XML binding
 //
-// 若 Content-Type 为 "application/json"，它将把请求体当作 JSON 解析，并使用 JSON 或 XML 作为 JSON 输入。
-// 它会将解析后的 json 数据解码到指定的结构体指针中。
-// 类似于 c.Bind() 方法，但该方法在输入无效时不会将响应状态码设置为 400 或终止执行。
-
-// ff:取参数到指针
-// obj:变量结构指针
-func (c *Context) ShouldBind(obj any) error {
-	b := binding.Default(c.Request.Method, c.ContentType())
-	return c.ShouldBindWith(obj, b)
+// It parses the request's body as JSON if Content-Type == "application/json" using JSON or XML as a JSON input.
+// It decodes the json payload into the struct specified as a pointer.
+// Like c.Bind() but this method does not set the response status code to 400 or abort if input is not valid.
+func (c *Context) X取参数到指针(变量结构指针 any) error {
+	b := binding.Default(c.X请求.Method, c.X取协议头ContentType())
+	return c.X取参数到指针并按类型(变量结构指针, b)
 }
 
-// ShouldBindJSON 是 c.ShouldBindWith(obj, binding.JSON) 的快捷方式。
-
-// ff:取JSON参数到指针
-// obj:JSON结构指针
-func (c *Context) ShouldBindJSON(obj any) error {
-	return c.ShouldBindWith(obj, binding.JSON)
+// ShouldBindJSON is a shortcut for c.ShouldBindWith(obj, binding.JSON).
+func (c *Context) X取JSON参数到指针(JSON结构指针 any) error {
+	return c.X取参数到指针并按类型(JSON结构指针, binding.JSON)
 }
 
-// ShouldBindXML 是 c.ShouldBindWith(obj, binding.XML) 的快捷方式。
-
-// ff:取XML参数到指针
-// obj:XML结构指针
-func (c *Context) ShouldBindXML(obj any) error {
-	return c.ShouldBindWith(obj, binding.XML)
+// ShouldBindXML is a shortcut for c.ShouldBindWith(obj, binding.XML).
+func (c *Context) X取XML参数到指针(XML结构指针 any) error {
+	return c.X取参数到指针并按类型(XML结构指针, binding.XML)
 }
 
-// ShouldBindQuery 是一个快捷方式，用于 c.ShouldBindWith(obj, binding.Query)。
-
-// ff:取URL参数到指针
-// obj:表单结构指针
-func (c *Context) ShouldBindQuery(obj any) error {
-	return c.ShouldBindWith(obj, binding.Query)
+// ShouldBindQuery is a shortcut for c.ShouldBindWith(obj, binding.Query).
+func (c *Context) X取URL参数到指针(表单结构指针 any) error {
+	return c.X取参数到指针并按类型(表单结构指针, binding.Query)
 }
 
-// ShouldBindYAML 是 c.ShouldBindWith(obj, binding.YAML) 的快捷方式。
-
-// ff:取YAML参数到指针
-// obj:YAML结构指针
-func (c *Context) ShouldBindYAML(obj any) error {
-	return c.ShouldBindWith(obj, binding.YAML)
+// ShouldBindYAML is a shortcut for c.ShouldBindWith(obj, binding.YAML).
+func (c *Context) X取YAML参数到指针(YAML结构指针 any) error {
+	return c.X取参数到指针并按类型(YAML结构指针, binding.YAML)
 }
 
-// ShouldBindTOML 是 c.ShouldBindWith(obj, binding.TOML) 的快捷方式。
-
-// ff:取TOML参数到指针
-// obj:TOML结构指针
-func (c *Context) ShouldBindTOML(obj any) error {
-	return c.ShouldBindWith(obj, binding.TOML)
+// ShouldBindTOML is a shortcut for c.ShouldBindWith(obj, binding.TOML).
+func (c *Context) X取TOML参数到指针(TOML结构指针 any) error {
+	return c.X取参数到指针并按类型(TOML结构指针, binding.TOML)
 }
 
-// ShouldBindHeader 是一个快捷方式，用于 c.ShouldBindWith(obj, binding.Header)。
-
-// ff:取Header参数到指针
-// obj:Header结构指针
-func (c *Context) ShouldBindHeader(obj any) error {
-	return c.ShouldBindWith(obj, binding.Header)
+// ShouldBindHeader is a shortcut for c.ShouldBindWith(obj, binding.Header).
+func (c *Context) X取Header参数到指针(Header结构指针 any) error {
+	return c.X取参数到指针并按类型(Header结构指针, binding.Header)
 }
 
-// ShouldBindUri 使用指定的绑定引擎，将传入的结构体指针进行绑定。
-
-// ff:取Uri参数到指针
-// obj:Uri结构指针
-func (c *Context) ShouldBindUri(obj any) error {
+// ShouldBindUri binds the passed struct pointer using the specified binding engine.
+func (c *Context) X取Uri参数到指针(Uri结构指针 any) error {
 	m := make(map[string][]string)
-	for _, v := range c.Params {
+	for _, v := range c.X参数 {
 		m[v.Key] = []string{v.Value}
 	}
-	return binding.Uri.BindUri(m, obj)
+	return binding.Uri.BindUri(m, Uri结构指针)
 }
 
-// ShouldBindWith 使用指定的绑定引擎绑定传入的结构体指针。
-// 请参阅binding包。
-
-// ff:取参数到指针并按类型
-// b:类型
-// obj:结构指针
-func (c *Context) ShouldBindWith(obj any, b binding.Binding) error {
-	return b.Bind(c.Request, obj)
+// ShouldBindWith binds the passed struct pointer using the specified binding engine.
+// See the binding package.
+func (c *Context) X取参数到指针并按类型(结构指针 any, 类型 binding.Binding) error {
+	return 类型.Bind(c.X请求, 结构指针)
 }
 
-// ShouldBindBodyWith 与 ShouldBindWith 类似，但它会将请求体存储到上下文中，并在再次调用时重用。
+// ShouldBindBodyWith is similar with ShouldBindWith, but it stores the request
+// body into the context, and reuse when it is called again.
 //
-// 注意：此方法在绑定前读取请求体。因此，如果你只需要调用一次，为了获得更好的性能，你应该使用 ShouldBindWith。
-
-// ff:取参数到指针并按类型且缓存
-// err:错误
-// bb:
-// obj:结构指针
-func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error) {
+// NOTE: This method reads the body before binding. So you should use
+// ShouldBindWith for better performance if you need to call only once.
+func (c *Context) X取参数到指针并按类型且缓存(结构指针 any, bb binding.BindingBody) (错误 error) {
 	var body []byte
-	if cb, ok := c.Get(BodyBytesKey); ok {
+	if cb, ok := c.X取值(BodyBytesKey); ok {
 		if cbb, ok := cb.([]byte); ok {
 			body = cbb
 		}
 	}
 	if body == nil {
-		body, err = io.ReadAll(c.Request.Body)
-		if err != nil {
-			return err
+		body, 错误 = io.ReadAll(c.X请求.Body)
+		if 错误 != nil {
+			return 错误
 		}
-		c.Set(BodyBytesKey, body)
+		c.X设置值(BodyBytesKey, body)
 	}
-	return bb.BindBody(body, obj)
+	return bb.BindBody(body, 结构指针)
 }
 
-// ClientIP 实现了一种尽力而为的算法，用于返回真实的客户端 IP 地址。
-// 在底层，它调用 c.RemoteIP() 来检查远程 IP 是否为可信代理。
-// 如果是可信代理，则尝试解析 Engine.RemoteIPHeaders 中定义的头部（默认为 [X-Forwarded-For, X-Real-Ip]）。
-// 如果这些头部格式不合法 或者 远程 IP 不对应于一个可信代理，
-// 则返回来自 Request.RemoteAddr 的远程 IP 地址。
-
-// ff:取客户端ip
-func (c *Context) ClientIP() string {
-	// 检查我们是否在受信任的平台上运行，如果有错误则继续向后执行
+// ClientIP implements one best effort algorithm to return the real client IP.
+// It calls c.RemoteIP() under the hood, to check if the remote IP is a trusted proxy or not.
+// If it is it will then try to parse the headers defined in Engine.RemoteIPHeaders (defaulting to [X-Forwarded-For, X-Real-Ip]).
+// If the headers are not syntactically valid OR the remote IP does not correspond to a trusted proxy,
+// the remote IP (coming from Request.RemoteAddr) is returned.
+func (c *Context) X取客户端ip() string {
+	// Check if we're running on a trusted platform, continue running backwards if error
 	if c.engine.TrustedPlatform != "" {
-		// 开发者可以定义自己的可信平台头文件，也可以使用预定义的常量
+		// Developers can define their own header of Trusted Platform or use predefined constants
 		if addr := c.requestHeader(c.engine.TrustedPlatform); addr != "" {
 			return addr
 		}
 	}
 
-	// "AppEngine"老版本标志
-	if c.engine.AppEngine {
+	// Legacy "AppEngine" flag
+	if c.engine.AppEngine弃用 {
 		log.Println(`The AppEngine flag is going to be deprecated. Please check issues #2723 and #2739 and use 'TrustedPlatform: gin.PlatformGoogleAppEngine' instead.`)
 		if addr := c.requestHeader("X-Appengine-Remote-Addr"); addr != "" {
 			return addr
 		}
 	}
 
-	// 它还会检查 remoteIP 是否为可信代理。
-	// 为了执行此验证，它会查看该 IP 是否至少包含在由 Engine.SetTrustedProxies() 方法定义的一个 CIDR 块中。
-	remoteIP := net.ParseIP(c.RemoteIP())
+	// It also checks if the remoteIP is a trusted proxy or not.
+	// In order to perform this validation, it will see if the IP is contained within at least one of the CIDR blocks
+	// defined by Engine.SetTrustedProxies()
+	remoteIP := net.ParseIP(c.X取协议头ip())
 	if remoteIP == nil {
 		return ""
 	}
@@ -1039,28 +805,23 @@ func (c *Context) ClientIP() string {
 	return remoteIP.String()
 }
 
-// RemoteIP 从 Request.RemoteAddr 解析 IP，进行规范化处理并返回不含端口号的 IP 地址。
-
-// ff:取协议头ip
-func (c *Context) RemoteIP() string {
-	ip, _, err := net.SplitHostPort(strings.TrimSpace(c.Request.RemoteAddr))
+// RemoteIP parses the IP from Request.RemoteAddr, normalizes and returns the IP (without the port).
+func (c *Context) X取协议头ip() string {
+	ip, _, err := net.SplitHostPort(strings.TrimSpace(c.X请求.RemoteAddr))
 	if err != nil {
 		return ""
 	}
 	return ip
 }
 
-// ContentType 返回请求的 Content-Type 头部信息。
-
-// ff:取协议头ContentType
-func (c *Context) ContentType() string {
+// ContentType returns the Content-Type header of the request.
+func (c *Context) X取协议头ContentType() string {
 	return filterFlags(c.requestHeader("Content-Type"))
 }
 
-// IsWebsocket 返回一个布尔值，如果请求头表明客户端正在进行websocket握手，则返回true。
-
-// ff:是否为Websocket请求
-func (c *Context) IsWebsocket() bool {
+// IsWebsocket returns true if the request headers indicate that a websocket
+// handshake is being initiated by the client.
+func (c *Context) X是否为Websocket请求() bool {
 	if strings.Contains(strings.ToLower(c.requestHeader("Connection")), "upgrade") &&
 		strings.EqualFold(c.requestHeader("Upgrade"), "websocket") {
 		return true
@@ -1069,14 +830,14 @@ func (c *Context) IsWebsocket() bool {
 }
 
 func (c *Context) requestHeader(key string) string {
-	return c.Request.Header.Get(key)
+	return c.X请求.Header.Get(key)
 }
 
 /************************************/
 /******** RESPONSE RENDERING ********/
 /************************************/
 
-// bodyAllowedForStatus 是 http 包中未导出函数 bodyAllowedForStatus 的复制版本。
+// bodyAllowedForStatus is a copy of http.bodyAllowedForStatus non-exported function.
 func bodyAllowedForStatus(status int) bool {
 	switch {
 	case status >= 100 && status <= 199:
@@ -1089,85 +850,62 @@ func bodyAllowedForStatus(status int) bool {
 	return true
 }
 
-// Status 设置 HTTP 响应代码。
-
-// ff:设置状态码
-// code:状态码
-func (c *Context) Status(code int) {
-	c.Writer.WriteHeader(code)
+// Status sets the HTTP response code.
+func (c *Context) X设置状态码(状态码 int) {
+	c.Writer.WriteHeader(状态码)
 }
 
-// Header 是一个智能快捷方式，用于 c.Writer.Header().Set(key, value)。
-// 它在响应中写入一个头信息。
-// 如果 value 等于 "", 则此方法会删除相应头信息：`c.Writer.Header().Del(key)`。
-
-// ff:设置响应协议头值
-// value:值
-// key:名称
-func (c *Context) Header(key, value string) {
-	if value == "" {
-		c.Writer.Header().Del(key)
+// Header is an intelligent shortcut for c.Writer.Header().Set(key, value).
+// It writes a header in the response.
+// If value == "", this method removes the header `c.Writer.Header().Del(key)`
+func (c *Context) X设置响应协议头值(名称, 值 string) {
+	if 值 == "" {
+		c.Writer.Header().Del(名称)
 		return
 	}
-	c.Writer.Header().Set(key, value)
+	c.Writer.Header().Set(名称, 值)
 }
 
-// GetHeader 从请求头中返回值。
-
-// ff:取请求协议头值
-// key:名称
-func (c *Context) GetHeader(key string) string {
-	return c.requestHeader(key)
+// GetHeader returns value from request headers.
+func (c *Context) X取请求协议头值(名称 string) string {
+	return c.requestHeader(名称)
 }
 
-// GetRawData 返回原始数据流。
-
-// ff:取流数据
-func (c *Context) GetRawData() ([]byte, error) {
-	return io.ReadAll(c.Request.Body)
+// GetRawData returns stream data.
+func (c *Context) X取流数据() ([]byte, error) {
+	return io.ReadAll(c.X请求.Body)
 }
 
-// SetSameSite 设置 cookie 的同站属性
-
-// ff:设置cookie跨站
-// samesite:
-func (c *Context) SetSameSite(samesite http.SameSite) {
+// SetSameSite with cookie
+func (c *Context) X设置cookie跨站(samesite http.SameSite) {
 	c.sameSite = samesite
 }
 
-// SetCookie 向 ResponseWriter 的头信息中添加一个 Set-Cookie 头部。提供的 cookie 必须具有有效的名称。不合法的 cookie 可能会被悄悄丢弃。
-
-// ff:设置cookie值
-// httpOnly:禁止js访问
-// secure:仅https生效
-// domain:域名
-// path:路径
-// maxAge:生效时间
-// value:值
-// name:名称
-func (c *Context) SetCookie(name, value string, maxAge int, path, domain string, secure, httpOnly bool) {
-	if path == "" {
-		path = "/"
+// SetCookie adds a Set-Cookie header to the ResponseWriter's headers.
+// The provided cookie must have a valid Name. Invalid cookies may be
+// silently dropped.
+func (c *Context) X设置cookie值(名称, 值 string, 生效时间 int, 路径, 域名 string, 仅https生效, 禁止js访问 bool) {
+	if 路径 == "" {
+		路径 = "/"
 	}
 	http.SetCookie(c.Writer, &http.Cookie{
-		Name:     name,
-		Value:    url.QueryEscape(value),
-		MaxAge:   maxAge,
-		Path:     path,
-		Domain:   domain,
+		Name:     名称,
+		Value:    url.QueryEscape(值),
+		MaxAge:   生效时间,
+		Path:     路径,
+		Domain:   域名,
 		SameSite: c.sameSite,
-		Secure:   secure,
-		HttpOnly: httpOnly,
+		Secure:   仅https生效,
+		HttpOnly: 禁止js访问,
 	})
 }
 
-// Cookie返回请求中提供的指定名称的cookie，如果未找到，则返回ErrNoCookie错误。同时返回的指定名称的cookie是经过解码的。
-// 如果多个cookie与给定名称匹配，则只返回一个cookie。
-
-// ff:取cookie值
-// name:名称
-func (c *Context) Cookie(name string) (string, error) {
-	cookie, err := c.Request.Cookie(name)
+// Cookie returns the named cookie provided in the request or
+// ErrNoCookie if not found. And return the named cookie is unescaped.
+// If multiple cookies match the given name, only one cookie will
+// be returned.
+func (c *Context) X取cookie值(名称 string) (string, error) {
+	cookie, err := c.X请求.Cookie(名称)
 	if err != nil {
 		return "", err
 	}
@@ -1175,219 +913,143 @@ func (c *Context) Cookie(name string) (string, error) {
 	return val, nil
 }
 
-// Render方法会写入响应头并调用render.Render来渲染数据。
+// Render writes the response headers and calls render.Render to render data.
+func (c *Context) Render底层方法(状态码 int, r render.Render) {
+	c.X设置状态码(状态码)
 
-// ff:Render底层方法
-// r:
-// code:状态码
-func (c *Context) Render(code int, r render.Render) {
-	c.Status(code)
-
-	if !bodyAllowedForStatus(code) {
+	if !bodyAllowedForStatus(状态码) {
 		r.WriteContentType(c.Writer)
 		c.Writer.WriteHeaderNow()
 		return
 	}
 
 	if err := r.Render(c.Writer); err != nil {
-		// 将错误推送到c.Errors
-		_ = c.Error(err)
-		c.Abort()
+		// Pushing error to c.Errors
+		_ = c.X错误(err)
+		c.X停止()
 	}
 }
 
-// HTML 根据其文件名渲染 HTTP 模板。
-// 同时，它还会更新 HTTP 状态码，并将 Content-Type 设置为 "text/html"。
-// 详情参见：http://golang.org/doc/articles/wiki/
-
-// ff:输出html模板
-// obj:结构
-// name:模板文件名
-// code:状态码
-func (c *Context) HTML(code int, name string, obj any) {
-	instance := c.engine.HTMLRender.Instance(name, obj)
-	c.Render(code, instance)
+// HTML renders the HTTP template specified by its file name.
+// It also updates the HTTP code and sets the Content-Type as "text/html".
+// See http://golang.org/doc/articles/wiki/
+func (c *Context) X输出html模板(状态码 int, 模板文件名 string, 结构 any) {
+	instance := c.engine.HTMLRender.Instance(模板文件名, 结构)
+	c.Render底层方法(状态码, instance)
 }
 
-// IndentedJSON 将给定的结构体序列化为美观的 JSON（缩进+换行符）并写入响应体中。
-// 同时，它还会将 Content-Type 设置为 "application/json"。
-// 警告：我们建议仅在开发目的下使用此方法，因为打印美观的 JSON 会消耗更多的 CPU 和带宽。请改用 Context.JSON()。
-
-// ff:输出JSON并美化
-// obj:结构
-// code:状态码
-func (c *Context) IndentedJSON(code int, obj any) {
-	c.Render(code, render.IndentedJSON{Data: obj})
+// IndentedJSON serializes the given struct as pretty JSON (indented + endlines) into the response body.
+// It also sets the Content-Type as "application/json".
+// WARNING: we recommend using this only for development purposes since printing pretty JSON is
+// more CPU and bandwidth consuming. Use Context.JSON() instead.
+func (c *Context) X输出JSON并美化(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.IndentedJSON{Data: 结构})
 }
 
-// SecureJSON将给定的结构体作为安全的JSON序列化到响应体中。
-// 默认情况下，如果给定的结构体是数组值，则会在响应体前缀添加 "while(1),"。
-// 同时，它还会将Content-Type设置为"application/json"。
-
-// ff:输出JSON并防劫持
-// obj:结构
-// code:状态码
-func (c *Context) SecureJSON(code int, obj any) {
-	c.Render(code, render.SecureJSON{Prefix: c.engine.secureJSONPrefix, Data: obj})
+// SecureJSON serializes the given struct as Secure JSON into the response body.
+// Default prepends "while(1)," to response body if the given struct is array values.
+// It also sets the Content-Type as "application/json".
+func (c *Context) X输出JSON并防劫持(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.SecureJSON{Prefix: c.engine.secureJSONPrefix, Data: 结构})
 }
 
-// JSONP将给定的结构体以JSON格式序列化到响应体中。
-// 它在响应体中添加填充，以便从与客户端不同域的服务器请求数据。
-// 同时，它还将Content-Type设置为"application/javascript"。
-
-// ff:输出JSONP
-// obj:结构
-// code:状态码
-func (c *Context) JSONP(code int, obj any) {
-	callback := c.DefaultQuery("callback", "")
+// JSONP serializes the given struct as JSON into the response body.
+// It adds padding to response body to request data from a server residing in a different domain than the client.
+// It also sets the Content-Type as "application/javascript".
+func (c *Context) X输出JSONP(状态码 int, 结构 any) {
+	callback := c.X取URL参数值并带默认("callback", "")
 	if callback == "" {
-		c.Render(code, render.JSON{Data: obj})
+		c.Render底层方法(状态码, render.JSON{Data: 结构})
 		return
 	}
-	c.Render(code, render.JsonpJSON{Callback: callback, Data: obj})
+	c.Render底层方法(状态码, render.JsonpJSON{Callback: callback, Data: 结构})
 }
 
-// JSON将给定的结构体以JSON格式序列化到响应体中。
-// 同时，它还将Content-Type设置为"application/json"。
-
-// ff:输出JSON
-// obj:结构
-// code:状态码
-func (c *Context) JSON(code int, obj any) {
-	c.Render(code, render.JSON{Data: obj})
+// JSON serializes the given struct as JSON into the response body.
+// It also sets the Content-Type as "application/json".
+func (c *Context) X输出JSON(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.JSON{Data: 结构})
 }
 
-// AsciiJSON 将给定的结构体按 JSON 格式序列化，并以 ASCII 字符串形式写入响应体中。
-// 同时，它还会将 Content-Type 设置为 "application/json"。
-
-// ff:输出JSON并按ASCII
-// obj:结构
-// code:状态码
-func (c *Context) AsciiJSON(code int, obj any) {
-	c.Render(code, render.AsciiJSON{Data: obj})
+// AsciiJSON serializes the given struct as JSON into the response body with unicode to ASCII string.
+// It also sets the Content-Type as "application/json".
+func (c *Context) X输出JSON并按ASCII(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.AsciiJSON{Data: 结构})
 }
 
-// PureJSON 将给定的结构体作为 JSON 序列化到响应体中。
-// 与 JSON 不同，PureJSON 不会将特殊 HTML 字符替换为它们的 Unicode 实体。
-
-// ff:输出JSON并按原文
-// obj:结构
-// code:状态码
-func (c *Context) PureJSON(code int, obj any) {
-	c.Render(code, render.PureJSON{Data: obj})
+// PureJSON serializes the given struct as JSON into the response body.
+// PureJSON, unlike JSON, does not replace special html characters with their unicode entities.
+func (c *Context) X输出JSON并按原文(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.PureJSON{Data: 结构})
 }
 
-// XML将给定的结构体作为XML序列化到响应体中。
-// 同时，它还会将Content-Type设置为"application/xml"。
-
-// ff:输出XML
-// obj:结构
-// code:状态码
-func (c *Context) XML(code int, obj any) {
-	c.Render(code, render.XML{Data: obj})
+// XML serializes the given struct as XML into the response body.
+// It also sets the Content-Type as "application/xml".
+func (c *Context) X输出XML(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.XML{Data: 结构})
 }
 
-// YAML 将给定的结构体以 YAML 格式序列化并写入响应体中。
-
-// ff:输出YAML
-// obj:结构
-// code:状态码
-func (c *Context) YAML(code int, obj any) {
-	c.Render(code, render.YAML{Data: obj})
+// YAML serializes the given struct as YAML into the response body.
+func (c *Context) X输出YAML(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.YAML{Data: 结构})
 }
 
-// TOML将给定的结构体序列化为TOML格式，并写入响应体中。
-
-// ff:输出TOML
-// obj:结构
-// code:状态码
-func (c *Context) TOML(code int, obj any) {
-	c.Render(code, render.TOML{Data: obj})
+// TOML serializes the given struct as TOML into the response body.
+func (c *Context) X输出TOML(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.TOML{Data: 结构})
 }
 
-// ProtoBuf将给定的结构体作为ProtoBuf序列化到响应体中。
-
-// ff:输出ProtoBuf
-// obj:结构
-// code:状态码
-func (c *Context) ProtoBuf(code int, obj any) {
-	c.Render(code, render.ProtoBuf{Data: obj})
+// ProtoBuf serializes the given struct as ProtoBuf into the response body.
+func (c *Context) X输出ProtoBuf(状态码 int, 结构 any) {
+	c.Render底层方法(状态码, render.ProtoBuf{Data: 结构})
 }
 
-// String将给定的字符串写入响应体中。
-
-// ff:输出文本
-// values:文本s
-// format:格式
-// code:状态码
-func (c *Context) String(code int, format string, values ...any) {
-	c.Render(code, render.String{Format: format, Data: values})
+// String writes the given string into the response body.
+func (c *Context) X输出文本(状态码 int, 格式 string, 文本s ...any) {
+	c.Render底层方法(状态码, render.String{Format: 格式, Data: 文本s})
 }
 
-// Redirect 返回一个HTTP重定向到特定位置。
-
-// ff:重定向
-// location:重定向地址
-// code:状态码
-func (c *Context) Redirect(code int, location string) {
-	c.Render(-1, render.Redirect{
-		Code:     code,
-		Location: location,
-		Request:  c.Request,
+// Redirect returns an HTTP redirect to the specific location.
+func (c *Context) X重定向(状态码 int, 重定向地址 string) {
+	c.Render底层方法(-1, render.Redirect{
+		Code:     状态码,
+		Location: 重定向地址,
+		Request:  c.X请求,
 	})
 }
 
-// Data 将一些数据写入主体流并更新HTTP状态码。
-
-// ff:输出字节集
-// data:字节集
-// contentType:HTTP响应类型
-// code:状态码
-func (c *Context) Data(code int, contentType string, data []byte) {
-	c.Render(code, render.Data{
-		ContentType: contentType,
-		Data:        data,
+// Data writes some data into the body stream and updates the HTTP code.
+func (c *Context) X输出字节集(状态码 int, HTTP响应类型 string, 字节集 []byte) {
+	c.Render底层方法(状态码, render.Data{
+		ContentType: HTTP响应类型,
+		Data:        字节集,
 	})
 }
 
-// DataFromReader 将指定读取器的内容写入主体流，并更新HTTP状态码。
-
-// ff:输出字节集并按IO
-// extraHeaders:协议头Map
-// reader:写出IO数据
-// contentType:HTTP响应类型
-// contentLength:数据长度
-// code:状态码
-func (c *Context) DataFromReader(code int, contentLength int64, contentType string, reader io.Reader, extraHeaders map[string]string) {
-	c.Render(code, render.Reader{
-		Headers:       extraHeaders,
-		ContentType:   contentType,
-		ContentLength: contentLength,
-		Reader:        reader,
+// DataFromReader writes the specified reader into the body stream and updates the HTTP code.
+func (c *Context) X输出字节集并按IO(状态码 int, 数据长度 int64, HTTP响应类型 string, 写出IO数据 io.Reader, 协议头Map map[string]string) {
+	c.Render底层方法(状态码, render.Reader{
+		Headers:       协议头Map,
+		ContentType:   HTTP响应类型,
+		ContentLength: 数据长度,
+		Reader:        写出IO数据,
 	})
 }
 
-// File 以高效的方式将指定的文件写入正文流中。
-
-// ff:下载文件
-// filepath:文件路径
-func (c *Context) File(filepath string) {
-	http.ServeFile(c.Writer, c.Request, filepath)
+// File writes the specified file into the body stream in an efficient way.
+func (c *Context) X下载文件(文件路径 string) {
+	http.ServeFile(c.Writer, c.X请求, 文件路径)
 }
 
-// FileFromFS 以高效的方式将指定的文件从 http.FileSystem 写入到 body 流中。
-
-// ff:下载文件FS
-// fs:
-// filepath:文件路径
-func (c *Context) FileFromFS(filepath string, fs http.FileSystem) {
+// FileFromFS writes the specified file from http.FileSystem into the body stream in an efficient way.
+func (c *Context) X下载文件FS(文件路径 string, fs http.FileSystem) {
 	defer func(old string) {
-		c.Request.URL.Path = old
-	}(c.Request.URL.Path)
+		c.X请求.URL.Path = old
+	}(c.X请求.URL.Path)
 
-	c.Request.URL.Path = filepath
+	c.X请求.URL.Path = 文件路径
 
-	http.FileServer(fs).ServeHTTP(c.Writer, c.Request)
+	http.FileServer(fs).ServeHTTP(c.Writer, c.X请求)
 }
 
 var quoteEscaper = strings.NewReplacer("\\", "\\\\", `"`, "\\\"")
@@ -1396,39 +1058,27 @@ func escapeQuotes(s string) string {
 	return quoteEscaper.Replace(s)
 }
 
-// FileAttachment 以高效的方式将指定文件写入主体流
-// 在客户端，该文件通常会以给定的文件名下载
-
-// ff:下载文件并带文件名
-// filename:文件名
-// filepath:文件路径
-func (c *Context) FileAttachment(filepath, filename string) {
-	if isASCII(filename) {
-		c.Writer.Header().Set("Content-Disposition", `attachment; filename="`+escapeQuotes(filename)+`"`)
+// FileAttachment writes the specified file into the body stream in an efficient way
+// On the client side, the file will typically be downloaded with the given filename
+func (c *Context) X下载文件并带文件名(文件路径, 文件名 string) {
+	if isASCII(文件名) {
+		c.Writer.Header().Set("Content-Disposition", `attachment; filename="`+escapeQuotes(文件名)+`"`)
 	} else {
-		c.Writer.Header().Set("Content-Disposition", `attachment; filename*=UTF-8''`+url.QueryEscape(filename))
+		c.Writer.Header().Set("Content-Disposition", `attachment; filename*=UTF-8''`+url.QueryEscape(文件名))
 	}
-	http.ServeFile(c.Writer, c.Request, filepath)
+	http.ServeFile(c.Writer, c.X请求, 文件路径)
 }
 
-// SSEvent 将一个服务器发送事件写入到主体数据流中。
-
-// ff:
-// message:
-// name:
+// SSEvent writes a Server-Sent Event into the body stream.
 func (c *Context) SSEvent(name string, message any) {
-	c.Render(-1, sse.Event{
+	c.Render底层方法(-1, sse.Event{
 		Event: name,
 		Data:  message,
 	})
 }
 
-// Stream 发送一个流式响应，并返回一个布尔值
-// 表示“在流传输过程中客户端是否已断开连接”
-
-// ff:
-// step:
-// w:
+// Stream sends a streaming response and returns a boolean
+// indicates "Is client disconnected in middle of stream"
 func (c *Context) Stream(step func(w io.Writer) bool) bool {
 	w := c.Writer
 	clientGone := w.CloseNotify()
@@ -1450,7 +1100,7 @@ func (c *Context) Stream(step func(w io.Writer) bool) bool {
 /******** CONTENT NEGOTIATION *******/
 /************************************/
 
-// Negotiate 包含所有协商数据。
+// Negotiate contains all negotiations data.
 type Negotiate struct {
 	Offered  []string
 	HTMLName string
@@ -1462,43 +1112,36 @@ type Negotiate struct {
 	TOMLData any
 }
 
-// Negotiate 根据可接受的 Accept 格式调用不同的 Render 方法。
-
-// ff:Negotiate底层方法
-// config:
-// code:
-func (c *Context) Negotiate(code int, config Negotiate) {
-	switch c.NegotiateFormat(config.Offered...) {
+// Negotiate calls different Render according to acceptable Accept format.
+func (c *Context) Negotiate底层方法(code int, config Negotiate) {
+	switch c.NegotiateFormat底层方法(config.Offered...) {
 	case binding.MIMEJSON:
 		data := chooseData(config.JSONData, config.Data)
-		c.JSON(code, data)
+		c.X输出JSON(code, data)
 
 	case binding.MIMEHTML:
 		data := chooseData(config.HTMLData, config.Data)
-		c.HTML(code, config.HTMLName, data)
+		c.X输出html模板(code, config.HTMLName, data)
 
 	case binding.MIMEXML:
 		data := chooseData(config.XMLData, config.Data)
-		c.XML(code, data)
+		c.X输出XML(code, data)
 
 	case binding.MIMEYAML:
 		data := chooseData(config.YAMLData, config.Data)
-		c.YAML(code, data)
+		c.X输出YAML(code, data)
 
 	case binding.MIMETOML:
 		data := chooseData(config.TOMLData, config.Data)
-		c.TOML(code, data)
+		c.X输出TOML(code, data)
 
 	default:
-		c.AbortWithError(http.StatusNotAcceptable, errors.New("the accepted formats are not offered by the server")) //nolint: errcheck
+		c.X停止并带状态码与错误(http.StatusNotAcceptable, errors.New("the accepted formats are not offered by the server")) //nolint: errcheck
 	}
 }
 
-// NegotiateFormat 返回一个可接受的 Accept 格式。
-
-// ff:NegotiateFormat底层方法
-// offered:
-func (c *Context) NegotiateFormat(offered ...string) string {
+// NegotiateFormat returns an acceptable Accept format.
+func (c *Context) NegotiateFormat底层方法(offered ...string) string {
 	assert1(len(offered) > 0, "you must provide at least one offer")
 
 	if c.Accepted == nil {
@@ -1509,8 +1152,8 @@ func (c *Context) NegotiateFormat(offered ...string) string {
 	}
 	for _, accepted := range c.Accepted {
 		for _, offer := range offered {
-			// 根据RFC 2616和RFC 2396的规定，非ASCII字符在头部中是不允许出现的，
-			// 因此我们可以在不将其转换为[]rune的情况下直接遍历该字符串。
+			// According to RFC 2616 and RFC 2396, non-ASCII characters are not allowed in headers,
+			// therefore we can just iterate over the string without casting it into []rune
 			i := 0
 			for ; i < len(accepted) && i < len(offer); i++ {
 				if accepted[i] == '*' || offer[i] == '*' {
@@ -1528,75 +1171,63 @@ func (c *Context) NegotiateFormat(offered ...string) string {
 	return ""
 }
 
-// SetAccepted 设置 Accept 头部数据。
-
-// ff:SetAccepted底层方法
-// formats:类型名称s
-func (c *Context) SetAccepted(formats ...string) {
-	c.Accepted = formats
+// SetAccepted sets Accept header data.
+func (c *Context) SetAccepted底层方法(类型名称s ...string) {
+	c.Accepted = 类型名称s
 }
 
 /************************************/
 /***** GOLANG.ORG/X/NET/CONTEXT *****/
 /************************************/
 
-// hasRequestContext 返回 c.Request 是否包含 Context 以及回退机制。
+// hasRequestContext returns whether c.Request has Context and fallback.
 func (c *Context) hasRequestContext() bool {
 	hasFallback := c.engine != nil && c.engine.ContextWithFallback
-	hasRequestContext := c.Request != nil && c.Request.Context() != nil
+	hasRequestContext := c.X请求 != nil && c.X请求.Context() != nil
 	return hasFallback && hasRequestContext
 }
 
-// Deadline 返回当 c.Request 没有 Context 时，表示没有截止时间（ok==false）。
-
-// ff:Deadline底层方法
-// ok:
-// deadline:
+// Deadline returns that there is no deadline (ok==false) when c.Request has no Context.
 func (c *Context) Deadline() (deadline time.Time, ok bool) {
 	if !c.hasRequestContext() {
 		return
 	}
-	return c.Request.Context().Deadline()
+	return c.X请求.Context().Deadline()
 }
 
-// 当c.Request没有Context时，Done返回nil（表示一个将永远等待的通道）。
-
-// ff:Done底层方法
+// Done returns nil (chan which will wait forever) when c.Request has no Context.
 func (c *Context) Done() <-chan struct{} {
 	if !c.hasRequestContext() {
 		return nil
 	}
-	return c.Request.Context().Done()
+	return c.X请求.Context().Done()
 }
 
-// Err在c.Request没有Context时返回nil。
-
-// ff:取上下文错误
+// Err returns nil when c.Request has no Context.
 func (c *Context) Err() error {
 	if !c.hasRequestContext() {
 		return nil
 	}
-	return c.Request.Context().Err()
+	return c.X请求.Context().Err()
 }
 
-// Value 方法返回与该上下文关联的键key所对应的值，如果该键没有关联任何值，则返回nil。对同一键连续调用Value方法将返回相同的结果。
-
-// ff:取上下文值
-// key:名称
+// Value returns the value associated with this context for key, or nil
+// if no value is associated with key. Successive calls to Value with
+// the same key returns the same result.
 func (c *Context) Value(key any) any {
 	if key == 0 {
-		return c.Request
+		return c.X请求
 	}
 	if key == ContextKey {
 		return c
 	}
 	if keyAsString, ok := key.(string); ok {
-		if val, exists := c.Get(keyAsString); exists {
+		if val, exists := c.X取值(keyAsString); exists {
 			return val
 		}
 	}
 	if !c.hasRequestContext() {
 		return nil
 	}
-	return c.Request.Context().Value(key)
+	return c.X请求.Context().Value(key)
 }
