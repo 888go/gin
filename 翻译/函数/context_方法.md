@@ -425,9 +425,9 @@ contentType=HTTP响应类型
 code=状态码
 
 [func (c *Context) DataFromReader(code int, contentLength int64, contentType string, reader io.Reader, extraHeaders map#左中括号#string#右中括号#string) {]
-ff=输出字节集并按IO
+ff=输出字节集并按IO读取器
 extraHeaders=协议头Map
-reader=写出IO数据
+reader=IO读取器
 contentType=HTTP响应类型
 contentLength=数据长度
 code=状态码
