@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"os"
 	"time"
-	
+
 	"github.com/mattn/go-isatty"
 )
 
@@ -40,12 +40,12 @@ type LoggerConfig struct {
 	// 可选的。默认值为gin.defaultLogFormatter
 	Formatter LogFormatter
 
-// Output 是一个用于写入日志的writer。
-// 可选配置，默认值为gin.DefaultWriter。
+	// Output 是一个用于写入日志的writer。
+	// 可选配置，默认值为gin.DefaultWriter。
 	Output io.Writer
 
-// SkipPaths 是一个 URL 路径数组，其中的请求日志不会被记录。
-// 可选配置。
+	// SkipPaths 是一个 URL 路径切片，其中的请求日志不会被记录。
+	// 可选配置。
 	SkipPaths []string
 }
 
@@ -244,9 +244,9 @@ func LoggerWithConfig(conf LoggerConfig) HandlerFunc {
 		// 当路径未被跳过时才记录日志
 		if _, ok := skip[path]; !ok {
 			param := LogFormatterParams{
-				X请求: c.X请求,
-				X是否输出到终端:  isTerm,
-				X上下文设置值map:    c.X上下文设置值Map,
+				X请求:        c.X请求,
+				X是否输出到终端:   isTerm,
+				X上下文设置值map: c.X上下文设置值Map,
 			}
 
 			// Stop timer

@@ -18,10 +18,10 @@ import (
 	"strings"
 	"sync"
 	"time"
-	
-	"github.com/gin-contrib/sse"
+
 	"github.com/888go/gin/binding"
 	"github.com/888go/gin/render"
+	"github.com/gin-contrib/sse"
 )
 
 // Content-Type MIME 是最常见的数据格式的 MIME 类型。
@@ -49,10 +49,10 @@ const abortIndex int8 = math.MaxInt8 >> 1
 // Context 是 gin 中最重要的部分。它允许我们在中间件之间传递变量，管理流程，验证请求的 JSON，并例如渲染 JSON 响应。
 type Context struct {
 	writermem responseWriter
-	X请求   *http.Request
+	X请求       *http.Request
 	Writer    ResponseWriter
 
-	X参数   Params
+	X参数      Params
 	handlers HandlersChain
 	index    int8
 	fullPath string
@@ -76,10 +76,10 @@ type Context struct {
 	// queryCache 对从 c.Request.URL.Query() 获取的查询结果进行缓存。
 	queryCache url.Values
 
-// formCache 对 c.Request.PostForm 进行缓存，其中包含从 POST、PATCH 或 PUT 请求体参数解析得到的表单数据。
+	// formCache 对 c.Request.PostForm 进行缓存，其中包含从 POST、PATCH 或 PUT 请求体参数解析得到的表单数据。
 	formCache url.Values
 
-// SameSite 允许服务器定义一个 cookie 属性，使得浏览器无法在跨站请求中携带此 cookie。
+	// SameSite 允许服务器定义一个 cookie 属性，使得浏览器无法在跨站请求中携带此 cookie。
 	sameSite http.SameSite
 }
 
@@ -109,8 +109,8 @@ func (c *Context) reset() {
 func (c *Context) X取副本() *Context {
 	cp := Context{
 		writermem: c.writermem,
-		X请求:   c.X请求,
-		X参数:    c.X参数,
+		X请求:       c.X请求,
+		X参数:       c.X参数,
 		engine:    c.engine,
 	}
 	cp.writermem.ResponseWriter = nil
@@ -138,12 +138,12 @@ func (c *Context) X取主处理程序名称() string {
 }
 
 // HandlerNames 返回与此上下文关联的已注册处理程序的降序列表，遵循HandlerName()的语义
-// 返回数组参考如下:
+// 返回切片参考如下:
 // 0 = {string} "github.com/888go/gin.TestContextHandlerNames.func1"
 // 1 = {string} "github.com/888go/gin.handlerNameTest"
 // 2 = {string} "github.com/888go/gin.TestContextHandlerNames.func2"
 // 3 = {string} "github.com/888go/gin.handlerNameTest2"
-func (c *Context) X取处理程序数组() []string {
+func (c *Context) X取处理程序切片() []string {
 	hn := make([]string, 0, len(c.handlers))
 	for _, val := range c.handlers {
 		hn = append(hn, nameOfFunction(val))
@@ -159,9 +159,10 @@ func (c *Context) X取主处理程序() HandlerFunc {
 // FullPath 返回已匹配路由的完整路径。对于未找到的路由，返回一个空字符串。
 //
 // 示例：
-//   router.GET("/user/:id", func(c *gin.Context) {
-//       c.FullPath() == "/user/:id" // 将会返回 true
-//   })
+//
+//	router.GET("/user/:id", func(c *gin.Context) {
+//	    c.FullPath() == "/user/:id" // 将会返回 true
+//	})
 func (c *Context) X取路由路径() string {
 	return c.fullPath
 }
@@ -349,9 +350,9 @@ func (c *Context) X取时长值(名称 string) (返回时长 time.Duration) {
 }
 
 // GetStringSlice 函数返回与键关联的值，该值为字符串切片。
-func (c *Context) X取数组值(名称 string) (返回数组 []string) {
+func (c *Context) X取切片值(名称 string) (返回切片 []string) {
 	if val, ok := c.X取值(名称); ok && val != nil {
-		返回数组, _ = val.([]string)
+		返回切片, _ = val.([]string)
 	}
 	return
 }
@@ -373,9 +374,9 @@ func (c *Context) X取文本Map值(名称 string) (返回Map map[string]string) 
 }
 
 // GetStringMapStringSlice 返回与键关联的值，该值为字符串到字符串切片的映射。
-func (c *Context) X取数组Map值(名称 string) (返回数组Map map[string][]string) {
+func (c *Context) X取切片Map值(名称 string) (返回切片Map map[string][]string) {
 	if val, ok := c.X取值(名称); ok && val != nil {
-		返回数组Map, _ = val.(map[string][]string)
+		返回切片Map, _ = val.(map[string][]string)
 	}
 	return
 }
@@ -390,12 +391,14 @@ func (c *Context) X取数组Map值(名称 string) (返回数组Map map[string][]
 // 示例：
 // 使用router.GET设置路由处理函数，访问"/user/:id"时，
 // ```go
-// router.GET("/user/:id", func(c *gin.Context) {
-//     // 当发送一个GET请求到/user/john
-//     id := c.Param("id") // 这时id的值为"john"
-//     // 当发送一个GET请求到/user/john/
-//     id := c.Param("id") // 这时id的值为"john/"
-// })
+//
+//	router.GET("/user/:id", func(c *gin.Context) {
+//	    // 当发送一个GET请求到/user/john
+//	    id := c.Param("id") // 这时id的值为"john"
+//	    // 当发送一个GET请求到/user/john/
+//	    id := c.Param("id") // 这时id的值为"john/"
+//	})
+//
 // ```
 // 注：在上述示例中，":id"是一个动态参数，其值会被解析并存储到c.Param("id")中。
 func (c *Context) X取API参数值(名称 string) string {
@@ -413,11 +416,11 @@ func (c *Context) X设置API参数值(名称, 值 string) {
 // Query方法返回键所对应的URL查询值，如果该值存在，则返回该值，否则返回一个空字符串 `("")`。
 // 这是 `c.Request.URL.Query().Get(key)` 的快捷方式。
 //
-//    GET /path?id=1234&name=Manu&value=
-//       c.Query("id") 返回 "1234"
-//       c.Query("name") 返回 "Manu"
-//       c.Query("value") 返回 ""
-//       c.Query("wtf") 返回 ""
+//	GET /path?id=1234&name=Manu&value=
+//	   c.Query("id") 返回 "1234"
+//	   c.Query("name") 返回 "Manu"
+//	   c.Query("value") 返回 ""
+//	   c.Query("wtf") 返回 ""
 func (c *Context) X取URL参数值(名称 string) (返回值 string) {
 	返回值, _ = c.X取URL参数值2(名称)
 	return
@@ -447,7 +450,7 @@ func (c *Context) X取URL参数值并带默认(名称, 默认值 string) string 
 // ("", false) 等价于 c.GetQuery("id")
 // ("", true) 等价于 c.GetQuery("lastname")
 func (c *Context) X取URL参数值2(名称 string) (string, bool) {
-	if values, ok := c.X取URL参数数组值2(名称); ok {
+	if values, ok := c.X取URL参数切片值2(名称); ok {
 		return values[0], ok
 	}
 	return "", false
@@ -455,8 +458,8 @@ func (c *Context) X取URL参数值2(名称 string) (string, bool) {
 
 // QueryArray 函数针对给定的查询键返回一个字符串切片。
 // 返回切片的长度取决于具有该键的参数的数量。
-func (c *Context) X取URL参数数组值(名称 string) (返回数组 []string) {
-	返回数组, _ = c.X取URL参数数组值2(名称)
+func (c *Context) X取URL参数切片值(名称 string) (返回切片 []string) {
+	返回切片, _ = c.X取URL参数切片值2(名称)
 	return
 }
 
@@ -472,9 +475,9 @@ func (c *Context) initQueryCache() {
 
 // GetQueryArray 返回给定查询键的字符串切片，以及
 // 一个布尔值，表示该键是否存在至少一个值。
-func (c *Context) X取URL参数数组值2(名称 string) (返回数组 []string, 是否存在 bool) {
+func (c *Context) X取URL参数切片值2(名称 string) (返回切片 []string, 是否存在 bool) {
 	c.initQueryCache()
-	返回数组, 是否存在 = c.queryCache[名称]
+	返回切片, 是否存在 = c.queryCache[名称]
 	return
 }
 
@@ -508,7 +511,7 @@ func (c *Context) X取表单参数值并带默认(名称, 默认值 string) stri
 }
 
 // 以下是将给定的Go注释翻译成中文：
-// 
+//
 // GetPostForm 类似于 PostForm(key)。当存在时，它从POST urlencoded表单或multipart表单中返回指定键的值 `(value, true)`（即使该值为空字符串），
 // 否则返回 ("", false)。
 // 例如，在进行PATCH请求以更新用户邮箱时：
@@ -517,7 +520,7 @@ func (c *Context) X取表单参数值并带默认(名称, 默认值 string) stri
 //		   email=                  -->  ("", true) := GetPostForm("email") // 将邮箱设置为空字符串
 //	                            -->  ("", false) := GetPostForm("email") // 对邮箱不做任何处理
 func (c *Context) X取表单参数值2(名称 string) (string, bool) {
-	if values, ok := c.X取参数数组值(名称); ok {
+	if values, ok := c.X取参数切片值(名称); ok {
 		return values[0], ok
 	}
 	return "", false
@@ -525,8 +528,8 @@ func (c *Context) X取表单参数值2(名称 string) (string, bool) {
 
 // PostFormArray 为给定的表单键返回一个字符串切片。
 // 切片的长度取决于具有该键的参数的数量。
-func (c *Context) X取表单参数数组值(名称 string) (返回数组 []string) {
-	返回数组, _ = c.X取参数数组值(名称)
+func (c *Context) X取表单参数切片值(名称 string) (返回切片 []string) {
+	返回切片, _ = c.X取参数切片值(名称)
 	return
 }
 
@@ -545,9 +548,9 @@ func (c *Context) initFormCache() {
 
 // GetPostFormArray 针对给定表单键返回一个字符串切片，以及
 // 一个布尔值，表示该键是否存在至少一个值。
-func (c *Context) X取参数数组值(名称 string) (返回数组 []string, 是否存在 bool) {
+func (c *Context) X取参数切片值(名称 string) (返回切片 []string, 是否存在 bool) {
 	c.initFormCache()
-	返回数组, 是否存在 = c.formCache[名称]
+	返回切片, 是否存在 = c.formCache[名称]
 	return
 }
 
@@ -641,10 +644,10 @@ func (c *Context) X取JSON参数到指针PANI(结构指针 any) error {
 	return c.X取参数到指针并按类型PANI(结构指针, binding.JSON)
 }
 
-// BindXML 是一个快捷方式，用于 c.MustBindWith(obj, binding.BindXML)。 
-// 
+// BindXML 是一个快捷方式，用于 c.MustBindWith(obj, binding.BindXML)。
+//
 // 更详细的翻译：
-// 
+//
 // BindXML 是一个便捷方法，它等同于调用 c.MustBindWith(obj, binding.BindXML)。
 // 其中，c 通常代表上下文（Context），obj 代表要绑定的对象，binding.BindXML 表示使用 XML 绑定方式进行数据绑定。这个方法会确保 XML 数据成功绑定到对象上，如果绑定失败，则会触发 panic。
 func (c *Context) X取XML参数到指针PANI(结构指针 any) error {
@@ -818,8 +821,8 @@ func (c *Context) X取客户端ip() string {
 		}
 	}
 
-// 它还会检查 remoteIP 是否为可信代理。
-// 为了执行此验证，它会查看该 IP 是否至少包含在由 Engine.SetTrustedProxies() 方法定义的一个 CIDR 块中。
+	// 它还会检查 remoteIP 是否为可信代理。
+	// 为了执行此验证，它会查看该 IP 是否至少包含在由 Engine.SetTrustedProxies() 方法定义的一个 CIDR 块中。
 	remoteIP := net.ParseIP(c.X取协议头ip())
 	if remoteIP == nil {
 		return ""
@@ -975,7 +978,7 @@ func (c *Context) X输出JSON并美化(状态码 int, 结构 any) {
 }
 
 // SecureJSON将给定的结构体作为安全的JSON序列化到响应体中。
-// 默认情况下，如果给定的结构体是数组值，则会在响应体前缀添加 "while(1),"。
+// 默认情况下，如果给定的结构体是切片值，则会在响应体前缀添加 "while(1),"。
 // 同时，它还会将Content-Type设置为"application/json"。
 func (c *Context) X输出JSON并防劫持(状态码 int, 结构 any) {
 	c.Render底层方法(状态码, render.SecureJSON{Prefix: c.engine.secureJSONPrefix, Data: 结构})
@@ -1180,8 +1183,8 @@ func (c *Context) NegotiateFormat底层方法(offered ...string) string {
 	}
 	for _, accepted := range c.Accepted {
 		for _, offer := range offered {
-// 根据RFC 2616和RFC 2396的规定，非ASCII字符在头部中是不允许出现的，
-// 因此我们可以在不将其转换为[]rune的情况下直接遍历该字符串。
+			// 根据RFC 2616和RFC 2396的规定，非ASCII字符在头部中是不允许出现的，
+			// 因此我们可以在不将其转换为[]rune的情况下直接遍历该字符串。
 			i := 0
 			for ; i < len(accepted) && i < len(offer); i++ {
 				if accepted[i] == '*' || offer[i] == '*' {
@@ -1247,7 +1250,7 @@ func (c *Context) Err() error {
 
 // Value 方法返回与该上下文关联的键key所对应的值，如果该键没有关联任何值，则返回nil。对同一键连续调用Value方法将返回相同的结果。
 //
-// 注意!!! 此方法不能翻译, 因为是http包的接口实现 
+// 注意!!! 此方法不能翻译, 因为是http包的接口实现
 func (c *Context) Value(key any) any {
 	if key == 0 {
 		return c.X请求

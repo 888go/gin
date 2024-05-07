@@ -17,7 +17,7 @@ import (
 	"sync/atomic"
 	"testing"
 	"time"
-	
+
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/net/http2"
 )
@@ -487,32 +487,32 @@ func TestListOfRoutes(t *testing.T) {
 	}
 	router.X绑定静态文件目录("/static", ".")
 
-	list := router.X取路由数组()
+	list := router.X取路由切片()
 
 	assert.Len(t, list, 7)
 	assertRoutePresent(t, list, RouteInfo{
-		X方法:  "GET",
-		X路径:    "/favicon.ico",
+		X方法:     "GET",
+		X路径:     "/favicon.ico",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
 	})
 	assertRoutePresent(t, list, RouteInfo{
-		X方法:  "GET",
-		X路径:    "/",
+		X方法:     "GET",
+		X路径:     "/",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
 	})
 	assertRoutePresent(t, list, RouteInfo{
-		X方法:  "GET",
-		X路径:    "/users/",
+		X方法:     "GET",
+		X路径:     "/users/",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",
 	})
 	assertRoutePresent(t, list, RouteInfo{
-		X方法:  "GET",
-		X路径:    "/users/:id",
+		X方法:     "GET",
+		X路径:     "/users/:id",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest1$",
 	})
 	assertRoutePresent(t, list, RouteInfo{
-		X方法:  "POST",
-		X路径:    "/users/:id",
+		X方法:     "POST",
+		X路径:     "/users/:id",
 		Handler: "^(.*/vendor/)?github.com/888go/gin.handlerTest2$",
 	})
 }

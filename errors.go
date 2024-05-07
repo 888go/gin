@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	
+
 	"github.com/888go/gin/internal/json"
 )
 
@@ -112,7 +112,7 @@ func (a errorMsgs) ByType(typ ErrorType) errorMsgs {
 	return result
 }
 
-// Last 函数返回切片中的最后一个错误。如果该数组为空，则返回 nil。
+// Last 函数返回切片中的最后一个错误。如果该切片为空，则返回 nil。
 // 这是 errors[len(errors)-1] 的快捷方式。
 func (a errorMsgs) Last() *Error {
 	if length := len(a); length > 0 {
@@ -121,7 +121,7 @@ func (a errorMsgs) Last() *Error {
 	return nil
 }
 
-// Errors 返回包含所有错误消息的数组。
+// Errors 返回包含所有错误消息的切片。
 // 示例：
 //
 //	c.Error(errors.New("第一个错误"))

@@ -93,7 +93,7 @@ handlers=处理函数s
 relativePath=路由规则
 
 [func Routes() gin.RoutesInfo {]
-ff=取路由数组
+ff=取路由切片
 
 [func Run(addr ...string) (err error) {]
 ff=监听

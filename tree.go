@@ -10,7 +10,7 @@ import (
 	"strings"
 	"unicode"
 	"unicode/utf8"
-	
+
 	"github.com/888go/gin/internal/bytesconv"
 )
 
@@ -119,7 +119,7 @@ type node struct {
 	wildChild bool
 	nType     nodeType
 	priority  uint32
-	children  []*node // 子节点，数组末尾最多包含 1 个 :param 样式的节点
+	children  []*node // 子节点，切片末尾最多包含 1 个 :param 样式的节点
 	handlers  HandlersChain
 	fullPath  string
 }
@@ -164,9 +164,9 @@ func (n *node) addRoute(path string, handlers HandlersChain) {
 
 walk:
 	for {
-// 查找最长公共前缀。
-// 这也意味着，公共前缀中不包含 ':' 或 '*'，
-// 因为已存在的键不能包含这些字符。
+		// 查找最长公共前缀。
+		// 这也意味着，公共前缀中不包含 ':' 或 '*'，
+		// 因为已存在的键不能包含这些字符。
 		i := longestCommonPrefix(path, n.path)
 
 		// Split edge
@@ -326,7 +326,7 @@ func (n *node) insertChild(path string, fullPath string, handlers HandlersChain)
 			n = child
 			n.priority++
 
-// 如果路径没有以通配符结尾，则会有一个以'/'开头的另一个子路径
+			// 如果路径没有以通配符结尾，则会有一个以'/'开头的另一个子路径
 			if len(wildcard) < len(path) {
 				path = path[len(wildcard):]
 
@@ -452,8 +452,8 @@ walk: // 外层循环，用于遍历树
 				}
 
 				if !n.wildChild {
-// 如果循环结束时路径不等于'/'且当前节点没有子节点，
-// 那么当前节点需要回滚到上一个有效的已跳过节点
+					// 如果循环结束时路径不等于'/'且当前节点没有子节点，
+					// 那么当前节点需要回滚到上一个有效的已跳过节点
 					if path != "/" {
 						for length := len(*skippedNodes); length > 0; length-- {
 							skippedNode := (*skippedNodes)[length-1]
@@ -470,20 +470,20 @@ walk: // 外层循环，用于遍历树
 						}
 					}
 
-// 未找到任何内容。
-// 如果该路径存在叶节点，我们可以建议重定向到不带尾部斜杠的相同 URL。
+					// 未找到任何内容。
+					// 如果该路径存在叶节点，我们可以建议重定向到不带尾部斜杠的相同 URL。
 					value.tsr = path == "/" && n.handlers != nil
 					return
 				}
 
-				// 处理通配符子节点，它总是在数组的末尾
+				// 处理通配符子节点，它总是在切片的末尾
 				n = n.children[len(n.children)-1]
 				globalParamsCount++
 
 				switch n.nType {
 				case param:
-// 修复：截断参数
-// 文件：tree_test.go，行号：204
+					// 修复：截断参数
+					// 文件：tree_test.go，行号：204
 
 					// 查找参数结束位置（可能是'/'或路径结束）
 					end := 0
@@ -536,7 +536,7 @@ walk: // 外层循环，用于遍历树
 						return
 					}
 					if len(n.children) == 1 {
-// 未找到处理程序。检查是否存在该路径加上末尾斜杠的处理程序，以便进行 TSR（可能指“透明目录重写”）推荐
+						// 未找到处理程序。检查是否存在该路径加上末尾斜杠的处理程序，以便进行 TSR（可能指“透明目录重写”）推荐
 						n = n.children[0]
 						value.tsr = (n.path == "/" && n.handlers != nil) || (n.path == "" && n.indices == "/")
 					}
@@ -581,8 +581,8 @@ walk: // 外层循环，用于遍历树
 		}
 
 		if path == prefix {
-// 如果当前路径不等于'/'，并且节点未注册处理程序，并且最近匹配的节点有一个子节点
-// 那么当前节点需要回滚到上一个有效跳过的节点
+			// 如果当前路径不等于'/'，并且节点未注册处理程序，并且最近匹配的节点有一个子节点
+			// 那么当前节点需要回滚到上一个有效跳过的节点
 			if n.handlers == nil && path != "/" {
 				for length := len(*skippedNodes); length > 0; length-- {
 					skippedNode := (*skippedNodes)[length-1]
@@ -597,16 +597,16 @@ walk: // 外层循环，用于遍历树
 						continue walk
 					}
 				}
-				// n = latestNode.children数组的最后一个元素
+				// n = latestNode.children切片的最后一个元素
 			}
-// 我们应该已经到达包含处理程序的节点。
-// 检查该节点是否注册了处理程序。
+			// 我们应该已经到达包含处理程序的节点。
+			// 检查该节点是否注册了处理程序。
 			if value.handlers = n.handlers; value.handlers != nil {
 				value.fullPath = n.fullPath
 				return
 			}
 
-// 如果该路由没有处理程序，但该路由有一个通配符子路由，则必须为此路径（带有一个额外的尾部斜杠）提供一个处理程序
+			// 如果该路由没有处理程序，但该路由有一个通配符子路由，则必须为此路径（带有一个额外的尾部斜杠）提供一个处理程序
 			if path == "/" && n.wildChild && n.nType != root {
 				value.tsr = true
 				return
@@ -617,7 +617,7 @@ walk: // 外层循环，用于遍历树
 				return
 			}
 
-// 未找到处理程序。检查是否存在针对此路径加上末尾斜杠的处理程序，以便提供末尾斜杠建议
+			// 未找到处理程序。检查是否存在针对此路径加上末尾斜杠的处理程序，以便提供末尾斜杠建议
 			for i, c := range []byte(n.indices) {
 				if c == '/' {
 					n = n.children[i]
@@ -630,7 +630,7 @@ walk: // 外层循环，用于遍历树
 			return
 		}
 
-// 未找到任何内容。如果该路径存在叶子节点，我们可以建议重定向到同一 URL 并附加一个额外的尾部斜杠
+		// 未找到任何内容。如果该路径存在叶子节点，我们可以建议重定向到同一 URL 并附加一个额外的尾部斜杠
 		value.tsr = path == "/" ||
 			(len(prefix) == len(path)+1 && prefix[len(path)] == '/' &&
 				path == prefix[:len(prefix)-1] && n.handlers != nil)
@@ -662,7 +662,7 @@ walk: // 外层循环，用于遍历树
 func (n *node) findCaseInsensitivePath(path string, fixTrailingSlash bool) ([]byte, bool) {
 	const stackBufSize = 128
 
-// 在常见情况下，使用栈上静态大小的缓冲区。如果路径过长，则改为在堆上分配缓冲区。
+	// 在常见情况下，使用栈上静态大小的缓冲区。如果路径过长，则改为在堆上分配缓冲区。
 	buf := make([]byte, 0, stackBufSize)
 	if length := len(path) + 1; length > stackBufSize {
 		buf = make([]byte, 0, length)
@@ -678,7 +678,7 @@ func (n *node) findCaseInsensitivePath(path string, fixTrailingSlash bool) ([]by
 	return ciPath, ciPath != nil
 }
 
-// 将数组中的字节向左移动n个字节
+// 将切片中的字节向左移动n个字节
 func shiftNRuneBytes(rb [4]byte, n int) [4]byte {
 	switch n {
 	case 0:
@@ -706,14 +706,14 @@ walk: // 外层循环，用于遍历树
 		ciPath = append(ciPath, n.path...)
 
 		if len(path) == 0 {
-// 我们应该已经到达包含处理程序的节点。
-// 检查该节点是否注册了处理程序。
+			// 我们应该已经到达包含处理程序的节点。
+			// 检查该节点是否注册了处理程序。
 			if n.handlers != nil {
 				return ciPath
 			}
 
-// 未找到处理程序。
-// 尝试通过添加尾部斜杠来修复路径
+			// 未找到处理程序。
+			// 尝试通过添加尾部斜杠来修复路径
 			if fixTrailingSlash {
 				for i, c := range []byte(n.indices) {
 					if c == '/' {
@@ -729,8 +729,8 @@ walk: // 外层循环，用于遍历树
 			return nil
 		}
 
-// 如果该节点没有通配符（param 或 catchAll）子节点，
-// 我们可以直接查找下一个子节点并继续向下遍历树
+		// 如果该节点没有通配符（param 或 catchAll）子节点，
+		// 我们可以直接查找下一个子节点并继续向下遍历树
 		if !n.wildChild {
 			// 跳过已处理的 rune 字节
 			rb = shiftNRuneBytes(rb, npLen)
@@ -750,9 +750,9 @@ walk: // 外层循环，用于遍历树
 				// Process a new rune
 				var rv rune
 
-// 查找rune的起始位置。
-// rune字符可能包含最多4个字节，
-// 因此，-4肯定属于另一个rune字符。
+				// 查找rune的起始位置。
+				// rune字符可能包含最多4个字节，
+				// 因此，-4肯定属于另一个rune字符。
 				var off int
 				for max := min(npLen, 3); off < max; off++ {
 					if i := npLen - off; utf8.RuneStart(oldPath[i]) {
@@ -773,7 +773,7 @@ walk: // 外层循环，用于遍历树
 				for i, c := range []byte(n.indices) {
 					// Lowercase matches
 					if c == idxc {
-// 必须采用递归方法，因为大小写两种字节都可能存在作为索引
+						// 必须采用递归方法，因为大小写两种字节都可能存在作为索引
 						if out := n.children[i].findCaseInsensitivePathRec(
 							path, ciPath, rb, fixTrailingSlash,
 						); out != nil {
@@ -783,8 +783,8 @@ walk: // 外层循环，用于遍历树
 					}
 				}
 
-// 如果我们没有找到匹配项，对于大写字符执行相同的操作，
-// 如果它与小写字符不同的话
+				// 如果我们没有找到匹配项，对于大写字符执行相同的操作，
+				// 如果它与小写字符不同的话
 				if up := unicode.ToUpper(rv); up != lo {
 					utf8.EncodeRune(rb[:], up)
 					rb = shiftNRuneBytes(rb, off)
@@ -802,7 +802,7 @@ walk: // 外层循环，用于遍历树
 				}
 			}
 
-// 未找到任何内容。如果该路径存在叶子节点，我们可以建议重定向到去掉尾部斜杠的相同URL
+			// 未找到任何内容。如果该路径存在叶子节点，我们可以建议重定向到去掉尾部斜杠的相同URL
 			if fixTrailingSlash && path == "/" && n.handlers != nil {
 				return ciPath
 			}
@@ -861,8 +861,8 @@ walk: // 外层循环，用于遍历树
 		}
 	}
 
-// 未找到任何内容。
-// 尝试通过添加或删除尾部斜杠来修复路径
+	// 未找到任何内容。
+	// 尝试通过添加或删除尾部斜杠来修复路径
 	if fixTrailingSlash {
 		if path == "/" {
 			return ciPath

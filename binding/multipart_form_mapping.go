@@ -20,8 +20,8 @@ var (
 	ErrMultiFileHeader = errors.New("unsupported field type for multipart.FileHeader")
 
 	// ErrMultiFileHeaderLenInvalid 表示 []*multipart.FileHeader 的长度无效
-// 
-// 这段 Go 语言注释翻译成中文为：当用于表示多个文件头的 []*multipart.FileHeader 切片（数组）的长度不正确或无效时，会返回这个错误。
+	//
+	// 这段 Go 语言注释翻译成中文为：当用于表示多个文件头的 []*multipart.FileHeader 切片（切片）的长度不正确或无效时，会返回这个错误。
 	ErrMultiFileHeaderLenInvalid = errors.New("unsupported len of array for []*multipart.FileHeader")
 )
 

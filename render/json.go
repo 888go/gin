@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	
+
 	"github.com/888go/gin/internal/bytesconv"
 	"github.com/888go/gin/internal/json"
 )
@@ -96,7 +96,7 @@ func (r SecureJSON) Render(w http.ResponseWriter) error {
 	if err != nil {
 		return err
 	}
-	// 如果jsonBytes是数组值
+	// 如果jsonBytes是切片值
 	if bytes.HasPrefix(jsonBytes, bytesconv.StringToBytes("[")) && bytes.HasSuffix(jsonBytes,
 		bytesconv.StringToBytes("]")) {
 		if _, err = w.Write(bytesconv.StringToBytes(r.Prefix)); err != nil {

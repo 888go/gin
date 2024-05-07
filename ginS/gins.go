@@ -8,7 +8,7 @@ import (
 	"html/template"
 	"net/http"
 	"sync"
-	
+
 	"github.com/888go/gin"
 )
 
@@ -127,8 +127,8 @@ func X中间件(middlewares ...gin类.HandlerFunc) gin类.IRoutes {
 }
 
 // Routes 返回已注册路由的切片。
-func X取路由数组() gin类.RoutesInfo {
-	return engine().X取路由数组()
+func X取路由切片() gin类.RoutesInfo {
+	return engine().X取路由切片()
 }
 
 // Run 函数连接到一个 http.Server，并开始监听和处理 HTTP 请求。

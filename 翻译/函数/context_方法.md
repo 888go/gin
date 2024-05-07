@@ -19,7 +19,7 @@ ff=取副本
 ff=取主处理程序名称
 
 [func (c *Context) HandlerNames() #左中括号##右中括号#string {]
-ff=取处理程序数组
+ff=取处理程序切片
 
 [func (c *Context) Handler() HandlerFunc {]
 ff=取主处理程序
@@ -88,8 +88,8 @@ d=返回时长
 key=名称
 
 [func (c *Context) GetStringSlice(key string) (ss #左中括号##右中括号#string) {]
-ff=取数组值
-ss=返回数组
+ff=取切片值
+ss=返回切片
 key=名称
 
 [func (c *Context) GetStringMap(key string) (sm map#左中括号#string#右中括号#any) {]
@@ -103,8 +103,8 @@ sms=返回Map
 key=名称
 
 [func (c *Context) GetStringMapStringSlice(key string) (smss map#左中括号#string#右中括号##左中括号##右中括号#string) {]
-ff=取数组Map值
-smss=返回数组Map
+ff=取切片Map值
+smss=返回切片Map
 key=名称
 
 [func (c *Context) Param(key string) string {]
@@ -131,14 +131,14 @@ ff=取URL参数值2
 key=名称
 
 [func (c *Context) QueryArray(key string) (values #左中括号##右中括号#string) {]
-ff=取URL参数数组值
-values=返回数组
+ff=取URL参数切片值
+values=返回切片
 key=名称
 
 [func (c *Context) GetQueryArray(key string) (values #左中括号##右中括号#string, ok bool) {]
-ff=取URL参数数组值2
+ff=取URL参数切片值2
 ok=是否存在
-values=返回数组
+values=返回切片
 key=名称
 
 [func (c *Context) QueryMap(key string) (dicts map#左中括号#string#右中括号#string) {]
@@ -165,14 +165,14 @@ ff=取表单参数值2
 key=名称
 
 [func (c *Context) PostFormArray(key string) (values #左中括号##右中括号#string) {]
-ff=取表单参数数组值
-values=返回数组
+ff=取表单参数切片值
+values=返回切片
 key=名称
 
 [func (c *Context) GetPostFormArray(key string) (values #左中括号##右中括号#string, ok bool) {]
-ff=取参数数组值
+ff=取参数切片值
 ok=是否存在
-values=返回数组
+values=返回切片
 key=名称
 
 [func (c *Context) PostFormMap(key string) (dicts map#左中括号#string#右中括号#string) {]

@@ -156,7 +156,7 @@
 
 # <翻译开始>
 // HandlerNames 返回与此上下文关联的已注册处理程序的降序列表，遵循HandlerName()的语义
-// 返回数组参考如下:
+// 返回切片参考如下:
 // 0 = {string} "github.com/888go/gin.TestContextHandlerNames.func1"
 // 1 = {string} "github.com/888go/gin.handlerNameTest"
 // 2 = {string} "github.com/888go/gin.TestContextHandlerNames.func2"
@@ -1181,7 +1181,7 @@
 
 # <翻译开始>
 // SecureJSON将给定的结构体作为安全的JSON序列化到响应体中。
-// 默认情况下，如果给定的结构体是数组值，则会在响应体前缀添加 "while(1),"。
+// 默认情况下，如果给定的结构体是切片值，则会在响应体前缀添加 "while(1),"。
 // 同时，它还会将Content-Type设置为"application/json"。
 # <翻译结束>
 

@@ -32,7 +32,7 @@ ff=加载HTML模板文件
 files=模板文件s
 
 [func (engine *Engine) Routes() (routes RoutesInfo) {]
-ff=取路由数组
+ff=取路由切片
 routes=路由s
 
 [func (engine *Engine) Run(addr ...string) (err error) {]

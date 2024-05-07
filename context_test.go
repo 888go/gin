@@ -22,7 +22,7 @@ import (
 	"sync"
 	"testing"
 	"time"
-	
+
 	"github.com/888go/gin/binding"
 	testdata "github.com/888go/gin/testdata/protoexample"
 	"github.com/gin-contrib/sse"
@@ -284,7 +284,7 @@ func TestContextGetDuration(t *testing.T) {
 func TestContextGetStringSlice(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.X设置值("slice", []string{"foo"})
-	assert.Equal(t, []string{"foo"}, c.X取数组值("slice"))
+	assert.Equal(t, []string{"foo"}, c.X取切片值("slice"))
 }
 
 func TestContextGetStringMap(t *testing.T) {
@@ -313,8 +313,8 @@ func TestContextGetStringMapStringSlice(t *testing.T) {
 	m["foo"] = []string{"foo"}
 	c.X设置值("map", m)
 
-	assert.Equal(t, m, c.X取数组Map值("map"))
-	assert.Equal(t, []string{"foo"}, c.X取数组Map值("map")["foo"])
+	assert.Equal(t, m, c.X取切片Map值("map"))
+	assert.Equal(t, []string{"foo"}, c.X取切片Map值("map")["foo"])
 }
 
 func TestContextCopy(t *testing.T) {
@@ -349,7 +349,7 @@ func TestContextHandlerNames(t *testing.T) {
 	c, _ := CreateTestContext(httptest.NewRecorder())
 	c.handlers = HandlersChain{func(c *Context) {}, handlerNameTest, func(c *Context) {}, handlerNameTest2}
 
-	names := c.X取处理程序数组()
+	names := c.X取处理程序切片()
 
 	assert.True(t, len(names) == 4)
 	for _, name := range names {
@@ -480,19 +480,19 @@ func TestContextQueryAndPostForm(t *testing.T) {
 	assert.Empty(t, obj.Both)
 	assert.Equal(t, []string{"first", "second"}, obj.Array)
 
-	values, ok := c.X取URL参数数组值2("array[]")
+	values, ok := c.X取URL参数切片值2("array[]")
 	assert.True(t, ok)
 	assert.Equal(t, "first", values[0])
 	assert.Equal(t, "second", values[1])
 
-	values = c.X取URL参数数组值("array[]")
+	values = c.X取URL参数切片值("array[]")
 	assert.Equal(t, "first", values[0])
 	assert.Equal(t, "second", values[1])
 
-	values = c.X取URL参数数组值("nokey")
+	values = c.X取URL参数切片值("nokey")
 	assert.Equal(t, 0, len(values))
 
-	values = c.X取URL参数数组值("both")
+	values = c.X取URL参数切片值("both")
 	assert.Equal(t, 1, len(values))
 	assert.Equal(t, "GET", values[0])
 
@@ -580,19 +580,19 @@ func TestContextPostFormMultipart(t *testing.T) {
 	assert.Empty(t, value)
 	assert.Equal(t, "nothing", c.X取表单参数值并带默认("nokey", "nothing"))
 
-	values, ok := c.X取参数数组值("array")
+	values, ok := c.X取参数切片值("array")
 	assert.True(t, ok)
 	assert.Equal(t, "first", values[0])
 	assert.Equal(t, "second", values[1])
 
-	values = c.X取表单参数数组值("array")
+	values = c.X取表单参数切片值("array")
 	assert.Equal(t, "first", values[0])
 	assert.Equal(t, "second", values[1])
 
-	values = c.X取表单参数数组值("nokey")
+	values = c.X取表单参数切片值("nokey")
 	assert.Equal(t, 0, len(values))
 
-	values = c.X取表单参数数组值("foo")
+	values = c.X取表单参数切片值("foo")
 	assert.Equal(t, 1, len(values))
 	assert.Equal(t, "bar", values[0])
 
@@ -997,8 +997,8 @@ func TestContextRenderFile(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Body.String(), "func X创建() *Engine {") //th:assert.Contains(t, w.Body.String(), "func X创建() *Engine {")
-// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
-// 否则，Content-Type='text/x-go; charset=utf-8'
+	// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
+	// 否则，Content-Type='text/x-go; charset=utf-8'
 	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
 }
 
@@ -1011,8 +1011,8 @@ func TestContextRenderFileFromFS(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Body.String(), "func X创建() *Engine {") //th:assert.Contains(t, w.Body.String(), "func X创建() *Engine {")
-// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
-// 否则，Content-Type='text/x-go; charset=utf-8'
+	// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
+	// 否则，Content-Type='text/x-go; charset=utf-8'
 	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
 	assert.Equal(t, "/some/path", c.X请求.URL.Path)
 }
@@ -1454,8 +1454,8 @@ func TestContextClientIP(t *testing.T) {
 	c.engine.trustedCIDRs, _ = c.engine.prepareTrustedCIDRs()
 	resetContextForClientIPTests(c)
 
-// 向后兼容测试（验证默认设置不会破坏
-// （不安全！）的旧版行为）
+	// 向后兼容测试（验证默认设置不会破坏
+	// （不安全！）的旧版行为）
 	assert.Equal(t, "20.20.20.20", c.X取客户端ip())
 
 	c.X请求.Header.Del("X-Forwarded-For")
@@ -1522,7 +1522,7 @@ func TestContextClientIP(t *testing.T) {
 	c.X请求.Header.Set("X-Forwarded-For", " blah ")
 	assert.Equal(t, "40.40.40.40", c.X取客户端ip())
 
-// LookupHost 返回的结果包含非 IP 元素。这种情况本不应该发生，但我们应当对其进行测试以确保我们能够优雅地处理此类异常情况。
+	// LookupHost 返回的结果包含非 IP 元素。这种情况本不应该发生，但我们应当对其进行测试以确保我们能够优雅地处理此类异常情况。
 	_ = c.engine.X设置受信任代理([]string{"baz"})
 	c.X请求.Header.Set("X-Forwarded-For", " 30.30.30.30 ")
 	assert.Equal(t, "40.40.40.40", c.X取客户端ip())
@@ -1935,7 +1935,7 @@ func TestContextShouldBindBodyWith(t *testing.T) {
 			c.X请求, _ = http.NewRequest(
 				"POST", "http://example.com", bytes.NewBufferString(tt.bodyA),
 			)
-// 当它绑定到 typeA 和 typeB 时，它发现主体不是 typeB，而是 typeA。
+			// 当它绑定到 typeA 和 typeB 时，它发现主体不是 typeB，而是 typeA。
 			objA := typeA{}
 			assert.NoError(t, c.X取参数到指针并按类型且缓存(&objA, tt.bindingA))
 			assert.Equal(t, typeA{"FOO"}, objA)
@@ -1945,7 +1945,7 @@ func TestContextShouldBindBodyWith(t *testing.T) {
 		}
 		// 将bodyB转换为typeA和typeB
 		{
-// 当它绑定到 typeA 和 typeB 时，会发现其实体不是 typeA，而是 typeB。
+			// 当它绑定到 typeA 和 typeB 时，会发现其实体不是 typeA，而是 typeB。
 			w := httptest.NewRecorder()
 			c, _ := CreateTestContext(w)
 			c.X请求, _ = http.NewRequest(
@@ -2431,9 +2431,9 @@ func TestInterceptedHeader(t *testing.T) {
 	})
 	c.X请求 = httptest.NewRequest("GET", "/", nil)
 	r.HandleContext底层方法(c)
-// 当 WriteHeaderNow() 被调用时，Result() 会冻结头部信息
-// 相对于此时，这是响应头将被刷新的时间点
-// 由于在 c.String 上进行响应刷新，因此第一个中间件无法设置 Header。请确认这一点
+	// 当 WriteHeaderNow() 被调用时，Result() 会冻结头部信息
+	// 相对于此时，这是响应头将被刷新的时间点
+	// 由于在 c.String 上进行响应刷新，因此第一个中间件无法设置 Header。请确认这一点
 	assert.Equal(t, "", w.Result().Header.Get("X-Test"))
 	assert.Equal(t, "present", w.Result().Header.Get("X-Test-2"))
 }

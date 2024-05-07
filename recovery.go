@@ -56,7 +56,7 @@ func CustomRecoveryWithWriter(out io.Writer, handle RecoveryFunc) HandlerFunc {
 	return func(c *Context) {
 		defer func() {
 			if err := recover(); err != nil {
-// 检查连接是否已断开，因为这并不是真正需要引发恐慌并打印堆栈跟踪的条件。
+				// 检查连接是否已断开，因为这并不是真正需要引发恐慌并打印堆栈跟踪的条件。
 				var brokenPipe bool
 				if ne, ok := err.(*net.OpError); ok {
 					var se *os.SyscallError
@@ -109,7 +109,7 @@ func defaultHandleRecovery(c *Context, _ any) {
 // stack 返回一个格式良好的堆栈帧，跳过 skip 个帧。
 func stack(skip int) []byte {
 	buf := new(bytes.Buffer) // the returned data
-// 在循环过程中，我们会打开文件并读取它们。这些变量记录当前加载的文件。
+	// 在循环过程中，我们会打开文件并读取它们。这些变量记录当前加载的文件。
 	var lines [][]byte
 	var lastFile string
 	for i := skip; ; i++ { // 跳过预期的帧数
@@ -134,7 +134,7 @@ func stack(skip int) []byte {
 
 // source 返回第n行去除两端空白字符后的切片。
 func source(lines [][]byte, n int) []byte {
-	n-- // 在堆栈跟踪中，行号是从1开始编号的，但我们的数组是从0开始索引的
+	n-- // 在堆栈跟踪中，行号是从1开始编号的，但我们的切片是从0开始索引的
 	if n < 0 || n >= len(lines) {
 		return dunno
 	}
