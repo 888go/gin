@@ -23,8 +23,8 @@
 <原文结束>
 
 # <翻译开始>
-// Output 是一个用于写入日志的writer。
-// 可选配置，默认值为gin.DefaultWriter。
+	// Output 是一个用于写入日志的writer。
+	// 可选配置，默认值为gin.DefaultWriter。
 # <翻译结束>
 
 

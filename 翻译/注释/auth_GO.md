@@ -70,8 +70,8 @@
 <原文结束>
 
 # <翻译开始>
-// 已找到用户凭据，将用户的ID设置为当前上下文中的AuthUserKey键，稍后可以通过
-// c.MustGet(gin.AuthUserKey)读取用户的ID。
+		// 已找到用户凭据，将用户的ID设置为当前上下文中的AuthUserKey键，稍后可以通过
+		// c.MustGet(gin.AuthUserKey)读取用户的ID。
 # <翻译结束>
 
 

@@ -162,13 +162,13 @@ func main() {
        ...
        app := gin.Default()
 
-// 为转发到服务1的请求启动span，并注入headers
+        // 为转发到服务1的请求启动span，并注入headers
        app.POST("/service1",
            opengintracing.NewSpan(trace, "转发至服务1"),
            opengintracing.InjectToHeaders(trace, true),
            service1handler)
 
-// 为转发到服务2的请求启动span，并注入headers
+        // 为转发到服务2的请求启动span，并注入headers
        app.POST("/service2",
            opengintracing.NewSpan(trace, "转发至服务2"),
            opengintracing.InjectToHeaders(trace, true),
@@ -196,10 +196,10 @@ func main() {
        refFunc := opentracing.FollowsFrom
        app := gin.Default()
 
-// 从请求头中获取并继承自“API Gateway”的span
+        // 从请求头中获取并继承自“API Gateway”的span
        app.POST("",
            opengintracing.SpanFromHeaders(trace, "操作", refFunc, true),
-// 如果要在其他服务中继续追踪，请勿忘记注入headers
+        // 如果要在其他服务中继续追踪，请勿忘记注入headers
            opengintracing.InjectToHeaders(trace, true),
            handler)
        ...
@@ -227,7 +227,7 @@ func main() {
        refFunc := opentracing.ChildOf
        app := gin.Default()
 
-// 从请求头中获取并作为子span创建
+        // 从请求头中获取并作为子span创建
        app.POST("",
            opengintracing.SpanFromHeaders(trace, "操作", refFunc, true),
            handler)

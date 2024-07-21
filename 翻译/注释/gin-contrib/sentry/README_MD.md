@@ -79,30 +79,30 @@ func main() {
 
 # <翻译开始>
 # ```go
-// (example/main.go Go 代码文件)
+	// (example/main.go Go 代码文件)
 
 package main
 
 import (
-    "github.com/getsentry/raven-go" // 引入raven错误报告库
-    "github.com/gin-contrib/sentry"  // 引入gin框架的sentry中间件
-    "github.com/gin-gonic/gin"       // 引入gin框架
+    "github.com/getsentry/raven-go" 	// 引入raven错误报告库
+    "github.com/gin-contrib/sentry"  	// 引入gin框架的sentry中间件
+    "github.com/gin-gonic/gin"       	// 引入gin框架
 )
 
 func init() {
-    raven.SetDSN("https://<key>:<secret>@app.getsentry.com/<project>") // 设置Sentry DSN（数据源名称）
+    raven.SetDSN("https:	//<key>:<secret>@app.getsentry.com/<project>") 	// 设置Sentry DSN（数据源名称）
 }
 
 func main() {
-    r := gin.Default() // 初始化gin引擎
+    r := gin.Default() 	// 初始化gin引擎
 
-// 使用sentry中间件进行恢复处理，不发送非崩溃报告
+	// 使用sentry中间件进行恢复处理，不发送非崩溃报告
     r.Use(sentry.Recovery(raven.DefaultClient, false))
 
-// 若要同时发送崩溃报告和非崩溃报告，可以使用如下代码：
-// r.Use(sentry.Recovery(raven.DefaultClient, true))
+	// 若要同时发送崩溃报告和非崩溃报告，可以使用如下代码：
+	// r.Use(sentry.Recovery(raven.DefaultClient, true))
 
-    r.Run(":8080") // 启动gin服务在8080端口
+    r.Run(":8080") 	// 启动gin服务在8080端口
 }
 ```
 

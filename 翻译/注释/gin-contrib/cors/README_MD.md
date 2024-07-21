@@ -115,27 +115,27 @@ import (
 )
 
 func main() {
-// 初始化路由
+  // 初始化路由
   router := gin.Default()
 
-// 为 https://foo.com 和 https://github.com 来源设置 CORS，允许：
-// - PUT 和 PATCH 方法
-// - Origin 请求头
-// - 凭证共享
-// - 预检请求缓存12小时
+  // 为 https:  //foo.com 和 https:  //github.com 来源设置 CORS，允许：
+  // - PUT 和 PATCH 方法
+  // - Origin 请求头
+  // - 凭证共享
+  // - 预检请求缓存12小时
   router.Use(cors.New(cors.Config{
-    AllowOrigins:     []string{"https://foo.com"},
+    AllowOrigins:     []string{"https:  //foo.com"},
     AllowMethods:     []string{"PUT", "PATCH"},
     AllowHeaders:     []string{"Origin"},
     ExposeHeaders:    []string{"Content-Length"},
     AllowCredentials: true,
     AllowOriginFunc: func(origin string) bool {
-      return origin == "https://github.com"
+      return origin == "https:  //github.com"
     },
     MaxAge: 12 * time.Hour,
   }))
 
-// 运行服务器
+  // 运行服务器
   router.Run()
 }
 ```
@@ -175,27 +175,27 @@ Note: while Default() allows all origins, DefaultConfig() does not and you will 
 
 ```go
 func main() {
-// 初始化默认的gin路由器
+  // 初始化默认的gin路由器
   router := gin.Default()
 
-// - 默认情况下不允许任何来源
-// - 允许GET、POST、PUT、HEAD方法
-// - 禁用凭据共享
-// - 预检请求缓存时间为12小时
+  // - 默认情况下不允许任何来源
+  // - 允许GET、POST、PUT、HEAD方法
+  // - 禁用凭据共享
+  // - 预检请求缓存时间为12小时
   config := cors.DefaultConfig()
 
-// 设置允许特定来源
-  config.AllowOrigins = []string{"http://google.com"}
-// 可以设置多个允许来源
-// config.AllowOrigins = []string{"http://google.com", "http://facebook.com"}
+  // 设置允许特定来源
+  config.AllowOrigins = []string{"http:  //google.com"}
+  // 可以设置多个允许来源
+  // config.AllowOrigins = []string{"http:  //google.com", "http:  //facebook.com"}
 
-// 若要允许所有来源，需要设置AllowAllOrigins为true
-// config.AllowAllOrigins = true
+  // 若要允许所有来源，需要设置AllowAllOrigins为true
+  // config.AllowAllOrigins = true
 
-// 使用自定义配置的CORS中间件
+  // 使用自定义配置的CORS中间件
   router.Use(cors.New(config))
 
-// 运行服务器
+  // 运行服务器
   router.Run()
 }
 
@@ -228,17 +228,17 @@ Using all origins disables the ability for Gin to set cookies for clients. When 
 
 ```go
 func main() {
-// 创建一个 Gin 路由器，并设置默认跨域策略，允许所有来源访问
+  // 创建一个 Gin 路由器，并设置默认跨域策略，允许所有来源访问
   router := gin.Default()
-// 相当于以下配置：
-// config := cors.DefaultConfig()
-// config.AllowAllOrigins = true
-// router.Use(cors.New(config))
+  // 相当于以下配置：
+  // config := cors.DefaultConfig()
+  // config.AllowAllOrigins = true
+  // router.Use(cors.New(config))
 
-// 使用默认的跨域中间件
+  // 使用默认的跨域中间件
   router.Use(cors.Default())
 
-// 运行服务器
+  // 运行服务器
   router.Run()
 }
 ```

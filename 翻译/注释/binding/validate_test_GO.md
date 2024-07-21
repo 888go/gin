@@ -18,8 +18,8 @@
 <原文结束>
 
 # <翻译开始>
-// StructPointerSlice []noValidationSub // 结构体指针切片
-// InterfaceSlice     []testInterface   // 接口类型切片
+		// StructPointerSlice []noValidationSub 		// 结构体指针切片
+		// InterfaceSlice     []testInterface   		// 接口类型切片
 # <翻译结束>
 
 
@@ -29,8 +29,8 @@
 <原文结束>
 
 # <翻译开始>
-// origin := 创建无验证值()
-// test := 创建无验证值()
+	// origin := 创建无验证值()
+	// test := 创建无验证值()
 # <翻译结束>
 
 
@@ -40,10 +40,10 @@
 <原文结束>
 
 # <翻译开始>
-// 断言validate(test)的结果为nil
-// 断言validate(&test)的结果为nil
-// 
-// 这里是对Go语言中测试断言库（如 testify/assert）的注释翻译，这两行代码在进行单元测试时使用。它们的作用是分别检查函数`validate(test)`和`validate(&test)`的返回值是否为`nil`，如果实际结果确实是`nil`，则测试通过；否则，测试失败。
+	// 断言validate(test)的结果为nil
+	// 断言validate(&test)的结果为nil
+	// 
+	// 这里是对Go语言中测试断言库（如 testify/assert）的注释翻译，这两行代码在进行单元测试时使用。它们的作用是分别检查函数`validate(test)`和`validate(&test)`的返回值是否为`nil`，如果实际结果确实是`nil`，则测试通过；否则，测试失败。
 # <翻译结束>
 
 
@@ -75,8 +75,8 @@
 <原文结束>
 
 # <翻译开始>
-// 这验证了函数 `notOne` 与 `defaultValidator` 预期的函数签名相匹配，
-// 从而也就验证了该函数与 validator 库的兼容性。
+	// 这验证了函数 `notOne` 与 `defaultValidator` 预期的函数签名相匹配，
+	// 从而也就验证了该函数与 validator 库的兼容性。
 # <翻译结束>
 
 

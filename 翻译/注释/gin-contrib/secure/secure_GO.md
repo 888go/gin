@@ -14,8 +14,8 @@
 <原文结束>
 
 # <翻译开始>
-// AllowedHosts 是一个完全合格域名列表，其中包含了允许访问的所有域名。
-// 默认为空列表，这意味着允许任何和所有主机名。
+	// AllowedHosts 是一个完全合格域名列表，其中包含了允许访问的所有域名。
+	// 默认为空列表，这意味着允许任何和所有主机名。
 # <翻译结束>
 
 
@@ -25,8 +25,8 @@
 <原文结束>
 
 # <翻译开始>
-// 如果SSLRedirect设置为true，则只允许https请求。
-// 默认值为false。
+	// 如果SSLRedirect设置为true，则只允许https请求。
+	// 默认值为false。
 # <翻译结束>
 
 
@@ -36,7 +36,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果SSLTemporaryRedirect为true，在重定向时将使用302状态码。默认值为false（即使用301状态码）。
+	// 如果SSLTemporaryRedirect为true，在重定向时将使用302状态码。默认值为false（即使用301状态码）。
 # <翻译结束>
 
 
@@ -46,8 +46,8 @@
 <原文结束>
 
 # <翻译开始>
-// SSLHost 是用于将 HTTP 请求重定向到 HTTPS 的主机名。
-// 默认值为 ""，表示使用相同的主机。
+	// SSLHost 是用于将 HTTP 请求重定向到 HTTPS 的主机名。
+	// 默认值为 ""，表示使用相同的主机。
 # <翻译结束>
 
 
@@ -57,8 +57,8 @@
 <原文结束>
 
 # <翻译开始>
-// STSSeconds 是 Strict-Transport-Security 头部的最大有效期（max-age）。
-// 默认值为 0，这意味着不会包含该头部。
+	// STSSeconds 是 Strict-Transport-Security 头部的最大有效期（max-age）。
+	// 默认值为 0，这意味着不会包含该头部。
 # <翻译结束>
 
 
@@ -68,7 +68,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果将STSIncludeSubdomains设置为true，则`includeSubdomains`将被添加到Strict-Transport-Security头中。默认值为false。
+	// 如果将STSIncludeSubdomains设置为true，则`includeSubdomains`将被添加到Strict-Transport-Security头中。默认值为false。
 # <翻译结束>
 
 
@@ -78,7 +78,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果FrameDeny设置为true，则会添加X-Frame-Options头，并将其值设为`DENY`。默认为false。
+	// 如果FrameDeny设置为true，则会添加X-Frame-Options头，并将其值设为`DENY`。默认为false。
 # <翻译结束>
 
 
@@ -88,7 +88,7 @@
 <原文结束>
 
 # <翻译开始>
-// CustomFrameOptionsValue 允许设置自定义 X-Frame-Options 头部值。这将覆盖 FrameDeny 选项。
+	// CustomFrameOptionsValue 允许设置自定义 X-Frame-Options 头部值。这将覆盖 FrameDeny 选项。
 # <翻译结束>
 
 
@@ -98,7 +98,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果ContentTypeNosniff设为true，则会添加一个X-Content-Type-Options头，并将其值设为`nosniff`。默认值为false。
+	// 如果ContentTypeNosniff设为true，则会添加一个X-Content-Type-Options头，并将其值设为`nosniff`。默认值为false。
 # <翻译结束>
 
 
@@ -108,7 +108,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果BrowserXssFilter设为true，则会添加“X-XSS-Protection”头部，并将其值设为`1; mode=block`。默认情况下为false。
+	// 如果BrowserXssFilter设为true，则会添加“X-XSS-Protection”头部，并将其值设为`1; mode=block`。默认情况下为false。
 # <翻译结束>
 
 
@@ -118,7 +118,7 @@
 <原文结束>
 
 # <翻译开始>
-// ContentSecurityPolicy 允许设置自定义的“Content-Security-Policy”头部值，默认为空字符串""。
+	// ContentSecurityPolicy 允许设置自定义的“Content-Security-Policy”头部值，默认为空字符串""。
 # <翻译结束>
 
 
@@ -165,7 +165,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果DontRedirectIPV4Hostnames设为true，那么对IPv4地址形式的主机名的请求将不会被重定向。这是为了允许负载均衡器健康检查能够成功执行。
+	// 如果DontRedirectIPV4Hostnames设为true，那么对IPv4地址形式的主机名的请求将不会被重定向。这是为了允许负载均衡器健康检查能够成功执行。
 # <翻译结束>
 
 
@@ -175,8 +175,8 @@
 <原文结束>
 
 # <翻译开始>
-// 如果请求不安全，但本字典中任意一个头部被设置为它们对应的值时，将请求视为安全请求。
-// 这在你的应用运行在一个通过 http 转发请求到你应用的 secure 代理（例如 Heroku）后面时非常有用。
+	// 如果请求不安全，但本字典中任意一个头部被设置为它们对应的值时，将请求视为安全请求。
+	// 这在你的应用运行在一个通过 http 转发请求到你应用的 secure 代理（例如 Heroku）后面时非常有用。
 # <翻译结束>
 
 

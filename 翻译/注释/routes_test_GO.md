@@ -92,8 +92,8 @@
 <原文结束>
 
 # <翻译开始>
-// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
-// 否则，Content-Type='text/x-go; charset=utf-8'
+	// 当Go版本小于等于1.16时，Content-Type='text/plain; charset=utf-8'，
+	// 否则，Content-Type='text/x-go; charset=utf-8'
 # <翻译结束>
 
 

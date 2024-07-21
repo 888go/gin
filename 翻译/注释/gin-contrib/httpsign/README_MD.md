@@ -88,27 +88,27 @@ import (
 )
 
 func main() {
-// 定义算法
+  // 定义算法
   hmacsha256 := &crypto.HmacSha256{}
   hmacsha512 := &crypto.HmacSha512{}
-// 初始化密钥参数
+  // 初始化密钥参数
   readKeyID := httpsign.KeyID("read")
   writeKeyID := httpsign.KeyID("write")
   secrets := httpsign.Secrets{
     readKeyID: &httpsign.Secret{
-      Key:       "HMACSHA256-SecretKey", // HMACSHA256密钥
-      Algorithm: hmacsha256,            // 可以使用其他符合Crypto接口的算法
+      Key:       "HMACSHA256-SecretKey",   // HMACSHA256密钥
+      Algorithm: hmacsha256,              // 可以使用其他符合Crypto接口的算法
     },
     writeKeyID: &httpsign.Secret{
-      Key:       "HMACSHA512-SecretKey", // HMACSHA512密钥
+      Key:       "HMACSHA512-SecretKey",   // HMACSHA512密钥
       Algorithm: hmacsha512,
     },
   }
 
-// 初始化服务器
+  // 初始化服务器
   r := gin.Default()
 
-// 创建中间件，采用默认规则。可以通过解析Option函数进行修改
+  // 创建中间件，采用默认规则。可以通过解析Option函数进行修改
   auth := httpsign.NewAuthenticator(secrets)
 
   r.Use(auth.Authenticated())
@@ -116,7 +116,7 @@ func main() {
   r.POST("/b", b)
   r.POST("/c", c)
 
-  r.Run(":8080") // 运行服务器在8080端口
+  r.Run(":8080")   // 运行服务器在8080端口
 }
 ```
 

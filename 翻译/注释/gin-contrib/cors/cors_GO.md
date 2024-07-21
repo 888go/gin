@@ -15,9 +15,9 @@
 <原文结束>
 
 # <翻译开始>
-// AllowOrigins 是一个跨域请求允许执行的源列表。
-// 如果列表中存在特殊的 "*" 值，则允许所有来源。
-// 默认值为 []
+	// AllowOrigins 是一个跨域请求允许执行的源列表。
+	// 如果列表中存在特殊的 "*" 值，则允许所有来源。
+	// 默认值为 []
 # <翻译结束>
 
 
@@ -28,7 +28,7 @@
 <原文结束>
 
 # <翻译开始>
-// AllowOriginFunc 是一个自定义函数，用于验证源。它接受一个 origin 参数，并在允许访问时返回 true，否则返回 false。如果设置了此选项，则忽略 AllowOrigins 的内容。
+	// AllowOriginFunc 是一个自定义函数，用于验证源。它接受一个 origin 参数，并在允许访问时返回 true，否则返回 false。如果设置了此选项，则忽略 AllowOrigins 的内容。
 # <翻译结束>
 
 
@@ -38,7 +38,7 @@
 <原文结束>
 
 # <翻译开始>
-// AllowMethods 是一个方法列表，列出了客户端在跨域请求中允许使用的HTTP方法。默认值包括简单的方法（GET, POST, PUT, PATCH, DELETE, HEAD 和 OPTIONS）。
+	// AllowMethods 是一个方法列表，列出了客户端在跨域请求中允许使用的HTTP方法。默认值包括简单的方法（GET, POST, PUT, PATCH, DELETE, HEAD 和 OPTIONS）。
 # <翻译结束>
 
 
@@ -57,7 +57,7 @@
 <原文结束>
 
 # <翻译开始>
-// AllowHeaders 是一个包含客户端在跨域请求中允许使用的非简单头信息的列表。
+	// AllowHeaders 是一个包含客户端在跨域请求中允许使用的非简单头信息的列表。
 # <翻译结束>
 
 
@@ -67,7 +67,7 @@
 <原文结束>
 
 # <翻译开始>
-// AllowCredentials 指示请求是否可以包含用户凭据，如cookies、HTTP认证或客户端SSL证书。
+	// AllowCredentials 指示请求是否可以包含用户凭据，如cookies、HTTP认证或客户端SSL证书。
 # <翻译结束>
 
 
@@ -77,7 +77,7 @@
 <原文结束>
 
 # <翻译开始>
-// ExposeHeaders 表示哪些头部信息在 CORS（跨源资源共享）API 规范中是安全的，并可以暴露给 API。
+	// ExposeHeaders 表示哪些头部信息在 CORS（跨源资源共享）API 规范中是安全的，并可以暴露给 API。
 # <翻译结束>
 
 
@@ -87,7 +87,7 @@
 <原文结束>
 
 # <翻译开始>
-// MaxAge 指示预检请求结果可以被缓存的时间长度（精确到秒）
+	// MaxAge 指示预检请求结果可以被缓存的时间长度（精确到秒）
 # <翻译结束>
 
 

@@ -76,13 +76,13 @@ data: {"content":"hi!","date":1431540810,"user":"manu"}
 import "github.com/gin-contrib/sse"
 
 func httpHandler(w http.ResponseWriter, req *http.Request) {
-// 数据可以是基本类型，如字符串、整数或浮点数
+	// 数据可以是基本类型，如字符串、整数或浮点数
     sse.Encode(w, sse.Event{
         Event: "message",
         Data:  "some data\nmore data",
     })
 
-// 也可以是复杂类型，如映射（map）、结构体或切片
+	// 也可以是复杂类型，如映射（map）、结构体或切片
     sse.Encode(w, sse.Event{
         Id:    "124",
         Event: "message",

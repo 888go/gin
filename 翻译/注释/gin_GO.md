@@ -63,7 +63,7 @@
 <原文结束>
 
 # <翻译开始>
-// PlatformGoogleAppEngine：当在 Google App Engine 上运行时。信任 X-Appengine-Remote-Addr 头部来确定客户端的 IP 地址
+	// PlatformGoogleAppEngine：当在 Google App Engine 上运行时。信任 X-Appengine-Remote-Addr 头部来确定客户端的 IP 地址
 # <翻译结束>
 
 
@@ -73,8 +73,8 @@
 <原文结束>
 
 # <翻译开始>
-// PlatformCloudflare 当使用Cloudflare的CDN时。信任CF-Connecting-IP来确定
-// 客户端的IP地址
+	// PlatformCloudflare 当使用Cloudflare的CDN时。信任CF-Connecting-IP来确定
+	// 客户端的IP地址
 # <翻译结束>
 
 
@@ -98,8 +98,8 @@
 <原文结束>
 
 # <翻译开始>
-// RedirectTrailingSlash 功能会自动重定向，当当前路由无法匹配，但存在一个与请求路径（有或无尾部斜杠）相匹配的处理程序时。
-// 例如，如果请求了 /foo/，但仅存在 /foo 的路由，则客户端将被重定向到 /foo，并根据请求方法的不同返回不同的HTTP状态码：对于GET请求返回301，对于所有其他请求方法返回307。
+	// RedirectTrailingSlash 功能会自动重定向，当当前路由无法匹配，但存在一个与请求路径（有或无尾部斜杠）相匹配的处理程序时。
+	// 例如，如果请求了 /foo/，但仅存在 /foo 的路由，则客户端将被重定向到 /foo，并根据请求方法的不同返回不同的HTTP状态码：对于GET请求返回301，对于所有其他请求方法返回307。
 # <翻译结束>
 
 
@@ -116,13 +116,13 @@
 <原文结束>
 
 # <翻译开始>
-// RedirectFixedPath：如果启用，当没有为当前请求路径注册处理程序时，路由器尝试修复该路径。
-// 首先移除诸如 ../ 或 // 等多余的路径元素。
-// 然后，路由器对清理后的路径进行不区分大小写的查找。
-// 如果能找到与此路由匹配的处理程序，路由器将根据请求方法进行重定向：
-// 对于 GET 请求，状态码为 301；对于所有其他请求方法，状态码为 307。
-// 例如，/FOO 和 /..//Foo 可能会被重定向到 /foo。
-// 该选项与 RedirectTrailingSlash 选项独立。
+	// RedirectFixedPath：如果启用，当没有为当前请求路径注册处理程序时，路由器尝试修复该路径。
+	// 首先移除诸如 ../ 或 	// 等多余的路径元素。
+	// 然后，路由器对清理后的路径进行不区分大小写的查找。
+	// 如果能找到与此路由匹配的处理程序，路由器将根据请求方法进行重定向：
+	// 对于 GET 请求，状态码为 301；对于所有其他请求方法，状态码为 307。
+	// 例如，/FOO 和 /..	//Foo 可能会被重定向到 /foo。
+	// 该选项与 RedirectTrailingSlash 选项独立。
 # <翻译结束>
 
 
@@ -136,9 +136,9 @@
 <原文结束>
 
 # <翻译开始>
-// 如果启用HandleMethodNotAllowed，当当前请求无法被路由时，路由器会检查当前路由是否允许其他方法。
-// 如果存在其他允许的方法，请求将得到响应'方法不允许'（Method Not Allowed）以及HTTP状态码405。
-// 若没有其他方法被允许，则该请求会被转发至NotFound处理器进行处理。
+	// 如果启用HandleMethodNotAllowed，当当前请求无法被路由时，路由器会检查当前路由是否允许其他方法。
+	// 如果存在其他允许的方法，请求将得到响应'方法不允许'（Method Not Allowed）以及HTTP状态码405。
+	// 若没有其他方法被允许，则该请求会被转发至NotFound处理器进行处理。
 # <翻译结束>
 
 
@@ -150,7 +150,7 @@
 <原文结束>
 
 # <翻译开始>
-// ForwardedByClientIP：如果启用，将会从请求头中解析客户端IP地址，这些请求头与存储在 `(*gin.Engine).RemoteIPHeaders` 中的相匹配。如果没有获取到IP地址，则会回退到通过 `(*gin.Context).Request.RemoteAddr` 获取的IP地址。
+	// ForwardedByClientIP：如果启用，将会从请求头中解析客户端IP地址，这些请求头与存储在 `(*gin.Engine).RemoteIPHeaders` 中的相匹配。如果没有获取到IP地址，则会回退到通过 `(*gin.Context).Request.RemoteAddr` 获取的IP地址。
 # <翻译结束>
 
 
@@ -162,10 +162,10 @@
 <原文结束>
 
 # <翻译开始>
-// AppEngine 已被弃用。
-// 废弃: 请改用 `TrustedPlatform`，并设置其值为 `gin.PlatformGoogleAppEngine`
-// #726 #755 如果启用，将会信任以 'X-AppEngine...' 开头的一些头部信息，
-// 以便更好地与该 PaaS（平台即服务）进行集成。
+	// AppEngine 已被弃用。
+	// 废弃: 请改用 `TrustedPlatform`，并设置其值为 `gin.PlatformGoogleAppEngine`
+	// #726 #755 如果启用，将会信任以 'X-AppEngine...' 开头的一些头部信息，
+	// 以便更好地与该 PaaS（平台即服务）进行集成。
 # <翻译结束>
 
 
@@ -185,9 +185,9 @@
 <原文结束>
 
 # <翻译开始>
-// UnescapePathValues 如果设为 true，路径值将被解码。
-// 若 UseRawPath 为 false（默认情况），则 UnescapePathValues 实际上等同于 true，
-// 因为此时会使用已经解码过的 url.Path。
+	// UnescapePathValues 如果设为 true，路径值将被解码。
+	// 若 UseRawPath 为 false（默认情况），则 UnescapePathValues 实际上等同于 true，
+	// 因为此时会使用已经解码过的 url.Path。
 # <翻译结束>
 
 
@@ -197,8 +197,8 @@
 <原文结束>
 
 # <翻译开始>
-// RemoveExtraSlash：即使存在额外的斜杠，参数也可以从URL中解析出来。
-// 参见PR #1817和问题#1644
+	// RemoveExtraSlash：即使存在额外的斜杠，参数也可以从URL中解析出来。
+	// 参见PR #1817和问题#1644
 # <翻译结束>
 
 
@@ -210,9 +210,9 @@
 <原文结束>
 
 # <翻译开始>
-// RemoteIPHeaders 是一个头部列表，当 `(*gin.Engine).ForwardedByClientIP` 设置为 `true` 时，
-// 如果 `(*gin.Context).Request.RemoteAddr` 与通过 `(*gin.Engine).SetTrustedProxies()` 方法定义的网络源列表中的至少一个匹配，
-// 则会使用这些头部来获取客户端 IP 地址。
+	// RemoteIPHeaders 是一个头部列表，当 `(*gin.Engine).ForwardedByClientIP` 设置为 `true` 时，
+	// 如果 `(*gin.Context).Request.RemoteAddr` 与通过 `(*gin.Engine).SetTrustedProxies()` 方法定义的网络源列表中的至少一个匹配，
+	// 则会使用这些头部来获取客户端 IP 地址。
 # <翻译结束>
 
 
@@ -222,8 +222,8 @@
 <原文结束>
 
 # <翻译开始>
-// TrustedPlatform 如果设置为gin.Platform*类型的常量值，表示信任该平台设置的头部信息，
-// 例如用于确定客户端IP地址
+	// TrustedPlatform 如果设置为gin.Platform*类型的常量值，表示信任该平台设置的头部信息，
+	// 例如用于确定客户端IP地址
 # <翻译结束>
 
 
@@ -233,7 +233,7 @@
 <原文结束>
 
 # <翻译开始>
-// MaxMultipartMemory 是提供给 http.Request 的 ParseMultipartForm 方法调用时的 'maxMemory' 参数的值。
+	// MaxMultipartMemory 是提供给 http.Request 的 ParseMultipartForm 方法调用时的 'maxMemory' 参数的值。
 # <翻译结束>
 
 
@@ -457,8 +457,8 @@
 <原文结束>
 
 # <翻译开始>
-// X-Forwarded-For 由代理服务器追加
-// 按照逆序检查 IP 地址，并在找到不可信的代理时停止
+		// X-Forwarded-For 由代理服务器追加
+		// 按照逆序检查 IP 地址，并在找到不可信的代理时停止
 # <翻译结束>
 
 

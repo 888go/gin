@@ -123,37 +123,37 @@ import (
   "fmt"
   "time"
 
-  "github.com/gin-contrib/zap" // Gin框架中集成zap日志库
-  "github.com/gin-gonic/gin"    // Gin Web框架
-  "go.uber.org/zap"             // Zap日志库
+  "github.com/gin-contrib/zap"   // Gin框架中集成zap日志库
+  "github.com/gin-gonic/gin"      // Gin Web框架
+  "go.uber.org/zap"               // Zap日志库
 )
 
 func main() {
-  r := gin.New() // 创建Gin引擎实例
+  r := gin.New()   // 创建Gin引擎实例
 
-  logger, _ := zap.NewProduction() // 初始化zap日志生产环境配置
+  logger, _ := zap.NewProduction()   // 初始化zap日志生产环境配置
 
-// 添加ginzap中间件，其功能包括：
-//   - 记录所有请求信息，如同综合访问和错误日志。
-//   - 将日志输出到标准输出（stdout）。
-//   - 使用RFC3339格式并以UTC时间显示。
+  // 添加ginzap中间件，其功能包括：
+  //   - 记录所有请求信息，如同综合访问和错误日志。
+  //   - 将日志输出到标准输出（stdout）。
+  //   - 使用RFC3339格式并以UTC时间显示。
   r.Use(ginzap.Ginzap(logger, time.RFC3339, true))
 
-// 记录所有的panic异常到错误日志
-//   - stack参数表示是否输出堆栈信息。
+  // 记录所有的panic异常到错误日志
+  //   - stack参数表示是否输出堆栈信息。
   r.Use(ginzap.RecoveryWithZap(logger, true))
 
-// 示例ping请求处理
+  // 示例ping请求处理
   r.GET("/ping", func(c *gin.Context) {
     c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
   })
 
-// 当panic异常发生时的示例
+  // 当panic异常发生时的示例
   r.GET("/panic", func(c *gin.Context) {
     panic("发生了一个意外错误！")
   })
 
-// 在0.0.0.0:8080监听并启动服务
+  // 在0.0.0.0:8080监听并启动服务
   r.Run(":8080")
 }
 ```
@@ -267,35 +267,35 @@ func main() {
 # <翻译开始>
 # 自定义Zap字段
 
-这是一个示例，用于自定义日志记录请求体、响应请求ID或日志[Open Telemetry](https://opentelemetry.io/) TraceID。
+这是一个示例，用于自定义日志记录请求体、响应请求ID或日志[Open Telemetry](https:      //opentelemetry.io/) TraceID。
 
 ```go
 func main() {
-// 创建一个新的Gin实例
+      // 创建一个新的Gin实例
   r := gin.New()
 
-// 初始化生产环境的zap日志器
+      // 初始化生产环境的zap日志器
   logger, _ := zap.NewProduction()
 
-// 使用Ginzap中间件并配置自定义上下文
+      // 使用Ginzap中间件并配置自定义上下文
   r.Use(ginzap.GinzapWithConfig(logger, &ginzap.Config{
-    UTC:        true,          // 使用UTC时间
-    TimeFormat: time.RFC3339,  // 时间格式为RFC3339
+    UTC:        true,                // 使用UTC时间
+    TimeFormat: time.RFC3339,        // 时间格式为RFC3339
     Context: ginzap.Fn(func(c *gin.Context) []zapcore.Field {
-      fields := []zapcore.Field{} // 初始化字段列表
+      fields := []zapcore.Field{}       // 初始化字段列表
 
-// 记录请求ID
+      // 记录请求ID
       if requestID := c.Writer.Header().Get("X-Request-Id"); requestID != "" {
         fields = append(fields, zap.String("request_id", requestID))
       }
 
-// 记录Trace ID和Span ID（Open Telemetry）
+      // 记录Trace ID和Span ID（Open Telemetry）
       if span := trace.SpanFromContext(c.Request.Context()); span.SpanContext().IsValid() {
         fields = append(fields, zap.String("trace_id", span.SpanContext().TraceID().String()))
         fields = append(fields, zap.String("span_id", span.SpanContext().SpanID().String()))
       }
 
-// 记录请求体
+      // 记录请求体
       var body []byte
       buf := bytes.Buffer{}
       teeReader := io.TeeReader(c.Request.Body, &buf)
@@ -307,7 +307,7 @@ func main() {
     }),
   }))
 
-// 示例ping请求
+      // 示例ping请求
   r.GET("/ping", func(c *gin.Context) {
     c.Writer.Header().Add("X-Request-Id", "1234-5678-9012")
     c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
@@ -318,7 +318,7 @@ func main() {
     c.String(200, "pong "+fmt.Sprint(time.Now().Unix()))
   })
 
-// 监听并服务在0.0.0.0:8080端口
+      // 监听并服务在0.0.0.0:8080端口
   r.Run(":8080")
 }
 ```

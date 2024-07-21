@@ -113,16 +113,16 @@ import (
 func main() {
   r := gin.Default()
 
-// 如果允许目录索引
-//r.Use(static.Serve("/", static.LocalFile("/tmp", true)))
-// 设置前缀
-//r.Use(static.Serve("/static", static.LocalFile("/tmp", true)))
+  // 如果允许目录索引
+  //r.Use(static.Serve("/", static.LocalFile("/tmp", true)))
+  // 设置前缀
+  //r.Use(static.Serve("/static", static.LocalFile("/tmp", true)))
 
   r.Use(static.Serve("/", static.LocalFile("/tmp", false)))
   r.GET("/ping", func(c *gin.Context) {
     c.String(200, "test")
   })
-// 监听并在 0.0.0.0:8080 端口上服务
+  // 监听并在 0.0.0.0:8080 端口上服务
   if err := r.Run(":8080"); err != nil {
     log.Fatal(err)
   }

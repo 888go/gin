@@ -28,9 +28,9 @@
 <原文结束>
 
 # <翻译开始>
-// * 遇到被拦截的参数错误
-// 新增 PR 处理方式（/all、/all/cc、/a/cc）
-// 修复 PR：https://github.com/gin-gonic/gin/pull/2796
+		// * 遇到被拦截的参数错误
+		// 新增 PR 处理方式（/all、/all/cc、/a/cc）
+		// 修复 PR：https:		//github.com/gin-gonic/gin/pull/2796
 # <翻译结束>
 
 
@@ -49,8 +49,8 @@
 <原文结束>
 
 # <翻译开始>
-// 查看所有已注册路由中的 `== in`
-// 当 fixTrailingSlash 设置为 true 时
+	// 查看所有已注册路由中的 `== in`
+	// 当 fixTrailingSlash 设置为 true 时
 # <翻译结束>
 
 
@@ -115,6 +115,6 @@
 <原文结束>
 
 # <翻译开始>
-// 我必须重新创建一个“树”，因为当循环从由`addRoute`函数抛出的panic中恢复时，“树”将处于不一致的状态。
+		// 我必须重新创建一个“树”，因为当循环从由`addRoute`函数抛出的panic中恢复时，“树”将处于不一致的状态。
 # <翻译结束>
 

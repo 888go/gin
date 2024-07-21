@@ -6,8 +6,8 @@
 <原文结束>
 
 # <翻译开始>
-// 来自 go/net/http/request.go:
-// 对于传入的请求，Host 头部会被提升至 Request.Host 字段，并从 Header 映射中移除。
+	// 来自 go/net/http/request.go:
+	// 对于传入的请求，Host 头部会被提升至 Request.Host 字段，并从 Header 映射中移除。
 # <翻译结束>
 
 

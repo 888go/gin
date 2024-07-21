@@ -148,33 +148,33 @@ import (
 )
 
 func main() {
-// 初始化路由
+	// 初始化路由
 	router := gin.Default()
 
-// 使用安全中间件配置
+	// 使用安全中间件配置
 	router.Use(secure.New(secure.Config{
-		AllowedHosts:          []string{"example.com", "ssl.example.com"}, // 允许的主机名
-		SSLRedirect:           true,                                       // 启用 HTTPS 重定向
-		SSLHost:               "ssl.example.com",                          // SSL 主机名
-		STSSeconds:            315360000,                                  // 设置 HSTS 头部的有效期（单位：秒）
-		STSIncludeSubdomains:  true,                                       // 在所有子域名中启用 HSTS
-		FrameDeny:             true,                                       // 禁止页面在 frame 中显示
-		ContentTypeNosniff:    true,                                       // 阻止浏览器猜测内容类型
-		BrowserXssFilter:      true,                                       // 启用浏览器 XSS 过滤器
-		ContentSecurityPolicy: "default-src 'self'",                         // 设置内容安全策略
-		IENoOpen:              true,                                       // 防止 IE 打开某些文件类型为下载而不是直接打开
-		ReferrerPolicy:        "strict-origin-when-cross-origin",            // 设置referrer策略
-		SSLProxyHeaders:       map[string]string{"X-Forwarded-Proto": "https"}, // 识别来自代理服务器的HTTPS请求头
+		AllowedHosts:          []string{"example.com", "ssl.example.com"}, 	// 允许的主机名
+		SSLRedirect:           true,                                       	// 启用 HTTPS 重定向
+		SSLHost:               "ssl.example.com",                          	// SSL 主机名
+		STSSeconds:            315360000,                                  	// 设置 HSTS 头部的有效期（单位：秒）
+		STSIncludeSubdomains:  true,                                       	// 在所有子域名中启用 HSTS
+		FrameDeny:             true,                                       	// 禁止页面在 frame 中显示
+		ContentTypeNosniff:    true,                                       	// 阻止浏览器猜测内容类型
+		BrowserXssFilter:      true,                                       	// 启用浏览器 XSS 过滤器
+		ContentSecurityPolicy: "default-src 'self'",                         	// 设置内容安全策略
+		IENoOpen:              true,                                       	// 防止 IE 打开某些文件类型为下载而不是直接打开
+		ReferrerPolicy:        "strict-origin-when-cross-origin",            	// 设置referrer策略
+		SSLProxyHeaders:       map[string]string{"X-Forwarded-Proto": "https"}, 	// 识别来自代理服务器的HTTPS请求头
 	}))
 
-// 定义一个简单的GET接口
+	// 定义一个简单的GET接口
 	router.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong") // 返回HTTP 200状态码及字符串"pong"
+		c.String(200, "pong") 	// 返回HTTP 200状态码及字符串"pong"
 	})
 
-// 监听并服务在 0.0.0.0:8080
+	// 监听并服务在 0.0.0.0:8080
 	if err := router.Run(); err != nil {
-		log.Fatal(err) // 如果运行过程中出现错误，输出错误信息并终止程序
+		log.Fatal(err) 	// 如果运行过程中出现错误，输出错误信息并终止程序
 	}
 }
 ```

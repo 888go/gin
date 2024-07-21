@@ -27,16 +27,16 @@
 <原文结束>
 
 # <翻译开始>
-// {http.MethodPut, "/authorizations/clients/:client_id"}：  
-// 对于HTTP方法PUT，路由为"/authorizations/clients/:client_id" 
-// 
-// {http.MethodPatch, "/authorizations/:id"}：  
-// 对于HTTP方法PATCH，路由为"/authorizations/:id" 
-// 
-// 这里，`http.MethodPut`和`http.MethodPatch`分别表示HTTP请求的PUT和PATCH方法，冒号（:`client_id`和`:id`）表示路由参数，这些参数在实际使用时会被动态值替换。具体来说：
-// 
-// - `/authorizations/clients/:client_id`：用于处理与特定客户端ID相关的授权更新或创建操作。
-// - `/authorizations/:id`：用于处理通过其ID进行部分更新的操作，这里的授权是指某个具体的授权资源。
+	// {http.MethodPut, "/authorizations/clients/:client_id"}：  
+	// 对于HTTP方法PUT，路由为"/authorizations/clients/:client_id" 
+	// 
+	// {http.MethodPatch, "/authorizations/:id"}：  
+	// 对于HTTP方法PATCH，路由为"/authorizations/:id" 
+	// 
+	// 这里，`http.MethodPut`和`http.MethodPatch`分别表示HTTP请求的PUT和PATCH方法，冒号（:`client_id`和`:id`）表示路由参数，这些参数在实际使用时会被动态值替换。具体来说：
+	// 
+	// - `/authorizations/clients/:client_id`：用于处理与特定客户端ID相关的授权更新或创建操作。
+	// - `/authorizations/:id`：用于处理通过其ID进行部分更新的操作，这里的授权是指某个具体的授权资源。
 # <翻译结束>
 
 
@@ -61,11 +61,11 @@
 <原文结束>
 
 # <翻译开始>
-// {http.MethodGet, "/gists/public"}： 这是Go语言中的HTTP路由注释，表示处理GET请求的方法和对应的路径。翻译为中文为：`处理GET方法的请求，路径为"/gists/public"`。
-// 
-// {http.MethodGet, "/gists/starred"}： 同样也是HTTP路由注释，表示处理GET请求的方法和对应的路径。翻译为中文为：`处理GET方法的请求，路径为"/gists/starred"`。
-// 
-// 这两个注释分别描述了两个不同的接口路由，一个是获取公开的Gist资源，另一个是获取已加星标的Gist资源。
+	// {http.MethodGet, "/gists/public"}： 这是Go语言中的HTTP路由注释，表示处理GET请求的方法和对应的路径。翻译为中文为：`处理GET方法的请求，路径为"/gists/public"`。
+	// 
+	// {http.MethodGet, "/gists/starred"}： 同样也是HTTP路由注释，表示处理GET请求的方法和对应的路径。翻译为中文为：`处理GET方法的请求，路径为"/gists/starred"`。
+	// 
+	// 这两个注释分别描述了两个不同的接口路由，一个是获取公开的Gist资源，另一个是获取已加星标的Gist资源。
 # <翻译结束>
 
 
@@ -107,9 +107,9 @@
 <原文结束>
 
 # <翻译开始>
-// {http.MethodPatch, "/repos/:owner/:repo/git/refs/*ref"}：该注释描述了一个HTTP路由规则，表示当接收到PATCH方法的请求时，路径应匹配"/repos/{owner}/{repo}/git/refs/*ref"。其中`:owner`和`:repo`是动态参数，代表仓库所有者和仓库名，`*ref`也是一个动态参数，代表Git引用（如分支、标签）的完整名称。
-// 
-// {http.MethodDelete, "/repos/:owner/:repo/git/refs/*ref"}：该注释描述了另一个HTTP路由规则，表示当接收到DELETE方法的请求时，路径同样应匹配"/repos/{owner}/{repo}/git/refs/*ref"。这个路由用于处理删除指定Git仓库中特定引用的操作。
+	// {http.MethodPatch, "/repos/:owner/:repo/git/refs/*ref"}：该注释描述了一个HTTP路由规则，表示当接收到PATCH方法的请求时，路径应匹配"/repos/{owner}/{repo}/git/refs/*ref"。其中`:owner`和`:repo`是动态参数，代表仓库所有者和仓库名，`*ref`也是一个动态参数，代表Git引用（如分支、标签）的完整名称。
+	// 
+	// {http.MethodDelete, "/repos/:owner/:repo/git/refs/*ref"}：该注释描述了另一个HTTP路由规则，表示当接收到DELETE方法的请求时，路径同样应匹配"/repos/{owner}/{repo}/git/refs/*ref"。这个路由用于处理删除指定Git仓库中特定引用的操作。
 # <翻译结束>
 
 
@@ -130,8 +130,8 @@
 <原文结束>
 
 # <翻译开始>
-// GET 请求，访问路径为 "/repos/:owner/:repo/issues/comments"，其中 ":owner" 和 ":repo" 分别代表仓库所有者和仓库名，用于获取指定仓库的issue评论列表
-// GET 请求，访问路径为 "/repos/:owner/:repo/issues/comments/:id"，其中 ":owner"、":repo" 和 ":id" 分别代表仓库所有者、仓库名和评论ID，用于获取指定仓库中特定ID的issue评论
+	// GET 请求，访问路径为 "/repos/:owner/:repo/issues/comments"，其中 ":owner" 和 ":repo" 分别代表仓库所有者和仓库名，用于获取指定仓库的issue评论列表
+	// GET 请求，访问路径为 "/repos/:owner/:repo/issues/comments/:id"，其中 ":owner"、":repo" 和 ":id" 分别代表仓库所有者、仓库名和评论ID，用于获取指定仓库中特定ID的issue评论
 # <翻译结束>
 
 
@@ -141,11 +141,11 @@
 <原文结束>
 
 # <翻译开始>
-//{http.MethodPatch, "/repos/:owner/:repo/issues/comments/:id"}： 
-//PATCH方法，用于更新仓库中某条Issue的指定评论，路径为"/repos/拥有者/:repo/issues/comments/评论ID"
-// 
-//{http.MethodDelete, "/repos/:owner/:repo/issues/comments/:id"}：
-//DELETE方法，用于删除仓库中某条Issue的指定评论，路径为"/repos/拥有者/:repo/issues/comments/评论ID"
+	//{http.MethodPatch, "/repos/:owner/:repo/issues/comments/:id"}： 
+	//PATCH方法，用于更新仓库中某条Issue的指定评论，路径为"/repos/拥有者/:repo/issues/comments/评论ID"
+	// 
+	//{http.MethodDelete, "/repos/:owner/:repo/issues/comments/:id"}：
+	//DELETE方法，用于删除仓库中某条Issue的指定评论，路径为"/repos/拥有者/:repo/issues/comments/评论ID"
 # <翻译结束>
 
 
@@ -155,8 +155,8 @@
 <原文结束>
 
 # <翻译开始>
-// GET 请求，获取仓库中指定拥有者和仓库名的议题事件
-// GET 请求，通过拥有者、仓库名和ID获取特定的议题事件
+	// GET 请求，获取仓库中指定拥有者和仓库名的议题事件
+	// GET 请求，通过拥有者、仓库名和ID获取特定的议题事件
 # <翻译结束>
 
 
@@ -236,8 +236,8 @@
 <原文结束>
 
 # <翻译开始>
-// GET 请求，访问路径为 "/repos/:owner/:repo/pulls/comments"，其中 ":owner" 和 ":repo" 代表仓库所有者和仓库名，用于获取指定仓库拉取请求的全部评论。
-// GET 请求，访问路径为 "/repos/:owner/:repo/pulls/comments/:number"，其中 ":owner"、":repo" 和 ":number" 分别代表仓库所有者、仓库名和评论编号，用于获取指定仓库拉取请求中特定编号的评论。
+	// GET 请求，访问路径为 "/repos/:owner/:repo/pulls/comments"，其中 ":owner" 和 ":repo" 代表仓库所有者和仓库名，用于获取指定仓库拉取请求的全部评论。
+	// GET 请求，访问路径为 "/repos/:owner/:repo/pulls/comments/:number"，其中 ":owner"、":repo" 和 ":number" 分别代表仓库所有者、仓库名和评论编号，用于获取指定仓库拉取请求中特定编号的评论。
 # <翻译结束>
 
 
@@ -247,8 +247,8 @@
 <原文结束>
 
 # <翻译开始>
-// {http.MethodPatch, "/repos/:owner/:repo/pulls/comments/:number"}：对repos仓库下指定owner和repo的pull requests评论（编号为:number）进行更新或修改操作。
-// {http.MethodDelete, "/repos/:owner/:repo/pulls/comments/:number"}：删除repos仓库下指定owner和repo的pull requests评论（编号为:number）。
+	// {http.MethodPatch, "/repos/:owner/:repo/pulls/comments/:number"}：对repos仓库下指定owner和repo的pull requests评论（编号为:number）进行更新或修改操作。
+	// {http.MethodDelete, "/repos/:owner/:repo/pulls/comments/:number"}：删除repos仓库下指定owner和repo的pull requests评论（编号为:number）。
 # <翻译结束>
 
 
@@ -292,12 +292,12 @@
 <原文结束>
 
 # <翻译开始>
-// {http.MethodGet, "/repos/:owner/:repo/contents/*path"}：GET 方法，访问路径为 /repos/仓库拥有者/仓库名/contents/任意路径
-// {http.MethodPut, "/repos/:owner/:repo/contents/*path"}：PUT 方法，访问路径为 /repos/仓库拥有者/仓库名/contents/任意路径
-// {http.MethodDelete, "/repos/:owner/:repo/contents/*path"}：DELETE 方法，访问路径为 /repos/仓库拥有者/仓库名/contents/任意路径
-// {http.MethodGet, "/repos/:owner/:repo/:archive_format/:ref"}：GET 方法，访问路径为 /repos/仓库拥有者/仓库名/指定归档格式/分支或提交引用
-// 
-// 这些注释描述了在Go语言中HTTP请求处理的路由规则，其中`:owner`、`:repo`、`:path` 和 `:archive_format` 是动态参数，分别表示仓库拥有者名称、仓库名称、任意路径和归档格式，`:ref` 表示特定的分支或提交引用。
+	// {http.MethodGet, "/repos/:owner/:repo/contents/*path"}：GET 方法，访问路径为 /repos/仓库拥有者/仓库名/contents/任意路径
+	// {http.MethodPut, "/repos/:owner/:repo/contents/*path"}：PUT 方法，访问路径为 /repos/仓库拥有者/仓库名/contents/任意路径
+	// {http.MethodDelete, "/repos/:owner/:repo/contents/*path"}：DELETE 方法，访问路径为 /repos/仓库拥有者/仓库名/contents/任意路径
+	// {http.MethodGet, "/repos/:owner/:repo/:archive_format/:ref"}：GET 方法，访问路径为 /repos/仓库拥有者/仓库名/指定归档格式/分支或提交引用
+	// 
+	// 这些注释描述了在Go语言中HTTP请求处理的路由规则，其中`:owner`、`:repo`、`:path` 和 `:archive_format` 是动态参数，分别表示仓库拥有者名称、仓库名称、任意路径和归档格式，`:ref` 表示特定的分支或提交引用。
 # <翻译结束>
 
 

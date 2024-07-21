@@ -80,26 +80,26 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// emptySuccessResponse 函数会在200微秒的延迟后向客户端发送一个空的成功响应（状态码为200）
+	// emptySuccessResponse 函数会在200微秒的延迟后向客户端发送一个空的成功响应（状态码为200）
 func emptySuccessResponse(c *gin.Context) {
 	time.Sleep(200 * time.Microsecond)
 	c.String(http.StatusOK, "")
 }
 
 func main() {
-// 初始化一个新的 gin 引擎
+	// 初始化一个新的 gin 引擎
 	r := gin.New()
 
-// 配置路由，当访问根路径 "/" 时，使用 timeout 中间件处理请求
-// 设置超时时间为100微秒，并在超时后调用 emptySuccessResponse 处理函数
+	// 配置路由，当访问根路径 "/" 时，使用 timeout 中间件处理请求
+	// 设置超时时间为100微秒，并在超时后调用 emptySuccessResponse 处理函数
 	r.GET("/", timeout.New(
 		timeout.WithTimeout(100*time.Microsecond),
 		timeout.WithHandler(emptySuccessResponse),
 	))
 
-// 监听并在 0.0.0.0:8080 端口启动服务器
+	// 监听并在 0.0.0.0:8080 端口启动服务器
 	if err := r.Run(":8080"); err != nil {
-// 如果运行服务器时出现错误，则输出错误信息并终止程序
+	// 如果运行服务器时出现错误，则输出错误信息并终止程序
 		log.Fatal(err)
 	}
 }

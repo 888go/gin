@@ -54,7 +54,7 @@
 <原文结束>
 
 # <翻译开始>
-// 如果不使用 EnableDecoderUseNumber，它将返回 float64(123)
-// 这可能不是期望的结果
+	// 如果不使用 EnableDecoderUseNumber，它将返回 float64(123)
+	// 这可能不是期望的结果
 # <翻译结束>
 

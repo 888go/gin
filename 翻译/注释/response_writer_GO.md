@@ -27,8 +27,8 @@
 <原文结束>
 
 # <翻译开始>
-// Size 返回已写入响应 http body 的字节数。
-// 参见 Written() 方法。
+	// Size 返回已写入响应 http body 的字节数。
+	// 参见 Written() 方法。
 # <翻译结束>
 
 

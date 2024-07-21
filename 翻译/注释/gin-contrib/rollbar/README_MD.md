@@ -110,7 +110,7 @@ import (
 
 func main() {
     roll.SetToken("MY_TOKEN")
-// roll.SetEnvironment("production") // 默认为 "development"
+  // roll.SetEnvironment("production")   // 默认为 "development"
 
     r := gin.Default()
     r.Use(rollbar.Recovery(true))

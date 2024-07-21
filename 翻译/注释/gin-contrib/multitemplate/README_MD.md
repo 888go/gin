@@ -218,7 +218,7 @@ func loadTemplates(templatesDir string) multitemplate.Renderer {
 # <翻译开始>
 # 进阶示例
 
-[近似实现 html/template 继承](https://elithrar.github.io/article/approximating-html-template-inheritance/)
+[近似实现 html/template 继承](https:  //elithrar.github.io/article/approximating-html-template-inheritance/)
 
 参见 [example/advanced/example.go](example/advanced/example.go)
 
@@ -262,7 +262,7 @@ func loadTemplates(templatesDir string) multitemplate.Renderer {
 		panic(err.Error())
 	}
 
-// 从 layouts/ 和 includes/ 目录生成模板映射
+  // 从 layouts/ 和 includes/ 目录生成模板映射
 	for _, include := range includes {
 		layoutCopy := make([]string, len(layouts))
 		copy(layoutCopy, layouts)

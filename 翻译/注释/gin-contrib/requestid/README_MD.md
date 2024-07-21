@@ -103,28 +103,28 @@ func main() {
 ```go
 func main() {
 
-// 创建一个gin实例
+  // 创建一个gin实例
   r := gin.New()
 
-// 使用requestid中间件，其中包含自定义生成器和自定义头键
+  // 使用requestid中间件，其中包含自定义生成器和自定义头键
   r.Use(
     requestid.New(
-// 自定义请求ID生成器函数
+  // 自定义请求ID生成器函数
       requestid.WithGenerator(func() string {
         return "test"
       }),
-// 设置自定义请求头键
+  // 设置自定义请求头键
       requestid.WithCustomHeaderStrKey("your-customer-key"),
     ),
   )
 
-// 示例ping请求处理
+  // 示例ping请求处理
   r.GET("/ping", func(c *gin.Context) {
-// 返回HTTP状态码200及当前时间戳的pong响应
+  // 返回HTTP状态码200及当前时间戳的pong响应
     c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
   })
 
-// 监听并在0.0.0.0:8080端口启动服务器
+  // 监听并在0.0.0.0:8080端口启动服务器
   r.Run(":8080")
 }
 ```
@@ -192,19 +192,19 @@ import (
 )
 
 func main() {
-// 创建一个新的gin实例
+  // 创建一个新的gin实例
   r := gin.New()
 
-// 使用requestid中间件
+  // 使用requestid中间件
   r.Use(requestid.New())
 
-// 示例ping请求处理
+  // 示例ping请求处理
   r.GET("/ping", func(c *gin.Context) {
-// 返回当前时间戳的pong响应
+  // 返回当前时间戳的pong响应
     c.String(http.StatusOK, "pong "+fmt.Sprint(time.Now().Unix()))
   })
 
-// 监听并在0.0.0.0:8080端口上提供服务
+  // 监听并在0.0.0.0:8080端口上提供服务
   r.Run(":8080")
 }
 ```
@@ -212,9 +212,9 @@ func main() {
 如何获取请求标识符：
 
 ```go
-// 示例根路径（"/"）请求处理
+  // 示例根路径（"/"）请求处理
 r.GET("/", func(c *gin.Context) {
-// 返回包含请求ID的消息
+  // 返回包含请求ID的消息
   c.String(http.StatusOK, "id:"+requestid.Get(c))
 })
 ```

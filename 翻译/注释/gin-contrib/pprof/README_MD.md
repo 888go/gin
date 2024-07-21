@@ -138,13 +138,13 @@ func main() {
 
 ```go
 func main() {
-// 创建默认的gin路由器实例
+  // 创建默认的gin路由器实例
   router := gin.Default()
 
-// 默认是 "debug/pprof"，现在更改为 "dev/pprof"
+  // 默认是 "debug/pprof"，现在更改为 "dev/pprof"
   pprof.Register(router, "dev/pprof")
 
-// 在8080端口运行服务器
+  // 在8080端口运行服务器
   router.Run(":8080")
 }
 ```

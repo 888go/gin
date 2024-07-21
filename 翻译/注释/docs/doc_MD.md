@@ -202,8 +202,8 @@ func main() {
 
 ```go
 func main() {
-// 创建一个gin路由器，其中包含默认中间件：
-// 日志记录和恢复（防崩溃）中间件
+  // 创建一个gin路由器，其中包含默认中间件：
+  // 日志记录和恢复（防崩溃）中间件
   router := gin.Default()
 
   router.GET("/someGet", getting)
@@ -214,10 +214,10 @@ func main() {
   router.HEAD("/someHead", head)
   router.OPTIONS("/someOptions", options)
 
-// 默认情况下，它在:8080端口提供服务，除非定义了
-// 环境变量PORT。
+  // 默认情况下，它在:8080端口提供服务，除非定义了
+  // 环境变量PORT。
   router.Run()
-// 若要硬编码指定端口，则使用router.Run(":3000")
+  // 若要硬编码指定端口，则使用router.Run(":3000")
 }
 ```
 
@@ -275,14 +275,14 @@ func main() {
 func main() {
   router := gin.Default()
 
-// 这个处理器将匹配 /user/john，但不会匹配 /user/ 或 /user
+  // 这个处理器将匹配 /user/john，但不会匹配 /user/ 或 /user
   router.GET("/user/:name", func(c *gin.Context) {
     name := c.Param("name")
     c.String(http.StatusOK, "你好，%s", name)
   })
 
-// 然而，这个处理器将匹配 /user/john/ 和 /user/john/send
-// 如果没有其他处理器匹配 /user/john，它将重定向到 /user/john/
+  // 然而，这个处理器将匹配 /user/john/ 和 /user/john/send
+  // 如果没有其他处理器匹配 /user/john，它将重定向到 /user/john/
   router.GET("/user/:name/*action", func(c *gin.Context) {
     name := c.Param("name")
     action := c.Param("action")
@@ -290,15 +290,15 @@ func main() {
     c.String(http.StatusOK, message)
   })
 
-// 对于每个匹配的请求，Context 将持有路由定义
+  // 对于每个匹配的请求，Context 将持有路由定义
   router.POST("/user/:name/*action", func(c *gin.Context) {
-    b := c.FullPath() == "/user/:name/*action" // 结果为 true
+    b := c.FullPath() == "/user/:name/*action"   // 结果为 true
     c.String(http.StatusOK, "%t", b)
   })
 
-// 这个处理器将添加一个新的路由 /user/groups。
-// 精确路由会在参数路由之前解析，无论它们定义的顺序如何。
-// 以 /user/groups 开头的路由永远不会被解释为 /user/:name/... 路由
+  // 这个处理器将添加一个新的路由 /user/groups。
+  // 精确路由会在参数路由之前解析，无论它们定义的顺序如何。
+  // 以 /user/groups 开头的路由永远不会被解释为 /user/:name/... 路由
   router.GET("/user/groups", func(c *gin.Context) {
     c.String(http.StatusOK, "可用的组包括 [...]")
   })
@@ -339,22 +339,22 @@ func main() {
 
 ```go
 func main() {
-// 初始化路由
+  // 初始化路由
   router := gin.Default()
 
-// 使用已存在的底层请求对象解析查询字符串参数。
-// 当请求的URL匹配：/welcome?firstname=Jane&lastname=Doe 时，该请求会得到响应
+  // 使用已存在的底层请求对象解析查询字符串参数。
+  // 当请求的URL匹配：/welcome?firstname=Jane&lastname=Doe 时，该请求会得到响应
   router.GET("/welcome", func(c *gin.Context) {
-// 获取查询参数“firstname”，若不存在则默认为 "Guest"
+  // 获取查询参数“firstname”，若不存在则默认为 "Guest"
     firstname := c.DefaultQuery("firstname", "Guest")
-// 快捷获取查询参数“lastname”
-    lastname := c.Query("lastname") // 相当于 c.Request.URL.Query().Get("lastname")
+  // 快捷获取查询参数“lastname”
+    lastname := c.Query("lastname")   // 相当于 c.Request.URL.Query().Get("lastname")
 
-// 返回状态码200，并向客户端发送消息
+  // 返回状态码200，并向客户端发送消息
     c.String(http.StatusOK, "Hello %s %s", firstname, lastname)
   })
 
-// 启动服务器监听8080端口
+  // 启动服务器监听8080端口
   router.Run(":8080")
 }
 ```
@@ -620,23 +620,23 @@ curl -X POST http://localhost:8080/upload \
 # <翻译开始>
 # 单文件上传
 
-引用问题 [#774](https://github.com/gin-gonic/gin/issues/774) 和详细示例代码：[example code](https://github.com/gin-gonic/examples/tree/master/upload-file/single)。
+引用问题 [#774](https:  //github.com/gin-gonic/gin/issues/774) 和详细示例代码：[example code](https:  //github.com/gin-gonic/examples/tree/master/upload-file/single)。
 
-**不应**盲目信任 `file.Filename`。参见MDN上的 [`Content-Disposition`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition#Directives) 和相关问题 [#1693](https://github.com/gin-gonic/gin/issues/1693)：
+**不应**盲目信任 `file.Filename`。参见MDN上的 [`Content-Disposition`](https:  //developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition#Directives) 和相关问题 [#1693](https:  //github.com/gin-gonic/gin/issues/1693)：
 
 > 文件名始终是可选的，应用程序不应盲目使用它：应去除路径信息，并根据服务器文件系统规则进行转换。
 
 ```go
 func main() {
   router := gin.Default()
-// 设置multipart表单的较低内存限制（默认为32 MiB）
-  router.MaxMultipartMemory = 8 << 20  // 设置为8 MiB
+  // 设置multipart表单的较低内存限制（默认为32 MiB）
+  router.MaxMultipartMemory = 8 << 20    // 设置为8 MiB
   router.POST("/upload", func(c *gin.Context) {
-// 单个文件上传
+  // 单个文件上传
     file, _ := c.FormFile("file")
     log.Println(file.Filename)
 
-// 将文件上传到特定的目标位置(dst)
+  // 将文件上传到特定的目标位置(dst)
     c.SaveUploadedFile(file, dst)
 
     c.String(http.StatusOK, fmt.Sprintf("'%s' 已上传!", file.Filename))
@@ -648,7 +648,7 @@ func main() {
 如何使用 `curl` 进行测试：
 
 ```bash
-curl -X POST http://localhost:8080/upload \
+curl -X POST http:  //localhost:8080/upload \
   -F "file=@/Users/appleboy/test.zip" \
   -H "Content-Type: multipart/form-data"
 ```
@@ -700,32 +700,32 @@ curl -X POST http://localhost:8080/upload \
 # <翻译开始>
 # 多文件上传
 
-查看详细[示例代码](https://github.com/gin-gonic/examples/tree/master/upload-file/multiple)。
+查看详细[示例代码](https:  //github.com/gin-gonic/examples/tree/master/upload-file/multiple)。
 
 ```go
 func main() {
-// 初始化路由
+  // 初始化路由
   router := gin.Default()
-// 设置multipart表单的内存限制（默认为32 MiB）
-  router.MaxMultipartMemory = 8 << 20  // 设置为8 MiB
-// 处理POST请求到"/upload"
+  // 设置multipart表单的内存限制（默认为32 MiB）
+  router.MaxMultipartMemory = 8 << 20    // 设置为8 MiB
+  // 处理POST请求到"/upload"
   router.POST("/upload", func(c *gin.Context) {
-// 获取multipart表单
+  // 获取multipart表单
     form, _ := c.MultipartForm()
-// 获取表单中名为"upload[]"的所有文件
+  // 获取表单中名为"upload[]"的所有文件
     files := form.File["upload[]"]
 
-// 遍历所有文件
+  // 遍历所有文件
     for _, file := range files {
-      log.Println(file.Filename)  // 输出文件名
+      log.Println(file.Filename)    // 输出文件名
 
-// 将上传的文件保存到特定的目标路径(dst)
+  // 将上传的文件保存到特定的目标路径(dst)
       c.SaveUploadedFile(file, dst)
     }
-// 返回状态码和已上传文件数量的消息
+  // 返回状态码和已上传文件数量的消息
     c.String(http.StatusOK, fmt.Sprintf("%d files uploaded!", len(files)))
   })
-// 启动服务器监听8080端口
+  // 启动服务器监听8080端口
   router.Run(":8080")
 }
 ```
@@ -733,7 +733,7 @@ func main() {
 如何使用`curl`进行上传：
 
 ```bash
-curl -X POST http://localhost:8080/upload \
+curl -X POST http:  //localhost:8080/upload \
   -F "upload[]=@/Users/appleboy/test1.zip" \
   -F "upload[]=@/Users/appleboy/test2.zip" \
   -H "Content-Type: multipart/form-data"
@@ -777,28 +777,28 @@ func main() {
 
 ```go
 func main() {
-// 初始化gin路由器
+  // 初始化gin路由器
   router := gin.Default()
 
-// 简单的路由分组：v1版本
+  // 简单的路由分组：v1版本
   v1 := router.Group("/v1")
   {
-// 在v1版本下定义POST请求路由
-    v1.POST("/login", loginEndpoint)   // 登录接口
-    v1.POST("/submit", submitEndpoint) // 提交接口
-    v1.POST("/read", readEndpoint)     // 阅读接口
+  // 在v1版本下定义POST请求路由
+    v1.POST("/login", loginEndpoint)     // 登录接口
+    v1.POST("/submit", submitEndpoint)   // 提交接口
+    v1.POST("/read", readEndpoint)       // 阅读接口
   }
 
-// 简单的路由分组：v2版本
+  // 简单的路由分组：v2版本
   v2 := router.Group("/v2")
   {
-// 在v2版本下定义POST请求路由
-    v2.POST("/login", loginEndpoint)   // 登录接口
-    v2.POST("/submit", submitEndpoint) // 提交接口
-    v2.POST("/read", readEndpoint)     // 阅读接口
+  // 在v2版本下定义POST请求路由
+    v2.POST("/login", loginEndpoint)     // 登录接口
+    v2.POST("/submit", submitEndpoint)   // 提交接口
+    v2.POST("/read", readEndpoint)       // 阅读接口
   }
 
-// 启动服务器监听8080端口
+  // 启动服务器监听8080端口
   router.Run(":8080")
 }
 ```
@@ -898,38 +898,38 @@ func main() {
 
 ```go
 func main() {
-// 默认情况下创建一个不包含任何中间件的路由器
+  // 默认情况下创建一个不包含任何中间件的路由器
   r := gin.New()
 
-// 全局中间件
-// Logger 中间件将会把日志写入 gin.DefaultWriter，即使你设置了 GIN_MODE=release。默认情况下 gin.DefaultWriter = os.Stdout
+  // 全局中间件
+  // Logger 中间件将会把日志写入 gin.DefaultWriter，即使你设置了 GIN_MODE=release。默认情况下 gin.DefaultWriter = os.Stdout
   r.Use(gin.Logger())
 
-// Recovery 中间件从任何 panic 恢复，并在发生 panic 时返回 500 状态码。
+  // Recovery 中间件从任何 panic 恢复，并在发生 panic 时返回 500 状态码。
   r.Use(gin.Recovery())
 
-// 路由级别的中间件，你可以根据需要添加任意多个。
+  // 路由级别的中间件，你可以根据需要添加任意多个。
   r.GET("/benchmark", MyBenchLogger(), benchEndpoint)
 
-// 授权分组
-// authorized := r.Group("/", AuthRequired())
-// 这与下面的代码完全等效：
+  // 授权分组
+  // authorized := r.Group("/", AuthRequired())
+  // 这与下面的代码完全等效：
   authorized := r.Group("/")
-// 分组级别中间件！在这个例子中，我们在 "authorized" 分组中仅使用自定义创建的
-// AuthRequired() 中间件。
+  // 分组级别中间件！在这个例子中，我们在 "authorized" 分组中仅使用自定义创建的
+  // AuthRequired() 中间件。
   authorized.Use(AuthRequired())
   {
     authorized.POST("/login", loginEndpoint)
     authorized.POST("/submit", submitEndpoint)
     authorized.POST("/read", readEndpoint)
 
-// 嵌套分组
+  // 嵌套分组
     testing := authorized.Group("testing")
-// 访问 0.0.0.0:8080/testing/analytics
+  // 访问 0.0.0.0:8080/testing/analytics
     testing.GET("/analytics", analyticsEndpoint)
   }
 
-// 在 0.0.0.0:8080 监听并提供服务
+  // 在 0.0.0.0:8080 监听并提供服务
   r.Run(":8080")
 }
 ```
@@ -982,14 +982,14 @@ func main() {
 
 ```go
 func main() {
-// 创建一个默认不包含任何中间件的路由器
+  // 创建一个默认不包含任何中间件的路由器
   r := gin.New()
 
-// 全局中间件
-// Logger 中间件会将日志写入 gin.DefaultWriter，即使你设置 GIN_MODE=release。默认情况下 gin.DefaultWriter = os.Stdout
+  // 全局中间件
+  // Logger 中间件会将日志写入 gin.DefaultWriter，即使你设置 GIN_MODE=release。默认情况下 gin.DefaultWriter = os.Stdout
   r.Use(gin.Logger())
 
-// Recovery 中间件用于从任何 panic 恢复，并在发生 panic 时返回一个 500 状态码。
+  // Recovery 中间件用于从任何 panic 恢复，并在发生 panic 时返回一个 500 状态码。
   r.Use(gin.CustomRecovery(func(c *gin.Context, recovered any) {
     if err, ok := recovered.(string); ok {
       c.String(http.StatusInternalServerError, fmt.Sprintf("错误: %s", err))
@@ -998,7 +998,7 @@ func main() {
   }))
 
   r.GET("/panic", func(c *gin.Context) {
-// 使用字符串触发 panic —— 自定义中间件可以将此信息保存到数据库或报告给用户
+  // 使用字符串触发 panic —— 自定义中间件可以将此信息保存到数据库或报告给用户
     panic("foo")
   })
 
@@ -1006,7 +1006,7 @@ func main() {
     c.String(http.StatusOK, "ohai")
   })
 
-// 监听并绑定到 0.0.0.0:8080 进行服务
+  // 监听并绑定到 0.0.0.0:8080 进行服务
   r.Run(":8080")
 }
 ```
@@ -1071,11 +1071,11 @@ func main() {
 
 ```go
 func main() {
-// 禁用日志的颜色
+  // 禁用日志的颜色
   gin.DisableConsoleColor()
 
-// 创建一个gin路由器，包含默认中间件：
-// 日志记录和恢复（防崩溃）中间件
+  // 创建一个gin路由器，包含默认中间件：
+  // 日志记录和恢复（防崩溃）中间件
   router := gin.Default()
 
   router.GET("/ping", func(c *gin.Context) {
@@ -1090,11 +1090,11 @@ func main() {
 
 ```go
 func main() {
-// 强制日志着色
+  // 强制日志着色
   gin.ForceConsoleColor()
 
-// 创建一个gin路由器，包含默认中间件：
-// 日志记录和恢复（防崩溃）中间件
+  // 创建一个gin路由器，包含默认中间件：
+  // 日志记录和恢复（防崩溃）中间件
   router := gin.Default()
 
   router.GET("/ping", func(c *gin.Context) {
@@ -1453,7 +1453,7 @@ curl -X GET "localhost:8085/testing?name=appleboy&address=xyz&birthday=1992-03-1
 # <翻译开始>
 # 绑定查询字符串或Post数据
 
-请参阅[详细信息](https://github.com/gin-gonic/gin/issues/742#issuecomment-264681292)。
+请参阅[详细信息](https:  //github.com/gin-gonic/gin/issues/742#issuecomment-264681292)。
 
 ```go
 package main
@@ -1467,11 +1467,11 @@ import (
 )
 
 type Person struct {
-  Name       string    `form:"name"`        // 表单字段"Name"
-  Address    string    `form:"address"`     // 表单字段"Address"
-  Birthday   time.Time `form:"birthday" time_format:"2006-01-02" time_utc:"1"` // 表单字段"Birthday"，时间格式为"2006-01-02"，使用UTC时间
-  CreateTime time.Time `form:"createTime" time_format:"unixNano"` // 表单字段"CreateTime"，时间格式为纳秒级Unix时间戳
-  UnixTime   time.Time `form:"unixTime" time_format:"unix"`      // 表单字段"UnixTime"，时间格式为秒级Unix时间戳
+  Name       string    `form:"name"`          // 表单字段"Name"
+  Address    string    `form:"address"`       // 表单字段"Address"
+  Birthday   time.Time `form:"birthday" time_format:"2006-01-02" time_utc:"1"`   // 表单字段"Birthday"，时间格式为"2006-01-02"，使用UTC时间
+  CreateTime time.Time `form:"createTime" time_format:"unixNano"`   // 表单字段"CreateTime"，时间格式为纳秒级Unix时间戳
+  UnixTime   time.Time `form:"unixTime" time_format:"unix"`        // 表单字段"UnixTime"，时间格式为秒级Unix时间戳
 }
 
 func main() {
@@ -1482,9 +1482,9 @@ func main() {
 
 func startPage(c *gin.Context) {
   var person Person
-// 如果是GET请求，仅使用`Form`绑定引擎（查询参数）。
-// 如果是POST请求，首先检查`content-type`是否为JSON或XML，然后使用`Form`（表单数据）进行绑定。
-// 更多详情见：https://github.com/gin-gonic/gin/blob/master/binding/binding.go#L88
+  // 如果是GET请求，仅使用`Form`绑定引擎（查询参数）。
+  // 如果是POST请求，首先检查`content-type`是否为JSON或XML，然后使用`Form`（表单数据）进行绑定。
+  // 更多详情见：https:  //github.com/gin-gonic/gin/blob/master/binding/binding.go#L88
   if c.ShouldBind(&person) == nil {
     log.Println(person.Name)
     log.Println(person.Address)
@@ -1851,52 +1851,52 @@ curl -X POST -v --form name=user --form "avatar=@./avatar.png" http://localhost:
 # 多部分/Urlencoded 绑定
 
 ```go
-// 定义表单结构体
+  // 定义表单结构体
 type ProfileForm struct {
-  Name   string                `form:"name" binding:"required"` // 名称，必填项
-  Avatar *multipart.FileHeader `form:"avatar" binding:"required"` // 头像文件，必填项
+  Name   string                `form:"name" binding:"required"`   // 名称，必填项
+  Avatar *multipart.FileHeader `form:"avatar" binding:"required"`   // 头像文件，必填项
 
-// 或者，如果需要上传多个文件
-// Avatars []*multipart.FileHeader `form:"avatar" binding:"required"`
+  // 或者，如果需要上传多个文件
+  // Avatars []*multipart.FileHeader `form:"avatar" binding:"required"`
 }
 
 func main() {
   router := gin.Default()
 
-// 注册POST路由处理函数
+  // 注册POST路由处理函数
   router.POST("/profile", func(c *gin.Context) {
-// 显式声明绑定 multipart 表单：
-// c.ShouldBindWith(&form, binding.Form)
-// 或者直接使用自动绑定 ShouldBind 方法：
+  // 显式声明绑定 multipart 表单：
+  // c.ShouldBindWith(&form, binding.Form)
+  // 或者直接使用自动绑定 ShouldBind 方法：
     var form ProfileForm
-// 在这种情况下，将会自动选择合适的绑定方式
+  // 在这种情况下，将会自动选择合适的绑定方式
     if err := c.ShouldBind(&form); err != nil {
-      c.String(http.StatusBadRequest, "bad request") // 如果绑定失败，返回400错误
+      c.String(http.StatusBadRequest, "bad request")   // 如果绑定失败，返回400错误
       return
     }
 
-// 保存上传的文件
+  // 保存上传的文件
     err := c.SaveUploadedFile(form.Avatar, form.Avatar.Filename)
     if err != nil {
-      c.String(http.StatusInternalServerError, "unknown error") // 文件保存失败，返回500错误
+      c.String(http.StatusInternalServerError, "unknown error")   // 文件保存失败，返回500错误
       return
     }
 
-// db.Save(&form) // 假设将表单数据保存到数据库
+  // db.Save(&form)   // 假设将表单数据保存到数据库
 
-    c.String(http.StatusOK, "ok") // 成功处理请求，返回200状态码和"ok"
+    c.String(http.StatusOK, "ok")   // 成功处理请求，返回200状态码和"ok"
   })
 
-  router.Run(":8080") // 运行服务器在8080端口
+  router.Run(":8080")   // 运行服务器在8080端口
 }
 
-// 测试命令示例
+  // 测试命令示例
 ```
 
 测试代码：
 
 ```sh
-curl -X POST -v --form name=user --form "avatar=@./avatar.png" http://localhost:8080/profile
+curl -X POST -v --form name=user --form "avatar=@./avatar.png" http:  //localhost:8080/profile
 ```
 
 通过以上示例，您可以在Go语言中使用Gin框架处理包含文件上传的多部分表单提交。在`ProfileForm`结构体中定义了表单字段，并通过`ShouldBind`方法进行表单数据绑定。同时，`SaveUploadedFile`方法用于将上传的文件头信息关联的实际文件内容保存到服务器指定位置。最后提供了一个使用curl命令测试该接口的示例。
@@ -2184,21 +2184,21 @@ func main() {
 func main() {
   r := gin.Default()
 
-// 服务端返回Unicode实体
+  // 服务端返回Unicode实体
   r.GET("/json", func(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{
       "html": "<b>Hello, world!</b>",
     })
   })
 
-// 服务端返回原始字符
+  // 服务端返回原始字符
   r.GET("/purejson", func(c *gin.Context) {
     c.PureJSON(http.StatusOK, gin.H{
       "html": "<b>Hello, world!</b>",
     })
   })
 
-// 在0.0.0.0:8080监听并提供服务
+  // 在0.0.0.0:8080监听并提供服务
   r.Run(":8080")
 }
 ```
@@ -2232,22 +2232,22 @@ func main() {
 
 ```go
 func main() {
-// 创建默认的Gin路由器实例
+  // 创建默认的Gin路由器实例
   router := gin.Default()
 
-// 设置"/assets"路由，提供"./assets"目录下的静态文件服务
+  // 设置"/assets"路由，提供"./assets"目录下的静态文件服务
   router.Static("/assets", "./assets")
 
-// 设置"/more_static"路由，从"my_file_system"目录下提供静态文件服务
+  // 设置"/more_static"路由，从"my_file_system"目录下提供静态文件服务
   router.StaticFS("/more_static", http.Dir("my_file_system"))
 
-// 设置"/favicon.ico"路由，提供"./resources/favicon.ico"文件作为 favicon
+  // 设置"/favicon.ico"路由，提供"./resources/favicon.ico"文件作为 favicon
   router.StaticFile("/favicon.ico", "./resources/favicon.ico")
 
-// 设置"/more_favicon.ico"路由，从"my_file_system"目录下的"more_favicon.ico"文件作为 favicon
+  // 设置"/more_favicon.ico"路由，从"my_file_system"目录下的"more_favicon.ico"文件作为 favicon
   router.StaticFileFS("/more_favicon.ico", "more_favicon.ico", http.Dir("my_file_system"))
 
-// 监听并服务在 0.0.0.0:8080 端口
+  // 监听并服务在 0.0.0.0:8080 端口
   router.Run(":8080")
 }
 ```
@@ -2876,46 +2876,46 @@ func main() {
 # 自定义中间件
 
 ```go
-// 定义 Logger 中间件函数
+    // 定义 Logger 中间件函数
 func Logger() gin.HandlerFunc {
   return func(c *gin.Context) {
-// 获取当前时间
+    // 获取当前时间
     t := time.Now()
 
-// 设置示例变量
+    // 设置示例变量
     c.Set("example", "12345")
 
-// 请求前的操作
+    // 请求前的操作
 
-// 调用下一个中间件或处理请求
+    // 调用下一个中间件或处理请求
     c.Next()
 
-// 请求后的操作
+    // 请求后的操作
     latency := time.Since(t)
-    log.Print(latency)  // 打印延迟时间
+    log.Print(latency)      // 打印延迟时间
 
-// 访问即将发送的状态码
+    // 访问即将发送的状态码
     status := c.Writer.Status()
-    log.Println(status)  // 打印状态码
+    log.Println(status)      // 打印状态码
   }
 }
 
 func main() {
-// 创建 Gin 应用实例
+    // 创建 Gin 应用实例
   r := gin.New()
-// 使用自定义的 Logger 中间件
+    // 使用自定义的 Logger 中间件
   r.Use(Logger())
 
-// 定义 GET 请求路由及其处理函数
+    // 定义 GET 请求路由及其处理函数
   r.GET("/test", func(c *gin.Context) {
-// 从上下文中获取示例变量
+    // 从上下文中获取示例变量
     example := c.MustGet("example").(string)
 
-// 将打印: "12345"
+    // 将打印: "12345"
     log.Println(example)
   })
 
-// 在 0.0.0.0:8080 端口监听并提供服务
+    // 在 0.0.0.0:8080 端口监听并提供服务
   r.Run(":8080")
 }
 ```
@@ -2972,7 +2972,7 @@ func main() {
 # 使用 BasicAuth() 中间件
 
 ```go
-// 模拟一些私密数据
+  // 模拟一些私密数据
 var secrets = gin.H{
   "foo":    gin.H{"email": "foo@bar.com", "phone": "123433"},
   "austin": gin.H{"email": "austin@example.com", "phone": "666"},
@@ -2982,8 +2982,8 @@ var secrets = gin.H{
 func main() {
   r := gin.Default()
 
-// 使用 gin.BasicAuth() 中间件的 Group
-// gin.Accounts 是一个快捷方式，用于创建 map[string]string
+  // 使用 gin.BasicAuth() 中间件的 Group
+  // gin.Accounts 是一个快捷方式，用于创建 map[string]string
   authorized := r.Group("/admin", gin.BasicAuth(gin.Accounts{
     "foo":    "bar",
     "austin": "1234",
@@ -2991,10 +2991,10 @@ func main() {
     "manu":   "4321",
   }))
 
-// 访问 "/admin/secrets" 端点
-// 在本地访问 "localhost:8080/admin/secrets"
+  // 访问 "/admin/secrets" 端点
+  // 在本地访问 "localhost:8080/admin/secrets"
   authorized.GET("/secrets", func(c *gin.Context) {
-// 获取用户信息，该信息由 BasicAuth 中间件设置
+  // 获取用户信息，该信息由 BasicAuth 中间件设置
     user := c.MustGet(gin.AuthUserKey).(string)
     if secret, exists := secrets[user]; exists {
       c.JSON(http.StatusOK, gin.H{"user": user, "secret": secret})
@@ -3003,7 +3003,7 @@ func main() {
     }
   })
 
-// 监听并服务于 0.0.0.0:8080
+  // 监听并服务于 0.0.0.0:8080
   r.Run(":8080")
 }
 ```
@@ -3058,26 +3058,26 @@ func main() {
   r := gin.Default()
 
   r.GET("/long_async", func(c *gin.Context) {
-// 创建一个用于在 Goroutine 中使用的副本
+    // 创建一个用于在 Goroutine 中使用的副本
     cCp := c.Copy()
     go func() {
-// 模拟一个耗时任务，用 time.Sleep() 暂停5秒
+    // 模拟一个耗时任务，用 time.Sleep() 暂停5秒
       time.Sleep(5 * time.Second)
 
-// 注意这里你正在使用复制的上下文 "cCp"，这一点非常重要
+    // 注意这里你正在使用复制的上下文 "cCp"，这一点非常重要
       log.Println("完成！在路径 " + cCp.Request.URL.Path)
     }()
   })
 
   r.GET("/long_sync", func(c *gin.Context) {
-// 模拟一个耗时任务，用 time.Sleep() 暂停5秒
+    // 模拟一个耗时任务，用 time.Sleep() 暂停5秒
     time.Sleep(5 * time.Second)
 
-// 由于我们没有使用 Goroutine，所以无需复制上下文
+    // 由于我们没有使用 Goroutine，所以无需复制上下文
     log.Println("完成！在路径 " + c.Request.URL.Path)
   })
 
-// 监听并服务于 0.0.0.0:8080
+    // 监听并服务于 0.0.0.0:8080
   r.Run(":8080")
 }
 ```
@@ -3242,7 +3242,7 @@ import (
 func main() {
   r := gin.Default()
 
-// Ping 处理器
+  // Ping 处理器
   r.GET("/ping", func(c *gin.Context) {
     c.String(http.StatusOK, "pong")
   })
@@ -3268,15 +3268,15 @@ import (
 func main() {
   r := gin.Default()
 
-// Ping 处理器
+  // Ping 处理器
   r.GET("/ping", func(c *gin.Context) {
     c.String(http.StatusOK, "pong")
   })
 
   m := autocert.Manager{
-    Prompt:     autocert.AcceptTOS, // 接受服务条款
-    HostPolicy: autocert.HostWhitelist("example1.com", "example2.com"), // 主机白名单策略
-    Cache:      autocert.DirCache("/var/www/.cache"), // 缓存目录
+    Prompt:     autocert.AcceptTOS,   // 接受服务条款
+    HostPolicy: autocert.HostWhitelist("example1.com", "example2.com"),   // 主机白名单策略
+    Cache:      autocert.DirCache("/var/www/.cache"),   // 缓存目录
   }
 
   log.Fatal(autotls.RunWithManager(r, &m))
@@ -3518,10 +3518,10 @@ func main() {
 # <翻译开始>
 # 手动
 
-如果你正在使用 Go 1.8 或更高版本，你可能不需要使用那些库。考虑使用 `http.Server` 内置的 [Shutdown()](https://pkg.go.dev/net/http#Server.Shutdown) 方法进行优雅关闭。下面的示例描述了其用法，我们还提供了更多使用 gin 的示例 [在这里](https://github.com/gin-gonic/examples/tree/master/graceful-shutdown)。
+如果你正在使用 Go 1.8 或更高版本，你可能不需要使用那些库。考虑使用 `http.Server` 内置的 [Shutdown()](https:  //pkg.go.dev/net/http#Server.Shutdown) 方法进行优雅关闭。下面的示例描述了其用法，我们还提供了更多使用 gin 的示例 [在这里](https:  //github.com/gin-gonic/examples/tree/master/graceful-shutdown)。
 
 ```go
-// +build go1.8
+  // +build go1.8
 
 package main
 
@@ -3549,23 +3549,23 @@ func main() {
         Handler: router,
     }
 
-// 在一个 goroutine 中初始化服务器，以便它不会阻塞下面优雅关闭的处理过程
+  // 在一个 goroutine 中初始化服务器，以便它不会阻塞下面优雅关闭的处理过程
     go func() {
         if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
             log.Printf("监听错误: %s\n", err)
         }
     }()
 
-// 等待中断信号以在 5 秒超时后优雅地关闭服务器
+  // 等待中断信号以在 5 秒超时后优雅地关闭服务器
     quit := make(chan os.Signal)
-// kill（无参数）默认发送 syscall.SIGTERM
-// kill -2 是 syscall.SIGINT
-// kill -9 是 syscall.SIGKILL，但无法捕获，所以无需添加
+  // kill（无参数）默认发送 syscall.SIGTERM
+  // kill -2 是 syscall.SIGINT
+  // kill -9 是 syscall.SIGKILL，但无法捕获，所以无需添加
     signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
     <-quit
     log.Println("正在关闭服务器...")
 
-// 使用上下文来告知服务器它有 5 秒钟的时间完成当前正在处理的请求
+  // 使用上下文来告知服务器它有 5 秒钟的时间完成当前正在处理的请求
     ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
     defer cancel()
 
@@ -3642,7 +3642,7 @@ See a complete example in the `https://github.com/gin-gonic/examples/tree/master
 # <翻译开始>
 # 构建包含模板的单个二进制文件
 
-您可以使用 [embed](https://pkg.go.dev/embed) 包将服务器构建为包含模板的单个二进制文件。
+您可以使用 [embed](https:  //pkg.go.dev/embed) 包将服务器构建为包含模板的单个二进制文件。
 
 ```go
 package main
@@ -3655,19 +3655,19 @@ import (
   "github.com/gin-gonic/gin"
 )
 
-//go:embed assets/* templates/*
-var f embed.FS // 使用embed.FS嵌入资源文件
+  //go:embed assets/* templates/*
+var f embed.FS   // 使用embed.FS嵌入资源文件
 
 func main() {
   router := gin.Default()
-// 从嵌入的文件系统中解析模板
+  // 从嵌入的文件系统中解析模板
   templ := template.Must(template.New("").ParseFS(f, "templates/*.tmpl", "templates/foo/*.tmpl"))
   router.SetHTMLTemplate(templ)
 
-// 示例：/public/assets/images/example.png
-  router.StaticFS("/public", http.FS(f)) // 设置静态文件服务
+  // 示例：/public/assets/images/example.png
+  router.StaticFS("/public", http.FS(f))   // 设置静态文件服务
 
-// 定义路由与处理函数
+  // 定义路由与处理函数
   router.GET("/", func(c *gin.Context) {
     c.HTML(http.StatusOK, "index.tmpl", gin.H{
       "title": "主网站",
@@ -3680,7 +3680,7 @@ func main() {
     })
   })
 
-// 从嵌入的资源中提供favicon.ico
+  // 从嵌入的资源中提供favicon.ico
   router.GET("favicon.ico", func(c *gin.Context) {
     file, _ := f.ReadFile("assets/favicon.ico")
     c.Data(
@@ -3690,10 +3690,10 @@ func main() {
     )
   })
 
-  router.Run(":8080") // 启动服务器监听8080端口
+  router.Run(":8080")   // 启动服务器监听8080端口
 }
 
-// 查看完整示例，请访问 https://github.com/gin-gonic/examples/tree/master/assets-in-binary/example02 目录。
+  // 查看完整示例，请访问 https:  //github.com/gin-gonic/examples/tree/master/assets-in-binary/example02 目录。
 ```
 
 此代码示例展示了如何在Go语言中利用`embed`包将模板和静态资源文件嵌入到单个二进制文件中，并通过 Gin 框架设置路由，实现从嵌入资源中提供模板和静态文件的功能。
@@ -3864,10 +3864,10 @@ type formB struct {
 func SomeHandler(c *gin.Context) {
   objA := formA{}
   objB := formB{}
-// 这里的 c.ShouldBind 会消耗 c.Request.Body，并且不能再重用。
+  // 这里的 c.ShouldBind 会消耗 c.Request.Body，并且不能再重用。
   if errA := c.ShouldBind(&objA); errA == nil {
     c.String(http.StatusOK, `请求体应为 formA 格式`)
-// 由于此时 c.Request.Body 已经是 EOF（文件结束符），所以此处总会报错
+  // 由于此时 c.Request.Body 已经是 EOF（文件结束符），所以此处总会报错
   } else if errB := c.ShouldBind(&objB); errB == nil {
     c.String(http.StatusOK, `请求体应为 formB 格式`)
   } else {
@@ -3882,13 +3882,13 @@ func SomeHandler(c *gin.Context) {
 func SomeHandler(c *gin.Context) {
   objA := formA{}
   objB := formB{}
-// 此处读取 c.Request.Body 并将结果存储在上下文中。
+  // 此处读取 c.Request.Body 并将结果存储在上下文中。
   if errA := c.ShouldBindBodyWith(&objA, binding.Form); errA == nil {
     c.String(http.StatusOK, `请求体应为 formA 格式`)
-// 此时，它重用了存储在上下文中的请求体。
+  // 此时，它重用了存储在上下文中的请求体。
   } else if errB := c.ShouldBindBodyWith(&objB, binding.JSON); errB == nil {
     c.String(http.StatusOK, `请求体应为 formB JSON 格式`)
-// 同时，它也支持其他格式
+  // 同时，它也支持其他格式
   } else if errB2 := c.ShouldBindBodyWith(&objB, binding.XML); errB2 == nil {
     c.String(http.StatusOK, `请求体应为 formB XML 格式`)
   } else {
@@ -3898,7 +3898,7 @@ func SomeHandler(c *gin.Context) {
 ```
 
 1. `c.ShouldBindBodyWith` 在绑定前将请求体存储到上下文中，这会对性能造成轻微影响。因此，如果你只需要一次性调用绑定方法，不应该使用此方法。
-2. 只有针对某些格式——`JSON`、`XML`、`MsgPack`、`ProtoBuf` 才需要这个特性。对于其他格式如 `Query`、`Form`、`FormPost`、`FormMultipart`，可以通过多次调用 `c.ShouldBind()` 而不会对性能造成损害（参见 [#1341](https://github.com/gin-gonic/gin/pull/1341)）。
+2. 只有针对某些格式——`JSON`、`XML`、`MsgPack`、`ProtoBuf` 才需要这个特性。对于其他格式如 `Query`、`Form`、`FormPost`、`FormMultipart`，可以通过多次调用 `c.ShouldBind()` 而不会对性能造成损害（参见 [#1341](https:  //github.com/gin-gonic/gin/pull/1341)）。
 
 # <翻译结束>
 
@@ -4097,7 +4097,7 @@ func main() {
 # <翻译开始>
 # http2 服务器推送
 
-http.Pusher 功能仅在 **go1.8+** 版本中支持。详细信息请参阅 [golang 官方博客](https://go.dev/blog/h2push)。
+http.Pusher 功能仅在 **go1.8+** 版本中支持。详细信息请参阅 [golang 官方博客](https:      //go.dev/blog/h2push)。
 
 ```go
 package main
@@ -4129,7 +4129,7 @@ func main() {
 
     r.GET("/", func(c *gin.Context) {
         if pusher := c.Writer.Pusher(); pusher != nil {
-// 使用 pusher.Push() 实现服务器推送
+      // 使用 pusher.Push() 实现服务器推送
             if err := pusher.Push("/assets/app.js", nil); err != nil {
                 log.Printf("推送失败: %v", err)
             }
@@ -4139,7 +4139,7 @@ func main() {
         })
     })
 
-// 在 https://127.0.0.1:8080 上监听并服务
+      // 在 https:      //127.0.0.1:8080 上监听并服务
     r.RunTLS(":8080", "./testdata/server.pem", "./testdata/server.key")
 }
 ```
@@ -4238,7 +4238,7 @@ func main() {
     c.JSON(http.StatusOK, "ok")
   })
 
-// 监听并服务在 http://0.0.0.0:8080
+  // 监听并服务在 http:  //0.0.0.0:8080
   r.Run()
 }
 ```
@@ -4413,8 +4413,8 @@ func main() {
   router.SetTrustedProxies([]string{"192.168.1.2"})
 
   router.GET("/", func(c *gin.Context) {
-// 如果客户端是192.168.1.2，则从可信赖部分使用 X-Forwarded-For 头部推断原始客户端IP。
-// 否则，直接返回直接客户端IP。
+    // 如果客户端是192.168.1.2，则从可信赖部分使用 X-Forwarded-For 头部推断原始客户端IP。
+    // 否则，直接返回直接客户端IP。
     fmt.Printf("ClientIP: %s\n", c.ClientIP())
   })
   router.Run()
@@ -4432,14 +4432,14 @@ import (
 
 func main() {
   router := gin.Default()
-// 使用预定义头部 gin.PlatformXXX
+    // 使用预定义头部 gin.PlatformXXX
   router.TrustedPlatform = gin.PlatformGoogleAppEngine
-// 或为其他可信代理服务设置你自己的可信请求头部
-// 不要将其设置为任何可疑请求头部，这是不安全的
+    // 或为其他可信代理服务设置你自己的可信请求头部
+    // 不要将其设置为任何可疑请求头部，这是不安全的
   router.TrustedPlatform = "X-CDN-IP"
 
   router.GET("/", func(c *gin.Context) {
-// 如果设置了 TrustedPlatform，ClientIP() 会解析相应的头部并直接返回IP
+    // 如果设置了 TrustedPlatform，ClientIP() 会解析相应的头部并直接返回IP
     fmt.Printf("ClientIP: %s\n", c.ClientIP())
   })
   router.Run()

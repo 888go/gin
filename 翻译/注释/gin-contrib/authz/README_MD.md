@@ -91,11 +91,11 @@ import (
 )
 
 func main() {
-// 从文件加载casbin模型和策略，也支持从数据库加载。
+  // 从文件加载casbin模型和策略，也支持从数据库加载。
   e := casbin.NewEnforcer("authz_model.conf", "authz_policy.csv")
 
-// 定义你的路由，并使用Casbin权限认证中间件。
-// 被authz拒绝的访问将会返回HTTP 403错误。
+  // 定义你的路由，并使用Casbin权限认证中间件。
+  // 被authz拒绝的访问将会返回HTTP 403错误。
   router := gin.New()
   router.Use(authz.NewAuthorizer(e))
 }
