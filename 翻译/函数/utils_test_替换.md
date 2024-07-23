@@ -35,18 +35,5 @@
 # //zj:
 # 备注结束
 
-[func SetMode(value string) {]
-ff=设置运行模式
-value=常量_运行模式
-
-[func DisableBindValidation() {]
-ff=关闭Validator验证器
-
-[func EnableJsonDecoderUseNumber() {]
-ff=启用Json解码器使用Number
-
-[func EnableJsonDecoderDisallowUnknownFields() {]
-ff=启用json解码器禁止未知字段
-
-[func Mode() string {]
-ff=取运行模式
+[assert.Regexp(t, `^(.*/vendor/)?github.com/gin-gonic/gin.somefunction$`, nameOfFunction(somefunction))]
+th=assert.Regexp(t, `^(.*/vendor/)?github.com/888go/gin.somefunction$`, nameOfFunction(somefunction))

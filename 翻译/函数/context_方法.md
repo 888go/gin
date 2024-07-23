@@ -1,16 +1,39 @@
+# 备注开始
 # **_方法.md 文件备注:
 # ff= 方法,重命名方法名称
-# 
-# **_package.md 文件备注:
-# bm= 包名,更换新的包名称, 如: package gin //bm:gin类
+# 如://ff:取文本
 #
+# yx=true,此方法优先翻译
+# 如: //yx=true
+
+# **_package.md 文件备注:
+# bm= 包名,更换新的包名称 
+# 如: package gin //bm:gin类
+
 # **_其他.md 文件备注:
-# hs= 行首,跳转到行首进行重命名.文档内如果有多个相同的,会一起重命名.
+# qm= 前面,跳转到前面进行重命名.文档内如果有多个相同的,会一起重命名.
+# hm= 后面,跳转到后面进行重命名.文档内如果有多个相同的,会一起重命名.
+# cz= 查找,配合前面/后面使用,
+# zz= 正则查找,配合前面/后面使用, 有设置正则查找,就不用设置上面的查找
+# 如: type Regexp struct {//qm:正则 cz:Regexp struct
+#
 # th= 替换,用于替换文本,文档内如果有多个相同的,会一起替换
-# cf= 重复,用于重命名多次,如: 一个文档内有2个"One(result interface{}) error"需要重命名.
-#     但是要注意,多个新名称要保持一致. 如:"X取一条(result interface{})"
-# zz= 正则表达式,用于结构名称替换或者复杂替换
-#     如待替换: type authPair struct { //zz:^type *authPair处理函数
+# 如:
+# type Regexp struct {//th:type Regexp222 struct
+#
+# cf= 重复,用于重命名多次,
+# 如: 
+# 一个文档内有2个"One(result interface{}) error"需要重命名.
+# 但是要注意,多个新名称要保持一致. 如:"X取一条(result interface{})"
+
+# **_追加.md 文件备注:
+# 在代码内追加代码,如:
+# //zj:前面一行的代码,如果为空,追加到末尾行
+# func (re *Regexp) X取文本() string { 
+# re.F.String()
+# }
+# //zj:
+# 备注结束
 
 [func (c *Context) Copy() *Context {]
 ff=取副本
@@ -24,8 +47,35 @@ ff=取处理程序切片
 [func (c *Context) Handler() HandlerFunc {]
 ff=取主处理程序
 
+[func (c *Context) FullPath() string {]
+ff=取路由路径
+
 [func (c *Context) Next() {]
 ff=中间件继续
+
+[func (c *Context) IsAborted() bool {]
+ff=是否已停止
+
+[func (c *Context) Abort() {]
+ff=停止
+
+[func (c *Context) AbortWithStatus(code int) {]
+ff=停止并带状态码
+code=状态码
+
+[func (c *Context) AbortWithStatusJSON(code int, jsonObj any) {]
+ff=停止并带状态码且返回JSON
+jsonObj=JSON结构
+code=状态码
+
+[func (c *Context) AbortWithError(code int, err error) *Error {]
+ff=停止并带状态码与错误
+err=错误
+code=状态码
+
+[func (c *Context) Error(err error) *Error {]
+ff=错误
+err=错误
 
 [func (c *Context) Set(key string, value any) {]
 ff=设置值
@@ -196,90 +246,42 @@ ff=保存上传文件
 dst=文件路径
 file=文件对象
 
+[func (c *Context) Bind(obj any) error {]
+ff=取参数到指针PANI
+obj=结构指针
+
 [func (c *Context) BindJSON(obj any) error {]
 ff=取JSON参数到指针PANI
 obj=结构指针
 
-[func (c *Context) ClientIP() string {]
-ff=取客户端ip
+[func (c *Context) BindXML(obj any) error {]
+ff=取XML参数到指针PANI
+obj=结构指针
 
-[func (c *Context) RemoteIP() string {]
-ff=取协议头ip
+[func (c *Context) BindQuery(obj any) error {]
+ff=取URL参数到指针PANI
+obj=结构指针
 
-[func (c *Context) ContentType() string {]
-ff=取协议头ContentType
+[func (c *Context) BindYAML(obj any) error {]
+ff=取YAML参数到指针PANI
+obj=结构指针
 
-[func (c *Context) IsWebsocket() bool {]
-ff=是否为Websocket请求
+[func (c *Context) BindTOML(obj any) error {]
+ff=取TOML参数到指针PANI
+obj=结构指针
 
-[func (c *Context) SetSameSite(samesite http.SameSite) {]
-ff=设置cookie跨站
+[func (c *Context) BindHeader(obj any) error {]
+ff=取Header参数到指针PANI
+obj=结构指针
 
-[func (c *Context) SetCookie(name, value string, maxAge int, path, domain string, secure, httpOnly bool) {]
-ff=设置cookie值
-httpOnly=禁止js访问
-secure=仅https生效
-domain=域名
-path=路径
-maxAge=生效时间
-value=值
-name=名称
+[func (c *Context) BindUri(obj any) error {]
+ff=取Uri参数到指针PANI
+obj=结构指针
 
-[func (c *Context) Cookie(name string) (string, error) {]
-ff=取cookie值
-name=名称
-
-[func (c *Context) HTML(code int, name string, obj any) {]
-ff=输出html模板
-obj=结构
-name=模板文件名
-code=状态码
-
-[func (c *Context) IndentedJSON(code int, obj any) {]
-ff=输出JSON并美化
-obj=结构
-code=状态码
-
-[func (c *Context) JSONP(code int, obj any) {]
-ff=输出JSONP
-obj=结构
-code=状态码
-
-[func (c *Context) JSON(code int, obj any) {]
-ff=输出JSON
-obj=结构
-code=状态码
-
-[func (c *Context) AsciiJSON(code int, obj any) {]
-ff=输出JSON并按ASCII
-obj=结构
-code=状态码
-
-[func (c *Context) PureJSON(code int, obj any) {]
-ff=输出JSON并按原文
-obj=结构
-code=状态码
-
-[func (c *Context) XML(code int, obj any) {]
-ff=输出XML
-obj=结构
-code=状态码
-
-[func (c *Context) YAML(code int, obj any) {]
-ff=输出YAML
-obj=结构
-code=状态码
-
-[func (c *Context) TOML(code int, obj any) {]
-ff=输出TOML
-obj=结构
-code=状态码
-
-[func (c *Context) String(code int, format string, values ...any) {]
-ff=输出文本
-values=文本s
-format=格式
-code=状态码
+[func (c *Context) MustBindWith(obj any, b binding.Binding) error {]
+ff=取参数到指针并按类型PANI
+b=类型
+obj=结构指针
 
 [func (c *Context) ShouldBind(obj any) error {]
 ff=取参数到指针
@@ -318,6 +320,23 @@ ff=取参数到指针并按类型
 b=类型
 obj=结构指针
 
+[func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error) {]
+ff=取参数到指针并按类型且缓存
+err=错误
+obj=结构指针
+
+[func (c *Context) ClientIP() string {]
+ff=取客户端ip
+
+[func (c *Context) RemoteIP() string {]
+ff=取协议头ip
+
+[func (c *Context) ContentType() string {]
+ff=取协议头ContentType
+
+[func (c *Context) IsWebsocket() bool {]
+ff=是否为Websocket请求
+
 [func (c *Context) Status(code int) {]
 ff=设置状态码
 code=状态码
@@ -334,44 +353,75 @@ key=名称
 [func (c *Context) GetRawData() (#左中括号##右中括号#byte, error) {]
 ff=取流数据
 
-[func (c *Context) IsAborted() bool {]
-ff=是否已停止
+[func (c *Context) SetSameSite(samesite http.SameSite) {]
+ff=设置cookie跨站
 
-[func (c *Context) Bind(obj any) error {]
-ff=取参数到指针PANI
-obj=结构指针
+[func (c *Context) SetCookie(name, value string, maxAge int, path, domain string, secure, httpOnly bool) {]
+ff=设置cookie值
+httpOnly=禁止js访问
+secure=仅https生效
+domain=域名
+path=路径
+maxAge=生效时间
+value=值
+name=名称
 
-[func (c *Context) BindXML(obj any) error {]
-ff=取XML参数到指针PANI
-obj=结构指针
+[func (c *Context) Cookie(name string) (string, error) {]
+ff=取cookie值
+name=名称
 
-[func (c *Context) BindQuery(obj any) error {]
-ff=取URL参数到指针PANI
-obj=结构指针
+[func (c *Context) Render(code int, r render.Render) {]
+ff=Render底层方法
+code=状态码
 
-[func (c *Context) BindYAML(obj any) error {]
-ff=取YAML参数到指针PANI
-obj=结构指针
+[func (c *Context) HTML(code int, name string, obj any) {]
+ff=输出html模板
+obj=结构
+name=模板文件名
+code=状态码
 
-[func (c *Context) BindTOML(obj any) error {]
-ff=取TOML参数到指针PANI
-obj=结构指针
-
-[func (c *Context) BindHeader(obj any) error {]
-ff=取Header参数到指针PANI
-obj=结构指针
-
-[func (c *Context) BindUri(obj any) error {]
-ff=取Uri参数到指针PANI
-obj=结构指针
-
-[func (c *Context) MustBindWith(obj any, b binding.Binding) error {]
-ff=取参数到指针并按类型PANI
-b=类型
-obj=结构指针
+[func (c *Context) IndentedJSON(code int, obj any) {]
+ff=输出JSON并美化
+obj=结构
+code=状态码
 
 [func (c *Context) SecureJSON(code int, obj any) {]
 ff=输出JSON并防劫持
+obj=结构
+code=状态码
+
+[func (c *Context) JSONP(code int, obj any) {]
+ff=输出JSONP
+obj=结构
+code=状态码
+
+[func (c *Context) JSON(code int, obj any) {]
+ff=输出JSON
+obj=结构
+code=状态码
+
+[func (c *Context) AsciiJSON(code int, obj any) {]
+ff=输出JSON并按ASCII
+obj=结构
+code=状态码
+
+[func (c *Context) PureJSON(code int, obj any) {]
+ff=输出JSON并按原文
+obj=结构
+code=状态码
+
+[func (c *Context) XML(code int, obj any) {]
+ff=输出XML
+obj=结构
+code=状态码
+
+[func (c *Context) YAML(code int, obj any) {]
+ff=输出YAML
+obj=结构
+code=状态码
+
+[func (c *Context) TOML(code int, obj any) {]
+ff=输出TOML
 obj=结构
 code=状态码
 
@@ -380,42 +430,15 @@ ff=输出ProtoBuf
 obj=结构
 code=状态码
 
-[func (c *Context) ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error) {]
-err=错误
-obj=结构指针
-ff=取参数到指针并按类型且缓存
+[func (c *Context) String(code int, format string, values ...any) {]
+ff=输出文本
+values=文本s
+format=格式
+code=状态码
 
 [func (c *Context) Redirect(code int, location string) {]
 ff=重定向
 location=重定向地址
-code=状态码
-
-[func (c *Context) FullPath() string {]
-ff=取路由路径
-
-[func (c *Context) Abort() {]
-ff=停止
-
-[func (c *Context) AbortWithStatus(code int) {]
-ff=停止并带状态码
-code=状态码
-
-[func (c *Context) AbortWithStatusJSON(code int, jsonObj any) {]
-ff=停止并带状态码且返回JSON
-jsonObj=JSON结构
-code=状态码
-
-[func (c *Context) AbortWithError(code int, err error) *Error {]
-ff=停止并带状态码与错误
-err=错误
-code=状态码
-
-[func (c *Context) Error(err error) *Error {]
-ff=错误
-err=错误
-
-[func (c *Context) Render(code int, r render.Render) {]
-ff=Render底层方法
 code=状态码
 
 [func (c *Context) Data(code int, contentType string, data #左中括号##右中括号#byte) {]
@@ -454,5 +477,3 @@ ff=NegotiateFormat底层方法
 [func (c *Context) SetAccepted(formats ...string) {]
 ff=SetAccepted底层方法
 formats=类型名称s
-
- 

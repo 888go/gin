@@ -35,18 +35,46 @@
 # //zj:
 # 备注结束
 
-[func SetMode(value string) {]
-ff=设置运行模式
-value=常量_运行模式
+[Request *http.Request]
+qm=请求
+cz=Request *http.Request
 
-[func DisableBindValidation() {]
-ff=关闭Validator验证器
+[TimeStamp time.Time]
+qm=响应时间
+cz=TimeStamp time.Time
 
-[func EnableJsonDecoderUseNumber() {]
-ff=启用Json解码器使用Number
+[StatusCode int]
+qm=状态码
+cz=StatusCode int
 
-[func EnableJsonDecoderDisallowUnknownFields() {]
-ff=启用json解码器禁止未知字段
+[Latency time.Duration]
+qm=时长
+cz=Latency time.Duration
 
-[func Mode() string {]
-ff=取运行模式
+[ClientIP string]
+qm=客户端IP
+cz=ClientIP string
+
+[Method string]
+qm=方法
+cz=Method string
+
+[Path string]
+qm=路径
+cz=Path string
+
+[ErrorMessage string]
+qm=错误信息
+cz=ErrorMessage string
+
+[isTerm bool]
+qm=是否输出到终端
+cz=isTerm bool
+
+[BodySize int]
+qm=响应体大小
+cz=BodySize int
+
+[Keys map#左中括号#string#右中括号#any]
+qm=上下文设置值map
+cz=Keys map[string]any

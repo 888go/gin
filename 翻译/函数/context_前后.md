@@ -35,18 +35,18 @@
 # //zj:
 # 备注结束
 
-[func SetMode(value string) {]
-ff=设置运行模式
-value=常量_运行模式
+[Request *http.Request]
+qm=请求
+cz=Request *http.Request
 
-[func DisableBindValidation() {]
-ff=关闭Validator验证器
+[Params Params]
+qm=参数
+cz=Params Params
 
-[func EnableJsonDecoderUseNumber() {]
-ff=启用Json解码器使用Number
+[Keys map#左中括号#string#右中括号#any]
+qm=上下文设置值Map
+cz=Keys map[string]any
 
-[func EnableJsonDecoderDisallowUnknownFields() {]
-ff=启用json解码器禁止未知字段
-
-[func Mode() string {]
-ff=取运行模式
+[Errors errorMsgs]
+qm=错误s
+cz=Errors errorMsgs

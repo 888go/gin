@@ -35,18 +35,42 @@
 # //zj:
 # 备注结束
 
-[func SetMode(value string) {]
-ff=设置运行模式
-value=常量_运行模式
+[Method string]
+qm=方法
+cz=Method string
 
-[func DisableBindValidation() {]
-ff=关闭Validator验证器
+[Path string]
+qm=路径
+cz=Path string
 
-[func EnableJsonDecoderUseNumber() {]
-ff=启用Json解码器使用Number
+[HandlerFunc HandlerFunc]
+qm=处理函数
+cz=HandlerFunc HandlerFunc
 
-[func EnableJsonDecoderDisallowUnknownFields() {]
-ff=启用json解码器禁止未知字段
+[RedirectTrailingSlash bool]
+qm=重定向尾部斜杠
+cz=RedirectTrailingSlash bool
 
-[func Mode() string {]
-ff=取运行模式
+[RedirectFixedPath bool]
+qm=重定向固定路径
+cz=RedirectFixedPath bool
+
+[AppEngine bool]
+qm=AppEngine弃用
+cz=AppEngine bool
+
+[UseRawPath bool]
+qm=使用原始路径
+cz=UseRawPath bool
+
+[RemoveExtraSlash bool]
+qm=删除多余斜杠
+cz=RemoveExtraSlash bool
+
+[MaxMultipartMemory int64]
+qm=最大Multipart内存
+cz=MaxMultipartMemory int64
+
+[UseH2C bool]
+qm=启用h2c支持
+cz=UseH2C bool

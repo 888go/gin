@@ -35,18 +35,8 @@
 # //zj:
 # 备注结束
 
-[func SetMode(value string) {]
-ff=设置运行模式
-value=常量_运行模式
+[assert.Regexp(t, `^\#左中括号#GIN-debug\#右中括号# GET /path/to/route/:param --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re)]
+th=assert.Regexp(t, `^\[GIN-debug\] GET /path/to/route/:param --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)
 
-[func DisableBindValidation() {]
-ff=关闭Validator验证器
-
-[func EnableJsonDecoderUseNumber() {]
-ff=启用Json解码器使用Number
-
-[func EnableJsonDecoderDisallowUnknownFields() {]
-ff=启用json解码器禁止未知字段
-
-[func Mode() string {]
-ff=取运行模式
+[assert.Regexp(t, `^\#左中括号#GIN-debug\#右中括号# GET /path/to/route/:param1/:param2 --> (.*/vendor/)?github.com/gin-gonic/gin.handlerNameTest \(2 handlers\)\n$`, re)]
+th=assert.Regexp(t, `^\[GIN-debug\] GET /path/to/route/:param1/:param2 --> (.*/vendor/)?github.com/888go/gin.handlerNameTest \(2 handlers\)\n$`, re)

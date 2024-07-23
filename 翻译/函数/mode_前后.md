@@ -35,18 +35,14 @@
 # //zj:
 # 备注结束
 
-[func SetMode(value string) {]
-ff=设置运行模式
-value=常量_运行模式
+[DebugMode = "debug"]
+qm=常量_运行模式_调试
+cz=DebugMode #等号# "debug"
 
-[func DisableBindValidation() {]
-ff=关闭Validator验证器
+[ReleaseMode = "release"]
+qm=常量_运行模式_发布
+cz=ReleaseMode #等号# "release"
 
-[func EnableJsonDecoderUseNumber() {]
-ff=启用Json解码器使用Number
-
-[func EnableJsonDecoderDisallowUnknownFields() {]
-ff=启用json解码器禁止未知字段
-
-[func Mode() string {]
-ff=取运行模式
+[TestMode = "test"]
+qm=常量_运行模式_测试
+cz=TestMode #等号# "test"
